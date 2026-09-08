@@ -1,0 +1,27 @@
+# Dependencias
+node_modules/
+
+# Variables y secretos
+.env
+.env.*
+!.env.example
+
+# Archivos generados
+dist/
+build/
+coverage/
+
+# Registros
+*.log
+npm-debug.log*
+
+# Sistema y editores
+.DS_Store
+.vscode/
+.idea/
+
+# Replays y datos privados
+*.replay
+uploads/
+tmp/
+
