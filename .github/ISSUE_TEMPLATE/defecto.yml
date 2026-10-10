@@ -1,0 +1,16 @@
+name: Defecto
+description: Fallo reproducible del comportamiento acordado
+title: "[BUG] "
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos, versión, resultado esperado y observado
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidencia sin credenciales ni datos privados
+    validations:
+      required: true

@@ -1,0 +1,28 @@
+name: Tarea de desarrollo
+description: Trabajo con responsable, dependencia y aceptación
+title: "[Axx] "
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Objetivo y requisitos
+    validations:
+      required: true
+  - type: input
+    id: ownership
+    attributes:
+      label: Responsable y revisor
+    validations:
+      required: true
+  - type: input
+    id: schedule
+    attributes:
+      label: Semana, fecha y dependencias
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Criterios y evidencia
+    validations:
+      required: true
