@@ -1,49 +1,37 @@
 # Adaptive RL Coach
 
-Proyecto final de **Laboratorio de Programación Web** para apoyar a jugadores de Rocket League mediante el análisis de bloques de cinco partidas y recomendaciones de entrenamiento adaptadas a sus resultados.
+Plan de desarrollo para cuatro integrantes. Aplicación web de entrenamiento de Rocket League con bloques de cinco replays, diagnóstico por reglas y planes versionados.
 
-## Estado
+Este repositorio inicial contiene planificación, documentación y plantillas. **Todavía no contiene una aplicación ejecutable.**
 
-El proyecto se encuentra en la Fase 1: definición del alcance, requisitos, arquitectura, navegación y bosquejos de interfaz.
+- [Project de trabajo](https://github.com/users/Santana-R/projects/1)
+- [Issues](https://github.com/Santana-R/adaptive-rl-coach/issues)
+- [Hitos semanales](https://github.com/Santana-R/adaptive-rl-coach/milestones)
+- [Guía de desarrollo en Notion](https://app.notion.com/p/3f4dd7559dd8818fbe0ffb78c6423a52)
+- [Diagramas y calendario en Miro](https://miro.com/app/board/uXjVEcA_AAE=/)
+
+Metas internas: RF integrados el 6 de noviembre de 2026; entrega preparada el 13. Fechas académicas pendientes de confirmación.
+
+- [Alcance y RF](docs/alcance-y-requisitos.md)
+- [Equipo y acuerdos](docs/equipo-y-acuerdos-semanales.md)
+- [Calendario](docs/calendario-y-dependencias.md)
+- [Arquitectura](docs/arquitectura-y-diagramas.md)
+- [Backlog con aceptación](docs/backlog.md)
+- [Pruebas y entrega](docs/pruebas-y-entrega.md)
+- [Riesgos](docs/riesgos-y-decisiones-pendientes.md)
+- [Publicación en GitHub](docs/publicacion-github.md)
+
+Stack de implementación: HTML/CSS, Bootstrap, JavaScript, jQuery, Chart.js, Node.js LTS/Express, Supabase PostgreSQL/Auth y Ballchasing.
+
+No incorporar replays, tokens ni datos personales al repositorio. Crear la implementación a partir de A04/A06/A08 y registrar en su momento versiones y comandos de ejecución reales.
 
 ## Equipo
 
-- Roberto Santana Trujillo — 2227084
-- Omar Tadeo Gasca Deciga — 2226708
-- Luis Enrique Almaguer Castillo — 2143523
-- David Alonso Torres Guerrero — 2144813
+Roberto Santana Trujillo, Omar Tadeo Gasca Deciga, Luis Enrique Almaguer Castillo y David Alonso Torres Guerrero. El reparto es provisional hasta confirmar disponibilidad.
 
-## Alcance inicial confirmado
-
-- Registro e inicio de sesión para jugadores y administradores.
-- Carga de exactamente cinco archivos `.replay` desde una computadora.
-- Envío privado de los archivos al servicio Ballchasing para recuperar estadísticas.
-- Validación básica del jugador y modo de juego de los replays.
-- Selección explicable de hasta tres áreas prioritarias mediante reglas.
-- Recomendaciones, ejercicios, objetivos y sesiones de entrenamiento.
-- Comparación del bloque actual de cinco partidas contra el bloque anterior.
-- Panel de métricas y gráficas elaborado con Chart.js.
-- Historial de análisis y progreso.
-- Administración de usuarios y ejercicios.
-
-Los modelos de aprendizaje automático y aprendizaje por refuerzo no forman parte de esta primera versión.
-
-## Tecnologías previstas
-
-- HTML, CSS y Bootstrap
-- JavaScript y jQuery
-- Node.js y Express
-- Supabase: PostgreSQL, autenticación y almacenamiento
-- Chart.js
-- API de Ballchasing
-
-## Documentación
+## Documentación inicial
 
 - [Acuerdos iniciales](docs/acuerdos-iniciales.md)
-- [Forma de trabajo](docs/forma-de-trabajo.md)
+- [Forma de trabajo inicial](docs/forma-de-trabajo.md)
 
-## Entregas
-
-- Fase 1: 10 de septiembre de 2026
-- Proyecto completo: aproximadamente a finales de noviembre de 2026
-
+La planificación de octubre–noviembre actualiza el calendario de esos documentos; las fechas de entrega de LBPWEB y PROGSA siguen pendientes.
