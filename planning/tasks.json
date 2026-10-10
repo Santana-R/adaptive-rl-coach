@@ -1,0 +1,1206 @@
+[
+  {
+    "id": "A01",
+    "week": 1,
+    "owner": "Roberto",
+    "owner_full": "Roberto Santana Trujillo",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Cerrar alcance y contrato API/datos",
+    "requirements": [
+      "RF01–RF12"
+    ],
+    "dependencies": [],
+    "acceptance": [
+      "Mapear los doce RF y las trece pantallas a tareas y pruebas.",
+      "Acordar payloads, unidades, null, errores, identidad, modalidad, tipo de partida y versionado; cada módulo tiene una interfaz definida.",
+      "Confirmar horas disponibles y reparto con los cuatro; registrar cambios sin reducir los RF."
+    ],
+    "evidence": "Matriz RF, contrato JSON y acta de reparto.",
+    "priority": "P0",
+    "start": "2026-10-12",
+    "due": "2026-10-14",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A02",
+    "week": 1,
+    "owner": "Roberto",
+    "owner_full": "Roberto Santana Trujillo",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Preparar casos del motor explicable",
+    "requirements": [
+      "RF07",
+      "RF08",
+      "RF09"
+    ],
+    "dependencies": [
+      "A01"
+    ],
+    "acceptance": [
+      "Crear casos de primer bloque, comparación válida y no comparable, valores faltantes y empates.",
+      "Documentar umbrales del prototipo como heurísticas pendientes de calibrar; definir máximo tres prioridades y evidencia por regla."
+    ],
+    "evidence": "Fixtures sin datos personales y resultados esperados.",
+    "priority": "P0",
+    "start": "2026-10-12",
+    "due": "2026-10-18",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A03",
+    "week": 1,
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Convertir los bosquejos actuales en flujo de pantallas",
+    "requirements": [
+      "RF01–RF12"
+    ],
+    "dependencies": [],
+    "acceptance": [
+      "Cubrir las trece pantallas de la Fase 1 actualizada, con navegación por rol.",
+      "Diseñar estados de carga, error, sin historial, comparación no disponible y plan parcial o vacío."
+    ],
+    "evidence": "Flujo y lista de estados vinculados a cada pantalla.",
+    "priority": "P0",
+    "start": "2026-10-12",
+    "due": "2026-10-14",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A04",
+    "week": 1,
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Crear base visual y navegación",
+    "requirements": [
+      "RF01",
+      "RF02",
+      "RF12"
+    ],
+    "dependencies": [
+      "A01",
+      "A03"
+    ],
+    "acceptance": [
+      "Preparar HTML, CSS, Bootstrap, JavaScript y jQuery con rutas o vistas coherentes.",
+      "Inicio, Acerca y Ayuda explican el ciclo de cinco replays y las limitaciones; separar navegación de jugador y administrador."
+    ],
+    "evidence": "PR y recorrido de navegación en escritorio.",
+    "priority": "P1",
+    "start": "2026-10-12",
+    "due": "2026-10-18",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A05",
+    "week": 1,
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Validar Ballchasing con una prueba real",
+    "requirements": [
+      "RF03",
+      "RF04",
+      "RF05",
+      "RF06"
+    ],
+    "dependencies": [],
+    "acceptance": [
+      "Comprobar con un replay autorizado la carga privada, consulta de procesamiento, respuesta de jugador y métricas disponibles.",
+      "Documentar límites, permisos, duplicados, errores transitorios y estrategia de espera/reintento según la API vigente.",
+      "Guardar token solo en servidor; no publicar archivos ni credenciales."
+    ],
+    "evidence": "Spike reproducible, respuesta anonimizada y decisión de viabilidad.",
+    "priority": "P0",
+    "start": "2026-10-12",
+    "due": "2026-10-14",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A06",
+    "week": 1,
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Preparar servidor y adaptador de ingestión",
+    "requirements": [
+      "RF03",
+      "RF05"
+    ],
+    "dependencies": [
+      "A01",
+      "A05"
+    ],
+    "acceptance": [
+      "Crear base Node.js LTS/Express y configuración de entorno con .env.example.",
+      "Definir estados por replay y bloque; el adaptador permite datos de prueba claramente identificados mientras se conecta la API."
+    ],
+    "evidence": "PR del servidor, contrato de estados y prueba básica de endpoints.",
+    "priority": "P0",
+    "start": "2026-10-12",
+    "due": "2026-10-18",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A07",
+    "week": 1,
+    "owner": "David",
+    "owner_full": "David Alonso Torres Guerrero",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Auditar el modelo de ocho tablas y completar diseño",
+    "requirements": [
+      "RF01–RF12"
+    ],
+    "dependencies": [],
+    "acceptance": [
+      "Revisar usuarios, bloques, replays, métricas, objetivos, ejercicios, planes y plan_ejercicio.",
+      "Proponer sesiones, historial de rango declarado, evidencia de reglas y snapshots de objetivos/ejercicios para cada versión del plan.",
+      "Definir propietarios, claves, integridad, índices y permisos; acordar cualquier cambio del ERD antes de implementarlo."
+    ],
+    "evidence": "Diccionario y propuesta de migraciones; enlace al ERD actualizado existente.",
+    "priority": "P0",
+    "start": "2026-10-12",
+    "due": "2026-10-14",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A08",
+    "week": 1,
+    "owner": "David",
+    "owner_full": "David Alonso Torres Guerrero",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Preparar autenticación y permisos de datos",
+    "requirements": [
+      "RF01",
+      "RF02",
+      "RF12"
+    ],
+    "dependencies": [
+      "A01",
+      "A07"
+    ],
+    "acceptance": [
+      "Implementar registro por correo y Google, inicio y cierre de sesión con Supabase Auth.",
+      "El registro público nunca asigna administrador; usuario A no lee ni cambia datos de B y suspensión impide acceso según el contrato.",
+      "Definir validación del token en Express y política de propiedad por recurso."
+    ],
+    "evidence": "PR y evidencia con dos jugadores y un administrador.",
+    "priority": "P0",
+    "start": "2026-10-12",
+    "due": "2026-10-18",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A09",
+    "week": 2,
+    "owner": "Roberto",
+    "owner_full": "Roberto Santana Trujillo",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Normalizar métricas de cinco replays",
+    "requirements": [
+      "RF06"
+    ],
+    "dependencies": [
+      "A02",
+      "A05",
+      "A14"
+    ],
+    "acceptance": [
+      "Extraer exclusivamente al jugador identificado en cada replay.",
+      "Agregar con denominadores y unidades explícitos; porcentajes ponderados por totales, null para datos ausentes y exclusiones visibles."
+    ],
+    "evidence": "Casos calculados a mano y resultados coincidentes.",
+    "priority": "P0",
+    "start": "2026-10-19",
+    "due": "2026-10-25",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A10",
+    "week": 2,
+    "owner": "Roberto",
+    "owner_full": "Roberto Santana Trujillo",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Resolver línea base y comparación válida",
+    "requirements": [
+      "RF07"
+    ],
+    "dependencies": [
+      "A09",
+      "A15"
+    ],
+    "acceptance": [
+      "Primer bloque se marca como línea base.",
+      "Comparar solo misma identidad, modalidad, tipo casual/ranked y medición equivalente; el seguimiento debe ser posterior.",
+      "Bloques no comparables conservan motivo y no producen una mejora inventada."
+    ],
+    "evidence": "Pruebas de cronología, incompatibilidad y comparación válida.",
+    "priority": "P0",
+    "start": "2026-10-19",
+    "due": "2026-10-25",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A11",
+    "week": 2,
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Implementar carga e historial de bloques",
+    "requirements": [
+      "RF03",
+      "RF04",
+      "RF05"
+    ],
+    "dependencies": [
+      "A04",
+      "A13"
+    ],
+    "acceptance": [
+      "Aceptar exactamente cinco archivos .replay desde PC y mostrar validaciones antes de enviar.",
+      "Mostrar estado individual, duplicados, espera, fallos y reintentos; impedir doble envío accidental.",
+      "Historial conserva IDs y permite ver el detalle de un bloque."
+    ],
+    "evidence": "Demo de bloque correcto, inválido y procesamiento parcial.",
+    "priority": "P0",
+    "start": "2026-10-19",
+    "due": "2026-10-25",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A12",
+    "week": 2,
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Conectar registro, login y perfil",
+    "requirements": [
+      "RF01",
+      "RF02"
+    ],
+    "dependencies": [
+      "A04",
+      "A08"
+    ],
+    "acceptance": [
+      "Conectar correo y Google y mensajes de error; Discord queda opcional.",
+      "Guardar plataforma, modalidad e identidad Epic o Steam; impedir análisis sin perfil válido."
+    ],
+    "evidence": "Demo de ambos métodos y edición persistente de perfil.",
+    "priority": "P1",
+    "start": "2026-10-19",
+    "due": "2026-10-25",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A13",
+    "week": 2,
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Implementar carga privada y estados de procesamiento",
+    "requirements": [
+      "RF03",
+      "RF04",
+      "RF05"
+    ],
+    "dependencies": [
+      "A06",
+      "A08",
+      "A15"
+    ],
+    "acceptance": [
+      "Recibir cinco replays autorizados, validar formato y duplicados, guardar IDs y consultar estados.",
+      "Reintentar fallos transitorios sin duplicar registros; conservar bloque pendiente o fallido hasta resolverlo.",
+      "Limpiar solo cargas propias y temporales; nunca borrar el duplicado externo de otro usuario."
+    ],
+    "evidence": "Pruebas del adaptador con errores y un bloque real.",
+    "priority": "P0",
+    "start": "2026-10-19",
+    "due": "2026-10-22",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A14",
+    "week": 2,
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Validar identidad y compatibilidad del bloque",
+    "requirements": [
+      "RF04",
+      "RF06"
+    ],
+    "dependencies": [
+      "A05",
+      "A06",
+      "A08"
+    ],
+    "acceptance": [
+      "Encontrar al jugador del perfil en los cinco replays.",
+      "Rechazar o señalar modalidad/tipo/identidad incompatibles sin mezclar mediciones.",
+      "Entregar al motor datos normalizados con trazabilidad al replay."
+    ],
+    "evidence": "Payload anonimizado de cinco partidas y casos incompatibles.",
+    "priority": "P0",
+    "start": "2026-10-19",
+    "due": "2026-10-21",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A15",
+    "week": 2,
+    "owner": "David",
+    "owner_full": "David Alonso Torres Guerrero",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Persistir perfil, bloques, replays y métricas",
+    "requirements": [
+      "RF02",
+      "RF05",
+      "RF06"
+    ],
+    "dependencies": [
+      "A07",
+      "A08"
+    ],
+    "acceptance": [
+      "Crear migraciones acordadas y relaciones de propiedad.",
+      "Persistir estados y métricas sin duplicar cargas; null sigue siendo null.",
+      "Exportar datos de ejemplo sin información privada para el desarrollo de los demás."
+    ],
+    "evidence": "Migración, seed de prueba y consultas de integridad.",
+    "priority": "P0",
+    "start": "2026-10-19",
+    "due": "2026-10-21",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A16",
+    "week": 2,
+    "owner": "David",
+    "owner_full": "David Alonso Torres Guerrero",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Implementar objetivos con historial",
+    "requirements": [
+      "RF10"
+    ],
+    "dependencies": [
+      "A07",
+      "A08"
+    ],
+    "acceptance": [
+      "Crear, consultar y editar objetivos por modalidad, con meta principal de rendimiento y meta opcional de entrenamiento.",
+      "Archivar metas vinculadas a planes/historial en lugar de destruirlas; conservar versión cuando cambien.",
+      "Objetivos no alteran métricas ni diagnóstico para forzar una recomendación."
+    ],
+    "evidence": "Endpoints y casos de edición, archivo y propiedad.",
+    "priority": "P1",
+    "start": "2026-10-19",
+    "due": "2026-10-25",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A17",
+    "week": 3,
+    "owner": "Roberto",
+    "owner_full": "Roberto Santana Trujillo",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Implementar reglas con máximo tres prioridades",
+    "requirements": [
+      "RF08"
+    ],
+    "dependencies": [
+      "A02",
+      "A09",
+      "A10"
+    ],
+    "acceptance": [
+      "Generar como máximo tres prioridades ordenadas de forma determinista.",
+      "Cada prioridad conserva regla, evidencia, unidades y contexto; datos insuficientes producen explicación.",
+      "Verificar salida del motor web frente a los casos del prototipo."
+    ],
+    "evidence": "Pruebas de reglas, empates, null y ausencia de prioridades.",
+    "priority": "P0",
+    "start": "2026-10-26",
+    "due": "2026-10-28",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A18",
+    "week": 3,
+    "owner": "Roberto",
+    "owner_full": "Roberto Santana Trujillo",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Generar planes compatibles y versionados",
+    "requirements": [
+      "RF09"
+    ],
+    "dependencies": [
+      "A16",
+      "A17",
+      "A23",
+      "A24"
+    ],
+    "acceptance": [
+      "Seleccionar ejercicios activos según prioridades, metas, plataforma, disponibilidad y sesiones.",
+      "Incluir instrucciones, duración, dificultad y recurso; validar que el tiempo cabe en la disponibilidad.",
+      "Sin cobertura total, declarar plan parcial o vacío y motivo; Actualizar plan crea otra versión."
+    ],
+    "evidence": "Casos con catálogo suficiente, parcial y vacío.",
+    "priority": "P0",
+    "start": "2026-10-26",
+    "due": "2026-11-01",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A19",
+    "week": 3,
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Construir análisis con evidencia",
+    "requirements": [
+      "RF06",
+      "RF07",
+      "RF08"
+    ],
+    "dependencies": [
+      "A10",
+      "A11",
+      "A17"
+    ],
+    "acceptance": [
+      "Mostrar métricas por replay/bloque, línea base o comparación y hasta tres prioridades.",
+      "Chart.js presenta unidades y faltantes; motivos de incompatibilidad son visibles."
+    ],
+    "evidence": "Demo contra fixtures con números comprobados.",
+    "priority": "P1",
+    "start": "2026-10-26",
+    "due": "2026-11-01",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A20",
+    "week": 3,
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Construir gestión de objetivos",
+    "requirements": [
+      "RF10"
+    ],
+    "dependencies": [
+      "A12",
+      "A16"
+    ],
+    "acceptance": [
+      "Crear, consultar, editar y archivar metas por modalidad.",
+      "Distinguir meta de rendimiento y entrenamiento y explicar su relación con planes e historial."
+    ],
+    "evidence": "Recorrido de todos los estados de objetivos.",
+    "priority": "P1",
+    "start": "2026-10-26",
+    "due": "2026-11-01",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A21",
+    "week": 3,
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Implementar CRUD de sesiones ligadas al plan",
+    "requirements": [
+      "RF10"
+    ],
+    "dependencies": [
+      "A08",
+      "A24"
+    ],
+    "acceptance": [
+      "Crear, consultar, corregir y eliminar sesiones propias ligadas a la versión exacta del plan.",
+      "Validar fecha, ejercicio y duración; la actividad es autorreportada.",
+      "Corrección o eliminación deja progresos coherentes y nunca prueba por sí sola mejora en partidas."
+    ],
+    "evidence": "Casos CRUD y recálculo con dos versiones de plan.",
+    "priority": "P0",
+    "start": "2026-10-26",
+    "due": "2026-11-01",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A22",
+    "week": 3,
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Calcular progreso y contrato de reportes",
+    "requirements": [
+      "RF10",
+      "RF11"
+    ],
+    "dependencies": [
+      "A10",
+      "A16",
+      "A21"
+    ],
+    "acceptance": [
+      "Separar progreso de entrenamiento, metas de rendimiento y cambios de métricas.",
+      "Incluir período, conteos, denominador, unidades, exclusiones y fuente de cada dato; rango se identifica como declarado."
+    ],
+    "evidence": "Respuestas de reporte verificadas con fixtures.",
+    "priority": "P1",
+    "start": "2026-10-26",
+    "due": "2026-11-01",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A23",
+    "week": 3,
+    "owner": "David",
+    "owner_full": "David Alonso Torres Guerrero",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Implementar catálogo CRUD y semilla validada",
+    "requirements": [
+      "RF09",
+      "RF12"
+    ],
+    "dependencies": [
+      "A07",
+      "A08"
+    ],
+    "acceptance": [
+      "Administrador crea, consulta, edita y desactiva ejercicios y recursos.",
+      "Validar modalidad/plataforma, duración, dificultad e instrucciones; seed revisado habilita ejercicios explícitamente.",
+      "Jugador no administra catálogo; ejercicios desactivados no entran en planes nuevos."
+    ],
+    "evidence": "Endpoints y seed suficiente para cubrir prioridades del MVP.",
+    "priority": "P0",
+    "start": "2026-10-26",
+    "due": "2026-10-28",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A24",
+    "week": 3,
+    "owner": "David",
+    "owner_full": "David Alonso Torres Guerrero",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Persistir versiones y snapshots del plan",
+    "requirements": [
+      "RF09",
+      "RF10"
+    ],
+    "dependencies": [
+      "A07",
+      "A15",
+      "A16"
+    ],
+    "acceptance": [
+      "Conservar metas, perfil, ejercicios, evidencia y reglas aplicadas en cada versión.",
+      "Cambiar perfil/meta/catálogo no reescribe versiones anteriores; actualizar crea otra.",
+      "Sesiones y plan_ejercicio referencian la versión correcta."
+    ],
+    "evidence": "Migraciones y comparación antes/después de una actualización.",
+    "priority": "P0",
+    "start": "2026-10-26",
+    "due": "2026-10-28",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A25",
+    "week": 4,
+    "owner": "Roberto",
+    "owner_full": "Roberto Santana Trujillo",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Integrar el ciclo adaptativo completo",
+    "requirements": [
+      "RF01–RF12"
+    ],
+    "dependencies": [
+      "A18",
+      "A19",
+      "A21",
+      "A22",
+      "A24"
+    ],
+    "acceptance": [
+      "Completar login → perfil → bloque A → análisis → meta → plan → sesión → bloque B comparable.",
+      "Demostrar reevaluación con evidencia; metas o sesiones no inventan cambio de desempeño.",
+      "Abrir incidencias de integración y cerrarlas antes del corte del viernes."
+    ],
+    "evidence": "Demo integrada con dos bloques y PRs revisados.",
+    "priority": "P0",
+    "start": "2026-11-02",
+    "due": "2026-11-06",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A26",
+    "week": 4,
+    "owner": "Roberto",
+    "owner_full": "Roberto Santana Trujillo",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Calibrar heurísticas y documentar límites",
+    "requirements": [
+      "RF07",
+      "RF08",
+      "RF09"
+    ],
+    "dependencies": [
+      "A17",
+      "A18"
+    ],
+    "acceptance": [
+      "Contrastar umbrales con casos manuales y contextos de modalidad.",
+      "Conservar reglas y evidencia reproducibles; describir incertidumbre y límites sin afirmar causalidad."
+    ],
+    "evidence": "Tabla de casos y versión de reglas usada.",
+    "priority": "P1",
+    "start": "2026-11-02",
+    "due": "2026-11-06",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A27",
+    "week": 4,
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Conectar plan y sesiones en la interfaz",
+    "requirements": [
+      "RF09",
+      "RF10"
+    ],
+    "dependencies": [
+      "A18",
+      "A20",
+      "A21",
+      "A24"
+    ],
+    "acceptance": [
+      "Mostrar versión, recursos, duración y estados de cobertura.",
+      "Actualizar plan crea versión y permite consultar anteriores; sesiones se registran/corrigen/eliminan sobre su versión."
+    ],
+    "evidence": "Recorrido integrado y prueba de conservación de historial.",
+    "priority": "P0",
+    "start": "2026-11-02",
+    "due": "2026-11-06",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A28",
+    "week": 4,
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Construir reportes y cerrar estados de pantallas",
+    "requirements": [
+      "RF11"
+    ],
+    "dependencies": [
+      "A19",
+      "A22",
+      "A31"
+    ],
+    "acceptance": [
+      "Separar gráficas de métricas, objetivos y rango declarado.",
+      "Mostrar períodos, unidades, muestras y exclusiones; no dibujar null como cero.",
+      "Completar todas las trece pantallas y navegación del ciclo del jugador."
+    ],
+    "evidence": "Demo de reportes con casos de ausencia de datos.",
+    "priority": "P1",
+    "start": "2026-11-02",
+    "due": "2026-11-06",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A29",
+    "week": 4,
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Implementar administración de usuarios",
+    "requirements": [
+      "RF12"
+    ],
+    "dependencies": [
+      "A08"
+    ],
+    "acceptance": [
+      "Administrador consulta usuarios y cambia activo/suspendido.",
+      "Validar rol en servidor y acceso de usuarios suspendidos; no habilitar alta pública de administradores."
+    ],
+    "evidence": "Pruebas de rol, suspensión y reactivación.",
+    "priority": "P0",
+    "start": "2026-11-02",
+    "due": "2026-11-04",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A30",
+    "week": 4,
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Cerrar errores de API, privacidad y reintentos",
+    "requirements": [
+      "RF04",
+      "RF05"
+    ],
+    "dependencies": [
+      "A13",
+      "A14"
+    ],
+    "acceptance": [
+      "Probar espera prolongada, duplicados, caída temporal y carga parcial sin perder estados.",
+      "Verificar cargas privadas y limpieza solo de archivos propios; documentar cómo retomar un bloque."
+    ],
+    "evidence": "Matriz de fallos y evidencia del manejo.",
+    "priority": "P0",
+    "start": "2026-11-02",
+    "due": "2026-11-06",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A31",
+    "week": 4,
+    "owner": "David",
+    "owner_full": "David Alonso Torres Guerrero",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Cerrar historial de objetivos y rango declarado",
+    "requirements": [
+      "RF10",
+      "RF11"
+    ],
+    "dependencies": [
+      "A16",
+      "A22",
+      "A24"
+    ],
+    "acceptance": [
+      "Registrar rango manual con fecha/modalidad y mostrar su fuente.",
+      "Conservar historial ante corrección de metas/sesiones y actualización del catálogo.",
+      "Verificar coherencia de plan, metas y reportes con las nuevas relaciones."
+    ],
+    "evidence": "Casos de integridad y reporte antes/después.",
+    "priority": "P1",
+    "start": "2026-11-02",
+    "due": "2026-11-04",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A32",
+    "week": 4,
+    "owner": "David",
+    "owner_full": "David Alonso Torres Guerrero",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
+    "title": "Conectar panel admin y CRUD del catálogo",
+    "requirements": [
+      "RF12"
+    ],
+    "dependencies": [
+      "A04",
+      "A23",
+      "A29"
+    ],
+    "acceptance": [
+      "Construir panel, usuarios y ejercicios con mensajes de éxito/error.",
+      "CRUD de ejercicios y cambio de estado de usuarios funcionan con autorización del servidor."
+    ],
+    "evidence": "Demo de las tres pantallas administrativas.",
+    "priority": "P0",
+    "start": "2026-11-02",
+    "due": "2026-11-06",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A33",
+    "week": 5,
+    "owner": "Roberto",
+    "owner_full": "Roberto Santana Trujillo",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Cerrar regresión de métricas, reglas y planes",
+    "requirements": [
+      "RF06",
+      "RF07",
+      "RF08",
+      "RF09"
+    ],
+    "dependencies": [
+      "A25",
+      "A26"
+    ],
+    "acceptance": [
+      "Ejecutar casos de línea base, ponderación, comparación incompatible, null y plan parcial.",
+      "Cero fallos abiertos que impidan el ciclo obligatorio; adjuntar resultados al commit de entrega."
+    ],
+    "evidence": "Informe de pruebas y commit final.",
+    "priority": "P0",
+    "start": "2026-11-09",
+    "due": "2026-11-13",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A34",
+    "week": 5,
+    "owner": "Roberto",
+    "owner_full": "Roberto Santana Trujillo",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Preparar evidencia técnica para PROGSA",
+    "requirements": [
+      "RF07",
+      "RF08",
+      "RF09"
+    ],
+    "dependencies": [
+      "A25",
+      "A26"
+    ],
+    "acceptance": [
+      "Documentar problema, decisiones, System Map, reglas, adaptación y limitaciones.",
+      "Separar lo demostrado por el prototipo de lo implementado en la web; validar formato con las instrucciones de PROGSA cuando se confirmen."
+    ],
+    "evidence": "Documento técnico, ejemplos y referencias de evidencia.",
+    "priority": "P1",
+    "start": "2026-11-09",
+    "due": "2026-11-13",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A35",
+    "week": 5,
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Revisar uso, mensajes y accesibilidad",
+    "requirements": [
+      "RF01–RF12"
+    ],
+    "dependencies": [
+      "A27",
+      "A28",
+      "A32"
+    ],
+    "acceptance": [
+      "Revisar etiquetas, teclado, contraste, foco, errores y visualización en escritorio.",
+      "Probar recorridos jugador/admin y ayuda con otra persona del equipo; cerrar bloqueos de uso."
+    ],
+    "evidence": "Lista de revisión y capturas finales.",
+    "priority": "P1",
+    "start": "2026-11-09",
+    "due": "2026-11-13",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A36",
+    "week": 5,
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Preparar demo, capturas y ensayo",
+    "requirements": [
+      "RF01–RF12"
+    ],
+    "dependencies": [
+      "A25",
+      "A35"
+    ],
+    "acceptance": [
+      "Crear guion de demostración de ocho a diez minutos ajustable a la rúbrica.",
+      "Cada integrante explica su módulo; preparar datos de respaldo marcados como demostración si la API no está disponible."
+    ],
+    "evidence": "Guion, capturas y ensayo cronometrado.",
+    "priority": "P1",
+    "start": "2026-11-09",
+    "due": "2026-11-13",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A37",
+    "week": 5,
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Verificar seguridad y privacidad funcional",
+    "requirements": [
+      "RF01",
+      "RF02",
+      "RF05",
+      "RF12"
+    ],
+    "dependencies": [
+      "A29",
+      "A30",
+      "A32"
+    ],
+    "acceptance": [
+      "Comprobar acceso directo a endpoints con jugador A/B/admin/suspendido y sin token.",
+      "Validar entradas, archivos y errores; credenciales solo en entorno del servidor y logs sin datos privados."
+    ],
+    "evidence": "Matriz de autorización y comprobación de secretos.",
+    "priority": "P0",
+    "start": "2026-11-09",
+    "due": "2026-11-13",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A38",
+    "week": 5,
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Preparar ejecución y despliegue reproducibles",
+    "requirements": [
+      "RF01–RF12"
+    ],
+    "dependencies": [
+      "A25",
+      "A37"
+    ],
+    "acceptance": [
+      "Otra persona ejecuta el proyecto desde cero con README, migraciones y .env.example.",
+      "Configurar entorno de entrega elegido por el equipo, validar OAuth y conexiones reales; conservar ruta de respaldo local.",
+      "Crear tag de entrega solo después de comprobar la versión final."
+    ],
+    "evidence": "URL o ejecución documentada, smoke test y tag.",
+    "priority": "P0",
+    "start": "2026-11-09",
+    "due": "2026-11-13",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A39",
+    "week": 5,
+    "owner": "David",
+    "owner_full": "David Alonso Torres Guerrero",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Auditar los tres CRUD y la integridad",
+    "requirements": [
+      "RF09",
+      "RF10",
+      "RF12"
+    ],
+    "dependencies": [
+      "A27",
+      "A31",
+      "A32"
+    ],
+    "acceptance": [
+      "Ejecutar altas, consultas, cambios, archivo/eliminación permitida en objetivos, sesiones y ejercicios.",
+      "Comprobar propietarios, relaciones y conservación de snapshots; preparar seed limpio de demo."
+    ],
+    "evidence": "Matriz CRUD y consultas de integridad.",
+    "priority": "P0",
+    "start": "2026-11-09",
+    "due": "2026-11-13",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "A40",
+    "week": 5,
+    "owner": "David",
+    "owner_full": "David Alonso Torres Guerrero",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
+    "title": "Preparar entrega LBPWEB y checklist común",
+    "requirements": [
+      "RF01–RF12"
+    ],
+    "dependencies": [
+      "A33",
+      "A35",
+      "A38",
+      "A39"
+    ],
+    "acceptance": [
+      "Vincular cada RF a pantalla, endpoint, datos, tarea y evidencia.",
+      "Reunir instalación, ERD vigente, capturas y documentación requerida; confirmar fecha y rúbrica de ambas materias.",
+      "Cerrar checklist en conjunto el viernes 13 y guardar una copia estable."
+    ],
+    "evidence": "Paquete de entrega y checklist firmado por los cuatro.",
+    "priority": "P0",
+    "start": "2026-11-09",
+    "due": "2026-11-13",
+    "status": "Backlog",
+    "conditional": false
+  },
+  {
+    "id": "B01",
+    "week": 6,
+    "owner": "Roberto",
+    "owner_full": "Roberto Santana Trujillo",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Corregir defectos de motor si aparecen",
+    "requirements": [
+      "RF07",
+      "RF08",
+      "RF09"
+    ],
+    "dependencies": [
+      "A33"
+    ],
+    "acceptance": [
+      "Atender solo defectos de la versión de entrega; repetir los casos afectados."
+    ],
+    "evidence": "Issue y prueba del arreglo.",
+    "priority": "P1",
+    "start": "2026-11-16",
+    "due": "2026-11-20",
+    "status": "Backlog",
+    "conditional": true
+  },
+  {
+    "id": "B02",
+    "week": 6,
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "David",
+    "reviewer_full": "David Alonso Torres Guerrero",
+    "title": "Ajustar presentación y experiencia si se solicita",
+    "requirements": [
+      "RF01–RF12"
+    ],
+    "dependencies": [
+      "A36"
+    ],
+    "acceptance": [
+      "Aplicar correcciones del ensayo o profesor sin ampliar el alcance."
+    ],
+    "evidence": "Capturas o guion actualizado.",
+    "priority": "P1",
+    "start": "2026-11-16",
+    "due": "2026-11-20",
+    "status": "Backlog",
+    "conditional": true
+  },
+  {
+    "id": "B03",
+    "week": 6,
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Verificar entorno antes de entregar",
+    "requirements": [
+      "RF01–RF12"
+    ],
+    "dependencies": [
+      "A38"
+    ],
+    "acceptance": [
+      "Repetir recorrido principal y respaldo local en la fecha confirmada."
+    ],
+    "evidence": "Smoke test de la versión de entrega.",
+    "priority": "P1",
+    "start": "2026-11-16",
+    "due": "2026-11-20",
+    "status": "Backlog",
+    "conditional": true
+  },
+  {
+    "id": "B04",
+    "week": 6,
+    "owner": "David",
+    "owner_full": "David Alonso Torres Guerrero",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
+    "title": "Revisar paquete y confirmar recepción",
+    "requirements": [
+      "RF01–RF12"
+    ],
+    "dependencies": [
+      "A40"
+    ],
+    "acceptance": [
+      "Comprobar nombres, evidencias y formatos por materia; registrar la fecha real de entrega."
+    ],
+    "evidence": "Checklist y comprobante de entrega cuando exista.",
+    "priority": "P1",
+    "start": "2026-11-16",
+    "due": "2026-11-20",
+    "status": "Backlog",
+    "conditional": true
+  }
+]
