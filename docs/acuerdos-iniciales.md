@@ -1,5 +1,7 @@
 # Acuerdos iniciales
 
+> Referencia del 8 de septiembre. El calendario y reparto vigentes están en [Equipo y acuerdos semanales](equipo-y-acuerdos-semanales.md) y [Empieza aquí](empieza-aqui.md), revisados el 12 de octubre de 2026.
+
 Última actualización: 8 de septiembre de 2026.
 
 ## Decisiones confirmadas
@@ -48,4 +50,5 @@ Las métricas definitivas dependerán de los datos que realmente entregue Ballch
 - Definir las métricas exactas y los umbrales del motor de reglas.
 - Confirmar las restricciones de la API de Ballchasing y el tratamiento privado de los replays.
 - Definir la fecha exacta de la entrega final.
+
 

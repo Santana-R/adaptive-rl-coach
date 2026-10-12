@@ -1,8 +1,11 @@
 # Trabajo en equipo
 
-Una rama por tarea: `feat/A13-carga-privada`, `fix/A10-comparacion` o `docs/A40-entrega`.
-Abrir PR con el ID de tarea, comportamiento, evidencia y pruebas pertinentes. El revisor propuesto en el backlog valida antes de integrar a `main`. Mantener PRs pequeños y revisar durante la semana.
+Primero leer [Empieza aquí](docs/empieza-aqui.md) y la issue. Una rama por entrega: `feat/A19-analisis`, `fix/A10-comparacion`, `docs/A40-entrega`.
 
-Una tarea queda Done cuando cumple aceptación, está integrada, otra persona la revisó y tiene evidencia. Un bloqueo se declara en 24 horas con impacto y siguiente acción. Corte semanal domingo a las 20:00 de Monterrey; semanas 4 y 5 tienen corte anticipado viernes.
+En cada PR: ID y issue, comportamiento, cómo ejecutarlo, resultado esperado/observado y evidencia. Añadir una explicación breve de cómo funciona y qué consume de otro módulo. El revisor propuesto ejecuta la comprobación y escribe lo observado antes de integrar a main. La revisión puede resolverse de forma asíncrona.
 
-Los responsables son propuestas de organización. Confirmar disponibilidad y asociar usuarios de GitHub antes de asignar cuentas. No configurar protección de ramas o permisos del equipo sin comprobar el plan disponible y acordar el acceso.
+Código Done: aceptación, revisión, integración y evidencia. Documento/diseño Done: versión guardada, comprobada y revisada. El estado operativo se mantiene en GitHub. No se exige trabajo acompañado ni reunión presencial.
+
+Mantener como máximo dos tareas activas. Bloqueos: motivo, impacto, ayuda y siguiente acción en menos de 24 horas. Corte propuesto domingo 20:00 Monterrey; S4/S5 viernes 6/13 de noviembre.
+
+El reparto actualizado requiere confirmar disponibilidad en A01. A19 es la función completa de Roberto; A25 la integración coordinada por Tadeo. Confirmar identidades antes de invitar o asignar cuentas.

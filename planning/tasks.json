@@ -4,8 +4,8 @@
     "week": 1,
     "owner": "Roberto",
     "owner_full": "Roberto Santana Trujillo",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
     "title": "Cerrar alcance y contrato API/datos",
     "requirements": [
       "RF01–RF12"
@@ -21,7 +21,18 @@
     "start": "2026-10-12",
     "due": "2026-10-14",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Dejar acuerdos que permitan que los cuatro construyan piezas compatibles.",
+    "inputs": "Fase 1 actualizada, matriz RF01–RF12, trece pantallas y este reparto.",
+    "steps": [
+      "Confirmar por escrito disponibilidad y aceptación de módulos; registrar ajustes.",
+      "Completar una fila por RF: pantalla, tarea, dato necesario y prueba.",
+      "Acordar ejemplos de solicitudes/respuestas, unidades, datos ausentes y errores con quienes consumen cada módulo."
+    ],
+    "deliverable": "docs/contratos-api.md, planning/trazabilidad-rf.csv y un acuerdo breve del equipo.",
+    "example": "RF07 → pantalla Análisis → A10/A19 → dos bloques comparables → mostrar cambio y motivo si no se puede comparar.",
+    "learning": "Leer requisitos, definir interfaces y coordinar sin depender de reuniones presenciales.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A02",
@@ -48,13 +59,24 @@
     "start": "2026-10-12",
     "due": "2026-10-18",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Definir datos de prueba y respuestas esperadas antes de programar las reglas.",
+    "inputs": "Contrato de A01, reglas del prototipo y comportamiento de RF07–RF09.",
+    "steps": [
+      "Preparar al menos los cinco casos descritos en la guía: primer bloque, comparable, incompatible, faltantes y empate.",
+      "Escribir entrada y salida esperada para cada caso; calcular a mano los ejemplos numéricos.",
+      "Anotar qué regla usa cada umbral del prototipo, su unidad y su límite; acordar un desempate reproducible."
+    ],
+    "deliverable": "tests/fixtures/analisis/*.json y docs/casos-motor.md con entradas y resultados esperados.",
+    "example": "Mismo jugador, modalidad y tipo; bloque A: 8 tiros/2 goles; B: 10 tiros/3 goles. Porcentaje: 25% → 30%; cambio +5 puntos porcentuales. Son datos inventados para una prueba.",
+    "learning": "Traducir una regla a un caso verificable; distinguir datos de prueba y datos reales.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A03",
     "week": 1,
-    "owner": "Tadeo",
-    "owner_full": "Omar Tadeo Gasca Deciga",
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
     "reviewer": "Roberto",
     "reviewer_full": "Roberto Santana Trujillo",
     "title": "Convertir los bosquejos actuales en flujo de pantallas",
@@ -71,15 +93,26 @@
     "start": "2026-10-12",
     "due": "2026-10-14",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Convertir los bosquejos de la Fase 1 en un recorrido navegable para jugador y administrador.",
+    "inputs": "Trece pantallas de Fase 1 y requisitos de cada rol.",
+    "steps": [
+      "Listar cada pantalla y los enlaces de entrada/salida.",
+      "Dibujar el recorrido de jugador y administrador con los controles permitidos.",
+      "Para cada pantalla, anotar carga, éxito, error y ausencia de datos; compartir el flujo antes de implementar."
+    ],
+    "deliverable": "docs/flujo-pantallas.md y un diagrama o capturas de los bosquejos.",
+    "example": "Carga → procesando → análisis; si falla un replay, mostrar cuál falló y la acción disponible.",
+    "learning": "Luis: conectar diseño de navegación con estados reales del sistema.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A04",
     "week": 1,
-    "owner": "Tadeo",
-    "owner_full": "Omar Tadeo Gasca Deciga",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
     "title": "Crear base visual y navegación",
     "requirements": [
       "RF01",
@@ -99,13 +132,24 @@
     "start": "2026-10-12",
     "due": "2026-10-18",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Crear la base de interfaz sobre la que se conectarán las funciones posteriores.",
+    "inputs": "Flujo de A03 y contrato de A01.",
+    "steps": [
+      "Preparar HTML/CSS/Bootstrap y JavaScript/jQuery con una estructura común.",
+      "Crear navegación y las páginas Inicio, Acerca y Ayuda, además de contenedores para las demás vistas.",
+      "Separar menús por rol y comprobar enlaces, foco y mensajes en escritorio."
+    ],
+    "deliverable": "PR con base visual y recorrido reproducible; actualizar instrucciones de ejecución cuando existan.",
+    "example": "Un jugador puede llegar a Carga desde su menú; no se le presenta el menú de administración.",
+    "learning": "Luis: estructura frontend, eventos y componentes reutilizables.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A05",
     "week": 1,
-    "owner": "Luis",
-    "owner_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
     "reviewer": "Roberto",
     "reviewer_full": "Roberto Santana Trujillo",
     "title": "Validar Ballchasing con una prueba real",
@@ -126,13 +170,24 @@
     "start": "2026-10-12",
     "due": "2026-10-14",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Comprobar que Ballchasing permite obtener los datos necesarios con un replay real autorizado.",
+    "inputs": "Cuenta/token válido, replay autorizado y documentación oficial vigente de Ballchasing.",
+    "steps": [
+      "Consultar permisos y límites actuales; hacer una carga privada de prueba desde el servidor.",
+      "Consultar procesamiento e identificar al jugador y las métricas devueltas.",
+      "Registrar respuesta anonimizada, errores y estrategia de reintento; comunicar brechas de viabilidad."
+    ],
+    "deliverable": "scripts/spike-ballchasing.* y docs/viabilidad-ballchasing.md, sin tokens ni replays publicados.",
+    "example": "Guardar un ejemplo anonimizado de estado pendiente y otro listo, indicando el campo que identifica al jugador.",
+    "learning": "Tadeo: explorar una API externa y validar supuestos antes de construir.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A06",
     "week": 1,
-    "owner": "Luis",
-    "owner_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
     "reviewer": "David",
     "reviewer_full": "David Alonso Torres Guerrero",
     "title": "Preparar servidor y adaptador de ingestión",
@@ -153,7 +208,18 @@
     "start": "2026-10-12",
     "due": "2026-10-18",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Dejar un servidor ejecutable y una interfaz común para cargar y consultar replays.",
+    "inputs": "Contrato de A01 y resultados reales de A05.",
+    "steps": [
+      "Crear Express y documentar versiones y comandos reales.",
+      "Añadir .env.example con nombres de variables sin secretos y los estados de replay/bloque acordados.",
+      "Crear el adaptador de ingestión y un modo de datos de prueba identificado; comprobar endpoints básicos."
+    ],
+    "deliverable": "PR del servidor, .env.example y docs/estados-procesamiento.md.",
+    "example": "Un endpoint de prueba devuelve estado pending y después ready con el mismo identificador.",
+    "learning": "Tadeo: servidor, configuración y separación entre integración externa y lógica propia.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A07",
@@ -177,15 +243,26 @@
     "start": "2026-10-12",
     "due": "2026-10-14",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Completar el diseño de datos antes de implementar funciones que necesitan historial.",
+    "inputs": "ERD de ocho tablas, Fase 1 y contrato de A01 en cuanto esté disponible.",
+    "steps": [
+      "Revisar qué requisito cubre cada tabla y dónde faltan sesiones, rango declarado, reglas o versiones.",
+      "Escribir campos, unidades, claves, propietarios y relaciones en un diccionario.",
+      "Proponer migraciones y revisar el diseño con los consumidores antes de cambiar el ERD o la base."
+    ],
+    "deliverable": "docs/diccionario-datos.md y propuesta de migraciones; ERD revisado cuando se acuerde.",
+    "example": "Una sesión necesita apuntar a la versión exacta del plan con la que se entrenó.",
+    "learning": "David: diseñar persistencia trazable y explicar por qué existe cada relación.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A08",
     "week": 1,
     "owner": "David",
     "owner_full": "David Alonso Torres Guerrero",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
     "title": "Preparar autenticación y permisos de datos",
     "requirements": [
       "RF01",
@@ -206,15 +283,26 @@
     "start": "2026-10-12",
     "due": "2026-10-18",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Permitir acceso por correo y Google y proteger los recursos de cada jugador.",
+    "inputs": "Modelo de A07, contrato de A01 y configuración de Auth documentada.",
+    "steps": [
+      "Implementar registro, acceso y salida; configurar Google según la documentación vigente.",
+      "Integrar validación de identidad en Express y propiedad de los datos.",
+      "Probar dos jugadores, administrador y suspensión; documentar el procedimiento de prueba."
+    ],
+    "deliverable": "PR de autenticación, configuración sin secretos y matriz de permisos.",
+    "example": "Jugador A intenta consultar un bloque de B: acceso denegado; el registro público no crea administradores.",
+    "learning": "David: distinguir inicio de sesión, autorización y propiedad de datos.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A09",
     "week": 2,
     "owner": "Roberto",
     "owner_full": "Roberto Santana Trujillo",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
     "title": "Normalizar métricas de cinco replays",
     "requirements": [
       "RF06"
@@ -233,7 +321,18 @@
     "start": "2026-10-19",
     "due": "2026-10-25",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Producir métricas correctas para el jugador a partir de cinco replays válidos.",
+    "inputs": "Casos A02, datos disponibles A05 y extracción compatible A14.",
+    "steps": [
+      "Localizar al jugador de interés en cada replay y conservar trazabilidad.",
+      "Documentar fórmula, unidad y denominador de cada métrica; mantener null si falta información.",
+      "Comparar resultados de la función con cálculos manuales y registrar exclusiones."
+    ],
+    "deliverable": "PR de normalización, docs/metricas.md y casos calculados a mano.",
+    "example": "2 goles/8 tiros y 3 goles/12 tiros se agregan como 5/20 = 25%; no se promedian porcentajes sin sus denominadores.",
+    "learning": "Roberto: transformación de datos, funciones y pruebas numéricas.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A10",
@@ -260,15 +359,26 @@
     "start": "2026-10-19",
     "due": "2026-10-25",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Decidir cuándo comparar dos bloques y explicar claramente el resultado.",
+    "inputs": "Métricas A09 y bloques persistidos A15.",
+    "steps": [
+      "Definir línea base si solo existe un bloque válido.",
+      "Validar identidad, modalidad, tipo, cronología y equivalencia de medición.",
+      "Calcular cambios por métrica y devolver un motivo verificable cuando la comparación no aplica."
+    ],
+    "deliverable": "PR de comparación y pruebas de línea base, incompatibilidad y cambios.",
+    "example": "Un bloque ranked 2v2 no se compara con casual 3v3; se conserva y muestra el motivo.",
+    "learning": "Roberto: condiciones, fechas y un contrato que después consumirá su pantalla A19.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A11",
     "week": 2,
-    "owner": "Tadeo",
-    "owner_full": "Omar Tadeo Gasca Deciga",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
     "title": "Implementar carga e historial de bloques",
     "requirements": [
       "RF03",
@@ -289,13 +399,24 @@
     "start": "2026-10-19",
     "due": "2026-10-25",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Permitir cargar cinco replays y seguir el estado de cada bloque desde la interfaz.",
+    "inputs": "Base A04 y contrato/endpoint A13; durante desarrollo usar respuestas de prueba marcadas.",
+    "steps": [
+      "Crear selección de exactamente cinco .replay y validación antes de enviar.",
+      "Conectar envío y estados por archivo, bloque, espera, error y reintento.",
+      "Crear historial con IDs y enlace a detalle; bloquear envíos repetidos accidentales."
+    ],
+    "deliverable": "PR frontend y capturas de carga válida, inválida y parcial.",
+    "example": "Al seleccionar cuatro archivos se explica que faltan uno; el botón no envía el bloque.",
+    "learning": "Luis: formularios, peticiones asíncronas y representación de estados.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A12",
     "week": 2,
-    "owner": "Tadeo",
-    "owner_full": "Omar Tadeo Gasca Deciga",
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
     "reviewer": "David",
     "reviewer_full": "David Alonso Torres Guerrero",
     "title": "Conectar registro, login y perfil",
@@ -316,13 +437,24 @@
     "start": "2026-10-19",
     "due": "2026-10-25",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Conectar las pantallas de acceso y perfil con autenticación y persistencia.",
+    "inputs": "Base A04 y autenticación A08.",
+    "steps": [
+      "Conectar correo y Google y representar fallos comprensibles.",
+      "Añadir plataforma, modalidad e identidad Epic/Steam con validación.",
+      "Comprobar que una edición persiste al recargar y que no se analiza un perfil incompleto."
+    ],
+    "deliverable": "PR y recorrido de acceso/perfil con ambos métodos.",
+    "example": "Sin identidad del jugador, la pantalla explica qué falta antes de analizar replays.",
+    "learning": "Luis: estado de sesión, validación y datos persistidos desde formularios.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A13",
     "week": 2,
-    "owner": "Luis",
-    "owner_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
     "reviewer": "David",
     "reviewer_full": "David Alonso Torres Guerrero",
     "title": "Implementar carga privada y estados de procesamiento",
@@ -346,13 +478,24 @@
     "start": "2026-10-19",
     "due": "2026-10-22",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Procesar cargas privadas sin perder estados ni duplicar registros durante reintentos.",
+    "inputs": "Servidor A06, autorización A08 y persistencia A15.",
+    "steps": [
+      "Validar el lote y registrar IDs/propiedad antes de consultar procesamiento.",
+      "Implementar espera y reintento controlado conservando estados individuales.",
+      "Probar formato, duplicados y fallos; comprobar una carga real privada autorizada."
+    ],
+    "deliverable": "PR del adaptador y pruebas con fallos y un bloque real.",
+    "example": "Un fallo transitorio se reintenta sobre el registro existente; no crea otro replay propio.",
+    "learning": "Tadeo: procesos externos, estados e idempotencia de reintentos.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A14",
     "week": 2,
-    "owner": "Luis",
-    "owner_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
     "reviewer": "Roberto",
     "reviewer_full": "Roberto Santana Trujillo",
     "title": "Validar identidad y compatibilidad del bloque",
@@ -375,15 +518,26 @@
     "start": "2026-10-19",
     "due": "2026-10-21",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Entregar al motor datos que pertenezcan al mismo jugador y contexto.",
+    "inputs": "Prueba A05, servidor A06 y perfil autorizado A08.",
+    "steps": [
+      "Buscar la identidad del perfil en los cinco archivos procesados.",
+      "Validar modalidad y tipo; devolver motivos por replay y por bloque.",
+      "Entregar la extracción con IDs, unidades y disponibilidad de métricas al motor A09."
+    ],
+    "deliverable": "PR, respuesta anonimizada y casos de jugador ausente/contexto incompatible.",
+    "example": "Si el jugador no aparece en uno de los cinco replays, el bloque no se presenta como una medición completa válida.",
+    "learning": "Tadeo: validar entradas y diseñar la frontera entre API y motor.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A15",
     "week": 2,
     "owner": "David",
     "owner_full": "David Alonso Torres Guerrero",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
     "title": "Persistir perfil, bloques, replays y métricas",
     "requirements": [
       "RF02",
@@ -404,7 +558,18 @@
     "start": "2026-10-19",
     "due": "2026-10-21",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Guardar perfil, bloques, replays y métricas con propiedad e integridad.",
+    "inputs": "Modelo A07 y autenticación A08.",
+    "steps": [
+      "Crear las migraciones acordadas y datos de ejemplo.",
+      "Persistir IDs y estados sin duplicados y conservar datos ausentes como null.",
+      "Entregar consultas/ejemplos anonimizados para A09–A10 y después A19."
+    ],
+    "deliverable": "Migraciones, seed de ejemplo y consultas de integridad.",
+    "example": "Tras reiniciar el servidor se consulta el mismo bloque, con sus cinco replays y sus estados.",
+    "learning": "David: relaciones, restricciones y recuperación de datos para una función completa.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A16",
@@ -431,15 +596,26 @@
     "start": "2026-10-19",
     "due": "2026-10-25",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Permitir objetivos propios con historial, sin cambiar artificialmente el diagnóstico.",
+    "inputs": "Modelo A07 y propiedad A08.",
+    "steps": [
+      "Crear endpoints para alta, consulta y edición de metas por modalidad.",
+      "Conservar historial y archivar metas vinculadas a planes.",
+      "Probar edición/archivo y acceso de otro jugador; documentar efecto sobre planes nuevos."
+    ],
+    "deliverable": "PR de objetivos y casos de historial/propiedad.",
+    "example": "Archivar una meta vinculada conserva el plan que ya la usó; las métricas anteriores no se modifican.",
+    "learning": "David: CRUD con historial y reglas de conservación.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A17",
     "week": 3,
     "owner": "Roberto",
     "owner_full": "Roberto Santana Trujillo",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
     "title": "Implementar reglas con máximo tres prioridades",
     "requirements": [
       "RF08"
@@ -459,7 +635,18 @@
     "start": "2026-10-26",
     "due": "2026-10-28",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Generar prioridades reproducibles que se puedan explicar con evidencia.",
+    "inputs": "Casos A02, métricas A09 y comparación A10.",
+    "steps": [
+      "Trasladar las reglas acordadas a JavaScript con versión explícita.",
+      "Ordenar y limitar a tres prioridades; cada salida conserva regla, dato y unidad.",
+      "Comprobar empates, faltantes y ausencia de señal con los casos preparados."
+    ],
+    "deliverable": "PR del motor y resultados de los casos de reglas.",
+    "example": "Una prioridad incluye el ID de regla y la métrica que la activó; un dato ausente no activa una conclusión inventada.",
+    "learning": "Roberto: lógica determinista, ordenamiento y explicaciones comprobables.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A18",
@@ -488,42 +675,68 @@
     "start": "2026-10-26",
     "due": "2026-11-01",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Crear un plan posible de realizar y conservar las versiones anteriores.",
+    "inputs": "Metas A16, prioridades A17, catálogo A23 y versiones A24.",
+    "steps": [
+      "Elegir ejercicios activos compatibles con prioridad, meta, plataforma y disponibilidad.",
+      "Comprobar duración, sesiones e instrucciones de cada ejercicio.",
+      "Guardar otra versión al actualizar y explicar cobertura parcial o vacía."
+    ],
+    "deliverable": "PR del generador y casos de catálogo suficiente, parcial y vacío.",
+    "example": "Si solo existe un ejercicio compatible para dos prioridades, se muestra plan parcial y la cobertura que falta.",
+    "learning": "Roberto: restricciones, selección y conexión entre reglas y persistencia.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A19",
     "week": 3,
-    "owner": "Tadeo",
-    "owner_full": "Omar Tadeo Gasca Deciga",
-    "reviewer": "Roberto",
-    "reviewer_full": "Roberto Santana Trujillo",
-    "title": "Construir análisis con evidencia",
+    "owner": "Roberto",
+    "owner_full": "Roberto Santana Trujillo",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "title": "Conectar datos, API y pantalla de análisis con comparación",
     "requirements": [
       "RF06",
       "RF07",
       "RF08"
     ],
     "dependencies": [
+      "A06",
       "A10",
       "A11",
+      "A15",
       "A17"
     ],
     "acceptance": [
-      "Mostrar métricas por replay/bloque, línea base o comparación y hasta tres prioridades.",
-      "Chart.js presenta unidades y faltantes; motivos de incompatibilidad son visibles."
+      "Consultar bloques guardados del jugador autorizado y reutilizar la normalización/comparación de A09–A10 y las prioridades de A17.",
+      "Implementar la consulta del análisis en Express y conectar su respuesta a la pantalla existente con JavaScript y Chart.js.",
+      "Mostrar métricas por replay/bloque, unidades, faltantes, línea base o comparación, hasta tres prioridades y el motivo de incompatibilidad.",
+      "Comprobar el recorrido datos → API → interfaz con bloques comparables, primer bloque, datos faltantes y acceso a datos ajenos denegado."
     ],
-    "evidence": "Demo contra fixtures con números comprobados.",
+    "evidence": "PR de la función completa, ejemplo de respuesta, capturas y prueba del recorrido con cifras verificadas.",
     "priority": "P1",
     "start": "2026-10-26",
     "due": "2026-11-01",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Construir una función completa para que Roberto conecte datos, servidor e interfaz.",
+    "inputs": "Servidor A06; comparación A10; acceso al bloque desde A11; consultas A15; prioridades A17; base visual A04.",
+    "steps": [
+      "Consultar los bloques propios y acordar con Tadeo la ruta del endpoint de análisis.",
+      "Reutilizar A09/A10/A17 y devolver el resultado autorizado con unidades, motivos y evidencia.",
+      "Conectar la respuesta a la pantalla Análisis con JavaScript/Chart.js; revisar su uso con Luis mediante el PR."
+    ],
+    "deliverable": "PR que incluya consulta, endpoint y pantalla; ejemplo de respuesta, prueba del recorrido y capturas.",
+    "example": "Abrir bloque B desde el historial: la API recupera A/B propios, calcula +5 puntos porcentuales de tiro en el caso de prueba y la pantalla lo muestra con unidad y período.",
+    "learning": "Roberto: comprender y construir una función desde persistencia hasta interfaz; Tadeo mantiene el servidor común, David el modelo y Luis la base visual.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A20",
     "week": 3,
-    "owner": "Tadeo",
-    "owner_full": "Omar Tadeo Gasca Deciga",
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
     "reviewer": "David",
     "reviewer_full": "David Alonso Torres Guerrero",
     "title": "Construir gestión de objetivos",
@@ -543,13 +756,24 @@
     "start": "2026-10-26",
     "due": "2026-11-01",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Dar al jugador una interfaz para mantener sus objetivos.",
+    "inputs": "Perfil A12 y endpoints A16.",
+    "steps": [
+      "Crear listado y formularios por modalidad.",
+      "Conectar alta, edición y archivo con los mensajes correspondientes.",
+      "Mostrar metas de rendimiento y entrenamiento por separado y comprobar conservación del historial."
+    ],
+    "deliverable": "PR de pantalla Objetivos y recorrido de todos sus estados.",
+    "example": "Archivar una meta cambia su estado visible y permite seguir consultando el plan histórico relacionado.",
+    "learning": "Luis: formularios CRUD y explicación de cambios con historial.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A21",
     "week": 3,
-    "owner": "Luis",
-    "owner_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
     "reviewer": "David",
     "reviewer_full": "David Alonso Torres Guerrero",
     "title": "Implementar CRUD de sesiones ligadas al plan",
@@ -570,13 +794,24 @@
     "start": "2026-10-26",
     "due": "2026-11-01",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Registrar entrenamiento realizado sobre la versión exacta del plan.",
+    "inputs": "Autorización A08 y versiones A24.",
+    "steps": [
+      "Implementar alta, consulta, corrección y eliminación de sesiones propias.",
+      "Validar fecha, duración, ejercicio y versión del plan.",
+      "Recalcular conteos tras una corrección/eliminación y comprobar dos versiones distintas."
+    ],
+    "deliverable": "PR de sesiones y pruebas CRUD/recálculo.",
+    "example": "Corregir una sesión de 20 a 15 minutos actualiza el total de entrenamiento; no demuestra una mejora en partidas.",
+    "learning": "Tadeo: endpoints CRUD y coherencia de datos derivados.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A22",
     "week": 3,
-    "owner": "Luis",
-    "owner_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
     "reviewer": "Roberto",
     "reviewer_full": "Roberto Santana Trujillo",
     "title": "Calcular progreso y contrato de reportes",
@@ -598,7 +833,18 @@
     "start": "2026-10-26",
     "due": "2026-11-01",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Entregar reportes con fuentes y unidades claras.",
+    "inputs": "Comparación A10, objetivos A16 y sesiones A21.",
+    "steps": [
+      "Separar entrenamiento declarado, cumplimiento de metas y métricas de partidas.",
+      "Agregar período, cantidad de observaciones, denominador y exclusiones.",
+      "Comprobar respuestas con datos de prueba y documentar su consumo por A28."
+    ],
+    "deliverable": "PR de reportes y ejemplos numéricos verificados.",
+    "example": "45 minutos declarados se presentan como entrenamiento; el cambio de rendimiento proviene de bloques comparables.",
+    "learning": "Tadeo: agregaciones y contratos claros para gráficas.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A23",
@@ -626,15 +872,26 @@
     "start": "2026-10-26",
     "due": "2026-10-28",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Mantener ejercicios y recursos que realmente puedan usarse en planes nuevos.",
+    "inputs": "Diseño A07 y permisos A08.",
+    "steps": [
+      "Implementar CRUD autorizado de ejercicios y recursos.",
+      "Validar compatibilidad, duración, dificultad e instrucciones.",
+      "Preparar y revisar la semilla mínima; probar que un ejercicio desactivado no entra en un plan nuevo."
+    ],
+    "deliverable": "PR de catálogo y seed revisado para las prioridades del MVP.",
+    "example": "Desactivar un ejercicio lo excluye de planes nuevos y conserva la descripción del plan que ya lo usó.",
+    "learning": "David: catálogo autorizado y conservación de datos históricos.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A24",
     "week": 3,
     "owner": "David",
     "owner_full": "David Alonso Torres Guerrero",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
     "title": "Persistir versiones y snapshots del plan",
     "requirements": [
       "RF09",
@@ -655,16 +912,27 @@
     "start": "2026-10-26",
     "due": "2026-10-28",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Conservar exactamente qué datos y reglas originaron cada versión del plan.",
+    "inputs": "Modelo A07, datos A15 y objetivos A16.",
+    "steps": [
+      "Guardar la copia histórica de meta, perfil, ejercicio, regla y evidencia aplicada.",
+      "Enlazar plan_ejercicio y sesiones a su versión correcta.",
+      "Modificar datos actuales y demostrar que una versión previa permanece idéntica."
+    ],
+    "deliverable": "Migraciones/PR y comparación de versiones antes/después.",
+    "example": "Editar hoy la duración de un ejercicio no cambia el tiempo que mostraba el plan de ayer.",
+    "learning": "David: snapshots, versionado y trazabilidad.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A25",
     "week": 4,
-    "owner": "Roberto",
-    "owner_full": "Roberto Santana Trujillo",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
-    "title": "Integrar el ciclo adaptativo completo",
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
+    "title": "Coordinar y comprobar la integración del ciclo completo",
     "requirements": [
       "RF01–RF12"
     ],
@@ -685,7 +953,18 @@
     "start": "2026-11-02",
     "due": "2026-11-06",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Comprobar que los módulos de los cuatro funcionan juntos en el recorrido obligatorio.",
+    "inputs": "A18, A19, A21, A22 y A24 integradas o con entregas intermedias acordadas.",
+    "steps": [
+      "Tadeo coordina el recorrido completo con dos bloques reales comparables.",
+      "Abrir incidencias con módulo afectado, evidencia y responsable; cada dueño corrige su pieza.",
+      "Repetir el recorrido tras los arreglos y dejar evidencia antes del corte."
+    ],
+    "deliverable": "Registro de integración, incidencias resueltas y demo del ciclo completo.",
+    "example": "Login → perfil → bloque A → análisis → meta → plan → sesión → bloque B → reevaluación.",
+    "learning": "Tadeo: integración y diagnóstico de fallos entre módulos; Roberto revisa la función de análisis. No exige trabajo acompañado.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A26",
@@ -713,13 +992,24 @@
     "start": "2026-11-02",
     "due": "2026-11-06",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Comprobar y documentar qué permiten concluir las heurísticas.",
+    "inputs": "Reglas A17 y planes A18 con casos reproducibles.",
+    "steps": [
+      "Comparar resultados con casos revisados manualmente por modalidad.",
+      "Registrar cambios de umbral y la versión que los usa.",
+      "Explicar incertidumbre y límites sin presentar correlaciones como causalidad."
+    ],
+    "deliverable": "docs/calibracion-reglas.md y casos reproducibles de la versión usada.",
+    "example": "Un cambio entre bloques es evidencia de una diferencia observada; no prueba por sí solo que el ejercicio la causó.",
+    "learning": "Roberto: evaluar límites del diagnóstico además de implementarlo.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A27",
     "week": 4,
-    "owner": "Tadeo",
-    "owner_full": "Omar Tadeo Gasca Deciga",
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
     "reviewer": "David",
     "reviewer_full": "David Alonso Torres Guerrero",
     "title": "Conectar plan y sesiones en la interfaz",
@@ -742,15 +1032,26 @@
     "start": "2026-11-02",
     "due": "2026-11-06",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Conectar planes y sesiones sin perder sus versiones.",
+    "inputs": "Generador A18, objetivos A20, sesiones A21 y versiones A24.",
+    "steps": [
+      "Mostrar versión, recursos, instrucciones, duración y cobertura.",
+      "Conectar actualización de plan y consulta de versiones anteriores.",
+      "Conectar registro/corrección/eliminación de sesiones sobre la versión elegida."
+    ],
+    "deliverable": "PR de Plan/Sesiones y recorrido con conservación de historial.",
+    "example": "Tras actualizar el plan a v2, una sesión de v1 sigue mostrando los ejercicios de v1.",
+    "learning": "Luis: interfaz con relaciones y versiones persistentes.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A28",
     "week": 4,
-    "owner": "Tadeo",
-    "owner_full": "Omar Tadeo Gasca Deciga",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Roberto",
+    "reviewer_full": "Roberto Santana Trujillo",
     "title": "Construir reportes y cerrar estados de pantallas",
     "requirements": [
       "RF11"
@@ -770,13 +1071,24 @@
     "start": "2026-11-02",
     "due": "2026-11-06",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Mostrar reportes comprensibles y completar los estados del recorrido del jugador.",
+    "inputs": "Análisis A19, reportes A22 e historial A31.",
+    "steps": [
+      "Separar las gráficas por fuente: partidas, objetivos y rango declarado.",
+      "Añadir unidades, períodos, muestra y explicación de exclusiones.",
+      "Revisar todas las pantallas del jugador y sus estados de error/ausencia de datos."
+    ],
+    "deliverable": "PR de reportes y capturas con datos completos y faltantes.",
+    "example": "Un valor ausente genera un hueco o mensaje, no una barra de cero; el rango se etiqueta como declarado.",
+    "learning": "Luis: visualización fiel de datos y comprensión de límites.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A29",
     "week": 4,
-    "owner": "Luis",
-    "owner_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
     "reviewer": "David",
     "reviewer_full": "David Alonso Torres Guerrero",
     "title": "Implementar administración de usuarios",
@@ -795,13 +1107,24 @@
     "start": "2026-11-02",
     "due": "2026-11-04",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Permitir al administrador consultar y cambiar el estado de usuarios.",
+    "inputs": "Autorización A08.",
+    "steps": [
+      "Crear consulta y cambio activo/suspendido desde el servidor.",
+      "Comprobar rol y suspensión en cada operación protegida.",
+      "Probar suspensión/reactivación y acceso del jugador a endpoints de administración."
+    ],
+    "deliverable": "PR de administración y matriz de rol/estado.",
+    "example": "Un jugador que envía directamente una petición de suspensión recibe acceso denegado.",
+    "learning": "Tadeo: autorización en servidor y reglas de estado.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A30",
     "week": 4,
-    "owner": "Luis",
-    "owner_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
     "reviewer": "Roberto",
     "reviewer_full": "Roberto Santana Trujillo",
     "title": "Cerrar errores de API, privacidad y reintentos",
@@ -822,7 +1145,18 @@
     "start": "2026-11-02",
     "due": "2026-11-06",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Cerrar los casos de fallo de ingestión y recuperación de bloques.",
+    "inputs": "Carga A13 y compatibilidad A14.",
+    "steps": [
+      "Simular espera prolongada, fallo temporal, duplicado y lote parcial.",
+      "Comprobar privacidad y conservación de registros/estados.",
+      "Documentar cómo retomar un bloque y qué puede limpiar el sistema."
+    ],
+    "deliverable": "Matriz de fallos, PR de arreglos y evidencia de recuperación.",
+    "example": "Una carga duplicada externa no se borra; se explica el conflicto y solo se limpian recursos propios permitidos.",
+    "learning": "Tadeo: recuperación de errores sin perder trazabilidad.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A31",
@@ -851,15 +1185,26 @@
     "start": "2026-11-02",
     "due": "2026-11-04",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Conservar historial de metas y rango declarado de forma coherente con planes y reportes.",
+    "inputs": "Objetivos A16, reportes A22 y versiones A24.",
+    "steps": [
+      "Registrar rango manual con fecha y modalidad.",
+      "Probar correcciones de metas/sesiones y cambios de catálogo.",
+      "Comprobar relaciones e historial y entregar datos al reporte A28."
+    ],
+    "deliverable": "PR y casos de integridad antes/después.",
+    "example": "Una entrada de rango manual conserva fecha, modalidad y fuente declarada; no se presenta como MMR obtenido automáticamente.",
+    "learning": "David: historial temporal y consistencia entre recursos.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A32",
     "week": 4,
     "owner": "David",
     "owner_full": "David Alonso Torres Guerrero",
-    "reviewer": "Tadeo",
-    "reviewer_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
     "title": "Conectar panel admin y CRUD del catálogo",
     "requirements": [
       "RF12"
@@ -878,15 +1223,26 @@
     "start": "2026-11-02",
     "due": "2026-11-06",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Conectar las tres pantallas administrativas a operaciones autorizadas.",
+    "inputs": "Base visual A04, catálogo A23 y usuarios A29.",
+    "steps": [
+      "Construir panel, usuarios y ejercicios usando los componentes comunes.",
+      "Conectar CRUD y activo/suspendido con mensajes de éxito/error.",
+      "Probar administrador y jugador; pedir a Luis la revisión frontend por PR."
+    ],
+    "deliverable": "PR y demo de panel, usuarios y ejercicios.",
+    "example": "Un administrador desactiva un ejercicio y lo ve actualizado; un jugador no puede ejecutar esa operación.",
+    "learning": "David: consumir su catálogo desde interfaz; Luis revisa usabilidad.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A33",
     "week": 5,
     "owner": "Roberto",
     "owner_full": "Roberto Santana Trujillo",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
     "title": "Cerrar regresión de métricas, reglas y planes",
     "requirements": [
       "RF06",
@@ -907,7 +1263,18 @@
     "start": "2026-11-09",
     "due": "2026-11-13",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Cerrar las regresiones del motor y de la función completa de análisis.",
+    "inputs": "Integración A25 y calibración A26.",
+    "steps": [
+      "Ejecutar casos de normalización, comparación, reglas y planes.",
+      "Repetir el recorrido de A19 y comprobar que API/pantalla coinciden.",
+      "Corregir fallos del ciclo obligatorio y enlazar resultados al commit de entrega."
+    ],
+    "deliverable": "Informe de regresión con versión, esperado/observado y evidencias.",
+    "example": "El ejemplo 25% → 30% debe seguir mostrando +5 puntos porcentuales en función, API y pantalla.",
+    "learning": "Roberto: comprobar coherencia de una función de extremo a extremo.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A34",
@@ -935,13 +1302,24 @@
     "start": "2026-11-09",
     "due": "2026-11-13",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Preparar evidencia de adaptación y decisiones para PROGSA.",
+    "inputs": "Integración A25, límites A26 e instrucciones vigentes de PROGSA.",
+    "steps": [
+      "Organizar problema, System Map, reglas, adaptación y ejemplos.",
+      "Separar prototipo Python y funciones realmente implementadas en la web.",
+      "Adaptar a la rúbrica confirmada y enlazar evidencia técnica reutilizable."
+    ],
+    "deliverable": "Documento técnico en el formato que confirme el curso; ejemplos y referencias.",
+    "example": "Explicar cómo un nuevo bloque cambia el diagnóstico y crea otro plan, con sus límites.",
+    "learning": "Roberto: comunicar decisiones técnicas con evidencia.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A35",
     "week": 5,
-    "owner": "Tadeo",
-    "owner_full": "Omar Tadeo Gasca Deciga",
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
     "reviewer": "David",
     "reviewer_full": "David Alonso Torres Guerrero",
     "title": "Revisar uso, mensajes y accesibilidad",
@@ -962,13 +1340,24 @@
     "start": "2026-11-09",
     "due": "2026-11-13",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Eliminar obstáculos de uso en los recorridos de jugador y administrador.",
+    "inputs": "Pantallas A27, A28 y A32.",
+    "steps": [
+      "Revisar teclado, foco, contraste, etiquetas y mensajes en escritorio.",
+      "Pedir al revisor que ejecute los recorridos con instrucciones y reporte hallazgos de forma asíncrona.",
+      "Corregir bloqueos y registrar capturas finales."
+    ],
+    "deliverable": "Checklist de uso y PR de correcciones.",
+    "example": "Un error de formulario identifica el campo y conserva los valores que el jugador ya escribió.",
+    "learning": "Luis: evaluar la interfaz con casos de uso completos.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A36",
     "week": 5,
-    "owner": "Tadeo",
-    "owner_full": "Omar Tadeo Gasca Deciga",
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
     "reviewer": "Roberto",
     "reviewer_full": "Roberto Santana Trujillo",
     "title": "Preparar demo, capturas y ensayo",
@@ -988,13 +1377,24 @@
     "start": "2026-11-09",
     "due": "2026-11-13",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Preparar una demostración reproducible y una explicación por integrante.",
+    "inputs": "Ciclo A25, revisión A35 y rúbrica que confirme el profesor.",
+    "steps": [
+      "Escribir guion de ocho a diez minutos ajustable a la rúbrica.",
+      "Preparar capturas y datos de respaldo identificados como demostración.",
+      "Cada integrante prepara su explicación breve; cronometrar el recorrido en el formato que permita su disponibilidad."
+    ],
+    "deliverable": "Guion, capturas y resultado del ensayo; no requiere reunión presencial.",
+    "example": "Mostrar primer bloque, diagnóstico, plan, sesión y comparación; cada dueño explica su pieza y una conexión con otra.",
+    "learning": "Luis: explicar el recorrido del producto y coordinar la presentación.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A37",
     "week": 5,
-    "owner": "Luis",
-    "owner_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
     "reviewer": "David",
     "reviewer_full": "David Alonso Torres Guerrero",
     "title": "Verificar seguridad y privacidad funcional",
@@ -1018,13 +1418,24 @@
     "start": "2026-11-09",
     "due": "2026-11-13",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Verificar permisos y privacidad en los endpoints reales.",
+    "inputs": "Administración A29, fallos A30 y panel A32.",
+    "steps": [
+      "Probar sin sesión, jugador A/B, administrador y suspendido.",
+      "Comprobar validación de archivos/entradas y mensajes sin datos privados.",
+      "Verificar que secretos permanecen en entorno y que frontend/logs no los exponen."
+    ],
+    "deliverable": "Matriz de autorización, comprobación de secretos y arreglos necesarios.",
+    "example": "Copiar un ID de bloque de otro jugador no permite ver ni editar su análisis.",
+    "learning": "Tadeo: probar permisos a través de peticiones directas.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A38",
     "week": 5,
-    "owner": "Luis",
-    "owner_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
     "reviewer": "Roberto",
     "reviewer_full": "Roberto Santana Trujillo",
     "title": "Preparar ejecución y despliegue reproducibles",
@@ -1045,15 +1456,26 @@
     "start": "2026-11-09",
     "due": "2026-11-13",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Permitir que otra persona ejecute y demuestre la versión de entrega.",
+    "inputs": "Integración A25 y comprobaciones A37.",
+    "steps": [
+      "Documentar instalación, versiones, migraciones y variables de entorno reales.",
+      "Validar el entorno elegido, OAuth y conexiones; conservar ejecución local de respaldo.",
+      "Pedir al revisor ejecutar desde cero de forma asíncrona y crear tag después de validar."
+    ],
+    "deliverable": "README reproducible, registro de ejecución y tag final.",
+    "example": "Un compañero sigue el README en una copia limpia y completa el recorrido principal sin indicaciones adicionales.",
+    "learning": "Tadeo: reproducibilidad, entorno e integración operativa.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A39",
     "week": 5,
     "owner": "David",
     "owner_full": "David Alonso Torres Guerrero",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
     "title": "Auditar los tres CRUD y la integridad",
     "requirements": [
       "RF09",
@@ -1074,15 +1496,26 @@
     "start": "2026-11-09",
     "due": "2026-11-13",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Comprobar los tres CRUD y la integridad después de cambios.",
+    "inputs": "Interfaz A27, historial A31 y catálogo/admin A32.",
+    "steps": [
+      "Ejecutar alta, consulta, edición y eliminación/archivo permitidos de objetivos, sesiones y ejercicios.",
+      "Comprobar propiedad, relaciones y conservación de versiones.",
+      "Preparar seed limpio de demo y registrar cada resultado."
+    ],
+    "deliverable": "Matriz CRUD y consultas de integridad.",
+    "example": "Eliminar una sesión recalcula entrenamiento; archivar una meta no borra el plan histórico.",
+    "learning": "David: pruebas de persistencia frente a recorridos reales.",
+    "revision": "2026-10-12"
   },
   {
     "id": "A40",
     "week": 5,
     "owner": "David",
     "owner_full": "David Alonso Torres Guerrero",
-    "reviewer": "Tadeo",
-    "reviewer_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
     "title": "Preparar entrega LBPWEB y checklist común",
     "requirements": [
       "RF01–RF12"
@@ -1103,15 +1536,26 @@
     "start": "2026-11-09",
     "due": "2026-11-13",
     "status": "Backlog",
-    "conditional": false
+    "conditional": false,
+    "objective": "Preparar la entrega de LBPWEB y el checklist común con evidencia localizable.",
+    "inputs": "Regresión A33, uso A35, ejecución A38 e integridad A39.",
+    "steps": [
+      "Vincular cada RF a pantalla, endpoint, datos, tarea y prueba.",
+      "Reunir instalación, ERD vigente, capturas y requisitos de formato confirmados.",
+      "Pedir revisión de los cuatro antes del corte y conservar una copia estable."
+    ],
+    "deliverable": "Paquete/checklist de entrega y referencias por materia.",
+    "example": "RF03 apunta a la pantalla Carga, su endpoint y una evidencia de cinco replays reales.",
+    "learning": "David: trazabilidad entre requisito y evidencia.",
+    "revision": "2026-10-12"
   },
   {
     "id": "B01",
     "week": 6,
     "owner": "Roberto",
     "owner_full": "Roberto Santana Trujillo",
-    "reviewer": "Luis",
-    "reviewer_full": "Luis Enrique Almaguer Castillo",
+    "reviewer": "Tadeo",
+    "reviewer_full": "Omar Tadeo Gasca Deciga",
     "title": "Corregir defectos de motor si aparecen",
     "requirements": [
       "RF07",
@@ -1129,13 +1573,24 @@
     "start": "2026-11-16",
     "due": "2026-11-20",
     "status": "Backlog",
-    "conditional": true
+    "conditional": true,
+    "objective": "Corregir únicamente fallos del motor que aparezcan en la versión final.",
+    "inputs": "Regresión A33 y defecto confirmado.",
+    "steps": [
+      "Registrar reproducción y resultado esperado.",
+      "Corregir el caso afectado y repetir su comprobación.",
+      "Adjuntar evidencia sin ampliar funciones."
+    ],
+    "deliverable": "PR del arreglo y prueba del defecto.",
+    "example": "Si un empate altera el orden entre ejecuciones, corregirlo y repetir ese caso.",
+    "learning": "Roberto: corrección localizada y regresión.",
+    "revision": "2026-10-12"
   },
   {
     "id": "B02",
     "week": 6,
-    "owner": "Tadeo",
-    "owner_full": "Omar Tadeo Gasca Deciga",
+    "owner": "Luis",
+    "owner_full": "Luis Enrique Almaguer Castillo",
     "reviewer": "David",
     "reviewer_full": "David Alonso Torres Guerrero",
     "title": "Ajustar presentación y experiencia si se solicita",
@@ -1153,13 +1608,24 @@
     "start": "2026-11-16",
     "due": "2026-11-20",
     "status": "Backlog",
-    "conditional": true
+    "conditional": true,
+    "objective": "Aplicar ajustes de presentación o uso solicitados para la entrega.",
+    "inputs": "Guion A36 y observación concreta del ensayo/profesor.",
+    "steps": [
+      "Registrar el ajuste solicitado.",
+      "Modificar mensaje, vista o guion dentro del alcance.",
+      "Comprobarlo y guardar captura."
+    ],
+    "deliverable": "Captura o guion actualizado y evidencia del ajuste.",
+    "example": "Aclarar el texto de una gráfica sin añadir otra función.",
+    "learning": "Luis: iteración de interfaz a partir de feedback.",
+    "revision": "2026-10-12"
   },
   {
     "id": "B03",
     "week": 6,
-    "owner": "Luis",
-    "owner_full": "Luis Enrique Almaguer Castillo",
+    "owner": "Tadeo",
+    "owner_full": "Omar Tadeo Gasca Deciga",
     "reviewer": "Roberto",
     "reviewer_full": "Roberto Santana Trujillo",
     "title": "Verificar entorno antes de entregar",
@@ -1177,15 +1643,26 @@
     "start": "2026-11-16",
     "due": "2026-11-20",
     "status": "Backlog",
-    "conditional": true
+    "conditional": true,
+    "objective": "Comprobar el entorno en la fecha real de entrega.",
+    "inputs": "Ejecución A38 y fecha confirmada.",
+    "steps": [
+      "Ejecutar el recorrido principal con la versión elegida.",
+      "Comprobar conexión y respaldo local.",
+      "Registrar resultado y atender únicamente bloqueos de entrega."
+    ],
+    "deliverable": "Registro de comprobación rápida de la versión final.",
+    "example": "Abrir la app y verificar login, carga y consulta antes de presentarla.",
+    "learning": "Tadeo: verificación operativa de entrega.",
+    "revision": "2026-10-12"
   },
   {
     "id": "B04",
     "week": 6,
     "owner": "David",
     "owner_full": "David Alonso Torres Guerrero",
-    "reviewer": "Tadeo",
-    "reviewer_full": "Omar Tadeo Gasca Deciga",
+    "reviewer": "Luis",
+    "reviewer_full": "Luis Enrique Almaguer Castillo",
     "title": "Revisar paquete y confirmar recepción",
     "requirements": [
       "RF01–RF12"
@@ -1201,6 +1678,17 @@
     "start": "2026-11-16",
     "due": "2026-11-20",
     "status": "Backlog",
-    "conditional": true
+    "conditional": true,
+    "objective": "Comprobar el paquete final y registrar la entrega cuando ocurra.",
+    "inputs": "Checklist A40 y formato/fecha confirmados.",
+    "steps": [
+      "Revisar nombres, enlaces, evidencias y formatos por materia.",
+      "Comprobar la copia estable y el acceso del destinatario cuando esté autorizado.",
+      "Guardar comprobante de recepción si existe."
+    ],
+    "deliverable": "Checklist final y comprobante cuando se entregue.",
+    "example": "Un enlace de evidencia abre la versión utilizada en la presentación.",
+    "learning": "David: cierre documental comprobable.",
+    "revision": "2026-10-12"
   }
 ]

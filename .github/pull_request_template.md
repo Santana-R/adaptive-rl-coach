@@ -10,3 +10,9 @@ Explica el comportamiento que cambia y por qué.
 
 Revisor propuesto:
 Evidencia:
+
+## Explicación para aprender del cambio
+Qué construí, cómo funciona y qué necesita de otro módulo:
+
+## Revisión
+El revisor indica qué comprobó y qué observó; puede hacerlo de forma asíncrona.

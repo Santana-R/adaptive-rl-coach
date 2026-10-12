@@ -54,3 +54,7 @@ La primera medición establece línea base. Una sesión autorreportada evidencia
 
 ## Revisión de datos en S1
 Auditar sesiones, historial de rango, evidencia de diagnóstico y snapshots completos; el esquema actual de ocho tablas es una base, no una confirmación de implementación. Esta release conserva intactos los tableros anteriores.
+
+
+## Responsabilidades y función completa A19
+Luis mantiene la base visual; Tadeo el servidor/Ballchasing; David los datos/auth; Roberto métricas/reglas/planes y A19. Roberto consulta bloques propios, integra el endpoint de análisis y conecta la respuesta a la pantalla JavaScript/Chart.js. Reutiliza módulos existentes y Luis revisa la interfaz mediante el PR. Tadeo coordina A25. Véase [Empieza aquí](empieza-aqui.md).

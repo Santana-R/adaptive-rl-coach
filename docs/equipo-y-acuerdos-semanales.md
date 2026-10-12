@@ -1,24 +1,31 @@
 # Equipo y acuerdos semanales
 
-## Cuatro responsables
-| Integrante | Responsabilidad propuesta | Revisión frecuente |
+## Reparto actualizado
+| Integrante | Responsabilidad principal | Revisión según tarea |
 | --- | --- | --- |
-| Roberto Santana Trujillo | Alcance, métricas, reglas, planes | Luis / David |
-| Omar Tadeo Gasca Deciga | Interfaz y experiencia del jugador | Roberto / David |
-| Luis Enrique Almaguer Castillo | API, Ballchasing, operación | David / Roberto |
-| David Alonso Torres Guerrero | Datos, auth, catálogo e historial | Luis / Roberto |
+| Luis Enrique Almaguer Castillo | Frontend, navegación, formularios, gráficas y uso | Roberto / David / Tadeo |
+| Omar Tadeo Gasca Deciga | Servidor, Ballchasing, endpoints e integración A25 | David / Roberto |
+| David Alonso Torres Guerrero | Datos, autenticación, permisos, catálogo e historial | Roberto / Luis / Tadeo |
+| Roberto Santana Trujillo | Métricas, reglas, planes y función completa de análisis A19 | Luis / David / Tadeo |
 
-## Ritmo de trabajo y definición de hecho
-El reparto se propone por módulos para reducir cambios de contexto: Roberto coordina alcance, métricas y reglas; Tadeo desarrolla el recorrido del jugador; Luis integra servidor, Ballchasing y operación; David prepara datos, autenticación y administración. **No se presume la experiencia ni la disponibilidad de nadie**: A01 confirma horas y redistribuye tareas si hace falta. La responsabilidad incluye integrar la pieza; el revisor verifica su aceptación. Todos participan en pruebas y presentación.
+Revisión autorizada por Roberto con el Release del 12 de octubre de 2026. Luis pasa a frontend por su interés. Tadeo toma backend como propuesta que debe confirmar junto con su disponibilidad. El responsable integra su pieza; el revisor comprueba su entrega. Esta organización corresponde al equipo LBPWEB; el equipo académico PROGSA puede ser distinto.
 
-Lunes: en 20–30 minutos elegir compromisos, confirmar entradas y salidas, estimar esfuerzo y revisar disponibilidad. Mantener como máximo dos tareas activas por persona. Miércoles: punto de control de diez minutos; reportar bloqueo, impacto y ayuda necesaria. Si una tarea depende de otra, acordar entrega intermedia explícita: esa dependencia manda sobre la libertad de horario. Las primeras entregas del 14 de octubre y las interfaces del 21–22 y 28 evitan esperar hasta el cierre.
+## Aprendizaje incorporado al trabajo
+Roberto desarrolla A19: consultas de bloques guardados, endpoint de análisis, comparación/reglas y pantalla JavaScript/Chart.js. Aprovecha la base visual A04, el servidor A06 y la persistencia A15; cada dueño mantiene su módulo común. Tadeo coordina A25, y Roberto lo revisa. No se añade otra función al alcance.
 
-Domingo, antes de las 20:00 de Monterrey: entregar la parte comprometida, revisión y demo de 15–20 minutos. Las semanas 4 y 5 tienen corte anticipado el viernes 6 y 13; el domingo queda para revisar. Un bloqueo se comunica en cuanto se detecta y como máximo dentro de 24 horas. El responsable propone ayuda, división o reasignación antes del cierre; una tarea incompleta sigue abierta con nueva fecha y responsable, nunca se marca hecha para cumplir el calendario.
+Se mantienen 44 tareas: Roberto 11, Luis 10, Tadeo 12, David 11 contando las contingencias. En S3 Roberto concentra A17/A18/A19; en S4 Tadeo coordina A25 además de A29/A30. Los conteos no son estimaciones de horas. Confirmar carga y entregas intermedias en A01; dividir o reasignar si no cabe.
 
-Hecho significa: criterios cumplidos; código integrado mediante PR y aprobación de otra persona; pruebas relevantes y evidencia enlazadas; documentación actualizada y ausencia de secretos. La revisión entre compañeros es necesaria aunque cada quien lleve su propio ritmo. Las fechas son compromisos internos propuestos, no obligaciones horarias que los cuatro hayan confirmado.
+Dos prácticas se incluyen en las entregas existentes: explicación semanal breve de qué se construyó, cómo funciona, cómo comprobarlo y qué necesita de otro módulo; y revisión entre áreas que ejecute la comprobación y explique el resultado. Pueden resolverse por escrito en issues/PRs. No se exige trabajo acompañado ni presencia física.
 
-GitHub mantendrá el estado operativo del trabajo. Notion explica acuerdos, alcance y aceptación; Miro muestra relaciones y calendario. Evitar copiar el estado manualmente a tres herramientas. Estados de GitHub: Backlog → Ready → In progress → In review → Done; Blocked requiere motivo y siguiente acción. P0 bloquea el ciclo o una entrega; P1 completa un RF o evidencia. El backlog contiene 40 tareas de desarrollo y cuatro tareas condicionales de reserva. Dos tareas por semana y persona son una estructura inicial, no una medida de igualdad de esfuerzo.
+## Ritmo flexible
+Lunes: confirmar compromisos, entradas y disponibilidad mediante un intercambio breve, escrito o remoto. Miércoles: registrar progreso o bloqueo, impacto y ayuda necesaria. Mantener como máximo dos tareas activas por persona; los IDs de dependencia definen entradas que deben acordarse antes de avanzar.
 
+Domingo antes de las 20:00 de Monterrey: entrega integrada, revisada y con evidencia. El cierre puede resolverse de forma asíncrona. S4/S5 tienen corte anticipado el viernes 6 y 13 de noviembre. Comunicar bloqueos al detectarlos y como máximo en 24 horas; una tarea incompleta permanece abierta con siguiente acción y fecha revisada.
 
-## Primer acuerdo del lunes
-Confirmar disponibilidad, reparto, cuentas de trabajo, quién revisa cada tarea y horario de cierre. El grupo PROGSA puede tener integrantes distintos; esta asignación corresponde a los cuatro de LBPWEB. Las evidencias técnicas se reutilizan y los documentos se adaptan por materia.
+## Qué significa terminar
+Para código: criterios cumplidos, PR comprobado por otra persona e integrado a main, pruebas pertinentes y evidencia. Para documentación/diseño: versión guardada y comprobada por el revisor. El revisor deja qué ejecutó y qué observó; la revisión no es una firma automática.
+
+GitHub conserva el estado operativo. Notion explica alcance, reparto e instrucciones; Miro muestra relaciones y calendario. Backlog → Ready → In progress → In review → Done; Blocked requiere motivo y siguiente acción. P0 bloquea el ciclo o una entrega. P1 también puede cubrir un RF obligatorio. B01–B04 son reservas condicionales.
+
+## Primer acuerdo de S1
+Cada integrante confirma disponibilidad, aceptación del reparto, cuentas y revisión. Se mantienen las fechas internas propuestas; confirmar las fechas y rúbricas de ambos cursos. La publicación de esta planificación no acredita implementación.

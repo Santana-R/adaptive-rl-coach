@@ -14,8 +14,8 @@ La entrega incluye trece pantallas y tres CRUD: objetivos, sesiones y ejercicios
 | RF04 | Validación del bloque | Formato, duplicados, jugador y modalidad; compatibilidad documentada. | A14, A30 |
 | RF05 | Procesamiento y estados | Cargas privadas, IDs, estados pendientes/fallidos/listos y reintentos. | A13, A30 |
 | RF06 | Métricas normalizadas | Jugador correcto en cinco replays, unidades, faltantes y agregación ponderada. | A09, A14, A19 |
-| RF07 | Comparación válida | Misma identidad, modalidad, tipo y medición equivalente; seguimiento posterior o línea base. | A10, A33 |
-| RF08 | Diagnóstico explicable | Máximo tres prioridades con regla y evidencia. | A17, A26, A33 |
+| RF07 | Comparación válida | Misma identidad, modalidad, tipo y medición equivalente; seguimiento posterior o línea base. | A10, A19, A33 |
+| RF08 | Diagnóstico explicable | Máximo tres prioridades con regla y evidencia. | A17, A19, A26, A33 |
 | RF09 | Plan personalizado | Ejercicios activos compatibles; tiempo disponible; snapshots, versiones y cobertura parcial/vacía. | A18, A23, A24, A27 |
 | RF10 | Objetivos y sesiones | CRUD con archivo de metas vinculadas, historial y sesiones sobre versión exacta; recálculo. | A16, A20, A21, A31, A39 |
 | RF11 | Reportes separados | Métricas, objetivos y rango declarado separados, con período, unidades, muestra y exclusiones. | A22, A28, A31 |

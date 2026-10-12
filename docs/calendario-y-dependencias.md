@@ -34,3 +34,12 @@ Los IDs de dependencia del backlog señalan qué debe existir primero. Las fecha
 
 Calendario oficial: [FIME agosto–diciembre 2026](https://www.fime.uanl.mx/wp-content/uploads/2026/07/calendario-agosto-diciembre2026.pdf). Últimas clases/laboratorios: 20 de noviembre; ordinarios: 23 de noviembre–3 de diciembre. La ventana 16–20 de noviembre es una estimación basada en entregar una semana antes de exámenes, **no una fecha confirmada por profesores**.
 
+
+
+## Entregas entre módulos y aprendizaje
+- S1: A01 acuerdo de datos, A03 flujo de Luis, A05 viabilidad de Tadeo y A07 modelo de David al 14 de octubre.
+- S2: A14/A15 entregan extracción/consultas al 21; A13 carga al 22; A09/A10 completan métricas/comparación al cierre.
+- S3: A17 prioridades y A23/A24 catálogo/versiones al 28; A19 completa datos → servidor → pantalla y A18 genera planes al cierre.
+- S4: Tadeo coordina A25, cada dueño corrige su módulo; Roberto revisa el recorrido y A26.
+
+A19 reutiliza A04/A06/A09/A10/A15/A17. No exige recrear el servidor, diseño o base de datos. Luis revisa la pantalla mediante el PR; las explicaciones y revisiones se pueden realizar por escrito.

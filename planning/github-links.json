@@ -52,7 +52,7 @@
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/1",
       "week": 1,
       "owner": "Roberto",
-      "reviewer": "Luis",
+      "reviewer": "Tadeo",
       "due": "2026-10-14"
     },
     {
@@ -69,7 +69,7 @@
       "number": 3,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/3",
       "week": 1,
-      "owner": "Tadeo",
+      "owner": "Luis",
       "reviewer": "Roberto",
       "due": "2026-10-14"
     },
@@ -78,8 +78,8 @@
       "number": 4,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/4",
       "week": 1,
-      "owner": "Tadeo",
-      "reviewer": "Luis",
+      "owner": "Luis",
+      "reviewer": "Tadeo",
       "due": "2026-10-18"
     },
     {
@@ -87,7 +87,7 @@
       "number": 5,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/5",
       "week": 1,
-      "owner": "Luis",
+      "owner": "Tadeo",
       "reviewer": "Roberto",
       "due": "2026-10-14"
     },
@@ -96,7 +96,7 @@
       "number": 6,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/6",
       "week": 1,
-      "owner": "Luis",
+      "owner": "Tadeo",
       "reviewer": "David",
       "due": "2026-10-18"
     },
@@ -115,7 +115,7 @@
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/8",
       "week": 1,
       "owner": "David",
-      "reviewer": "Luis",
+      "reviewer": "Tadeo",
       "due": "2026-10-18"
     },
     {
@@ -124,7 +124,7 @@
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/9",
       "week": 2,
       "owner": "Roberto",
-      "reviewer": "Luis",
+      "reviewer": "Tadeo",
       "due": "2026-10-25"
     },
     {
@@ -141,8 +141,8 @@
       "number": 11,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/11",
       "week": 2,
-      "owner": "Tadeo",
-      "reviewer": "Luis",
+      "owner": "Luis",
+      "reviewer": "Tadeo",
       "due": "2026-10-25"
     },
     {
@@ -150,7 +150,7 @@
       "number": 12,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/12",
       "week": 2,
-      "owner": "Tadeo",
+      "owner": "Luis",
       "reviewer": "David",
       "due": "2026-10-25"
     },
@@ -159,7 +159,7 @@
       "number": 13,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/13",
       "week": 2,
-      "owner": "Luis",
+      "owner": "Tadeo",
       "reviewer": "David",
       "due": "2026-10-22"
     },
@@ -168,7 +168,7 @@
       "number": 14,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/14",
       "week": 2,
-      "owner": "Luis",
+      "owner": "Tadeo",
       "reviewer": "Roberto",
       "due": "2026-10-21"
     },
@@ -178,7 +178,7 @@
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/15",
       "week": 2,
       "owner": "David",
-      "reviewer": "Luis",
+      "reviewer": "Tadeo",
       "due": "2026-10-21"
     },
     {
@@ -196,7 +196,7 @@
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/17",
       "week": 3,
       "owner": "Roberto",
-      "reviewer": "Luis",
+      "reviewer": "Tadeo",
       "due": "2026-10-28"
     },
     {
@@ -213,8 +213,8 @@
       "number": 19,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/19",
       "week": 3,
-      "owner": "Tadeo",
-      "reviewer": "Roberto",
+      "owner": "Roberto",
+      "reviewer": "Luis",
       "due": "2026-11-01"
     },
     {
@@ -222,7 +222,7 @@
       "number": 20,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/20",
       "week": 3,
-      "owner": "Tadeo",
+      "owner": "Luis",
       "reviewer": "David",
       "due": "2026-11-01"
     },
@@ -231,7 +231,7 @@
       "number": 21,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/21",
       "week": 3,
-      "owner": "Luis",
+      "owner": "Tadeo",
       "reviewer": "David",
       "due": "2026-11-01"
     },
@@ -240,7 +240,7 @@
       "number": 22,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/22",
       "week": 3,
-      "owner": "Luis",
+      "owner": "Tadeo",
       "reviewer": "Roberto",
       "due": "2026-11-01"
     },
@@ -259,7 +259,7 @@
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/24",
       "week": 3,
       "owner": "David",
-      "reviewer": "Luis",
+      "reviewer": "Tadeo",
       "due": "2026-10-28"
     },
     {
@@ -267,8 +267,8 @@
       "number": 25,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/25",
       "week": 4,
-      "owner": "Roberto",
-      "reviewer": "Luis",
+      "owner": "Tadeo",
+      "reviewer": "Roberto",
       "due": "2026-11-06"
     },
     {
@@ -285,7 +285,7 @@
       "number": 27,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/27",
       "week": 4,
-      "owner": "Tadeo",
+      "owner": "Luis",
       "reviewer": "David",
       "due": "2026-11-06"
     },
@@ -294,8 +294,8 @@
       "number": 28,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/28",
       "week": 4,
-      "owner": "Tadeo",
-      "reviewer": "Luis",
+      "owner": "Luis",
+      "reviewer": "Roberto",
       "due": "2026-11-06"
     },
     {
@@ -303,7 +303,7 @@
       "number": 29,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/29",
       "week": 4,
-      "owner": "Luis",
+      "owner": "Tadeo",
       "reviewer": "David",
       "due": "2026-11-04"
     },
@@ -312,7 +312,7 @@
       "number": 30,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/30",
       "week": 4,
-      "owner": "Luis",
+      "owner": "Tadeo",
       "reviewer": "Roberto",
       "due": "2026-11-06"
     },
@@ -331,7 +331,7 @@
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/32",
       "week": 4,
       "owner": "David",
-      "reviewer": "Tadeo",
+      "reviewer": "Luis",
       "due": "2026-11-06"
     },
     {
@@ -340,7 +340,7 @@
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/33",
       "week": 5,
       "owner": "Roberto",
-      "reviewer": "Luis",
+      "reviewer": "Tadeo",
       "due": "2026-11-13"
     },
     {
@@ -357,7 +357,7 @@
       "number": 35,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/35",
       "week": 5,
-      "owner": "Tadeo",
+      "owner": "Luis",
       "reviewer": "David",
       "due": "2026-11-13"
     },
@@ -366,7 +366,7 @@
       "number": 36,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/36",
       "week": 5,
-      "owner": "Tadeo",
+      "owner": "Luis",
       "reviewer": "Roberto",
       "due": "2026-11-13"
     },
@@ -375,7 +375,7 @@
       "number": 37,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/37",
       "week": 5,
-      "owner": "Luis",
+      "owner": "Tadeo",
       "reviewer": "David",
       "due": "2026-11-13"
     },
@@ -384,7 +384,7 @@
       "number": 38,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/38",
       "week": 5,
-      "owner": "Luis",
+      "owner": "Tadeo",
       "reviewer": "Roberto",
       "due": "2026-11-13"
     },
@@ -394,7 +394,7 @@
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/39",
       "week": 5,
       "owner": "David",
-      "reviewer": "Luis",
+      "reviewer": "Tadeo",
       "due": "2026-11-13"
     },
     {
@@ -403,7 +403,7 @@
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/40",
       "week": 5,
       "owner": "David",
-      "reviewer": "Tadeo",
+      "reviewer": "Luis",
       "due": "2026-11-13"
     },
     {
@@ -412,7 +412,7 @@
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/41",
       "week": 6,
       "owner": "Roberto",
-      "reviewer": "Luis",
+      "reviewer": "Tadeo",
       "due": "2026-11-20"
     },
     {
@@ -420,7 +420,7 @@
       "number": 42,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/42",
       "week": 6,
-      "owner": "Tadeo",
+      "owner": "Luis",
       "reviewer": "David",
       "due": "2026-11-20"
     },
@@ -429,7 +429,7 @@
       "number": 43,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/43",
       "week": 6,
-      "owner": "Luis",
+      "owner": "Tadeo",
       "reviewer": "Roberto",
       "due": "2026-11-20"
     },
@@ -439,8 +439,11 @@
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/44",
       "week": 6,
       "owner": "David",
-      "reviewer": "Tadeo",
+      "reviewer": "Luis",
       "due": "2026-11-20"
     }
-  ]
+  ],
+  "planning_revision": "2026-10-12",
+  "planning_revision_published_to_github": true,
+  "notion_guide_url": "https://app.notion.com/p/3f7dd7559dd881bfbbceeff2d19b9d5f"
 }

@@ -2,11 +2,14 @@
 
 Plan de desarrollo para cuatro integrantes. Aplicación web de entrenamiento de Rocket League con bloques de cinco replays, diagnóstico por reglas y planes versionados.
 
+**Primero lee [Empieza aquí · Guía del equipo](docs/empieza-aqui.md).** Incluye reparto, primeros pasos y ejemplos de entrega.
+
 Este repositorio inicial contiene planificación, documentación y plantillas. **Todavía no contiene una aplicación ejecutable.**
 
 - [Project de trabajo](https://github.com/users/Santana-R/projects/1)
 - [Issues](https://github.com/Santana-R/adaptive-rl-coach/issues)
 - [Hitos semanales](https://github.com/Santana-R/adaptive-rl-coach/milestones)
+- [Empieza aquí · Guía del equipo en Notion](https://app.notion.com/p/3f7dd7559dd881bfbbceeff2d19b9d5f)
 - [Guía de desarrollo en Notion](https://app.notion.com/p/3f4dd7559dd8818fbe0ffb78c6423a52)
 - [Diagramas y calendario en Miro](https://miro.com/app/board/uXjVEcA_AAE=/)
 
@@ -31,7 +34,11 @@ Roberto Santana Trujillo, Omar Tadeo Gasca Deciga, Luis Enrique Almaguer Castill
 
 ## Documentación inicial
 
-- [Acuerdos iniciales](docs/acuerdos-iniciales.md)
-- [Forma de trabajo inicial](docs/forma-de-trabajo.md)
+- [Acuerdos de septiembre (referencia)](docs/acuerdos-iniciales.md)
+- [Forma de trabajo de septiembre (referencia histórica)](docs/forma-de-trabajo.md)
 
-La planificación de octubre–noviembre actualiza el calendario de esos documentos; las fechas de entrega de LBPWEB y PROGSA siguen pendientes.
+La planificación de octubre–noviembre actualiza el calendario y reparto de esos documentos; las fechas de entrega de LBPWEB y PROGSA siguen pendientes.
+
+
+## Revisión de organización del 12 de octubre
+Luis: frontend. Tadeo: backend e integración A25. David: datos/auth e historial. Roberto: métricas/reglas/planes y función completa de análisis A19. Disponibilidad por confirmar en A01. Explicaciones y revisiones breves, asíncronas; trabajo acompañado no obligatorio.

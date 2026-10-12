@@ -1,5 +1,7 @@
 # Forma de trabajo propuesta
 
+> Propuesta histórica de septiembre, sustituida para el trabajo actual por [Equipo y acuerdos semanales](equipo-y-acuerdos-semanales.md) y [Empieza aquí](empieza-aqui.md). El reparto de la tabla siguiente y su ritmo describen la propuesta anterior. Luis lleva frontend, Tadeo backend, David datos/auth y Roberto métricas/reglas/planes y A19 en la revisión del 12 de octubre de 2026.
+
 ## Principio
 
 El equipo trabajará por funcionalidades completas. Cada tarea deberá incluir la interfaz, la lógica necesaria, los datos y una comprobación básica. Esto permite que todos entiendan cómo se conectan las distintas partes del sistema.
@@ -51,4 +53,5 @@ Una tarea se considera terminada cuando:
 - Demostración funcional cada dos semanas.
 - Rotación de revisores a mitad del proyecto para evitar conocimiento aislado.
 - Congelamiento de funciones nuevas dos semanas antes de la entrega final para concentrarse en pruebas, documentación y presentación.
+
 
