@@ -30,16 +30,31 @@ flowchart TD
   T --> Q["S5: pruebas, despliegue y evidencias"]
 ```
 
-Los IDs de dependencia del backlog señalan qué debe existir primero. Las fechas intermedias son entregas de interfaz funcional, no solo un boceto. Un cambio al contrato se comunica a sus consumidores antes de modificarlo.
+Los IDs de dependencia señalan qué debe estar conectado para cerrar. La base/fixtures permiten iniciar en paralelo; las entregas intermedias de jueves aportan contratos verificados o interfaces según la tarea. Un cambio al contrato se comunica a sus consumidores antes de modificarlo.
 
 Calendario oficial: [FIME agosto–diciembre 2026](https://www.fime.uanl.mx/wp-content/uploads/2026/07/calendario-agosto-diciembre2026.pdf). Últimas clases/laboratorios: 20 de noviembre; ordinarios: 23 de noviembre–3 de diciembre. La ventana 16–20 de noviembre es una estimación basada en entregar una semana antes de exámenes, **no una fecha confirmada por profesores**.
 
 
 
 ## Entregas entre módulos y aprendizaje
-- S1: A01 acuerdo de datos, A03 flujo de Luis, A05 viabilidad de Tadeo y A07 modelo de David al 14 de octubre.
-- S2: A14/A15 entregan extracción/consultas al 21; A13 carga al 22; A09/A10 completan métricas/comparación al cierre.
-- S3: A17 prioridades y A23/A24 catálogo/versiones al 28; A19 completa datos → servidor → pantalla y A18 genera planes al cierre.
-- S4: Tadeo coordina A25, cada dueño corrige su módulo; Roberto revisa el recorrido y A26.
+- S1, jueves 15 de octubre: A01 revisión de base, A03 flujo validado, A05 prueba real de Ballchasing y A07 modelo validado.
+- S2, jueves 22 de octubre: A14 validación/extracción, A15 persistencia y A13 carga/estados. Preparar A13 con fixtures desde el lunes y conectar al recibir A14/A15; comunicar cualquier bloqueo de integración. A09/A10 completan métricas/comparación al domingo 25.
+- S3, jueves 29 de octubre: A17 prioridades, A23 catálogo y A24 versiones; A18/A19/A21/A22 conectan datos reales para domingo 1 de noviembre.
+- S4, jueves 5 de noviembre: A29 usuarios y A31 historial; las pantallas consumidoras pueden prepararse antes con ejemplos. Corte integrado viernes 6; Tadeo coordina A25.
 
-A19 reutiliza A04/A06/A09/A10/A15/A17. No exige recrear el servidor, diseño o base de datos. Luis revisa la pantalla mediante el PR; las explicaciones y revisiones se pueden realizar por escrito.
+A19 reutiliza A04/A06/A09/A10/A15/A17. Luis revisa la pantalla. Explicaciones y revisiones por escrito; no se exige trabajo acompañado. Los domingos y cortes viernes no se desplazan con este cambio; son metas internas, no fechas confirmadas por profesores.
+
+## Cambios de fechas autorizados el 13 de octubre
+| Tarea | Antes | Ahora (jueves) |
+| --- | --- | --- |
+| A01 | 2026-10-14 | 2026-10-15 |
+| A03 | 2026-10-14 | 2026-10-15 |
+| A05 | 2026-10-14 | 2026-10-15 |
+| A07 | 2026-10-14 | 2026-10-15 |
+| A14 | 2026-10-21 | 2026-10-22 |
+| A15 | 2026-10-21 | 2026-10-22 |
+| A17 | 2026-10-28 | 2026-10-29 |
+| A23 | 2026-10-28 | 2026-10-29 |
+| A24 | 2026-10-28 | 2026-10-29 |
+| A29 | 2026-11-04 | 2026-11-05 |
+| A31 | 2026-11-04 | 2026-11-05 |

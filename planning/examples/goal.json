@@ -1,0 +1,8 @@
+{
+  "goal_id": "test-goal",
+  "metric_key": "shooting_pct",
+  "target_value": 35,
+  "unit": "percent",
+  "status": "active",
+  "due_date": null
+}

@@ -1,0 +1,36 @@
+{
+  "case_id": "primer-bloque",
+  "synthetic": true,
+  "input": {
+    "current": {
+      "block_id": "test-block-current",
+      "status": "ready",
+      "context": {
+        "platform": "steam",
+        "player_id": "TEST_PLAYER_01",
+        "mode": "2v2",
+        "match_type": "ranked",
+        "metrics_version": "mvp.metrics.v1"
+      },
+      "first_match_at": "2026-10-10T20:00:00Z",
+      "last_match_at": "2026-10-10T21:00:00Z",
+      "replay_ids": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
+      "shots": 10,
+      "goals": 3
+    },
+    "baseline": null
+  },
+  "expected": {
+    "comparison_status": "baseline",
+    "reason_codes": [
+      "NO_PREVIOUS_COMPATIBLE_BLOCK"
+    ],
+    "delta": null
+  }
+}

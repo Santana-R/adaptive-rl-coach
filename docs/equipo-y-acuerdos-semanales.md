@@ -1,31 +1,23 @@
 # Equipo y acuerdos semanales
 
-## Reparto actualizado
-| Integrante | Responsabilidad principal | Revisión según tarea |
+| Integrante | Responsabilidad | Revisión |
 | --- | --- | --- |
-| Luis Enrique Almaguer Castillo | Frontend, navegación, formularios, gráficas y uso | Roberto / David / Tadeo |
-| Omar Tadeo Gasca Deciga | Servidor, Ballchasing, endpoints e integración A25 | David / Roberto |
-| David Alonso Torres Guerrero | Datos, autenticación, permisos, catálogo e historial | Roberto / Luis / Tadeo |
-| Roberto Santana Trujillo | Métricas, reglas, planes y función completa de análisis A19 | Luis / David / Tadeo |
+| Luis Enrique Almaguer Castillo | Frontend, pantallas, formularios y gráficas | Según issue; revisa interfaz A19 |
+| Omar Tadeo Gasca Deciga | Servidor, Ballchasing, endpoints e integración A25 | Según issue |
+| David Alonso Torres Guerrero | Datos, Auth, permisos, catálogo e historial | Según issue |
+| Roberto Santana Trujillo | Métricas, comparación, reglas, planes y función completa A19 | Según issue |
 
-Revisión autorizada por Roberto con el Release del 12 de octubre de 2026. Luis pasa a frontend por su interés. Tadeo toma backend como propuesta que debe confirmar junto con su disponibilidad. El responsable integra su pieza; el revisor comprueba su entrega. Esta organización corresponde al equipo LBPWEB; el equipo académico PROGSA puede ser distinto.
+Roberto aceptó este reparto el 13 de octubre de 2026. A01 no pide reconfirmarlo ni escribir el diseño desde cero. La base ya preparada se revisa; los ajustes técnicos se comprueban en sus tareas. Esta organización corresponde al equipo LBPWEB; PROGSA puede tener integrantes distintos.
 
-## Aprendizaje incorporado al trabajo
-Roberto desarrolla A19: consultas de bloques guardados, endpoint de análisis, comparación/reglas y pantalla JavaScript/Chart.js. Aprovecha la base visual A04, el servidor A06 y la persistencia A15; cada dueño mantiene su módulo común. Tadeo coordina A25, y Roberto lo revisa. No se añade otra función al alcance.
+## Ritmo acordado
+Lunes: revisar compromiso e insumos mediante intercambio escrito. Jueves: entregar avances intermedios y comunicar bloqueos. Domingo antes de las 20:00 de Monterrey: cierre integrado y revisado en S1–S3. S4/S5 conservan cortes viernes 6/13 de noviembre; S6 reserva condicionada a fecha real. Un bloqueo se comunica cuando aparece y como máximo en 24 horas. No requiere reunión presencial.
 
-Se mantienen 44 tareas: Roberto 11, Luis 10, Tadeo 12, David 11 contando las contingencias. En S3 Roberto concentra A17/A18/A19; en S4 Tadeo coordina A25 además de A29/A30. Los conteos no son estimaciones de horas. Confirmar carga y entregas intermedias en A01; dividir o reasignar si no cabe.
+El reparto es la base aceptada; horas reales y cuentas se comunican cuando afecten un compromiso. Las fechas académicas/rúbricas siguen pendientes de profesores. Un trabajo incompleto permanece abierto con siguiente acción; nunca se marca terminado por editar planificación.
 
-Dos prácticas se incluyen en las entregas existentes: explicación semanal breve de qué se construyó, cómo funciona, cómo comprobarlo y qué necesita de otro módulo; y revisión entre áreas que ejecute la comprobación y explique el resultado. Pueden resolverse por escrito en issues/PRs. No se exige trabajo acompañado ni presencia física.
+## Aprender y revisar
+Roberto desarrolla A19 consulta → cálculo → endpoint → pantalla aprovechando base visual/servidor/persistencia de los demás. Tadeo coordina A25; Roberto revisa. Se mantienen 44 tareas (40 desarrollo y 4 reservas); en S3 Roberto concentra tres y en S4 Tadeo tres. Conteos no equivalen a horas.
 
-## Ritmo flexible
-Lunes: confirmar compromisos, entradas y disponibilidad mediante un intercambio breve, escrito o remoto. Miércoles: registrar progreso o bloqueo, impacto y ayuda necesaria. Mantener como máximo dos tareas activas por persona; los IDs de dependencia definen entradas que deben acordarse antes de avanzar.
+Cada dueño deja una explicación breve semanal de qué hizo, cómo funciona, cómo comprobarlo y qué consume de otro módulo. El revisor ejecuta la comprobación y registra observado. Ambas prácticas pueden quedar en PRs/issues; trabajo acompañado no obligatorio.
 
-Domingo antes de las 20:00 de Monterrey: entrega integrada, revisada y con evidencia. El cierre puede resolverse de forma asíncrona. S4/S5 tienen corte anticipado el viernes 6 y 13 de noviembre. Comunicar bloqueos al detectarlos y como máximo en 24 horas; una tarea incompleta permanece abierta con siguiente acción y fecha revisada.
-
-## Qué significa terminar
-Para código: criterios cumplidos, PR comprobado por otra persona e integrado a main, pruebas pertinentes y evidencia. Para documentación/diseño: versión guardada y comprobada por el revisor. El revisor deja qué ejecutó y qué observó; la revisión no es una firma automática.
-
-GitHub conserva el estado operativo. Notion explica alcance, reparto e instrucciones; Miro muestra relaciones y calendario. Backlog → Ready → In progress → In review → Done; Blocked requiere motivo y siguiente acción. P0 bloquea el ciclo o una entrega. P1 también puede cubrir un RF obligatorio. B01–B04 son reservas condicionales.
-
-## Primer acuerdo de S1
-Cada integrante confirma disponibilidad, aceptación del reparto, cuentas y revisión. Se mantienen las fechas internas propuestas; confirmar las fechas y rúbricas de ambos cursos. La publicación de esta planificación no acredita implementación.
+## Terminar y mantener el estado
+Código: aceptación, PR revisado, comprobación y main integrado. Documento: versión guardada y revisada. GitHub conserva el estado operativo; Notion explica y Miro muestra relaciones/calendario. Backlog → Ready → In progress → In review → Done; Blocked incluye causa y siguiente acción. Mantener como máximo dos tareas activas por persona. Base/fixtures permiten empezar; dependencia real conectada permite cerrar.

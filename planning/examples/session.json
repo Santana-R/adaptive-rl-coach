@@ -1,0 +1,8 @@
+{
+  "session_id": "test-session",
+  "plan_version_id": "test-plan-v1-with-exercise",
+  "plan_exercise_id": "test-plan-exercise",
+  "performed_at": "2026-10-10T23:00:00Z",
+  "duration_minutes": 10,
+  "notes": "Ejemplo de sesión; requiere una versión real con ejercicio."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "test-user",
+  "role": "player",
+  "status": "active",
+  "platform": "steam",
+  "player_id": "TEST_PLAYER_01",
+  "mode": "2v2",
+  "available_minutes": 30
+}

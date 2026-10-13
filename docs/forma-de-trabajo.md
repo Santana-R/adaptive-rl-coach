@@ -1,6 +1,6 @@
 # Forma de trabajo propuesta
 
-> Propuesta histórica de septiembre, sustituida para el trabajo actual por [Equipo y acuerdos semanales](equipo-y-acuerdos-semanales.md) y [Empieza aquí](empieza-aqui.md). El reparto de la tabla siguiente y su ritmo describen la propuesta anterior. Luis lleva frontend, Tadeo backend, David datos/auth y Roberto métricas/reglas/planes y A19 en la revisión del 12 de octubre de 2026.
+> Propuesta histórica de septiembre, sustituida para el trabajo actual por [Equipo y acuerdos semanales](equipo-y-acuerdos-semanales.md) y [Empieza aquí](empieza-aqui.md). El reparto de la tabla siguiente y su ritmo describen la propuesta anterior. Luis lleva frontend, Tadeo backend, David datos/auth y Roberto métricas/reglas/planes y A19 en la revisión vigente del 13 de octubre de 2026; reparto aceptado y entregas intermedias jueves.
 
 ## Principio
 

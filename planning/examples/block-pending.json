@@ -1,0 +1,8 @@
+{
+  "block_id": "test-block-current",
+  "status": "pending",
+  "expected_replays": 5,
+  "ready_replays": 0,
+  "reason_codes": [],
+  "retry_allowed": false
+}

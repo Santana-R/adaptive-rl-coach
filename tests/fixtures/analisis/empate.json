@@ -1,0 +1,33 @@
+{
+  "case_id": "empate",
+  "synthetic": true,
+  "input": {
+    "activated_rules": [
+      {
+        "rule_id": "rule-b",
+        "score": 1
+      },
+      {
+        "rule_id": "rule-a",
+        "score": 1
+      },
+      {
+        "rule_id": "rule-c",
+        "score": 0.5
+      },
+      {
+        "rule_id": "rule-d",
+        "score": 0.2
+      }
+    ]
+  },
+  "expected": {
+    "priority_rule_ids": [
+      "rule-a",
+      "rule-b",
+      "rule-c"
+    ],
+    "max_priorities": 3
+  },
+  "note": "Desempate propuesto score desc/rule_id asc, revisar contra prototipo en A02; estos valores no son umbrales de diagnóstico."
+}

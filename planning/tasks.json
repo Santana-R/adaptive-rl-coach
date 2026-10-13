@@ -6,33 +6,39 @@
     "owner_full": "Roberto Santana Trujillo",
     "reviewer": "Tadeo",
     "reviewer_full": "Omar Tadeo Gasca Deciga",
-    "title": "Cerrar alcance y contrato API/datos",
+    "title": "Revisar y validar la base del proyecto",
     "requirements": [
       "RF01–RF12"
     ],
     "dependencies": [],
     "acceptance": [
-      "Mapear los doce RF y las trece pantallas a tareas y pruebas.",
-      "Acordar payloads, unidades, null, errores, identidad, modalidad, tipo de partida y versionado; cada módulo tiene una interfaz definida.",
-      "Confirmar horas disponibles y reparto con los cuatro; registrar cambios sin reducir los RF."
+      "Roberto explica el recorrido perfil → cinco replays → métricas → análisis → plan → sesiones, usando los ejemplos preparados.",
+      "Roberto y Tadeo revisan el mapa de doce RF y trece pantallas y registran observaciones o indican que no encontraron cambios.",
+      "docs/revision-base.md distingue base propuesta de integración real; cada duda técnica apunta a A05, A07, A08 u otra tarea responsable.",
+      "Tadeo deja la comprobación realizada y su resultado. La revisión inicial puede cerrarse con pendientes técnicos localizados; esos pendientes se validan en sus tareas."
     ],
-    "evidence": "Matriz RF, contrato JSON y acta de reparto.",
+    "evidence": "Nota de revisión guardada, observaciones concretas y comprobación de Tadeo.",
     "priority": "P0",
     "start": "2026-10-12",
-    "due": "2026-10-14",
+    "due": "2026-10-15",
     "status": "Backlog",
     "conditional": false,
-    "objective": "Dejar acuerdos que permitan que los cuatro construyan piezas compatibles.",
-    "inputs": "Fase 1 actualizada, matriz RF01–RF12, trece pantallas y este reparto.",
+    "objective": "Entender la base ya preparada y registrar observaciones concretas para empezar a implementar.",
+    "inputs": "Base preparada en docs/base-tecnica.md, docs/contratos-api.md, docs/diccionario-datos.md, docs/flujo-pantallas.md y planning/trazabilidad-rf.csv. Roberto aceptó el reparto el 13 de octubre.",
     "steps": [
-      "Confirmar por escrito disponibilidad y aceptación de módulos; registrar ajustes.",
-      "Completar una fila por RF: pantalla, tarea, dato necesario y prueba.",
-      "Acordar ejemplos de solicitudes/respuestas, unidades, datos ausentes y errores con quienes consumen cada módulo."
+      "Leer primero docs/base-tecnica.md: recorrido, módulos, quién produce cada dato y primer paso por integrante.",
+      "Revisar los ejemplos de Carga y Análisis en docs/contratos-api.md; explicar a Tadeo qué recibe la pantalla y qué entrega el servidor.",
+      "Consultar la matriz ya completa para ubicar los doce requisitos y las trece pantallas. Registrar únicamente dudas, omisiones o cambios necesarios.",
+      "Dejar docs/revision-base.md con tres apartados: entendido, dudas concretas y ajustes. Tadeo revisa la explicación y la cobertura; anotar responsables de pendientes técnicos."
     ],
-    "deliverable": "docs/contratos-api.md, planning/trazabilidad-rf.csv y un acuerdo breve del equipo.",
-    "example": "RF07 → pantalla Análisis → A10/A19 → dos bloques comparables → mostrar cambio y motivo si no se puede comparar.",
-    "learning": "Leer requisitos, definir interfaces y coordinar sin depender de reuniones presenciales.",
-    "revision": "2026-10-12"
+    "deliverable": "docs/revision-base.md completado y revisado por Tadeo; la matriz y el contrato ya están preparados.",
+    "example": "Entendido: Luis envía cinco archivos al servidor; Tadeo devuelve block_id y estado. Duda: la identidad Epic aún debe comprobarse en A05. Ajuste: actualizar el mapeo cuando exista una respuesta real.",
+    "learning": "Comprender una especificación preparada, seguir datos entre módulos y explicar decisiones antes de programar.",
+    "revision": "2026-10-13",
+    "first_action": "Abrir docs/base-tecnica.md y leer el ejemplo del recorrido antes de tocar los otros documentos.",
+    "work_area": "docs/revision-base.md; editar la matriz o contrato solo si aparece un ajuste real.",
+    "verification": "Explicar Carga y Análisis a Tadeo y guardar su observación; las pruebas reales de API siguen en A05.",
+    "handoff": "La base propuesta ya está disponible. Las validaciones A05/A07/A08 no bloquean la lectura ni obligan a cerrar toda la arquitectura."
   },
   {
     "id": "A02",
@@ -51,7 +57,7 @@
       "A01"
     ],
     "acceptance": [
-      "Crear casos de primer bloque, comparación válida y no comparable, valores faltantes y empates.",
+      "Revisar y completar los casos preparados de primer bloque, comparación válida/no comparable, faltantes y empates.",
       "Documentar umbrales del prototipo como heurísticas pendientes de calibrar; definir máximo tres prioridades y evidencia por regla."
     ],
     "evidence": "Fixtures sin datos personales y resultados esperados.",
@@ -61,16 +67,20 @@
     "status": "Backlog",
     "conditional": false,
     "objective": "Definir datos de prueba y respuestas esperadas antes de programar las reglas.",
-    "inputs": "Contrato de A01, reglas del prototipo y comportamiento de RF07–RF09.",
+    "inputs": "Cinco casos iniciales ya escritos en tests/fixtures/analisis y docs/casos-motor.md; contrato preparado y prototipo Python como referencia de heurísticas.",
     "steps": [
-      "Preparar al menos los cinco casos descritos en la guía: primer bloque, comparable, incompatible, faltantes y empate.",
-      "Escribir entrada y salida esperada para cada caso; calcular a mano los ejemplos numéricos.",
-      "Anotar qué regla usa cada umbral del prototipo, su unidad y su límite; acordar un desempate reproducible."
+      "Revisar los cinco JSON preparados y comprobar a mano 2/8 = 25%, 3/10 = 30% y cambio +5 puntos porcentuales.",
+      "Contrastar los umbrales reales del prototipo: anotar métrica, valor, unidad y limitación; dejar pendiente lo que no exista.",
+      "Completar resultados esperados de prioridades y desempates con la regla real; David revisa los casos antes de usarlos en A09/A10/A17."
     ],
-    "deliverable": "tests/fixtures/analisis/*.json y docs/casos-motor.md con entradas y resultados esperados.",
+    "deliverable": "tests/fixtures/analisis/*.json revisados y docs/casos-motor.md completado con los umbrales reales del prototipo.",
     "example": "Mismo jugador, modalidad y tipo; bloque A: 8 tiros/2 goles; B: 10 tiros/3 goles. Porcentaje: 25% → 30%; cambio +5 puntos porcentuales. Son datos inventados para una prueba.",
     "learning": "Traducir una regla a un caso verificable; distinguir datos de prueba y datos reales.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Abrir tests/fixtures/analisis/comparable.json y calcular los porcentajes indicados.",
+    "work_area": "tests/fixtures/analisis y docs/casos-motor.md.",
+    "verification": "Los casos identifican entrada, resultado esperado y si el dato es sintético; los umbrales se contrastan con el prototipo.",
+    "handoff": "Se puede revisar los casos mientras A01 se revisa; los ajustes del contrato se incorporan antes de terminar."
   },
   {
     "id": "A03",
@@ -79,32 +89,36 @@
     "owner_full": "Luis Enrique Almaguer Castillo",
     "reviewer": "Roberto",
     "reviewer_full": "Roberto Santana Trujillo",
-    "title": "Convertir los bosquejos actuales en flujo de pantallas",
+    "title": "Validar el flujo preparado y los estados de pantallas",
     "requirements": [
       "RF01–RF12"
     ],
     "dependencies": [],
     "acceptance": [
-      "Cubrir las trece pantallas de la Fase 1 actualizada, con navegación por rol.",
-      "Diseñar estados de carga, error, sin historial, comparación no disponible y plan parcial o vacío."
+      "Revisar las trece pantallas y sus enlaces, preservando las funciones obligatorias de la Fase 1.",
+      "Validar carga, error, vacío, comparación no disponible y plan parcial/vacío usando los estados preparados."
     ],
     "evidence": "Flujo y lista de estados vinculados a cada pantalla.",
     "priority": "P0",
     "start": "2026-10-12",
-    "due": "2026-10-14",
+    "due": "2026-10-15",
     "status": "Backlog",
     "conditional": false,
     "objective": "Convertir los bosquejos de la Fase 1 en un recorrido navegable para jugador y administrador.",
-    "inputs": "Trece pantallas de Fase 1 y requisitos de cada rol.",
+    "inputs": "docs/flujo-pantallas.md contiene las trece pantallas y estados iniciales; contrastar con los bosquejos de la Fase 1.",
     "steps": [
-      "Listar cada pantalla y los enlaces de entrada/salida.",
-      "Dibujar el recorrido de jugador y administrador con los controles permitidos.",
-      "Para cada pantalla, anotar carga, éxito, error y ausencia de datos; compartir el flujo antes de implementar."
+      "Leer la tabla preparada y recorrer Registro → Perfil → Carga → Análisis → Plan → Sesiones.",
+      "Contrastar el recorrido del jugador y administrador con los bosquejos; completar controles o mensajes faltantes en la misma tabla.",
+      "Anotar observaciones y comprobar con Roberto la navegación y los estados antes de construir A04."
     ],
-    "deliverable": "docs/flujo-pantallas.md y un diagrama o capturas de los bosquejos.",
+    "deliverable": "docs/flujo-pantallas.md revisado y observaciones/capturas de los bosquejos.",
     "example": "Carga → procesando → análisis; si falla un replay, mostrar cuál falló y la acción disponible.",
     "learning": "Luis: conectar diseño de navegación con estados reales del sistema.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Abrir docs/flujo-pantallas.md y marcar qué control lleva de Carga a Análisis.",
+    "work_area": "docs/flujo-pantallas.md y los bosquejos actuales.",
+    "verification": "Recorrer las trece pantallas, incluido usuario sin historial y jugador sin acceso a administración.",
+    "handoff": "La tabla preparada permite revisar el flujo sin esperar código ni una nueva matriz."
   },
   {
     "id": "A04",
@@ -143,7 +157,11 @@
     "deliverable": "PR con base visual y recorrido reproducible; actualizar instrucciones de ejecución cuando existan.",
     "example": "Un jugador puede llegar a Carga desde su menú; no se le presenta el menú de administración.",
     "learning": "Luis: estructura frontend, eventos y componentes reutilizables.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Crear public/index.html con navegación a Inicio, Acerca y Ayuda, usando la tabla preparada.",
+    "work_area": "public/*.html, public/css/app.css y public/js/navigation.js; estructura propuesta en docs/base-tecnica.md.",
+    "verification": "Abrir cada enlace y comprobar que no termina en una página inexistente; distinguir menú del jugador y administrador.",
+    "handoff": "Puede construir componentes con estados de ejemplo; conectar datos reales en A11/A12/A19/A27/A28."
   },
   {
     "id": "A05",
@@ -168,7 +186,7 @@
     "evidence": "Spike reproducible, respuesta anonimizada y decisión de viabilidad.",
     "priority": "P0",
     "start": "2026-10-12",
-    "due": "2026-10-14",
+    "due": "2026-10-15",
     "status": "Backlog",
     "conditional": false,
     "objective": "Comprobar que Ballchasing permite obtener los datos necesarios con un replay real autorizado.",
@@ -181,7 +199,11 @@
     "deliverable": "scripts/spike-ballchasing.* y docs/viabilidad-ballchasing.md, sin tokens ni replays publicados.",
     "example": "Guardar un ejemplo anonimizado de estado pendiente y otro listo, indicando el campo que identifica al jugador.",
     "learning": "Tadeo: explorar una API externa y validar supuestos antes de construir.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Leer el apartado Ballchasing del contrato; comprobar con una cuenta autorizada el endpoint de ping y un replay propio.",
+    "work_area": "docs/viabilidad-ballchasing.md y fixtures saneados del proveedor; nunca guardar token ni replay privado en GitHub.",
+    "verification": "Registrar HTTP, estado, campos del jugador elegido, identidad y privacidad observada; un fixture no sustituye esta evidencia.",
+    "handoff": "Entregar a Roberto y David el mapeo observado y los límites de la cuenta el jueves 15. Una duda sobre identidad/unidades se documenta con ejemplo saneado."
   },
   {
     "id": "A06",
@@ -219,7 +241,11 @@
     "deliverable": "PR del servidor, .env.example y docs/estados-procesamiento.md.",
     "example": "Un endpoint de prueba devuelve estado pending y después ready con el mismo identificador.",
     "learning": "Tadeo: servidor, configuración y separación entre integración externa y lógica propia.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Crear src/app.js con Express y GET /health que devuelva estado ok.",
+    "work_area": "src/app.js, src/routes, src/middleware y src/services/ballchasing.js.",
+    "verification": "Arrancar el servidor y consultar /health; simular pendiente, error y duplicado del adaptador sin exponer el token.",
+    "handoff": "El contrato define la interfaz; cerrar la conexión real después de A05. El servidor común lo mantiene Tadeo."
   },
   {
     "id": "A07",
@@ -228,33 +254,37 @@
     "owner_full": "David Alonso Torres Guerrero",
     "reviewer": "Roberto",
     "reviewer_full": "Roberto Santana Trujillo",
-    "title": "Auditar el modelo de ocho tablas y completar diseño",
+    "title": "Validar el modelo de datos preparado",
     "requirements": [
       "RF01–RF12"
     ],
     "dependencies": [],
     "acceptance": [
-      "Revisar usuarios, bloques, replays, métricas, objetivos, ejercicios, planes y plan_ejercicio.",
-      "Proponer sesiones, historial de rango declarado, evidencia de reglas y snapshots de objetivos/ejercicios para cada versión del plan.",
-      "Definir propietarios, claves, integridad, índices y permisos; acordar cualquier cambio del ERD antes de implementarlo."
+      "Revisar las ocho entidades originales y las propuestas de sesiones, rango e historial/evidencia de versiones.",
+      "Comprobar que una sesión apunta a la versión exacta y que sus ejercicios/objetivos conservan snapshots.",
+      "Definir claves, propietarios, integridad, índices y permisos a partir de la propuesta; registrar cambios antes de implementarlos."
     ],
     "evidence": "Diccionario y propuesta de migraciones; enlace al ERD actualizado existente.",
     "priority": "P0",
     "start": "2026-10-12",
-    "due": "2026-10-14",
+    "due": "2026-10-15",
     "status": "Backlog",
     "conditional": false,
     "objective": "Completar el diseño de datos antes de implementar funciones que necesitan historial.",
-    "inputs": "ERD de ocho tablas, Fase 1 y contrato de A01 en cuanto esté disponible.",
+    "inputs": "docs/diccionario-datos.md propone las entidades y relaciones a partir de las ocho tablas iniciales; docs/contratos-api.md define qué consume cada módulo.",
     "steps": [
-      "Revisar qué requisito cubre cada tabla y dónde faltan sesiones, rango declarado, reglas o versiones.",
-      "Escribir campos, unidades, claves, propietarios y relaciones en un diccionario.",
-      "Proponer migraciones y revisar el diseño con los consumidores antes de cambiar el ERD o la base."
+      "Comparar las ocho tablas del ERD con las entidades del diccionario preparado; identificar nombres equivalentes y diferencias.",
+      "Comprobar propietario, claves y relaciones con los ejemplos de bloque, versión de plan y sesión. Registrar ajustes en el diccionario.",
+      "Preparar el diseño/migraciones que implementarán A08/A15/A24; revisar con Roberto antes de cambiar el ERD."
     ],
-    "deliverable": "docs/diccionario-datos.md y propuesta de migraciones; ERD revisado cuando se acuerde.",
+    "deliverable": "docs/diccionario-datos.md validado, lista de ajustes y propuesta de migraciones.",
     "example": "Una sesión necesita apuntar a la versión exacta del plan con la que se entrenó.",
     "learning": "David: diseñar persistencia trazable y explicar por qué existe cada relación.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Leer la fila planes/versiones/sesiones en docs/diccionario-datos.md y contrastarla con el ERD actual.",
+    "work_area": "docs/diccionario-datos.md y propuesta de migraciones de Supabase.",
+    "verification": "Una sesión de la versión 1 sigue apuntando a ella después de crear la versión 2; todos los datos privados tienen propietario.",
+    "handoff": "David entrega el diccionario validado el jueves 15; la implementación de tablas y políticas corresponde a A08/A15/A24."
   },
   {
     "id": "A08",
@@ -294,7 +324,11 @@
     "deliverable": "PR de autenticación, configuración sin secretos y matriz de permisos.",
     "example": "Jugador A intenta consultar un bloque de B: acceso denegado; el registro público no crea administradores.",
     "learning": "David: distinguir inicio de sesión, autorización y propiedad de datos.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Seguir los enlaces oficiales de Auth/RLS del contrato y configurar un entorno de desarrollo con usuario jugador.",
+    "work_area": "Supabase Auth, políticas/migraciones y src/middleware/auth.js; guardar solo nombres de variables en .env.example.",
+    "verification": "Sin token: 401. Jugador A no lee datos de B. El formulario público no crea administradores. Suspensión se comprueba en servidor.",
+    "handoff": "Usar el diccionario como propuesta mientras A07 revisa relaciones; terminar con permisos reales verificados."
   },
   {
     "id": "A09",
@@ -332,7 +366,11 @@
     "deliverable": "PR de normalización, docs/metricas.md y casos calculados a mano.",
     "example": "2 goles/8 tiros y 3 goles/12 tiros se agregan como 5/20 = 25%; no se promedian porcentajes sin sus denominadores.",
     "learning": "Roberto: transformación de datos, funciones y pruebas numéricas.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Abrir el fixture comparable y escribir normalizeBlock(replays, playerIdentity) sobre los datos del jugador seleccionado.",
+    "work_area": "src/domain/metrics.js y pruebas de normalización.",
+    "verification": "Sumar goles y tiros antes de dividir; 2/8 da 25%, un denominador 0 produce null con motivo. Conservar cobertura y unidades.",
+    "handoff": "A14 entrega identificación/contexto y A15 persistencia; fixtures permiten empezar. Validar contra cinco replays reales antes de cerrar."
   },
   {
     "id": "A10",
@@ -370,7 +408,11 @@
     "deliverable": "PR de comparación y pruebas de línea base, incompatibilidad y cambios.",
     "example": "Un bloque ranked 2v2 no se compara con casual 3v3; se conserva y muestra el motivo.",
     "learning": "Roberto: condiciones, fechas y un contrato que después consumirá su pantalla A19.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Escribir compareBlocks(baseline, current) usando compatible, incompatible y primer-bloque de los fixtures.",
+    "work_area": "src/domain/comparison.js y pruebas del motor.",
+    "verification": "Mismo contexto posterior: delta 5 pp en el ejemplo. Contexto distinto: no comparable con motivo. Sin anterior: línea base.",
+    "handoff": "Se puede escribir la función pura con JSON; verificar después con métricas A09 y bloques guardados A15."
   },
   {
     "id": "A11",
@@ -410,7 +452,11 @@
     "deliverable": "PR frontend y capturas de carga válida, inválida y parcial.",
     "example": "Al seleccionar cuatro archivos se explica que faltan uno; el botón no envía el bloque.",
     "learning": "Luis: formularios, peticiones asíncronas y representación de estados.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Crear el formulario con cinco archivos y la lista de estados de docs/flujo-pantallas.md.",
+    "work_area": "public/carga.html y public/js/blocks.js; POST/GET /api/v1/blocks.",
+    "verification": "Cuatro o seis archivos generan aviso; cinco envían el formulario. Pendiente/fallido/listo se muestran fielmente y se puede reintentar.",
+    "handoff": "Usar ejemplo block-pending.json hasta conectar A13; cerrar únicamente con la API real."
   },
   {
     "id": "A12",
@@ -448,7 +494,11 @@
     "deliverable": "PR y recorrido de acceso/perfil con ambos métodos.",
     "example": "Sin identidad del jugador, la pantalla explica qué falta antes de analizar replays.",
     "learning": "Luis: estado de sesión, validación y datos persistidos desde formularios.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Conectar registro/login de Supabase y después GET/PATCH /api/v1/profile según el contrato.",
+    "work_area": "public/login.html, public/perfil.html y public/js/auth.js/profile.js.",
+    "verification": "Registrar jugador, entrar, guardar plataforma/identidad/modalidad y cerrar sesión; Google se prueba con configuración real.",
+    "handoff": "Usar A08 para Auth y A15 para persistencia; nunca confiar en rol enviado por el navegador."
   },
   {
     "id": "A13",
@@ -489,7 +539,11 @@
     "deliverable": "PR del adaptador y pruebas con fallos y un bloque real.",
     "example": "Un fallo transitorio se reintenta sobre el registro existente; no crea otro replay propio.",
     "learning": "Tadeo: procesos externos, estados e idempotencia de reintentos.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Implementar POST /api/v1/blocks para recibir cinco archivos, crear block_id y devolver 202.",
+    "work_area": "src/routes/blocks.js, src/services/ingestion.js y repositorio de bloques de David.",
+    "verification": "Carga privada real → IDs externos → pendiente/procesando → listo solo si los cinco son válidos; fallo/reintento preserva el bloque.",
+    "handoff": "A15 y A14 también entregan el jueves 22. Preparar rutas/adaptador con el ejemplo desde el lunes; coordinar la conexión al recibirlos y registrar cualquier bloqueo."
   },
   {
     "id": "A14",
@@ -516,7 +570,7 @@
     "evidence": "Payload anonimizado de cinco partidas y casos incompatibles.",
     "priority": "P0",
     "start": "2026-10-19",
-    "due": "2026-10-21",
+    "due": "2026-10-22",
     "status": "Backlog",
     "conditional": false,
     "objective": "Entregar al motor datos que pertenezcan al mismo jugador y contexto.",
@@ -529,7 +583,11 @@
     "deliverable": "PR, respuesta anonimizada y casos de jugador ausente/contexto incompatible.",
     "example": "Si el jugador no aparece en uno de los cinco replays, el bloque no se presenta como una medición completa válida.",
     "learning": "Tadeo: validar entradas y diseñar la frontera entre API y motor.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Extraer un jugador de una respuesta saneada A05 por plataforma e ID, no por nombre visible.",
+    "work_area": "src/services/replay-validation.js y mapeo proveedor → contrato.",
+    "verification": "Jugador ausente, replay repetido o modalidad/tipo distintos impiden marcar el bloque listo; conservar razón legible.",
+    "handoff": "Entregar a Roberto el objeto normalizado y los casos de rechazo el jueves 22; campos no verificados conservan pendiente explícito."
   },
   {
     "id": "A15",
@@ -556,7 +614,7 @@
     "evidence": "Migración, seed de prueba y consultas de integridad.",
     "priority": "P0",
     "start": "2026-10-19",
-    "due": "2026-10-21",
+    "due": "2026-10-22",
     "status": "Backlog",
     "conditional": false,
     "objective": "Guardar perfil, bloques, replays y métricas con propiedad e integridad.",
@@ -569,7 +627,11 @@
     "deliverable": "Migraciones, seed de ejemplo y consultas de integridad.",
     "example": "Tras reiniciar el servidor se consulta el mismo bloque, con sus cinco replays y sus estados.",
     "learning": "David: relaciones, restricciones y recuperación de datos para una función completa.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Crear persistencia de perfil/bloque/replay/métrica siguiendo el diccionario validado.",
+    "work_area": "Migraciones/consultas y src/repositories/blocks.js/profile.js.",
+    "verification": "Guardar y recuperar un bloque propio de cinco replays; otro jugador no obtiene su contenido. No convertir métricas faltantes en cero.",
+    "handoff": "Entregar consultas y un bloque de ejemplo a Tadeo/Roberto el jueves 22; acordar el punto de conexión con A13 durante el trabajo."
   },
   {
     "id": "A16",
@@ -607,7 +669,11 @@
     "deliverable": "PR de objetivos y casos de historial/propiedad.",
     "example": "Archivar una meta vinculada conserva el plan que ya la usó; las métricas anteriores no se modifican.",
     "learning": "David: CRUD con historial y reglas de conservación.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Implementar POST y GET /api/v1/goals con propietario tomado de la sesión.",
+    "work_area": "src/routes/goals.js y consultas de objetivos.",
+    "verification": "Alta/consulta/edición funcionan; borrar una meta enlazada la archiva sin eliminar versiones históricas.",
+    "handoff": "Modelo A07 y permisos A08; el contrato y goal.json permiten construir sin esperar la pantalla A20."
   },
   {
     "id": "A17",
@@ -633,7 +699,7 @@
     "evidence": "Pruebas de reglas, empates, null y ausencia de prioridades.",
     "priority": "P0",
     "start": "2026-10-26",
-    "due": "2026-10-28",
+    "due": "2026-10-29",
     "status": "Backlog",
     "conditional": false,
     "objective": "Generar prioridades reproducibles que se puedan explicar con evidencia.",
@@ -646,7 +712,11 @@
     "deliverable": "PR del motor y resultados de los casos de reglas.",
     "example": "Una prioridad incluye el ID de regla y la métrica que la activó; un dato ausente no activa una conclusión inventada.",
     "learning": "Roberto: lógica determinista, ordenamiento y explicaciones comprobables.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Escribir diagnose(metrics, comparison, rulesVersion) usando los casos de A02.",
+    "work_area": "src/domain/rules.js y configuración de reglas versionada.",
+    "verification": "Máximo tres prioridades; cada una incluye regla, métrica, unidad y evidencia. null no activa una regla; empates son reproducibles.",
+    "handoff": "Entregar función y un diagnóstico de ejemplo el jueves 29. A19 y A18 lo consumen; las heurísticas se calibran en A26."
   },
   {
     "id": "A18",
@@ -686,7 +756,11 @@
     "deliverable": "PR del generador y casos de catálogo suficiente, parcial y vacío.",
     "example": "Si solo existe un ejercicio compatible para dos prioridades, se muestra plan parcial y la cobertura que falta.",
     "learning": "Roberto: restricciones, selección y conexión entre reglas y persistencia.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Escribir generatePlan(diagnosis, goals, exercises, availableMinutes) con los ejemplos del contrato.",
+    "work_area": "src/domain/plans.js y ruta de generación de planes.",
+    "verification": "Usar solo ejercicios activos compatibles; respetar minutos; cobertura completa/parcial/vacía tiene motivo y snapshots.",
+    "handoff": "Puede probar con el catálogo y snapshots de ejemplo; cerrar con A17/A23/A24 reales. David persiste las versiones."
   },
   {
     "id": "A19",
@@ -730,7 +804,11 @@
     "deliverable": "PR que incluya consulta, endpoint y pantalla; ejemplo de respuesta, prueba del recorrido y capturas.",
     "example": "Abrir bloque B desde el historial: la API recupera A/B propios, calcula +5 puntos porcentuales de tiro en el caso de prueba y la pantalla lo muestra con unidad y período.",
     "learning": "Roberto: comprender y construir una función desde persistencia hasta interfaz; Tadeo mantiene el servidor común, David el modelo y Luis la base visual.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Seguir la sección función completa A19 de la base: consulta propia → comparación/reglas → endpoint → gráfica.",
+    "work_area": "src/routes/analysis.js, repositorios existentes, public/analisis.html y public/js/analysis.js.",
+    "verification": "El caso 25% → 30% muestra +5 pp en función, API y pantalla; primer bloque/incompatible/faltante muestran el motivo.",
+    "handoff": "Tadeo entrega servidor, David consultas y Luis componentes. Roberto integra esta función; Luis revisa la pantalla. El contrato permite avanzar con fixtures."
   },
   {
     "id": "A20",
@@ -767,7 +845,11 @@
     "deliverable": "PR de pantalla Objetivos y recorrido de todos sus estados.",
     "example": "Archivar una meta cambia su estado visible y permite seguir consultando el plan histórico relacionado.",
     "learning": "Luis: formularios CRUD y explicación de cambios con historial.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Crear el formulario/listado de Objetivos usando goal.json y después conectar sus endpoints.",
+    "work_area": "public/objetivos.html y public/js/goals.js.",
+    "verification": "Crear, editar y borrar/archivar con mensajes claros; la lista refleja el servidor y conserva relaciones históricas.",
+    "handoff": "Usar A16 para la operación real y A12 para sesión/perfil; un mock solo acredita el diseño."
   },
   {
     "id": "A21",
@@ -805,7 +887,11 @@
     "deliverable": "PR de sesiones y pruebas CRUD/recálculo.",
     "example": "Corregir una sesión de 20 a 15 minutos actualiza el total de entrenamiento; no demuestra una mejora en partidas.",
     "learning": "Tadeo: endpoints CRUD y coherencia de datos derivados.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Implementar POST /api/v1/sessions con plan_version_id y ejercicio de esa versión.",
+    "work_area": "src/routes/sessions.js y consultas persistentes.",
+    "verification": "Una sesión de v1 conserva sus ejercicios al crear v2; corregir/borrar recalcula entrenamiento sin cambiar métricas de replays.",
+    "handoff": "Plan-version.json permite empezar; validar con versiones reales A24 y permisos A08."
   },
   {
     "id": "A22",
@@ -844,7 +930,11 @@
     "deliverable": "PR de reportes y ejemplos numéricos verificados.",
     "example": "45 minutos declarados se presentan como entrenamiento; el cambio de rendimiento proviene de bloques comparables.",
     "learning": "Tadeo: agregaciones y contratos claros para gráficas.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Preparar GET /api/v1/reports y separar sus tres series: rendimiento, metas y rango declarado.",
+    "work_area": "src/services/reports.js y src/routes/reports.js.",
+    "verification": "Cada serie declara fuente, fechas, unidad, muestra y exclusiones; rango manual no se presenta como MMR automático.",
+    "handoff": "Usar fixtures para contrato; completar con comparación A10, metas A16 y sesiones A21 antes de cerrar."
   },
   {
     "id": "A23",
@@ -870,7 +960,7 @@
     "evidence": "Endpoints y seed suficiente para cubrir prioridades del MVP.",
     "priority": "P0",
     "start": "2026-10-26",
-    "due": "2026-10-28",
+    "due": "2026-10-29",
     "status": "Backlog",
     "conditional": false,
     "objective": "Mantener ejercicios y recursos que realmente puedan usarse en planes nuevos.",
@@ -883,7 +973,11 @@
     "deliverable": "PR de catálogo y seed revisado para las prioridades del MVP.",
     "example": "Desactivar un ejercicio lo excluye de planes nuevos y conserva la descripción del plan que ya lo usó.",
     "learning": "David: catálogo autorizado y conservación de datos históricos.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Implementar CRUD administrativo de ejercicios y revisar una semilla de ejemplos por prioridad.",
+    "work_area": "src/routes/exercises.js, catálogo persistente y seed de desarrollo.",
+    "verification": "Jugador consulta activos; administrador crea/edita/desactiva. Cada ejercicio tiene recurso válido, instrucciones, minutos y compatibilidad.",
+    "handoff": "Entregar catálogo funcional el jueves 29. No prometer recursos no revisados; plan anterior mantiene snapshots tras un cambio."
   },
   {
     "id": "A24",
@@ -910,7 +1004,7 @@
     "evidence": "Migraciones y comparación antes/después de una actualización.",
     "priority": "P0",
     "start": "2026-10-26",
-    "due": "2026-10-28",
+    "due": "2026-10-29",
     "status": "Backlog",
     "conditional": false,
     "objective": "Conservar exactamente qué datos y reglas originaron cada versión del plan.",
@@ -923,7 +1017,11 @@
     "deliverable": "Migraciones/PR y comparación de versiones antes/después.",
     "example": "Editar hoy la duración de un ejercicio no cambia el tiempo que mostraba el plan de ayer.",
     "learning": "David: snapshots, versionado y trazabilidad.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Crear escritura de plan_version y plan_exercise a partir de plan-version.json.",
+    "work_area": "Migraciones/consultas de planes, versiones y snapshots.",
+    "verification": "Crear v1 y v2: v1 permanece inmutable con metas, ejercicios y reglas utilizados; sesión referencia versión exacta.",
+    "handoff": "Entregar persistencia de versiones el jueves 29 para A18/A21; el esquema preparado permite empezar desde el lunes."
   },
   {
     "id": "A25",
@@ -964,7 +1062,11 @@
     "deliverable": "Registro de integración, incidencias resueltas y demo del ciclo completo.",
     "example": "Login → perfil → bloque A → análisis → meta → plan → sesión → bloque B → reevaluación.",
     "learning": "Tadeo: integración y diagnóstico de fallos entre módulos; Roberto revisa la función de análisis. No exige trabajo acompañado.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Abrir la fila P11 de pruebas y recorrer registro → perfil → bloque → análisis → plan → sesión → segundo bloque.",
+    "work_area": "docs/integracion-ciclo.md y fixes separados en cada módulo.",
+    "verification": "Ejecutar con dos bloques reales compatibles, evidencia por paso y lista de defectos con responsable. Cada dueño corrige su pieza.",
+    "handoff": "Tadeo coordina, Roberto revisa; empezar a integrar ejemplos antes del corte y terminar con funciones reales."
   },
   {
     "id": "A26",
@@ -1003,7 +1105,11 @@
     "deliverable": "docs/calibracion-reglas.md y casos reproducibles de la versión usada.",
     "example": "Un cambio entre bloques es evidencia de una diferencia observada; no prueba por sí solo que el ejercicio la causó.",
     "learning": "Roberto: evaluar límites del diagnóstico además de implementarlo.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Comparar las prioridades del prototipo con bloques reales disponibles y registrar por qué se activan.",
+    "work_area": "docs/calibracion-reglas.md y configuración de reglas.",
+    "verification": "Umbral, unidad, versión y limitación están documentados; no se atribuye causalidad a sesiones autorreportadas.",
+    "handoff": "Usar A17/A18 implementados; muestras pequeñas se identifican y no se inventan validaciones estadísticas."
   },
   {
     "id": "A27",
@@ -1043,7 +1149,11 @@
     "deliverable": "PR de Plan/Sesiones y recorrido con conservación de historial.",
     "example": "Tras actualizar el plan a v2, una sesión de v1 sigue mostrando los ejercicios de v1.",
     "learning": "Luis: interfaz con relaciones y versiones persistentes.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Crear Plan/Sesiones con plan-version.json y session.json antes de conectar el servidor.",
+    "work_area": "public/plan.html, public/sesiones.html y sus controladores JavaScript.",
+    "verification": "Crear otra versión no modifica la sesión v1; consultar versiones, registrar/corregir/borrar sesiones y mostrar cobertura.",
+    "handoff": "Conectar A18/A20/A21/A24; los ejemplos reducen la espera entre módulos."
   },
   {
     "id": "A28",
@@ -1082,7 +1192,11 @@
     "deliverable": "PR de reportes y capturas con datos completos y faltantes.",
     "example": "Un valor ausente genera un hueco o mensaje, no una barra de cero; el rango se etiqueta como declarado.",
     "learning": "Luis: visualización fiel de datos y comprensión de límites.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Representar report.json con tres secciones y unidades visibles.",
+    "work_area": "public/reportes o sección de seguimiento de las pantallas aprobadas, y public/js/reports.js.",
+    "verification": "No añadir una decimocuarta pantalla: ubicar reportes en Análisis/Objetivos/Sesiones. null muestra hueco/motivo; rango lleva fuente declarada.",
+    "handoff": "A19/A22/A31 entregan datos; usar el ejemplo para diseño y cerrar al verificar respuestas reales."
   },
   {
     "id": "A29",
@@ -1105,7 +1219,7 @@
     "evidence": "Pruebas de rol, suspensión y reactivación.",
     "priority": "P0",
     "start": "2026-11-02",
-    "due": "2026-11-04",
+    "due": "2026-11-05",
     "status": "Backlog",
     "conditional": false,
     "objective": "Permitir al administrador consultar y cambiar el estado de usuarios.",
@@ -1118,7 +1232,11 @@
     "deliverable": "PR de administración y matriz de rol/estado.",
     "example": "Un jugador que envía directamente una petición de suspensión recibe acceso denegado.",
     "learning": "Tadeo: autorización en servidor y reglas de estado.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Implementar GET /api/v1/admin/users y PATCH /api/v1/admin/users/:id/status.",
+    "work_area": "src/routes/admin-users.js y consultas de rol/estado.",
+    "verification": "Jugador recibe 403 al intentar una operación admin; suspensión/reactivación afecta las siguientes peticiones protegidas.",
+    "handoff": "Permisos A08; entregar operaciones el jueves 5 para conectar el panel A32."
   },
   {
     "id": "A30",
@@ -1156,7 +1274,11 @@
     "deliverable": "Matriz de fallos, PR de arreglos y evidencia de recuperación.",
     "example": "Una carga duplicada externa no se borra; se explica el conflicto y solo se limpian recursos propios permitidos.",
     "learning": "Tadeo: recuperación de errores sin perder trazabilidad.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Reproducir cada fallo del apartado carga/reintentos del contrato.",
+    "work_area": "Pruebas de ingestión, adaptador y docs/fallos-ingestion.md.",
+    "verification": "409 externo no autoriza borrar replay ajeno; 429/5xx tienen espera limitada; un reintento no duplica el bloque.",
+    "handoff": "Partir de A13/A14; registrar esperado/observado y corregir el módulo afectado."
   },
   {
     "id": "A31",
@@ -1183,7 +1305,7 @@
     "evidence": "Casos de integridad y reporte antes/después.",
     "priority": "P1",
     "start": "2026-11-02",
-    "due": "2026-11-04",
+    "due": "2026-11-05",
     "status": "Backlog",
     "conditional": false,
     "objective": "Conservar historial de metas y rango declarado de forma coherente con planes y reportes.",
@@ -1196,7 +1318,11 @@
     "deliverable": "PR y casos de integridad antes/después.",
     "example": "Una entrada de rango manual conserva fecha, modalidad y fuente declarada; no se presenta como MMR obtenido automáticamente.",
     "learning": "David: historial temporal y consistencia entre recursos.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Implementar registro de rango declarado con fecha/modalidad/fuente y comprobar historial de metas.",
+    "work_area": "Consultas de rank_history y pruebas de integridad temporal.",
+    "verification": "Modificar meta/catálogo conserva plan histórico; rango aparece separado de métricas. Entregar datos para reportes el jueves 5.",
+    "handoff": "Usar A16/A22/A24; no obtener ni inferir MMR automáticamente."
   },
   {
     "id": "A32",
@@ -1234,7 +1360,11 @@
     "deliverable": "PR y demo de panel, usuarios y ejercicios.",
     "example": "Un administrador desactiva un ejercicio y lo ve actualizado; un jugador no puede ejecutar esa operación.",
     "learning": "David: consumir su catálogo desde interfaz; Luis revisa usabilidad.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Crear Panel admin, Usuarios admin y Ejercicios admin usando los componentes de Luis.",
+    "work_area": "public/admin/*.html y JavaScript consumidor de admin/users y exercises.",
+    "verification": "Admin cambia estado y catálogo y observa respuesta; jugador no accede aunque llame endpoints directamente.",
+    "handoff": "A29 entrega el jueves 5; preparar vistas con los ejemplos antes y conectar la operación real para el corte del 6."
   },
   {
     "id": "A33",
@@ -1274,7 +1404,11 @@
     "deliverable": "Informe de regresión con versión, esperado/observado y evidencias.",
     "example": "El ejemplo 25% → 30% debe seguir mostrando +5 puntos porcentuales en función, API y pantalla.",
     "learning": "Roberto: comprobar coherencia de una función de extremo a extremo.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Ejecutar los fixtures revisados sobre funciones, API y pantalla de A19.",
+    "work_area": "docs/resultados-regresion.md y correcciones del motor.",
+    "verification": "Registrar commit, caso, esperado y observado; verificar null, porcentajes, comparación, prioridades y plan sin regresiones.",
+    "handoff": "Requiere integración A25 y calibración A26 para el cierre; preparar la matriz antes."
   },
   {
     "id": "A34",
@@ -1313,7 +1447,11 @@
     "deliverable": "Documento técnico en el formato que confirme el curso; ejemplos y referencias.",
     "example": "Explicar cómo un nuevo bloque cambia el diagnóstico y crea otro plan, con sus límites.",
     "learning": "Roberto: comunicar decisiones técnicas con evidencia.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Organizar evidencia de un nuevo bloque que modifica prioridades y genera otra versión de plan.",
+    "work_area": "Paquete de PROGSA y docs/evidencia-progsa.md.",
+    "verification": "Distinguir prototipo Python de web real; cada afirmación tiene captura/resultado. Ajustar formato a rúbrica confirmada.",
+    "handoff": "Reutilizar evidencia A25/A26; pendientes de profesor se registran, no se presentan como requisitos confirmados."
   },
   {
     "id": "A35",
@@ -1351,7 +1489,11 @@
     "deliverable": "Checklist de uso y PR de correcciones.",
     "example": "Un error de formulario identifica el campo y conserva los valores que el jugador ya escribió.",
     "learning": "Luis: evaluar la interfaz con casos de uso completos.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Recorrer con teclado Registro, Carga, Análisis y las vistas administrativas.",
+    "work_area": "docs/revision-uso.md y fixes de interfaz.",
+    "verification": "Foco, etiquetas, errores y valores conservados se comprueban; registrar captura y resultado por bloqueo corregido.",
+    "handoff": "Usar A27/A28/A32 conectados. La revisión se puede realizar de forma asíncrona."
   },
   {
     "id": "A36",
@@ -1388,7 +1530,11 @@
     "deliverable": "Guion, capturas y resultado del ensayo; no requiere reunión presencial.",
     "example": "Mostrar primer bloque, diagnóstico, plan, sesión y comparación; cada dueño explica su pieza y una conexión con otra.",
     "learning": "Luis: explicar el recorrido del producto y coordinar la presentación.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Escribir el guion del ciclo y asignar a cada dueño la explicación de su módulo y una conexión.",
+    "work_area": "docs/demo.md, capturas y respaldo de demostración.",
+    "verification": "Recorrido cronometrado de 8–10 minutos ajustable al profesor; datos simulados se identifican y cada enlace funciona.",
+    "handoff": "Ensayar después de A25/A35; las explicaciones pueden prepararse por escrito sin reunión presencial."
   },
   {
     "id": "A37",
@@ -1429,7 +1575,11 @@
     "deliverable": "Matriz de autorización, comprobación de secretos y arreglos necesarios.",
     "example": "Copiar un ID de bloque de otro jugador no permite ver ni editar su análisis.",
     "learning": "Tadeo: probar permisos a través de peticiones directas.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Preparar usuarios A/B, administrador y suspendido en desarrollo y llamar directamente a endpoints.",
+    "work_area": "docs/permisos-verificados.md y pruebas/fixes de autorización.",
+    "verification": "Sin sesión 401; rol indebido 403; recurso privado ajeno no se revela; claves privadas fuera del navegador/repositorio/logs.",
+    "handoff": "Verificar A29/A30/A32 reales. Probar RLS y middleware, no solo esconder botones."
   },
   {
     "id": "A38",
@@ -1467,7 +1617,11 @@
     "deliverable": "README reproducible, registro de ejecución y tag final.",
     "example": "Un compañero sigue el README en una copia limpia y completa el recorrido principal sin indicaciones adicionales.",
     "learning": "Tadeo: reproducibilidad, entorno e integración operativa.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Seguir el README desde una copia limpia y documentar los pasos que falten.",
+    "work_area": "README.md, .env.example, migraciones, lockfile y registro de ejecución.",
+    "verification": "Otro integrante instala y ejecuta el ciclo sin instrucciones adicionales; OAuth y conexiones funcionan en el entorno elegido.",
+    "handoff": "Usar A25/A37 validados; acordar el alojamiento y conservar respaldo local."
   },
   {
     "id": "A39",
@@ -1507,7 +1661,11 @@
     "deliverable": "Matriz CRUD y consultas de integridad.",
     "example": "Eliminar una sesión recalcula entrenamiento; archivar una meta no borra el plan histórico.",
     "learning": "David: pruebas de persistencia frente a recorridos reales.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Ejecutar alta/consulta/edición/eliminación o archivo en objetivos, sesiones y ejercicios.",
+    "work_area": "docs/resultados-crud.md y consultas de integridad.",
+    "verification": "Versiones e historial sobreviven cambios; otro propietario no opera sobre los datos; semilla de demo contiene relaciones válidas.",
+    "handoff": "Recorridos A27/A31/A32 reales; registrar evidencia antes/después."
   },
   {
     "id": "A40",
@@ -1547,7 +1705,11 @@
     "deliverable": "Paquete/checklist de entrega y referencias por materia.",
     "example": "RF03 apunta a la pantalla Carga, su endpoint y una evidencia de cinco replays reales.",
     "learning": "David: trazabilidad entre requisito y evidencia.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Abrir la trazabilidad preparada y añadir enlaces a las evidencias reales de cada RF.",
+    "work_area": "planning/trazabilidad-rf.csv y paquete final LBPWEB.",
+    "verification": "Doce RF y trece pantallas enlazan implementación y comprobación; instalación/ERD/formato/nombres están revisados.",
+    "handoff": "Cerrar con A33/A35/A38/A39 y fechas/rúbricas confirmadas. La matriz preparada reduce trabajo documental."
   },
   {
     "id": "B01",
@@ -1584,7 +1746,11 @@
     "deliverable": "PR del arreglo y prueba del defecto.",
     "example": "Si un empate altera el orden entre ejecuciones, corregirlo y repetir ese caso.",
     "learning": "Roberto: corrección localizada y regresión.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Activar solo si se registra un defecto reproducible del motor después de A33.",
+    "work_area": "Módulo afectado, PR de arreglo y caso de regresión.",
+    "verification": "Reproducir antes, corregir y comprobar el mismo caso después.",
+    "handoff": "Reserva: no comenzar si no existe defecto confirmado."
   },
   {
     "id": "B02",
@@ -1619,7 +1785,11 @@
     "deliverable": "Captura o guion actualizado y evidencia del ajuste.",
     "example": "Aclarar el texto de una gráfica sin añadir otra función.",
     "learning": "Luis: iteración de interfaz a partir de feedback.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Activar solo ante una observación concreta del ensayo o profesor.",
+    "work_area": "Vista/guion afectado y captura final.",
+    "verification": "La observación se resuelve y queda evidencia; conservar alcance.",
+    "handoff": "Reserva: no comenzar si no existe ajuste solicitado."
   },
   {
     "id": "B03",
@@ -1654,7 +1824,11 @@
     "deliverable": "Registro de comprobación rápida de la versión final.",
     "example": "Abrir la app y verificar login, carga y consulta antes de presentarla.",
     "learning": "Tadeo: verificación operativa de entrega.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Activar al conocer la fecha real y ejecutar la versión de A38.",
+    "work_area": "Registro de verificación y respaldo local.",
+    "verification": "Login, carga y consulta funcionan en la versión que se presentará.",
+    "handoff": "Reserva operativa condicionada a la entrega confirmada."
   },
   {
     "id": "B04",
@@ -1689,6 +1863,10 @@
     "deliverable": "Checklist final y comprobante cuando se entregue.",
     "example": "Un enlace de evidencia abre la versión utilizada en la presentación.",
     "learning": "David: cierre documental comprobable.",
-    "revision": "2026-10-12"
+    "revision": "2026-10-13",
+    "first_action": "Activar al cerrar el paquete y conocer el mecanismo de entrega.",
+    "work_area": "Checklist final y comprobante de recepción cuando exista.",
+    "verification": "Nombres/enlaces/versiones coinciden y el comprobante corresponde a la entrega real.",
+    "handoff": "Reserva documental; un paquete preparado no equivale a enviado."
   }
 ]

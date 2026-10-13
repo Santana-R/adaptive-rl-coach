@@ -1,0 +1,13 @@
+{
+  "error": {
+    "code": "REPLAY_COUNT_INVALID",
+    "message": "Selecciona exactamente cinco replays .replay de PC.",
+    "details": {
+      "expected": 5,
+      "received": 4
+    }
+  },
+  "meta": {
+    "contract_version": "1.0"
+  }
+}

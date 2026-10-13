@@ -35,11 +35,34 @@ def body(t, repo):
 ## Resultado esperado
 {t['title']}
 
-Responsable propuesto: **{t['owner_full']}**
-Revisor propuesto: **{t['reviewer_full']}**
+Responsable: **{t['owner_full']}**
+Revisor: **{t['reviewer_full']}**
 Semana: **S{t['week']}** · Entrega interna: **{t['due']}** · Prioridad: **{t['priority']}**
 RF: {', '.join(t['requirements'])}
-Dependencias: {dependency_links}
+Dependencias para cerrar: {dependency_links}
+
+## Empieza por aquí
+{t['first_action']}
+
+## Base que ya tienes
+{t['inputs']}
+
+## Dónde trabajar
+{t['work_area']}
+
+## Pasos concretos
+'''+ '\n'.join(str(i+1)+'. '+s for i,s in enumerate(t['steps'])) + f'''
+
+## Entrega y conexión con el equipo
+{t['deliverable']}
+
+{t['handoff']}
+
+## Ejemplo del resultado
+{t['example']}
+
+## Cómo comprobarlo
+{t['verification']}
 
 ## Aceptación
 '''+ '\n'.join('- [ ] '+c for c in t['acceptance']) + f'''
@@ -47,7 +70,7 @@ Dependencias: {dependency_links}
 ## Evidencia
 {t['evidence']}
 
-Reparto provisional; confirmar disponibilidad. {'Tarea condicional de reserva; activar solo si es necesaria.' if t['conditional'] else 'La tarea queda terminada al integrar, revisar y adjuntar evidencia.'}
+Reparto aceptado por Roberto el 13 de octubre de 2026. {'Tarea condicional de reserva; activar solo si es necesaria.' if t['conditional'] else 'Cerrar al cumplir aceptación, guardar/integrar, revisar y adjuntar evidencia. Los ejemplos sintéticos no acreditan integración real.'}
 '''
 
 def main():

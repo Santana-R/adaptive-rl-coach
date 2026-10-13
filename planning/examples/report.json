@@ -1,0 +1,32 @@
+{
+  "period": {
+    "from": "2026-10-01",
+    "to": "2026-10-10",
+    "timezone": "America/Monterrey"
+  },
+  "performance": {
+    "source": "compatible_replays",
+    "unit": "percent",
+    "metric_key": "shooting_pct",
+    "sample_size": 5,
+    "points": [
+      {
+        "block_id": "test-block-current",
+        "value": 30
+      }
+    ],
+    "excluded": []
+  },
+  "training": {
+    "source": "self_reported_sessions",
+    "unit": "minutes",
+    "points": [],
+    "sample_size": 0
+  },
+  "rank": {
+    "source": "self_reported",
+    "mode": "2v2",
+    "points": [],
+    "sample_size": 0
+  }
+}

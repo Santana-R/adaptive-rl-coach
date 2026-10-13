@@ -8,4 +8,6 @@ Código Done: aceptación, revisión, integración y evidencia. Documento/diseñ
 
 Mantener como máximo dos tareas activas. Bloqueos: motivo, impacto, ayuda y siguiente acción en menos de 24 horas. Corte propuesto domingo 20:00 Monterrey; S4/S5 viernes 6/13 de noviembre.
 
-El reparto actualizado requiere confirmar disponibilidad en A01. A19 es la función completa de Roberto; A25 la integración coordinada por Tadeo. Confirmar identidades antes de invitar o asignar cuentas.
+El reparto fue aceptado por Roberto el 13 de octubre. A01 revisa la base preparada; comunicar disponibilidad si afecta entregas. A19 es la función completa de Roberto; A25 la integración coordinada por Tadeo. Confirmar identidades antes de invitar o asignar cuentas.
+
+Las entregas intermedias son jueves. Cada tarea enlaza base técnica, primer paso, área y comprobación. Los ejemplos permiten construir en paralelo; las tareas de integración se cierran con módulos reales.

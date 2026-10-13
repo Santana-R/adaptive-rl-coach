@@ -1,0 +1,17 @@
+{
+  "block_id": "test-block-current",
+  "status": "ready",
+  "expected_replays": 5,
+  "ready_replays": 5,
+  "context": {
+    "platform": "steam",
+    "player_id": "TEST_PLAYER_01",
+    "mode": "2v2",
+    "match_type": "ranked"
+  },
+  "first_match_at": "2026-10-10T20:00:00Z",
+  "last_match_at": "2026-10-10T21:00:00Z",
+  "metrics_version": "mvp.metrics.v1",
+  "reason_codes": [],
+  "retry_allowed": false
+}

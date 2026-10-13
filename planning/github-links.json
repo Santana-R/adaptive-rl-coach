@@ -53,7 +53,7 @@
       "week": 1,
       "owner": "Roberto",
       "reviewer": "Tadeo",
-      "due": "2026-10-14"
+      "due": "2026-10-15"
     },
     {
       "task_id": "A02",
@@ -71,7 +71,7 @@
       "week": 1,
       "owner": "Luis",
       "reviewer": "Roberto",
-      "due": "2026-10-14"
+      "due": "2026-10-15"
     },
     {
       "task_id": "A04",
@@ -89,7 +89,7 @@
       "week": 1,
       "owner": "Tadeo",
       "reviewer": "Roberto",
-      "due": "2026-10-14"
+      "due": "2026-10-15"
     },
     {
       "task_id": "A06",
@@ -107,7 +107,7 @@
       "week": 1,
       "owner": "David",
       "reviewer": "Roberto",
-      "due": "2026-10-14"
+      "due": "2026-10-15"
     },
     {
       "task_id": "A08",
@@ -170,7 +170,7 @@
       "week": 2,
       "owner": "Tadeo",
       "reviewer": "Roberto",
-      "due": "2026-10-21"
+      "due": "2026-10-22"
     },
     {
       "task_id": "A15",
@@ -179,7 +179,7 @@
       "week": 2,
       "owner": "David",
       "reviewer": "Tadeo",
-      "due": "2026-10-21"
+      "due": "2026-10-22"
     },
     {
       "task_id": "A16",
@@ -197,7 +197,7 @@
       "week": 3,
       "owner": "Roberto",
       "reviewer": "Tadeo",
-      "due": "2026-10-28"
+      "due": "2026-10-29"
     },
     {
       "task_id": "A18",
@@ -251,7 +251,7 @@
       "week": 3,
       "owner": "David",
       "reviewer": "Roberto",
-      "due": "2026-10-28"
+      "due": "2026-10-29"
     },
     {
       "task_id": "A24",
@@ -260,7 +260,7 @@
       "week": 3,
       "owner": "David",
       "reviewer": "Tadeo",
-      "due": "2026-10-28"
+      "due": "2026-10-29"
     },
     {
       "task_id": "A25",
@@ -305,7 +305,7 @@
       "week": 4,
       "owner": "Tadeo",
       "reviewer": "David",
-      "due": "2026-11-04"
+      "due": "2026-11-05"
     },
     {
       "task_id": "A30",
@@ -323,7 +323,7 @@
       "week": 4,
       "owner": "David",
       "reviewer": "Roberto",
-      "due": "2026-11-04"
+      "due": "2026-11-05"
     },
     {
       "task_id": "A32",
@@ -443,7 +443,21 @@
       "due": "2026-11-20"
     }
   ],
-  "planning_revision": "2026-10-12",
+  "planning_revision": "2026-10-13",
   "planning_revision_published_to_github": true,
-  "notion_guide_url": "https://app.notion.com/p/3f7dd7559dd881bfbbceeff2d19b9d5f"
+  "notion_guide_url": "https://app.notion.com/p/3f7dd7559dd881bfbbceeff2d19b9d5f",
+  "project_dates_synced": false,
+  "project_dates_pending": [
+    "A01",
+    "A03",
+    "A05",
+    "A07",
+    "A14",
+    "A15",
+    "A17",
+    "A23",
+    "A24",
+    "A29",
+    "A31"
+  ]
 }

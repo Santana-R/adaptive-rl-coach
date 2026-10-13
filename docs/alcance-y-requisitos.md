@@ -29,3 +29,23 @@ Base documental: Fase 1 actualizada de 45 páginas, **2227084-207-FASE1-PWEB-LAB
 
 Calendario oficial: [FIME agosto–diciembre 2026](https://www.fime.uanl.mx/wp-content/uploads/2026/07/calendario-agosto-diciembre2026.pdf). Últimas clases/laboratorios: 20 de noviembre; ordinarios: 23 de noviembre–3 de diciembre. La ventana 16–20 de noviembre es una estimación basada en entregar una semana antes de exámenes, **no una fecha confirmada por profesores**.
 
+
+
+## Mapa preparado para implementar
+
+[Base técnica](base-tecnica.md) · [Contrato API/datos](contratos-api.md) · [Flujo de las trece pantallas](flujo-pantallas.md) · [Diccionario de datos](diccionario-datos.md) · [Matriz CSV completa](../planning/trazabilidad-rf.csv). Preparados el 13 de octubre; A01 revisa y registra observaciones.
+
+| RF | Pantallas | Datos | Pruebas |
+| --- | --- | --- | --- |
+| RF01 | Inicio;Registro/login;Panel admin | Sesión Auth, perfil, rol y estado | P01;P10 |
+| RF02 | Perfil | Plataforma, ID de jugador, modalidad, disponibilidad | P01 |
+| RF03 | Carga/historial;Ayuda | Cinco archivos y perfil del jugador | P02 |
+| RF04 | Carga/historial;Análisis | Identidad, replay IDs, modalidad, tipo de partida | P02;P03 |
+| RF05 | Carga/historial | block_id, estados, errores y posibilidad de reintento | P02;P10 |
+| RF06 | Análisis | Métricas por jugador, unidades, cobertura y versión | P04 |
+| RF07 | Análisis | Bloque actual y anterior, contexto, fechas y versión de medición | P03;P04;P11 |
+| RF08 | Análisis;Acerca | Reglas versionadas y evidencia de hasta tres prioridades | P05;P11 |
+| RF09 | Plan;Perfil | Diagnóstico, metas, catálogo, minutos y snapshots | P05;P06;P11 |
+| RF10 | Objetivos;Sesiones;Plan | Metas, sesiones, duración y versión exacta del plan | P06;P07 |
+| RF11 | Análisis;Objetivos;Sesiones | Serie de partidas, entrenamiento y rango declarado por periodo | P08 |
+| RF12 | Panel admin;Usuarios admin;Ejercicios admin | Usuarios/estado, catálogo/recursos y rol admin | P09;P10 |

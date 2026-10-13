@@ -41,4 +41,8 @@ La planificación de octubre–noviembre actualiza el calendario y reparto de es
 
 
 ## Revisión de organización del 12 de octubre
-Luis: frontend. Tadeo: backend e integración A25. David: datos/auth e historial. Roberto: métricas/reglas/planes y función completa de análisis A19. Disponibilidad por confirmar en A01. Explicaciones y revisiones breves, asíncronas; trabajo acompañado no obligatorio.
+Luis: frontend. Tadeo: backend e integración A25. David: datos/auth e historial. Roberto: métricas/reglas/planes y función completa de análisis A19. Reparto aceptado por Roberto el 13 de octubre; comunicar disponibilidad si afecta entregas. Explicaciones y revisiones breves, asíncronas; trabajo acompañado no obligatorio.
+
+
+## Base preparada el 13 de octubre
+Empieza por [Base técnica](docs/base-tecnica.md). Ya están escritos [contratos](docs/contratos-api.md), [mapa RF](planning/trazabilidad-rf.csv), [flujo](docs/flujo-pantallas.md), [diccionario](docs/diccionario-datos.md) y [casos iniciales](docs/casos-motor.md). A01 revisa esa base; no pide crearla desde cero. Entregas intermedias jueves 15/22/29 de octubre y 5 de noviembre, cierres semanales conservados.

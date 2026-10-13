@@ -1,0 +1,56 @@
+{
+  "case_id": "comparable",
+  "synthetic": true,
+  "input": {
+    "baseline": {
+      "block_id": "test-block-baseline",
+      "status": "ready",
+      "context": {
+        "platform": "steam",
+        "player_id": "TEST_PLAYER_01",
+        "mode": "2v2",
+        "match_type": "ranked",
+        "metrics_version": "mvp.metrics.v1"
+      },
+      "first_match_at": "2026-10-08T20:00:00Z",
+      "last_match_at": "2026-10-08T21:00:00Z",
+      "replay_ids": [
+        "a1",
+        "a2",
+        "a3",
+        "a4",
+        "a5"
+      ],
+      "shots": 8,
+      "goals": 2
+    },
+    "current": {
+      "block_id": "test-block-current",
+      "status": "ready",
+      "context": {
+        "platform": "steam",
+        "player_id": "TEST_PLAYER_01",
+        "mode": "2v2",
+        "match_type": "ranked",
+        "metrics_version": "mvp.metrics.v1"
+      },
+      "first_match_at": "2026-10-10T20:00:00Z",
+      "last_match_at": "2026-10-10T21:00:00Z",
+      "replay_ids": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
+      "shots": 10,
+      "goals": 3
+    }
+  },
+  "expected": {
+    "comparison_status": "comparable",
+    "baseline_shooting_pct": 25,
+    "current_shooting_pct": 30,
+    "delta_pp": 5
+  }
+}

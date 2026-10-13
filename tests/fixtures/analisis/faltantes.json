@@ -1,0 +1,14 @@
+{
+  "case_id": "faltantes",
+  "synthetic": true,
+  "input": {
+    "shots": 0,
+    "goals": 0,
+    "boost_avg": null
+  },
+  "expected": {
+    "shooting_pct": null,
+    "shooting_missing_reason": "zero_denominator",
+    "boost_rule_active": false
+  }
+}

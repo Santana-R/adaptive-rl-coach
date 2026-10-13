@@ -1,0 +1,17 @@
+{
+  "exercise_id": "test-exercise",
+  "title": "Práctica de tiros (ejemplo)",
+  "priority_key": "shooting",
+  "modes": [
+    "2v2"
+  ],
+  "platforms": [
+    "steam",
+    "epic"
+  ],
+  "duration_minutes": 10,
+  "instructions": "Ejemplo sintético; sustituir por instrucciones revisadas en A23.",
+  "resource_url": null,
+  "resource_code": null,
+  "active": false
+}

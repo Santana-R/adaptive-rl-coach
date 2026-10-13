@@ -1,0 +1,31 @@
+{
+  "block_id": "test-block-current",
+  "metrics_version": "mvp.metrics.v1",
+  "sample_size": 5,
+  "values": {
+    "shots": {
+      "value": 10,
+      "unit": "count",
+      "coverage": 5,
+      "missing_reason": null
+    },
+    "goals": {
+      "value": 3,
+      "unit": "count",
+      "coverage": 5,
+      "missing_reason": null
+    },
+    "shooting_pct": {
+      "value": 30,
+      "unit": "percent",
+      "coverage": 5,
+      "missing_reason": null
+    },
+    "boost_avg": {
+      "value": null,
+      "unit": "percent",
+      "coverage": 0,
+      "missing_reason": "not_available"
+    }
+  }
+}

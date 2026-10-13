@@ -58,3 +58,7 @@ Auditar sesiones, historial de rango, evidencia de diagnóstico y snapshots comp
 
 ## Responsabilidades y función completa A19
 Luis mantiene la base visual; Tadeo el servidor/Ballchasing; David los datos/auth; Roberto métricas/reglas/planes y A19. Roberto consulta bloques propios, integra el endpoint de análisis y conecta la respuesta a la pantalla JavaScript/Chart.js. Reutiliza módulos existentes y Luis revisa la interfaz mediante el PR. Tadeo coordina A25. Véase [Empieza aquí](empieza-aqui.md).
+
+
+## Base lista para construir
+[Contrato](contratos-api.md), [diccionario](diccionario-datos.md) y [flujo](flujo-pantallas.md) preparados. El ERD histórico sigue como referencia; David valida propuesta en A07 antes de aplicar migraciones. A01 revisa la base y no exige cerrar por adelantado las comprobaciones de A05/A07/A08.

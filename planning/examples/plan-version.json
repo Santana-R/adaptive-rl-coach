@@ -1,0 +1,34 @@
+{
+  "plan_id": "test-plan",
+  "plan_version_id": "test-plan-v1",
+  "version": 1,
+  "block_id": "test-block-current",
+  "rules_version": "prototype.pending-verification",
+  "metrics_version": "mvp.metrics.v1",
+  "availability_minutes": 30,
+  "coverage": "empty",
+  "uncovered_priorities": [],
+  "reason_codes": [
+    "RULES_NOT_VERIFIED",
+    "NO_VERIFIED_ACTIVE_EXERCISE"
+  ],
+  "goals_snapshot": [
+    {
+      "goal_id": "test-goal",
+      "target_value": 35,
+      "unit": "percent"
+    }
+  ],
+  "profile_snapshot": {
+    "mode": "2v2",
+    "platform": "steam",
+    "available_minutes": 30
+  },
+  "diagnosis_snapshot": {
+    "priorities": [],
+    "limitations": [
+      "synthetic_fixture"
+    ]
+  },
+  "exercises": []
+}

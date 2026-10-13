@@ -1,8 +1,15 @@
 # Empieza aquí · Guía del equipo
 
-Revisión del 12 de octubre de 2026. Equipo de LBPWEB: Roberto Santana Trujillo, Omar Tadeo Gasca Deciga, Luis Enrique Almaguer Castillo y David Alonso Torres Guerrero.
+## La base está preparada: empieza aquí
 
-Esta guía explica cómo comenzar y cómo entregar trabajo que otro compañero pueda revisar. La implementación de la aplicación sigue pendiente. El reparto está actualizado con el Release de Roberto; cada integrante confirma disponibilidad y compromisos en A01.
+Lee [Base técnica para empezar](base-tecnica.md). Ya tienes mapa de doce RF, flujo de trece pantallas, contrato con ejemplos, diccionario de datos y cinco casos de prueba. A01 consiste en comprender y revisar esa base con Tadeo, dejando dudas/ajustes en [revision-base.md](revision-base.md). Las pruebas reales continúan en A05/A07/A08.
+
+Reparto aceptado por Roberto el 13 de octubre. Entregas intermedias: jueves 15/22/29 de octubre y 5 de noviembre. Cierres semanales conservados.
+
+
+Revisión del 13 de octubre de 2026. Equipo de LBPWEB: Roberto Santana Trujillo, Omar Tadeo Gasca Deciga, Luis Enrique Almaguer Castillo y David Alonso Torres Guerrero.
+
+Esta guía explica cómo comenzar y cómo entregar trabajo que otro compañero pueda revisar. La implementación de la aplicación sigue pendiente. Roberto aceptó el reparto. La base técnica ya está preparada; A01 la revisa y las comprobaciones reales se realizan en sus tareas.
 
 ## El producto que vamos a construir
 
@@ -36,7 +43,7 @@ El [System Map](https://miro.com/app/board/uXjVHnaZoh0=/) explica actores y fuer
 | David | Base de datos, autenticación, permisos, catálogo e historial. | Cómo se consultan los datos y se conservan planes/sesiones. |
 | Roberto | Métricas, comparación, prioridades, planes y función completa de análisis A19. | Persistencia → consulta en servidor → cálculo → pantalla. |
 
-Luis toma frontend por su interés en esa área. El backend de Tadeo es una asignación propuesta que debe confirmar con su disponibilidad. Cada módulo tiene un responsable, pero sus interfaces y revisiones conectan al equipo.
+Luis toma frontend por su interés en esa área. Tadeo lleva backend en el reparto aceptado por Roberto; comunicar disponibilidad si afecta una entrega. Cada módulo tiene un responsable, pero sus interfaces y revisiones conectan al equipo.
 
 Roberto desarrolla A19 aprovechando la base visual de Luis, el servidor de Tadeo y las consultas de David. Tadeo coordina A25 para compensar la distribución de integración. Se conservan 44 tareas: Roberto 11, Luis 10, Tadeo 12, David 11, contando contingencias. Esos conteos no miden dificultad ni horas.
 
@@ -44,16 +51,16 @@ En S3 Roberto tiene tres tareas y Luis una, además de revisar A19. En S4 Tadeo 
 
 ## Tu primer paso en S1
 
-S1 comienza el 12 de octubre. La entrega intermedia del 14 permite que otros módulos avancen; el corte de la semana es el 18.
+S1 comienza el 12 de octubre. La entrega intermedia del jueves 15 permite que otros módulos avancen; el corte de la semana es el 18.
 
-| Persona | Primero, al 14 de octubre | Después, al 18 de octubre |
+| Persona | Primero, al 15 de octubre | Después, al 18 de octubre |
 | --- | --- | --- |
-| Roberto | [A01](https://github.com/Santana-R/adaptive-rl-coach/issues/1): acordar requisitos, datos y reparto. | [A02](https://github.com/Santana-R/adaptive-rl-coach/issues/2): preparar entradas y resultados esperados del motor. |
-| Luis | [A03](https://github.com/Santana-R/adaptive-rl-coach/issues/3): convertir bosquejos en navegación y estados. | [A04](https://github.com/Santana-R/adaptive-rl-coach/issues/4): construir base visual y navegación. |
+| Roberto | [A01](https://github.com/Santana-R/adaptive-rl-coach/issues/1): leer y revisar la base preparada con Tadeo. | [A02](https://github.com/Santana-R/adaptive-rl-coach/issues/2): revisar los cinco casos preparados y contrastar umbrales del prototipo. |
+| Luis | [A03](https://github.com/Santana-R/adaptive-rl-coach/issues/3): validar el flujo preparado contra los bosquejos. | [A04](https://github.com/Santana-R/adaptive-rl-coach/issues/4): construir base visual y navegación. |
 | Tadeo | [A05](https://github.com/Santana-R/adaptive-rl-coach/issues/5): comprobar Ballchasing con una prueba autorizada. | [A06](https://github.com/Santana-R/adaptive-rl-coach/issues/6): dejar servidor y adaptador básicos. |
-| David | [A07](https://github.com/Santana-R/adaptive-rl-coach/issues/7): revisar y completar el diseño de datos. | [A08](https://github.com/Santana-R/adaptive-rl-coach/issues/8): implementar acceso y permisos. |
+| David | [A07](https://github.com/Santana-R/adaptive-rl-coach/issues/7): validar el diccionario preparado contra el ERD. | [A08](https://github.com/Santana-R/adaptive-rl-coach/issues/8): implementar acceso y permisos. |
 
-Las fechas son metas internas propuestas; las fechas académicas siguen pendientes. A01 recoge disponibilidad real de los cuatro y cualquier ajuste. Tener un documento de planificación no significa que esos entregables ya existan.
+Las fechas son metas internas propuestas; las fechas académicas siguen pendientes. A01 deja una revisión breve de la base. Contrato, matriz, flujo, diccionario y casos iniciales ya existen; la aplicación y las comprobaciones reales siguen pendientes.
 
 ## Cómo trabajar una tarea
 
@@ -78,7 +85,7 @@ P0 identifica una tarea que bloquea el ciclo o una entrega. P1 también puede cu
 
 ## Un ejemplo completo: A02
 
-La tarea pide preparar casos para probar las reglas. Un fixture es simplemente un conjunto de datos de prueba. La entrega propuesta es una tabla de casos y archivos JSON con entrada y resultado esperado.
+Ya están preparados cinco casos en [tests/fixtures/analisis](../tests/fixtures/analisis) y [casos-motor.md](casos-motor.md). Un fixture es un conjunto de datos de prueba. A02 revisa/calcula estos ejemplos y completa umbrales del prototipo, no parte de una hoja en blanco.
 
 | Caso | Datos preparados | Resultado esperado |
 | --- | --- | --- |
@@ -105,7 +112,7 @@ Para Roberto, **A19** concreta el aprendizaje transversal: recuperar bloques gua
 
 ## Ritmo y calendario
 
-El lunes se confirman compromisos y disponibilidad mediante un intercambio breve. El miércoles se registra progreso o bloqueo, impacto y ayuda necesaria. Al cierre semanal, cada entrega tiene evidencia, revisión e integración. Estos puntos pueden resolverse por escrito.
+El lunes se confirman compromisos y disponibilidad mediante un intercambio breve. El jueves se entrega el avance intermedio y se registra bloqueo, impacto y ayuda necesaria. Al cierre semanal, cada entrega tiene evidencia, revisión e integración. Estos puntos pueden resolverse por escrito.
 
 | Semana | Resultado que buscamos | Corte interno |
 | --- | --- | --- |
@@ -137,4 +144,4 @@ En S1–S3 el corte propuesto es domingo a las 20:00 de Monterrey. Un bloqueo se
 
 ## Decisiones que todavía faltan
 
-Disponibilidad de los cuatro y aceptación del reparto; cuentas y accesos de GitHub/Notion; fechas y rúbricas de ambos cursos; permisos de Ballchasing y entorno de datos; alojamiento de la app. Se registran en [Riesgos y decisiones pendientes](riesgos-y-decisiones-pendientes.md). El equipo de PROGSA puede ser distinto; adaptar responsables de documentos académicos sin confundirlos con este equipo LBPWEB.
+Disponibilidad y cuentas/accesos de GitHub/Notion cuando afecten compromisos; fechas y rúbricas de ambos cursos; permisos de Ballchasing y entorno de datos; alojamiento de la app. Se registran en [Riesgos y decisiones pendientes](riesgos-y-decisiones-pendientes.md). El equipo de PROGSA puede ser distinto; adaptar responsables de documentos académicos sin confundirlos con este equipo LBPWEB.

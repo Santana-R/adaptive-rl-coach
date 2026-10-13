@@ -1,6 +1,6 @@
 # Acuerdos iniciales
 
-> Referencia del 8 de septiembre. El calendario y reparto vigentes están en [Equipo y acuerdos semanales](equipo-y-acuerdos-semanales.md) y [Empieza aquí](empieza-aqui.md), revisados el 12 de octubre de 2026.
+> Referencia del 8 de septiembre. El calendario y reparto vigentes están en [Equipo y acuerdos semanales](equipo-y-acuerdos-semanales.md) y [Empieza aquí](empieza-aqui.md), revisados el 13 de octubre de 2026. El reparto está aceptado; entregas intermedias jueves y base técnica preparada.
 
 Última actualización: 8 de septiembre de 2026.
 

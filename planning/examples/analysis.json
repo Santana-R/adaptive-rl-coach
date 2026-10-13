@@ -1,0 +1,23 @@
+{
+  "block_id": "test-block-current",
+  "metrics_version": "mvp.metrics.v1",
+  "comparison": {
+    "status": "comparable",
+    "baseline_block_id": "test-block-baseline",
+    "reason_codes": [],
+    "deltas": {
+      "shooting_pct": {
+        "baseline": 25,
+        "current": 30,
+        "delta": 5,
+        "unit": "percentage_points"
+      }
+    }
+  },
+  "priorities": [],
+  "rules_version": "prototype.pending-verification",
+  "limitations": [
+    "synthetic_fixture",
+    "thresholds_pending_A02_A26"
+  ]
+}

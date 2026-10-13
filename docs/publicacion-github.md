@@ -1,6 +1,13 @@
 # Publicación en GitHub
 
-## Revisión publicada el 12 de octubre
+## Revisión del 13 de octubre
+Base técnica, contrato, matriz RF, flujo, diccionario, nota de revisión y ejemplos preparados con el Release de Roberto. Las 44 issues existentes se actualizan conservando estado, responsables, etiquetas, hitos y números. Once entregas intermedias pasan de miércoles a jueves; los cierres semanales se conservan.
+
+El campo Target date del Project debe sincronizarse con las once nuevas fechas. La vía CLI actual no tiene permiso de Projects y el acceso visual necesita el Mac desbloqueado; esta sincronización se registra explícitamente hasta verificarla. Las fechas vigentes se leen en cada issue y en [Calendario](calendario-y-dependencias.md).
+
+Reparto aceptado por Roberto: Luis frontend, Tadeo backend/integración, David datos/Auth, Roberto métricas/reglas/planes/A19. A01 pasa a revisar una base escrita. Los ejemplos son sintéticos; la aplicación no está implementada por publicar esta documentación.
+
+## Historial: revisión publicada el 12 de octubre
 La organización inicial se publicó y verificó el 9 de octubre. La revisión autorizada el 12 actualiza las 44 issues existentes, sus etiquetas de responsable, los campos Responsable/Revisor del Project, las instrucciones detalladas y esta documentación. Se mantienen estados, fechas, prioridades y números de issue. Las vistas usan el reparto actualizado: Roberto 11, Luis 10, Tadeo 12 y David 11, incluidas contingencias.
 
 [Empieza aquí · Guía del equipo](https://app.notion.com/p/3f7dd7559dd881bfbbceeff2d19b9d5f) explica el uso de las herramientas y el primer paso de cada persona. A19 es la función completa de Roberto; A25 la integración coordinada por Tadeo. La aplicación todavía está pendiente de implementación.
@@ -18,7 +25,7 @@ Contenido preparado: README, acuerdos, alcance RF01–RF12, calendario, arquitec
 - [Roadmap](https://github.com/users/Santana-R/projects/1/views/4): calendario agrupado por semana, basado en Start date y Target date.
 - [Por integrante](https://github.com/users/Santana-R/projects/1/views/5): tareas por responsable; la revisión del 12 propone Roberto 11, Luis 10, Tadeo 12 y David 11, incluidas contingencias.
 
-Los nombres en Responsable y Revisor son el reparto provisional aprobado. Falta confirmar la disponibilidad e identificar las cuentas reales de Tadeo, Luis y David para invitarlos y asignar usuarios. No se enviaron invitaciones a cuentas inferidas.
+Los nombres en Responsable y Revisor corresponden al reparto aceptado por Roberto. Identificar cuentas reales de Tadeo, Luis y David y comunicar disponibilidad si afecta una entrega. No se enviaron invitaciones a cuentas inferidas.
 
 ## Script opcional de publicación
 
