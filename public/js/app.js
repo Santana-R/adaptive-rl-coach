@@ -2,7 +2,7 @@
   'use strict';
   const data=window.CoachDemoData;
   const params=new URLSearchParams(window.location.search);
-  const validHistory=(params.get('history')||'').split('.').filter(v=>/^(initial|followup)-(20|40)$/.test(v)).slice(-12);
+  const validHistory=(params.get('history')||'').split('.').filter(v=>/^(initial|followup)-(20|40)$/.test(v));
   const scenario=params.get('scenario')==='followup'?'followup':'initial';
   const minutes=params.get('minutes')==='20'?20:40;
   const start=`${scenario}-${minutes}`;
@@ -91,7 +91,7 @@
   }
   async function renderPlan(){
     const selector=$id('version-select');if(!selector)return;
-    const previous=selector.value;selector.innerHTML=state.history.map((entry,i)=>{const s=data.parseSnapshot(entry);return `<option value="${i}">Versión ${i+1} · ${s.scenario==='initial'?'bloque 01':'bloque 02'} · ${s.minutes} min</option>`;}).join('');
+    selector.innerHTML=state.history.map((entry,i)=>{const s=data.parseSnapshot(entry);return `<option value="${i}">Versión ${i+1} · ${s.scenario==='initial'?'bloque 01':'bloque 02'} · ${s.minutes} min</option>`;}).join('');
     let index=state.planVersion===undefined?state.history.length-1:Math.min(state.planVersion,state.history.length-1);
     selector.value=String(index);selector.onchange=()=>{state.planVersion=Number(selector.value);renderPlan();};
     const snapshot=data.parseSnapshot(state.history[index]);const response=await window.CoachDemoService.loadPlan(snapshot,index+1);const plan=response.data;

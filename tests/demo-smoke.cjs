@@ -106,6 +106,16 @@ let runningBrowser;
   await direct.getByRole('button',{name:'Restablecer demostración'}).click();
   await direct.waitForFunction(()=>document.getElementById('plan-duration').textContent.includes('40'));
   assert.equal(await direct.locator('#version-select option').count(),1);
+  // Repeated changes must not drop or renumber earlier versions on navigation.
+  for(let i=0;i<13;i++)await direct.locator(`input[name=minutes][value="${i%2===0?20:40}"]`).check();
+  assert.equal(await direct.locator('#version-select option').count(),14);
+  await direct.getByRole('link',{name:'Volver a replays'}).click();
+  await direct.getByRole('link',{name:'Mi plan',exact:true}).click();
+  await direct.locator('.exercise').first().waitFor();
+  assert.equal(await direct.locator('#version-select option').count(),14);
+  await direct.locator('#version-select').selectOption('0');
+  await direct.waitForFunction(()=>document.getElementById('historical-note').hidden===false);
+  assert.match(await direct.locator('#plan-duration').textContent(),/40/);
   assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
   await browser.close();
   console.log(JSON.stringify({result:'passed',checks:['weighted metrics/null/context','file count/extension/duplicates/remove','three-page navigation','baseline/followup priorities and chart','20/40 minute allocation','historical plan immutable','reload/query state','390px responsive views','direct file opening offline','zero external requests','zero JavaScript errors'],screenshots:output},null,2));
