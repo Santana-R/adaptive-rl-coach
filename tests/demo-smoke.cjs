@@ -1,0 +1,122 @@
+/* Browser checks for the PROGSA shell. Requires an external Playwright install;
+ * the demonstration itself has no Node/npm/build requirement. */
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const {chromium}=require('playwright');
+const D=require('../public/js/demo-data.js');
+const base=process.env.DEMO_BASE_URL||'http://127.0.0.1:4173';
+const output=process.env.DEMO_QA_DIR||'/tmp/adaptive-demo-qa';
+fs.mkdirSync(output,{recursive:true});
+let runningBrowser;
+
+(async()=>{
+  // Domain invariants help catch misleading demonstrations, not just DOM text.
+  assert.equal(D.aggregate([{shots:1,goals:1},{shots:9,goals:0}]).shooting_pct,10);
+  assert.equal(D.aggregate([{shots:0,goals:0}]).shooting_pct,null);
+  assert.equal(D.diagnose({shooting_pct:null,boost_low_pct:null}).length,0);
+  assert.equal(D.compare(D.initial,{...D.followup,context:{...D.followup.context,mode:'3v3'}}).status,'not_comparable');
+  assert.equal(D.analysis('followup').data.comparison.deltas.shooting_pct.delta,5);
+  for(const scenario of ['initial','followup'])for(const minutes of [20,40]){
+    const plan=D.plan({scenario,minutes},1).data;
+    assert.equal(plan.exercises.reduce((n,e)=>n+e.assigned_minutes,0),minutes);
+    assert.ok(plan.exercises.every(e=>e.assigned_minutes>0));
+    assert.ok(plan.diagnosis_snapshot.priorities.length<=3);
+  }
+  const browser=await chromium.launch({headless:true,executablePath:process.env.DEMO_CHROMIUM_EXECUTABLE||undefined,args:['--no-sandbox']});
+  runningBrowser=browser;
+  const context=await browser.newContext({viewport:{width:1440,height:1100},deviceScaleFactor:1});
+  const page=await context.newPage();
+  const errors=[],external=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  page.on('request',r=>{if(!r.url().startsWith(base)&&!r.url().startsWith('file:')&&!r.url().startsWith('data:'))external.push(r.url());});
+  await page.goto(base+'/carga.html');
+  await page.locator('#file-count').waitFor();
+  await page.screenshot({path:output+'/carga-desktop.png',fullPage:true});
+  assert.equal(await page.locator('#view-analysis').isDisabled(),true);
+  const file=(name='test.replay',content='synthetic')=>({name,mimeType:'application/octet-stream',buffer:Buffer.from(content)});
+  await page.locator('#replay-input').setInputFiles(Array.from({length:4},(_,i)=>file(`p${i}.replay`)));
+  assert.match(await page.locator('#file-notice').textContent(),/exactamente cinco/);
+  assert.equal(await page.locator('#view-analysis').isDisabled(),true);
+  await page.locator('#replay-input').setInputFiles(Array.from({length:6},(_,i)=>file(`p${i}.replay`)));
+  assert.equal(await page.locator('#view-analysis').isDisabled(),true);
+  await page.locator('#replay-input').setInputFiles([file('x.txt'),...Array.from({length:4},(_,i)=>file(`p${i}.replay`))]);
+  assert.match(await page.locator('#file-notice').textContent(),/extensión/);
+  await page.locator('#replay-input').setInputFiles([file('same.replay'),file('same.replay'),file('a.replay'),file('b.replay'),file('c.replay')]);
+  assert.match(await page.locator('#file-notice').textContent(),/repetidos/);
+  await page.locator('#use-fixtures').click();
+  assert.equal(await page.locator('#view-analysis').isEnabled(),true);
+  await page.getByRole('button',{name:'Quitar demo_2v2_partida_01.replay',exact:true}).click();
+  assert.equal(await page.locator('#view-analysis').isDisabled(),true);
+  await page.locator('#use-fixtures').click();
+  await page.locator('#view-analysis').click();
+  await page.waitForURL(/analisis.html/);
+  await page.locator('.priority-card').first().waitFor();
+  assert.match(await page.locator('#comparison-message').textContent(),/línea base/);
+  assert.equal(await page.locator('.priority-card').count(),2);
+  await page.locator('#scenario-select').selectOption('followup');
+  await page.waitForFunction(()=>document.getElementById('priority-count').textContent.startsWith('1 de'));
+  assert.match(await page.locator('#shooting-foot').textContent(),/5 pp/);
+  assert.equal(await page.locator('.priority-card').count(),1);
+  await page.locator('#toast-status').waitFor({state:'hidden'});
+  await page.screenshot({path:output+'/analisis-desktop.png',fullPage:true});
+  for(const metric of ['boost_low_pct','shots_per_match','shooting_pct'])await page.locator('#metric-select').selectOption(metric);
+  await page.locator('summary').first().click();
+  assert.match(await page.locator('.priority-card details').textContent(),/ilustrativa/);
+  await page.getByRole('link',{name:'Ver mi plan de entrenamiento'}).click();
+  await page.waitForURL(/plan.html/);await page.locator('.exercise').first().waitFor();
+  assert.match(await page.locator('#plan-duration').textContent(),/40/);
+  assert.equal(await page.locator('#version-select option').count(),2);
+  await page.locator('input[name=minutes][value="20"]').check();
+  await page.waitForFunction(()=>document.getElementById('plan-duration').textContent.includes('20'));
+  assert.equal(await page.locator('#version-select option').count(),3);
+  const durations=await page.locator('.exercise-minutes').allTextContents();
+  assert.equal(durations.reduce((n,s)=>n+parseInt(s),0),20);
+  await page.locator('#toast-status').waitFor({state:'hidden'});
+  await page.screenshot({path:output+'/plan-desktop.png',fullPage:true});
+  await page.locator('#version-select').selectOption('0');
+  await page.waitForFunction(()=>document.getElementById('historical-note').hidden===false);
+  assert.match(await page.locator('#plan-duration').textContent(),/40/);
+  await page.reload();await page.locator('.exercise').first().waitFor();
+  assert.match(await page.locator('#plan-duration').textContent(),/20/);
+  assert.equal(await page.locator('#scenario-select').inputValue(),'followup');
+  // Mobile overflow, focusable navigation and labels across all views.
+  await page.setViewportSize({width:390,height:844});
+  for(const name of ['carga','analisis','plan']){
+    await page.goto(`${base}/${name}.html?scenario=followup&minutes=20`);
+    if(name==='analisis')await page.locator('.priority-card').first().waitFor();
+    if(name==='plan')await page.locator('.exercise').first().waitFor();
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`Horizontal overflow: ${name}`);
+    assert.equal(await page.locator('h1').count(),1);
+    assert.equal(await page.locator('nav a[aria-current=page]').count(),1);
+    await page.screenshot({path:`${output}/${name}-mobile.png`,fullPage:true});
+  }
+  // Direct opening and navigation remain usable with all network disabled.
+  const local=await browser.newContext({offline:true,viewport:{width:1366,height:900}});
+  const direct=await local.newPage();direct.on('pageerror',e=>errors.push(e.message));
+  await direct.goto('file://'+path.resolve(__dirname,'../public/carga.html'));
+  await direct.locator('#use-fixtures').click();await direct.locator('#view-analysis').click();
+  await direct.waitForURL(/analisis.html/);await direct.locator('.priority-card').first().waitFor();
+  await direct.locator('#scenario-select').selectOption('followup');
+  await direct.getByRole('link',{name:'Ver mi plan de entrenamiento'}).click();
+  await direct.locator('.exercise').first().waitFor();
+  await direct.locator('input[name=minutes][value="20"]').check();
+  await direct.waitForFunction(()=>document.getElementById('plan-duration').textContent.includes('20'));
+  assert.equal(await direct.locator('#scenario-select').inputValue(),'followup');
+  await direct.getByRole('button',{name:'Restablecer demostración'}).click();
+  await direct.waitForFunction(()=>document.getElementById('plan-duration').textContent.includes('40'));
+  assert.equal(await direct.locator('#version-select option').count(),1);
+  // Repeated changes must not drop or renumber earlier versions on navigation.
+  for(let i=0;i<13;i++)await direct.locator(`input[name=minutes][value="${i%2===0?20:40}"]`).check();
+  assert.equal(await direct.locator('#version-select option').count(),14);
+  await direct.getByRole('link',{name:'Volver a replays'}).click();
+  await direct.getByRole('link',{name:'Mi plan',exact:true}).click();
+  await direct.locator('.exercise').first().waitFor();
+  assert.equal(await direct.locator('#version-select option').count(),14);
+  await direct.locator('#version-select').selectOption('0');
+  await direct.waitForFunction(()=>document.getElementById('historical-note').hidden===false);
+  assert.match(await direct.locator('#plan-duration').textContent(),/40/);
+  assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
+  await browser.close();
+  console.log(JSON.stringify({result:'passed',checks:['weighted metrics/null/context','file count/extension/duplicates/remove','three-page navigation','baseline/followup priorities and chart','20/40 minute allocation','historical plan immutable','reload/query state','390px responsive views','direct file opening offline','zero external requests','zero JavaScript errors'],screenshots:output},null,2));
+})().catch(async error=>{console.error(error);if(runningBrowser)await runningBrowser.close();process.exitCode=1;});

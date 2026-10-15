@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vista previa de Adaptive RL Coach: cinco replays, análisis explicable y plan de entrenamiento. Datos sintéticos.">
+  <title>Análisis del jugador · Adaptive RL Coach</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/bootstrap-5.3.8.min.css"><link rel="stylesheet" href="css/app.css">
+  <script defer src="vendor/jquery-3.7.1.min.js"></script>
+  <script defer src="vendor/chart-4.5.1.umd.min.js"></script>
+  <script defer src="js/demo-data.js"></script><script defer src="js/demo-service.js"></script><script defer src="js/app.js"></script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido</a>
+<aside class="sidebar" aria-label="Navegación principal">
+  <a class="brand" href="carga.html" data-page="carga.html" aria-label="Adaptive RL Coach, carga de replays"><span class="brand-mark"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m12 7 4 3-2 5h-4l-2-5Z M12 3v4m8 2-4 1m1 9-3-4m-7 4 3-4M4 9l4 1"/></svg></span><span class="brand-title">ADAPTIVE<span>RL COACH</span></span></a>
+  <p class="nav-label">TU ENTRENAMIENTO</p>
+  <nav class="side-nav"><a href="carga.html" data-page="carga.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5h16v-5"/></svg>Carga de replays</a><a href="analisis.html" data-page="analisis.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v17h17M8 15v-4m5 4V7m5 8V4"/></svg>Análisis<span class="nav-dot" aria-hidden="true"></span></a><a href="plan.html" data-page="plan.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="15" height="17" rx="2"/><path d="M9 3v3m7-3v3M9 11h7m-7 5h5"/></svg>Mi plan</a></nav>
+  <div class="sidebar-note"><small class="subtle">UN CICLO, UN SIGUIENTE PASO</small><p>Observa tu rendimiento.<br>Entiende tus prioridades.<br>Ajusta tu entrenamiento.</p></div>
+  <div class="sidebar-bottom"><div class="player"><span class="avatar" aria-hidden="true">JD</span><div><strong>Jugador demo</strong><small>PC · 2v2 · Steam</small></div></div></div>
+</aside>
+<div class="workspace">
+  <header class="topbar"><div class="breadcrumb">Entrenamiento <span aria-hidden="true">/</span> <strong>Análisis del jugador</strong></div><span class="mobile-brand">ADAPTIVE RL COACH</span><div class="top-actions"><span class="demo-badge">Modo demostración · Datos de ejemplo</span><button type="button" class="reset-button" data-reset aria-label="Restablecer demostración"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2 6M20 4v7h-7"/></svg> Restablecer</button></div></header>
+  <main id="main-content" tabindex="-1" class="container-fluid">
+    <div class="heading-row"><div><p class="eyebrow">02 / INTERPRETAR</p><h1>Entiende qué necesita tu juego.</h1><p class="lead-copy">Métricas claras, prioridades explicadas y un siguiente paso para entrenar.</p></div><div class="heading-aside"><strong>MEJORAR TIENE UN PROCESO</strong>Cinco partidas. Un enfoque claro.</div></div>
+    <ol class="steps" aria-label="Recorrido del jugador"><li><span class="step-n">1</span>Carga tus replays</li><li class="active" aria-current="step"><span class="step-n">2</span>Entiende tu juego</li><li><span class="step-n">3</span>Entrena con un plan</li></ol>
+    <section class="controls" aria-label="Configurar la demostración">
+  <div class="scenario-control"><label class="control-label" for="scenario-select">Escenario</label><select id="scenario-select" class="select-dark scenario-select"><option value="initial">Primer bloque</option><option value="followup">Bloque posterior</option></select></div>
+  <fieldset class="budget-control"><legend>Tiempo disponible</legend><label><input type="radio" name="minutes" value="20"><span>20 min</span></label><label><input type="radio" name="minutes" value="40" checked><span>40 min</span></label></fieldset>
+  <span class="control-tail">Jugador demo <span aria-hidden="true">·</span> <strong>2v2 / PC</strong></span>
+</section>
+    <section class="metric-grid" aria-label="Resumen del bloque">
+<article class="metric-card"><div class="metric-label">Precisión de tiro<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div><div class="metric-value" id="shooting-value">25<span class="unit">%</span></div><div class="metric-foot" id="shooting-foot">5 goles de 20 tiros · línea base</div></article>
+<article class="metric-card"><div class="metric-label">Tiempo con boost bajo<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 10-13h-7Z"/></svg></div><div class="metric-value" id="boost-value">39<span class="unit">%</span></div><div class="metric-foot" id="boost-foot">Tiempo con 0–25 de boost</div></article>
+<article class="metric-card"><div class="metric-label">Tiros por partida<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v17h17M8 15v-4m5 4V7m5 8V4"/></svg></div><div class="metric-value" id="shots-value">4<span class="unit"></span></div><div class="metric-foot" id="shots-foot">20 tiros en 5 partidas</div></article>
+<article class="metric-card"><div class="metric-label">Muestra analizada<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10l4 4v13H7ZM17 3v5h4M3 7v15h13"/></svg></div><div class="metric-value" id="sample-value">5<span class="unit">replays</span></div><div class="metric-foot" id="sample-foot">Mismo jugador · 2v2 · PC</div></article>
+</section>
+<div class="comparison-note"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/></svg><span id="comparison-message">Este bloque es tu línea base. Todavía no hay un bloque anterior con el que comparar.</span></div>
+<div class="analysis-grid">
+  <section class="panel" aria-labelledby="chart-title"><div class="panel-head"><div><h2 id="chart-title">Tu rendimiento, con contexto</h2><p id="analysis-period">01–05 oct 2026</p></div><div><label for="metric-select" class="visually-hidden">Métrica de la gráfica</label><select id="metric-select" class="select-dark"><option value="shooting_pct">Precisión de tiro</option><option value="boost_low_pct">Boost bajo</option><option value="shots_per_match">Tiros por partida</option></select></div></div><div class="panel-body"><div class="chart-wrap"><canvas id="comparison-chart" role="img" aria-label="Gráfica de precisión. Los valores se presentan también en la tabla."></canvas></div><p class="chart-foot" id="chart-description">Goles ÷ tiros × 100. El cambio se expresa en puntos porcentuales.</p><div class="table-wrap"><table class="data-table"><caption>Los números detrás del cambio</caption><thead><tr><th scope="col">Métrica</th><th scope="col">Anterior</th><th scope="col">Actual</th><th scope="col">Cambio</th></tr></thead><tbody id="metric-rows"></tbody></table></div></div></section>
+  <section aria-labelledby="priorities-title"><div class="section-label"><h2 id="priorities-title">En qué enfocarte</h2><small id="priority-count">Hasta 3 prioridades</small></div><div class="priority-stack" id="priority-list"></div><div id="maintenance-note" class="maintenance-note" hidden><strong>Boost pasa a mantenimiento.</strong><br>El tiempo con boost bajo disminuyó en este ejemplo. El siguiente plan conserva práctica breve de rutas y dedica más tiempo a tiros.</div><a href="plan.html" data-page="plan.html" class="btn-primary-coach wide-button">Ver mi plan de entrenamiento <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a><p class="session-foot">Una mejora observada entre bloques no demuestra por sí sola qué la causó.</p></section>
+</div>
+    <footer class="footer-note"><span>Vista previa con datos sintéticos. Las referencias de las reglas son ilustrativas y requieren calibración.</span><span>Adaptive RL Coach · PROGSA</span></footer>
+  </main>
+</div>
+<div id="toast-status" class="toast-status" role="status" aria-live="polite"></div>
+</body></html>

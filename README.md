@@ -4,7 +4,13 @@ Plan de desarrollo para cuatro integrantes. Aplicación web de entrenamiento de 
 
 **Primero lee [Empieza aquí · Guía del equipo](docs/empieza-aqui.md).** Incluye reparto, primeros pasos y ejemplos de entrega.
 
-Este repositorio inicial contiene planificación, documentación y plantillas. **Todavía no contiene una aplicación ejecutable.**
+El repositorio contiene planificación y un **cascarón HTML ejecutable de demostración**. La aplicación completa con autenticación, API y persistencia sigue en desarrollo.
+
+## Abrir la demo de PROGSA
+
+Abrir [public/carga.html](public/carga.html) desde una copia local del repositorio, o servir `public/` con `python -m http.server 8000 --directory public` y entrar a `http://localhost:8000/carga.html`. No necesita internet ni claves.
+
+Pulsar **Usar cinco replays de ejemplo → Ver análisis de ejemplo → Ver mi plan**. Cambiar a **Bloque posterior** y después a **20 minutos** para mostrar la adaptación. [Instrucciones, guion y alcance de la demo](docs/demo-progsa.md). Los datos y umbrales son ilustrativos; la demo es avance parcial de A04/A11/A19/A27 y conserva el reparto.
 
 - [Project de trabajo](https://github.com/users/Santana-R/projects/1)
 - [Issues](https://github.com/Santana-R/adaptive-rl-coach/issues)
@@ -30,7 +36,7 @@ No incorporar replays, tokens ni datos personales al repositorio. Crear la imple
 
 ## Equipo
 
-Roberto Santana Trujillo, Omar Tadeo Gasca Deciga, Luis Enrique Almaguer Castillo y David Alonso Torres Guerrero. El reparto es provisional hasta confirmar disponibilidad.
+Roberto Santana Trujillo, Omar Tadeo Gasca Deciga, Luis Enrique Almaguer Castillo y David Alonso Torres Guerrero. El reparto fue aceptado por Roberto el 13 de octubre; comunicar disponibilidad si afecta una entrega.
 
 ## Documentación inicial
 
@@ -46,3 +52,4 @@ Luis: frontend. Tadeo: backend e integración A25. David: datos/auth e historial
 
 ## Base preparada el 13 de octubre
 Empieza por [Base técnica](docs/base-tecnica.md). Ya están escritos [contratos](docs/contratos-api.md), [mapa RF](planning/trazabilidad-rf.csv), [flujo](docs/flujo-pantallas.md), [diccionario](docs/diccionario-datos.md) y [casos iniciales](docs/casos-motor.md). A01 revisa esa base; no pide crearla desde cero. Entregas intermedias jueves 15/22/29 de octubre y 5 de noviembre, cierres semanales conservados.
+
