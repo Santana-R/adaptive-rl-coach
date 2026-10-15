@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vista previa de Adaptive RL Coach: cinco replays, análisis explicable y plan de entrenamiento. Datos sintéticos.">
+  <title>Plan de entrenamiento · Adaptive RL Coach</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/bootstrap-5.3.8.min.css"><link rel="stylesheet" href="css/app.css">
+  <script defer src="vendor/jquery-3.7.1.min.js"></script>
+  
+  <script defer src="js/demo-data.js"></script><script defer src="js/demo-service.js"></script><script defer src="js/app.js"></script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido</a>
+<aside class="sidebar" aria-label="Navegación principal">
+  <a class="brand" href="carga.html" data-page="carga.html" aria-label="Adaptive RL Coach, carga de replays"><span class="brand-mark"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m12 7 4 3-2 5h-4l-2-5Z M12 3v4m8 2-4 1m1 9-3-4m-7 4 3-4M4 9l4 1"/></svg></span><span class="brand-title">ADAPTIVE<span>RL COACH</span></span></a>
+  <p class="nav-label">TU ENTRENAMIENTO</p>
+  <nav class="side-nav"><a href="carga.html" data-page="carga.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5h16v-5"/></svg>Carga de replays</a><a href="analisis.html" data-page="analisis.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v17h17M8 15v-4m5 4V7m5 8V4"/></svg>Análisis</a><a href="plan.html" data-page="plan.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="15" height="17" rx="2"/><path d="M9 3v3m7-3v3M9 11h7m-7 5h5"/></svg>Mi plan<span class="nav-dot" aria-hidden="true"></span></a></nav>
+  <div class="sidebar-note"><small class="subtle">UN CICLO, UN SIGUIENTE PASO</small><p>Observa tu rendimiento.<br>Entiende tus prioridades.<br>Ajusta tu entrenamiento.</p></div>
+  <div class="sidebar-bottom"><div class="player"><span class="avatar" aria-hidden="true">JD</span><div><strong>Jugador demo</strong><small>PC · 2v2 · Steam</small></div></div></div>
+</aside>
+<div class="workspace">
+  <header class="topbar"><div class="breadcrumb">Entrenamiento <span aria-hidden="true">/</span> <strong>Plan de entrenamiento</strong></div><span class="mobile-brand">ADAPTIVE RL COACH</span><div class="top-actions"><span class="demo-badge">Modo demostración · Datos de ejemplo</span><button type="button" class="reset-button" data-reset aria-label="Restablecer demostración"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2 6M20 4v7h-7"/></svg> Restablecer</button></div></header>
+  <main id="main-content" tabindex="-1" class="container-fluid">
+    <div class="heading-row"><div><p class="eyebrow">03 / ADAPTAR</p><h1>Entrena con un enfoque claro.</h1><p class="lead-copy">Un plan que responde a tus partidas y al tiempo que tienes disponible.</p></div><div class="heading-aside"><strong>MEJORAR TIENE UN PROCESO</strong>Cinco partidas. Un enfoque claro.</div></div>
+    <ol class="steps" aria-label="Recorrido del jugador"><li><span class="step-n">1</span>Carga tus replays</li><li><span class="step-n">2</span>Entiende tu juego</li><li class="active" aria-current="step"><span class="step-n">3</span>Entrena con un plan</li></ol>
+    <section class="controls" aria-label="Configurar la demostración">
+  <div class="scenario-control"><label class="control-label" for="scenario-select">Escenario</label><select id="scenario-select" class="select-dark scenario-select"><option value="initial">Primer bloque</option><option value="followup">Bloque posterior</option></select></div>
+  <fieldset class="budget-control"><legend>Tiempo disponible</legend><label><input type="radio" name="minutes" value="20"><span>20 min</span></label><label><input type="radio" name="minutes" value="40" checked><span>40 min</span></label></fieldset>
+  <span class="control-tail">Jugador demo <span aria-hidden="true">·</span> <strong>2v2 / PC</strong></span>
+</section>
+    <div class="plan-summary"><div><span class="tag" id="plan-version">Versión 1</span><p id="plan-caption" class="mt-2">Bloque 01 · Dos prioridades · PC / Steam</p></div><div><label for="version-select" class="control-label">Consultar plan</label><select id="version-select" class="select-dark" aria-describedby="version-help"><option value="0">Versión 1 · bloque 01 · 40 min</option></select></div></div>
+<div class="main-grid">
+  <section class="panel" aria-labelledby="routine-title"><div class="panel-head"><div><h2 id="routine-title">Tu rutina tiene un porqué</h2><p>Ejercicios ordenados para trabajar lo que más importa.</p></div><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg></div><div class="panel-body"><div class="duration-overview"><div class="duration-number" id="plan-duration">40<span> min</span></div><div><div class="duration-bar" id="duration-bar" aria-hidden="true"></div><div class="bar-legend" id="duration-legend"></div></div></div><ol class="exercise-list" id="exercise-list"></ol><div class="historical-note" id="historical-note" role="status" hidden></div><p class="session-foot" id="version-help">Abre cada ejercicio para consultar finalidad, pasos y meta. El selector conserva las versiones de ejemplo de este recorrido.</p></div><div class="panel-footer"><p>El siguiente bloque comparable permitirá revisar el rendimiento. Registrar práctica será un paso posterior.</p><a href="carga.html" data-page="carga.html" class="btn-secondary-coach">Volver a replays <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a></div></section>
+  <div><section class="panel side-card" aria-labelledby="reason-title"><div class="panel-head"><h2 id="reason-title">Por qué este plan</h2></div><div class="panel-body"><p style="font-size:12px">Las prioridades y tu disponibilidad orientan el reparto del tiempo.</p><ul class="change-list" id="plan-reason"></ul><div class="context-goal"><span>OBJETIVO QUE ACOMPAÑA EL PLAN</span><strong>Mejorar la precisión de tiro</strong><p>Tu objetivo orienta los ejercicios; las partidas aportan la evidencia.</p></div></div></section><section class="info-card side-card"><h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2 6M20 4v7h-7"/></svg> El próximo ciclo cuenta</h3><p>Entrena con este plan y vuelve a medir con cinco partidas comparables. Mantén lo que funciona y ajusta lo que requiere atención.</p><p>Para probarlo ahora, cambia a «Bloque posterior» y después reduce la disponibilidad a 20 minutos.</p></section></div>
+</div>
+    <footer class="footer-note"><span>Vista previa con datos sintéticos. Las referencias de las reglas son ilustrativas y requieren calibración.</span><span>Adaptive RL Coach · PROGSA</span></footer>
+  </main>
+</div>
+<div id="toast-status" class="toast-status" role="status" aria-live="polite"></div>
+</body></html>

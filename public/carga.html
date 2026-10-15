@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vista previa de Adaptive RL Coach: cinco replays, análisis explicable y plan de entrenamiento. Datos sintéticos.">
+  <title>Carga de replays · Adaptive RL Coach</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/bootstrap-5.3.8.min.css"><link rel="stylesheet" href="css/app.css">
+  <script defer src="vendor/jquery-3.7.1.min.js"></script>
+  
+  <script defer src="js/demo-data.js"></script><script defer src="js/demo-service.js"></script><script defer src="js/app.js"></script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido</a>
+<aside class="sidebar" aria-label="Navegación principal">
+  <a class="brand" href="carga.html" data-page="carga.html" aria-label="Adaptive RL Coach, carga de replays"><span class="brand-mark"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m12 7 4 3-2 5h-4l-2-5Z M12 3v4m8 2-4 1m1 9-3-4m-7 4 3-4M4 9l4 1"/></svg></span><span class="brand-title">ADAPTIVE<span>RL COACH</span></span></a>
+  <p class="nav-label">TU ENTRENAMIENTO</p>
+  <nav class="side-nav"><a href="carga.html" data-page="carga.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5h16v-5"/></svg>Carga de replays<span class="nav-dot" aria-hidden="true"></span></a><a href="analisis.html" data-page="analisis.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v17h17M8 15v-4m5 4V7m5 8V4"/></svg>Análisis</a><a href="plan.html" data-page="plan.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="15" height="17" rx="2"/><path d="M9 3v3m7-3v3M9 11h7m-7 5h5"/></svg>Mi plan</a></nav>
+  <div class="sidebar-note"><small class="subtle">UN CICLO, UN SIGUIENTE PASO</small><p>Observa tu rendimiento.<br>Entiende tus prioridades.<br>Ajusta tu entrenamiento.</p></div>
+  <div class="sidebar-bottom"><div class="player"><span class="avatar" aria-hidden="true">JD</span><div><strong>Jugador demo</strong><small>PC · 2v2 · Steam</small></div></div></div>
+</aside>
+<div class="workspace">
+  <header class="topbar"><div class="breadcrumb">Entrenamiento <span aria-hidden="true">/</span> <strong>Carga de replays</strong></div><span class="mobile-brand">ADAPTIVE RL COACH</span><div class="top-actions"><span class="demo-badge">Modo demostración · Datos de ejemplo</span><button type="button" class="reset-button" data-reset aria-label="Restablecer demostración"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2 6M20 4v7h-7"/></svg> Restablecer</button></div></header>
+  <main id="main-content" tabindex="-1" class="container-fluid">
+    <div class="heading-row"><div><p class="eyebrow">01 / OBSERVAR</p><h1>Cada mejora empieza con tus partidas.</h1><p class="lead-copy">Reúne cinco replays para encontrar un enfoque concreto para tu entrenamiento.</p></div><div class="heading-aside"><strong>MEJORAR TIENE UN PROCESO</strong>Cinco partidas. Un enfoque claro.</div></div>
+    <ol class="steps" aria-label="Recorrido del jugador"><li class="active" aria-current="step"><span class="step-n">1</span>Carga tus replays</li><li><span class="step-n">2</span>Entiende tu juego</li><li><span class="step-n">3</span>Entrena con un plan</li></ol>
+    <section class="controls" aria-label="Configurar la demostración">
+  <div class="scenario-control"><label class="control-label" for="scenario-select">Escenario</label><select id="scenario-select" class="select-dark scenario-select"><option value="initial">Primer bloque</option><option value="followup">Bloque posterior</option></select></div>
+  <fieldset class="budget-control"><legend>Tiempo disponible</legend><label><input type="radio" name="minutes" value="20"><span>20 min</span></label><label><input type="radio" name="minutes" value="40" checked><span>40 min</span></label></fieldset>
+  <span class="control-tail">Jugador demo <span aria-hidden="true">·</span> <strong>2v2 / PC</strong></span>
+</section>
+    <div class="main-grid">
+  <section class="panel" aria-labelledby="upload-title">
+    <div class="panel-head"><div><h2 id="upload-title">Tu próximo bloque de análisis</h2><p>Selecciona cinco partidas del mismo jugador y modalidad.</p></div><span class="small-tag">.REPLAY / PC</span></div>
+    <form id="upload-form" novalidate>
+      <div class="panel-body">
+        <div class="dropzone" id="dropzone" role="region" aria-label="Seleccionar o arrastrar replays">
+          <div class="upload-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5h16v-5"/></svg></div><h3>Arrastra aquí tus cinco replays</h3><p>O selecciónalos desde una carpeta de tu computadora.</p>
+          <button type="button" id="select-files" class="btn-secondary-coach">Seleccionar archivos</button>
+          <label class="visually-hidden" for="replay-input">Seleccionar cinco archivos .replay</label><input type="file" id="replay-input" tabindex="-1" class="visually-hidden" accept=".replay" multiple>
+        </div>
+        <div class="fixture-row"><button type="button" id="use-fixtures" class="btn-link-coach">Usar cinco replays de ejemplo</button><small>Recorre la demo sin necesitar archivos.</small></div>
+        <div class="file-summary"><strong>Archivos del bloque</strong><span id="file-count" aria-live="polite">0 de 5</span></div>
+        <ul class="files" id="file-list" aria-label="Archivos seleccionados"><li class="empty-files">Aún no hay replays seleccionados.</li></ul>
+        <div id="file-notice" class="notice" role="status" aria-live="polite" hidden></div>
+      </div>
+      <div class="panel-footer"><p>En esta demo solo se revisan cantidad y extensión. Tus archivos no se leen ni se envían.</p><button type="submit" id="view-analysis" class="btn-primary-coach" disabled>Ver análisis de ejemplo <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button></div>
+    </form>
+  </section>
+  <div>
+    <section class="panel side-card" aria-labelledby="context-title"><div class="panel-head"><h2 id="context-title">Tu contexto</h2><span class="small-tag">EJEMPLO</span></div><div class="panel-body"><dl class="context-list"><dt>Jugador</dt><dd><strong>Jugador demo</strong></dd><dt>Modalidad</dt><dd>2v2 · Competitivo</dd><dt>Plataforma</dt><dd>PC / Steam</dd><dt>Disponibilidad</dt><dd data-availability>40 minutos</dd><dt>Bloque de ejemplo</dt><dd data-block-label>Bloque 01</dd></dl><div class="context-goal"><span>OBJETIVO ACTIVO</span><strong>Mejorar la precisión de tiro</strong><p>Referencia de ejemplo: alcanzar 35 % de conversión.</p></div></div></section>
+    <section class="info-card side-card"><h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></svg> Primero, datos comparables</h3><p>El análisis final comprobará identidad, modalidad y compatibilidad de los cinco replays. Esta plantilla muestra el recorrido que usará el jugador.</p><div class="mini-flow"><div><b>1</b> Un bloque de cinco partidas</div><div><b>2</b> Hasta tres prioridades explicadas</div><div><b>3</b> Un plan ajustado a tu tiempo</div></div></section>
+  </div>
+</div>
+    <footer class="footer-note"><span>Vista previa con datos sintéticos. Las referencias de las reglas son ilustrativas y requieren calibración.</span><span>Adaptive RL Coach · PROGSA</span></footer>
+  </main>
+</div>
+<div id="toast-status" class="toast-status" role="status" aria-live="polite"></div>
+</body></html>
