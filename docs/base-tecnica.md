@@ -1,6 +1,6 @@
-# Base técnica para empezar
+# Base técnica de referencia
 
-Preparada con el Release del 13 de octubre de 2026. Roberto aceptó el reparto y pidió una base clara; las entregas intermedias pasan a jueves. Esta base es una propuesta concreta para construir. La aplicación y las comprobaciones reales siguen pendientes.
+Referencia de contratos y conexiones. Para elegir qué hacer ahora abre [la guía breve](empieza-aqui.md). La demo sintética ya existe; API, autenticación y persistencia reales continúan pendientes.
 
 ## Qué vamos a construir
 Una web donde un jugador entra, registra su identidad, carga cinco replays de PC, ve métricas y hasta tres prioridades explicadas, genera un plan, registra entrenamiento y compara un bloque posterior compatible. Jugador/admin son los roles. Conservamos las trece pantallas y los tres CRUD de objetivos, sesiones y ejercicios.
@@ -26,15 +26,10 @@ Una web donde un jugador entra, registra su identidad, carga cinco replays de PC
 Los números anteriores son ejemplos sintéticos. El contrato ofrece objetos preparados en planning/examples; A05 entrega una respuesta real saneada para verificar el mapeo.
 
 ## Primer paso por integrante
-| Integrante | Empieza por | Entrega de jueves 15 |
-| --- | --- | --- |
-| Roberto | Leer esta base, seguir ejemplos Carga/Análisis y completar revision-base.md | Revisión entendida y observaciones con Tadeo; no redactar matriz/contrato desde cero |
-| Luis | Revisar flujo-pantallas.md contra bosquejos actuales | Flujo validado y ajustes de controles/mensajes en A03 |
-| Tadeo | Consultar contrato externo y probar Ballchasing con cuenta/replay autorizados | Viabilidad real A05, mapeo/estados y límites observados |
-| David | Contrastar diccionario-datos.md con ERD de ocho tablas | Modelo validado y ajustes localizados A07 |
+La [guía breve](empieza-aqui.md) y las cuatro issues con etiqueta `siguiente` indican la entrega actual. La revisión de contratos/modelo acompaña la implementación de cada pieza.
 
 ## Estructura propuesta para el código
-La planificación y ejemplos ya existen. Estas carpetas de aplicación se crean al realizar las tareas; no son archivos ya implementados.
+La planificación y ejemplos ya existen. `public/` contiene la demo. La primera subida de Luis usará `public/sitio/`; `src/` y los módulos reales se crean durante sus tareas. La estructura siguiente describe el destino de integración, no código ya implementado.
 
 ```text
 public/                  HTML/CSS/JavaScript de las trece pantallas

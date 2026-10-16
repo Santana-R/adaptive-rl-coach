@@ -1,55 +1,35 @@
 # Adaptive RL Coach
 
-Plan de desarrollo para cuatro integrantes. Aplicación web de entrenamiento de Rocket League con bloques de cinco replays, diagnóstico por reglas y planes versionados.
+Web de entrenamiento de Rocket League: cinco replays → análisis con reglas → plan → seguimiento.
 
-**Primero lee [Empieza aquí · Guía del equipo](docs/empieza-aqui.md).** Incluye reparto, primeros pasos y ejemplos de entrega.
+## Qué hacer ahora
 
-El repositorio contiene planificación y un **cascarón HTML ejecutable de demostración**. La aplicación completa con autenticación, API y persistencia sigue en desarrollo.
+Abre [las cuatro próximas entregas](https://github.com/Santana-R/adaptive-rl-coach/issues?q=is%3Aissue%20is%3Aopen%20label%3Asiguiente). La etiqueta **siguiente** señala qué tomar primero; no significa que ya esté iniciado.
 
-## Abrir la demo de PROGSA
+| Persona | Próxima entrega |
+| --- | --- |
+| Luis · frontend | [A04: subir las cuatro pantallas de su ZIP desde su cuenta](https://github.com/Santana-R/adaptive-rl-coach/issues/4). [Pasos completos](docs/subir-pantallas-luis.md). |
+| Tadeo · backend | [A06: arrancar Express y comprobar `/health`](https://github.com/Santana-R/adaptive-rl-coach/issues/6). |
+| David · datos y acceso | [A08: comprobar registro, acceso y salida con correo en desarrollo](https://github.com/Santana-R/adaptive-rl-coach/issues/8). |
+| Roberto · métricas y adaptación | [A02: comprobar un cálculo con datos de ejemplo y guardar el resultado esperado](https://github.com/Santana-R/adaptive-rl-coach/issues/2). |
 
-Abrir [public/carga.html](public/carga.html) desde una copia local del repositorio, o servir `public/` con `python -m http.server 8000 --directory public` y entrar a `http://localhost:8000/carga.html`. No necesita internet ni claves.
+Estas son primeras entregas pequeñas. Cada issue conserva lo que falta para completar su alcance. Roberto construirá Análisis de extremo a extremo en A19.
 
-Pulsar **Usar cinco replays de ejemplo → Ver análisis de ejemplo → Ver mi plan**. Cambiar a **Bloque posterior** y después a **20 minutos** para mostrar la adaptación. [Instrucciones, guion y alcance de la demo](docs/demo-progsa.md). Los datos y umbrales son ilustrativos; la demo es avance parcial de A04/A11/A19/A27 y conserva el reparto.
+## Abrir lo que ya existe
 
-- [Project de trabajo](https://github.com/users/Santana-R/projects/1)
-- [Issues](https://github.com/Santana-R/adaptive-rl-coach/issues)
-- [Hitos semanales](https://github.com/Santana-R/adaptive-rl-coach/milestones)
-- [Empieza aquí · Guía del equipo en Notion](https://app.notion.com/p/3f7dd7559dd881bfbbceeff2d19b9d5f)
-- [Guía de desarrollo en Notion](https://app.notion.com/p/3f4dd7559dd8818fbe0ffb78c6423a52)
-- [Diagramas y calendario en Miro](https://miro.com/app/board/uXjVEcA_AAE=/)
+La demo Carga → Análisis → Plan ya está en `main`. Descarga **Code → Download ZIP**, extrae y abre `public/carga.html`. Pulsa **Usar cinco replays de ejemplo**. [Instrucciones y alcance](docs/demo-progsa.md).
 
-Metas internas: RF integrados el 6 de noviembre de 2026; entrega preparada el 13. Fechas académicas pendientes de confirmación.
+Los datos son sintéticos. Autenticación, Ballchasing y persistencia reales siguen pendientes. Las cuatro vistas públicas de Luis fueron revisadas desde su ZIP y están pendientes de que él las suba siguiendo su guía.
 
-- [Alcance y RF](docs/alcance-y-requisitos.md)
-- [Equipo y acuerdos](docs/equipo-y-acuerdos-semanales.md)
-- [Calendario](docs/calendario-y-dependencias.md)
-- [Arquitectura](docs/arquitectura-y-diagramas.md)
-- [Backlog con aceptación](docs/backlog.md)
-- [Pruebas y entrega](docs/pruebas-y-entrega.md)
-- [Riesgos](docs/riesgos-y-decisiones-pendientes.md)
-- [Publicación en GitHub](docs/publicacion-github.md)
+## Cómo trabajamos
 
-Stack de implementación: HTML/CSS, Bootstrap, JavaScript, jQuery, Chart.js, Node.js LTS/Express, Supabase PostgreSQL/Auth y Ballchasing.
+Una entrega pequeña por persona, una rama para ese cambio y commits desde la cuenta de quien lo construye. El PR explica qué cambió, cómo probarlo y qué falta. [Flujo breve](CONTRIBUTING.md).
 
-No incorporar replays, tokens ni datos personales al repositorio. Crear la implementación a partir de A04/A06/A08 y registrar en su momento versiones y comandos de ejecución reales.
+La planificación y la demo inicial se prepararon con asistencia de IA y se publicaron desde la cuenta de Roberto. Ese historial no acredita por sí solo implementación individual del equipo. Los próximos cambios deben reflejar aportaciones reales y poder explicarse.
 
-## Equipo
+- [Guía breve del equipo](docs/empieza-aqui.md)
+- [Referencias técnicas y requisitos](docs/README.md)
+- [Notion: explicación del proyecto](https://app.notion.com/p/3f7dd7559dd881bfbbceeff2d19b9d5f)
+- [Miro: relaciones del sistema](https://miro.com/app/board/uXjVEcA_AAE=/)
 
-Roberto Santana Trujillo, Omar Tadeo Gasca Deciga, Luis Enrique Almaguer Castillo y David Alonso Torres Guerrero. El reparto fue aceptado por Roberto el 13 de octubre; comunicar disponibilidad si afecta una entrega.
-
-## Documentación inicial
-
-- [Acuerdos de septiembre (referencia)](docs/acuerdos-iniciales.md)
-- [Forma de trabajo de septiembre (referencia histórica)](docs/forma-de-trabajo.md)
-
-La planificación de octubre–noviembre actualiza el calendario y reparto de esos documentos; las fechas de entrega de LBPWEB y PROGSA siguen pendientes.
-
-
-## Revisión de organización del 12 de octubre
-Luis: frontend. Tadeo: backend e integración A25. David: datos/auth e historial. Roberto: métricas/reglas/planes y función completa de análisis A19. Reparto aceptado por Roberto el 13 de octubre; comunicar disponibilidad si afecta entregas. Explicaciones y revisiones breves, asíncronas; trabajo acompañado no obligatorio.
-
-
-## Base preparada el 13 de octubre
-Empieza por [Base técnica](docs/base-tecnica.md). Ya están escritos [contratos](docs/contratos-api.md), [mapa RF](planning/trazabilidad-rf.csv), [flujo](docs/flujo-pantallas.md), [diccionario](docs/diccionario-datos.md) y [casos iniciales](docs/casos-motor.md). A01 revisa esa base; no pide crearla desde cero. Entregas intermedias jueves 15/22/29 de octubre y 5 de noviembre, cierres semanales conservados.
-
+GitHub lleva el trabajo actual. El calendario es una referencia interna; se prefieren avances intermedios en jueves. Las fechas académicas y la rúbrica detallada siguen pendientes de confirmación.

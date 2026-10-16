@@ -33,3 +33,10 @@ LBPWEB: requisitos, pantallas, CRUD, modelo de datos, ejecución y pruebas funci
 
 
 La revisión P11 la coordina Tadeo y la comprueba Roberto. La función completa A19 se comprueba también en A33: datos, respuesta del servidor y pantalla deben coincidir. Revisar de forma asíncrona con pasos reproducibles.
+
+
+## Evidencia individual en Git
+
+El profesor indicó que revisará los commits para calificar aportaciones individuales. Cada integrante crea y sube sus cambios con su identidad, enlaza tarea/PR y puede explicar lo implementado. Conservar commits al integrar. Un primer commit de un ZIP registra el avance disponible en ese momento; los siguientes describen modificaciones nuevas.
+
+La planificación y demo inicial tuvieron asistencia de IA. Su publicación desde Roberto no reparte autoría entre el equipo ni acredita integración real. Las dependencias visuales se identifican como bibliotecas. Confirmar rúbrica y condiciones sobre IA antes de la entrega académica; no inventar un número mínimo de commits.
