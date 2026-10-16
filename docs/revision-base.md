@@ -1,6 +1,8 @@
 # Revisión inicial de la base · A01
 
-Plantilla preparada. Roberto debe completarla y Tadeo revisarla; todavía no acredita A01 terminada.
+Plantilla preparada. Roberto puede dejar esta revisión en A01 o completar esta nota y enlazarla; Tadeo revisa la parte necesaria; todavía no acredita A01 terminada.
+
+La revisión acompaña las primeras entregas. Consultar contrato/mapa según la duda concreta; no es necesario leer todos los documentos antes de comprobar A02.
 
 ## Entendido
 Explicar en 5–8 líneas cómo pasan perfil, cinco replays, métricas, análisis, plan y sesiones entre los cuatro módulos. Ejemplo orientativo: «Luis envía cinco archivos; Tadeo devuelve block_id/estado; David conserva propietario e historial; Roberto calcula comparación y muestra Análisis».

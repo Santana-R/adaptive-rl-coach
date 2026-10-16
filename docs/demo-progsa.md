@@ -1,5 +1,7 @@
 # Cascarón HTML para PROGSA
 
+Las vistas públicas de Luis se revisaron desde su ZIP y complementan esta demo. Su incorporación desde su cuenta se describe en [la guía de subida](subir-pantallas-luis.md); todavía no están publicadas en el repositorio.
+
 Tres pantallas navegables del mismo proyecto: **Carga → Análisis → Plan**. Esta entrega ofrece una interfaz ejecutable con datos sintéticos. Sirve como punto de partida para conectar servidor, métricas y persistencia después.
 
 ## Abrir la demostración

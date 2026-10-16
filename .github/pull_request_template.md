@@ -1,18 +1,11 @@
-## Resultado
-Tarea: Axx
-Explica el comportamiento que cambia y por qué.
+## Qué cambió
+Tarea relacionada: #
+Describe el resultado y si es una entrega parcial.
 
-## Verificación
-- [ ] Criterios de la tarea cumplidos.
-- [ ] Pruebas relevantes y evidencia enlazadas.
-- [ ] Datos propios, permisos y errores revisados cuando aplica.
-- [ ] Documentación actualizada y sin secretos.
+## Cómo comprobarlo
+Pasos y resultado observado:
 
-Revisor propuesto:
-Evidencia:
+## Qué falta
+Pendientes o dependencia de otro módulo:
 
-## Explicación para aprender del cambio
-Qué construí, cómo funciona y qué necesita de otro módulo:
-
-## Revisión
-El revisor indica qué comprobó y qué observó; puede hacerlo de forma asíncrona.
+Origen de archivos/base y apoyo utilizado, cuando corresponda:

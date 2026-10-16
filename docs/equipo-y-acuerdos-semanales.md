@@ -1,23 +1,26 @@
-# Equipo y acuerdos semanales
+# Equipo y acuerdos
 
-| Integrante | Responsabilidad | Revisión |
-| --- | --- | --- |
-| Luis Enrique Almaguer Castillo | Frontend, pantallas, formularios y gráficas | Según issue; revisa interfaz A19 |
-| Omar Tadeo Gasca Deciga | Servidor, Ballchasing, endpoints e integración A25 | Según issue |
-| David Alonso Torres Guerrero | Datos, Auth, permisos, catálogo e historial | Según issue |
-| Roberto Santana Trujillo | Métricas, comparación, reglas, planes y función completa A19 | Según issue |
+| Integrante | Responsabilidad |
+| --- | --- |
+| Luis Enrique Almaguer Castillo | Frontend, navegación, formularios y gráficas. Revisa la interfaz A19. |
+| Omar Tadeo Gasca Deciga | Servidor, Ballchasing, endpoints e integración A25. |
+| David Alonso Torres Guerrero | Datos, autenticación, permisos, catálogo e historial. |
+| Roberto Santana Trujillo | Métricas, comparación, reglas, planes y función completa A19. |
 
-Roberto aceptó este reparto el 13 de octubre de 2026. A01 no pide reconfirmarlo ni escribir el diseño desde cero. La base ya preparada se revisa; los ajustes técnicos se comprueban en sus tareas. Esta organización corresponde al equipo LBPWEB; PROGSA puede tener integrantes distintos.
+El reparto se conserva. Corresponde al equipo LBPWEB; los integrantes de PROGSA pueden diferir.
 
-## Ritmo acordado
-Lunes: revisar compromiso e insumos mediante intercambio escrito. Jueves: entregar avances intermedios y comunicar bloqueos. Domingo antes de las 20:00 de Monterrey: cierre integrado y revisado en S1–S3. S4/S5 conservan cortes viernes 6/13 de noviembre; S6 reserva condicionada a fecha real. Un bloqueo se comunica cuando aparece y como máximo en 24 horas. No requiere reunión presencial.
+## Trabajo diario
 
-El reparto es la base aceptada; horas reales y cuentas se comunican cuando afecten un compromiso. Las fechas académicas/rúbricas siguen pendientes de profesores. Un trabajo incompleto permanece abierto con siguiente acción; nunca se marca terminado por editar planificación.
+Tomar una de [las cuatro próximas entregas](https://github.com/Santana-R/adaptive-rl-coach/issues?q=is%3Aissue%20is%3Aopen%20label%3Asiguiente), construir una parte comprobable, subirla desde la cuenta propia y describir el resultado en el PR. La persona revisora indicada en la issue comprueba lo necesario por escrito. La misma explicación sirve para aprender; no hace falta otro reporte semanal ni reunirse presencialmente.
 
-## Aprender y revisar
-Roberto desarrolla A19 consulta → cálculo → endpoint → pantalla aprovechando base visual/servidor/persistencia de los demás. Tadeo coordina A25; Roberto revisa. Se mantienen 44 tareas (40 desarrollo y 4 reservas); en S3 Roberto concentra tres y en S4 Tadeo tres. Conteos no equivalen a horas.
+GitHub concentra el estado. Notion explica y enlaza; Miro ayuda a entender relaciones. Al terminar una entrega, se elige el siguiente paso de la cola según dependencias y evidencia. Una tarea parcial permanece abierta.
 
-Cada dueño deja una explicación breve semanal de qué hizo, cómo funciona, cómo comprobarlo y qué consume de otro módulo. El revisor ejecuta la comprobación y registra observado. Ambas prácticas pueden quedar en PRs/issues; trabajo acompañado no obligatorio.
+Los avances intermedios se prefieren en jueves. El calendario existente es una referencia interna, sujeta a disponibilidad real y fechas de los profesores. Un bloqueo se comunica al detectarlo con qué falta y a quién afecta.
 
-## Terminar y mantener el estado
-Código: aceptación, PR revisado, comprobación y main integrado. Documento: versión guardada y revisada. GitHub conserva el estado operativo; Notion explica y Miro muestra relaciones/calendario. Backlog → Ready → In progress → In review → Done; Blocked incluye causa y siguiente acción. Mantener como máximo dos tareas activas por persona. Base/fixtures permiten empezar; dependencia real conectada permite cerrar.
+## Evidencia individual
+
+Cada quien configura su nombre/correo y realiza sus commits. Se conserva el historial previo. El ZIP de Luis entra mediante un primer commit de su avance actual; las correcciones futuras se registran cuando ocurran. La planificación y demo asistidas se identifican como base. La rúbrica exacta y las condiciones del profesor sobre IA siguen por confirmar.
+
+## Aprendizaje de Roberto
+
+A19 une datos → cálculo → endpoint → pantalla. Roberto la implementa por partes, reutilizando los módulos comunes. Luis revisa la pantalla, Tadeo mantiene el servidor y David la persistencia. Este recorrido permite conocer las conexiones entre áreas sin añadir otra función al alcance.

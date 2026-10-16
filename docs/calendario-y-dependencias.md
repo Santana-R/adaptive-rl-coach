@@ -1,4 +1,8 @@
-# Calendario y dependencias
+# Calendario y dependencias · referencia
+
+Las fechas siguientes proceden del plan inicial y son metas internas, no compromisos académicos confirmados ni evidencia de avance. El trabajo inmediato se consulta en [la guía breve](empieza-aqui.md) y en las issues. Preferencia vigente: avance intermedio el jueves.
+
+**Project:** once campos `Target date` quedaron pendientes de sincronización en la revisión anterior. No usar el Roadmap como fecha definitiva; esta simplificación no declara esa sincronización realizada.
 
 ## Calendario interno
 | Semana | Periodo | Corte interno | Resultado integrado |

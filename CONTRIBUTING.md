@@ -1,13 +1,19 @@
-# Trabajo en equipo
+# Cómo entregar un cambio
 
-Primero leer [Empieza aquí](docs/empieza-aqui.md) y la issue. Una rama por entrega: `feat/A19-analisis`, `fix/A10-comparacion`, `docs/A40-entrega`.
+1. Abre [tu próxima tarea](https://github.com/Santana-R/adaptive-rl-coach/issues?q=is%3Aissue%20is%3Aopen%20label%3Asiguiente). Toma una entrega pequeña y comprueba qué necesitas de otro módulo.
+2. Actualiza tu copia de `main` y crea una rama para ese cambio. Conserva cualquier cambio local pendiente antes de cambiar de rama.
+3. Construye, comprueba y haz commits desde tu identidad de Git. Cada mensaje describe un cambio real.
+4. Sube la rama y abre un PR: qué cambió, cómo probarlo y qué falta. Vincula la issue; usa `Closes` solo si completas todos sus criterios.
+5. La persona revisora indicada en la issue comprueba el cambio de forma asíncrona. Integra conservando la autoría de los commits y actualiza la issue.
 
-En cada PR: ID y issue, comportamiento, cómo ejecutarlo, resultado esperado/observado y evidencia. Añadir una explicación breve de cómo funciona y qué consume de otro módulo. El revisor propuesto ejecuta la comprobación y escribe lo observado antes de integrar a main. La revisión puede resolverse de forma asíncrona.
+GitHub lleva el estado real. **Siguiente** señala la entrega a tomar, no trabajo ya iniciado. Los estados existentes del Project se conservan: Backlog/Ready = pendiente; In progress = trabajando; In review = PR por comprobar; Done = terminado; Blocked = impedimento con siguiente acción. No hace falta actualizar Notion ni Miro por cada avance.
 
-Código Done: aceptación, revisión, integración y evidencia. Documento/diseño Done: versión guardada, comprobada y revisada. El estado operativo se mantiene en GitHub. No se exige trabajo acompañado ni reunión presencial.
+Una entrega de código se completa al estar comprobada e integrada. Una nota se completa al estar guardada y revisada. Un avance parcial conserva su tarea abierta.
 
-Mantener como máximo dos tareas activas. Bloqueos: motivo, impacto, ayuda y siguiente acción en menos de 24 horas. Corte propuesto domingo 20:00 Monterrey; S4/S5 viernes 6/13 de noviembre.
+La explicación breve del PR también sirve para aprender: qué construiste, cómo funciona y qué consume. Las revisiones pueden hacerse por escrito; no hay trabajo acompañado obligatorio. Los avances intermedios se prefieren en jueves.
 
-El reparto fue aceptado por Roberto el 13 de octubre. A01 revisa la base preparada; comunicar disponibilidad si afecta entregas. A19 es la función completa de Roberto; A25 la integración coordinada por Tadeo. Confirmar identidades antes de invitar o asignar cuentas.
+## Autoría y evidencia individual
 
-Las entregas intermedias son jueves. Cada tarea enlaza base técnica, primer paso, área y comprobación. Los ejemplos permiten construir en paralelo; las tareas de integración se cierran con módulos reales.
+Cada persona configura su propio nombre y un correo asociado a su cuenta antes de crear commits. La planificación y demo inicial tuvieron asistencia de IA; estar publicados desde Roberto no equivale a que los cuatro hayan implementado esas funciones. Describe el origen de una base o dependencia y la contribución real del cambio. La rúbrica detallada y las condiciones de uso de IA deben confirmarse con el profesor.
+
+Para la primera subida del ZIP de Luis, sigue [esta guía](docs/subir-pantallas-luis.md). El primer commit registra su avance actual; los siguientes reflejan las modificaciones nuevas. Conserva el historial existente.
