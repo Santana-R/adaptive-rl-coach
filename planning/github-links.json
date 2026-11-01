@@ -3,46 +3,32 @@
   "project_url": "https://github.com/users/Santana-R/projects/1",
   "milestones": [
     {
-      "week": 1,
-      "title": "S1 · Base y viabilidad",
-      "due": "2026-10-18",
       "number": 1,
+      "title": "Fase 2 · Revisión de base de datos · 3 nov",
+      "due": "2026-11-03",
+      "status": "confirmado_por_Roberto",
       "url": "https://github.com/Santana-R/adaptive-rl-coach/milestone/1"
     },
     {
-      "week": 2,
-      "title": "S2 · Primer bloque real",
-      "due": "2026-10-25",
       "number": 2,
+      "title": "PROGSA · Motor adaptativo · 9 nov",
+      "due": "2026-11-09",
+      "status": "confirmado_por_Roberto",
       "url": "https://github.com/Santana-R/adaptive-rl-coach/milestone/2"
     },
     {
-      "week": 3,
-      "title": "S3 · Diagnóstico y plan",
-      "due": "2026-11-01",
       "number": 3,
+      "title": "PROGSA · Proyecto completo · 16 nov",
+      "due": "2026-11-16",
+      "status": "confirmado_por_Roberto",
       "url": "https://github.com/Santana-R/adaptive-rl-coach/milestone/3"
     },
     {
-      "week": 4,
-      "title": "S4 · Integración completa",
-      "due": "2026-11-06",
       "number": 4,
+      "title": "LBPWEB · Entrega final · 23 nov tentativo",
+      "due": "2026-11-23",
+      "status": "tentativo",
       "url": "https://github.com/Santana-R/adaptive-rl-coach/milestone/4"
-    },
-    {
-      "week": 5,
-      "title": "S5 · Entrega preparada",
-      "due": "2026-11-13",
-      "number": 5,
-      "url": "https://github.com/Santana-R/adaptive-rl-coach/milestone/5"
-    },
-    {
-      "week": 6,
-      "title": "S6 · Reserva de entrega",
-      "due": "2026-11-20",
-      "number": 6,
-      "url": "https://github.com/Santana-R/adaptive-rl-coach/milestone/6"
     }
   ],
   "issues": [
@@ -50,397 +36,485 @@
       "task_id": "A01",
       "number": 1,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/1",
-      "week": 1,
       "owner": "Roberto",
       "reviewer": "Tadeo",
-      "due": "2026-10-15"
+      "due": "2026-11-03",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A02",
       "number": 2,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/2",
-      "week": 1,
       "owner": "Roberto",
       "reviewer": "David",
-      "due": "2026-10-18"
+      "due": "2026-11-02",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": true
     },
     {
       "task_id": "A03",
       "number": 3,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/3",
-      "week": 1,
       "owner": "Luis",
       "reviewer": "Roberto",
-      "due": "2026-10-15"
+      "due": "2026-11-10",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A04",
       "number": 4,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/4",
-      "week": 1,
       "owner": "Luis",
       "reviewer": "Tadeo",
-      "due": "2026-10-18"
+      "due": "2026-11-02",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": true
     },
     {
       "task_id": "A05",
       "number": 5,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/5",
-      "week": 1,
       "owner": "Tadeo",
       "reviewer": "Roberto",
-      "due": "2026-10-15"
+      "due": "2026-11-03",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A06",
       "number": 6,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/6",
-      "week": 1,
       "owner": "Tadeo",
       "reviewer": "David",
-      "due": "2026-10-18"
+      "due": "2026-11-02",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": true
     },
     {
       "task_id": "A07",
       "number": 7,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/7",
-      "week": 1,
       "owner": "David",
       "reviewer": "Roberto",
-      "due": "2026-10-15"
+      "due": "2026-11-03",
+      "milestone": 1,
+      "phase": "fase2",
+      "focus": true
     },
     {
       "task_id": "A08",
       "number": 8,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/8",
-      "week": 1,
       "owner": "David",
       "reviewer": "Tadeo",
-      "due": "2026-10-18"
+      "due": "2026-11-10",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A09",
       "number": 9,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/9",
-      "week": 2,
       "owner": "Roberto",
       "reviewer": "Tadeo",
-      "due": "2026-10-25"
+      "due": "2026-11-04",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A10",
       "number": 10,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/10",
-      "week": 2,
       "owner": "Roberto",
       "reviewer": "David",
-      "due": "2026-10-25"
+      "due": "2026-11-05",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A11",
       "number": 11,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/11",
-      "week": 2,
       "owner": "Luis",
       "reviewer": "Tadeo",
-      "due": "2026-10-25"
+      "due": "2026-11-06",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A12",
       "number": 12,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/12",
-      "week": 2,
       "owner": "Luis",
       "reviewer": "David",
-      "due": "2026-10-25"
+      "due": "2026-11-11",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A13",
       "number": 13,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/13",
-      "week": 2,
       "owner": "Tadeo",
       "reviewer": "David",
-      "due": "2026-10-22"
+      "due": "2026-11-11",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A14",
       "number": 14,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/14",
-      "week": 2,
       "owner": "Tadeo",
       "reviewer": "Roberto",
-      "due": "2026-10-22"
+      "due": "2026-11-04",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A15",
       "number": 15,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/15",
-      "week": 2,
       "owner": "David",
       "reviewer": "Tadeo",
-      "due": "2026-10-22"
+      "due": "2026-11-05",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A16",
       "number": 16,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/16",
-      "week": 2,
       "owner": "David",
       "reviewer": "Roberto",
-      "due": "2026-10-25"
+      "due": "2026-11-11",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A17",
       "number": 17,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/17",
-      "week": 3,
       "owner": "Roberto",
       "reviewer": "Tadeo",
-      "due": "2026-10-29"
+      "due": "2026-11-05",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A18",
       "number": 18,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/18",
-      "week": 3,
       "owner": "Roberto",
       "reviewer": "David",
-      "due": "2026-11-01"
+      "due": "2026-11-06",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A19",
       "number": 19,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/19",
-      "week": 3,
       "owner": "Roberto",
       "reviewer": "Luis",
-      "due": "2026-11-01"
+      "due": "2026-11-06",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A20",
       "number": 20,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/20",
-      "week": 3,
       "owner": "Luis",
       "reviewer": "David",
-      "due": "2026-11-01"
+      "due": "2026-11-12",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A21",
       "number": 21,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/21",
-      "week": 3,
       "owner": "Tadeo",
       "reviewer": "David",
-      "due": "2026-11-01"
+      "due": "2026-11-12",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A22",
       "number": 22,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/22",
-      "week": 3,
       "owner": "Tadeo",
       "reviewer": "Roberto",
-      "due": "2026-11-01"
+      "due": "2026-11-13",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A23",
       "number": 23,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/23",
-      "week": 3,
       "owner": "David",
       "reviewer": "Roberto",
-      "due": "2026-10-29"
+      "due": "2026-11-04",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A24",
       "number": 24,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/24",
-      "week": 3,
       "owner": "David",
       "reviewer": "Tadeo",
-      "due": "2026-10-29"
+      "due": "2026-11-06",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A25",
       "number": 25,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/25",
-      "week": 4,
       "owner": "Tadeo",
       "reviewer": "Roberto",
-      "due": "2026-11-06"
+      "due": "2026-11-08",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A26",
       "number": 26,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/26",
-      "week": 4,
       "owner": "Roberto",
       "reviewer": "David",
-      "due": "2026-11-06"
+      "due": "2026-11-06",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A27",
       "number": 27,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/27",
-      "week": 4,
       "owner": "Luis",
       "reviewer": "David",
-      "due": "2026-11-06"
+      "due": "2026-11-07",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A28",
       "number": 28,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/28",
-      "week": 4,
       "owner": "Luis",
       "reviewer": "Roberto",
-      "due": "2026-11-06"
+      "due": "2026-11-14",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A29",
       "number": 29,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/29",
-      "week": 4,
       "owner": "Tadeo",
       "reviewer": "David",
-      "due": "2026-11-05"
+      "due": "2026-11-12",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A30",
       "number": 30,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/30",
-      "week": 4,
       "owner": "Tadeo",
       "reviewer": "Roberto",
-      "due": "2026-11-06"
+      "due": "2026-11-13",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A31",
       "number": 31,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/31",
-      "week": 4,
       "owner": "David",
       "reviewer": "Roberto",
-      "due": "2026-11-05"
+      "due": "2026-11-13",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A32",
       "number": 32,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/32",
-      "week": 4,
       "owner": "David",
       "reviewer": "Luis",
-      "due": "2026-11-06"
+      "due": "2026-11-13",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A33",
       "number": 33,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/33",
-      "week": 5,
       "owner": "Roberto",
       "reviewer": "Tadeo",
-      "due": "2026-11-13"
+      "due": "2026-11-08",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A34",
       "number": 34,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/34",
-      "week": 5,
       "owner": "Roberto",
       "reviewer": "David",
-      "due": "2026-11-13"
+      "due": "2026-11-09",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A35",
       "number": 35,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/35",
-      "week": 5,
       "owner": "Luis",
       "reviewer": "David",
-      "due": "2026-11-13"
+      "due": "2026-11-14",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A36",
       "number": 36,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/36",
-      "week": 5,
       "owner": "Luis",
       "reviewer": "Roberto",
-      "due": "2026-11-13"
+      "due": "2026-11-08",
+      "milestone": 2,
+      "phase": "motor",
+      "focus": false
     },
     {
       "task_id": "A37",
       "number": 37,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/37",
-      "week": 5,
       "owner": "Tadeo",
       "reviewer": "David",
-      "due": "2026-11-13"
+      "due": "2026-11-14",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A38",
       "number": 38,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/38",
-      "week": 5,
       "owner": "Tadeo",
       "reviewer": "Roberto",
-      "due": "2026-11-13"
+      "due": "2026-11-15",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A39",
       "number": 39,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/39",
-      "week": 5,
       "owner": "David",
       "reviewer": "Tadeo",
-      "due": "2026-11-13"
+      "due": "2026-11-14",
+      "milestone": 3,
+      "phase": "proyecto_completo",
+      "focus": false
     },
     {
       "task_id": "A40",
       "number": 40,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/40",
-      "week": 5,
       "owner": "David",
       "reviewer": "Luis",
-      "due": "2026-11-13"
+      "due": "2026-11-22",
+      "milestone": 4,
+      "phase": "lbpweb",
+      "focus": false
     },
     {
       "task_id": "B01",
       "number": 41,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/41",
-      "week": 6,
       "owner": "Roberto",
       "reviewer": "Tadeo",
-      "due": "2026-11-20"
+      "due": "2026-11-23",
+      "milestone": 4,
+      "phase": "lbpweb",
+      "focus": false
     },
     {
       "task_id": "B02",
       "number": 42,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/42",
-      "week": 6,
       "owner": "Luis",
       "reviewer": "David",
-      "due": "2026-11-20"
+      "due": "2026-11-23",
+      "milestone": 4,
+      "phase": "lbpweb",
+      "focus": false
     },
     {
       "task_id": "B03",
       "number": 43,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/43",
-      "week": 6,
       "owner": "Tadeo",
       "reviewer": "Roberto",
-      "due": "2026-11-20"
+      "due": "2026-11-23",
+      "milestone": 4,
+      "phase": "lbpweb",
+      "focus": false
     },
     {
       "task_id": "B04",
       "number": 44,
       "url": "https://github.com/Santana-R/adaptive-rl-coach/issues/44",
-      "week": 6,
       "owner": "David",
       "reviewer": "Luis",
-      "due": "2026-11-20"
+      "due": "2026-11-23",
+      "milestone": 4,
+      "phase": "lbpweb",
+      "focus": false
     }
   ],
   "planning_revision": "2026-10-13",
@@ -459,5 +533,7 @@
     "A24",
     "A29",
     "A31"
-  ]
+  ],
+  "revision": "2026-11-01",
+  "project_note": "Las issues e hitos llevan el calendario operativo; no se declara sincronización de campos del Project que no se haya verificado."
 }

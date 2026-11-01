@@ -1,5 +1,8 @@
 # Pruebas y entrega
 
+## Dos cortes de verificación
+Para el 9: casos del motor en A33 e integración/ensayo A25/A36. Para el 16: matriz siguiente, tres CRUD, acceso/permisos y trece pantallas en A37/A38/A39. LBPWEB el 23 sigue tentativo. Registrar pasos/resultados reales; esta matriz no acredita ejecución.
+
 ## Matriz mínima de validación
 | Prueba | RF | Caso y resultado esperado | Responsable | Revisor |
 | --- | --- | --- | --- | --- |
@@ -18,7 +21,7 @@
 
 Cada resultado guarda fecha, versión/commit, datos usados, resultado esperado, resultado observado y evidencia. Priorizar pruebas de reglas, permisos, integridad y recorrido real; no repetir pruebas sin cambios o dudas nuevas.
 
-## Checklist del viernes 13
+## Checklist previo al proyecto completo del 16
 - [ ] RF01–RF12 demostrados y vinculados a evidencia.
 - [ ] Trece pantallas conectadas y tres CRUD verificados.
 - [ ] Dos bloques reales comparables y fallos controlados.

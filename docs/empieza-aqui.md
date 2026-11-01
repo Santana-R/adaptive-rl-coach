@@ -1,38 +1,32 @@
-# Guía breve del equipo
+# Empieza con una entrega
 
-Construimos una web que toma cinco replays, calcula métricas, explica hasta tres prioridades y genera un plan. Otro bloque comparable permite revisar cambios. Las sesiones registran práctica; el rango es declarado. [Requisitos completos](alcance-y-requisitos.md).
+Hasta el 9, el objetivo es **estadísticas → motor → Análisis → Plan adaptado**. Reutilizar Carga, Análisis y Plan. Las trece pantallas y los tres CRUD siguen dentro de la entrega completa; no hace falta terminarlos todos antes de programar una regla.
 
-## Empieza con una entrega
+| Persona | Haz primero | Sabes que entregaste cuando | Orden siguiente |
+| --- | --- | --- | --- |
+| Roberto | [A02](https://github.com/Santana-R/adaptive-rl-coach/issues/2): cálculo y primera regla. | Entrada, fórmula, resultado y ficha explicable registrados; pendientes identificados. | A09 → A10 → A17 → A18 → A19 → A26/A33/A34. |
+| Tadeo | [A06](https://github.com/Santana-R/adaptive-rl-coach/issues/6): servidor mínimo. | Otro integrante arranca el servidor y abre la demo en localhost. | A05 antes del 3 → A14 → apoyo A11/A19 → A25. |
+| Luis | [A04](https://github.com/Santana-R/adaptive-rl-coach/issues/4): subir sus cuatro vistas. | PR integrado con su autoría y rutas comprobadas. | A11 → apoyo Análisis → A27 → A36. |
+| David | [A07](https://github.com/Santana-R/adaptive-rl-coach/issues/7): revisión de las 30 tablas. | Puede explicar claves/cardinalidades/versiones y registrar la revisión. | A23 → A15 → A24. |
 
-| Persona | Haz primero | Cómo sabes que entregaste |
-| --- | --- | --- |
-| Luis | [A04](https://github.com/Santana-R/adaptive-rl-coach/issues/4): sigue [la guía de subida](subir-pantallas-luis.md) y abre el PR de sus cuatro vistas. | Archivos y primer commit visibles desde su cuenta. Después corrige enlaces y móvil. |
-| Tadeo | [A06](https://github.com/Santana-R/adaptive-rl-coach/issues/6): servidor Express con `/health`. | Otro integrante puede arrancarlo y obtener `ok`; adaptador real continúa con A05. |
-| David | [A08](https://github.com/Santana-R/adaptive-rl-coach/issues/8): registro, acceso y salida por correo en desarrollo. | Un usuario de prueba puede entrar y salir; Google y permisos completos siguen en la misma tarea. |
-| Roberto | [A02](https://github.com/Santana-R/adaptive-rl-coach/issues/2): comprueba el caso `comparable.json`. | Quedan calculados 25 %, 30 % y +5 puntos porcentuales con su explicación. Después revisa los otros casos y programa A09/A10. |
+## Forma de avanzar
 
-[Ver estas cuatro tareas](https://github.com/Santana-R/adaptive-rl-coach/issues?q=is%3Aissue%20is%3Aopen%20label%3Asiguiente). La etiqueta `siguiente` no acredita trabajo iniciado. Las demás tareas son la cola del proyecto. A01/A03/A07 se consultan y completan con observaciones durante las primeras entregas; no obligan a leer toda la documentación para comenzar una pieza independiente.
+1. Abrir la issue propia con etiqueta `siguiente` y seguir su primer paso.
+2. Hacer una entrega comprobable. Se reutilizan las 44 issues; las entregas grandes se acotaron y el alcance restante apunta a otra issue existente.
+3. Subir rama/PR con aportación real y comprobarlo por escrito.
+4. Al completar, mover `siguiente` a la próxima entrega de esa persona.
+5. Si hay bloqueo, dejar qué se intentó, qué falta y a quién afecta al detectarlo.
 
-## Qué existe y qué falta
+No se estiman horas semanales. David tiene carga académica distinta; no se presume mayor disponibilidad. Las fechas internas son propuestas que se ajustan con el avance y los bloqueos.
 
-- En GitHub: demo Carga, Análisis y Plan con datos sintéticos; se abre desde `public/carga.html`. [Recorrido](demo-progsa.md).
-- Fuera del repositorio: ZIP de Luis con Inicio, Acerca, Ayuda y Crear cuenta. Revisado; su subida y correcciones siguen pendientes.
-- Por implementar/conectar: servidor, datos reales, acceso, reglas verificadas, persistencia y el ciclo completo. Las maquetas no cierran esas tareas.
+## Conexiones de esta semana
 
-Las vistas de Luis se incorporarán inicialmente en `public/sitio/` para conservar el avance original. A04 unificará navegación/estilos y comprobará que las dependencias visuales no se cargan por duplicado. La pantalla llamada `login.html` contiene registro y se aclarará antes de conectar A12.
+Tadeo comprueba temprano qué estadísticas reales entrega el proveedor. Roberto desarrolla funciones con fixtures; David prepara catálogo/guardado; Luis conecta vistas. Catálogo y persistencia no deben esperar al último día.
 
-## Responsabilidades y aprendizaje
+Un JSON guardado o sintético puede alimentar **el motor ejecutable** como respaldo identificado. Seleccionar nombres ficticios no equivale a procesar .replay. El uso compartido con datos reales requiere autenticación/propiedad verificadas; antes, el modo de prueba permanece local y explícito.
 
-Luis: frontend. Tadeo: servidor, Ballchasing e integración A25. David: datos, autenticación, permisos e historial. Roberto: métricas, comparación, reglas y planes.
+La Fase 2 tiene 30 tablas creadas y evidencia documental; falta la revisión del 3 y conectar las operaciones. [Estado de Fase 2](fase2-estado.md).
 
-Roberto conserva **A19**, una función completa: consultar bloques propios → reutilizar cálculos → responder desde Express → mostrar Análisis. Se construye por partes usando el servidor, consultas y componentes comunes; Luis revisa la interfaz.
+Roberto mantiene el motor y A19 de extremo a extremo con [acompañamiento paso a paso](motor-paso-a-paso.md). Luis apoya presentación; Tadeo servidor; David consultas.
 
-Cada quien sube sus cambios. Un PR breve explica qué hizo, cómo funciona y cómo comprobarlo. Las revisiones son asíncronas. [Pasos de entrega](../CONTRIBUTING.md).
-
-## Qué herramienta abrir
-
-- **GitHub:** código, tareas, PRs y estado del trabajo.
-- **Notion:** explicación y referencias; enlaza las tareas vigentes de GitHub.
-- **Miro:** relaciones y diagramas, consultados cuando ayuden a entender una conexión.
-
-La [documentación técnica](README.md) se consulta según la tarea. El [calendario](calendario-y-dependencias.md) conserva metas internas y jueves como avance intermedio; las fechas y rúbricas académicas siguen por confirmar. La evaluación individual usará los commits según lo indicado por el profesor; el conteo por sí solo no describe el alcance ni la comprensión de una contribución.
+[Calendario](calendario-y-dependencias.md) · [Cómo entregar](../CONTRIBUTING.md) · [Referencias](README.md).
