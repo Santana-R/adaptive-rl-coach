@@ -1,14 +1,22 @@
 # Contrato inicial de API y datos
 
-**Base propuesta v1.0, preparada el 13 de octubre.** Las rutas internas y nombres normalizados son decisiones de diseño para coordinar la implementación. No son respuestas reales de Ballchasing ni endpoints ya desplegados. A05/A07/A08 comprueban proveedor/modelo/permisos, y sus ajustes se registran aquí. A01 revisa que el equipo entienda esta base.
+**Base propuesta v1.0, preparada el 13 de octubre.** Las rutas internas y nombres normalizados son decisiones de diseño para coordinar la implementación. No son respuestas reales de Ballchasing ni endpoints ya desplegados. A05 comprueba proveedor, A07 revisa las 30 tablas reales y A08 implementa permisos, y sus ajustes se registran aquí. A01 revisa que el equipo entienda esta base.
 
+
+## Ajuste de integración · 1 de noviembre
+
+La Fase 2 tiene 30 tablas; usar [diccionario vigente](diccionario-datos.md) y SQL. planning/examples contiene objetos sintéticos de interfaz, no filas SQL. planes representa una versión; no crear plan_versiones ni rank_history del borrador. A24 debe fijar el mapeo de identidad/versión en las rutas propuestas.
+
+Para el 9 se reutilizan Carga/Análisis/Plan con fuente identificada. A06 sirve localhost; A05/A14 verifican entrada; A19 expone Análisis; A18/A24 generan/guardan Plan. El modo local de prueba no acredita permisos. Las rutas privadas requieren A08 antes de uso compartido.
+
+Las rutas siguientes son el contrato objetivo de la aplicación completa del 16, no endpoints acreditados por esta reorganización.
 
 ## Qué significa contrato en este proyecto
 Luis necesita saber qué enviar y qué leer para pintar una pantalla. Tadeo necesita conocer las rutas y estados que sirve Express. David necesita saber qué relaciones se guardan. Roberto necesita métricas comparables para calcular diferencias y reglas. Los ejemplos en planning/examples permiten trabajar sin esperar que todos terminen; el cierre de las tareas de integración requiere datos reales.
 
 ## Convenciones preparadas
 - Base interna `/api/v1`; JSON UTF-8 para datos. Éxito: `{ "data": ..., "meta": { "contract_version": "1.0" } }`. Error: el ejemplo error.json, con code estable, mensaje legible y detalles no sensibles.
-- IDs internos UUID en la implementación. Los IDs `test-*` y `TEST_PLAYER_01` de los ejemplos son ficticios y no pasan una validación real de identidad Steam/Epic.
+- Identidades de usuario UUID; entidades de dominio mayormente bigint según Fase 2. Fijar serialización sin perder precisión y no asumir todos los IDs UUID. Los IDs `test-*` y `TEST_PLAYER_01` de los ejemplos son ficticios y no pasan una validación real de identidad Steam/Epic.
 - Fechas de eventos ISO 8601 con zona, guardadas en UTC. Fechas de metas YYYY-MM-DD. Reportes from/to son días inclusivos en America/Monterrey; convertir a límites UTC `[inicio del primer día, inicio del día siguiente al último)`.
 - Conteos enteros; porcentajes 0–100. Diferencia entre porcentajes en puntos porcentuales: 30 − 25 = +5 pp. Duración de entrenamiento en minutos; tiempos de replay en segundos tras verificar el proveedor.
 - Ausencia `null` acompañada de motivo y cobertura. Cero representa un resultado medido. `shots=0` hace shooting_pct null con `zero_denominator`. Cinco replays válidos permiten bloque listo; una métrica opcional ausente conserva null.

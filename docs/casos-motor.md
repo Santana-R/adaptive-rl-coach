@@ -1,20 +1,17 @@
-# Casos iniciales del motor · A02
+# Casos del motor · A02
 
-Cinco fixtures sintéticos preparados para revisar y programar; no son datos reales ni evidencia de motor implementado. Roberto calcula a mano y contrasta heurísticas con el prototipo; David revisa.
+Fixtures sintéticos para comprobar. Roberto valida cálculos y define una primera ficha de regla con apoyo. Los parámetros pendientes se identifican y se resuelven antes de activar la regla.
 
-| Caso | Resultado esperado |
+| Caso existente | Resultado que comprobar |
 | --- | --- |
-| primer-bloque | {"comparison_status": "baseline", "reason_codes": ["NO_PREVIOUS_COMPATIBLE_BLOCK"], "delta": null} |
-| comparable | {"comparison_status": "comparable", "baseline_shooting_pct": 25, "current_shooting_pct": 30, "delta_pp": 5} |
-| incompatible | {"comparison_status": "not_comparable", "reason_codes": ["MODE_MISMATCH"], "delta": null} |
-| faltantes | {"shooting_pct": null, "shooting_missing_reason": "zero_denominator", "boost_rule_active": false} |
-| empate | {"priority_rule_ids": ["rule-a", "rule-b", "rule-c"], "max_priorities": 3} |
+| primer-bloque | Línea base; sin mejora inventada ni delta. |
+| comparable | 2/8 = 25 %, 3/10 = 30 %, diferencia +5 puntos porcentuales. |
+| incompatible | Contexto incompatible: motivo y sin delta. |
+| faltantes | Cero tiros → no evaluable; boost ausente no activa su regla. |
+| empate | Hasta tres prioridades y orden determinista. Los rule-a/b/c actuales son placeholders. |
 
-El ejemplo comparable resume cinco partidas por bloque: 8 tiros/2 goles antes y 10/3 después; 25% → 30%, +5 pp. Estos totales no son una referencia de nivel del jugador.
+Registrar entrada, denominadores/muestra, salida esperada, fuente y estado comprobado/pendiente. A17 completa resultados de reglas definidas; A33 ejecuta casos contra el motor.
 
-## Completar con el prototipo real
-| Regla | Métrica | Umbral real | Unidad | Limitación | Versión |
-| --- | --- | --- | --- | --- | --- |
-| Pendiente de contrastar en A02 | No inventar | Pendiente | Pendiente | Heurística por calibrar en A26 | Pendiente |
+Usar la ficha de [motor paso a paso](motor-paso-a-paso.md). Umbrales de la demo son ilustrativos. Contrastar con el prototipo si está disponible; no bloquear una regla nueva documentada por recuperar ese archivo.
 
-El desempate inicial propuesto es score descendente, rule_id ascendente; A02/A17 lo verifican y fijan. La prioridad precisa requiere regla y evidencia, no solo un score de fixture.
+A09 agrega; A10 compara; A17 aplica reglas; A18 propone plan; A24 conserva versiones. Una meta puede ordenar una necesidad respaldada, sin alterar la evidencia para forzarla.

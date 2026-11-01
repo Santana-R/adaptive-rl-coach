@@ -1,35 +1,42 @@
 # Adaptive RL Coach
 
-Web de entrenamiento de Rocket League: cinco replays → análisis con reglas → plan → seguimiento.
+Cinco partidas de Rocket League → métricas → prioridades explicables → plan → comparación posterior.
 
-## Qué hacer ahora
+## Esta semana: motor funcionando para el 9 de noviembre
 
-Abre [las cuatro próximas entregas](https://github.com/Santana-R/adaptive-rl-coach/issues?q=is%3Aissue%20is%3Aopen%20label%3Asiguiente). La etiqueta **siguiente** señala qué tomar primero; no significa que ya esté iniciado.
+Usaremos las pantallas existentes **Carga → Análisis → Plan**. El motor debe calcular sobre las entradas y adaptar la rutina; las vistas actuales todavía son una demo con reglas ilustrativas.
 
-| Persona | Próxima entrega |
+| Persona | Empieza por esta entrega | Después |
+| --- | --- | --- |
+| Roberto · motor | [A02: primera regla y casos comprobables](https://github.com/Santana-R/adaptive-rl-coach/issues/2) · [guía paso a paso](docs/motor-paso-a-paso.md) | Métricas → comparación → reglas → plan → API y Análisis. |
+| Tadeo · servidor | [A06: Express, /health y servir public/](https://github.com/Santana-R/adaptive-rl-coach/issues/6) | [A05: comprobar Ballchasing antes del 3](https://github.com/Santana-R/adaptive-rl-coach/issues/5) → entrada válida al motor. |
+| Luis · interfaz | [A04: subir sus cuatro pantallas desde su cuenta](https://github.com/Santana-R/adaptive-rl-coach/issues/4) · [instrucciones](docs/subir-pantallas-luis.md) | Conectar Carga y Plan; revisar Análisis con Roberto. |
+| David · datos | [A07: preparar la revisión de Fase 2 para el martes 3](https://github.com/Santana-R/adaptive-rl-coach/issues/7) | Catálogo inicial → consultas → análisis y versiones del plan. |
+
+[Ver solo las cuatro próximas entregas](https://github.com/Santana-R/adaptive-rl-coach/issues?q=is%3Aissue%20is%3Aopen%20label%3Asiguiente). Tomar una por persona; `siguiente` no significa iniciada. Al terminar, mover esa etiqueta a su próxima entrega.
+
+## Fechas de noviembre de 2026
+
+| Fecha | Entrega |
 | --- | --- |
-| Luis · frontend | [A04: subir las cuatro pantallas de su ZIP desde su cuenta](https://github.com/Santana-R/adaptive-rl-coach/issues/4). [Pasos completos](docs/subir-pantallas-luis.md). |
-| Tadeo · backend | [A06: arrancar Express y comprobar `/health`](https://github.com/Santana-R/adaptive-rl-coach/issues/6). |
-| David · datos y acceso | [A08: comprobar registro, acceso y salida con correo en desarrollo](https://github.com/Santana-R/adaptive-rl-coach/issues/8). |
-| Roberto · métricas y adaptación | [A02: comprobar un cálculo con datos de ejemplo y guardar el resultado esperado](https://github.com/Santana-R/adaptive-rl-coach/issues/2). |
+| Martes 3 | Revisión Fase 2 de LBPWEB: base de datos. |
+| Lunes 9 | Motor adaptativo funcionando para PROGSA. |
+| Lunes 16 | Proyecto completo para PROGSA. |
+| Lunes 23, **tentativo** | Entrega final de LBPWEB. |
 
-Estas son primeras entregas pequeñas. Cada issue conserva lo que falta para completar su alcance. Roberto construirá Análisis de extremo a extremo en A19.
+Piezas principales 4–6 e integración/ensayo 7–8 son metas internas propuestas. No se asumen horas disponibles de nadie. [Calendario](docs/calendario-y-dependencias.md).
 
-## Abrir lo que ya existe
+## Lo que ya está preparado
 
-La demo Carga → Análisis → Plan ya está en `main`. Descarga **Code → Download ZIP**, extrae y abre `public/carga.html`. Pulsa **Usar cinco replays de ejemplo**. [Instrucciones y alcance](docs/demo-progsa.md).
+- **Demo:** abrir `public/carga.html` y usar cinco replays de ejemplo. [Qué hace y qué falta](docs/demo-progsa.md). No analiza el contenido de los .replay ni tiene servidor/persistencia conectados.
+- **Fase 2:** se verificaron las **30 tablas existentes** en Supabase el 1 de noviembre. [Estado, documento y revisión](docs/fase2-estado.md) · [esquema SQL](database/esquema-fase2.sql). La revisión del profesor sigue pendiente.
+- **Luis:** sus cuatro pantallas están fuera de este repositorio hasta integrar A04 desde su cuenta.
+- **Pendiente:** motor definitivo, servidor, entrada real, consultas/persistencia y acceso. La creación de tablas es avance distinto de conectar esas operaciones.
 
-Los datos son sintéticos. Autenticación, Ballchasing y persistencia reales siguen pendientes. Las cuatro vistas públicas de Luis fueron revisadas desde su ZIP y están pendientes de que él las suba siguiendo su guía.
+## Cómo trabajar
 
-## Cómo trabajamos
+Cada quien construye y sube su cambio desde su identidad de Git. El PR explica qué cambió, cómo comprobarlo y qué falta. Avisar bloqueos en la issue al detectarlos; apoyo por escrito sin reuniones obligatorias. [Guía breve](docs/empieza-aqui.md) · [Cómo entregar](CONTRIBUTING.md).
 
-Una entrega pequeña por persona, una rama para ese cambio y commits desde la cuenta de quien lo construye. El PR explica qué cambió, cómo probarlo y qué falta. [Flujo breve](CONTRIBUTING.md).
+La planificación y demo inicial tuvieron asistencia de IA y no acreditan aportaciones individuales del equipo. Se conserva el historial y se registran los cambios reales.
 
-La planificación y la demo inicial se prepararon con asistencia de IA y se publicaron desde la cuenta de Roberto. Ese historial no acredita por sí solo implementación individual del equipo. Los próximos cambios deben reflejar aportaciones reales y poder explicarse.
-
-- [Guía breve del equipo](docs/empieza-aqui.md)
-- [Referencias técnicas y requisitos](docs/README.md)
-- [Notion: explicación del proyecto](https://app.notion.com/p/3f7dd7559dd881bfbbceeff2d19b9d5f)
-- [Miro: relaciones del sistema](https://miro.com/app/board/uXjVEcA_AAE=/)
-
-GitHub lleva el trabajo actual. El calendario es una referencia interna; se prefieren avances intermedios en jueves. Las fechas académicas y la rúbrica detallada siguen pendientes de confirmación.
+[Referencias](docs/README.md) · [Cola del proyecto](docs/backlog.md) · [Notion](https://app.notion.com/p/3f7dd7559dd881bfbbceeff2d19b9d5f) · [Miro](https://miro.com/app/board/uXjVEcA_AAE=/).

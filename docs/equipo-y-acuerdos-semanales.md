@@ -1,26 +1,18 @@
-# Equipo y acuerdos
+# Equipo y acuerdos · noviembre
 
-| Integrante | Responsabilidad |
-| --- | --- |
-| Luis Enrique Almaguer Castillo | Frontend, navegación, formularios y gráficas. Revisa la interfaz A19. |
-| Omar Tadeo Gasca Deciga | Servidor, Ballchasing, endpoints e integración A25. |
-| David Alonso Torres Guerrero | Datos, autenticación, permisos, catálogo e historial. |
-| Roberto Santana Trujillo | Métricas, comparación, reglas, planes y función completa A19. |
+| Integrante LBPWEB | Responsabilidad | Prioridad hasta el 9 |
+| --- | --- | --- |
+| Roberto Santana Trujillo | Métricas, comparación, reglas, planes y A19 completo. | Motor con acompañamiento y decisiones deportivas explicables. |
+| Omar Tadeo Gasca Deciga | Servidor, proveedor e integración. | Arranque, prueba real, entrada normalizada e integración. |
+| Luis Enrique Almaguer Castillo | Frontend, navegación y gráficas. | Subir su avance; conectar Carga/Plan, apoyar Análisis y ensayo. |
+| David Alonso Torres Guerrero | Datos, acceso, catálogo e historial. | Fase 2, catálogo y guardado/versiones. |
 
-El reparto se conserva. Corresponde al equipo LBPWEB; los integrantes de PROGSA pueden diferir.
+Este reparto corresponde a LBPWEB; los integrantes de PROGSA pueden diferir. No atribuye participación a personas de la otra materia.
 
-## Trabajo diario
+Una próxima entrega por persona y revisión breve por escrito. No se requieren reuniones ni reportes paralelos en Notion. Avisar bloqueos al detectarlos. Cada quien hace sus commits y puede explicar su aportación real.
 
-Tomar una de [las cuatro próximas entregas](https://github.com/Santana-R/adaptive-rl-coach/issues?q=is%3Aissue%20is%3Aopen%20label%3Asiguiente), construir una parte comprobable, subirla desde la cuenta propia y describir el resultado en el PR. La persona revisora indicada en la issue comprueba lo necesario por escrito. La misma explicación sirve para aprender; no hace falta otro reporte semanal ni reunirse presencialmente.
+No se presuponen horas disponibles. David lleva otras materias; eso no equivale a tener más tiempo.
 
-GitHub concentra el estado. Notion explica y enlaza; Miro ayuda a entender relaciones. Al terminar una entrega, se elige el siguiente paso de la cola según dependencias y evidencia. Una tarea parcial permanece abierta.
+Roberto primero razona una decisión con datos de Rocket, después la convierte en función, la prueba y la conecta. A19 conserva datos → cálculo → endpoint → pantalla con módulos compartidos. [Guía paso a paso](motor-paso-a-paso.md).
 
-Los avances intermedios se prefieren en jueves. El calendario existente es una referencia interna, sujeta a disponibilidad real y fechas de los profesores. Un bloqueo se comunica al detectarlo con qué falta y a quién afecta.
-
-## Evidencia individual
-
-Cada quien configura su nombre/correo y realiza sus commits. Se conserva el historial previo. El ZIP de Luis entra mediante un primer commit de su avance actual; las correcciones futuras se registran cuando ocurran. La planificación y demo asistidas se identifican como base. La rúbrica exacta y las condiciones del profesor sobre IA siguen por confirmar.
-
-## Aprendizaje de Roberto
-
-A19 une datos → cálculo → endpoint → pantalla. Roberto la implementa por partes, reutilizando los módulos comunes. Luis revisa la pantalla, Tadeo mantiene el servidor y David la persistencia. Este recorrido permite conocer las conexiones entre áreas sin añadir otra función al alcance.
+La preparación asistida de planificación/demo/base no se registra como programación individual del equipo. [Guía](empieza-aqui.md) · [Calendario](calendario-y-dependencias.md).

@@ -11,8 +11,8 @@ Una web donde un jugador entra, registra su identidad, carga cinco replays de PC
 | [Contrato API/datos](contratos-api.md) | Rutas, objetos, unidades, estados, errores y ejemplos | Implementar y verificar; ajustar con evidencia |
 | [Trazabilidad de RF](../planning/trazabilidad-rf.csv) | Doce requisitos vinculados a pantallas, tareas, datos y pruebas | Consultar; añadir evidencia real al implementar |
 | [Flujo de pantallas](flujo-pantallas.md) | Trece pantallas, navegación y estados | Luis valida contra bosquejos en A03 |
-| [Diccionario de datos](diccionario-datos.md) | Entidades, propietarios, relaciones y snapshots | David valida en A07 y luego implementa |
-| [Casos del motor](casos-motor.md) | Cinco entradas/resultados esperados sintéticos | Roberto revisa y completa heurísticas reales en A02 |
+| [Diccionario de datos](diccionario-datos.md) | Entidades, propietarios, relaciones y snapshots | David revisa las 30 tablas en A07 y conecta consultas en A15/A24 |
+| [Casos del motor](casos-motor.md) | Cinco entradas/resultados esperados sintéticos | Roberto comprueba casos y define heurísticas explícitas en A02 |
 | [Nota de revisión](revision-base.md) | Plantilla pequeña con lo entendido, dudas y ajustes | Roberto completa A01; Tadeo revisa |
 
 ## Un recorrido con datos para entender las conexiones
@@ -54,5 +54,5 @@ A01 es la revisión inicial de esta base: puede cerrarse con dudas técnicas asi
 ## Aprendizaje con un camino definido
 Roberto construye A19 de extremo a extremo: consulta → cálculo → endpoint → pantalla. Reutiliza módulos comunes. Cada integrante deja explicación breve y revisa una conexión con otra área por escrito. No hay trabajo acompañado obligatorio. Aprender incluye poder explicar por qué una métrica es null, por qué un bloque no es comparable y qué conserva una versión del plan.
 
-## Calendario y dudas
-Entregas intermedias jueves 15/22/29 de octubre y 5 de noviembre. Cierres S1–S3 domingo; metas de integración/entrega preparada viernes 6/13 de noviembre. Esas son fechas internas; profesores aún deben confirmar fechas/rúbricas. Disponibilidad y accesos se atienden cuando exista un bloqueo concreto; no obligan a rehacer esta base.
+## Calendario vigente
+Fase 2 el 3; motor el 9; completo PROGSA el 16; LBPWEB el 23 tentativo. [Calendario](calendario-y-dependencias.md) · [30 tablas y estado](fase2-estado.md) · [Motor paso a paso](motor-paso-a-paso.md).

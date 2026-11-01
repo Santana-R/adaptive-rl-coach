@@ -5,6 +5,9 @@ Aplicación web de entrenamiento de Rocket League: cinco replays privados → m�
 
 La entrega incluye trece pantallas y tres CRUD: objetivos, sesiones y ejercicios. Administración de usuarios significa consulta y cambio de estado. Objetivos enlazados se archivan. Quedan fuera entrenamiento de modelos de ML o reinforcement learning, coaching en vivo, rotaciones automáticas, MMR automático, chat, pagos y app nativa. Discord es opcional.
 
+## Prioridad de las entregas
+Para el motor del 9, reutilizar Carga/Análisis/Plan. Las trece pantallas y los tres CRUD permanecen en la entrega completa del 16; dividir tareas no elimina requisitos.
+
 ## Matriz de requisitos
 | RF | Función | Aceptación resumida | Tareas |
 | --- | --- | --- | --- |
@@ -25,9 +28,9 @@ La entrega incluye trece pantallas y tres CRUD: objetivos, sesiones y ejercicios
 Inicio; Acerca; Ayuda; Registro/login; Perfil; Carga/historial; Análisis; Objetivos; Plan; Sesiones; Panel admin; Usuarios admin; Ejercicios admin.
 
 ## Fuentes y prioridad documental
-Base documental: Fase 1 actualizada de 45 páginas, **2227084-207-FASE1-PWEB-LAB.pdf** (adjunto actual, recibido el 8/9 de octubre de 2026); **Sprint-2-Adaptive-RL-Coach-2227084.pdf**, versión 3, de 20 páginas; **Tablas_Adaptive_RL_Coach.pdf**, borrador de ocho tablas. Se usa la Fase 1 actualizada para el comportamiento detallado. El prototipo Python/Tkinter del Sprint 2 sirve para contrastar reglas; la aplicación final es web. RL significa Rocket League.
+Base documental: Fase 1 actualizada de 45 páginas, **2227084-207-FASE1-PWEB-LAB.pdf** (adjunto actual, recibido el 8/9 de octubre de 2026); **Sprint-2-Adaptive-RL-Coach-2227084.pdf**, versión 3, de 20 páginas; **Tablas_Adaptive_RL_Coach.pdf**, borrador histórico de ocho tablas. Para datos prevalece **2227084-207-FASES1-2-PWEB-LAB.pdf**, versión 3, con 30 tablas verificadas; ver [estado de Fase 2](fase2-estado.md). Se usa la Fase 1 actualizada para el comportamiento detallado. El prototipo Python/Tkinter del Sprint 2 sirve para contrastar reglas; la aplicación final es web. RL significa Rocket League.
 
-Calendario oficial: [FIME agosto–diciembre 2026](https://www.fime.uanl.mx/wp-content/uploads/2026/07/calendario-agosto-diciembre2026.pdf). Últimas clases/laboratorios: 20 de noviembre; ordinarios: 23 de noviembre–3 de diciembre. La ventana 16–20 de noviembre es una estimación basada en entregar una semana antes de exámenes, **no una fecha confirmada por profesores**.
+Fechas comunicadas por Roberto el 1 de noviembre: revisión Fase 2 el 3; motor PROGSA el 9; proyecto completo el 16; LBPWEB el 23 tentativo. El calendario de octubre fue sustituido. [Calendario vigente](calendario-y-dependencias.md).
 
 
 
