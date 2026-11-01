@@ -10,3 +10,5 @@ Las issues de GitHub llevan el estado real. tasks.json/tasks.csv son el catálog
 - scope_transfers: requisitos que se completan en otra issue existente al dividir una entrega grande.
 
 Conservar IDs y trazabilidad RF. No volver a publicar el calendario de octubre con el script antiguo.
+
+[Cuentas del equipo verificadas](miembros-github.json). Las cuatro personas quedaron asignadas a sus tareas; esto no acredita trabajo iniciado.

@@ -36,6 +36,6 @@ Las funciones avanzan con fixtures mientras llegan dependencias. Cerrar una inte
 
 Hitos 1–4 representan estas cuatro entregas. Fechas de issues = metas internas; `siguiente` = una próxima entrega por persona. El estado real depende de evidencia, no de tener una fecha.
 
-El Project anterior tiene campos propios: usar issues/hitos como calendario operativo hasta comprobar su sincronización. No se declara una actualización de campos no verificada. Las antiguas semanas S1–S6 se retiraron de las etiquetas de las tareas.
+El Project tiene dos entradas verificadas: [Empieza aquí](https://github.com/users/Santana-R/projects/1/views/1), con cuatro próximas tareas, y [Motor · 9 nov](https://github.com/users/Santana-R/projects/1/views/3), con las 21 tareas del hito agrupadas por persona. Board y Por integrante muestran cuentas/hitos actuales. La vista [Histórico · fechas de octubre](https://github.com/users/Santana-R/projects/1/views/4) conserva el Roadmap anterior; sus campos Start date/Target date son históricos. Consultar las metas internas en cada issue y las fechas académicas en los hitos. Las antiguas etiquetas semana:S1–S6 se retiraron de las tareas.
 
 El [calendario de octubre](historico/calendario-octubre.md) es histórico y fue sustituido por esta revisión.

@@ -1,0 +1,11 @@
+{
+  "revision": "2026-11-01",
+  "accounts": {
+    "Roberto": "Santana-R",
+    "Tadeo": "OmarHub-star",
+    "Luis": "Lamaguer",
+    "David": "dvdatogro-123"
+  },
+  "verification": "Permiso write comprobado para las cuatro cuentas. Tadeo identificado además por nombre completo y usuario en la issue T02 de Salón Aurora; Luis/David por los repositorios y commits identificados en el contexto del equipo.",
+  "identity_source_tadeo": "https://github.com/Santana-R/salon-aurora/issues/3"
+}

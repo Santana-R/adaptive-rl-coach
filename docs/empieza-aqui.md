@@ -9,6 +9,8 @@ Hasta el 9, el objetivo es **estadísticas → motor → Análisis → Plan adap
 | Luis | [A04](https://github.com/Santana-R/adaptive-rl-coach/issues/4): subir sus cuatro vistas. | PR integrado con su autoría y rutas comprobadas. | A11 → apoyo Análisis → A27 → A36. |
 | David | [A07](https://github.com/Santana-R/adaptive-rl-coach/issues/7): revisión de las 30 tablas. | Puede explicar claves/cardinalidades/versiones y registrar la revisión. | A23 → A15 → A24. |
 
+[Abrir las cuatro próximas entregas](https://github.com/users/Santana-R/projects/1/views/1) · [Ver la cola del motor por persona](https://github.com/users/Santana-R/projects/1/views/3).
+
 ## Forma de avanzar
 
 1. Abrir la issue propia con etiqueta `siguiente` y seguir su primer paso.

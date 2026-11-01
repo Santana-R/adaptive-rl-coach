@@ -535,5 +535,24 @@
     "A31"
   ],
   "revision": "2026-11-01",
-  "project_note": "Las issues e hitos llevan el calendario operativo; no se declara sincronización de campos del Project que no se haya verificado."
+  "project_note": "Empieza aquí y Motor guardadas/verificadas. Board y Por integrante muestran campos actuales. El Roadmap de fechas propio del Project se conserva únicamente como vista histórica de octubre; issues/hitos llevan el calendario vigente.",
+  "views": [
+    {
+      "name": "Empieza aquí",
+      "url": "https://github.com/users/Santana-R/projects/1/views/1",
+      "filter": "is:open label:siguiente",
+      "matching_items": 4
+    },
+    {
+      "name": "Motor · 9 nov",
+      "url": "https://github.com/users/Santana-R/projects/1/views/3",
+      "filter": "is:open milestone:\"PROGSA · Motor adaptativo · 9 nov\"",
+      "matching_items": 21
+    },
+    {
+      "name": "Histórico · fechas de octubre",
+      "url": "https://github.com/users/Santana-R/projects/1/views/4",
+      "purpose": "Referencia histórica; no fechas vigentes"
+    }
+  ]
 }

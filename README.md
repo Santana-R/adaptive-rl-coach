@@ -13,7 +13,7 @@ Usaremos las pantallas existentes **Carga → Análisis → Plan**. El motor deb
 | Luis · interfaz | [A04: subir sus cuatro pantallas desde su cuenta](https://github.com/Santana-R/adaptive-rl-coach/issues/4) · [instrucciones](docs/subir-pantallas-luis.md) | Conectar Carga y Plan; revisar Análisis con Roberto. |
 | David · datos | [A07: preparar la revisión de Fase 2 para el martes 3](https://github.com/Santana-R/adaptive-rl-coach/issues/7) | Catálogo inicial → consultas → análisis y versiones del plan. |
 
-[Ver solo las cuatro próximas entregas](https://github.com/Santana-R/adaptive-rl-coach/issues?q=is%3Aissue%20is%3Aopen%20label%3Asiguiente). Tomar una por persona; `siguiente` no significa iniciada. Al terminar, mover esa etiqueta a su próxima entrega.
+[Empieza aquí: cuatro próximas entregas](https://github.com/users/Santana-R/projects/1/views/1) · [Cola del motor del 9](https://github.com/users/Santana-R/projects/1/views/3). Tomar una por persona; `siguiente` no significa iniciada. Al terminar, mover esa etiqueta a su próxima entrega.
 
 ## Fechas de noviembre de 2026
 
