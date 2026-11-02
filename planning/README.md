@@ -12,3 +12,5 @@ Las issues de GitHub llevan el estado real. tasks.json/tasks.csv son el catálog
 Conservar IDs y trazabilidad RF. No volver a publicar el calendario de octubre con el script antiguo.
 
 [Cuentas del equipo verificadas](miembros-github.json). Las cuatro personas quedaron asignadas a sus tareas; esto no acredita trabajo iniciado.
+
+Ajuste confirmado por Roberto: el documento de Fase 2 ya está listo para presentarlo. A07 queda como seguimiento de observaciones; A23 es la próxima entrega de David. Ninguna tarea de implementación depende de A07. confirmed_progress registra esa confirmación y no acredita aprobación del profesor ni implementación de código.

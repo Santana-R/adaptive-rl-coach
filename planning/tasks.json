@@ -290,42 +290,43 @@
     "owner_full": "David Alonso Torres Guerrero",
     "reviewer": "Roberto",
     "reviewer_full": "Roberto Santana Trujillo",
-    "title": "Preparar la revisión de Fase 2 sobre las 30 tablas existentes",
+    "title": "Registrar y atender observaciones del documento de Fase 2",
     "requirements": [
       "RF01–RF12"
     ],
     "dependencies": [],
     "acceptance": [
-      "Documento vigente, SQL capturado y diccionario de 30 tablas enlazados.",
-      "David y Roberto pueden explicar relaciones/historial y qué falta para conectar la aplicación.",
-      "Observaciones reales del martes registradas y correcciones identificadas."
+      "El equipo confirmó que el documento está listo para presentarlo (confirmado por Roberto).",
+      "Se registra el resultado de la revisión del profesor, con observaciones o indicación de que no pidió cambios.",
+      "Se atienden las correcciones solicitadas al documento, si las hubiera."
     ],
-    "evidence": "Referencia al PDF vigente, SQL de estructura, explicación y observaciones reales de la revisión.",
-    "priority": "P0",
+    "evidence": "Confirmación de documento listo y nota del resultado de la revisión; versión corregida solo si se solicitan cambios.",
+    "priority": "P1",
     "start": "2026-11-01",
     "due": "2026-11-03",
     "status": "Backlog",
     "conditional": false,
-    "objective": "Completar el diseño de datos antes de implementar funciones que necesitan historial.",
-    "inputs": "Referencias según esta tarea: docs/empieza-aqui.md, docs/contratos-api.md, docs/diccionario-datos.md y los archivos de su área. La base de Fase 2 ya tiene 30 tablas.",
+    "objective": "Dar seguimiento a la revisión académica del documento ya listo para presentarlo.",
+    "inputs": "Documento de Fase 2 listo para presentar y docs/fase2-estado.md. No se requiere una revisión técnica adicional de SQL, funciones o triggers para esta entrega.",
     "steps": [
-      "Comparar el diccionario de 30 tablas con las páginas 52–84 del documento Fases 1–2.",
-      "Preparar explicación de claves, cardinalidades y versiones para el martes; revisar las funciones/triggers incluidos.",
-      "Registrar las observaciones reales del 3 de noviembre y localizar correcciones concretas, sin declarar aprobación antes de la revisión."
+      "Presentar el documento en la revisión del 3 de noviembre.",
+      "Registrar el resultado y las observaciones reales del profesor; si no pide cambios, dejarlo indicado.",
+      "Si pide cambios, concretar las correcciones al documento y registrar su atención."
     ],
-    "deliverable": "PR con los archivos del área, entrada/salida comprobada y evidencia de los criterios actuales.",
-    "example": "Una sesión necesita apuntar a la versión exacta del plan con la que se entrenó.",
-    "learning": "David: diseñar persistencia trazable y explicar por qué existe cada relación.",
+    "deliverable": "Nota del resultado de la revisión y documento corregido únicamente si lo pide el profesor. No exige un PR de código.",
+    "example": "El profesor pide aclarar una cardinalidad del diagrama: registrar esa observación y ajustar el documento. Si no pide cambios, registrar el resultado sin inventar trabajo.",
+    "learning": "Distinguir la revisión académica del documento de la implementación y comprobación técnica de la aplicación.",
     "revision": "2026-11-01",
-    "first_action": "Abrir docs/fase2-estado.md y database/esquema-fase2.sql. Las 30 tablas ya existen: seguir usuarios → bloques → análisis → planes y explicar cómo se conserva una versión.",
-    "work_area": "database/esquema-fase2.sql, database/README.md, docs/fase2-estado.md y docs/diccionario-datos.md.",
-    "verification": "Comprobar cada criterio de esta entrega con entradas/resultados observables; registrar los pasos ejecutados y los pendientes sin marcar como terminado lo que no se haya probado.",
-    "handoff": "Después: A23 catálogo → A15 consultas → A24 versiones. Auth/políticas continúan en A08. La preparación asistida no se atribuye como implementación individual.",
-    "focus": true,
+    "first_action": "Presentar el documento de Fase 2 el martes 3. La comprobación previa de que está listo ya fue realizada por el equipo, según confirmó Roberto.",
+    "work_area": "El documento de Fase 2 y el registro de observaciones en esta issue o docs/fase2-estado.md.",
+    "verification": "Comparar las correcciones del documento con las observaciones reales. Si no hay observaciones, registrar el resultado y cerrar el seguimiento.",
+    "handoff": "Seguimiento documental del hito del 3. David comienza A23 desde ahora; A08/A15/A16/A23/A24 no esperan el cierre de A07.",
+    "focus": false,
     "milestone": 1,
     "milestone_title": "Fase 2 · Revisión de base de datos · 3 nov",
     "phase": "fase2",
-    "date_kind": "meta_interna_propuesta"
+    "date_kind": "meta_interna_propuesta",
+    "confirmed_progress": "Roberto confirmó que el equipo ya comprobó el documento y está listo para presentarlo. La revisión del profesor sigue pendiente."
   },
   {
     "id": "A08",
@@ -341,8 +342,7 @@
       "RF12"
     ],
     "dependencies": [
-      "A01",
-      "A07"
+      "A01"
     ],
     "acceptance": [
       "Implementar registro por correo y Google, inicio y cierre de sesión con Supabase Auth.",
@@ -681,7 +681,6 @@
       "RF06"
     ],
     "dependencies": [
-      "A07",
       "A14"
     ],
     "acceptance": [
@@ -728,7 +727,6 @@
       "RF10"
     ],
     "dependencies": [
-      "A07",
       "A08"
     ],
     "acceptance": [
@@ -1066,36 +1064,35 @@
       "RF09",
       "RF12"
     ],
-    "dependencies": [
-      "A07"
-    ],
+    "dependencies": [],
     "acceptance": [
       "Actividades activas con modalidad/plataforma, duración, dificultad, instrucciones y recurso comprobable.",
       "El motor consulta/filtra activos compatibles; las versiones históricas no se sobrescriben.",
       "Casos de actividad inactiva/incompatible y catálogo sin cobertura sin forzar ejercicios inválidos."
     ],
-    "evidence": "Endpoints y seed suficiente para cubrir prioridades del MVP.",
+    "evidence": "Seed revisado, consulta del catálogo y resultados de compatibilidad/inactividad/cobertura.",
     "priority": "P0",
     "start": "2026-11-01",
     "due": "2026-11-04",
     "status": "Backlog",
     "conditional": false,
     "objective": "Mantener ejercicios y recursos que realmente puedan usarse en planes nuevos.",
-    "inputs": "Referencias según esta tarea: docs/empieza-aqui.md, docs/contratos-api.md, docs/diccionario-datos.md y los archivos de su área. La base de Fase 2 ya tiene 30 tablas.",
+    "inputs": "Esquema de 30 tablas existente, diccionario vigente y prioridades que Roberto defina en A02. Puede preparar fichas y el mecanismo de carga mientras se acuerdan esas prioridades.",
     "steps": [
-      "Revisar la base disponible y la entrada/salida acordada para esta entrega.",
-      "Implementar los criterios de aceptación de esta ficha con sus dependencias.",
-      "Ejecutar una comprobación y guardar la evidencia real en el PR."
+      "Consultar las columnas y relaciones de las tres tablas del catálogo, sin recrearlas.",
+      "Preparar fichas con prioridad que atienden, contexto/plataforma, duración, dificultad, instrucciones y recurso comprobable; revisarlas con Roberto.",
+      "Crear el seed (archivo que carga los datos iniciales de desarrollo) y una forma de consultar los ejercicios compatibles que consumirá A18.",
+      "Comprobar actividad inactiva, plataforma incompatible y ausencia de cobertura; conservar versiones históricas."
     ],
-    "deliverable": "PR con los archivos del área, entrada/salida comprobada y evidencia de los criterios actuales.",
+    "deliverable": "PR del catálogo inicial y su consulta, con datos de desarrollo revisados y pasos de comprobación para que A18 pueda consumirlo.",
     "example": "Desactivar un ejercicio lo excluye de planes nuevos y conserva la descripción del plan que ya lo usó.",
     "learning": "David: catálogo autorizado y conservación de datos históricos.",
     "revision": "2026-11-01",
-    "first_action": "Preparar un seed revisado en ejercicios, ejercicio_versiones y ejercicio_plataforma para las prioridades acordadas con Roberto.",
-    "work_area": "src/routes/exercises.js, catálogo persistente y seed de desarrollo.",
-    "verification": "Comprobar cada criterio de esta entrega con entradas/resultados observables; registrar los pasos ejecutados y los pendientes sin marcar como terminado lo que no se haya probado.",
-    "handoff": "A18 consume el catálogo y A24 conserva versiones prescritas. El CRUD administrativo se completa en A32 con A08.",
-    "focus": false,
+    "first_action": "Comenzar el catálogo de ejercicios sobre ejercicios, ejercicio_versiones y ejercicio_plataforma, que ya existen. Acordar con Roberto qué prioridades cubrir; no esperar la revisión del PDF ni el cierre de A07.",
+    "work_area": "Datos iniciales de desarrollo (seed) del catálogo y su consulta desde la aplicación, sobre ejercicios, ejercicio_versiones y ejercicio_plataforma. El CRUD administrativo continúa en A32.",
+    "verification": "Consultar las actividades del seed con dos contextos de plataforma y comprobar que solo se ofrecen ejercicios activos compatibles; cuando no hay cobertura, devolverlo explícitamente.",
+    "handoff": "A18 necesita este catálogo para elegir ejercicios y distribuir minutos. Después David continúa con A15 y A24. La revisión documental A07 no bloquea esta tarea; el CRUD administrativo sigue en A32 con A08.",
+    "focus": true,
     "milestone": 2,
     "milestone_title": "PROGSA · Motor adaptativo · 9 nov",
     "phase": "motor",
@@ -1117,7 +1114,6 @@
       "RF10"
     ],
     "dependencies": [
-      "A07",
       "A15",
       "A18"
     ],

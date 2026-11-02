@@ -15,7 +15,7 @@ Usaremos las pantallas existentes **Carga → Análisis → Plan**. El motor deb
 | Roberto · motor | [A02: primera regla y casos comprobables](https://github.com/Santana-R/adaptive-rl-coach/issues/2) · [guía paso a paso](docs/motor-paso-a-paso.md) | Métricas → comparación → reglas → plan → API y Análisis. |
 | Tadeo · servidor | [A06: Express, /health y servir public/](https://github.com/Santana-R/adaptive-rl-coach/issues/6) | [A05: comprobar Ballchasing antes del 3](https://github.com/Santana-R/adaptive-rl-coach/issues/5) → entrada válida al motor. |
 | Luis · interfaz | [A04: subir sus cuatro pantallas desde su cuenta](https://github.com/Santana-R/adaptive-rl-coach/issues/4) · [instrucciones](docs/subir-pantallas-luis.md) | Conectar Carga y Plan; revisar Análisis con Roberto. |
-| David · datos | [A07: preparar la revisión de Fase 2 para el martes 3](https://github.com/Santana-R/adaptive-rl-coach/issues/7) | Catálogo inicial → consultas → análisis y versiones del plan. |
+| David · datos | [A23: preparar el catálogo que necesita el motor](https://github.com/Santana-R/adaptive-rl-coach/issues/23) | Consultas → análisis y versiones del plan. |
 
 [Empieza aquí: cuatro próximas entregas](https://github.com/users/Santana-R/projects/1/views/1) · [Cola del motor del 9](https://github.com/users/Santana-R/projects/1/views/3). Tomar una por persona; `siguiente` no significa iniciada. Al terminar, mover esa etiqueta a su próxima entrega.
 
@@ -33,7 +33,7 @@ Piezas principales 4–6 e integración/ensayo 7–8 son metas internas propuest
 ## Lo que ya está preparado
 
 - **Demo:** abrir `public/carga.html` y usar cinco replays de ejemplo. [Qué hace y qué falta](docs/demo-progsa.md). No analiza el contenido de los .replay ni tiene servidor/persistencia conectados.
-- **Fase 2:** se verificaron las **30 tablas existentes** en Supabase el 1 de noviembre. [Estado, documento y revisión](docs/fase2-estado.md) · [esquema SQL](database/esquema-fase2.sql). La revisión del profesor sigue pendiente.
+- **Fase 2:** se verificaron las **30 tablas existentes** en Supabase el 1 de noviembre. [Estado, documento y revisión](docs/fase2-estado.md) · [esquema SQL](database/esquema-fase2.sql). El equipo confirmó que el documento está listo para presentarlo; la revisión del profesor sigue pendiente. A07 solo da seguimiento a sus observaciones y no bloquea la implementación.
 - **Luis:** sus cuatro pantallas están fuera de este repositorio hasta integrar A04 desde su cuenta.
 - **Pendiente:** motor definitivo, servidor, entrada real, consultas/persistencia y acceso. La creación de tablas es avance distinto de conectar esas operaciones.
 

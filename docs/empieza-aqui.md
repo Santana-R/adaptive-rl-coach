@@ -7,7 +7,7 @@ Hasta el 9, el objetivo es **estadísticas → motor → Análisis → Plan adap
 | Roberto | [A02](https://github.com/Santana-R/adaptive-rl-coach/issues/2): cálculo y primera regla. | Entrada, fórmula, resultado y ficha explicable registrados; pendientes identificados. | A09 → A10 → A17 → A18 → A19 → A26/A33/A34. |
 | Tadeo | [A06](https://github.com/Santana-R/adaptive-rl-coach/issues/6): servidor mínimo. | Otro integrante arranca el servidor y abre la demo en localhost. | A05 antes del 3 → A14 → apoyo A11/A19 → A25. |
 | Luis | [A04](https://github.com/Santana-R/adaptive-rl-coach/issues/4): subir sus cuatro vistas. | PR integrado con su autoría y rutas comprobadas. | A11 → apoyo Análisis → A27 → A36. |
-| David | [A07](https://github.com/Santana-R/adaptive-rl-coach/issues/7): revisión de las 30 tablas. | Puede explicar claves/cardinalidades/versiones y registrar la revisión. | A23 → A15 → A24. |
+| David | [A23](https://github.com/Santana-R/adaptive-rl-coach/issues/23): catálogo de ejercicios del motor. | El catálogo inicial se consulta con actividades activas compatibles y fichas revisadas. | A15 → A24. |
 
 [Abrir las cuatro próximas entregas](https://github.com/users/Santana-R/projects/1/views/1) · [Ver la cola del motor por persona](https://github.com/users/Santana-R/projects/1/views/3).
 
@@ -31,7 +31,7 @@ Tadeo comprueba temprano qué estadísticas reales entrega el proveedor. Roberto
 
 Un JSON guardado o sintético puede alimentar **el motor ejecutable** como respaldo identificado. Seleccionar nombres ficticios no equivale a procesar .replay. El uso compartido con datos reales requiere autenticación/propiedad verificadas; antes, el modo de prueba permanece local y explícito.
 
-La Fase 2 tiene 30 tablas creadas y evidencia documental; falta la revisión del 3 y conectar las operaciones. [Estado de Fase 2](fase2-estado.md).
+El equipo ya comprobó que el documento de Fase 2 está listo para presentarlo el 3. A07 solo registra la revisión y sus observaciones; el catálogo y las operaciones de la aplicación avanzan desde ahora sobre las 30 tablas existentes. [Estado de Fase 2](fase2-estado.md).
 
 Roberto mantiene el motor y A19 de extremo a extremo con [acompañamiento paso a paso](motor-paso-a-paso.md). Luis apoya presentación; Tadeo servidor; David consultas.
 

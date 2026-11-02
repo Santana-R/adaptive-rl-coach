@@ -1,6 +1,6 @@
 # Contrato inicial de API y datos
 
-**Base propuesta v1.0, preparada el 13 de octubre.** Las rutas internas y nombres normalizados son decisiones de diseño para coordinar la implementación. No son respuestas reales de Ballchasing ni endpoints ya desplegados. A05 comprueba proveedor, A07 revisa las 30 tablas reales y A08 implementa permisos, y sus ajustes se registran aquí. A01 revisa que el equipo entienda esta base.
+**Base propuesta v1.0, preparada el 13 de octubre.** Las rutas internas y nombres normalizados son decisiones de diseño para coordinar la implementación. No son respuestas reales de Ballchasing ni endpoints ya desplegados. A05 comprueba proveedor, A15/A24 verifican su mapeo al esquema existente y A08 implementa permisos; sus ajustes se registran aquí. A07 solo sigue las observaciones del documento y no bloquea estas tareas. A01 revisa que el equipo entienda esta base.
 
 
 ## Ajuste de integración · 1 de noviembre
@@ -120,7 +120,7 @@ Todos son sintéticos. Los objetos de ejemplo son el contenido de data; envolver
 | Pendiente técnico | Tarea | Resultado que debe actualizar la base |
 | --- | --- | --- |
 | Identidad Epic/Steam, tipos, permisos, privacidad, métricas/unidades y límites de cuenta | A05/A14 | Mapeo de una respuesta real saneada y decisiones verificadas |
-| Nombres SQL, relaciones, índices y snapshots | A07/A15/A24 | Diccionario validado y migraciones |
+| Nombres SQL, relaciones, índices y snapshots | A15/A24 | Diccionario validado y migraciones |
 | Google, token, rol/suspensión, RLS y propiedad | A08/A37 | Pruebas reales de permisos y sesión |
 | Umbrales, desempate y limitaciones | A02/A17/A26 | Configuración de reglas versionada |
 | Recursos compatibles y duración de ejercicios | A23 | Catálogo activo revisado |

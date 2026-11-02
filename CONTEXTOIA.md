@@ -32,7 +32,7 @@ Si la IA no puede leer el repositorio privado, indicar qué archivo o fragmento 
 | Parte | Estado documentado en esta revisión |
 | --- | --- |
 | Demo visual | Carga, Análisis y Plan navegables, con datos sintéticos y reglas ilustrativas. |
-| Fase 2 | Documento UML/explicación y 30 tablas verificadas en Supabase el 1 de noviembre; SQL y diccionario en el repo. |
+| Fase 2 | Documento comprobado por el equipo y listo para presentarlo, según confirmó Roberto. La revisión del profesor sigue pendiente; SQL y diccionario de las 30 tablas están en el repo. |
 | Pantallas de Luis | Cuatro vistas preparadas fuera del repo; su incorporación desde su cuenta sigue en A04. Comprobar el PR actual antes de asumir que faltan. |
 | Servidor y motor definitivo | Pendientes de implementación/conexión. |
 | Proveedor real, acceso y persistencia de la web | Pendientes de integración y comprobación. |
@@ -41,7 +41,7 @@ La demo se abre desde `public/carga.html`. Su selector valida nombres/cantidad d
 
 En la rama revisada no hay `src/` ni `package.json` de la aplicación. No indicar `npm start`, instalación de dependencias o endpoints como disponibles sin comprobar primero que esos archivos/comandos ya existen.
 
-La revisión del profesor de Fase 2 y la restauración del SQL en un proyecto nuevo siguen pendientes. El [estado de Fase 2](docs/fase2-estado.md) enlaza el PDF vigente; el binario todavía no está en el repositorio.
+El martes el profesor solo revisa el documento de Fase 2. Su preparación ya fue comprobada por el equipo; A07 queda para registrar y atender las observaciones que haga. No es un requisito previo del catálogo ni de otras tareas de implementación. La restauración del SQL en un proyecto nuevo sigue pendiente en A38, como comprobación técnica separada. El [estado de Fase 2](docs/fase2-estado.md) enlaza el PDF vigente; el binario todavía no está en el repositorio.
 
 ## 4. Equipo y tarea inicial
 
@@ -52,7 +52,7 @@ Este reparto corresponde al equipo de LBPWEB. Los integrantes de PROGSA pueden d
 | Roberto Santana Trujillo · Santana-R | Métricas, comparación, reglas, planes y función completa A19. | [A02: primera regla y casos comprobables](https://github.com/Santana-R/adaptive-rl-coach/issues/2). |
 | Omar Tadeo Gasca Deciga · OmarHub-star | Servidor, Ballchasing e integración. | [A06: Express y apertura local](https://github.com/Santana-R/adaptive-rl-coach/issues/6); después A05. |
 | Luis Enrique Almaguer Castillo · Lamaguer | Frontend, navegación y gráficas. | [A04: subir sus cuatro pantallas](https://github.com/Santana-R/adaptive-rl-coach/issues/4); después Carga y Plan. |
-| David Alonso Torres Guerrero · dvdatogro-123 | Datos, acceso, catálogo e historial. | [A07: revisar la base existente para el martes](https://github.com/Santana-R/adaptive-rl-coach/issues/7); después catálogo y guardado. |
+| David Alonso Torres Guerrero · dvdatogro-123 | Datos, acceso, catálogo e historial. | [A23: catálogo que consume el motor](https://github.com/Santana-R/adaptive-rl-coach/issues/23); después A15/A24. |
 
 La etiqueta `siguiente` señala una próxima entrega por persona y no significa trabajo iniciado. El orden cambia al completar entregas: consultar la issue y el tablero actuales. El catálogo de esta reorganización contiene 44 tareas; no iniciarlas todas ni duplicarlas al planificar.
 

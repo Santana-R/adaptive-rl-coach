@@ -11,7 +11,7 @@ Una web donde un jugador entra, registra su identidad, carga cinco replays de PC
 | [Contrato API/datos](contratos-api.md) | Rutas, objetos, unidades, estados, errores y ejemplos | Implementar y verificar; ajustar con evidencia |
 | [Trazabilidad de RF](../planning/trazabilidad-rf.csv) | Doce requisitos vinculados a pantallas, tareas, datos y pruebas | Consultar; añadir evidencia real al implementar |
 | [Flujo de pantallas](flujo-pantallas.md) | Trece pantallas, navegación y estados | Luis valida contra bosquejos en A03 |
-| [Diccionario de datos](diccionario-datos.md) | Entidades, propietarios, relaciones y snapshots | David revisa las 30 tablas en A07 y conecta consultas en A15/A24 |
+| [Diccionario de datos](diccionario-datos.md) | Entidades, propietarios, relaciones y snapshots | David consulta el esquema existente al preparar A23 y conecta consultas en A15/A24 |
 | [Casos del motor](casos-motor.md) | Cinco entradas/resultados esperados sintéticos | Roberto comprueba casos y define heurísticas explícitas en A02 |
 | [Nota de revisión](revision-base.md) | Plantilla pequeña con lo entendido, dudas y ajustes | Roberto completa A01; Tadeo revisa |
 
@@ -49,7 +49,7 @@ planning/examples/       Objetos del contrato preparados
 ## Trabajar en paralelo y cuándo cerrar
 El contrato/fixtures permiten construir una pantalla o función antes de que exista la API real. Los IDs de dependencia describen lo que debe estar conectado para cerrar la tarea. Cada ficha distingue primer paso, área, comprobación y entrega entre módulos. Si una prueba del proveedor cambia el diseño, registrar qué cambió y actualizar consumidores.
 
-A01 es la revisión inicial de esta base: puede cerrarse con dudas técnicas asignadas a sus tareas. A05 confirma Ballchasing, A07 el diseño y A08 permisos; cada una requiere su evidencia. Una tarea de integración necesita el recorrido real, revisión y código integrado. GitHub conserva el estado operativo.
+A01 es la revisión inicial de esta base: puede cerrarse con dudas técnicas asignadas a sus tareas. A05 confirma Ballchasing y A08 permisos. A07 solo registra y atiende observaciones del documento de Fase 2, que el equipo ya confirmó listo; no bloquea la implementación. Una tarea de integración necesita el recorrido real, revisión y código integrado. GitHub conserva el estado operativo.
 
 ## Aprendizaje con un camino definido
 Roberto construye A19 de extremo a extremo: consulta → cálculo → endpoint → pantalla. Reutiliza módulos comunes. Cada integrante deja explicación breve y revisa una conexión con otra área por escrito. No hay trabajo acompañado obligatorio. Aprender incluye poder explicar por qué una métrica es null, por qué un bloque no es comparable y qué conserva una versión del plan.
