@@ -1,0 +1,73 @@
+.navbar-color{
+    background-color: rgb(8, 15, 22);
+}
+.bodycolor{
+    background-color: rgb(15, 28, 41);
+}
+.mainbody{
+    background-image: linear-gradient(to top,rgb(15, 28, 41),rgb(21, 56, 51))
+}
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.accent{
+    background-color: rgb(13, 228, 196);
+}
+.text-navy{
+    color:rgb(15, 28, 41);
+}
+.text-bray{
+    color:rgb(179, 190, 205);
+}
+.right{
+    float:right;
+}
+.border-accent{
+    border-width: 2px;
+    border-color: rgb(13, 228, 196);
+    border-style:solid;
+}
+.bg-card{
+    background-color: rgb(29, 63, 81);
+}
+.border-card{
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(85, 118, 147);
+}
+.denotative{
+    border-left: double 5px rgb(13, 228, 196); 
+}
+#grayb{
+ transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+#grayb:hover{
+    background-color: rgb(29, 63, 81);   
+}
+.current{
+    background-color:rgb(29, 63, 81);
+}
+.text-justify{
+    text-align: justify;
+}
+.car-image{
+    width: 1000px !important;
+    height: 500px;
+    object-fit: cover ;
+}
+.mask{
+    background: linear-gradient(
+        180deg,
+        hsla(180, 100%, 0%, 0.9),
+        hsla(171, 89%, 14%, 0.4) 100%
+      )
+}
+.text-accent{
+    color:rgb(13, 228, 196);
+}
