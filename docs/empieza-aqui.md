@@ -11,6 +11,10 @@ Hasta el 9, el objetivo es **estadísticas → motor → Análisis → Plan adap
 
 [Abrir las cuatro próximas entregas](https://github.com/users/Santana-R/projects/1/views/1) · [Ver la cola del motor por persona](https://github.com/users/Santana-R/projects/1/views/3).
 
+## Trabajar con una IA
+
+Comparte [CONTEXTOIA.md](../CONTEXTOIA.md), tu issue y los archivos de la tarea con el asistente que prefieras. Pídele que explique cada paso y comando y espere tu Release antes de modificar recursos. El contexto no se carga automáticamente en todas las herramientas; solicita que lo lea o adjúntalo. Incluye un mensaje listo para empezar.
+
 ## Forma de avanzar
 
 1. Abrir la issue propia con etiqueta `siguiente` y seguir su primer paso.

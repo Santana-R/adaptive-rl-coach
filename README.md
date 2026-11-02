@@ -2,6 +2,10 @@
 
 Cinco partidas de Rocket League → métricas → prioridades explicables → plan → comparación posterior.
 
+## Apoyo con cualquier IA
+
+Lee [CONTEXTOIA.md](CONTEXTOIA.md) y tu issue actual antes de empezar. Puedes adjuntarlos a tu asistente favorito; el archivo incluye un mensaje de inicio, reparto, reglas, estado y la autorización por Release.
+
 ## Esta semana: motor funcionando para el 9 de noviembre
 
 Usaremos las pantallas existentes **Carga → Análisis → Plan**. El motor debe calcular sobre las entradas y adaptar la rutina; las vistas actuales todavía son una demo con reglas ilustrativas.
