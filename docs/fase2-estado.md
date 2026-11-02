@@ -1,6 +1,8 @@
-# Fase 2 · avance preparado y revisión pendiente
+# Fase 2 · documento listo y revisión del profesor pendiente
 
-Revisión académica: martes 3 de noviembre de 2026, según Roberto.
+Revisión académica del documento: martes 3 de noviembre de 2026, según Roberto.
+
+**Preparación comprobada:** Roberto confirmó que el equipo ya revisó el documento y está listo para presentarlo. La revisión y aprobación del profesor siguen pendientes. A07 solo registra su resultado y las correcciones que solicite; no es una revisión técnica adicional ni bloquea el catálogo u otras tareas.
 
 ## Evidencia disponible
 
@@ -16,7 +18,7 @@ El PDF quedó enlazado; no se pudo copiar su archivo binario al repositorio en e
 | Pendiente | Tarea |
 | --- | --- |
 | Revisión y observaciones del profesor. | A07, el 3 de noviembre. |
-| Restauración en un entorno nuevo. | A07/A38. |
+| Restauración en un entorno nuevo (comprobación técnica separada). | A38. |
 | Catálogo inicial utilizable por el motor. | A23. |
 | Consultas/guardado de bloques, métricas, análisis y planes. | A15/A24. |
 | Acceso y políticas de la aplicación. | A08/A12/A37. |
@@ -24,10 +26,10 @@ El PDF quedó enlazado; no se pudo copiar su archivo binario al repositorio en e
 
 Las tablas creadas cuentan como avance de Fase 2; las conexiones de la web y el motor siguen siendo entregas de implementación. La preparación asistida no se atribuye como trabajo individual de David ni de los demás.
 
-## Para explicar el martes
+## Seguimiento del martes
 
-1. Seguir usuarios/perfiles → bloques → replays/métricas → análisis/prioridades → planes/ejercicios.
-2. Explicar una relación 1:n y una n:m resuelta con tabla intermedia.
-3. Mostrar cómo objetivo_versiones y ejercicio_versiones conservan lo usado por el plan.
-4. Aclarar que planes representa cada versión; no existe plan_versiones del antiguo borrador.
-5. Explicar restricciones/triggers de cardinalidad y registrar las observaciones del profesor.
+1. Presentar el documento que ya está listo.
+2. Registrar las observaciones reales o indicar que el profesor no pidió cambios.
+3. Atender las correcciones solicitadas al documento, si las hubiera. Si no pide cambios, cerrar el seguimiento con una nota.
+
+El catálogo A23 puede comenzar desde ahora con el esquema existente. No se exige reconstruir tablas, restaurar el SQL ni revisar funciones/triggers como entregable adicional para esa revisión del documento.

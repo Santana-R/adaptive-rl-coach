@@ -4,7 +4,7 @@ Fechas comunicadas por Roberto. Las metas internas son propuestas; no implican h
 
 | Fecha de noviembre | Tipo | Resultado |
 | --- | --- | --- |
-| 3 | Revisión académica LBPWEB | Fase 2: explicar modelo/SQL existente y registrar observaciones. |
+| 3 | Revisión académica LBPWEB | Presentar el documento de Fase 2, ya comprobado y listo; registrar observaciones del profesor. |
 | 9 | Entrega académica PROGSA | Motor adaptativo funcionando. |
 | 16 | Entrega académica PROGSA | Proyecto completo. |
 | 23 | LBPWEB, **tentativo** | Paquete final; confirmar con el profesor. |
@@ -13,7 +13,7 @@ Fechas comunicadas por Roberto. Las metas internas son propuestas; no implican h
 
 | Periodo interno propuesto | Entregas |
 | --- | --- |
-| 1–3 | Roberto: primera regla/casos. Tadeo: servidor y prueba real del proveedor. Luis: subir su avance. David: revisión de las 30 tablas. |
+| 1–3 | Roberto: primera regla/casos. Tadeo: servidor y prueba real del proveedor. Luis: subir su avance. David: catálogo inicial del motor sobre las tablas existentes. |
 | 4–6 | Métricas, comparación, reglas, catálogo, plan, consultas/versiones y conexión a las tres vistas. |
 | 7–8 | Integración: dos bloques, faltantes/incompatibles, plataforma y minutos; ensayo y correcciones. |
 | 9 | Motor, evidencias del commit probado y fuente identificada. |
@@ -26,7 +26,7 @@ Del 9 al 15: completar acceso/perfil, carga privada robusta, objetivos, sesiones
 
 - Tadeo: A06 → A05 → A14 entrega servidor y estadísticas con contexto/unidades.
 - Roberto: A02 → A09 → A10 → A17 → A18 → A19 calcula decisiones y muestra Análisis.
-- David: A07 → A23/A15 → A24 entrega catálogo y conserva resultados/versiones.
+- David: A23 → A15 → A24 entrega catálogo y conserva resultados/versiones. A07 solo sigue el documento y no bloquea estas tareas.
 - Luis: A04 → A11/A27 conecta Carga/Plan y apoya Análisis.
 - A25 integra; A33 comprueba el motor; A34/A36 conservan evidencia y ensayo.
 

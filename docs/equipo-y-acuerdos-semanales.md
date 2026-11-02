@@ -5,7 +5,7 @@
 | Roberto Santana Trujillo | Métricas, comparación, reglas, planes y A19 completo. | Motor con acompañamiento y decisiones deportivas explicables. |
 | Omar Tadeo Gasca Deciga | Servidor, proveedor e integración. | Arranque, prueba real, entrada normalizada e integración. |
 | Luis Enrique Almaguer Castillo | Frontend, navegación y gráficas. | Subir su avance; conectar Carga/Plan, apoyar Análisis y ensayo. |
-| David Alonso Torres Guerrero | Datos, acceso, catálogo e historial. | Fase 2, catálogo y guardado/versiones. |
+| David Alonso Torres Guerrero | Datos, acceso, catálogo e historial. | A23: catálogo; después consultas y guardado/versiones. A07 solo sigue observaciones del documento. |
 
 Este reparto corresponde a LBPWEB; los integrantes de PROGSA pueden diferir. No atribuye participación a personas de la otra materia.
 

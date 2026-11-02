@@ -107,7 +107,7 @@
       "due": "2026-11-03",
       "milestone": 1,
       "phase": "fase2",
-      "focus": true
+      "focus": false
     },
     {
       "task_id": "A08",
@@ -283,7 +283,7 @@
       "due": "2026-11-04",
       "milestone": 2,
       "phase": "motor",
-      "focus": false
+      "focus": true
     },
     {
       "task_id": "A24",
@@ -517,7 +517,7 @@
       "focus": false
     }
   ],
-  "planning_revision": "2026-10-13",
+  "planning_revision": "2026-11-01",
   "planning_revision_published_to_github": true,
   "notion_guide_url": "https://app.notion.com/p/3f7dd7559dd881bfbbceeff2d19b9d5f",
   "project_dates_synced": false,
@@ -554,5 +554,6 @@
       "url": "https://github.com/users/Santana-R/projects/1/views/4",
       "purpose": "Referencia histórica; no fechas vigentes"
     }
-  ]
+  ],
+  "document_review_scope": "Documento Fase 2 confirmado listo por Roberto; A07 registra observaciones del profesor. A23 es la próxima tarea de David y la implementación no depende de A07."
 }

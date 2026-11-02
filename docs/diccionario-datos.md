@@ -444,4 +444,4 @@ Claves: PRIMARY KEY (id_usuario); FOREIGN KEY (id_usuario) REFERENCES auth.users
 
 ## Uso durante la implementación
 
-A07 revisa/explica la base. A23 prepara catálogo; A15 guarda perfil/bloques/métricas; A24 guarda análisis/prioridades/planes y versiones; A08 define permisos antes del uso compartido. Comprobar conservación de versiones al cambiar metas/catálogo. Las políticas y operaciones conectadas todavía no se declaran implementadas. El SQL es una instantánea, no una migración para el proyecto existente.
+El esquema existente se consulta durante cada implementación. A07 solo sigue el documento de Fase 2 y no bloquea el desarrollo. A23 prepara catálogo; A15 guarda perfil/bloques/métricas; A24 guarda análisis/prioridades/planes y versiones; A08 define permisos antes del uso compartido. Comprobar conservación de versiones al cambiar metas/catálogo. Las políticas y operaciones conectadas todavía no se declaran implementadas. El SQL es una instantánea, no una migración para el proyecto existente.

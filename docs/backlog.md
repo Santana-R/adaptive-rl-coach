@@ -6,7 +6,7 @@
 
 | Tarea | Persona | Meta interna | Estado inicial |
 | --- | --- | --- | --- |
-| [A07: Preparar la revisión de Fase 2 sobre las 30 tablas existentes](https://github.com/Santana-R/adaptive-rl-coach/issues/7) | David | 2026-11-03 | Siguiente |
+| [A07: Registrar y atender observaciones del documento de Fase 2](https://github.com/Santana-R/adaptive-rl-coach/issues/7) | David | 2026-11-03 | Documento listo; seguimiento de revisión |
 
 ## PROGSA · Motor adaptativo · 9 nov
 
@@ -25,7 +25,7 @@
 | [A17: Implementar reglas con máximo tres prioridades](https://github.com/Santana-R/adaptive-rl-coach/issues/17) | Roberto | 2026-11-05 | En cola |
 | [A18: Generar planes compatibles y versionados](https://github.com/Santana-R/adaptive-rl-coach/issues/18) | Roberto | 2026-11-06 | En cola |
 | [A19: Servir y mostrar el análisis calculado por el motor](https://github.com/Santana-R/adaptive-rl-coach/issues/19) | Roberto | 2026-11-06 | En cola |
-| [A23: Preparar el catálogo versionado que consume el motor](https://github.com/Santana-R/adaptive-rl-coach/issues/23) | David | 2026-11-04 | En cola |
+| [A23: Preparar el catálogo versionado que consume el motor](https://github.com/Santana-R/adaptive-rl-coach/issues/23) | David | 2026-11-04 | Siguiente |
 | [A24: Persistir versiones y snapshots del plan](https://github.com/Santana-R/adaptive-rl-coach/issues/24) | David | 2026-11-06 | En cola |
 | [A25: Integrar el recorrido del motor para el 9](https://github.com/Santana-R/adaptive-rl-coach/issues/25) | Tadeo | 2026-11-08 | En cola |
 | [A26: Calibrar heurísticas y documentar límites](https://github.com/Santana-R/adaptive-rl-coach/issues/26) | Roberto | 2026-11-06 | En cola |

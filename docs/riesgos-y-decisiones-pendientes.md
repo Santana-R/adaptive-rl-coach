@@ -1,7 +1,7 @@
 # Pendientes concretos · 1 de noviembre
 
 - **Proveedor:** A05 comprueba datos/campos con un replay autorizado antes del 3; registrar bloqueo temprano. Respaldo JSON/sintético identificado.
-- **Datos:** 30 tablas verificadas y SQL capturado. Restauración nueva y consultas/guardado pendientes en A07/A15/A24/A38.
+- **Datos:** 30 tablas verificadas y SQL capturado. Restauración nueva pendiente en A38; consultas/guardado en A15/A24. El documento de Fase 2 está comprobado y listo; A07 solo sigue observaciones del profesor, sin bloquear desarrollo.
 - **Reglas:** A02/A17/A26 definen/comprueban criterios con Roberto. Valores de demo ilustrativos; calibración con evidencia real pendiente.
 - **Interfaz:** Luis sube sus cuatro vistas y después conecta Carga/Plan y apoya Análisis.
 - **Acceso:** A08/A12/A37 completan identidad/propiedad/suspensión antes del uso compartido real.
