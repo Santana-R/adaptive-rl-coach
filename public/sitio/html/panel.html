@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Panel</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="../css/mdb.min.css">
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body class="mainbody appbody">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
+        <a href="panel.html" class="sidebar-link active" aria-current="page">Panel</a>
+        <a href="replays.html" class="sidebar-link">Replays</a>
+        <a href="objetivos.html" class="sidebar-link">Objetivos</a>
+        <a href="plan.html" class="sidebar-link">Plan</a>
+        <a href="sesiones.html" class="sidebar-link">Sesiones</a>
+        <a href="perfil.html" class="sidebar-link">Perfil</a>
+        <a href="helpme.html" class="sidebar-link">Ayuda</a>
+        <div class="sidebar-footer">
+          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+        </div>
+      </aside>
+      <main class="app-main">
+        <h1 class="fw-bold text-light mb-1">Resumen del bloque 02</h1>
+        <p class="text-bray mb-4">2v2 competitivo · 5 partidas · Comparado con bloque 01</p>
+        <div class="row mb-4">
+          <div class="col-3"><div class="stat-card"><div class="stat-label">Tiros por partida</div><div class="stat-value">3.8</div><div class="stat-sub">Anterior: 3.4</div></div></div>
+          <div class="col-3"><div class="stat-card"><div class="stat-label">Eficiencia de tiro</div><div class="stat-value">31 %</div><div class="stat-sub">Anterior: 27 %</div></div></div>
+          <div class="col-3"><div class="stat-card"><div class="stat-label">Boost bajo (0-25)</div><div class="stat-value">39 %</div><div class="stat-sub">Anterior: 31 %</div></div></div>
+          <div class="col-3"><div class="stat-card"><div class="stat-label">Velocidad media</div><div class="stat-value">1,548</div><div class="stat-sub">Variación descriptiva</div></div></div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-8">
+            <div class="card bg-card border-card h-100">
+              <div class="card-body">
+                <h5 class="card-title fw-bold text-light mb-1">Métrica: eficiencia de tiro</h5>
+                <p class="text-bray mb-0">Porcentaje (%)</p>
+                <div class="bars-chart">
+                  <div class="bar-col"><span class="fw-bold">27 %</span><div class="bar" style="height: 90px;"></div><span class="text-bray">Bloque 01</span></div>
+                  <div class="bar-col"><span class="fw-bold">31 %</span><div class="bar" style="height: 105px;"></div><span class="text-bray">Bloque 02</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card bg-card border-card denotative pb-4 mb-3">
+              <div class="card-body">
+                <h5 class="card-title fw-bold text-light mb-2">Prioridad: boost</h5>
+                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
+                <li>Tiempo con 0-25 unidades:</li>
+                <li>31 % anterior → 39 % actual.</li>
+                <li>Cambio: +8 puntos porcentuales.</li>
+                <li>Revisar rutas de recarga.</li>
+                </ul>
+              </div>
+            </div>
+            <button type="button" class="btn-rl btn-rl-outline w-100 mb-3" data-mdb-ripple-init data-mdb-ripple-color="info">Ver evidencia</button>
+            <button type="button" class="btn-rl btn-rl-accent w-100" data-mdb-ripple-init data-mdb-ripple-color="light">Ver plan completo</button>
+          </div>
+        </div>
+        <div class="mb-3">
+          <button type="button" class="btn-rl btn-rl-outline me-3" data-mdb-ripple-init data-mdb-ripple-color="info">Bloque anterior</button>
+          <button type="button" class="btn-rl btn-rl-outline " data-mdb-ripple-init data-mdb-ripple-color="info">Bloque siguiente</button>
+        </div>
+        <p class="text-bray">Sin bloque anterior: Línea base. Sin dato suficiente: No evaluable.</p>
+        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
+      </main>
+    </div>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+  </body>
+</html>

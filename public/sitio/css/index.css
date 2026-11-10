@@ -36,6 +36,9 @@ body {
 .bg-card{
     background-color: rgb(29, 63, 81);
 }
+.card.bg-card{
+    background-color: rgb(29, 63, 81) !important;
+}
 .border-card{
     border-style: solid;
     border-width: 2px;
@@ -70,4 +73,207 @@ body {
 }
 .text-accent{
     color:rgb(13, 228, 196);
+}
+
+.appbody{
+    background-image: none;
+    background-color: rgb(9, 24, 35);
+}
+.app-shell{
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar{
+    width: 220px;
+    flex-shrink: 0;
+    background-color: rgb(8, 15, 22);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar-brand{
+    color: rgb(13, 228, 196);
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    margin: 0 0 1.5rem 0.5rem;
+}
+.sidebar-link{
+    display: block;
+    padding: .6rem 1rem;
+    margin-bottom: .5rem;
+    border-radius: .5rem;
+    border: 1px solid transparent;
+    color: rgb(179, 190, 205);
+    text-decoration: none;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.sidebar-link:hover{
+    background-color: rgb(29, 63, 81);
+    color: rgb(179, 190, 205);
+}
+.sidebar-link.active{
+    background-color: rgb(29, 63, 81);
+    border-color: rgb(13, 228, 196);
+    color: rgb(13, 228, 196);
+}
+.sidebar-footer{
+    margin-top: auto;
+}
+.app-main{
+    flex: 1;
+    min-width: 0;
+    padding: 2rem 2.5rem;
+}
+.app-note{
+    color: rgb(179, 190, 205);
+    font-size: .8rem;
+    margin-top: 1.5rem;
+}
+
+/* Botones */
+.btn-rl{
+    display: inline-block;
+    padding: .5rem 1.25rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+.btn-rl-accent{
+    background-color: rgb(13, 228, 196);
+    color: rgb(15, 28, 41);
+    border: 0;
+}
+.btn-rl-outline{
+    background-color: rgb(15, 28, 41);
+    color: #fff;
+    border: 2px solid rgb(13, 228, 196);
+}
+
+/* Filas tipo tabla (cada fila es una tarjeta) */
+.table-head,
+.table-row{
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    padding: .5rem 1rem;
+}
+.table-head{
+    color: rgb(13, 228, 196);
+    font-weight: 700;
+}
+.table-row{
+    background-color: rgb(29, 63, 81);
+    border: 2px solid rgb(85, 118, 147);
+    border-radius: 1rem;
+    color: #fff;
+    padding: .9rem 1rem;
+    margin-bottom: .75rem;
+}
+.table-row.selected{
+    border-color: rgb(13, 228, 196);
+}
+.link-actions{
+    color: rgb(13, 228, 196);
+}
+.link-actions a{
+    color: rgb(13, 228, 196);
+    text-decoration: none;
+}
+.link-actions a:hover{
+    text-decoration: underline;
+}
+
+/* Tarjetas de métricas */
+.stat-card{
+    background-color: rgb(29, 63, 81);
+    border: 2px solid rgb(85, 118, 147);
+    border-radius: 1rem;
+    padding: 1rem;
+    height: 100%;
+}
+.stat-card .stat-label{ color: rgb(179, 190, 205); margin-bottom: .25rem; }
+.stat-card .stat-value{ color: #fff; font-size: 1.9rem; font-weight: 700; line-height: 1.2; }
+.stat-card .stat-sub{ color: rgb(13, 228, 196); font-size: .9rem; }
+
+/* Gráfica de barras */
+.bars-chart{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 200px;
+    padding-top: 1rem;
+}
+.bars-chart .bar-col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    color: #fff;
+}
+.bars-chart .bar{
+    width: 70px;
+    background-color: rgb(13, 228, 196);
+    margin: .25rem 0 .5rem 0;
+}
+.bar-track{
+    background-color: rgb(15, 28, 41);
+    border-radius: .25rem;
+    height: 18px;
+    flex: 1;
+}
+.bar-fill{
+    background-color: rgb(13, 228, 196);
+    height: 100%;
+    border-radius: .25rem;
+}
+
+.step-num{
+    color: rgb(13, 228, 196);
+    font-weight: 700;
+    font-size: 1.2rem;
+    width: 2rem;
+}
+
+.form-outline.bodycolor .form-control{
+    color: #fff;
+}
+
+.admin .sidebar{
+    background-color: rgb(22, 19, 9);
+}
+.admin .sidebar-brand{
+    color: rgb(247, 190, 74);
+}
+.admin .sidebar-link:hover{
+    background-color: rgb(60, 48, 24);
+}
+.admin .sidebar-link.active{
+    background-color: rgb(80, 62, 28);
+    border-color: rgb(247, 190, 74);
+    color: rgb(247, 190, 74);
+}
+.text-gold{
+    color: rgb(247, 190, 74);
+}
+.denotative-gold{
+    border-left: solid 5px rgb(247, 190, 74);
+}
+.admin .stat-card{
+    background-color: rgb(37, 30, 18);
+    border-color: rgb(120, 92, 40);
+}
+.admin .stat-card .stat-sub{
+    color: rgb(247, 190, 74);
+}
+.admin .link-actions,
+.admin .link-actions a{
+    color: rgb(247, 190, 74);
+}
+
+@media (max-width: 768px){
+    .app-shell{ flex-direction: column; }
+    .sidebar{ width: 100%; }
 }

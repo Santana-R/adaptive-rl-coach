@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Administración - Ejercicios</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="../css/mdb.min.css">
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body class="mainbody appbody admin">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <h5 class="sidebar-brand">ADMINISTRACIÓN</h5>
+        <a href="admin-resumen.html" class="sidebar-link">Resumen</a>
+        <a href="#" class="sidebar-link">Progreso</a>
+        <a href="admin-usuarios.html" class="sidebar-link">Usuarios</a>
+        <a href="admin-ejercicios.html" class="sidebar-link active" aria-current="page">Ejercicios</a>
+        <a href="#" class="sidebar-link">Errores</a>
+        <div class="sidebar-footer">
+          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+        </div>
+      </aside>
+      <main class="app-main">
+        <h1 class="fw-bold text-light mb-1">Catálogo de ejercicios</h1>
+        <p class="text-bray mb-3">El motor selecciona actividades activas; el catálogo debe cargarse antes de generar planes.</p>
+        <div class="row align-items-end mb-2">
+          <div class="col-6">
+            <label class="text-bray mb-1" for="buscare">Buscar</label>
+            <div data-mdb-input-init class="form-outline bodycolor">
+              <input type="text" id="buscare" class="form-control" />
+              <label class="form-label" for="buscare">Tiro, boost o nombre</label>
+            </div>
+          </div>
+          <div class="col-3"><button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Mostrar todos</button></div>
+          <div class="col-3"><button type="button" class="btn-rl btn-rl-accent w-100" data-mdb-ripple-init data-mdb-ripple-color="light">Nuevo ejercicio</button></div>
+        </div>
+        <p class="text-bray mb-3">Filtros: Prioridad · Plataforma · Estado</p>
+        <div class="mb-3">
+        <div class="table-head" style="grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr;"><span>Ejercicio</span><span>Prioridad</span><span>Plataforma</span><span>Duración</span><span>Estado</span></div>
+        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr;"><span>Rutas de recarga</span><span>Boost</span><span>Epic / Steam</span><span>15 min</span><span>Activo</span></div>
+        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr;"><span>Tiro: finalización</span><span>Tiro</span><span>Epic / Steam</span><span>12 min</span><span>Activo</span></div>
+        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr;"><span>Recuperaciones</span><span>Movimiento</span><span>Steam</span><span>10 min</span><span>Inactivo</span></div>
+        </div>
+        <p class="link-actions mb-4">Acciones: <a href="#">Ver detalle</a> · <a href="#">Editar</a> · <a href="#">Desactivar</a> · <a href="#">Eliminar si nunca se utilizó</a></p>
+        <div class="card bg-card border-card denotative-gold pb-4 ">
+              <div class="card-body">
+                <h5 class="card-title fw-bold text-light mb-2">Ficha del ejercicio y activación</h5>
+                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
+                <li>Finalidad, instrucciones, meta, dificultad y recurso. Guardar conserva borrador.</li>
+                <li>Activar requiere ficha completa y recurso revisado; conserva versiones anteriores.</li>
+                </ul>
+              </div>
+            </div>
+        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
+      </main>
+    </div>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Administración - Usuarios</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="../css/mdb.min.css">
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body class="mainbody appbody admin">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <h5 class="sidebar-brand">ADMINISTRACIÓN</h5>
+        <a href="admin-resumen.html" class="sidebar-link">Resumen</a>
+        <a href="#" class="sidebar-link">Progreso</a>
+        <a href="admin-usuarios.html" class="sidebar-link active" aria-current="page">Usuarios</a>
+        <a href="admin-ejercicios.html" class="sidebar-link">Ejercicios</a>
+        <a href="#" class="sidebar-link">Errores</a>
+        <div class="sidebar-footer">
+          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+        </div>
+      </aside>
+      <main class="app-main">
+        <h1 class="fw-bold text-light mb-4">Administración de usuarios</h1>
+        <div class="row align-items-end mb-2">
+          <div class="col-6">
+            <label class="text-bray mb-1" for="buscaru">Buscar por nombre o correo</label>
+            <div data-mdb-input-init class="form-outline bodycolor">
+              <input type="text" id="buscaru" class="form-control" value="Jugador" />
+              <label class="form-label" for="buscaru">Nombre o correo</label>
+            </div>
+          </div>
+          <div class="col-3"><button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Mostrar todos</button></div>
+        </div>
+        <p class="text-bray mb-3">Filtros: Rol · Estado</p>
+        <div class="mb-3">
+        <div class="table-head" style="grid-template-columns: 1.5fr 2fr 1.5fr 1.2fr 1.2fr;"><span>Usuario</span><span>Correo</span><span>Rol</span><span>Estado</span><span>Último acceso</span></div>
+        <div class="table-row" style="grid-template-columns: 1.5fr 2fr 1.5fr 1.2fr 1.2fr;"><span>Jugador 01</span><span>j01@correo.mx</span><span>Jugador</span><span>Activo</span><span>07/10</span></div>
+        <div class="table-row" style="grid-template-columns: 1.5fr 2fr 1.5fr 1.2fr 1.2fr;"><span>Jugador 02</span><span>j02@correo.mx</span><span>Jugador</span><span>Suspendido</span><span>05/10</span></div>
+        <div class="table-row" style="grid-template-columns: 1.5fr 2fr 1.5fr 1.2fr 1.2fr;"><span>Admin 01</span><span>admin@correo.mx</span><span>Administrador</span><span>Activo</span><span>Hoy</span></div>
+        </div>
+        <p class="link-actions mb-4">Acciones de cuenta: <a href="#">Ver</a> · <a href="#">Editar datos permitidos</a> · <a href="#">Suspender / Activar</a></p>
+        <div class="card bg-card border-card denotative-gold pb-4 ">
+              <div class="card-body">
+                <h5 class="card-title fw-bold text-light mb-2">Suspender conserva el historial</h5>
+                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
+                <li>No hay eliminación completa de usuarios ni cambio libre de rol.</li>
+                </ul>
+              </div>
+            </div>
+        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
+      </main>
+    </div>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+  </body>
+</html>

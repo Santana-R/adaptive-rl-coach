@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Perfil</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="../css/mdb.min.css">
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body class="mainbody appbody">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
+        <a href="panel.html" class="sidebar-link">Panel</a>
+        <a href="replays.html" class="sidebar-link">Replays</a>
+        <a href="objetivos.html" class="sidebar-link">Objetivos</a>
+        <a href="plan.html" class="sidebar-link">Plan</a>
+        <a href="sesiones.html" class="sidebar-link">Sesiones</a>
+        <a href="perfil.html" class="sidebar-link active" aria-current="page">Perfil</a>
+        <a href="helpme.html" class="sidebar-link">Ayuda</a>
+        <div class="sidebar-footer">
+          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+        </div>
+      </aside>
+      <main class="app-main">
+        <h1 class="fw-bold text-light mb-4">Perfil y configuración inicial</h1>
+        <form>
+          <div class="row">
+            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
+              <input type="text" id="nombre" class="form-control" value="JugadorRL" />
+              <label class="form-label" for="nombre">Nombre visible</label>
+            </div></div>
+            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
+              <input type="text" id="plataforma" class="form-control" value="Steam" />
+              <label class="form-label" for="plataforma">Plataforma</label>
+            </div></div>
+          </div>
+          <div class="row">
+            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
+              <input type="text" id="idplat" class="form-control" value="ID de la cuenta Steam" />
+              <label class="form-label" for="idplat">Identificador de plataforma</label>
+            </div></div>
+            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
+              <input type="text" id="modalidad" class="form-control" value="2v2 competitivo" />
+              <label class="form-label" for="modalidad">Modalidad principal</label>
+            </div></div>
+          </div>
+          <div class="row">
+            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
+              <input type="text" id="minutos" class="form-control" value="45" />
+              <label class="form-label" for="minutos">Minutos por sesión</label>
+            </div></div>
+            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
+              <input type="text" id="dias" class="form-control" value="4" />
+              <label class="form-label" for="dias">Días disponibles por semana</label>
+            </div></div>
+          </div>
+          <div class="row">
+            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
+              <input type="text" id="rango" class="form-control" value="Diamond II · Temporada indicada" />
+              <label class="form-label" for="rango">Rango declarado y temporada</label>
+            </div></div>
+            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
+              <input type="text" id="fecha" class="form-control" value="05/10/2026" />
+              <label class="form-label" for="fecha">Fecha del registro</label>
+            </div></div>
+          </div>
+          <div class="row">
+            <div class="col-12"><div data-mdb-input-init class="form-outline bodycolor mb-4">
+              <input type="text" id="enfoque" class="form-control" value="Administración de boost" />
+              <label class="form-label" for="enfoque">Enfoque inicial: prepara una sugerencia en Objetivos</label>
+            </div></div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-8">
+              <div class="card bg-card border-card denotative pb-4 h-100">
+              <div class="card-body">
+                <h5 class="card-title fw-bold text-light mb-2">Fuente y seguimiento</h5>
+                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
+                <li>Rango declarado por el jugador.</li>
+                <li>El enfoque aún necesita una meta medible.</li>
+                </ul>
+              </div>
+            </div>
+            </div>
+            <div class="col-4">
+              <button type="button" class="btn-rl btn-rl-accent w-100 mb-3" data-mdb-ripple-init data-mdb-ripple-color="light">Guardar perfil</button>
+              <button type="button" class="btn-rl btn-rl-outline w-100 mb-3" data-mdb-ripple-init data-mdb-ripple-color="info">Definir objetivo</button>
+              <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cancelar</button>
+            </div>
+          </div>
+        </form>
+        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
+      </main>
+    </div>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+  </body>
+</html>

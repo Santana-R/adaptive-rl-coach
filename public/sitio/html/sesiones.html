@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Sesiones</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="../css/mdb.min.css">
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body class="mainbody appbody">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
+        <a href="panel.html" class="sidebar-link">Panel</a>
+        <a href="replays.html" class="sidebar-link">Replays</a>
+        <a href="objetivos.html" class="sidebar-link">Objetivos</a>
+        <a href="plan.html" class="sidebar-link">Plan</a>
+        <a href="sesiones.html" class="sidebar-link active" aria-current="page">Sesiones</a>
+        <a href="perfil.html" class="sidebar-link">Perfil</a>
+        <a href="helpme.html" class="sidebar-link">Ayuda</a>
+        <div class="sidebar-footer">
+          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+        </div>
+      </aside>
+      <main class="app-main">
+        <h1 class="fw-bold text-light mb-1">Sesiones e historial</h1>
+        <p class="text-bray mb-3">Cada registro describe práctica declarada y conserva la versión del plan realizada.</p>
+        <div class="row align-items-end mb-4">
+          <div class="col-6">
+            <label class="text-bray mb-1" for="periodo">Buscar / Periodo</label>
+            <div data-mdb-input-init class="form-outline bodycolor">
+              <input type="text" id="periodo" class="form-control" value="Últimos 30 días" />
+              <label class="form-label" for="periodo">Periodo</label>
+            </div>
+          </div>
+          <div class="col-3"><button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Mostrar todos</button></div>
+          <div class="col-3"><button type="button" class="btn-rl btn-rl-accent w-100" data-mdb-ripple-init data-mdb-ripple-color="light">Nueva sesión</button></div>
+        </div>
+        <div class="mb-3">
+        <div class="table-head" style="grid-template-columns: 1fr 1fr 1fr 2fr 1.5fr 1.5fr;"><span>Fecha</span><span>Plan</span><span>Minutos</span><span>Ejercicios</span><span>Dificultad</span><span>Estado</span></div>
+        <div class="table-row" style="grid-template-columns: 1fr 1fr 1fr 2fr 1.5fr 1.5fr;"><span>07/10</span><span>v2</span><span>42</span><span>3 de 4 · 75 %</span><span>Adecuada</span><span>Parcial</span></div>
+        <div class="table-row" style="grid-template-columns: 1fr 1fr 1fr 2fr 1.5fr 1.5fr;"><span>05/10</span><span>v2</span><span>45</span><span>4 de 4 · 100 %</span><span>Alta</span><span>Completa</span></div>
+        <div class="table-row" style="grid-template-columns: 1fr 1fr 1fr 2fr 1.5fr 1.5fr;"><span>03/10</span><span>v2</span><span>38</span><span>3 de 4 · 75 %</span><span>Adecuada</span><span>Parcial</span></div>
+        </div>
+        <p class="link-actions mb-4">Fila seleccionada: <a href="#">Ver detalle</a> · <a href="#">Editar</a> · <a href="#">Eliminar con confirmación</a></p>
+        <div class="card bg-card border-card denotative pb-4 ">
+              <div class="card-body">
+                <h5 class="card-title fw-bold text-light mb-2">Resumen del plan v2</h5>
+                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
+                <li>10 de 12 actividades completadas: 83 % al redondear.</li>
+                <li>1 sesión completa y 2 parciales. Una sesión reporta dificultad Alta.</li>
+                <li>Las sesiones muestran práctica; el siguiente bloque permite evaluar rendimiento.</li>
+                </ul>
+              </div>
+            </div>
+        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
+      </main>
+    </div>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Replays</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="../css/mdb.min.css">
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body class="mainbody appbody">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
+        <a href="panel.html" class="sidebar-link">Panel</a>
+        <a href="replays.html" class="sidebar-link active" aria-current="page">Replays</a>
+        <a href="objetivos.html" class="sidebar-link">Objetivos</a>
+        <a href="plan.html" class="sidebar-link">Plan</a>
+        <a href="sesiones.html" class="sidebar-link">Sesiones</a>
+        <a href="perfil.html" class="sidebar-link">Perfil</a>
+        <a href="helpme.html" class="sidebar-link">Ayuda</a>
+        <div class="sidebar-footer">
+          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+        </div>
+      </aside>
+      <main class="app-main">
+        <h1 class="fw-bold text-light mb-4">Carga e historial de replays</h1>
+        <div class="card bg-card border-card denotative pb-4 mb-4">
+              <div class="card-body">
+                <h5 class="card-title fw-bold text-light mb-2">Bloque nuevo: cinco archivos .replay distintos</h5>
+                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
+                <li>Mismo jugador, modalidad y tipo de partida. Carga disponible desde PC.</li>
+                <li>La pantalla informará el límite de tamaño configurado.</li>
+                </ul>
+              </div>
+            </div>
+        <div class="mb-3">
+          <button type="button" class="btn-rl btn-rl-outline me-3" data-mdb-ripple-init data-mdb-ripple-color="info">Seleccionar archivos</button>
+          <button type="button" class="btn-rl btn-rl-accent " data-mdb-ripple-init data-mdb-ripple-color="light">Procesar bloque</button>
+        </div>
+        <h6 class="fw-bold text-accent">Selección: 5 de 5 archivos</h6>
+        <p class="text-light mb-1">Partida 1 · Partida 2 · Partida 3 · Partida 4 · Partida 5</p>
+        <p class="text-bray fs-6 mb-4">Acciones por archivo: Quitar / Reemplazar</p>
+        <div class="mb-3">
+        <div class="table-head" style="grid-template-columns: 1fr 2fr 1fr 1.5fr 1.5fr;"><span>Bloque</span><span>Contexto</span><span>Partidas</span><span>Estado</span><span>Acción</span></div>
+        <div class="table-row" style="grid-template-columns: 1fr 2fr 1fr 1.5fr 1.5fr;"><span>03</span><span>2v2 competitivo</span><span>5 de 5</span><span>Procesando</span><span>Ver estado</span></div>
+        <div class="table-row" style="grid-template-columns: 1fr 2fr 1fr 1.5fr 1.5fr;"><span>02</span><span>2v2 competitivo</span><span>5 de 5</span><span>Completo</span><span>Ver análisis</span></div>
+        <div class="table-row" style="grid-template-columns: 1fr 2fr 1fr 1.5fr 1.5fr;"><span>01</span><span>2v2 competitivo</span><span>5 de 5</span><span>Completo</span><span>Ver análisis</span></div>
+        </div>
+        <p class="text-bray">Reintentar se ofrece ante fallas recuperables. Ver análisis exige cinco partidas válidas.</p>
+        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
+      </main>
+    </div>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+  </body>
+</html>

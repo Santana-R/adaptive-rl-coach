@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Objetivos</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="../css/mdb.min.css">
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body class="mainbody appbody">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
+        <a href="panel.html" class="sidebar-link">Panel</a>
+        <a href="replays.html" class="sidebar-link">Replays</a>
+        <a href="objetivos.html" class="sidebar-link active" aria-current="page">Objetivos</a>
+        <a href="plan.html" class="sidebar-link">Plan</a>
+        <a href="sesiones.html" class="sidebar-link">Sesiones</a>
+        <a href="perfil.html" class="sidebar-link">Perfil</a>
+        <a href="helpme.html" class="sidebar-link">Ayuda</a>
+        <div class="sidebar-footer">
+          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+        </div>
+      </aside>
+      <main class="app-main">
+        <h1 class="fw-bold text-light mb-1">Gestión de objetivos</h1>
+        <p class="text-bray mb-3">Un objetivo principal de cada tipo por modalidad. Los anteriores conservan su historia.</p>
+        <div class="row align-items-end mb-2">
+          <div class="col-6">
+            <label class="text-bray mb-1" for="buscar">Buscar</label>
+            <div data-mdb-input-init class="form-outline bodycolor">
+              <input type="text" id="buscar" class="form-control" />
+              <label class="form-label" for="buscar">Nombre del objetivo</label>
+            </div>
+          </div>
+          <div class="col-3"><button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Mostrar todos</button></div>
+          <div class="col-3"><button type="button" class="btn-rl btn-rl-accent w-100" data-mdb-ripple-init data-mdb-ripple-color="light">Nuevo objetivo</button></div>
+        </div>
+        <p class="text-bray mb-3">Filtros: Tipo · Estado · Modalidad</p>
+        <div class="mb-3">
+        <div class="table-head" style="grid-template-columns: 2fr 1.5fr 1.5fr 2fr 1fr;"><span>Objetivo</span><span>Tipo</span><span>Meta</span><span>Evidencia / avance</span><span>Estado</span></div>
+        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 2fr 1fr;"><span>Mejorar tiro</span><span>Rendimiento</span><span>Superar 35 %</span><span>28 % inicial → 36 %</span><span>Cumplido</span></div>
+        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 2fr 1fr;"><span>Completar 4 sesiones</span><span>Entrenamiento</span><span>4 · 05-11 oct</span><span>1 de 4 completas · 25 %</span><span>Activo</span></div>
+        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 2fr 1fr;"><span>Reducir boost bajo</span><span>Rendimiento</span><span>Menor a 32 %</span><span>39 % actual</span><span>Activo</span></div>
+        </div>
+        <p class="link-actions mb-4">Fila seleccionada: <a href="#">Ver detalle</a> · <a href="#">Editar</a> · <a href="#">Archivar</a> · <a href="#">Eliminar si no tiene vínculos</a></p>
+        <div class="card bg-card border-card denotative pb-4 ">
+              <div class="card-body">
+                <h5 class="card-title fw-bold text-light mb-2">La evidencia depende del tipo de meta</h5>
+                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
+                <li>Rendimiento: valores de bloques comparables. Entrenamiento: sesiones completas.</li>
+                <li>Cambiar una meta afecta al siguiente plan; conserva los anteriores.</li>
+                </ul>
+              </div>
+            </div>
+        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
+      </main>
+    </div>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+  </body>
+</html>
