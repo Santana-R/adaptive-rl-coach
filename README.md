@@ -32,10 +32,10 @@ Piezas principales 4–6 e integración/ensayo 7–8 son metas internas propuest
 
 ## Lo que ya está preparado
 
-- **Demo:** abrir `public/carga.html` y usar cinco replays de ejemplo. [Qué hace y qué falta](docs/demo-progsa.md). No analiza el contenido de los .replay ni tiene servidor/persistencia conectados.
+- **Demo:** abrir `public/carga.html` y usar cinco replays de ejemplo. [Qué hace y qué falta](docs/demo-progsa.md).La demo usa datos de ejemplo y se puede abrir en local con Express.
 - **Fase 2:** se verificaron las **30 tablas existentes** en Supabase el 1 de noviembre. [Estado, documento y revisión](docs/fase2-estado.md) · [esquema SQL](database/esquema-fase2.sql). El equipo confirmó que el documento está listo para presentarlo; la revisión del profesor sigue pendiente. A07 solo da seguimiento a sus observaciones y no bloquea la implementación.
 - **Luis:** sus cuatro pantallas están fuera de este repositorio hasta integrar A04 desde su cuenta.
-- **Pendiente:** motor definitivo, servidor, entrada real, consultas/persistencia y acceso. La creación de tablas es avance distinto de conectar esas operaciones.
+- **Pendiente:** motor definitivo, entrada real, consultas/persistencia y acceso. La creación de tablas es avance distinto de conectar esas operaciones.
 
 ## Ejecutar la demo en local
 
