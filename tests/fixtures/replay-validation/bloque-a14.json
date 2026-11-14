@@ -1,0 +1,472 @@
+{
+  "case_id": "a14_block_validation",
+  "synthetic": true,
+  "input": {
+    "profile": {
+      "platform": "steam",
+      "player_id": "TEST_PLAYER_01",
+      "mode": "2v2"
+    },
+    "replays": [
+      {
+        "id": "test-replay-1",
+        "status": "ok",
+        "team_size": 2,
+        "playlist_id": "ranked-doubles",
+        "blue": {
+          "players": [
+            {
+              "id": {
+                "platform": "steam",
+                "id": "TEST_PLAYER_01"
+              },
+              "stats": {
+                "core": {
+                  "goals": 3,
+                  "shots": 3,
+                  "assists": 0,
+                  "saves": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "test-replay-2",
+        "status": "ok",
+        "team_size": 2,
+        "playlist_id": "ranked-doubles",
+        "orange": {
+          "players": [
+            {
+              "id": {
+                "platform": "steam",
+                "id": "TEST_PLAYER_01"
+              },
+              "stats": {
+                "core": {
+                  "goals": 0,
+                  "shots": 2,
+                  "saves": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "test-replay-3",
+        "status": "ok",
+        "team_size": 2,
+        "playlist_id": "ranked-doubles",
+        "blue": {
+          "players": [
+            {
+              "id": {
+                "platform": "steam",
+                "id": "TEST_PLAYER_01"
+              },
+              "stats": {
+                "core": {
+                  "goals": 1,
+                  "shots": 4,
+                  "assists": 1,
+                  "saves": 0
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "test-replay-4",
+        "status": "ok",
+        "team_size": 2,
+        "playlist_id": "ranked-doubles",
+        "orange": {
+          "players": [
+            {
+              "id": {
+                "platform": "steam",
+                "id": "TEST_PLAYER_01"
+              },
+              "stats": {
+                "core": {
+                  "goals": 2,
+                  "shots": 5,
+                  "assists": 1,
+                  "saves": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "test-replay-5",
+        "status": "ok",
+        "team_size": 2,
+        "playlist_id": "ranked-doubles",
+        "blue": {
+          "players": [
+            {
+              "id": {
+                "platform": "steam",
+                "id": "TEST_PLAYER_01"
+              },
+              "stats": {
+                "core": {
+                  "goals": 1,
+                  "shots": 3,
+                  "assists": 0,
+                  "saves": 2
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "valid_output": {
+    "valid": true,
+    "reason_codes": [],
+    "replays": [
+      {
+        "position": 1,
+        "replay_id": "test-replay-1",
+        "reason_codes": []
+      },
+      {
+        "position": 2,
+        "replay_id": "test-replay-2",
+        "reason_codes": []
+      },
+      {
+        "position": 3,
+        "replay_id": "test-replay-3",
+        "reason_codes": []
+      },
+      {
+        "position": 4,
+        "replay_id": "test-replay-4",
+        "reason_codes": []
+      },
+      {
+        "position": 5,
+        "replay_id": "test-replay-5",
+        "reason_codes": []
+      }
+    ],
+    "data": {
+      "source": "ballchasing",
+      "context": {
+        "platform": "steam",
+        "player_id": "TEST_PLAYER_01",
+        "mode": "2v2",
+        "match_type": "ranked"
+      },
+      "replays": [
+        {
+          "replay_id": "test-replay-1",
+          "values": {
+            "goals": {
+              "value": 3,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "shots": {
+              "value": 3,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "assists": {
+              "value": 0,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "saves": {
+              "value": 1,
+              "unit": "count",
+              "missing_reason": null
+            }
+          }
+        },
+        {
+          "replay_id": "test-replay-2",
+          "values": {
+            "goals": {
+              "value": 0,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "shots": {
+              "value": 2,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "assists": {
+              "value": null,
+              "unit": "count",
+              "missing_reason": "not_available"
+            },
+            "saves": {
+              "value": 2,
+              "unit": "count",
+              "missing_reason": null
+            }
+          }
+        },
+        {
+          "replay_id": "test-replay-3",
+          "values": {
+            "goals": {
+              "value": 1,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "shots": {
+              "value": 4,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "assists": {
+              "value": 1,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "saves": {
+              "value": 0,
+              "unit": "count",
+              "missing_reason": null
+            }
+          }
+        },
+        {
+          "replay_id": "test-replay-4",
+          "values": {
+            "goals": {
+              "value": 2,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "shots": {
+              "value": 5,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "assists": {
+              "value": 1,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "saves": {
+              "value": 1,
+              "unit": "count",
+              "missing_reason": null
+            }
+          }
+        },
+        {
+          "replay_id": "test-replay-5",
+          "values": {
+            "goals": {
+              "value": 1,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "shots": {
+              "value": 3,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "assists": {
+              "value": 0,
+              "unit": "count",
+              "missing_reason": null
+            },
+            "saves": {
+              "value": 2,
+              "unit": "count",
+              "missing_reason": null
+            }
+          }
+        }
+      ]
+    }
+  },
+  "incompatible": [
+    {
+      "case_id": "duplicado",
+      "replay_5_patch": {
+        "id": "test-replay-1"
+      },
+      "output": {
+        "valid": false,
+        "reason_codes": [
+          "DUPLICATE_REPLAY"
+        ],
+        "replays": [
+          {
+            "position": 1,
+            "replay_id": "test-replay-1",
+            "reason_codes": []
+          },
+          {
+            "position": 2,
+            "replay_id": "test-replay-2",
+            "reason_codes": []
+          },
+          {
+            "position": 3,
+            "replay_id": "test-replay-3",
+            "reason_codes": []
+          },
+          {
+            "position": 4,
+            "replay_id": "test-replay-4",
+            "reason_codes": []
+          },
+          {
+            "position": 5,
+            "replay_id": "test-replay-1",
+            "reason_codes": [
+              "DUPLICATE_REPLAY"
+            ]
+          }
+        ],
+        "data": null
+      }
+    },
+    {
+      "case_id": "jugador ausente",
+      "replay_5_patch": {
+        "blue": {
+          "players": []
+        }
+      },
+      "output": {
+        "valid": false,
+        "reason_codes": [
+          "PLAYER_MISMATCH"
+        ],
+        "replays": [
+          {
+            "position": 1,
+            "replay_id": "test-replay-1",
+            "reason_codes": []
+          },
+          {
+            "position": 2,
+            "replay_id": "test-replay-2",
+            "reason_codes": []
+          },
+          {
+            "position": 3,
+            "replay_id": "test-replay-3",
+            "reason_codes": []
+          },
+          {
+            "position": 4,
+            "replay_id": "test-replay-4",
+            "reason_codes": []
+          },
+          {
+            "position": 5,
+            "replay_id": "test-replay-5",
+            "reason_codes": [
+              "PLAYER_MISMATCH"
+            ]
+          }
+        ],
+        "data": null
+      }
+    },
+    {
+      "case_id": "modalidad distinta",
+      "replay_5_patch": {
+        "team_size": 3,
+        "playlist_id": "ranked-standard"
+      },
+      "output": {
+        "valid": false,
+        "reason_codes": [
+          "MODE_MISMATCH"
+        ],
+        "replays": [
+          {
+            "position": 1,
+            "replay_id": "test-replay-1",
+            "reason_codes": []
+          },
+          {
+            "position": 2,
+            "replay_id": "test-replay-2",
+            "reason_codes": []
+          },
+          {
+            "position": 3,
+            "replay_id": "test-replay-3",
+            "reason_codes": []
+          },
+          {
+            "position": 4,
+            "replay_id": "test-replay-4",
+            "reason_codes": []
+          },
+          {
+            "position": 5,
+            "replay_id": "test-replay-5",
+            "reason_codes": [
+              "MODE_MISMATCH"
+            ]
+          }
+        ],
+        "data": null
+      }
+    },
+    {
+      "case_id": "tipo distinto",
+      "replay_5_patch": {
+        "playlist_id": "unranked-doubles"
+      },
+      "output": {
+        "valid": false,
+        "reason_codes": [
+          "MATCH_TYPE_MISMATCH"
+        ],
+        "replays": [
+          {
+            "position": 1,
+            "replay_id": "test-replay-1",
+            "reason_codes": []
+          },
+          {
+            "position": 2,
+            "replay_id": "test-replay-2",
+            "reason_codes": []
+          },
+          {
+            "position": 3,
+            "replay_id": "test-replay-3",
+            "reason_codes": []
+          },
+          {
+            "position": 4,
+            "replay_id": "test-replay-4",
+            "reason_codes": []
+          },
+          {
+            "position": 5,
+            "replay_id": "test-replay-5",
+            "reason_codes": [
+              "MATCH_TYPE_MISMATCH"
+            ]
+          }
+        ],
+        "data": null
+      }
+    }
+  ]
+}
