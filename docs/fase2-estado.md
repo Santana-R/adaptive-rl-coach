@@ -1,8 +1,8 @@
-# Fase 2 · documento listo y revisión del profesor pendiente
+# Fase 2 · documento aprobado el 3 de noviembre sin correcciones
 
-Revisión académica del documento: martes 3 de noviembre de 2026, según Roberto.
+Revisión académica del documento: martes 3 de noviembre de 2026.
 
-**Preparación comprobada:** Roberto confirmó que el equipo ya revisó el documento y está listo para presentarlo. La revisión y aprobación del profesor siguen pendientes. A07 solo registra su resultado y las correcciones que solicite; no es una revisión técnica adicional ni bloquea el catálogo u otras tareas.
+**Resultado:** el profesor aprobó el documento sin solicitar correcciones al contenido. Comentó que era muy extenso para revisarlo punto por punto e indicó que confía en el trabajo del equipo. A07 queda cerrada sin observaciones pendientes; no era una revisión técnica adicional ni bloquea el catálogo u otras tareas.
 
 ## Evidencia disponible
 
@@ -17,7 +17,7 @@ El PDF quedó enlazado; no se pudo copiar su archivo binario al repositorio en e
 
 | Pendiente | Tarea |
 | --- | --- |
-| Revisión y observaciones del profesor. | A07, el 3 de noviembre. |
+| ~~Revisión y observaciones del profesor.~~ Completado: aprobado el 3 de noviembre sin correcciones. | A07 (cerrada). |
 | Restauración en un entorno nuevo (comprobación técnica separada). | A38. |
 | Catálogo inicial utilizable por el motor. | A23. |
 | Consultas/guardado de bloques, métricas, análisis y planes. | A15/A24. |
@@ -26,10 +26,10 @@ El PDF quedó enlazado; no se pudo copiar su archivo binario al repositorio en e
 
 Las tablas creadas cuentan como avance de Fase 2; las conexiones de la web y el motor siguen siendo entregas de implementación. La preparación asistida no se atribuye como trabajo individual de David ni de los demás.
 
-## Seguimiento del martes
+## Seguimiento del martes (completado)
 
-1. Presentar el documento que ya está listo.
-2. Registrar las observaciones reales o indicar que el profesor no pidió cambios.
-3. Atender las correcciones solicitadas al documento, si las hubiera. Si no pide cambios, cerrar el seguimiento con una nota.
+- [x] Presentar el documento que ya está listo.
+- [x] Registrar las observaciones reales o indicar que el profesor no pidió cambios: no pidió cambios.
+- [x] Atender las correcciones solicitadas al documento, si las hubiera: no hubo correcciones; el seguimiento se cierra con esta nota.
 
 El catálogo A23 puede comenzar desde ahora con el esquema existente. No se exige reconstruir tablas, restaurar el SQL ni revisar funciones/triggers como entregable adicional para esa revisión del documento.
