@@ -37,6 +37,21 @@ Piezas principales 4–6 e integración/ensayo 7–8 son metas internas propuest
 - **Luis:** sus cuatro pantallas están fuera de este repositorio hasta integrar A04 desde su cuenta.
 - **Pendiente:** motor definitivo, servidor, entrada real, consultas/persistencia y acceso. La creación de tablas es avance distinto de conectar esas operaciones.
 
+## Ejecutar la demo en local
+
+Probado con Node.js v24.7.0 y npm 11.5.1. Desde la raíz del repositorio, ejecuta:
+
+```powershell
+npm ci
+npm start
+```
+
+Abre `http://127.0.0.1:3000/health` para comprobar que el servidor responde con `{"status":"ok"}`.
+
+En `http://127.0.0.1:3000/carga.html`, pulsa **Usar cinco replays de ejemplo** y luego **Ver análisis de ejemplo**. Desde Análisis, abre **Mi plan** para ver la rutina.
+
+El puerto predeterminado es `3000`. Para cambiarlo, copia `.env.example` a `.env`, ajusta `PORT` y reinicia el servidor. Para detenerlo, presiona `Ctrl+C` en la terminal.
+
 ## Cómo trabajar
 
 Cada quien construye y sube su cambio desde su identidad de Git. El PR explica qué cambió, cómo comprobarlo y qué falta. Avisar bloqueos en la issue al detectarlos; apoyo por escrito sin reuniones obligatorias. [Guía breve](docs/empieza-aqui.md) · [Cómo entregar](CONTRIBUTING.md).
