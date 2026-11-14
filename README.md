@@ -32,10 +32,25 @@ Piezas principales 4–6 e integración/ensayo 7–8 son metas internas propuest
 
 ## Lo que ya está preparado
 
-- **Demo:** abrir `public/carga.html` y usar cinco replays de ejemplo. [Qué hace y qué falta](docs/demo-progsa.md). No analiza el contenido de los .replay ni tiene servidor/persistencia conectados.
+- **Demo:** abrir `public/carga.html` y usar cinco replays de ejemplo. [Qué hace y qué falta](docs/demo-progsa.md).La demo usa datos de ejemplo y se puede abrir en local con Express.
 - **Fase 2:** se verificaron las **30 tablas existentes** en Supabase el 1 de noviembre. [Estado, documento y revisión](docs/fase2-estado.md) · [esquema SQL](database/esquema-fase2.sql). El equipo confirmó que el documento está listo para presentarlo; la revisión del profesor sigue pendiente. A07 solo da seguimiento a sus observaciones y no bloquea la implementación.
 - **Luis:** sus cuatro pantallas están fuera de este repositorio hasta integrar A04 desde su cuenta.
-- **Pendiente:** motor definitivo, servidor, entrada real, consultas/persistencia y acceso. La creación de tablas es avance distinto de conectar esas operaciones.
+- **Pendiente:** motor definitivo, entrada real, consultas/persistencia y acceso. La creación de tablas es avance distinto de conectar esas operaciones.
+
+## Ejecutar la demo en local
+
+Probado con Node.js v24.7.0 y npm 11.5.1. Desde la raíz del repositorio, ejecuta:
+
+```powershell
+npm ci
+npm start
+```
+
+Abre `http://127.0.0.1:3000/health` para comprobar que el servidor responde con `{"status":"ok"}`.
+
+En `http://127.0.0.1:3000/carga.html`, pulsa **Usar cinco replays de ejemplo** y luego **Ver análisis de ejemplo**. Desde Análisis, abre **Mi plan** para ver la rutina.
+
+El puerto predeterminado es `3000`. Para cambiarlo, copia `.env.example` a `.env`, ajusta `PORT` y reinicia el servidor. Para detenerlo, presiona `Ctrl+C` en la terminal.
 
 ## Cómo trabajar
 
