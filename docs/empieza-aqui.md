@@ -1,12 +1,12 @@
 # Empieza con una entrega
 
-Hasta el 9, el objetivo es **estadísticas → motor → Análisis → Plan adaptado**. Reutilizar Carga, Análisis y Plan. Las trece pantallas y los tres CRUD siguen dentro de la entrega completa; no hace falta terminarlos todos antes de programar una regla.
+El recorrido del motor es **estadísticas → motor → Análisis → Plan adaptado**. Luis diseña y construye las interfaces definitivas de Carga, Análisis y Plan según los bosquejos; el cascarón PROGSA fue provisional. Las trece pantallas y los tres CRUD siguen dentro de la entrega completa. [Reparto por pantalla y entrega de Luis](frontend-luis.md).
 
 | Persona | Haz primero | Sabes que entregaste cuando | Orden siguiente |
 | --- | --- | --- | --- |
 | Roberto | [A02](https://github.com/Santana-R/adaptive-rl-coach/issues/2): cálculo y primera regla. | Entrada, fórmula, resultado y ficha explicable registrados; pendientes identificados. | A09 → A10 → A17 → A18 → A19 → A26/A33/A34. |
 | Tadeo | [A06](https://github.com/Santana-R/adaptive-rl-coach/issues/6): servidor mínimo. | Otro integrante arranca el servidor y abre la demo en localhost. | A05 antes del 3 → A14 → apoyo A11/A19 → A25. |
-| Luis | [A04](https://github.com/Santana-R/adaptive-rl-coach/issues/4): subir sus cuatro vistas. | PR integrado con su autoría y rutas comprobadas. | A11 → apoyo Análisis → A27 → A36. |
+| Luis | [A11](https://github.com/Santana-R/adaptive-rl-coach/issues/11): diseñar, construir y conectar Carga. | Interfaz propia según bosquejos, estados comprobados y PR con capturas de escritorio/móvil. | A19: construir Análisis con Roberto → A27: construir Plan; después A12/A20/A28 y A35. A03/A04 ya están cerradas. |
 | David | [A23](https://github.com/Santana-R/adaptive-rl-coach/issues/23): catálogo de ejercicios del motor. | El catálogo inicial se consulta con actividades activas compatibles y fichas revisadas. | A15 → A24. |
 
 [Abrir las cuatro próximas entregas](https://github.com/users/Santana-R/projects/1/views/1) · [Ver la cola del motor por persona](https://github.com/users/Santana-R/projects/1/views/3).
@@ -27,12 +27,12 @@ No se estiman horas semanales. David tiene carga académica distinta; no se pres
 
 ## Conexiones de esta semana
 
-Tadeo comprueba temprano qué estadísticas reales entrega el proveedor. Roberto desarrolla funciones con fixtures; David prepara catálogo/guardado; Luis conecta vistas. Catálogo y persistencia no deben esperar al último día.
+Tadeo comprueba temprano qué estadísticas reales entrega el proveedor. Roberto desarrolla funciones con fixtures; David prepara catálogo/guardado; Luis diseña y construye las vistas definitivas y las conecta con esos módulos. Catálogo y persistencia no deben esperar al último día.
 
 Un JSON guardado o sintético puede alimentar **el motor ejecutable** como respaldo identificado. Seleccionar nombres ficticios no equivale a procesar .replay. El uso compartido con datos reales requiere autenticación/propiedad verificadas; antes, el modo de prueba permanece local y explícito.
 
 El equipo ya comprobó que el documento de Fase 2 está listo para presentarlo el 3. A07 solo registra la revisión y sus observaciones; el catálogo y las operaciones de la aplicación avanzan desde ahora sobre las 30 tablas existentes. [Estado de Fase 2](fase2-estado.md).
 
-Roberto mantiene el motor y A19 de extremo a extremo con [acompañamiento paso a paso](motor-paso-a-paso.md). Luis apoya presentación; Tadeo servidor; David consultas.
+Roberto mantiene motor, endpoint y conexión de datos de A19 con [acompañamiento paso a paso](motor-paso-a-paso.md). Luis es corresponsable de A19 y construye su interfaz definitiva; Tadeo aporta servidor y David consultas. Ambos autores comprueban datos → cálculo → API → pantalla.
 
 [Calendario](calendario-y-dependencias.md) · [Cómo entregar](../CONTRIBUTING.md) · [Referencias](README.md).

@@ -7,7 +7,7 @@
 
 La Fase 2 tiene 30 tablas; usar [diccionario vigente](diccionario-datos.md) y SQL. planning/examples contiene objetos sintéticos de interfaz, no filas SQL. planes representa una versión; no crear plan_versiones ni rank_history del borrador. A24 debe fijar el mapeo de identidad/versión en las rutas propuestas.
 
-Para el 9 se reutilizan Carga/Análisis/Plan con fuente identificada. A06 sirve localhost; A05/A14 verifican entrada; A19 expone Análisis; A18/A24 generan/guardan Plan. El modo local de prueba no acredita permisos. Las rutas privadas requieren A08 antes de uso compartido.
+El recorrido Carga/Análisis/Plan usa fuente identificada y tendrá las interfaces definitivas que diseña y construye Luis según los bosquejos. El cascarón PROGSA es provisional. A06 sirve localhost; A05/A14 verifican entrada; Roberto expone Análisis y conecta sus datos en A19 compartida con Luis; A18/A24 generan/guardan Plan. El modo local de prueba no acredita permisos. Las rutas privadas requieren A08 antes de uso compartido. [Reparto de frontend](frontend-luis.md).
 
 Las rutas siguientes son el contrato objetivo de la aplicación completa del 16, no endpoints acreditados por esta reorganización.
 
@@ -65,6 +65,12 @@ La API externa documenta autenticación con el token como Authorization, carga e
 Seleccionar jugador por plataforma e ID; jamás sumar estadísticas de todo el equipo como si fueran del usuario. La base propone shots/goals/assists/saves como conteos y shooting_pct derivado; boost_avg es candidato y se confirma en A05. Toda métrica adicional debe tener clave, unidad, extracción, fórmula, cobertura y versión documentadas.
 
 shooting_pct = 100 × suma(goals) / suma(shots), sobre la misma cobertura válida; no promediar porcentajes de partidos sin pesos. Una media temporal necesita duración válida del jugador y cálculo documentado antes de usarla. En A05/A09 se verifica el denominador y los campos reales. No fabricar precisión ni unidades no comprobadas.
+
+### Normalización implementada en A09
+
+El [servicio de métricas](metricas-bloque.md) entrega goles, tiros, eficiencia y `play_duration_s`, con unidades, cobertura y exclusiones. Este último agrega `replay.play_duration` del proveedor: unidad `seconds`, alcance `scope: match` y `source_field: play_duration`. La documentación oficial define ese reloj sin las cuentas regresivas de saque; no se sustituye por `duration` ni se le añade `overtime_seconds`. Un faltante deja `null` con motivo, conservando las demás métricas calculables.
+
+El nuevo campo es una extensión aditiva del [ejemplo de métricas](../planning/examples/metrics.json). A19 consume su unidad/alcance al construir la respuesta y la pantalla junto con Luis; A15 verifica el destino SQL. La duración de las partidas no se copia como tiempo individual de participación (`tiempo_jugado_s`) sin una fuente específica comprobada. El servicio interno conserva procedencia, contexto e IDs de replay; A19/A15 añadirán la asociación al `block_id` persistido y el sobre HTTP. Esta implementación no acredita un endpoint desplegado.
 
 Comparar bloques propios, distintos, listos, con cinco partidas; identidad, modalidad, tipo y medición equivalentes. No hay replays repetidos entre ellos. Todas las partidas del actual deben ser posteriores al anterior para el seguimiento; si no, `CHRONOLOGY_INVALID`. Sin anterior compatible: `baseline`. Con anterior explícito incompatible: `not_comparable` y reason_codes; nunca mostrar deltas fabricados. Sin baseline_id se propone el anterior compatible más reciente y se registra cuál se usó.
 

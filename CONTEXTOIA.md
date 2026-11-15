@@ -1,6 +1,6 @@
 # Contexto común para las IAs · Adaptive RL Coach
 
-**Actualizado: 1 de noviembre de 2026.** Este archivo puede entregarse a cualquier asistente de IA. Es una entrada al proyecto; el estado descrito es una instantánea que debe contrastarse con la rama y las issues actuales.
+**Base de contexto: 1 de noviembre de 2026. Reparto de frontend actualizado el 14 de noviembre de 2026.** Este archivo puede entregarse a cualquier asistente de IA. Es una entrada al proyecto; el estado descrito es una instantánea que debe contrastarse con la rama y las issues actuales.
 
 Repositorio: [Santana-R/adaptive-rl-coach](https://github.com/Santana-R/adaptive-rl-coach).
 [Empieza aquí: próximas entregas](https://github.com/users/Santana-R/projects/1/views/1) · [Cola del motor](https://github.com/users/Santana-R/projects/1/views/3).
@@ -31,15 +31,15 @@ Si la IA no puede leer el repositorio privado, indicar qué archivo o fragmento 
 
 | Parte | Estado documentado en esta revisión |
 | --- | --- |
-| Demo visual | Carga, Análisis y Plan navegables, con datos sintéticos y reglas ilustrativas. |
+| Demo visual provisional | Carga, Análisis y Plan del cascarón PROGSA, con datos sintéticos y reglas ilustrativas; Luis construye las interfaces definitivas según los bosquejos. |
 | Fase 2 | Documento comprobado por el equipo y listo para presentarlo, según confirmó Roberto. La revisión del profesor sigue pendiente; SQL y diccionario de las 30 tablas están en el repo. |
-| Pantallas de Luis | Cuatro vistas preparadas fuera del repo; su incorporación desde su cuenta sigue en A04. Comprobar el PR actual antes de asumir que faltan. |
+| Pantallas de Luis | Cuatro vistas públicas integradas en PR #50; A03/A04 cerradas. Continúa la construcción del frontend en A11/A12/A19/A20/A27/A28 y revisión A35. |
 | Servidor y motor definitivo | Pendientes de implementación/conexión. |
 | Proveedor real, acceso y persistencia de la web | Pendientes de integración y comprobación. |
 
 La demo se abre desde `public/carga.html`. Su selector valida nombres/cantidad de archivos, pero no procesa el contenido de los .replay ni los envía al proveedor. Las versiones de ejemplo no acreditan historial guardado en base de datos. [Alcance de la demo](docs/demo-progsa.md).
 
-En la rama revisada no hay `src/` ni `package.json` de la aplicación. No indicar `npm start`, instalación de dependencias o endpoints como disponibles sin comprobar primero que esos archivos/comandos ya existen.
+El servidor Express y package.json ya existen en main; comprobar el README, la rama y los archivos actuales antes de indicar comandos o endpoints disponibles. El estado técnico de las demás filas conserva su carácter de instantánea y requiere comprobación.
 
 El martes el profesor solo revisa el documento de Fase 2. Su preparación ya fue comprobada por el equipo; A07 queda para registrar y atender las observaciones que haga. No es un requisito previo del catálogo ni de otras tareas de implementación. La restauración del SQL en un proyecto nuevo sigue pendiente en A38, como comprobación técnica separada. El [estado de Fase 2](docs/fase2-estado.md) enlaza el PDF vigente; el binario todavía no está en el repositorio.
 
@@ -49,16 +49,22 @@ Este reparto corresponde al equipo de LBPWEB. Los integrantes de PROGSA pueden d
 
 | Persona / cuenta | Responsabilidad | Primera entrega seleccionada |
 | --- | --- | --- |
-| Roberto Santana Trujillo · Santana-R | Métricas, comparación, reglas, planes y función completa A19. | [A02: primera regla y casos comprobables](https://github.com/Santana-R/adaptive-rl-coach/issues/2). |
+| Roberto Santana Trujillo · Santana-R | Métricas, comparación, reglas, planes y motor/API/conexión de datos de A19. | [A02: primera regla y casos comprobables](https://github.com/Santana-R/adaptive-rl-coach/issues/2). |
 | Omar Tadeo Gasca Deciga · OmarHub-star | Servidor, Ballchasing e integración. | [A06: Express y apertura local](https://github.com/Santana-R/adaptive-rl-coach/issues/6); después A05. |
-| Luis Enrique Almaguer Castillo · Lamaguer | Frontend, navegación y gráficas. | [A04: subir sus cuatro pantallas](https://github.com/Santana-R/adaptive-rl-coach/issues/4); después Carga y Plan. |
+| Luis Enrique Almaguer Castillo · Lamaguer | Diseño e implementación del frontend del jugador, navegación, gráficas y coherencia visual. Corresponsable de Análisis en A19. | [A11: construir Carga](https://github.com/Santana-R/adaptive-rl-coach/issues/11); después Análisis A19 y Plan A27. A03/A04 cerradas. |
 | David Alonso Torres Guerrero · dvdatogro-123 | Datos, acceso, catálogo e historial. | [A23: catálogo que consume el motor](https://github.com/Santana-R/adaptive-rl-coach/issues/23); después A15/A24. |
 
 La etiqueta `siguiente` señala una próxima entrega por persona y no significa trabajo iniciado. El orden cambia al completar entregas: consultar la issue y el tablero actuales. El catálogo de esta reorganización contiene 44 tareas; no iniciarlas todas ni duplicarlas al planificar.
 
-Roberto conoce Rocket League y decide con apoyo los criterios deportivos. Su camino: A02 → A09 → A10 → A17 → A18 → A19, con comprobaciones A26/A33 y evidencia A34. A19 conserva el recorrido datos → cálculo → endpoint → pantalla, reutilizando servidor/consultas/componentes del equipo. [Guía gradual del motor](docs/motor-paso-a-paso.md).
+Roberto conoce Rocket League y decide con apoyo los criterios deportivos. Su camino: A02 → A09 → A10 → A17 → A18 → A19, con comprobaciones A26/A33 y evidencia A34. A19 conserva el recorrido datos → cálculo → endpoint → pantalla: Roberto implementa motor/API y conexión de datos, y Luis diseña y construye la interfaz definitiva de Análisis. Reutilizan los módulos de servidor y datos del equipo. [Guía gradual del motor](docs/motor-paso-a-paso.md).
 
 No se conocen horas semanales disponibles. David lleva materias distintas; no asumir que dispone de más tiempo. El apoyo y las revisiones pueden ser breves y por escrito, sin reuniones obligatorias.
+
+## Acuerdo de frontend que debe respetar cualquier IA
+
+Luis diseña y construye las pantallas definitivas según los bosquejos y mantiene una apariencia común con su trabajo público. Carga, Análisis y Plan del cascarón PROGSA fueron provisionales: no indicar que se reutilice su HTML/CSS o presentación como interfaz final. Conservar los cálculos, contratos y funciones comprobados y conectarlos con las interfaces que desarrolle Luis. La sustitución del prototipo ocurre al integrar y comprobar esas nuevas vistas, no mediante una eliminación anticipada.
+
+[Guía de frontend, reparto por pantalla y evidencia](docs/frontend-luis.md). En A19 Luis construye frontend y Roberto motor/API/conexión de datos; ambos son responsables de la entrega. A32 conserva a David como implementador administrativo y a Luis como coordinador/revisor visual.
 
 ## 5. Tecnologías y estructura
 
@@ -68,9 +74,9 @@ No cambiar el stack ni añadir frameworks/dependencias sin explicar la necesidad
 
 | Ruta | Uso |
 | --- | --- |
-| `public/carga.html`, `public/analisis.html`, `public/plan.html` | Pantallas existentes que se reutilizarán para el motor. |
+| `public/carga.html`, `public/analisis.html`, `public/plan.html` | Rutas objetivo de las interfaces definitivas de Luis; el cascarón actual es provisional y su presentación será sustituida al integrar las nuevas vistas. |
 | `public/js/demo-data.js`, `demo-service.js`, `app.js` | Datos, lógica ilustrativa y presentación de la demo; comprobar sus rutas bajo public/js. |
-| `public/sitio/` | Destino acordado de la primera subida de Luis; verificar si ya fue incorporado. |
+| `public/sitio/` | Vistas públicas propias de Luis, integradas en PR #50; referencia de coherencia visual del sitio. |
 | `src/app.js`, `src/routes/`, `src/services/` | Destino propuesto del servidor, rutas y adaptador de Tadeo; aún no acredita archivos creados. |
 | `src/domain/` | Destino propuesto de métricas, comparación, reglas y planes de Roberto. |
 | `src/repositories/` | Destino propuesto de consultas y persistencia de David. |
@@ -144,7 +150,7 @@ Si la tarea produce un documento académico, usar el formato Web UANL–FIME apr
 | Lunes 16 | Proyecto completo para PROGSA. |
 | Lunes 23, **tentativo** | Entrega final de LBPWEB; confirmar con el profesor. |
 
-Son fechas comunicadas por Roberto. Piezas del 4–6 e integración/ensayo del 7–8 son metas internas propuestas, sujetas al avance real. La prioridad del 9 reutiliza Carga/Análisis/Plan; las demás pantallas y los CRUD continúan para la entrega completa.
+Son fechas comunicadas por Roberto. Piezas del 4–6 e integración/ensayo del 7–8 son metas internas históricas, sujetas al avance real. El recorrido Carga/Análisis/Plan tendrá las interfaces definitivas de Luis; las demás pantallas y los CRUD conservan su alcance. Esta aclaración no establece fechas nuevas.
 
 - Estado del código: rama/archivos actuales y comprobaciones efectivamente ejecutadas.
 - Trabajo y fechas: issues/hitos actuales y [calendario vigente](docs/calendario-y-dependencias.md).

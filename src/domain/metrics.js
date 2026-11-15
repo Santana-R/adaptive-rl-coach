@@ -13,35 +13,61 @@ function readCount(replay, key) {
   return { value: metric.value, reason: null };
 }
 
-function sumCounts(replays, key) {
+function readDuration(replay, key) {
+  const metric = replay.values?.[key];
+  if (metric?.value == null) {
+    return { value: null, reason: metric?.missing_reason || 'not_available' };
+  }
+  if (metric.unit !== 'seconds') return { value: null, reason: 'unit_mismatch' };
+  if (metric.scope !== 'match' || metric.source_field !== 'play_duration') {
+    return { value: null, reason: 'incompatible_duration_basis' };
+  }
+  if (!Number.isFinite(metric.value) || metric.value < 0 ||
+      metric.value > Number.MAX_SAFE_INTEGER) {
+    return { value: null, reason: 'invalid_duration' };
+  }
+  return { value: metric.value, reason: null };
+}
+
+function sumValues(replays, key, unit, readValue, isSafeTotal) {
   let total = 0;
   let coverage = 0;
   const excluded = [];
 
   for (const replay of replays) {
-    const count = readCount(replay, key);
-    if (count.reason !== null) {
-      excluded.push({ replay_id: replay.replay_id, metric_key: key, reason: count.reason });
+    const measurement = readValue(replay, key);
+    if (measurement.reason !== null) {
+      excluded.push({ replay_id: replay.replay_id, metric_key: key, reason: measurement.reason });
       continue;
     }
-    total += count.value;
+    total += measurement.value;
     coverage += 1;
   }
 
   let missingReason = null;
   if (coverage < REQUIRED_REPLAYS) {
     missingReason = coverage === 0 ? 'not_available' : 'incomplete_coverage';
-  } else if (!Number.isSafeInteger(total)) {
+  } else if (!isSafeTotal(total)) {
     missingReason = 'unsafe_total';
   }
 
   return {
     value: missingReason === null ? total : null,
-    unit: 'count',
+    unit,
     coverage,
     missing_reason: missingReason,
     excluded,
   };
+}
+
+function sumCounts(replays, key) {
+  return sumValues(replays, key, 'count', readCount, Number.isSafeInteger);
+}
+
+function sumDurations(replays) {
+  const duration = sumValues(replays, 'play_duration_s', 'seconds', readDuration,
+    total => Number.isFinite(total) && total <= Number.MAX_SAFE_INTEGER);
+  return { ...duration, scope: 'match', source_field: 'play_duration' };
 }
 
 function shootingEfficiency(goals, shots) {
@@ -106,7 +132,12 @@ function calculateBlockMetrics(block) {
     metrics_version: 'mvp.metrics.v1',
     sample_size: REQUIRED_REPLAYS,
     replay_ids: replayIds,
-    values: { goals, shots, shooting_pct: shootingEfficiency(goals, shots) },
+    values: {
+      goals,
+      shots,
+      shooting_pct: shootingEfficiency(goals, shots),
+      play_duration_s: sumDurations(replays),
+    },
   };
 }
 

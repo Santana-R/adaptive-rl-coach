@@ -1,8 +1,8 @@
 # Cascarón HTML para PROGSA
 
-Las vistas públicas de Luis se revisaron desde su ZIP y complementan esta demo. Su incorporación desde su cuenta se describe en [la guía de subida](subir-pantallas-luis.md); todavía no están publicadas en el repositorio.
+**Prototipo provisional de PROGSA.** Las vistas públicas de Luis ya se integraron en PR #50. Luis diseña y construye las interfaces definitivas de Carga, Análisis y Plan según los bosquejos; la presentación de este cascarón no se adopta como interfaz final. [Reparto y entregas de frontend](frontend-luis.md).
 
-Tres pantallas navegables del mismo proyecto: **Carga → Análisis → Plan**. Esta entrega ofrece una interfaz ejecutable con datos sintéticos. Sirve como punto de partida para conectar servidor, métricas y persistencia después.
+Tres pantallas navegables del mismo proyecto: **Carga → Análisis → Plan**. Esta entrega ofrece una interfaz ejecutable con datos sintéticos. Se conserva como demostración de aquella entrega mientras se construyen y conectan las interfaces definitivas de Luis.
 
 ## Abrir la demostración
 
@@ -57,12 +57,12 @@ La mejora entre bloques no demuestra que el ejercicio la causó. Los porcentajes
 
 ## Cómo encaja con el reparto
 
-| Trabajo existente | Qué aporta el cascarón | Qué falta para completar la tarea |
+| Trabajo definitivo | Referencia funcional de esta demo provisional | Entrega acordada |
 | --- | --- | --- |
-| A04 · Luis | Estilos, navegación y componentes compartidos. | Completar las páginas públicas/roles que pide A04 y su revisión. |
-| A11 · Luis | Formulario y lista de replays con validaciones de interfaz. | API real de carga, procesamiento, recuperación e historial. |
-| A19 · Roberto, revisa Luis | Pantalla de métricas/comparación y separación del origen de datos. | Consulta autorizada, motor real, endpoint y prueba datos → API → pantalla. |
-| A27 · Luis | Vista de plan, ejercicios y selector de versiones de ejemplo. | Planes persistidos, sesiones y operaciones reales sobre sus versiones. |
+| A03/A04 · Luis | Esta demo fue un avance separado de sus vistas públicas. | Sus cuatro vistas ya están integradas y ambas issues cerradas; el resto del frontend continúa. |
+| A11 · Luis | Recorrido ilustrativo de selección de replays. | Diseñar/construir Carga definitiva y conectarla con API y estados; historial continúa en A28. |
+| A19 · Roberto y Luis | Ejemplo de información de métricas/comparación. | Luis construye la interfaz de Análisis; Roberto consulta, calcula, expone el endpoint y conecta datos → API → pantalla. |
+| A27 · Luis | Ejemplo de información de planes/versiones. | Diseñar/construir Plan definitivo y conectar propuesta calculada y versiones persistidas; interfaz de Sesiones en A28. |
 
 Tadeo mantiene servidor/Ballchasing e integración; David datos/Auth/historial. Esta muestra es avance parcial y no cierra automáticamente A04/A11/A19/A27, no reasigna responsables ni cambia sus fechas. PR relacionado con #4, #11, #19 y #27.
 
@@ -79,7 +79,7 @@ Tadeo mantiene servidor/Ballchasing e integración; David datos/Auth/historial. 
 | `public/js/app.js` | Eventos de interfaz, navegación, presentación y estado del recorrido. |
 | `public/vendor/README.md` | Versiones, origen, integridad y licencias de dependencias. |
 
-Las funciones `loadAnalysis` y `loadPlan` devuelven un sobre `{ data, meta }` siguiendo la convención del contrato inicial. Este es un modelo de presentación de ejemplo: A19 debe mapear las respuestas reales, gestionar espera/error y probar permisos. Los controladores no contienen claves ni llamadas al proveedor. Sustituir el origen y el mapeo de datos permite conservar HTML/CSS/componentes; las reglas de demo no sustituyen el motor definitivo.
+Las funciones `loadAnalysis` y `loadPlan` devuelven un sobre `{ data, meta }` siguiendo la convención del contrato inicial. Este es un modelo de presentación de ejemplo: A19 debe mapear las respuestas reales, gestionar espera/error y probar permisos. Los controladores no contienen claves ni llamadas al proveedor. El frontend definitivo requiere el diseño e implementación de Luis según los bosquejos; no se adopta el HTML/CSS o la presentación del cascarón como solución final. Los contratos y funciones comprobados se conectan con esas nuevas interfaces; las reglas de demo no sustituyen el motor definitivo.
 
 Referencias internas: [contrato inicial](contratos-api.md), [flujo de pantallas](flujo-pantallas.md), [base técnica](base-tecnica.md). Referencias académicas: Fase 1, secciones 6.6/6.7/6.9; Sprint 1, ciclo de comparación y ajuste del entrenamiento.
 

@@ -8,13 +8,13 @@ Lee [CONTEXTOIA.md](CONTEXTOIA.md) y tu issue actual antes de empezar. Puedes ad
 
 ## Esta semana: motor funcionando para el 9 de noviembre
 
-Usaremos las pantallas existentes **Carga → Análisis → Plan**. El motor debe calcular sobre las entradas y adaptar la rutina; las vistas actuales todavía son una demo con reglas ilustrativas.
+**Luis diseña y construye las pantallas definitivas de Carga → Análisis → Plan según los bosquejos.** El cascarón PROGSA fue provisional; su presentación no se adopta como interfaz final. Roberto mantiene el motor/API y conecta sus resultados con las nuevas vistas. [Reparto de frontend y entregas de Luis](docs/frontend-luis.md).
 
 | Persona | Empieza por esta entrega | Después |
 | --- | --- | --- |
 | Roberto · motor | [A02: primera regla y casos comprobables](https://github.com/Santana-R/adaptive-rl-coach/issues/2) · [guía paso a paso](docs/motor-paso-a-paso.md) | Métricas → comparación → reglas → plan → API y Análisis. |
 | Tadeo · servidor | [A06: Express, /health y servir public/](https://github.com/Santana-R/adaptive-rl-coach/issues/6) | [A05: comprobar Ballchasing antes del 3](https://github.com/Santana-R/adaptive-rl-coach/issues/5) → entrada válida al motor. |
-| Luis · interfaz | [A04: subir sus cuatro pantallas desde su cuenta](https://github.com/Santana-R/adaptive-rl-coach/issues/4) · [instrucciones](docs/subir-pantallas-luis.md) | Conectar Carga y Plan; revisar Análisis con Roberto. |
+| Luis · interfaz | [A11: diseñar y construir Carga](https://github.com/Santana-R/adaptive-rl-coach/issues/11) · [guía de frontend](docs/frontend-luis.md) | Construir Análisis en A19 con Roberto, Plan en A27 y las demás vistas en A12/A20/A28. |
 | David · datos | [A23: preparar el catálogo que necesita el motor](https://github.com/Santana-R/adaptive-rl-coach/issues/23) | Consultas → análisis y versiones del plan. |
 
 [Empieza aquí: cuatro próximas entregas](https://github.com/users/Santana-R/projects/1/views/1) · [Cola del motor del 9](https://github.com/users/Santana-R/projects/1/views/3). Tomar una por persona; `siguiente` no significa iniciada. Al terminar, mover esa etiqueta a su próxima entrega.
@@ -32,9 +32,9 @@ Piezas principales 4–6 e integración/ensayo 7–8 son metas internas propuest
 
 ## Lo que ya está preparado
 
-- **Demo:** abrir `public/carga.html` y usar cinco replays de ejemplo. [Qué hace y qué falta](docs/demo-progsa.md).La demo usa datos de ejemplo y se puede abrir en local con Express.
+- **Demo:** abrir `public/carga.html` y usar cinco replays de ejemplo. [Qué hace y qué falta](docs/demo-progsa.md). Este prototipo usa datos de ejemplo y se conserva mientras Luis desarrolla sus interfaces definitivas.
 - **Fase 2:** se verificaron las **30 tablas existentes** en Supabase el 1 de noviembre. [Estado, documento y revisión](docs/fase2-estado.md) · [esquema SQL](database/esquema-fase2.sql). El equipo confirmó que el documento está listo para presentarlo; la revisión del profesor sigue pendiente. A07 solo da seguimiento a sus observaciones y no bloquea la implementación.
-- **Luis:** sus cuatro pantallas están fuera de este repositorio hasta integrar A04 desde su cuenta.
+- **Luis:** sus cuatro vistas públicas se integraron en PR #50; A03 y A04 están cerradas. El diseño y la construcción del resto del frontend continúan en A11/A12/A19/A20/A27/A28 y la revisión A35.
 - **Pendiente:** motor definitivo, entrada real, consultas/persistencia y acceso. La creación de tablas es avance distinto de conectar esas operaciones.
 
 ## Ejecutar la demo en local

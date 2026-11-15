@@ -30,7 +30,11 @@
               }
             }
           ]
-        }
+        },
+        "play_duration": 300,
+        "duration": 330,
+        "overtime": false,
+        "overtime_seconds": 0
       },
       {
         "id": "test-replay-2",
@@ -53,7 +57,11 @@
               }
             }
           ]
-        }
+        },
+        "play_duration": 315.5,
+        "duration": 346,
+        "overtime": false,
+        "overtime_seconds": 0
       },
       {
         "id": "test-replay-3",
@@ -77,7 +85,11 @@
               }
             }
           ]
-        }
+        },
+        "play_duration": 240,
+        "duration": 270,
+        "overtime": false,
+        "overtime_seconds": 0
       },
       {
         "id": "test-replay-4",
@@ -101,7 +113,11 @@
               }
             }
           ]
-        }
+        },
+        "play_duration": 420.25,
+        "duration": 451,
+        "overtime": true,
+        "overtime_seconds": 120.25
       },
       {
         "id": "test-replay-5",
@@ -125,7 +141,11 @@
               }
             }
           ]
-        }
+        },
+        "play_duration": 305,
+        "duration": 335,
+        "overtime": false,
+        "overtime_seconds": 0
       }
     ]
   },
@@ -190,6 +210,13 @@
               "value": 1,
               "unit": "count",
               "missing_reason": null
+            },
+            "play_duration_s": {
+              "value": 300,
+              "unit": "seconds",
+              "scope": "match",
+              "source_field": "play_duration",
+              "missing_reason": null
             }
           }
         },
@@ -214,6 +241,13 @@
             "saves": {
               "value": 2,
               "unit": "count",
+              "missing_reason": null
+            },
+            "play_duration_s": {
+              "value": 315.5,
+              "unit": "seconds",
+              "scope": "match",
+              "source_field": "play_duration",
               "missing_reason": null
             }
           }
@@ -240,6 +274,13 @@
               "value": 0,
               "unit": "count",
               "missing_reason": null
+            },
+            "play_duration_s": {
+              "value": 240,
+              "unit": "seconds",
+              "scope": "match",
+              "source_field": "play_duration",
+              "missing_reason": null
             }
           }
         },
@@ -265,6 +306,13 @@
               "value": 1,
               "unit": "count",
               "missing_reason": null
+            },
+            "play_duration_s": {
+              "value": 420.25,
+              "unit": "seconds",
+              "scope": "match",
+              "source_field": "play_duration",
+              "missing_reason": null
             }
           }
         },
@@ -289,6 +337,13 @@
             "saves": {
               "value": 2,
               "unit": "count",
+              "missing_reason": null
+            },
+            "play_duration_s": {
+              "value": 305,
+              "unit": "seconds",
+              "scope": "match",
+              "source_field": "play_duration",
               "missing_reason": null
             }
           }
@@ -468,5 +523,12 @@
         "data": null
       }
     }
-  ]
+  ],
+  "duration_reference": {
+    "url": "https://ballchasing.com/doc/api",
+    "field": "play_duration",
+    "unit": "seconds",
+    "scope": "match",
+    "note": "Duraciones sintéticas para verificar el mapeo documentado, sin llamadas nuevas al proveedor. El total esperado es 1580.75 segundos. duration y overtime_seconds son distractores que no se suman como play_duration."
+  }
 }

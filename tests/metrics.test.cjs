@@ -213,3 +213,131 @@ test('no modifica los datos de entrada y conserva la procedencia por defecto', (
   assert.deepEqual(data, before);
   assert.equal(result.data.source, 'ballchasing');
 });
+
+test('la extracción extendida de A14 coincide con su fixture completo', () => {
+  const data = input();
+  assert.deepEqual(extractReplayBlockMetrics(data.replays, data.profile), fixture.valid_output);
+});
+
+test('suma duraciones variables con fracciones: 300 + 315.5 + 240 + 420.25 + 305 = 1580.75 s', () => {
+  const metrics = evaluate(input()).data;
+  const duration = metrics.values.play_duration_s;
+  assert.equal(duration.value, 1580.75);
+  assert.equal(duration.unit, 'seconds');
+  assert.equal(duration.scope, 'match');
+  assert.equal(duration.source_field, 'play_duration');
+  assert.equal(duration.coverage, 5);
+  assert.equal(duration.missing_reason, null);
+  assert.deepEqual(duration.excluded, []);
+});
+
+test('usa play_duration: no sustituye duration ni añade overtime_seconds', () => {
+  const data = input();
+  for (const replay of data.replays) {
+    replay.play_duration = 382;
+    replay.duration = 394;
+    replay.overtime = true;
+    replay.overtime_seconds = 60;
+  }
+  assert.equal(evaluate(data).data.values.play_duration_s.value, 1910);
+});
+
+test('mantiene la duración de partida separada de la participación individual', () => {
+  const data = input();
+  const player = findReplayPlayer(data.replays[0], data.profile);
+  player.start_time = 120;
+  player.end_time = 180;
+  player.play_duration = 60;
+  const metrics = evaluate(data).data;
+  assert.equal(metrics.values.play_duration_s.value, 1580.75);
+  assert.equal(metrics.values.play_duration_s.scope, 'match');
+  assert.equal(Object.hasOwn(metrics.values, 'player_play_duration_s'), false);
+});
+
+test('duración ausente no usa otro reloj como reemplazo ni oculta las otras métricas', () => {
+  const data = input();
+  delete data.replays[0].play_duration;
+  data.replays[0].duration = 999;
+  const values = evaluate(data).data.values;
+  assert.equal(values.goals.value, 7);
+  assert.equal(values.shots.value, 17);
+  assert.ok(values.shooting_pct.value > 41);
+  assert.equal(values.play_duration_s.value, null);
+  assert.equal(values.play_duration_s.coverage, 4);
+  assert.equal(values.play_duration_s.missing_reason, 'incomplete_coverage');
+  assert.deepEqual(values.play_duration_s.excluded, [{
+    replay_id: 'test-replay-1', metric_key: 'play_duration_s', reason: 'not_available',
+  }]);
+});
+
+test('duración completamente ausente conserva null, cobertura 0 y cinco exclusiones', () => {
+  const data = input();
+  for (const replay of data.replays) delete replay.play_duration;
+  const duration = evaluate(data).data.values.play_duration_s;
+  assert.equal(duration.value, null);
+  assert.equal(duration.coverage, 0);
+  assert.equal(duration.missing_reason, 'not_available');
+  assert.equal(duration.excluded.length, 5);
+});
+
+test('duración cero registrada conserva 0 segundos y cobertura completa', () => {
+  const data = input();
+  for (const replay of data.replays) replay.play_duration = 0;
+  const duration = evaluate(data).data.values.play_duration_s;
+  assert.equal(duration.value, 0);
+  assert.equal(duration.coverage, 5);
+  assert.equal(duration.missing_reason, null);
+});
+
+for (const [label, value, reason] of [
+  ['negativa', -1, 'invalid_duration'],
+  ['NaN', NaN, 'invalid_duration'],
+  ['infinita', Infinity, 'invalid_duration'],
+  ['texto', '300', 'invalid_duration'],
+  ['booleano', true, 'invalid_duration'],
+  ['null', null, 'not_available'],
+]) {
+  test(`duración ${label}: null con motivo, sin convertirla en cero`, () => {
+    const data = input();
+    data.replays[0].play_duration = value;
+    const duration = evaluate(data).data.values.play_duration_s;
+    assert.equal(duration.value, null);
+    assert.equal(duration.coverage, 4);
+    assert.equal(duration.excluded[0].reason, reason);
+  });
+}
+
+for (const [field, value, reason] of [
+  ['unit', 'minutes', 'unit_mismatch'],
+  ['scope', 'player', 'incompatible_duration_basis'],
+  ['source_field', 'duration', 'incompatible_duration_basis'],
+]) {
+  test(`el dominio excluye una duración con ${field} incompatible`, () => {
+    const data = input();
+    const normalized = extractReplayBlockMetrics(data.replays, data.profile).data;
+    normalized.replays[0].values.play_duration_s[field] = value;
+    const duration = calculateBlockMetrics(normalized).values.play_duration_s;
+    assert.equal(duration.value, null);
+    assert.equal(duration.coverage, 4);
+    assert.equal(duration.excluded[0].reason, reason);
+  });
+}
+
+test('una suma de duraciones que excede la precisión segura se marca no disponible', () => {
+  const data = input();
+  for (const replay of data.replays) replay.play_duration = Number.MAX_SAFE_INTEGER;
+  const duration = evaluate(data).data.values.play_duration_s;
+  assert.equal(duration.value, null);
+  assert.equal(duration.coverage, 5);
+  assert.equal(duration.missing_reason, 'unsafe_total');
+});
+
+test('acepta entradas normalizadas anteriores sin duración y conserva las métricas disponibles', () => {
+  const data = input();
+  const normalized = extractReplayBlockMetrics(data.replays, data.profile).data;
+  for (const replay of normalized.replays) delete replay.values.play_duration_s;
+  const values = calculateBlockMetrics(normalized).values;
+  assert.equal(values.goals.value, 7);
+  assert.equal(values.play_duration_s.value, null);
+  assert.equal(values.play_duration_s.coverage, 0);
+});

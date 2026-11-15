@@ -26,6 +26,15 @@
       "unit": "percent",
       "coverage": 0,
       "missing_reason": "not_available"
+    },
+    "play_duration_s": {
+      "value": 1580.75,
+      "unit": "seconds",
+      "coverage": 5,
+      "missing_reason": null,
+      "excluded": [],
+      "scope": "match",
+      "source_field": "play_duration"
     }
   }
 }

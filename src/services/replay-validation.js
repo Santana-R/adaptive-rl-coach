@@ -115,6 +115,19 @@ function extractReplayBlockMetrics(replays, profile) {
       })
     );
 
+    // Es tiempo de la partida, no tiempo de participación del jugador.
+    const duration = replay.play_duration;
+    const durationAvailable = Number.isFinite(duration) && duration >= 0 &&
+      duration <= Number.MAX_SAFE_INTEGER;
+    values.play_duration_s = {
+      value: durationAvailable ? duration : null,
+      unit: 'seconds',
+      scope: 'match',
+      source_field: 'play_duration',
+      missing_reason: durationAvailable ? null
+        : (duration == null ? 'not_available' : 'invalid_duration')
+    };
+
     return { replay_id: validation.replays[index].replay_id, values };
   });
 
