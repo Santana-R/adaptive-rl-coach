@@ -1,5 +1,7 @@
 # Luis: subir tus cuatro pantallas
 
+**Primera subida ya integrada en PR #50; A03/A04 cerradas.** Esta guía conserva el procedimiento original. Para el trabajo siguiente de diseño e implementación abre [Pantallas definitivas y reparto de frontend](frontend-luis.md): A11 → A19 compartida → A27. El cascarón PROGSA fue provisional.
+
 **Resultado:** tus archivos quedarán en el repositorio del equipo, con un primer commit asociado a tu cuenta y un PR para revisarlos. Como el ZIP no tiene historial, ese commit representa el avance actual. Los cambios que hagas después se registrarán conforme ocurran.
 
 ## 1. Comprueba tu acceso

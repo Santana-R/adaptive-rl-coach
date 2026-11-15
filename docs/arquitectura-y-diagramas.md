@@ -57,7 +57,7 @@ Auditar sesiones, historial de rango, evidencia de diagnóstico y snapshots comp
 
 
 ## Responsabilidades y función completa A19
-Luis mantiene la base visual; Tadeo el servidor/Ballchasing; David los datos/auth; Roberto métricas/reglas/planes y A19. Roberto consulta bloques propios, integra el endpoint de análisis y conecta la respuesta a la pantalla JavaScript/Chart.js. Reutiliza módulos existentes y Luis revisa la interfaz mediante el PR. Tadeo coordina A25. Véase [Empieza aquí](empieza-aqui.md).
+Luis diseña e implementa las interfaces definitivas del jugador; Tadeo mantiene servidor/Ballchasing; David datos/auth y la implementación administrativa; Roberto métricas/reglas/planes. A19 es compartida: Luis construye la interfaz de Análisis y Roberto consulta bloques propios, implementa el endpoint y conecta su respuesta a la pantalla JavaScript/Chart.js. Ambos comprueban el recorrido; el diseño provisional del cascarón PROGSA se sustituye por el de Luis. Tadeo coordina A25. [Reparto de frontend](frontend-luis.md) · [Empieza aquí](empieza-aqui.md).
 
 
 ## Base lista para construir

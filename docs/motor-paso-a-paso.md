@@ -11,10 +11,10 @@ Tú propones y revisas la interpretación deportiva. El acompañamiento sigue: *
 | 3 | Línea base y comparación compatible. | A10 | Primer bloque, posterior e incompatible tienen respuestas explicadas. |
 | 4 | Reglas y orden de hasta tres prioridades. | A17 | Variar valores cambia activación; faltantes no inventan conclusiones. |
 | 5 | Selección y minutos de ejercicios. | A18 | Respeta plataforma/tiempo y explica cobertura parcial/vacía. |
-| 6 | Servidor y pantalla de Análisis. | A19 | La interfaz usa el resultado calculado y explica evidencia. |
+| 6 | Servicio/endpoint y conexión a la interfaz definitiva de Análisis que construye Luis. | A19 compartida | La interfaz usa el resultado calculado y explica evidencia; cada autor registra su aportación. |
 | 7 | Parámetros y adaptación con otro bloque. | A26/A33/A34 | Salidas corresponden a entradas y se conservan versiones. |
 
-Tadeo entrega estadísticas/contexto; David catálogo y guardado; Luis presentación de Carga/Plan y apoyo visual. Tus funciones de dominio pueden calcular sin botones, internet ni credenciales.
+Tadeo entrega estadísticas/contexto; David catálogo y guardado; Luis diseña y construye las interfaces definitivas de Carga/Análisis/Plan según los bosquejos. El cascarón PROGSA es provisional; [reparto de frontend](frontend-luis.md). Tus funciones de dominio pueden calcular sin botones, internet ni credenciales.
 
 ## Primera sesión: A02
 

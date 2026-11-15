@@ -6,7 +6,7 @@ Aplicación web de entrenamiento de Rocket League: cinco replays privados → m�
 La entrega incluye trece pantallas y tres CRUD: objetivos, sesiones y ejercicios. Administración de usuarios significa consulta y cambio de estado. Objetivos enlazados se archivan. Quedan fuera entrenamiento de modelos de ML o reinforcement learning, coaching en vivo, rotaciones automáticas, MMR automático, chat, pagos y app nativa. Discord es opcional.
 
 ## Prioridad de las entregas
-Para el motor del 9, reutilizar Carga/Análisis/Plan. Las trece pantallas y los tres CRUD permanecen en la entrega completa del 16; dividir tareas no elimina requisitos.
+El recorrido del motor pasa por Carga/Análisis/Plan. Luis diseña y construye sus interfaces definitivas según los bosquejos; el cascarón PROGSA es provisional. Las trece pantallas y los tres CRUD conservan su alcance; dividir tareas no elimina requisitos. [Reparto de frontend](frontend-luis.md).
 
 ## Matriz de requisitos
 | RF | Función | Aceptación resumida | Tareas |

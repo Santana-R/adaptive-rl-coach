@@ -3,7 +3,7 @@
 - **Proveedor:** A05 comprueba datos/campos con un replay autorizado antes del 3; registrar bloqueo temprano. Respaldo JSON/sintético identificado.
 - **Datos:** 30 tablas verificadas y SQL capturado. Restauración nueva pendiente en A38; consultas/guardado en A15/A24. El documento de Fase 2 está comprobado y listo; A07 solo sigue observaciones del profesor, sin bloquear desarrollo.
 - **Reglas:** A02/A17/A26 definen/comprueban criterios con Roberto. Valores de demo ilustrativos; calibración con evidencia real pendiente.
-- **Interfaz:** Luis sube sus cuatro vistas y después conecta Carga/Plan y apoya Análisis.
+- **Interfaz:** A03/A04 cerradas registran las primeras vistas de Luis. Él diseña y construye Carga (A11), Análisis (A19 compartida con Roberto), Plan (A27) y las demás vistas del jugador. El cascarón PROGSA es provisional. [Reparto de frontend](frontend-luis.md).
 - **Acceso:** A08/A12/A37 completan identidad/propiedad/suspensión antes del uso compartido real.
 - **Fechas:** Fase 2 el 3, motor el 9 y PROGSA completo el 16; LBPWEB el 23 tentativo.
 - **Capacidad:** sin horas semanales conocidas; no presumir más tiempo de David.
