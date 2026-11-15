@@ -92,4 +92,34 @@ El caso 11 cambia el estado a mano. El registro en `cambios_estado_usuario` y la
 
 ## Evidencia para el PR
 
-Salida de `npm test`, captura de la comprobación de la migración y tabla de casos 1–13 con el resultado observado (sin tokens, contraseñas ni correos reales).
+Salida de `npm test`, captura de la comprobación de la migración y tabla de casos con el resultado observado (sin tokens, contraseñas ni correos reales).
+
+## Resultado de la prueba real · 15 de noviembre de 2026
+
+Ejecutada por David con `scripts/prueba-auth.ps1` contra el proyecto Supabase de desarrollo, con el servidor local (`npm start`), dos jugadores (A y B) y un administrador. Ambas migraciones aplicadas y comprobadas antes (trigger presente, 0 cuentas sin fila, 30 tablas con RLS, 0 políticas).
+
+| Caso | Prueba | Esperado | Obtenido | OK |
+| --- | --- | --- | --- | --- |
+| — | Inicio de sesión por correo (A, B, admin) | Token emitido | Token emitido | Sí |
+| 1 | Sin token | 401 AUTH_REQUIRED | 401 AUTH_REQUIRED | Sí |
+| 2 | Token inválido | 401 AUTH_REQUIRED | 401 AUTH_REQUIRED | Sí |
+| 3 | Jugador A `/me` | 200 player active | 200 player active | Sí |
+| 4 | Administrador `/me` | 200 admin active | 200 admin active | Sí |
+| 5 | A lee su perfil | 200 TEST_A | 200 TEST_A | Sí |
+| 6 | A pide el perfil de B enviando su id | 200 TEST_A (id ignorado) | 200 TEST_A | Sí |
+| 7 | B lee su perfil | 200 TEST_B | 200 TEST_B | Sí |
+| 8 | Usuario sin perfil | 404 RESOURCE_NOT_FOUND | 404 RESOURCE_NOT_FOUND | Sí |
+| 9 | A lee `perfiles` directo con clave pública | Sin acceso | 403 permission denied | Sí |
+| 10 | A lee `usuarios` directo con clave pública | Sin acceso | 403 permission denied | Sí |
+| 11 | Registro con `rol=administrador` en los datos del registro | jugador | jugador | Sí |
+| 12 | B suspendido, mismo token | 403 USER_SUSPENDED | 403 USER_SUSPENDED | Sí |
+| 13 | B reactivado | 200 | 200 | Sí |
+| 14 | A cierra sesión y reutiliza el token | logout 204; después 401 | logout 204; después 401 AUTH_REQUIRED | Sí |
+
+**14 de 14 casos correctos.** Después de la prueba: B quedó activo de nuevo, la cuenta temporal del caso 11 se borró y quedan 2 jugadores activos y 1 administrador.
+
+Hallazgos durante la prueba:
+- `service_role` no tenía `SELECT` en las tablas: Express respondía 503 con tokens válidos. Se corrigió con `a08-permisos-servidor.sql`.
+- Supabase rechaza la clave secreta en peticiones con User-Agent de navegador ("Forbidden use of secret API key in browser"). PowerShell 5.1 se identifica como "Mozilla", por lo que el script usa un User-Agent propio. Express no está afectado.
+
+**Pendiente:** inicio de sesión con Google (configuración arriba) y las pantallas de acceso de A12.
