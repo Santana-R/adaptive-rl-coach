@@ -6,7 +6,8 @@ Para comenzar basta [la guía breve](empieza-aqui.md) y tu issue. Abre estas ref
 | --- | --- |
 | Aprender/construir el motor | [Motor paso a paso](motor-paso-a-paso.md) |
 | Revisar Fase 2 y estructura SQL | [Estado](fase2-estado.md) · [SQL](../database/esquema-fase2.sql) · [Diccionario](diccionario-datos.md) |
-| Subir las cuatro pantallas del ZIP | [Guía de Luis](subir-pantallas-luis.md) |
+| Construir las pantallas definitivas y ver el reparto de Luis | [Guía de frontend](frontend-luis.md) |
+| Consultar la primera subida de las cuatro vistas, ya integrada | [Guía de subida de Luis](subir-pantallas-luis.md) |
 | Recorrer la demo con datos sintéticos | [Demo PROGSA](demo-progsa.md) |
 | Comprobar funciones y pantallas obligatorias | [Alcance](alcance-y-requisitos.md) · [Flujo](flujo-pantallas.md) · [Matriz RF](../planning/trazabilidad-rf.csv) |
 | Acordar entradas, salidas y estados | [Contrato](contratos-api.md) · [Ejemplos](../planning/examples) |

@@ -1,4 +1,6 @@
-# Plan vigente · 1 de noviembre de 2026
+# Plan vigente · base del 1 de noviembre de 2026
+
+**Aclaración de frontend del 14 de noviembre:** tasks.json/tasks.csv incorporan el diseño e implementación de las pantallas de Luis. A19 conserva owner=Roberto como responsable de motor/API/conexión de datos y reviewer=Luis por compatibilidad del catálogo; ambos están asignados en GitHub y Luis es responsable de construir su frontend, como detallan objective, steps y acceptance. A04 deja de ser focus y A11 pasa a ser la próxima entrega de Luis. Las fechas históricas y el status de la instantánea no se convierten en estado operativo. [Guía de frontend](../docs/frontend-luis.md).
 
 Las issues de GitHub llevan el estado real. tasks.json/tasks.csv son el catálogo de esta revisión; no actualizan automáticamente el avance posterior.
 

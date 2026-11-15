@@ -1,6 +1,6 @@
 # Flujo preparado de las trece pantallas
 
-Base inicial v1, preparada el 13 de octubre. Luis la revisa en A03 contra los bosquejos y la implementa progresivamente; no tiene que dibujar todo desde cero. No se añade una pantalla de reportes: el seguimiento vive en Análisis, Objetivos y Sesiones.
+Base funcional preparada el 13 de octubre; responsabilidad de frontend aclarada el 14 de noviembre. Luis diseña y construye las pantallas definitivas del jugador según los bosquejos, incluidas Carga/Análisis/Plan, y mantiene la coherencia visual del sitio. El cascarón PROGSA fue provisional. A03/A04 cerradas registran el avance inicial; las tareas de construcción continúan. [Guía y reparto por pantalla](frontend-luis.md). El seguimiento vive en Análisis, Objetivos y Sesiones, sin añadir una pantalla de Reportes.
 
 | Pantalla | Acceso | Acción y destino | RF | Tareas | Estados | Datos |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -33,3 +33,7 @@ Los botones protegidos usan la sesión. El servidor verifica identidad, rol y pr
 
 ## Qué valida Luis en A03
 Comprobar enlaces, controles, mensajes y correspondencia con los bosquejos actuales. Registrar ajustes aquí y compartirlos con Roberto. Esta tabla es una propuesta funcional; su publicación no acredita pantallas implementadas.
+
+## Construcción y revisión visual
+
+Luis construye Carga (A11), acceso/Perfil (A12), Análisis con Roberto (A19), Objetivos (A20), Plan (A27) y Sesiones/historial/seguimiento (A28). David implementa las tres vistas administrativas (A32) con componentes y revisión visual de Luis. A35 comprueba escritorio/móvil y coherencia del conjunto. El detalle funcional de la tabla no acredita implementación.

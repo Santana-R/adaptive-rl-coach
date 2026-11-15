@@ -7,7 +7,7 @@
 
 La Fase 2 tiene 30 tablas; usar [diccionario vigente](diccionario-datos.md) y SQL. planning/examples contiene objetos sintéticos de interfaz, no filas SQL. planes representa una versión; no crear plan_versiones ni rank_history del borrador. A24 debe fijar el mapeo de identidad/versión en las rutas propuestas.
 
-Para el 9 se reutilizan Carga/Análisis/Plan con fuente identificada. A06 sirve localhost; A05/A14 verifican entrada; A19 expone Análisis; A18/A24 generan/guardan Plan. El modo local de prueba no acredita permisos. Las rutas privadas requieren A08 antes de uso compartido.
+El recorrido Carga/Análisis/Plan usa fuente identificada y tendrá las interfaces definitivas que diseña y construye Luis según los bosquejos. El cascarón PROGSA es provisional. A06 sirve localhost; A05/A14 verifican entrada; Roberto expone Análisis y conecta sus datos en A19 compartida con Luis; A18/A24 generan/guardan Plan. El modo local de prueba no acredita permisos. Las rutas privadas requieren A08 antes de uso compartido. [Reparto de frontend](frontend-luis.md).
 
 Las rutas siguientes son el contrato objetivo de la aplicación completa del 16, no endpoints acreditados por esta reorganización.
 
