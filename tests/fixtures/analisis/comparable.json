@@ -57,12 +57,12 @@
     "source": "synthetic",
     "expected_result_status": "reviewed_as_specification",
     "review_detail": "Aritmética revisada: 100*2/8=25; 100*3/10=30; 30-25=5 pp. Contextos, cronología e IDs compatibles. Ambos totales de tiros son insuficientes para aplicar finalización en 2v2.",
-    "engine_execution": "pending",
+    "engine_execution": "partial_normalization_and_comparison_verified",
     "pending_issues": [
-      "A09",
-      "A10",
       "A17",
       "A33"
-    ]
+    ],
+    "comparison_execution": "passed_A10_tests",
+    "normalization_execution": "passed_synthetic_A14_A09_integration"
   }
 }

@@ -49,13 +49,13 @@ Ambos bloques tienen menos de los **15 tiros requeridos en 2v2**: sus porcentaje
 
 ## Revisión de los cinco escenarios existentes
 
-Todos declaran `synthetic: true`. Sus resultados esperados y límites se revisaron como especificación; **ninguno acredita una ejecución del motor definitivo**. Cada JSON registra esa distinción en `verification`.
+Todos declaran `synthetic: true`. Primer bloque, comparable e incompatible ahora se ejecutan mediante A14/A09/A10 con cinco respuestas sintéticas preparadas a partir de sus totales/fechas. **Las reglas y el plan del motor definitivo continúan pendientes**. Cada JSON registra esa distinción en `verification`; ver [comparación de bloques](comparacion-bloques.md).
 
-| Archivo | Resultado esperado revisado | Comprobación de A02 | Pendiente contra el motor |
+| Archivo | Resultado esperado revisado | Comprobación registrada | Pendiente contra el motor |
 | --- | --- | --- | --- |
-| [primer-bloque.json](../tests/fixtures/analisis/primer-bloque.json) | Línea base, motivo legible y delta `null`. | No hay bloque anterior. Sus 10 tiros en 2v2 son insuficientes para esta regla. | A10/A17/A33. |
-| [comparable.json](../tests/fixtures/analisis/comparable.json) | 25 %, 30 % y +5 pp. | Misma identidad/modalidad/tipo/versión; cronología posterior e IDs distintos. Aritmética comprobada con denominadores. | A09/A10/A17/A33. |
-| [incompatible.json](../tests/fixtures/analisis/incompatible.json) | `not_comparable`, `MODE_MISMATCH` y delta `null`. | Cambia 2v2 → 3v3. Eso impide el delta entre bloques; no impide evaluar por separado un bloque actual válido con muestra suficiente. | A10/A17/A33. |
+| [primer-bloque.json](../tests/fixtures/analisis/primer-bloque.json) | Línea base, motivo legible y delta `null`. | Ejecutado con A14/A09/A10. Sus 10 tiros en 2v2 son insuficientes para la futura regla. | A17/A33. |
+| [comparable.json](../tests/fixtures/analisis/comparable.json) | 25 %, 30 % y +5 pp. | Normalización/comparación ejecutadas con identidad/contexto/cronología/IDs compatibles. | A17/A33. |
+| [incompatible.json](../tests/fixtures/analisis/incompatible.json) | `not_comparable`, `MODE_MISMATCH` y delta `null`. | Ejecutado: cambiar 2v2 → 3v3 impide el delta; el actual conserva sus métricas propias. | A17/A33. |
 | [faltantes.json](../tests/fixtures/analisis/faltantes.json) | Cero tiros → eficiencia `null`; boost ausente no activa su regla de ejemplo. | 0/0 no es 0 %. No se define aquí una regla definitiva de boost. | A09/A17/A33. |
 | [empate.json](../tests/fixtures/analisis/empate.json) | Como propuesta técnica: `rule-a`, `rule-b`, `rule-c`; máximo tres. | Orden por score descendente e ID ascendente; las cuatro reglas siguen siendo placeholders. | Ratificar score/desempate en A17 y ejecutar A33. |
 

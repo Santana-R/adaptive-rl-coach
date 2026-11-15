@@ -3,14 +3,53 @@
   "metrics_version": "mvp.metrics.v1",
   "comparison": {
     "status": "comparable",
+    "current_block_id": "test-block-current",
     "baseline_block_id": "test-block-baseline",
     "reason_codes": [],
     "deltas": {
+      "goals": {
+        "baseline": 2,
+        "current": 3,
+        "delta": 1,
+        "unit": "count",
+        "coverage": {
+          "baseline": 5,
+          "current": 5
+        },
+        "missing_reason": null
+      },
+      "shots": {
+        "baseline": 8,
+        "current": 10,
+        "delta": 2,
+        "unit": "count",
+        "coverage": {
+          "baseline": 5,
+          "current": 5
+        },
+        "missing_reason": null
+      },
       "shooting_pct": {
         "baseline": 25,
         "current": 30,
         "delta": 5,
-        "unit": "percentage_points"
+        "unit": "percentage_points",
+        "coverage": {
+          "baseline": 5,
+          "current": 5
+        },
+        "missing_reason": null
+      },
+      "play_duration_s": {
+        "baseline": 1500,
+        "current": 1580.75,
+        "delta": 80.75,
+        "unit": "seconds",
+        "coverage": {
+          "baseline": 5,
+          "current": 5
+        },
+        "missing_reason": null
       }
     }
   },
@@ -18,6 +57,7 @@
   "rules_version": "prototype.pending-verification",
   "limitations": [
     "synthetic_fixture",
-    "thresholds_pending_A02_A26"
+    "rules_engine_pending_A17",
+    "heuristics_pending_calibration_A26"
   ]
 }
