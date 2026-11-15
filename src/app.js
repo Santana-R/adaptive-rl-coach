@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('node:path');
+const blocksRouter = require('./routes/blocks');
 const { createAuth, sendError, ApiError } = require('./middleware/auth');
 const { createServerClient } = require('./services/supabase');
 
@@ -10,6 +11,12 @@ const { createServerClient } = require('./services/supabase');
 function createApp({ supabase = createServerClient() } = {}) {
   const app = express();
   const { requireAuth } = createAuth(supabase);
+
+  app.use(express.raw({
+    type: request => request.headers['content-type']?.startsWith('multipart/form-data'),
+    limit: '100mb'
+  }));
+  app.use(express.json({ limit: '1mb' }));
 
   app.get('/health', (_req, res) => {
     res.json({ status: 'ok' });
@@ -45,9 +52,9 @@ function createApp({ supabase = createServerClient() } = {}) {
     }
   });
 
+  app.use('/api/v1/blocks', blocksRouter);
   app.use(express.static(path.join(__dirname, '..', 'public')));
 
-  // Errores de la API con el formato del contrato; nunca expone detalles internos.
   app.use((err, _req, res, _next) => {
     if (err instanceof ApiError) return sendError(res, err.status, err.code, err.message);
     console.error(err);
@@ -57,12 +64,13 @@ function createApp({ supabase = createServerClient() } = {}) {
   return app;
 }
 
-module.exports = { createApp };
+const app = createApp();
+module.exports = app;
+module.exports.createApp = createApp;
 
 if (require.main === module) {
   const host = '127.0.0.1';
   const port = Number(process.env.PORT ?? '3000');
-  const app = createApp();
   app.listen(port, host, () => {
     console.log(`Adaptive RL Coach en http://${host}:${port}`);
   });

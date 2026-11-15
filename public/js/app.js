@@ -59,7 +59,20 @@
     zone.addEventListener('dragleave',()=>zone.classList.remove('drag-over'));
     zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('drag-over');state.files=Array.from(e.dataTransfer.files);state.isFixture=false;renderFiles(true);});
     $id('use-fixtures').addEventListener('click',()=>{state.files=Array.from({length:5},(_,i)=>({name:`demo_2v2_partida_0${i+1}.replay`,size:0}));state.isFixture=true;renderFiles(true);});
-    $id('upload-form').addEventListener('submit',e=>{e.preventDefault();const check=data.validateFiles(state.files);if(!check.ok){notify(check.message);return;}window.location.href=`analisis.html?${query()}`;});
+    $id('upload-form').addEventListener('submit',async e=>{
+      e.preventDefault();
+      const check=data.validateFiles(state.files);
+      if(!check.ok){notify(check.message);return;}
+      if(state.isFixture){window.location.href=`analisis.html?${query()}`;return;}
+      const button=$id('view-analysis');button.disabled=true;button.firstChild.textContent='Enviando replays... ';
+      try{
+        const block=await window.CoachBlocks.create(state.files);
+        notify(`Carga aceptada. El bloque ${block.block_id} está ${window.CoachBlocks.label(block.status).toLowerCase()}; podrás abrir Análisis cuando esté listo.`,'success');
+        button.firstChild.textContent='Carga iniciada ';
+      }catch(error){
+        button.disabled=false;notify(error.message,'error');button.firstChild.textContent='Iniciar análisis ';
+      }
+    });
     renderFiles();
   }
   function metricCard(id,value,unit,foot){$id(`${id}-value`).innerHTML=`${esc(number(value))}<span class="unit">${esc(unit)}</span>`;$id(`${id}-foot`).textContent=foot;}
