@@ -20,13 +20,12 @@
   "verification": {
     "source": "synthetic",
     "expected_result_status": "reviewed_as_specification",
-    "engine_execution": "pending",
+    "engine_execution": "passed_rule_evaluation_A17",
     "pending_issues": [
-      "A09",
-      "A17",
       "A33"
     ],
-    "note": "Los porcentajes se expresan sin redondearlos para decidir. active/inactive/not_evaluable y reason describen este fixture; A17 resolverá el objeto público conforme al contrato."
+    "note": "Los 17 casos se ejecutaron mediante A09 y A17. Se conservan los decimales manuales; la regla decide sin redondear. A33 comprobará el recorrido con plan.",
+    "rules_execution": "passed_A17_tests"
   },
   "cases": [
     {

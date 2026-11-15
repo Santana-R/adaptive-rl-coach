@@ -58,12 +58,12 @@
     "source": "synthetic",
     "expected_result_status": "reviewed_as_specification",
     "review_detail": "Revisión de escenario: modalidad anterior 2v2 y actual 3v3; no se calcula delta. La regla del bloque actual se puede evaluar por separado si cumple sus requisitos.",
-    "engine_execution": "partial_normalization_and_comparison_verified",
+    "engine_execution": "partial_normalization_comparison_and_rules_verified",
     "pending_issues": [
-      "A17",
       "A33"
     ],
     "comparison_execution": "passed_A10_tests",
-    "normalization_execution": "passed_synthetic_A14_A09_integration"
+    "normalization_execution": "passed_synthetic_A14_A09_integration",
+    "rules_execution": "passed_A17_tests"
   }
 }

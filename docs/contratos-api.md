@@ -85,7 +85,13 @@ La comparación devuelve `status`, `current_block_id`, `baseline_block_id`, `rea
 `resolveBaseline` elige el anterior compatible más reciente de un historial recibido, con descartes explicados y desempate determinista por ID. La consulta del historial propio, asociación SQL y exposición HTTP continúan en A15/A19; A10 no implementa esas rutas ni modifica las interfaces de Luis. Ver el [ejemplo de análisis actualizado](../planning/examples/analysis.json).
 
 ## Diagnóstico y plan
-Prioridad: `{ priority_key, rule_id, score, evidence: { metric_key, value, unit, threshold, direction }, rules_version }`. Máximo tres. Umbrales proceden del prototipo y se revisan en A02/A26; ninguna cifra de fixture se adopta como umbral calibrado. Desempate propuesto: score descendente y después rule_id ascendente, que debe fijarse en A02/A17. null no activa una regla que requiera ese valor.
+Prioridad: `{ priority_key, rule_id, score, evidence: { metric_key, value, unit, threshold, direction }, rules_version }`. Máximo tres. Los criterios definitivos proceden de las fichas acordadas con Roberto en A02 y se calibrarán en A26; los umbrales ilustrativos del prototipo no se trasladan automáticamente. A17 fija el orden por score descendente y después rule_id ascendente como texto. null no activa una regla que requiera ese valor.
+
+### Reglas implementadas en A17
+
+El [servicio de reglas](reglas-motor.md) reutiliza A14/A09 y devuelve métricas, `rules_version: mvp.rules.v1`, `priorities`, `evaluations` y limitaciones. El dominio también acepta las métricas ya normalizadas, sin requerir anterior ni fechas. Se publica una sola regla: `finalizacion-eficiencia`, clave de prioridad `shooting`, eficiencia ≤30 % y mínimo de 20/15/10 tiros por modalidad 1v1/2v2/3v3, con cobertura completa de cinco partidas. Estos parámetros son heurísticos sin calibración; score 1 es un peso técnico fijo.
+
+Cada evaluación conserva `active`, `inactive` o `not_evaluable`, motivo, explicación y evidencia. Solo `active` produce prioridad; muestra insuficiente, faltantes o cero tiros no se convierten en ausencia de necesidad deportiva. Cada prioridad amplía el objeto base con `order`, `title`, `explanation` y `calibration_status`; la evidencia añade operador, conteos/cobertura, muestra, mínimo, contexto, fuente/versión e IDs de replay. Se conservan las claves existentes del catálogo y se actualiza el ejemplo de análisis. A18 consume las prioridades; A19 conecta la respuesta con la interfaz de Luis; A15/A24 resolverán persistencia y versionado SQL. Esta entrega no acredita un endpoint ni un diagnóstico guardado.
 
 Generar plan usa diagnóstico, metas propias, disponibilidad y ejercicios activos compatibles/revisados. Campos de cobertura: complete/partial/empty, prioridades sin cubrir y reason_codes. Una falta de catálogo devuelve plan parcial/vacío explicado. El ejemplo exercise está inactivo porque su recurso es ficticio; A23 prepara el catálogo revisado.
 
