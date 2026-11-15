@@ -50,4 +50,10 @@ La cuenta de prueba mostraba 10 cargas por cada 24 horas y 70 por cada 7 días. 
 
 La prueba confirmó la carga privada y la consulta de goles y tiros por jugador. El primer jugador naranja devolvió `steam` como plataforma y un identificador. Estos campos sirven de base para verificar la identidad del jugador en los cinco replays de A14.
 
+## Referencia de duración para A09
+
+A09 amplía la normalización usando `play_duration` del replay, documentado por Ballchasing en segundos y sin las cuentas regresivas de saque. Su disponibilidad se comprueba por archivo; si falta, queda `null` con motivo. Se identifica como duración de la partida (`scope: match`), separada de la participación individual. El mapeo, cobertura y pruebas están en [métricas del bloque](metricas-bloque.md).
+
+Esta ampliación se verificó con la documentación oficial y fixtures sintéticos. No agrega una nueva prueba autenticada a la evidencia real de A05 descrita arriba. El significado/denominador de boost continúa pendiente de verificación antes de su normalización, conforme al alcance condicional de A09.
+
 [Documentación de la API de Ballchasing](https://ballchasing.com/doc/api)

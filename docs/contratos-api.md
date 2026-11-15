@@ -66,6 +66,12 @@ Seleccionar jugador por plataforma e ID; jamás sumar estadísticas de todo el e
 
 shooting_pct = 100 × suma(goals) / suma(shots), sobre la misma cobertura válida; no promediar porcentajes de partidos sin pesos. Una media temporal necesita duración válida del jugador y cálculo documentado antes de usarla. En A05/A09 se verifica el denominador y los campos reales. No fabricar precisión ni unidades no comprobadas.
 
+### Normalización implementada en A09
+
+El [servicio de métricas](metricas-bloque.md) entrega goles, tiros, eficiencia y `play_duration_s`, con unidades, cobertura y exclusiones. Este último agrega `replay.play_duration` del proveedor: unidad `seconds`, alcance `scope: match` y `source_field: play_duration`. La documentación oficial define ese reloj sin las cuentas regresivas de saque; no se sustituye por `duration` ni se le añade `overtime_seconds`. Un faltante deja `null` con motivo, conservando las demás métricas calculables.
+
+El nuevo campo es una extensión aditiva del [ejemplo de métricas](../planning/examples/metrics.json). A19 consume su unidad/alcance al construir la respuesta y la pantalla junto con Luis; A15 verifica el destino SQL. La duración de las partidas no se copia como tiempo individual de participación (`tiempo_jugado_s`) sin una fuente específica comprobada. El servicio interno conserva procedencia, contexto e IDs de replay; A19/A15 añadirán la asociación al `block_id` persistido y el sobre HTTP. Esta implementación no acredita un endpoint desplegado.
+
 Comparar bloques propios, distintos, listos, con cinco partidas; identidad, modalidad, tipo y medición equivalentes. No hay replays repetidos entre ellos. Todas las partidas del actual deben ser posteriores al anterior para el seguimiento; si no, `CHRONOLOGY_INVALID`. Sin anterior compatible: `baseline`. Con anterior explícito incompatible: `not_comparable` y reason_codes; nunca mostrar deltas fabricados. Sin baseline_id se propone el anterior compatible más reciente y se registra cuál se usó.
 
 Estados de comparison: baseline, comparable, not_comparable. Motivos posibles: NO_PREVIOUS_COMPATIBLE_BLOCK, PLAYER_MISMATCH, MODE_MISMATCH, MATCH_TYPE_MISMATCH, METRICS_VERSION_MISMATCH, CHRONOLOGY_INVALID, SHARED_REPLAYS. Cada métrica ausente queda null y explica motivo; no impide mostrar otras métricas válidas.
