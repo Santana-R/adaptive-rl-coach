@@ -15,11 +15,10 @@
     "source": "synthetic",
     "expected_result_status": "reviewed_as_specification",
     "review_detail": "Aritmética y faltantes revisados: 0/0 no es evaluable; boost null no aporta evidencia. No se define una regla definitiva de boost en A02.",
-    "engine_execution": "pending",
+    "engine_execution": "passed_A09_A17_tests",
     "pending_issues": [
-      "A09",
-      "A17",
       "A33"
-    ]
+    ],
+    "rules_execution": "passed_A17_tests"
   }
 }

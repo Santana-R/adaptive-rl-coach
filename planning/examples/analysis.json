@@ -54,10 +54,55 @@
     }
   },
   "priorities": [],
-  "rules_version": "prototype.pending-verification",
+  "rules_version": "mvp.rules.v1",
   "limitations": [
     "synthetic_fixture",
-    "rules_engine_pending_A17",
     "heuristics_pending_calibration_A26"
+  ],
+  "evaluations": [
+    {
+      "rule_id": "finalizacion-eficiencia",
+      "rules_version": "mvp.rules.v1",
+      "status": "not_evaluable",
+      "reason": "INSUFFICIENT_SHOTS",
+      "evidence": {
+        "metric_key": "shooting_pct",
+        "value": 30,
+        "unit": "percent",
+        "threshold": 30,
+        "direction": "below_or_equal",
+        "operator": "<=",
+        "sample_size": 5,
+        "coverage": 5,
+        "goals": {
+          "value": 3,
+          "unit": "count",
+          "coverage": 5
+        },
+        "shots": {
+          "value": 10,
+          "unit": "count",
+          "coverage": 5
+        },
+        "min_shots": 15,
+        "context": {
+          "platform": "steam",
+          "player_id": "TEST_PLAYER_01",
+          "mode": "2v2",
+          "match_type": "ranked"
+        },
+        "source": "synthetic",
+        "metrics_version": "mvp.metrics.v1",
+        "replay_ids": [
+          "b1",
+          "b2",
+          "b3",
+          "b4",
+          "b5"
+        ]
+      },
+      "explanation": "El bloque tiene 10 tiros; 2v2 requiere al menos 15 para evaluar esta regla.",
+      "calibration_status": "agreed_heuristic_not_calibrated"
+    }
   ]
 }
