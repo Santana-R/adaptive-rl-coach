@@ -131,6 +131,27 @@ body {
     font-size: .8rem;
     margin-top: 1.5rem;
 }
+/*Modificadores de color para los errores dentro de replays.html y replays.js*/
+.replay-notice{
+    border-radius: .5rem;
+    padding: .65rem .85rem;
+    border: 1px solid transparent;
+}
+.replay-notice-error{
+    color: #ffb4b4;
+    background-color: rgb(70, 27, 35);
+    border-color: #e36b76;
+    font-weight: 700;
+}
+.replay-notice-valid{
+    color: rgb(179, 190, 205);
+}
+.replay-notice-pending{
+    color: #ffe3a3;
+}
+.replay-notice-success{
+    color: #8ff0d8;
+}
 
 /* Botones */
 .btn-rl{

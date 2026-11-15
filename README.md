@@ -50,6 +50,8 @@ Abre `http://127.0.0.1:3000/health` para comprobar que el servidor responde con 
 
 En `http://127.0.0.1:3000/carga.html`, pulsa **Usar cinco replays de ejemplo** y luego **Ver análisis de ejemplo**. Desde Análisis, abre **Mi plan** para ver la rutina.
 
+La carga de archivos reales se envía a `POST /api/v1/blocks` como `multipart/form-data` y queda en estado `pending` en el servidor local en memoria. El procesamiento privado, persistencia, autenticación y transición a `ready` pertenecen a A13/A15/A30; la interfaz no presenta una carga aceptada como análisis calculado.
+
 El puerto predeterminado es `3000`. Para cambiarlo, copia `.env.example` a `.env`, ajusta `PORT` y reinicia el servidor. Para detenerlo, presiona `Ctrl+C` en la terminal.
 
 ## Cómo trabajar
