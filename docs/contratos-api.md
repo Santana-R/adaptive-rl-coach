@@ -76,6 +76,14 @@ Comparar bloques propios, distintos, listos, con cinco partidas; identidad, moda
 
 Estados de comparison: baseline, comparable, not_comparable. Motivos posibles: NO_PREVIOUS_COMPATIBLE_BLOCK, PLAYER_MISMATCH, MODE_MISMATCH, MATCH_TYPE_MISMATCH, METRICS_VERSION_MISMATCH, CHRONOLOGY_INVALID, SHARED_REPLAYS. Cada métrica ausente queda null y explica motivo; no impide mostrar otras métricas válidas.
 
+### Comparación implementada en A10
+
+El [servicio de comparación](comparacion-bloques.md) conecta A14/A09 con `compareBlocks`. Recibe IDs de bloque serializados como cadenas y obtiene la ventana de fechas desde los cinco `replay.date` con zona confirmada; conserva los motivos de fechas ausentes o inválidas. A19/A15 también pueden entregar bloques ya normalizados con contexto, versión, procedencia, IDs y ventana comprobada.
+
+La comparación devuelve `status`, `current_block_id`, `baseline_block_id`, `reason_codes` y `deltas`. Línea base o incompatibilidad conservan `deltas: null`. Para bloques compatibles, cada delta lleva sus valores anterior/actual, unidad, cobertura y motivo si no puede calcularse. Los porcentajes cambian en `percentage_points`; conteos y segundos conservan su unidad. No se compara una duración de partida con un tiempo individual ni se mezclan fuentes sintéticas/reales. Replays compartidos también se detectan mediante `rocket_league_id`/`match_guid` cuando están disponibles.
+
+`resolveBaseline` elige el anterior compatible más reciente de un historial recibido, con descartes explicados y desempate determinista por ID. La consulta del historial propio, asociación SQL y exposición HTTP continúan en A15/A19; A10 no implementa esas rutas ni modifica las interfaces de Luis. Ver el [ejemplo de análisis actualizado](../planning/examples/analysis.json).
+
 ## Diagnóstico y plan
 Prioridad: `{ priority_key, rule_id, score, evidence: { metric_key, value, unit, threshold, direction }, rules_version }`. Máximo tres. Umbrales proceden del prototipo y se revisan en A02/A26; ninguna cifra de fixture se adopta como umbral calibrado. Desempate propuesto: score descendente y después rule_id ascendente, que debe fijarse en A02/A17. null no activa una regla que requiera ese valor.
 
