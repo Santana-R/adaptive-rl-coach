@@ -7,17 +7,18 @@ Procedimiento para comprobar A08 con cuentas reales de Supabase: dos jugadores (
 | Pieza | Archivo | Comportamiento |
 | --- | --- | --- |
 | Registro → usuario de la aplicación | `database/migraciones/a08-auth.sql` | Cada cuenta nueva de Auth (correo o Google) crea su fila en `usuarios` como `jugador`/`activo`. El rol no se lee de los datos del registro. |
-| Acceso directo desde el navegador | RLS existente, sin políticas | Con la clave pública no se puede leer ni escribir ninguna tabla. |
+| Permisos del servidor | `database/migraciones/a08-permisos-servidor.sql` | Solo `service_role` (clave secreta de Express) lee y escribe las tablas. |
+| Acceso directo desde el navegador | Sin permisos para `anon`/`authenticated`, RLS activado sin políticas | Con la clave pública no se puede leer ni escribir ninguna tabla (`permission denied`). |
 | Validación del token | `src/middleware/auth.js` → `requireAuth` | Sin token o token inválido: **401 AUTH_REQUIRED**. Lee rol y estado de `usuarios` en cada petición; suspendido: **403 USER_SUSPENDED**. |
 | Rol | `requireRole('admin')` | Para rutas de administración (A29/A32): otro rol responde **403 ROLE_DENIED**. |
 | Propiedad por recurso | `assertOwner(req, ownerId)` y filtros por `req.user.id` | Las rutas de propietario nunca aceptan `user_id` del cliente. Un recurso ajeno responde **404 RESOURCE_NOT_FOUND**, igual que uno inexistente. |
 | Rutas | `GET /api/v1/me`, `GET /api/v1/profile` | `me`: id, role, status. `profile`: solo el perfil propio (A15 añade PATCH). |
 
-Pruebas automáticas con Supabase simulado: `npm test` (12 casos). Copia en texto de la migración y sus comprobaciones: [a08-auth.md](../database/migraciones/a08-auth.md).
+Pruebas automáticas con Supabase simulado: `npm test` (12 casos). Prueba real automatizada: `powershell -ExecutionPolicy Bypass -File scripts/prueba-auth.ps1` (14 casos; pide correos y contraseñas en la terminal y no los imprime). Copia en texto de la migración y sus comprobaciones: [a08-auth.md](../database/migraciones/a08-auth.md).
 
 ## Preparación (una vez)
 
-1. **Migración.** Supabase → SQL Editor → pegar `database/migraciones/a08-auth.sql` → Run. Después ejecutar las consultas de comprobación del final del archivo y guardar captura.
+1. **Migraciones.** Supabase → SQL Editor → pegar el **contenido** de `database/migraciones/a08-auth.sql` → Run; después el de `a08-permisos-servidor.sql` → Run. Ejecutar las comprobaciones del final de cada archivo y guardar captura.
 2. **Variables.** Copiar `.env.example` a `.env` y rellenar `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` y `SUPABASE_ANON_KEY` (Project Settings → API). No compartir `.env`.
 3. **Correo.** Authentication → Providers → Email activado. Para la prueba, crear las cuentas desde Authentication → Users → *Add user* con *Auto Confirm User*.
 4. **Servidor.** `npm start` → `http://127.0.0.1:3000`.
@@ -72,8 +73,8 @@ Los tokens no se pegan en el PR ni en capturas.
 | 5 | `curl -s $API/profile -H "Authorization: Bearer $TA"` | Perfil `TEST_A` |
 | 6 | `curl -s "$API/profile?user_id=<id de B>" -H "Authorization: Bearer $TA"` | Sigue devolviendo `TEST_A` |
 | 7 | `curl -s $API/profile -H "Authorization: Bearer $TB"` | Perfil `TEST_B` |
-| 8 | Acceso directo con clave pública: `curl -s "$SUPABASE_URL/rest/v1/perfiles?select=*" -H "apikey: $SUPABASE_ANON_KEY" -H "Authorization: Bearer $TA"` | `[]`: A no lee ninguna fila, ni la de B |
-| 9 | Igual que 8 con `usuarios` | `[]` |
+| 8 | Acceso directo con clave pública: `curl -s "$SUPABASE_URL/rest/v1/perfiles?select=*" -H "apikey: $SUPABASE_ANON_KEY" -H "Authorization: Bearer $TA"` | `permission denied` (o `[]`): A no lee ninguna fila, ni la de B |
+| 9 | Igual que 8 con `usuarios` | `permission denied` (o `[]`) |
 | 10 | Registro público pidiendo admin: `curl -s "$SUPABASE_URL/auth/v1/signup" -H "apikey: $SUPABASE_ANON_KEY" -H "Content-Type: application/json" -d '{"email":"intento-admin@…","password":"…","data":{"rol":"administrador","role":"admin"}}'` y luego la consulta SQL de cuentas | La nueva cuenta queda `jugador` |
 | 11 | SQL: `UPDATE public.usuarios SET estado='suspendido' WHERE id_usuario=(SELECT id FROM auth.users WHERE email='jugador-b@…');` y repetir 7 con `$TB` | 403 `USER_SUSPENDED` sin pedir token nuevo |
 | 12 | Volver a `activo` y repetir 7 | 200 |

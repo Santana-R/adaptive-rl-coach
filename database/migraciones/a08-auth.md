@@ -110,8 +110,48 @@ SELECT count(*) FROM pg_policies WHERE schemaname = 'public';
 | Tablas sin RLS | Ninguna fila |
 | Políticas en `public` | `0` |
 
+## Segunda migración: permisos del servidor
+
+Archivo ejecutable: [`a08-permisos-servidor.sql`](a08-permisos-servidor.sql). Se aplica después de la primera, igual: pegar el contenido en el SQL Editor y pulsar **Run**.
+
+Hace falta porque en este proyecto `service_role` (la clave secreta del servidor) no tenía `SELECT` en las tablas. Express respondía **503** con tokens válidos (`permission denied for table usuarios`). No da permisos a `anon` ni a `authenticated`.
+
+```sql
+-- A08 · Permisos del servidor (Express) sobre las tablas.
+-- Se ejecuta UNA vez en el SQL Editor de Supabase, después de a08-auth.sql.
+-- No crea, modifica ni borra tablas ni filas. Se puede volver a ejecutar.
+--
+-- Por qué: en este proyecto service_role solo tenía REFERENCES/TRIGGER/TRUNCATE
+-- (ver database/esquema-fase2.sql), así que Express no podía leer public.usuarios
+-- y respondía 503 aunque el token fuera válido ("permission denied for table usuarios").
+--
+-- Qué hace: da a service_role (la clave secreta, que solo vive en el servidor)
+-- lectura y escritura en las tablas de public y uso de sus secuencias (columnas identity).
+-- NO da permisos a anon ni a authenticated: el navegador sigue sin acceso directo a
+-- ninguna tabla ("permission denied"), y además RLS sigue activado y sin políticas.
+
+BEGIN;
+
+GRANT USAGE ON SCHEMA public TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO service_role;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO service_role;
+
+COMMIT;
+
+-- Comprobación (ejecutar aparte):
+--   SELECT grantee, privilege_type, count(*) AS tablas
+--   FROM information_schema.role_table_grants
+--   WHERE table_schema = 'public' AND grantee IN ('service_role', 'authenticated', 'anon')
+--     AND privilege_type IN ('SELECT', 'INSERT', 'UPDATE', 'DELETE')
+--   GROUP BY grantee, privilege_type ORDER BY grantee, privilege_type;
+--   Esperado: service_role con 30 tablas en cada privilegio. Si aparecen filas de anon o
+--   authenticated, revisarlas: el navegador no debe tener acceso directo a las tablas.
+```
+
 ## Errores comunes
 
 - `syntax error at or near "database"`: se pegó la ruta del archivo en lugar de su contenido.
+- Aviso *Potential issue detected / destructive operations*: lo provocan `DROP TRIGGER IF EXISTS` y `REVOKE`. Solo afectan al trigger y la función de esta migración; se puede confirmar.
+- La API responde 503 con un token válido: falta aplicar `a08-permisos-servidor.sql`.
 
 Siguiente paso: [prueba de autenticación](../../docs/prueba-auth.md).
