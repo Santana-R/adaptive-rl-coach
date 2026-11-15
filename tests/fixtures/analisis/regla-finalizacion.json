@@ -1,0 +1,305 @@
+{
+  "case_id": "regla-finalizacion",
+  "synthetic": true,
+  "input_note": "Totales y cobertura sintéticos de un solo jugador en bloques válidos. Son ejemplos para especificar una regla, no un payload de la API ni una prueba de agregación o procesamiento real de replays.",
+  "rule": {
+    "rule_id": "finalizacion-eficiencia",
+    "rules_version": "mvp.rules.v1",
+    "metric_key": "shooting_pct",
+    "threshold_pct": 30,
+    "operator": "<=",
+    "min_shots_by_mode": {
+      "1v1": 20,
+      "2v2": 15,
+      "3v3": 10
+    },
+    "required_replays": 5,
+    "required_coverage": 5,
+    "calibration_status": "agreed_heuristic_not_calibrated"
+  },
+  "verification": {
+    "source": "synthetic",
+    "expected_result_status": "reviewed_as_specification",
+    "engine_execution": "pending",
+    "pending_issues": [
+      "A09",
+      "A17",
+      "A33"
+    ],
+    "note": "Los porcentajes se expresan sin redondearlos para decidir. active/inactive/not_evaluable y reason describen este fixture; A17 resolverá el objeto público conforme al contrato."
+  },
+  "cases": [
+    {
+      "case_id": "1v1-minimo-exacto",
+      "input": {
+        "mode": "1v1",
+        "replay_count": 5,
+        "goals": 4,
+        "shots": 20,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 20,
+        "rule_status": "active",
+        "reason": "AT_OR_BELOW_THRESHOLD"
+      }
+    },
+    {
+      "case_id": "1v1-un-tiro-menos",
+      "input": {
+        "mode": "1v1",
+        "replay_count": 5,
+        "goals": 3,
+        "shots": 19,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 15.789473684210526,
+        "rule_status": "not_evaluable",
+        "reason": "INSUFFICIENT_SHOTS"
+      }
+    },
+    {
+      "case_id": "1v1-limite-30-inclusivo",
+      "input": {
+        "mode": "1v1",
+        "replay_count": 5,
+        "goals": 6,
+        "shots": 20,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 30,
+        "rule_status": "active",
+        "reason": "AT_OR_BELOW_THRESHOLD"
+      }
+    },
+    {
+      "case_id": "1v1-supera-30",
+      "input": {
+        "mode": "1v1",
+        "replay_count": 5,
+        "goals": 7,
+        "shots": 20,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 35,
+        "rule_status": "inactive",
+        "reason": "ABOVE_THRESHOLD"
+      }
+    },
+    {
+      "case_id": "2v2-minimo-exacto",
+      "input": {
+        "mode": "2v2",
+        "replay_count": 5,
+        "goals": 3,
+        "shots": 15,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 20,
+        "rule_status": "active",
+        "reason": "AT_OR_BELOW_THRESHOLD"
+      }
+    },
+    {
+      "case_id": "2v2-un-tiro-menos",
+      "input": {
+        "mode": "2v2",
+        "replay_count": 5,
+        "goals": 3,
+        "shots": 14,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 21.428571428571427,
+        "rule_status": "not_evaluable",
+        "reason": "INSUFFICIENT_SHOTS"
+      }
+    },
+    {
+      "case_id": "2v2-limite-30-inclusivo",
+      "input": {
+        "mode": "2v2",
+        "replay_count": 5,
+        "goals": 6,
+        "shots": 20,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 30,
+        "rule_status": "active",
+        "reason": "AT_OR_BELOW_THRESHOLD"
+      }
+    },
+    {
+      "case_id": "2v2-supera-30",
+      "input": {
+        "mode": "2v2",
+        "replay_count": 5,
+        "goals": 7,
+        "shots": 20,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 35,
+        "rule_status": "inactive",
+        "reason": "ABOVE_THRESHOLD"
+      }
+    },
+    {
+      "case_id": "3v3-minimo-y-limite-30",
+      "input": {
+        "mode": "3v3",
+        "replay_count": 5,
+        "goals": 3,
+        "shots": 10,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 30,
+        "rule_status": "active",
+        "reason": "AT_OR_BELOW_THRESHOLD"
+      }
+    },
+    {
+      "case_id": "3v3-un-tiro-menos",
+      "input": {
+        "mode": "3v3",
+        "replay_count": 5,
+        "goals": 2,
+        "shots": 9,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 22.22222222222222,
+        "rule_status": "not_evaluable",
+        "reason": "INSUFFICIENT_SHOTS"
+      }
+    },
+    {
+      "case_id": "3v3-supera-30",
+      "input": {
+        "mode": "3v3",
+        "replay_count": 5,
+        "goals": 4,
+        "shots": 10,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 40,
+        "rule_status": "inactive",
+        "reason": "ABOVE_THRESHOLD"
+      }
+    },
+    {
+      "case_id": "2v2-ejemplo-comparable-insuficiente",
+      "input": {
+        "mode": "2v2",
+        "replay_count": 5,
+        "goals": 3,
+        "shots": 10,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 30,
+        "rule_status": "not_evaluable",
+        "reason": "INSUFFICIENT_SHOTS"
+      }
+    },
+    {
+      "case_id": "cero-tiros",
+      "input": {
+        "mode": "2v2",
+        "replay_count": 5,
+        "goals": 0,
+        "shots": 0,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": null,
+        "rule_status": "not_evaluable",
+        "reason": "zero_denominator"
+      }
+    },
+    {
+      "case_id": "cero-goles-con-tiros-suficientes",
+      "input": {
+        "mode": "2v2",
+        "replay_count": 5,
+        "goals": 0,
+        "shots": 20,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 0,
+        "rule_status": "active",
+        "reason": "AT_OR_BELOW_THRESHOLD"
+      }
+    },
+    {
+      "case_id": "tiros-ausentes-en-una-partida",
+      "input": {
+        "mode": "2v2",
+        "replay_count": 5,
+        "goals": 4,
+        "shots": null,
+        "goals_coverage": 5,
+        "shots_coverage": 4
+      },
+      "expected": {
+        "shooting_pct": null,
+        "rule_status": "not_evaluable",
+        "reason": "INCOMPLETE_METRIC_COVERAGE"
+      }
+    },
+    {
+      "case_id": "goles-ausentes-en-una-partida",
+      "input": {
+        "mode": "2v2",
+        "replay_count": 5,
+        "goals": null,
+        "shots": 20,
+        "goals_coverage": 4,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": null,
+        "rule_status": "not_evaluable",
+        "reason": "INCOMPLETE_METRIC_COVERAGE"
+      }
+    },
+    {
+      "case_id": "supera-30-aunque-redondeado-parezca-30",
+      "input": {
+        "mode": "2v2",
+        "replay_count": 5,
+        "goals": 7,
+        "shots": 23,
+        "goals_coverage": 5,
+        "shots_coverage": 5
+      },
+      "expected": {
+        "shooting_pct": 30.434782608695652,
+        "rule_status": "inactive",
+        "reason": "ABOVE_THRESHOLD"
+      }
+    }
+  ]
+}

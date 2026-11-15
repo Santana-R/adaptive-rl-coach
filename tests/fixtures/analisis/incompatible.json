@@ -53,5 +53,16 @@
       "MODE_MISMATCH"
     ],
     "delta": null
+  },
+  "verification": {
+    "source": "synthetic",
+    "expected_result_status": "reviewed_as_specification",
+    "review_detail": "Revisión de escenario: modalidad anterior 2v2 y actual 3v3; no se calcula delta. La regla del bloque actual se puede evaluar por separado si cumple sus requisitos.",
+    "engine_execution": "pending",
+    "pending_issues": [
+      "A10",
+      "A17",
+      "A33"
+    ]
   }
 }

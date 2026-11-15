@@ -29,5 +29,15 @@
     ],
     "max_priorities": 3
   },
-  "note": "Desempate propuesto score desc/rule_id asc, revisar contra prototipo en A02; estos valores no son umbrales de diagnóstico."
+  "note": "Desempate propuesto score desc/rule_id asc, revisar contra prototipo en A02; estos valores no son umbrales de diagnóstico.",
+  "verification": {
+    "source": "synthetic",
+    "expected_result_status": "reviewed_as_specification",
+    "review_detail": "Orden técnico propuesto revisado: score descendente y rule_id ascendente, máximo tres. Los IDs son placeholders; score y desempate definitivos pendientes en A17.",
+    "engine_execution": "pending",
+    "pending_issues": [
+      "A17",
+      "A33"
+    ]
+  }
 }

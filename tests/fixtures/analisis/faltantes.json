@@ -10,5 +10,16 @@
     "shooting_pct": null,
     "shooting_missing_reason": "zero_denominator",
     "boost_rule_active": false
+  },
+  "verification": {
+    "source": "synthetic",
+    "expected_result_status": "reviewed_as_specification",
+    "review_detail": "Aritmética y faltantes revisados: 0/0 no es evaluable; boost null no aporta evidencia. No se define una regla definitiva de boost en A02.",
+    "engine_execution": "pending",
+    "pending_issues": [
+      "A09",
+      "A17",
+      "A33"
+    ]
   }
 }
