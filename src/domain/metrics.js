@@ -1,0 +1,113 @@
+const REQUIRED_REPLAYS = 5;
+
+// Un cero registrado es válido. null, undefined y conteos inválidos se excluyen.
+function readCount(replay, key) {
+  const metric = replay.values?.[key];
+  if (metric?.value == null) {
+    return { value: null, reason: metric?.missing_reason || 'not_available' };
+  }
+  if (metric.unit !== 'count') return { value: null, reason: 'unit_mismatch' };
+  if (!Number.isSafeInteger(metric.value) || metric.value < 0) {
+    return { value: null, reason: 'invalid_count' };
+  }
+  return { value: metric.value, reason: null };
+}
+
+function sumCounts(replays, key) {
+  let total = 0;
+  let coverage = 0;
+  const excluded = [];
+
+  for (const replay of replays) {
+    const count = readCount(replay, key);
+    if (count.reason !== null) {
+      excluded.push({ replay_id: replay.replay_id, metric_key: key, reason: count.reason });
+      continue;
+    }
+    total += count.value;
+    coverage += 1;
+  }
+
+  let missingReason = null;
+  if (coverage < REQUIRED_REPLAYS) {
+    missingReason = coverage === 0 ? 'not_available' : 'incomplete_coverage';
+  } else if (!Number.isSafeInteger(total)) {
+    missingReason = 'unsafe_total';
+  }
+
+  return {
+    value: missingReason === null ? total : null,
+    unit: 'count',
+    coverage,
+    missing_reason: missingReason,
+    excluded,
+  };
+}
+
+function shootingEfficiency(goals, shots) {
+  const excluded = [...goals.excluded, ...shots.excluded];
+  const excludedIds = new Set(excluded.map(item => item.replay_id));
+  const coverage = REQUIRED_REPLAYS - excludedIds.size;
+  let value = null;
+  let missingReason = null;
+
+  if (goals.value === null || shots.value === null) {
+    missingReason = coverage < REQUIRED_REPLAYS
+      ? (coverage === 0 ? 'not_available' : 'incomplete_coverage')
+      : (goals.missing_reason || shots.missing_reason);
+  } else if (shots.value === 0) {
+    missingReason = 'zero_denominator';
+  } else {
+    // Dividimos los totales del bloque, sin promediar porcentajes ni redondear.
+    value = (goals.value / shots.value) * 100;
+    if (value > 100) {
+      value = null;
+      missingReason = 'out_of_range';
+    }
+  }
+
+  return {
+    value,
+    unit: 'percent',
+    coverage,
+    missing_reason: missingReason,
+    numerator: { metric_key: 'goals', value: goals.value, unit: 'count' },
+    denominator: { metric_key: 'shots', value: shots.value, unit: 'count' },
+    excluded,
+  };
+}
+
+// Recibe datos normalizados de A14, sin leer archivos, credenciales ni botones.
+function calculateBlockMetrics(block) {
+  if (!Array.isArray(block?.replays) || block.replays.length !== REQUIRED_REPLAYS) {
+    throw new TypeError('Las métricas requieren exactamente cinco replays normalizados.');
+  }
+  const replays = Array.from(block.replays);
+  const replayIds = replays.map(replay => replay?.replay_id);
+  if (replayIds.some(id => typeof id !== 'string' || !id.trim()) ||
+      new Set(replayIds).size !== REQUIRED_REPLAYS) {
+    throw new TypeError('Cada replay normalizado debe tener un identificador distinto.');
+  }
+  for (const key of ['platform', 'player_id', 'mode', 'match_type']) {
+    if (typeof block.context?.[key] !== 'string' || !block.context[key].trim()) {
+      throw new TypeError('Se requiere el contexto del jugador validado por A14.');
+    }
+  }
+  if (typeof block.source !== 'string' || !block.source.trim()) {
+    throw new TypeError('Se requiere identificar la procedencia de los datos.');
+  }
+
+  const goals = sumCounts(replays, 'goals');
+  const shots = sumCounts(replays, 'shots');
+
+  return {
+    source: block.source,
+    context: { ...block.context },
+    metrics_version: 'mvp.metrics.v1',
+    sample_size: REQUIRED_REPLAYS,
+    replay_ids: replayIds,
+    values: { goals, shots, shooting_pct: shootingEfficiency(goals, shots) },
+  };
+}
+
+module.exports = { calculateBlockMetrics };
