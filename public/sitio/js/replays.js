@@ -23,7 +23,7 @@
           notice.textContent = message;
         }
 
-        function renderFiles(message) { //Renders the file. duh
+        function renderFiles(message) {
           list.replaceChildren();
           files.forEach(file => {
             const item = document.createElement('li');
@@ -50,25 +50,110 @@
           process.disabled = Boolean(error);
         }
 
+        const reasons = {
+          DUPLICATE_REPLAY: 'El replay ya existe en Ballchasing.',
+          RATE_LIMITED: 'Ballchasing limitó las solicitudes temporalmente.',
+          REPLAY_FORMAT_INVALID: 'Ballchasing rechazó el formato del archivo.',
+          REPLAY_PROCESSING_FAILED: 'Ballchasing no pudo procesar el replay.',
+          REPLAY_NOT_PRIVATE: 'No se pudo comprobar la privacidad del replay.',
+          REPLAY_FILES_EXPIRED: 'Los archivos temporales caducaron. Crea un bloque nuevo.',
+          REPLAY_FILES_CHANGED: 'Un archivo temporal cambió. Crea un bloque nuevo.',
+          UPLOAD_UNAVAILABLE: 'Falló la carga a Ballchasing.',
+          PROCESSING_TIMEOUT: 'Se agotó la espera para consultar el replay.',
+          PLAYER_MISMATCH: 'El jugador del perfil no aparece en este replay.',
+          MODE_MISMATCH: 'La modalidad no coincide con la del perfil.',
+          MATCH_TYPE_MISMATCH: 'El tipo de partida no coincide con el resto.',
+          REPLAY_CONTEXT_UNSUPPORTED: 'El contexto de esta partida no es compatible.'
+        };
+
+        const history = document.getElementById('blocks-list');
+        let refreshTimer;
+
+        function historyMessage(message) {
+          const paragraph = document.createElement('p');
+          paragraph.className = 'text-bray';
+          paragraph.textContent = message;
+          history.replaceChildren(paragraph);
+        }
+
+        async function showBlock(blockId) {
+          const block = await window.CoachBlocks.get(blockId);
+          const files = block.replays.map(replay => {
+            const reason = replay.error?.split(',').map(code => reasons[code] || code).join(' ');
+            const state = replay.status === 'ok' ? 'Válido' : window.CoachBlocks.label(replay.status);
+            return replay.position + '. ' + replay.file_name + ' · ' + (reason || state);
+          });
+          const details = document.getElementById('block-details');
+          details.textContent = 'Bloque ' + blockId + ' · ' + window.CoachBlocks.label(block.status)
+            + '\n' + files.join('\n');
+          details.hidden = false;
+        }
+
+        function actionButton(label, handler) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'btn-rl btn-rl-outline';
+          button.textContent = label;
+          button.addEventListener('click', async () => {
+            button.disabled = true;
+            try {
+              await handler();
+            } catch (error) {
+              showNotice(error.message, 'error');
+            } finally {
+              button.disabled = false;
+            }
+          });
+          return button;
+        }
+
         async function loadHistory() {
-          const response = await fetch('../../api/v1/blocks');
-          const payload = await response.json();
-          const container = document.getElementById('blocks-list');
-          container.replaceChildren();
-          if (!payload.data.length) {
-            const empty = document.createElement('p');
-            empty.className = 'text-bray';
-            empty.textContent = 'Todavía no hay bloques cargados.';
-            container.append(empty);
+          clearTimeout(refreshTimer);
+          const blocks = await window.CoachBlocks.list();
+          if (!blocks.length) {
+            historyMessage('Todavía no hay bloques cargados.');
             return;
           }
-          payload.data.forEach(block => {
+          history.replaceChildren();
+          for (const block of blocks) {
             const row = document.createElement('div');
             row.className = 'table-row';
             row.style.gridTemplateColumns = '1fr 2fr 1fr 1.5fr 1.5fr';
-            row.innerHTML = `<span>${block.block_id}</span><span>Contexto pendiente</span><span>${block.ready_replays} de ${block.expected_replays}</span><span>${window.CoachBlocks.label(block.status)}</span><span>Consultar estado</span>`;
-            container.append(row);
-          });
+            for (const text of [
+              block.block_id,
+              [block.mode, block.match_type === 'pending' ? null : block.match_type].filter(Boolean).join(' · '),
+              block.ready_replays + ' de ' + block.expected_replays,
+              window.CoachBlocks.label(block.status)
+            ]) {
+              const cell = document.createElement('span');
+              cell.textContent = text;
+              row.append(cell);
+            }
+            const actions = document.createElement('span');
+            actions.append(actionButton('Estado', () => showBlock(block.block_id)));
+            if (block.retry_allowed) {
+              actions.append(actionButton('Reintentar', async () => {
+                try {
+                  await window.CoachBlocks.retry(block.block_id);
+                  showNotice('Reintento aceptado para el bloque ' + block.block_id + '.', 'pending');
+                } finally {
+                  await loadHistory();
+                }
+              }));
+            }
+            if (block.status === 'ready') {
+              const link = document.createElement('a');
+              link.className = 'btn-rl btn-rl-outline';
+              link.href = 'analisis.html?block_id=' + encodeURIComponent(block.block_id);
+              link.textContent = 'Ver análisis';
+              actions.append(link);
+            }
+            row.append(actions);
+            history.append(row);
+          }
+          if (blocks.some(block => ['pending', 'processing'].includes(block.status) && !block.retry_allowed)) {
+            refreshTimer = setTimeout(() => loadHistory().catch(error => historyMessage(error.message)), 3000);
+          }
         }
 
         document.getElementById('select-files').addEventListener('click', () => input.click());
@@ -107,7 +192,7 @@
           }
         });
         renderFiles();
-        if (window.location.protocol !== 'file:') { //Evitar que aparezca en rojo desde el inicio.
-          loadHistory().catch(() => {});
+        if (window.location.protocol !== 'file:') {
+          loadHistory().catch(error => historyMessage(error.message));
         }
       }());

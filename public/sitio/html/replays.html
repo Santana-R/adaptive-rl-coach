@@ -1,74 +1,87 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Replays</title>
-    <!-- MDB icon -->
-    <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <!-- Google Fonts Roboto -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
-    />
-    <!-- MDB -->
-    <link rel="stylesheet" href="../css/mdb.min.css">
-    <link rel="stylesheet" href="../css/index.css" />
-  </head>
-  <body class="mainbody appbody">
-    <div class="app-shell">
-      <aside class="sidebar">
-        <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
-        <a href="plan.html" class="sidebar-link">Plan</a>
-        <a href="replays.html" class="sidebar-link active" aria-current="page">Replays</a>
-        <a href="analisis.html" class="sidebar-link">Análisis</a>
-        <a href="objetivos.html" class="sidebar-link">Objetivos</a>
-        <a href="sesiones.html" class="sidebar-link">Sesiones</a>
-        <a href="perfil.html" class="sidebar-link">Perfil</a>
-        <a href="helpme.html" class="sidebar-link">Ayuda</a>
-        <div class="sidebar-footer">
-          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
-        </div>
-      </aside>
-      <main class="app-main">
-        <h1 class="fw-bold text-light mb-4">Carga e historial de replays</h1>
-        <div class="card bg-card border-card denotative pb-4 mb-4">
-              <div class="card-body">
-                <h5 class="card-title fw-bold text-light mb-2">Bloque nuevo: cinco archivos .replay distintos</h5>
-                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
-                <li>Mismo jugador, modalidad y tipo de partida. Carga disponible desde PC.</li>
-                <li>La pantalla informará el límite de tamaño configurado.</li>
-                </ul>
-              </div>
-            </div>
-        <form id="replay-upload-form" novalidate>
-          <input id="replay-input" type="file" accept=".replay" multiple class="form-control mb-3">
-          <div class="mb-3">
-            <button id="select-files" type="button" class="btn-rl btn-rl-outline me-3" data-mdb-ripple-init data-mdb-ripple-color="info">Seleccionar archivos</button>
-            <button id="process-block" type="submit" class="btn-rl btn-rl-accent" data-mdb-ripple-init data-mdb-ripple-color="light" disabled>Procesar bloque</button>
-          </div>
-          <h6 class="fw-bold text-accent">Selección: <span id="file-count">0 de 5</span></h6>
-          <ul id="file-list" class="text-light mb-1"></ul>
-          <p id="file-notice" class="text-bray fs-6 mb-4" role="status" aria-live="polite">Selecciona exactamente cinco archivos .replay.</p>
-        </form>
-        <div class="mb-3">
-        <div class="table-head" style="grid-template-columns: 1fr 2fr 1fr 1.5fr 1.5fr;"><span>Bloque</span><span>Contexto</span><span>Partidas</span><span>Estado</span><span>Acción</span></div>
-        <div id="blocks-list"><p class="text-bray">Todavía no hay bloques cargados.</p></div>
-        </div>
-        <p class="text-bray">Reintentar se ofrece ante fallas recuperables. Ver análisis exige cinco partidas válidas.</p>
-        <p class="app-note">Los bloques se consultan desde el API local. El procesamiento real y la persistencia se incorporan en las tareas de integración del motor.</p>
-      </main>
-    </div>
 
-    <!-- MDB -->
-    <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
-    <script type="text/javascript" src="../../js/blocks.js"></script>
-    <script type="text/javascript" src="../js/replays.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Replays</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+  <!-- MDB -->
+  <link rel="stylesheet" href="../css/mdb.min.css">
+  <link rel="stylesheet" href="../css/index.css" />
+</head>
+
+<body class="mainbody appbody">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
+      <a href="plan.html" class="sidebar-link">Plan</a>
+      <a href="replays.html" class="sidebar-link active" aria-current="page">Replays</a>
+      <a href="analisis.html" class="sidebar-link">Análisis</a>
+      <a href="objetivos.html" class="sidebar-link">Objetivos</a>
+      <a href="sesiones.html" class="sidebar-link">Sesiones</a>
+      <a href="perfil.html" class="sidebar-link">Perfil</a>
+      <a href="helpme.html" class="sidebar-link">Ayuda</a>
+      <div class="sidebar-footer">
+        <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init
+          data-mdb-ripple-color="info">Cerrar sesión</button>
+      </div>
+    </aside>
+    <main class="app-main">
+      <h1 class="fw-bold text-light mb-4">Carga e historial de replays</h1>
+      <div class="card bg-card border-card denotative pb-4 mb-4">
+        <div class="card-body">
+          <h5 class="card-title fw-bold text-light mb-2">Bloque nuevo: cinco archivos .replay distintos</h5>
+          <ul class="card-text text-bray fs-6 list-unstyled mb-0">
+            <li>Mismo jugador, modalidad y tipo de partida. Carga disponible desde PC.</li>
+            <li>El servidor valida el tamaño total de la carga.</li>
+          </ul>
+        </div>
+      </div>
+      <form id="replay-upload-form" novalidate>
+        <input id="replay-input" type="file" accept=".replay" multiple class="form-control mb-3">
+        <div class="mb-3">
+          <button id="select-files" type="button" class="btn-rl btn-rl-outline me-3" data-mdb-ripple-init
+            data-mdb-ripple-color="info">Seleccionar archivos</button>
+          <button id="process-block" type="submit" class="btn-rl btn-rl-accent" data-mdb-ripple-init
+            data-mdb-ripple-color="light" disabled>Procesar bloque</button>
+        </div>
+        <h6 class="fw-bold text-accent">Selección: <span id="file-count">0 de 5</span></h6>
+        <ul id="file-list" class="text-light mb-1"></ul>
+        <p id="file-notice" class="text-bray fs-6 mb-4" role="status" aria-live="polite">Selecciona exactamente cinco
+          archivos .replay.</p>
+      </form>
+      <div class="mb-3">
+        <div class="table-head" style="grid-template-columns: 1fr 2fr 1fr 1.5fr 1.5fr;">
+          <span>Bloque</span><span>Contexto</span><span>Partidas</span><span>Estado</span><span>Acción</span></div>
+        <div id="blocks-list">
+          <p class="text-bray">Todavía no hay bloques cargados.</p>
+        </div>
+      </div>
+      <pre id="block-details" class="text-bray" style="white-space: pre-wrap" aria-live="polite" hidden></pre>
+      <p class="text-bray">Reintentar se ofrece ante fallas recuperables. Ver análisis exige cinco partidas válidas.</p>
+      <p class="app-note">Los bloques se consultan desde el API local. El procesamiento real y la persistencia se
+        incorporan en las tareas de integración del motor.</p>
+    </main>
+  </div>
+
+  <!-- MDB -->
+  <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
+    <script>
+      window.SUPABASE_CONFIG = {
+      url: "https://fylupliaforboawqdutb.supabase.co",
+      anonKey: "sb_publishable_DBJPBlKMqpNxAytdxCxwDw_cvuEo4Pc"};
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/profile-api.js"></script>
+  <script type="text/javascript" src="../../js/blocks.js"></script>
+  <script type="text/javascript" src="../js/replays.js"></script>
+</body>
+
 </html>
