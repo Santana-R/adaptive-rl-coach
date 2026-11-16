@@ -16,3 +16,7 @@ Conservar IDs y trazabilidad RF. No volver a publicar el calendario de octubre c
 [Cuentas del equipo verificadas](miembros-github.json). Las cuatro personas quedaron asignadas a sus tareas; esto no acredita trabajo iniciado.
 
 Ajuste confirmado por Roberto: el documento de Fase 2 ya está listo para presentarlo. A07 queda como seguimiento de observaciones; A23 es la próxima entrega de David. Ninguna tarea de implementación depende de A07. confirmed_progress registra esa confirmación y no acredita aprobación del profesor ni implementación de código.
+
+## Contenido deportivo de A23 · 15 de noviembre
+
+Roberto define/revisa contenido deportivo y David implementa carga, consulta, compatibilidad y versiones. Las [fichas revisadas](../docs/catalogo-ejercicios.md) y [catalogo-ejercicios.v1.json](catalogo-ejercicios.v1.json) contienen tres recursos reales para `shooting`, variantes de CoCo y criterios de reparto para A18. Son una entrega de contenido, no el seed ni una respuesta pública del API; conservan `active: false` mientras faltan comprobaciones técnicas. Las proporciones/rangos/tiempos son heurísticos iniciales. Las referencias `exercise_key` no son IDs SQL. A23 no se cierra por incorporar estos archivos. La asignación operativa y los pendientes vigentes se consultan en la issue, sin regenerar el catálogo histórico de 44 tareas.

@@ -60,6 +60,8 @@ Roberto conoce Rocket League y decide con apoyo los criterios deportivos. Su cam
 
 No se conocen horas semanales disponibles. David lleva materias distintas; no asumir que dispone de más tiempo. El apoyo y las revisiones pueden ser breves y por escrito, sin reuniones obligatorias.
 
+**Catálogo A23 · reparto concretado el 15 de noviembre:** Roberto define y revisa el contenido deportivo; David conserva seed, consulta, filtros y versiones. Las [tres fichas iniciales](docs/catalogo-ejercicios.md) y su [referencia estructurada](planning/catalogo-ejercicios.v1.json) incluyen Ground Shots de Castro, Mid Height Shots y CoCo, sin BakkesMod, con variantes por nivel y distribución proporcional con mínimo de cinco minutos. El contenido está aprobado como heurística inicial, pero A23 sigue pendiente de comprobación técnica; el archivo de fichas no es un seed ni un catálogo activo. A18 implementará el reparto y A24 guardará versiones.
+
 ## Acuerdo de frontend que debe respetar cualquier IA
 
 Luis diseña y construye las pantallas oficiales según los bosquejos y mantiene una apariencia común con su trabajo público. Las vistas oficiales conservan los cálculos, contratos y funciones comprobados, y los muestran mediante los servicios sintéticos mientras se conectan los datos definitivos. Las páginas raíz antiguas quedan fuera del recorrido oficial hasta completar su retirada.

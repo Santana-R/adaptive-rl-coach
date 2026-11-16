@@ -13,6 +13,7 @@ Para comenzar basta [la guía breve](empieza-aqui.md) y tu issue. Abre estas ref
 | Acordar entradas, salidas y estados | [Contrato](contratos-api.md) · [Ejemplos](../planning/examples) |
 | Entender conexiones y responsabilidades | [Base técnica](base-tecnica.md) · [Arquitectura](arquitectura-y-diagramas.md) |
 | Implementar datos e historial | [Diccionario](diccionario-datos.md) |
+| Preparar el catálogo y distinguir la aportación de Roberto/David | [Fichas deportivas de A23](catalogo-ejercicios.md) · [Contenido estructurado](../planning/catalogo-ejercicios.v1.json) |
 | Verificar métricas y reglas | [Casos del motor](casos-motor.md) · [Fixtures](../tests/fixtures/analisis) |
 | Consultar tareas futuras | [Índice del backlog](backlog.md) |
 | Consultar acuerdos y fechas | [Equipo](equipo-y-acuerdos-semanales.md) · [Calendario de referencia](calendario-y-dependencias.md) |

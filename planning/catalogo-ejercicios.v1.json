@@ -1,0 +1,221 @@
+{
+  "catalog_version": "mvp.catalog.v1",
+  "document_type": "reviewed_content_for_A23_not_a_database_seed",
+  "review": {
+    "sports_reviewer": "Roberto Santana Trujillo",
+    "approved_on": "2026-11-15",
+    "prepared_with_ai": true,
+    "calibration_status": "approved_initial_heuristics_not_calibrated",
+    "technical_status": "pending_seed_query_and_compatibility_validation",
+    "technical_owner": "David Alonso Torres Guerrero"
+  },
+  "priority_key": "shooting",
+  "rule_id": "finalizacion-eficiencia",
+  "modes": ["1v1", "2v2", "3v3"],
+  "sources": {
+    "castro": "https://docs.google.com/document/d/1d6D9Yh7KhT_acDZS_NLP7Ejsn_dfuUL3e4I1Qa7eXkI/edit?tab=t.0",
+    "coco": "https://steamcommunity.com/sharedfiles/filedetails/?id=1906378036",
+    "native_custom_training": "https://www.rocketleague.com/news/patch-notes-v1-31",
+    "workshop_and_eac": "https://www.rocketleague.com/news/easy-anti-cheat-comes-to-rocket-league-on-pc-today",
+    "survival_and_streaks": "Descripción y captura de Roberto en conversación; límite de cinco segundos y racha de aciertos."
+  },
+  "practice_levels": [
+    {
+      "level_key": "base",
+      "ranks": ["bronze", "silver", "gold"],
+      "instruction": "Asegurar el contacto y dirigir el balón a portería."
+    },
+    {
+      "level_key": "placement",
+      "ranks": ["platinum", "diamond"],
+      "instruction": "Elegir izquierda o derecha antes del tiro y buscar esa zona."
+    },
+    {
+      "level_key": "placement_and_power",
+      "ranks": ["champion", "grand_champion", "supersonic_legend"],
+      "instruction": "Elegir una esquina y combinar colocación con potencia."
+    }
+  ],
+  "rank_policy": {
+    "source": "self_reported_for_the_analyzed_mode",
+    "missing_rank": "use_base_level_without_inventing_a_rank",
+    "easier_variant_allowed": true,
+    "efficiency_is_not_a_difficulty_estimator": true
+  },
+  "exercises": [
+    {
+      "exercise_key": "castro-ground-shots",
+      "content_version": 1,
+      "title": "Ground Shots — Castro",
+      "author": "Castro",
+      "priority_key": "shooting",
+      "resource_type": "custom_training",
+      "resource_code": "9472-6A26-7F5D-767B",
+      "resource_url": "https://docs.google.com/document/d/1d6D9Yh7KhT_acDZS_NLP7Ejsn_dfuUL3e4I1Qa7eXkI/edit?tab=t.0",
+      "platforms": ["steam", "epic"],
+      "requirements": {"steam_workshop_access": false, "bakkesmod": false},
+      "difficulty_base": 1,
+      "reference_duration_minutes": 10,
+      "minimum_duration_minutes": 5,
+      "purpose": "Practicar contacto después del bote, consistencia, colocación y potencia de finalización.",
+      "instructions": [
+        "Abrir Entrenamiento personalizado e introducir el código del paquete.",
+        "Practicar el paquete base sin BakkesMod y sin añadir aleatorización externa.",
+        "Esperar el bote y golpear justo después; adaptar la colocación al nivel de práctica.",
+        "Recorrer las posiciones en orden, con máximo tres intentos por posición antes de avanzar.",
+        "Practicar durante los minutos asignados; no es necesario completar todo el paquete."
+      ],
+      "practice_level_keys": ["base", "placement", "placement_and_power"],
+      "success_criterion": "Buscar el gol tras el contacto posterior al bote; después trabajar la zona elegida y la potencia según el nivel. No se impone una velocidad ni tasa de acierto calibrada.",
+      "resource_validation": {"source_code_checked": true, "in_game_import": "pending_confirmation", "seed_and_query": "pending"},
+      "active": false
+    },
+    {
+      "exercise_key": "castro-mid-height-shots",
+      "content_version": 1,
+      "title": "Mid Height Shots — Castro",
+      "author": "Castro",
+      "priority_key": "shooting",
+      "resource_type": "custom_training",
+      "resource_code": "E6E3-1E82-E6DE-C4B4",
+      "resource_url": "https://docs.google.com/document/d/1d6D9Yh7KhT_acDZS_NLP7Ejsn_dfuUL3e4I1Qa7eXkI/edit?tab=t.0",
+      "platforms": ["steam", "epic"],
+      "requirements": {"steam_workshop_access": false, "bakkesmod": false},
+      "difficulty_base": 1,
+      "reference_duration_minutes": 5,
+      "minimum_duration_minutes": 5,
+      "purpose": "Practicar finalización de balones elevados que permiten aprovechar el flip para generar potencia.",
+      "instructions": [
+        "Abrir Entrenamiento personalizado e introducir el código del paquete.",
+        "Practicar el paquete base sin BakkesMod y sin añadir aleatorización externa.",
+        "Buscar finalizar directamente y aprovechar el flip cuando sea posible; adaptar la colocación al nivel de práctica.",
+        "Recorrer las posiciones en orden, con máximo tres intentos por posición antes de avanzar.",
+        "Practicar durante los minutos asignados; no es necesario completar todo el paquete."
+      ],
+      "practice_level_keys": ["base", "placement", "placement_and_power"],
+      "success_criterion": "Buscar gol directo con contacto controlado; añadir zona elegida y potencia según el nivel. No se exige una mecánica avanzada adicional.",
+      "resource_validation": {"source_code_checked": true, "in_game_import": "pending_confirmation", "seed_and_query": "pending"},
+      "active": false
+    },
+    {
+      "exercise_key": "coco-aim-training",
+      "content_version": 1,
+      "title": "Aim Training — CoCo",
+      "author": "CoCo",
+      "priority_key": "shooting",
+      "resource_type": "steam_workshop",
+      "resource_code": null,
+      "resource_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=1906378036",
+      "platforms": ["steam"],
+      "requirements": {"steam_workshop_access": true, "bakkesmod": false},
+      "difficulty_base": 1,
+      "reference_duration_minutes": 5,
+      "minimum_duration_minutes": 5,
+      "purpose": "Practicar precisión y consistencia de contacto contra objetivos con dificultad elegida.",
+      "instructions": [
+        "Abrir el mapa desde Steam Workshop y seleccionar una sola variante para el bloque de práctica.",
+        "En Normal, comprobar los tres ajustes de la variante antes de empezar; no se deduce su estado por la captura de ejemplo.",
+        "Buscar contactos controlados contra el objetivo durante los minutos asignados, sin reiniciar el cronómetro después de fallar.",
+        "Registrar manualmente minutos realizados, variante, ajustes y mejor racha del bloque.",
+        "Si la dificultad resulta excesiva, elegir una variante más sencilla y registrar el cambio como otro bloque de práctica."
+      ],
+      "variants": [
+        {
+          "variant_key": "easy-base",
+          "mode": "easy",
+          "difficulty": 1,
+          "suggested_ranks": ["bronze", "silver", "gold"],
+          "default_for_ranks": true,
+          "random_target_sizes": null,
+          "random_wall_distances": null,
+          "random_ball_drops": null
+        },
+        {
+          "variant_key": "normal-fixed",
+          "mode": "normal",
+          "difficulty": 2,
+          "suggested_ranks": ["platinum", "diamond"],
+          "default_for_ranks": true,
+          "random_target_sizes": false,
+          "random_wall_distances": false,
+          "random_ball_drops": false
+        },
+        {
+          "variant_key": "normal-distance",
+          "mode": "normal",
+          "difficulty": 3,
+          "suggested_ranks": ["champion"],
+          "default_for_ranks": true,
+          "random_target_sizes": false,
+          "random_wall_distances": true,
+          "random_ball_drops": false
+        },
+        {
+          "variant_key": "normal-random",
+          "mode": "normal",
+          "difficulty": 4,
+          "suggested_ranks": ["grand_champion", "supersonic_legend"],
+          "default_for_ranks": true,
+          "random_target_sizes": true,
+          "random_wall_distances": true,
+          "random_ball_drops": true
+        },
+        {
+          "variant_key": "survival-optional",
+          "mode": "survival",
+          "difficulty": 4,
+          "suggested_ranks": ["grand_champion", "supersonic_legend"],
+          "default_for_ranks": false,
+          "selection": "explicit_player_choice_replaces_normal",
+          "random_target_sizes": null,
+          "random_wall_distances": null,
+          "random_ball_drops": null,
+          "shot_time_limit_seconds": 5,
+          "time_limit_source": "reported_by_roberto"
+        }
+      ],
+      "success_criterion": "Trabajar contactos controlados y consistencia; conservar la mejor racha como práctica autorreportada, sin establecer un umbral para acreditar mejora.",
+      "resource_validation": {"source_url_checked": true, "in_game_access": "reported_by_roberto_with_screenshot", "seed_and_query": "pending"},
+      "active": false
+    }
+  ],
+  "allocation_policy": {
+    "version": "mvp.allocation.v1",
+    "status": "approved_specification_A18_implementation_pending",
+    "applies_to": "shooting_only_initial_routine",
+    "time_unit": "minutes",
+    "minimum_minutes_per_exercise": 5,
+    "weights_with_workshop": {"castro-ground-shots": 0.5, "castro-mid-height-shots": 0.25, "coco-aim-training": 0.25},
+    "weights_without_workshop": {"castro-ground-shots": 0.75, "castro-mid-height-shots": 0.25},
+    "short_session_order_with_workshop": ["castro-ground-shots", "coco-aim-training", "castro-mid-height-shots"],
+    "short_session_order_without_workshop": ["castro-ground-shots", "castro-mid-height-shots"],
+    "rounding_tie_order": ["castro-ground-shots", "castro-mid-height-shots", "coco-aim-training"],
+    "minimum_handling": "Fix allocations below five to five and redistribute the remaining budget proportionally among the remaining selected exercises.",
+    "rounding": "Whole minutes, floor quotas and distribute remaining minutes by descending fractional remainder, then rounding_tie_order.",
+    "incompatible_or_inactive": "Exclude before allocating; do not activate draft content to fill time.",
+    "missing_workshop_access": "use_custom_training_only",
+    "less_than_five_minutes": "empty_with_INSUFFICIENT_TIME",
+    "missing_catalog_coverage": "explain_partial_or_empty_without_fabricating_exercises",
+    "examples": [
+      {"available_minutes": 4, "workshop_access": true, "assigned": {}, "reason": "INSUFFICIENT_TIME"},
+      {"available_minutes": 5, "workshop_access": true, "assigned": {"castro-ground-shots": 5}},
+      {"available_minutes": 10, "workshop_access": true, "assigned": {"castro-ground-shots": 5, "coco-aim-training": 5}},
+      {"available_minutes": 15, "workshop_access": true, "assigned": {"castro-ground-shots": 5, "castro-mid-height-shots": 5, "coco-aim-training": 5}},
+      {"available_minutes": 20, "workshop_access": true, "assigned": {"castro-ground-shots": 10, "castro-mid-height-shots": 5, "coco-aim-training": 5}},
+      {"available_minutes": 25, "workshop_access": true, "assigned": {"castro-ground-shots": 13, "castro-mid-height-shots": 6, "coco-aim-training": 6}},
+      {"available_minutes": 30, "workshop_access": true, "assigned": {"castro-ground-shots": 15, "castro-mid-height-shots": 8, "coco-aim-training": 7}},
+      {"available_minutes": 40, "workshop_access": true, "assigned": {"castro-ground-shots": 20, "castro-mid-height-shots": 10, "coco-aim-training": 10}},
+      {"available_minutes": 10, "workshop_access": false, "assigned": {"castro-ground-shots": 5, "castro-mid-height-shots": 5}},
+      {"available_minutes": 20, "workshop_access": false, "assigned": {"castro-ground-shots": 15, "castro-mid-height-shots": 5}},
+      {"available_minutes": 40, "workshop_access": false, "assigned": {"castro-ground-shots": 30, "castro-mid-height-shots": 10}}
+    ]
+  },
+  "manual_tracking": {
+    "fields": ["performed_minutes", "exercise_key", "content_version", "variant_key", "settings", "best_streak"],
+    "scope": "self_reported_training_not_replay_performance",
+    "streak_comparison": "same_variant_settings_and_duration_only",
+    "automatic_workshop_reading": false,
+    "integration": "A21_A24_can_use_session_notes_after_mapping_review"
+  },
+  "pending": ["confirm_custom_pack_imports_in_game", "create_seed_and_catalog_query_A23", "implement_allocation_A18", "persist_version_and_selected_variant_A24", "connect_manual_practice_tracking_A21"]
+}
