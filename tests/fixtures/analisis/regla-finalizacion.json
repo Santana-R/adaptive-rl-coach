@@ -4,7 +4,7 @@
   "input_note": "Totales y cobertura sintéticos de un solo jugador en bloques válidos. Son ejemplos para especificar una regla, no un payload de la API ni una prueba de agregación o procesamiento real de replays.",
   "rule": {
     "rule_id": "finalizacion-eficiencia",
-    "rules_version": "mvp.rules.v2",
+    "rules_version": "mvp.rules.v3",
     "metric_key": "shooting_pct",
     "threshold_pct": 30,
     "operator": "<=",

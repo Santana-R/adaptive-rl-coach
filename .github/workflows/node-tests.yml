@@ -1,0 +1,40 @@
+name: Pruebas Node
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pruebas-node-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obtener código
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Preparar Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22.19.0'
+          cache: npm
+      - name: Instalar dependencias
+        run: npm ci --ignore-scripts
+      - name: Ejecutar pruebas
+        run: npm test
+      - name: Comprobar propuesta defensiva sin activar el motor
+        run: |
+          node <<'NODE'
+          const check = require('./planning/proposals/comprobar-cobertura-defensiva.v0.cjs');
+          const proposal = require('./planning/proposals/cobertura-defensiva.v0.json');
+          const cases = require('./planning/fixtures/cobertura-defensiva-propuesta.v0.json');
+          const report = check(proposal, cases);
+          console.log(JSON.stringify(report, null, 2));
+          NODE

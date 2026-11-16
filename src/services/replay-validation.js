@@ -1,4 +1,5 @@
 const { extractBoostValues } = require('../domain/boost');
+const { extractDefensiveValues } = require('../domain/defensive-positioning');
 
 function findReplayPlayer(replay, profile) {
   const platform = profile?.platform;
@@ -131,6 +132,8 @@ function extractReplayBlockMetrics(replays, profile) {
     };
 
     Object.assign(values, extractBoostValues(player.stats?.boost));
+    const defensive = extractDefensiveValues(player.stats?.positioning);
+    if (defensive) values.defensive_positioning = defensive;
     return { replay_id: validation.replays[index].replay_id, values };
   });
 

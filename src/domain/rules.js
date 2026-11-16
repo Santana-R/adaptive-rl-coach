@@ -1,5 +1,6 @@
 const { RULES_CONFIG: config } = require('./rules-config');
 const { evaluateBoostRule } = require('./boost-rule');
+const { evaluateDefensiveRule } = require('./defensive-rule');
 const rule = config.finalization;
 const nonempty = value => typeof value === 'string' && value.trim().length > 0;
 
@@ -146,11 +147,14 @@ function evaluateRules(block) {
   }] : [];
   const boost = evaluateBoostRule(block, blockProblem(block));
   if (boost.priority) priorities.push(boost.priority);
+  const defense = evaluateDefensiveRule(block, blockProblem(block));
+  if (defense.priority) priorities.push(defense.priority);
   return {
     rules_version: config.rules_version,
     priorities: rankPriorities(priorities),
-    evaluations: [evaluation, boost.evaluation],
+    evaluations: [evaluation, boost.evaluation, defense.evaluation],
     limitations: ['heuristics_pending_calibration_A26',
+      ...(defense.priority ? ['defensive_review_heuristic_pending_validation'] : []),
       ...(block?.source === 'synthetic' ? ['synthetic_fixture'] : [])],
   };
 }

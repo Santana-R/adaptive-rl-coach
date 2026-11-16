@@ -1,0 +1,125 @@
+{
+  "proposal_version": "proposal.defensive-coverage.v0",
+  "lifecycle": "draft_pending_sports_review_and_provider_validation",
+  "runtime_enabled": false,
+  "title": "Revisar cobertura defensiva y decisiones como último hombre",
+  "proposed_rule_id": "cobertura-defensiva-revision",
+  "proposed_priority_key": "defensive_review",
+  "accepted_by_roberto": {
+    "relevance": true,
+    "numerical_threshold": false,
+    "catalog_execution": false
+  },
+  "context": {
+    "mode": "2v2",
+    "match_type": "ranked",
+    "required_replays": 5,
+    "required_count_coverage": 5
+  },
+  "signal": {
+    "provider_path": "selected_player.stats.positioning.goals_against_while_last_defender",
+    "source_field": "goals_against_while_last_defender",
+    "unit": "count",
+    "scope": "player",
+    "aggregation": "per_replay",
+    "missing_policy": "null_with_reason_never_zero",
+    "min_goals_per_replay": 2,
+    "min_matching_replays": 3
+  },
+  "threshold_status": "working_hypothesis_not_agreed_not_calibrated",
+  "contextual_fields": [
+    {
+      "provider_path": "selected_player.stats.positioning.time_most_back",
+      "unit": "seconds",
+      "use": "context_only",
+      "missing": "omit_with_reason"
+    },
+    {
+      "provider_path": "selected_player.stats.positioning.percent_most_back",
+      "unit": "percent",
+      "use": "context_only",
+      "missing": "omit_with_reason"
+    },
+    {
+      "provider_path": "selected_player.stats.positioning.percent_infront_ball",
+      "unit": "percent",
+      "use": "context_only",
+      "missing": "omit_with_reason"
+    },
+    {
+      "provider_path": "selected_player.stats.positioning.avg_distance_to_mates",
+      "unit": "uu",
+      "use": "context_only",
+      "missing": "omit_with_reason"
+    },
+    {
+      "provider_path": "replay.play_duration",
+      "unit": "seconds",
+      "scope": "match",
+      "use": "duration_context_not_individual_exposure_denominator",
+      "missing": "omit_with_reason"
+    }
+  ],
+  "forbidden_inferences": [
+    "fault_attribution",
+    "failed_challenge_identification",
+    "two_vs_one_identification",
+    "double_commit_identification",
+    "automatic_rotation_diagnosis",
+    "save_efficiency_from_goals_last_defender",
+    "event_timestamps_from_aggregate_counts"
+  ],
+  "proposed_activity": {
+    "content_key": "review-last-defender",
+    "content_version": "proposal.1",
+    "status": "draft_not_catalog_active",
+    "available_for_generation": false,
+    "resource_type": "native_replay_review",
+    "requires_saved_replay": true,
+    "supported_clients": [
+      "steam",
+      "epic"
+    ],
+    "requires_workshop": false,
+    "requires_bakkesmod": false,
+    "requires_partner": false,
+    "min_duration_minutes": 5,
+    "reference_duration_minutes": 10,
+    "exercise_id": null,
+    "exercise_version_id": null,
+    "instructions": [
+      "Elegir una de las partidas del bloque con mayor conteo observado y abrir manualmente su replay guardada en Rocket League.",
+      "Revisar goles recibidos retrocediendo aproximadamente 10 segundos para entender la preparación de la jugada; el conteo no identifica cuáles fueron como último defensor.",
+      "Comprobar en la replay si ocupabas la posición de último defensor. Si no corresponde, revisar otro gol dentro del tiempo asignado.",
+      "En una situación identificada, valorar opciones del rival, cobertura disponible, entrada o temporización y recuperación del compañero.",
+      "Registrar una decisión alternativa concreta o que no se identifica una alternativa clara. Detener la actividad al terminar los minutos asignados."
+    ],
+    "completion": "Completar los minutos asignados y registrar lo revisado o la dificultad de revisión; no equivale a demostrar mejora competitiva.",
+    "reviewed_goals_are_self_reported": true
+  },
+  "runtime_versions_unchanged": {
+    "rules": "mvp.rules.v2",
+    "plans": "mvp.plans.v2",
+    "allocation": "mvp.allocation.v2"
+  },
+  "release_gates": [
+    "Revisar la hipótesis numérica con Roberto usando bloques completos 2v2.",
+    "Capturar respuestas autenticadas del proveedor y verificar valores explícitos, omisiones, identidad y tiempos con procedencia.",
+    "Revisar duración, tiempo extra, abandonos y exposición al papel de último defensor antes de generalizar frecuencias.",
+    "Preparar extracción, normalización y persistencia sin rellenar ausencias con cero; verificar el esquema real antes de cualquier cambio SQL.",
+    "Resolver catálogo y snapshots de la actividad, reparto entre tres áreas y casos con cinco o diez minutos.",
+    "Implementar versiones nuevas y ejecutar pruebas del dominio, integración y regresión con Node antes de activar."
+  ],
+  "sources": [
+    {
+      "url": "https://ballchasing.com/doc/api",
+      "purpose": "Presencia y rutas de los campos; ejemplos documentales, no benchmark ni garantía de todas las respuestas.",
+      "checked_date": "2026-11-16"
+    },
+    {
+      "url": "https://dignitas.gg/articles/a-guide-to-defense-in-rocket-league-with-apparentlyjack",
+      "purpose": "Orientación sobre paciencia, decisión de entrada, cobertura y práctica contextual; no respalda el umbral 2 en 3/5.",
+      "checked_date": "2026-11-16"
+    }
+  ]
+}

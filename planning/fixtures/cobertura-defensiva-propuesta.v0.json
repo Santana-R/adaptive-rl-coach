@@ -1,0 +1,505 @@
+{
+  "fixture_version": "proposal.defensive-coverage.cases.v0",
+  "synthetic": true,
+  "purpose": "Comprobar la hipótesis descrita; no ejecuta el motor, la API ni el generador.",
+  "provider_capture": false,
+  "descriptor_format": {
+    "defaults": {
+      "mode": "2v2",
+      "match_type": "ranked",
+      "platform": "steam",
+      "player_id": "synthetic-player",
+      "unit": "count",
+      "scope": "player",
+      "source_field": "goals_against_while_last_defender",
+      "identity_consistent": true,
+      "replay_ids": [
+        "synthetic-1",
+        "synthetic-2",
+        "synthetic-3",
+        "synthetic-4",
+        "synthetic-5"
+      ]
+    },
+    "notes": "goals_last_defender contiene cinco valores del jugador; null es dato no disponible. Cualquier override solo sustituye la clave indicada. contextual_data es descriptivo y no interviene en esta hipótesis."
+  },
+  "cases": [
+    {
+      "id": "exact-boundary",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "expected": "review_candidate"
+    },
+    {
+      "id": "only-two-matches",
+      "goals_last_defender": [
+        2,
+        2,
+        1,
+        0,
+        0
+      ],
+      "expected": "no_candidate"
+    },
+    {
+      "id": "extreme-values-do-not-replace-repetition",
+      "goals_last_defender": [
+        9,
+        9,
+        1,
+        0,
+        0
+      ],
+      "expected": "no_candidate"
+    },
+    {
+      "id": "one-in-every-match",
+      "goals_last_defender": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected": "no_candidate"
+    },
+    {
+      "id": "five-explicit-zeros",
+      "goals_last_defender": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "expected": "no_candidate"
+    },
+    {
+      "id": "above-boundary",
+      "goals_last_defender": [
+        3,
+        4,
+        2,
+        1,
+        0
+      ],
+      "expected": "review_candidate"
+    },
+    {
+      "id": "missing-last-match",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        null
+      ],
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "three-positive-and-two-missing",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        null,
+        null
+      ],
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "all-missing",
+      "goals_last_defender": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "boolean-is-not-count",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        false
+      ],
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "string-is-not-count",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        "0"
+      ],
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "fractional-group-average",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0.2
+      ],
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "negative-count",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        -1
+      ],
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "unsafe-integer",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        9007199254740992
+      ],
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "duplicate-replay",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "replay_ids": [
+          "a",
+          "b",
+          "c",
+          "d",
+          "a"
+        ]
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "trimmed-duplicate-replay",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "replay_ids": [
+          "a",
+          "b",
+          "c",
+          "d",
+          " a "
+        ]
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "four-matches",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0
+      ],
+      "override": {
+        "replay_ids": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "six-matches",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      "override": {
+        "replay_ids": [
+          "a",
+          "b",
+          "c",
+          "d",
+          "e",
+          "f"
+        ]
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "blank-replay-id",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "replay_ids": [
+          "a",
+          "b",
+          "c",
+          "d",
+          " "
+        ]
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "3v3-needs-separate-criteria",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "mode": "3v3"
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "1v1-needs-separate-criteria",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "mode": "1v1"
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "casual-outside-initial-scope",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "match_type": "casual"
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "private-outside-initial-scope",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "match_type": "private"
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "player-mismatch",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "identity_consistent": false
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "team-scope-is-not-player",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "scope": "team"
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "wrong-source-field",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "source_field": "goals_against"
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "wrong-unit",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "unit": "seconds"
+      },
+      "expected": "not_evaluable"
+    },
+    {
+      "id": "unavailable-role-context",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "contextual_data": {
+        "time_most_back": null,
+        "percent_most_back": null
+      },
+      "expected": "review_candidate"
+    },
+    {
+      "id": "context-cannot-create-count-signal",
+      "goals_last_defender": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "contextual_data": {
+        "percent_infront_ball": [
+          90,
+          90,
+          90,
+          90,
+          90
+        ],
+        "avg_distance_to_mates": [
+          500,
+          500,
+          500,
+          500,
+          500
+        ]
+      },
+      "expected": "no_candidate"
+    },
+    {
+      "id": "different-role-exposure-same-count-hypothesis",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "contextual_data": {
+        "percent_most_back": [
+          75,
+          75,
+          75,
+          75,
+          75
+        ]
+      },
+      "expected": "review_candidate"
+    },
+    {
+      "id": "overtime-count-hypothesis-needs-review",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "contextual_data": {
+        "play_duration_s": [
+          600,
+          600,
+          600,
+          600,
+          600
+        ]
+      },
+      "expected": "review_candidate",
+      "limitation": "La hipótesis cuenta eventos; no ajusta exposición ni duración y debe revisarse antes de publicarla."
+    },
+    {
+      "id": "epic-player",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "platform": "epic"
+      },
+      "expected": "review_candidate"
+    },
+    {
+      "id": "unsupported-player-platform",
+      "goals_last_defender": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "override": {
+        "platform": "ps4"
+      },
+      "expected": "not_evaluable"
+    }
+  ]
+}
