@@ -89,7 +89,7 @@ El archivo de casos usa vectores de cinco conteos, valores por defecto y overrid
 
 El comprobador aislado recorre los 33 casos: **6 candidatos a revisión, 5 sin candidato y 22 no evaluables**. Incluye límite exacto, falta de repetición, valores extremos, ceros explícitos, faltantes, tipo/unidad/fuente incorrectos, promedio fraccionario, IDs repetidos, otra identidad, número de partidas, modalidades/tipos no admitidos y contexto que no crea una señal.
 
-**Ejecución realizada:** el mismo código del comprobador se ejecutó en una celda JavaScript V8 con ambos JSON y se verificó su serialización. No se ejecutó Node ni `npm test`: el entorno de ejecución del proyecto estaba desconectado. Este resultado comprueba consistencia de la hipótesis con su tabla, no extracción, regla de producción, HTTP, interfaz, SQL ni una calibración deportiva. Las 372 pruebas registradas para el PR anterior no verifican esta propuesta.
+**Comprobación inicial:** el mismo código del comprobador se ejecutó en una celda JavaScript V8 con ambos JSON y se verificó su serialización. En esa primera revisión no se ejecutó Node ni `npm test` porque el entorno del proyecto estaba desconectado. Este resultado comprueba consistencia de la hipótesis con su tabla, no extracción, regla de producción, HTTP, interfaz, SQL ni una calibración deportiva. Las 372 pruebas registradas para el PR anterior no verifican esta propuesta.
 
 Cuando vuelva a estar disponible Node, la comprobación aislada puede repetirse desde la raíz:
 
@@ -98,3 +98,13 @@ node -e 'const check = require("./planning/proposals/comprobar-cobertura-defensi
 ```
 
 Antes de activar hay que resolver las condiciones pendientes de la propuesta estructurada, incorporar pruebas de producción y ejecutar la suite. El borrador es revisable; no acredita que el proyecto tenga ya tres reglas activas.
+
+## Continuación de la comprobación con Node · 16 de noviembre
+
+El entorno local continúa desconectado. Se añadió `.github/workflows/node-tests.yml` para ejecutar la suite con Node.js 22.19.0 en GitHub Actions y repetir el comprobador aislado de la propuesta. El workflow usa permiso de lectura del repositorio y no recibe secretos del proveedor ni credenciales de la aplicación.
+
+La base actualizada, conservando los avances de los compañeros, aprobó **382 pruebas, 0 fallidas** en el [run 43977848162](https://github.com/Santana-R/adaptive-rl-coach/actions/runs/43977848162). Esto valida las funcionalidades ya integradas, no una tercera regla activa. El siguiente commit incorpora al workflow la ejecución de los 33 casos del borrador; su resultado se registra en los checks y en la descripción del PR #74.
+
+La integración de la tercera regla en extracción, configuración, generador, presentación y adaptador persistido **no se publicó**. La revisión automática rechazó ese conjunto por considerar que el Release anterior autorizaba la propuesta, no la activación. Se necesita un nuevo Release literal para ese conjunto. Los archivos de dominio y las versiones de producción permanecen sin cambios en este borrador.
+
+El conjunto preparado para esa autorización comprende: conteos explícitos del jugador, evaluación provisional en 2v2, evidencia por partida, actividad nativa con snapshot propio, reparto entre tres áreas y pruebas de dominio/HTTP/presentación. Los faltantes de A15 deben continuar sin inventarse; el umbral numérico y la calibración real siguen pendientes de revisión deportiva. No incluye cambios de base remota ni el cierre de A26/A19.

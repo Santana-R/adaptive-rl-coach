@@ -187,3 +187,7 @@ Bajo Release de Roberto se añade `boost-disponibilidad` en `mvp.rules.v2`: ≥1
 ## Tercera regla de cobertura defensiva · propuesta del 16 de noviembre
 
 Roberto confirmó la relevancia de revisar cobertura defensiva y decisiones como último hombre. Bajo su Release se prepara una [propuesta con actividad y casos](docs/cobertura-defensiva-propuesta.md), no una regla activa: 2 goles como último defensor en 3/5 ranked 2v2 es una hipótesis aún pendiente de aprobación numérica y validación. No atribuye culpa ni detecta jugadas/timestamps. Los 33 casos sintéticos se comprobaron con un verificador aislado en JavaScript V8; no se ejecutó Node ni la suite porque el entorno estaba desconectado. Las versiones publicadas y las dos reglas de producción siguen iguales. La actividad de revisión no está activa en SQL ni en el generador. A26 y las integraciones indicadas en la ficha permanecen pendientes.
+
+### Continuación de validación de la propuesta
+
+La rama del PR #74 conserva los avances de main e incorpora GitHub Actions con Node 22.19.0: la base obtuvo 382 pruebas aprobadas y el workflow añade la comprobación aislada de los 33 casos. La integración que activaría la tercera regla no se publicó: la revisión automática exigió un nuevo Release literal para ese conjunto. La producción conserva dos reglas y sus versiones; los checks de este PR verifican la base y la propuesta, no acreditan una tercera regla integrada ni calibración con bloques reales.
