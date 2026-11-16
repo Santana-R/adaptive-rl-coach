@@ -6,7 +6,7 @@ const rule = config.defensive_review;
 function evaluateDefensiveRule(block, blockReason) {
   const data = block?.defensive_review_per_replay;
   const observations = Array.isArray(data?.observations) ? data.observations : [];
-  const checked = collectDefensiveMeasurements(observations.map(o => ({
+  const checked = collectDefensiveMeasurements(Array.from(observations, o => ({
     replay_id: o?.replay_id, values: { defensive_positioning: o },
   })));
   let reason = blockReason;

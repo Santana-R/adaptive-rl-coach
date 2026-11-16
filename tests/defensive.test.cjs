@@ -106,6 +106,8 @@ test('Rechaza cobertura, base, IDs y valores de contexto manipulados', () => {
     d => { d.coverage = 4; }, d => { d.measurement_basis = 'guessed'; },
     d => { d.observations[0].replay_id = 'another-replay'; },
     d => { d.observations[0].role_percent.value = 101; },
+    d => { delete d.observations[0]; }, d => { d.observations = null; },
+    d => { d.observations = Array(5); },
   ]) {
     const data = analyze(); mutate(data.metrics.defensive_review_per_replay);
     assert.equal(defense(evaluateRules(data.metrics)).status,'not_evaluable');
