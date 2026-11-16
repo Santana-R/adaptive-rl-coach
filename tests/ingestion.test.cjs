@@ -102,9 +102,13 @@ test('A13 exige sesión y conserva ID y cargas aceptadas al reintentar', async t
     queried.push(id);
     return {
       id, status: 'ok', visibility: 'private', team_size: 2, playlist_id: 'ranked-doubles',
-      blue: { players: [{ id: { platform: 'steam', id: 'test-player' }, stats: {
-        core: { goals: 1, shots: 2, assists: 0, saves: 0 }
-      } }] }
+      blue: {
+        players: [{
+          id: { platform: 'steam', id: 'test-player' }, stats: {
+            core: { goals: 1, shots: 2, assists: 0, saves: 0 }
+          }
+        }]
+      }
     };
   });
   const app = createApp({ supabase: fakeAuth() });
@@ -171,4 +175,168 @@ test('A13 solicita privacidad y distingue duplicados del formato rechazado', asy
   await assert.rejects(provider.uploadPrivateReplay('demo.replay', Buffer.from('data')), {
     code: 'REPLAY_FORMAT_INVALID'
   });
+});
+test('A30 limita la espera y conserva los IDs cuando un replay sigue pendiente', async t => {
+  const { mkdtemp, rm } = require('node:fs/promises');
+  const { tmpdir } = require('node:os');
+  const { join } = require('node:path');
+  const { processReplayBlock } = require('../src/services/ingestion');
+
+  mockStorage(t);
+  const folder = await mkdtemp(join(tmpdir(), 'a30-espera-'));
+  t.after(() => rm(folder, { recursive: true, force: true }));
+
+  const ids = Array.from({ length: 5 }, (_, i) => `replay-${i + 1}`);
+  const pendingId = ids[4];
+  const block = await blocks.createBlock(null, OWNER, {
+    mode: '2v2',
+    status: 'pending',
+    replays: ids.map((id, i) => ({
+      position: i + 1,
+      ballchasing_id: id,
+      status: 'pending',
+      player: { platform: 'steam', player_id: 'test-player' }
+    }))
+  });
+  const queries = [];
+  const pauses = [];
+
+  await processReplayBlock({
+    supabase: null,
+    userId: OWNER,
+    blockId: block.block_id,
+    folder,
+    files: [],
+    wait: async ms => { pauses.push(ms); },
+    provider: {
+      getReplay: async id => {
+        queries.push(id);
+        return {
+          id,
+          visibility: 'private',
+          status: id === pendingId ? 'pending' : 'ok'
+        };
+      }
+    }
+  });
+
+  const result = await blocks.getBlock(null, OWNER, block.block_id);
+  assert.equal(result.status, 'failed');
+  assert.deepEqual(result.replays.map(replay => replay.ballchasing_id), ids);
+  assert.equal(result.replays[4].status, 'failed');
+  assert.equal(result.replays[4].error, 'PROCESSING_TIMEOUT');
+  assert.equal(queries.filter(id => id === pendingId).length, 6);
+  assert.equal(queries.length, 10);
+  assert.deepEqual(pauses, [5000, 5000, 5000, 5000, 5000]);
+});
+test('A30 recupera una consulta tras un 503 sin volver a cargar replays', async t => {
+  const { mkdtemp, rm } = require('node:fs/promises');
+  const { tmpdir } = require('node:os');
+  const { join } = require('node:path');
+  const { processReplayBlock } = require('../src/services/ingestion');
+
+  mockStorage(t);
+  const folder = await mkdtemp(join(tmpdir(), 'a30-caida-'));
+  t.after(() => rm(folder, { recursive: true, force: true }));
+
+  const ids = Array.from({ length: 5 }, (_, i) => `replay-${i + 1}`);
+  const block = await blocks.createBlock(null, OWNER, {
+    mode: '2v2',
+    status: 'pending',
+    replays: ids.map((id, i) => ({
+      position: i + 1,
+      ballchasing_id: id,
+      status: 'pending',
+      player: { platform: 'steam', player_id: 'test-player' }
+    }))
+  });
+
+  const queries = [];
+  const pauses = [];
+
+  await processReplayBlock({
+    supabase: null,
+    userId: OWNER,
+    blockId: block.block_id,
+    folder,
+    files: [],
+    wait: async ms => { pauses.push(ms); },
+    provider: {
+      uploadPrivateReplay: async () => assert.fail('La carga ya estaba registrada'),
+      getReplay: async id => {
+        queries.push(id);
+        if (queries.length === 1) {
+          throw new ApiError(503, 'PROVIDER_UNAVAILABLE', 'Caída simulada');
+        }
+        return {
+          id,
+          status: 'ok',
+          visibility: 'private',
+          team_size: 2,
+          playlist_id: 'ranked-doubles',
+          blue: {
+            players: [{
+              id: { platform: 'steam', id: 'test-player' },
+              stats: { core: { goals: 1, shots: 2, assists: 0, saves: 0 } }
+            }]
+          }
+        };
+      }
+    }
+  });
+
+  const result = await blocks.getBlock(null, OWNER, block.block_id);
+  assert.equal(result.status, 'ready');
+  assert.equal(result.ready_replays, 5);
+  assert.deepEqual(result.replays.map(replay => replay.ballchasing_id), ids);
+  assert.deepEqual(queries, [...ids, ids[0]]);
+  assert.deepEqual(pauses, [5000]);
+});
+test('A30 rechaza el duplicado externo y limpia solo su lote temporal', async t => {
+  const { mkdtemp, rm, access, readFile } = require('node:fs/promises');
+  const { tmpdir } = require('node:os');
+  const { join } = require('node:path');
+  const {
+    savePendingReplayBlock,
+    stageReplayFiles,
+    processReplayBlock
+  } = require('../src/services/ingestion');
+
+  mockStorage(t);
+  const root = await mkdtemp(join(tmpdir(), 'a30-duplicado-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  const folder = join(root, 'lote-rechazado');
+  const otherFolder = join(root, 'otro-lote');
+  const prepared = await prepareReplayFiles(files());
+  const block = await savePendingReplayBlock(null, OWNER, prepared);
+  await stageReplayFiles(folder, prepared);
+  await stageReplayFiles(otherFolder, prepared);
+
+  const uploads = [];
+  const duplicateProvider = {
+    uploadPrivateReplay: async name => {
+      uploads.push(name);
+      return { id: 'replay-ajeno', duplicate: true, providerStatus: 409 };
+    },
+    getReplay: async () => assert.fail('Se consultó el replay duplicado'),
+    deleteReplay: async () => assert.fail('Se intentó borrar el replay ajeno')
+  };
+
+  await processReplayBlock({
+    supabase: null,
+    userId: OWNER,
+    blockId: block.block_id,
+    folder,
+    files: prepared,
+    provider: duplicateProvider
+  });
+
+  const result = await blocks.getBlock(null, OWNER, block.block_id);
+  assert.equal(result.status, 'invalid');
+  assert.equal(result.replays[0].error, 'DUPLICATE_REPLAY');
+  assert.ok(result.replays.every(replay => !replay.ballchasing_id));
+  assert.deepEqual(uploads, [prepared[0].name]);
+  await assert.rejects(access(folder), { code: 'ENOENT' });
+  assert.deepEqual(await readFile(join(otherFolder, '1.replay')), prepared[0].bytes);
 });
