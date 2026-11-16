@@ -38,6 +38,121 @@
         "demo-current-4",
         "demo-current-5"
       ],
+      "boost_zero_per_replay": {
+        "measurement_basis": "provider_percent_zero_boost",
+        "aggregation": "per_replay",
+        "coverage": 0,
+        "missing_reason": "not_available",
+        "observations": [
+          {
+            "replay_id": "demo-current-1",
+            "seconds": {
+              "value": null,
+              "unit": "seconds",
+              "scope": "player",
+              "source_field": "time_zero_boost",
+              "missing_reason": "not_available"
+            },
+            "percent": {
+              "value": null,
+              "unit": "percent",
+              "scope": "player",
+              "source_field": "percent_zero_boost",
+              "missing_reason": "not_available"
+            }
+          },
+          {
+            "replay_id": "demo-current-2",
+            "seconds": {
+              "value": null,
+              "unit": "seconds",
+              "scope": "player",
+              "source_field": "time_zero_boost",
+              "missing_reason": "not_available"
+            },
+            "percent": {
+              "value": null,
+              "unit": "percent",
+              "scope": "player",
+              "source_field": "percent_zero_boost",
+              "missing_reason": "not_available"
+            }
+          },
+          {
+            "replay_id": "demo-current-3",
+            "seconds": {
+              "value": null,
+              "unit": "seconds",
+              "scope": "player",
+              "source_field": "time_zero_boost",
+              "missing_reason": "not_available"
+            },
+            "percent": {
+              "value": null,
+              "unit": "percent",
+              "scope": "player",
+              "source_field": "percent_zero_boost",
+              "missing_reason": "not_available"
+            }
+          },
+          {
+            "replay_id": "demo-current-4",
+            "seconds": {
+              "value": null,
+              "unit": "seconds",
+              "scope": "player",
+              "source_field": "time_zero_boost",
+              "missing_reason": "not_available"
+            },
+            "percent": {
+              "value": null,
+              "unit": "percent",
+              "scope": "player",
+              "source_field": "percent_zero_boost",
+              "missing_reason": "not_available"
+            }
+          },
+          {
+            "replay_id": "demo-current-5",
+            "seconds": {
+              "value": null,
+              "unit": "seconds",
+              "scope": "player",
+              "source_field": "time_zero_boost",
+              "missing_reason": "not_available"
+            },
+            "percent": {
+              "value": null,
+              "unit": "percent",
+              "scope": "player",
+              "source_field": "percent_zero_boost",
+              "missing_reason": "not_available"
+            }
+          }
+        ],
+        "excluded": [
+          {
+            "replay_id": "demo-current-1",
+            "reason": "not_available"
+          },
+          {
+            "replay_id": "demo-current-2",
+            "reason": "not_available"
+          },
+          {
+            "replay_id": "demo-current-3",
+            "reason": "not_available"
+          },
+          {
+            "replay_id": "demo-current-4",
+            "reason": "not_available"
+          },
+          {
+            "replay_id": "demo-current-5",
+            "reason": "not_available"
+          }
+        ]
+      },
       "values": {
         "goals": {
           "value": 6,
@@ -78,6 +193,41 @@
           "excluded": [],
           "scope": "match",
           "source_field": "play_duration"
+        },
+        "boost_zero_s": {
+          "value": null,
+          "unit": "seconds",
+          "scope": "player",
+          "source_field": "time_zero_boost",
+          "coverage": 0,
+          "missing_reason": "not_available",
+          "excluded": [
+            {
+              "replay_id": "demo-current-1",
+              "metric_key": "boost_zero_s",
+              "reason": "not_available"
+            },
+            {
+              "replay_id": "demo-current-2",
+              "metric_key": "boost_zero_s",
+              "reason": "not_available"
+            },
+            {
+              "replay_id": "demo-current-3",
+              "metric_key": "boost_zero_s",
+              "reason": "not_available"
+            },
+            {
+              "replay_id": "demo-current-4",
+              "metric_key": "boost_zero_s",
+              "reason": "not_available"
+            },
+            {
+              "replay_id": "demo-current-5",
+              "metric_key": "boost_zero_s",
+              "reason": "not_available"
+            }
+          ]
         }
       },
       "block_id": "demo-current",
@@ -142,15 +292,26 @@
             "current": 5
           },
           "missing_reason": null
+        },
+        "boost_zero_s": {
+          "baseline": null,
+          "current": null,
+          "delta": null,
+          "unit": "seconds",
+          "coverage": {
+            "baseline": 0,
+            "current": 0
+          },
+          "missing_reason": "not_available"
         }
       }
     },
-    "rules_version": "mvp.rules.v1",
+    "rules_version": "mvp.rules.v2",
     "priorities": [
       {
         "priority_key": "shooting",
         "rule_id": "finalizacion-eficiencia",
-        "rules_version": "mvp.rules.v1",
+        "rules_version": "mvp.rules.v2",
         "title": "Practicar colocación y finalización",
         "score": 1,
         "evidence": {
@@ -197,7 +358,7 @@
     "evaluations": [
       {
         "rule_id": "finalizacion-eficiencia",
-        "rules_version": "mvp.rules.v1",
+        "rules_version": "mvp.rules.v2",
         "status": "active",
         "reason": "AT_OR_BELOW_THRESHOLD",
         "evidence": {
@@ -237,6 +398,81 @@
           ]
         },
         "explanation": "Registraste 6 goles en 20 tiros (30 %). Cumples el mínimo de 15 tiros para 2v2 y el criterio inicial de eficiencia ≤ 30 %; se sugiere practicar colocación y finalización.",
+        "calibration_status": "agreed_heuristic_not_calibrated"
+      },
+      {
+        "rule_id": "boost-disponibilidad",
+        "rules_version": "mvp.rules.v2",
+        "status": "not_evaluable",
+        "reason": "BOOST_METRIC_UNAVAILABLE",
+        "evidence": {
+          "metric_key": "boost_zero_pct",
+          "unit": "percent",
+          "measurement_basis": "provider_percent_zero_boost",
+          "aggregation": "per_replay",
+          "threshold": 15,
+          "high_threshold": 20,
+          "operator": ">=",
+          "required_matches": 3,
+          "matched_replays": null,
+          "high_matched_replays": null,
+          "sample_size": 5,
+          "coverage": 0,
+          "severity": null,
+          "replay_ids": [
+            "demo-current-1",
+            "demo-current-2",
+            "demo-current-3",
+            "demo-current-4",
+            "demo-current-5"
+          ],
+          "context": {
+            "platform": "steam",
+            "player_id": "TEST_PLAYER_01",
+            "mode": "2v2",
+            "match_type": "ranked"
+          },
+          "source": "synthetic",
+          "metrics_version": "mvp.metrics.v1",
+          "observations": [
+            {
+              "replay_id": "demo-current-1",
+              "percent_zero_boost": null,
+              "time_zero_boost_s": null,
+              "percent_missing_reason": "not_available",
+              "seconds_missing_reason": "not_available"
+            },
+            {
+              "replay_id": "demo-current-2",
+              "percent_zero_boost": null,
+              "time_zero_boost_s": null,
+              "percent_missing_reason": "not_available",
+              "seconds_missing_reason": "not_available"
+            },
+            {
+              "replay_id": "demo-current-3",
+              "percent_zero_boost": null,
+              "time_zero_boost_s": null,
+              "percent_missing_reason": "not_available",
+              "seconds_missing_reason": "not_available"
+            },
+            {
+              "replay_id": "demo-current-4",
+              "percent_zero_boost": null,
+              "time_zero_boost_s": null,
+              "percent_missing_reason": "not_available",
+              "seconds_missing_reason": "not_available"
+            },
+            {
+              "replay_id": "demo-current-5",
+              "percent_zero_boost": null,
+              "time_zero_boost_s": null,
+              "percent_missing_reason": "not_available",
+              "seconds_missing_reason": "not_available"
+            }
+          ]
+        },
+        "explanation": "Se requieren porcentajes válidos del proveedor en las cinco partidas; no se deducen de segundos ni de duraciones sin procedencia comprobada. No se puede evaluar la disponibilidad de boost con estas entradas.",
         "calibration_status": "agreed_heuristic_not_calibrated"
       }
     ],

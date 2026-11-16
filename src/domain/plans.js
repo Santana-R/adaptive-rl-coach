@@ -3,6 +3,8 @@ const { evaluateRules, rankPriorities } = require('./rules');
 const { RULES_CONFIG } = require('./rules-config');
 const { allocateMinutes } = require('./time-allocation');
 
+const nativeBoostCatalog = require('../../planning/catalogo-boost.v1.json');
+
 const KEYS = ['castro-ground-shots', 'castro-mid-height-shots', 'coco-aim-training'];
 const RANKS = ['bronze', 'silver', 'gold', 'platinum', 'diamond', 'champion', 'grand_champion', 'supersonic_legend'];
 const nonempty = value => typeof value === 'string' && value.trim().length > 0;
@@ -136,6 +138,11 @@ function exerciseSnapshot(exercise, variant, rank) {
   if (['champion', 'grand_champion', 'supersonic_legend'].includes(rank)) {
     level = 'Elegir una esquina y combinar colocación con potencia.';
   }
+  if (exercise.priority_key === 'boost') {
+    level = ['champion', 'grand_champion', 'supersonic_legend'].includes(rank)
+      ? 'Añadir wavedashes solo si ya se dominan, sin sacrificar la posición elegida.'
+      : 'Priorizar rutas sencillas, giros controlados y aterrizajes; no se exige wavedash.';
+  }
   if (variant === null) instructions.push(level);
   else {
     instructions.push(`Modo elegido: ${variant.mode}.`);
@@ -155,6 +162,8 @@ function exerciseSnapshot(exercise, variant, rank) {
     difficulty: variant?.difficulty ?? exercise.difficulty_base,
     practice_level_instruction: variant === null ? level : null,
     selected_variant: variant,
+    ...(exercise.source === 'bundled_native_instructions' ? { source: exercise.source,
+      native_catalog_version: nativeBoostCatalog.catalog_version, review_status: exercise.review_status } : {}),
   });
 }
 
@@ -164,16 +173,17 @@ function generatePlan({ analysis, profile, catalog, availability_minutes, goals 
   const reasons = [];
   const rank = selectRank(profile, reasons);
   const supplied = rankPriorities(analysis.priorities);
-  const verified = evaluateRules(analysis.metrics).priorities[0];
-  const backed = supplied.filter(p => p.priority_key === 'shooting' && p.rule_id === verified?.rule_id &&
-    p.rules_version === analysis.rules_version && p.score === verified.score && isDeepStrictEqual(p.evidence, verified.evidence));
-  const supported = backed.length ? [clone(verified)] : [];
+  const verified = evaluateRules(analysis.metrics).priorities;
+  const backed = supplied.filter(p => verified.some(v => p.priority_key === v.priority_key &&
+    p.rule_id === v.rule_id && p.rules_version === v.rules_version && p.score === v.score &&
+    isDeepStrictEqual(p.evidence, v.evidence)));
+  const supported = verified.filter(v => backed.some(p => p.rule_id === v.rule_id)).map(clone);
   const uncovered = supplied.filter(p => !backed.includes(p)).map(p => p.priority_key);
   if (uncovered.length) reasons.push('UNSUPPORTED_OR_UNBACKED_PRIORITY');
   if (!supplied.length) reasons.push('NO_PRIORITIES');
   const { included: goalsSnapshot, excluded: goalsExcluded } = compatibleGoals(goals, profile.mode, supported, reasons);
   const exclusions = [];
-  const candidates = [];
+  const shootingCandidates = [];
   for (const exercise of catalog.exercises) {
     let reason = candidateProblem(exercise, catalog, profile);
     let variant = null;
@@ -182,46 +192,67 @@ function generatePlan({ analysis, profile, catalog, availability_minutes, goals 
       if (variant === null) reason = 'VARIANT_UNAVAILABLE';
     }
     if (reason) exclusions.push({ exercise_key: exercise.exercise_key, reason });
-    else candidates.push({ exercise, variant });
+    else shootingCandidates.push({ exercise, variant });
   }
-  const expectedKeys = profile.platform === 'steam' && profile.workshop_access === true ? KEYS : KEYS.slice(0, 2);
-  const availableKeys = new Set(candidates.map(c => c.exercise.exercise_key));
-  const missing = expectedKeys.filter(key => !availableKeys.has(key));
-  const hasWorkshop = availableKeys.has(KEYS[2]);
-  const order = hasWorkshop ? [KEYS[0], KEYS[2], KEYS[1]] : KEYS.slice(0, 2);
-  const slots = Math.floor(availability_minutes / 5);
-  const selectedKeys = supported.length ? order.filter(key => availableKeys.has(key)).slice(0, slots) : [];
-  const weights = hasWorkshop ? [2, 1, 1] : [3, 1, 0];
-  const entries = KEYS.filter(key => selectedKeys.includes(key)).map(key => ({ key, weight: weights[KEYS.indexOf(key)] }));
-  const allocation = allocateMinutes(availability_minutes, entries);
-  const exercises = entries.map(({ key }, index) => {
-    const { exercise, variant } = candidates.find(c => c.exercise.exercise_key === key);
-    const snapshot = exerciseSnapshot(exercise, variant, rank);
-    return {
-      plan_exercise_id: null, order: index + 1, priority_key: 'shooting', rule_id: verified.rule_id,
-      exercise_key: key, exercise_version_id: snapshot.exercise_version_id,
-      assigned_minutes: allocation[key], difficulty: snapshot.difficulty, exercise_snapshot: snapshot,
-    };
+  const hasWorkshop = shootingCandidates.some(c => c.exercise.exercise_key === KEYS[2]);
+  const expectedShooting = profile.platform === 'steam' && profile.workshop_access === true ? KEYS : KEYS.slice(0, 2);
+  const boostCandidates = nativeBoostCatalog.exercises
+    .filter(e => e.platforms.includes(profile.platform) && e.modes.includes(profile.mode))
+    .map(exercise => ({ exercise: clone(exercise), variant: null }));
+  // Las rutinas nativas tienen fuente y versión propias; no se hacen pasar por filas SQL.
+  const groups = supported.map(priority => {
+    const shooting = priority.priority_key === 'shooting';
+    const candidates = shooting ? shootingCandidates : boostCandidates;
+    const expected = shooting ? expectedShooting : nativeBoostCatalog.exercises.map(e => e.exercise_key);
+    const available = new Set(candidates.map(c => c.exercise.exercise_key));
+    const order = shooting ? hasWorkshop ? [KEYS[0], KEYS[2], KEYS[1]] : KEYS.slice(0, 2) : expected;
+    return { priority, candidates, expected, order, available };
   });
-  if (supported.length && !exercises.length) uncovered.push('shooting');
+  const missing = groups.flatMap(g => g.expected.filter(k => !g.available.has(k)));
+  const offered = groups.filter(g => g.candidates.length);
+  const slots = Math.floor(availability_minutes / 5);
+  const selectedGroups = offered.slice(0, slots);
+  const budgets = allocateMinutes(availability_minutes,
+    selectedGroups.map(g => ({ key: g.priority.priority_key, weight: 1 })));
+  const exercises = [];
+  for (const group of groups) {
+    if (!selectedGroups.includes(group)) { uncovered.push(group.priority.priority_key); continue; }
+    const budget = budgets[group.priority.priority_key];
+    const selected = group.order.filter(k => group.available.has(k)).slice(0, Math.floor(budget / 5));
+    const weights = group.priority.priority_key === 'shooting'
+      ? Object.fromEntries(KEYS.map((k, i) => [k, (hasWorkshop ? [2, 1, 1] : [3, 1, 0])[i]]))
+      : Object.fromEntries(group.expected.map(k => [k, 1]));
+    const entries = group.expected.filter(k => selected.includes(k)).map(key => ({ key, weight: weights[key] }));
+    const allocation = allocateMinutes(budget, entries);
+    for (const { key } of entries) {
+      const { exercise, variant } = group.candidates.find(c => c.exercise.exercise_key === key);
+      const snapshot = exerciseSnapshot(exercise, variant, rank);
+      exercises.push({ plan_exercise_id: null, order: exercises.length + 1,
+        priority_key: group.priority.priority_key, rule_id: group.priority.rule_id,
+        exercise_key: key, exercise_version_id: snapshot.exercise_version_id,
+        assigned_minutes: allocation[key], difficulty: snapshot.difficulty, exercise_snapshot: snapshot });
+    }
+    if (selected.length < group.candidates.length) reasons.push('SHORT_SESSION');
+  }
   if (availability_minutes < 5) reasons.push('INSUFFICIENT_TIME');
-  if (supported.length && !candidates.length) reasons.push('NO_VERIFIED_ACTIVE_EXERCISE');
-  if (supported.length && missing.length) reasons.push('CATALOG_PARTIAL');
-  if (exercises.length && selectedKeys.length < candidates.length) reasons.push('SHORT_SESSION');
+  if (groups.some(g => !g.candidates.length)) reasons.push('NO_VERIFIED_ACTIVE_EXERCISE');
+  if (missing.length) reasons.push('CATALOG_PARTIAL');
+  if (selectedGroups.length < offered.length) reasons.push('SHORT_SESSION');
   const coverage = exercises.length === 0 ? 'empty' : uncovered.length || missing.length ? 'partial' : 'complete';
   const assigned = exercises.reduce((sum, exercise) => sum + exercise.assigned_minutes, 0);
   const limitations = unique([...(analysis.limitations || []), 'unpersisted_proposal',
     ...(catalog.source === 'synthetic' ? ['synthetic_catalog'] : [])]);
   const explanations = {
-    complete: `Se proponen ${exercises.length} ejercicios compatibles para practicar finalización durante ${assigned} minutos.`,
+    complete: `Se proponen ${exercises.length} ejercicios compatibles para practicar ${supported.map(p => p.priority_key === 'boost' ? 'disponibilidad de boost' : 'finalización').join(' y ')} durante ${assigned} minutos.`,
     partial: `Se proponen ${assigned} minutos de práctica con cobertura parcial; revisa las prioridades o recursos sin cubrir.`,
     empty: 'No se propone una rutina con estas entradas; revisa los motivos de prioridad, catálogo o disponibilidad.',
   };
   return {
-    plan_id: null, plan_version_id: null, version, generator_version: 'mvp.plans.v1',
+    plan_id: null, plan_version_id: null, version, generator_version: 'mvp.plans.v2',
     block_id: analysis.block_id, rules_version: analysis.rules_version, metrics_version: analysis.metrics.metrics_version,
     catalog_version: catalog.catalog_version, catalog_source: catalog.source ?? 'content_handoff',
-    allocation_version: 'mvp.allocation.v1', availability_minutes, assigned_minutes: assigned,
+    native_catalog_version: exercises.some(e => e.priority_key === 'boost') ? nativeBoostCatalog.catalog_version : null,
+    allocation_version: 'mvp.allocation.v2', availability_minutes, assigned_minutes: assigned,
     unassigned_minutes: availability_minutes - assigned, coverage, explanation: explanations[coverage],
     uncovered_priorities: unique(uncovered), missing_exercises: supported.length ? missing : [],
     reason_codes: unique(reasons), catalog_exclusions: exclusions, goals_excluded: goalsExcluded,

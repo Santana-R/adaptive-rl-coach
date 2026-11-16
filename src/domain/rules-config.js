@@ -1,8 +1,16 @@
 // Cambiar los criterios publicados requiere una versión nueva; no se calibraron con partidas reales.
 const RULES_CONFIG = Object.freeze({
-  rules_version: 'mvp.rules.v1',
+  rules_version: 'mvp.rules.v2',
   metrics_version: 'mvp.metrics.v1',
   max_priorities: 3,
+  boost: Object.freeze({
+    rule_id: 'boost-disponibilidad', priority_key: 'boost',
+    metric_key: 'boost_zero_pct', required_replays: 5, required_coverage: 5,
+    minimum_matches: 3, threshold_pct: 15, high_threshold_pct: 20,
+    score: 1, high_score: 2,
+    modes: Object.freeze(['2v2', '3v3']), match_types: Object.freeze(['ranked']),
+    calibration_status: 'agreed_heuristic_not_calibrated',
+  }),
   finalization: Object.freeze({
     rule_id: 'finalizacion-eficiencia',
     priority_key: 'shooting',

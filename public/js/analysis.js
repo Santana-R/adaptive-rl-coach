@@ -6,6 +6,7 @@
     goals: { label: 'Goles', unit: 'goles' },
     shots: { label: 'Tiros totales', unit: 'tiros' },
     play_duration_s: { label: 'Duración de las partidas', unit: 's' },
+    boost_zero_s: { label: 'Tiempo acumulado con cero boost', unit: 's' },
   };
   const reasons = {
     MODE_MISMATCH: 'Las modalidades son distintas.', PLAYER_MISMATCH: 'La identidad del jugador es distinta.',
@@ -52,6 +53,7 @@
     $('chart-description').textContent = key === 'shooting_pct'
       ? 'Goles ÷ tiros × 100. Los cambios se expresan en puntos porcentuales.'
       : key === 'play_duration_s' ? 'Segundos de las partidas; no representa tiempo individual de participación.'
+      : key === 'boost_zero_s' ? 'Segundos acumulados del jugador con exactamente cero boost. La regla evalúa el porcentaje de cada partida por separado.'
       : `Conteo del jugador seleccionado en cinco partidas. Unidad: ${metric.unit}.`;
     $('comparison-chart').setAttribute('aria-label', `${metric.label}: ${values.map((v, i) => `${labels[i]} ${measure({ value: v }, key)}`).join('; ')}. Valores también disponibles en la tabla.`);
     if (activeChart) activeChart.destroy();
@@ -97,9 +99,14 @@
       return `<tr><td>${escape(metric.label)}</td><td>${escape(previous)}</td><td>${escape(measure(values[key], key))}<br><small>${escape(`${values[key]?.coverage ?? 0}/${a.metrics.sample_size} partidas`)}</small></td><td>${escape(difference)}</td></tr>`;
     }).join('');
     $('priority-count').textContent = `${a.priorities.length} de 3 como máximo`;
-    $('priority-list').innerHTML = a.priorities.length ? a.priorities.map((p, index) =>
-      `<article class="priority-card${index ? ' secondary' : ''}"><div class="priority-top d-flex justify-content-between flex-wrap gap-2"><span>PRIORIDAD ${String(index + 1).padStart(2, '0')}</span><span>FINALIZACIÓN</span></div><h3>${escape(p.title)}</h3><p>${escape(p.explanation)}</p><details><summary>Ver evidencia y regla</summary><p>${escape(p.rule_id)} · ${escape(p.rules_version)}. ${escape(number(p.evidence.goals.value))} goles / ${escape(number(p.evidence.shots.value))} tiros; ${escape(p.evidence.coverage)}/5 partidas. Mínimo aplicado: ${escape(p.evidence.min_shots)} tiros. Criterio inicial pendiente de calibración.</p></details></article>`
-    ).join('') : `<p>${escape(a.evaluations?.[0]?.explanation || 'No hay una prioridad respaldada por estos datos.')}</p>`;
+    $('priority-list').innerHTML = a.priorities.map((p, index) => {
+      const boost = p.priority_key === 'boost', e = p.evidence;
+      const detail = boost
+        ? `${e.matched_replays}/5 partidas con ≥ ${e.threshold} % en cero; ${e.high_matched_replays}/5 con ≥ ${e.high_threshold} %. Se requieren ${e.required_matches}; cobertura ${e.coverage}/5.`
+        : `${number(e.goals.value)} goles / ${number(e.shots.value)} tiros; ${e.coverage}/5 partidas. Mínimo aplicado: ${e.min_shots} tiros.`;
+      const observations = boost ? `<ul>${e.observations.map((o, i) => `<li>Partida ${i + 1}: ${escape(number(o.percent_zero_boost))} % en cero; ${escape(number(o.time_zero_boost_s))} s acumulados.</li>`).join('')}</ul>` : '';
+      return `<article class="priority-card${index ? ' secondary' : ''}"><div class="priority-top d-flex justify-content-between flex-wrap gap-2"><span>PRIORIDAD ${String(index + 1).padStart(2, '0')}</span><span>${boost ? 'DISPONIBILIDAD DE BOOST' : 'FINALIZACIÓN'}</span></div><h3>${escape(p.title)}</h3><p>${escape(p.explanation)}</p><details><summary>Ver evidencia y regla</summary><p>${escape(p.rule_id)} · ${escape(p.rules_version)}. ${escape(detail)} Criterio inicial pendiente de calibración.</p>${observations}</details></article>`;
+    }).join('') + (a.evaluations || []).filter(e => e.status !== 'active').map(e => `<p>${escape(e.explanation)}</p>`).join('');
     $('analysis-source').textContent = envelope.meta.synthetic
       ? 'Datos sintéticos de prueba. El motor calcula estas métricas y prioridades; no provienen de replays cargados.'
       : 'Estadísticas del bloque consultado. Las recomendaciones usan criterios iniciales pendientes de calibración.';

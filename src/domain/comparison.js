@@ -5,6 +5,7 @@ const METRICS = {
   shots: { unit: 'count', deltaUnit: 'count', integer: true },
   shooting_pct: { unit: 'percent', deltaUnit: 'percentage_points', maximum: 100 },
   play_duration_s: { unit: 'seconds', deltaUnit: 'seconds', scope: 'match', source: 'play_duration' },
+  boost_zero_s: { unit: 'seconds', deltaUnit: 'seconds', scope: 'player', source: 'time_zero_boost' },
 };
 
 const nonempty = value => typeof value === 'string' && value.trim().length > 0;

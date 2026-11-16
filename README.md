@@ -35,8 +35,8 @@ Piezas principales 4–6 e integración/ensayo 7–8 son metas internas propuest
 - **Interfaz oficial:** abrir `public/sitio/html/replays.html` para cargar cinco replays y consultar el historial. Análisis y Plan están en `public/sitio/html/analisis.html` y `public/sitio/html/plan.html`.
 - **Fase 2:** se verificaron las **30 tablas existentes** en Supabase el 1 de noviembre. [Estado, documento y revisión](docs/fase2-estado.md) · [esquema SQL](database/esquema-fase2.sql). El equipo confirmó que el documento está listo para presentarlo; la revisión del profesor sigue pendiente. A07 solo da seguimiento a sus observaciones y no bloquea la implementación.
 - **Luis:** sus cuatro vistas públicas se integraron en PR #50; A03 y A04 están cerradas. El diseño y la construcción del resto del frontend continúan en A11/A12/A19/A20/A27/A28 y la revisión A35.
-- **Motor:** métricas A09, comparación A10, reglas A17 y generador de propuestas A18 implementados. Análisis A19 calcula por HTTP y usa la interfaz de Luis; [guía de integración y límites](docs/analisis-integracion.md).
-- **Pendiente:** entrada real, adaptación de las consultas de bloques A15 a Análisis y ruta de generación de Plan. Perfil y catálogo ya tienen consultas integradas; Análisis reutiliza el acceso de Luis. La creación de tablas es avance distinto de conectar esas operaciones.
+- **Motor:** métricas A09, comparación A10, reglas A17 y generador de propuestas A18 implementados. La [segunda regla de disponibilidad de boost](docs/disponibilidad-boost.md) añade 15/20 % en al menos 3/5 partidas y rutinas nativas; el plan comparte minutos con finalización. Análisis A19 calcula por HTTP y usa la interfaz de Luis; [guía de integración y límites](docs/analisis-integracion.md).
+- **Pendiente:** procesamiento real A13, comprobación privada A19/A37 y persistencia/presentación de Plan A24/A27. A15 ya se conecta a Análisis y existe la ruta de propuestas sin guardar. Perfil y catálogo ya tienen consultas integradas; Análisis reutiliza el acceso de Luis. La creación de tablas es avance distinto de conectar esas operaciones.
 
 ## Ejecutar la demo en local
 

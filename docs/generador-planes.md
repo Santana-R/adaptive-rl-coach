@@ -22,12 +22,12 @@ El resultado conserva bloque, versiones de métricas/reglas/catálogo/reparto/ge
 ## El recorrido del código
 
 1. Valida el contexto y versiones. Perfil y análisis deben describir el mismo jugador, plataforma y modalidad. El catálogo debe entregar una sola versión vigente por clave; duplicados o entradas generales inválidas producen un error de entrada.
-2. Reutiliza A17 sobre las métricas recibidas para comprobar que la prioridad de finalización está respaldada. Una prioridad alterada o sin evidencia actual no produce ejercicios. Las prioridades no soportadas se conservan sin cubrir.
+2. Reutiliza A17 sobre las métricas recibidas para comprobar que cada prioridad de finalización o boost está respaldada. Una prioridad alterada o sin evidencia actual no produce ejercicios. Las prioridades no soportadas se conservan sin cubrir.
 3. Filtra ejercicios activos, revisados y compatibles con modalidad/plataforma/requisitos. Rechazos por recurso, instrucciones, versión o variante quedan en `catalog_exclusions`.
 4. Elige nivel/variante, selecciona los ejercicios que caben con mínimo cinco y distribuye los minutos.
 5. Devuelve otra propuesta con copias de los snapshots. No modifica las entradas ni propuestas anteriores; A24 deberá preservar esa independencia al persistirlas.
 
-La única rutina publicada corresponde a **`shooting`** y los tres recursos acordados en [A23](catalogo-ejercicios.md). No se inventan otras necesidades para llenar la sesión ni se incorpora un plan de mantenimiento cuando A17 no tiene prioridades.
+Las rutinas publicadas corresponden a **`shooting`**, con los tres recursos acordados en [A23](catalogo-ejercicios.md), y **`boost`**, con dos [rutinas nativas versionadas](disponibilidad-boost.md). Estas últimas conservan su fuente y no se hacen pasar por filas SQL; A24 necesita resolver su persistencia. No se inventan otras necesidades para llenar la sesión ni se incorpora un plan de mantenimiento cuando A17 no tiene prioridades.
 
 ## Catálogo que debe entregar la integración A23
 
@@ -38,7 +38,7 @@ La forma normalizada parte del [contenido deportivo](../planning/catalogo-ejerci
 - `exercise_id` / `exercise_version_id` serializados como cadenas cuando existan en persistencia. Su asociación se resuelve en el adaptador A23/A24 sobre las tablas existentes.
 - `source`, por ejemplo `database` para un catálogo efectivamente consultado o `synthetic` para un fixture. Cambiar una etiqueta no acredita una consulta real.
 
-El archivo de fichas mantiene **todos los ejercicios inactivos y pendientes**. Al pasarlo directamente a `generatePlan`, la salida es vacía con `NO_VERIFIED_ACTIVE_EXERCISE`; el generador no lo activa. Los tests usan una copia expresamente sintética con revisión/actividad simuladas y IDs `test-*`. No es el seed ni una comprobación de los códigos dentro del juego.
+El archivo de fichas mantiene **todos los ejercicios inactivos y pendientes**. Al pasarlo directamente a `generatePlan` con solo prioridad de tiro, la salida es vacía con `NO_VERIFIED_ACTIVE_EXERCISE`; el generador no lo activa. Los tests usan una copia expresamente sintética con revisión/actividad simuladas y IDs `test-*`. No es el seed ni una comprobación de los códigos dentro del juego.
 
 ## Nivel, metas y CoCo
 
@@ -48,11 +48,11 @@ Con rango ausente, desconocido, no declarado o de otra modalidad, se usa la ejec
 
 `profile.workshop_access === true` debe representar acceso confirmado al mapa; una identidad Steam enlazada no basta. Sin esa capacidad, o con plataforma Epic, se usan los paquetes nativos compatibles. Esta versión no configura loaders ni BakkesMod.
 
-Las metas admitidas son activas, para `shooting_pct`, unidad `percent` y objetivo entre 0 y 100, con modalidad compatible si está declarada. Se preservan en `goals_snapshot`. Las archivadas, repetidas, incompatibles o sin prioridad respaldada quedan explicadas en `goals_excluded`. Con una única prioridad de finalización, una meta compatible ya está alineada y **no altera el reparto 50/25/25 ni el umbral de A17**. Ponderaciones entre futuras categorías requieren otra política; una meta sola no inventa una señal.
+Las metas admitidas son activas, para `shooting_pct`, unidad `percent` y objetivo entre 0 y 100, con modalidad compatible si está declarada. Se preservan en `goals_snapshot`. Las archivadas, repetidas, incompatibles o sin prioridad respaldada quedan explicadas en `goals_excluded`. Con una única prioridad de finalización, una meta compatible ya está alineada y **no altera el reparto 50/25/25 ni el umbral de A17**. El reparto entre boost y tiro usa la política v2 descrita abajo; una meta sola no inventa una señal ni cambia ese reparto.
 
 ## Cómo se distribuyen los minutos
 
-La política **`mvp.allocation.v1`** conserva los [once ejemplos aprobados](catalogo-ejercicios.md): 50/25/25 con CoCo y 75/25 cuando no hay un CoCo elegible. Primero reduce la cantidad de ejercicios si no caben todos con cinco minutos; con Workshop, en sesiones cortas se eligen Ground Shots y después CoCo.
+La política **`mvp.allocation.v2`**, con generador `mvp.plans.v2`, reparte por igual entre áreas respaldadas con recursos. Primero cubre una rutina de cada área; si el tiempo no alcanza, respeta el orden de prioridad y declara cobertura parcial. Dentro de boost divide 50/50 entre sus dos ejercicios. Dentro de tiro conserva los [once ejemplos aprobados](catalogo-ejercicios.md): 50/25/25 con CoCo y 75/25 cuando no hay un CoCo elegible. Primero reduce la cantidad de ejercicios si no caben todos con cinco minutos; con Workshop, en sesiones cortas se eligen Ground Shots y después CoCo.
 
 El ayudante interno [allocateMinutes](../src/domain/time-allocation.js) calcula la cuota:
 
@@ -72,7 +72,7 @@ Para veinte minutos, los pesos `2, 1, 1` suman cuatro: Ground Shots recibe `20 �
 | 30 minutos con Workshop | 15 + 8 + 7. |
 | 40 minutos con Workshop | 20 + 10 + 10. |
 | 20 minutos sin Workshop | Ground Shots 15 + Mid Height Shots 5. |
-| Catálogo actual pendiente de A23 | Cero ejercicios; no se fuerza una rutina. |
+| Catálogo de tiro sin recursos elegibles | Cero ejercicios; no se fuerza una rutina. |
 
 Si falta algún recurso del catálogo, los pesos disponibles se redistribuyen entre candidatos elegibles. El plan explica la falta; no presenta un ejercicio inactivo o incompatible como sustituto.
 

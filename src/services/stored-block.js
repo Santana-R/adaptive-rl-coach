@@ -3,6 +3,7 @@
 const { calculateBlockMetrics } = require('../domain/metrics');
 const { parseTimestamp } = require('../domain/timestamps');
 const blocks = require('../repositories/blocks');
+const { boostMeasurement } = require('../domain/boost');
 
 // A15 ya filtró por propietario. Las métricas se recalculan desde los cinco
 // registros del jugador, no desde totales editables ni respuestas ficticias del proveedor.
@@ -35,6 +36,9 @@ function fromStoredBlock(block, ownerId) {
     const values = Object.fromEntries(['goals', 'shots'].map(key => [key,
       { value: r.metrics?.[key] ?? null, unit: 'count', missing_reason: r.metrics?.[key] == null ? 'not_available' : null }]));
     values.play_duration_s = { value: null, unit: 'seconds', scope: 'match', source_field: 'play_duration', missing_reason: 'duration_basis_unverified' };
+    values.boost_zero_s = boostMeasurement(r.metrics?.boost_zero_s, 'seconds', 'time_zero_boost');
+    // A15 conserva segundos, pero no el porcentaje ni su denominador de origen.
+    values.boost_zero_pct = boostMeasurement(null, 'percent', 'percent_zero_boost', 'stored_boost_percentage_not_recorded');
     normalized.push({ replay_id: id, values });
     const time = parseTimestamp(r.file.played_at);
     if (time === null) dateExclusions.push({ replay_id: id, reason: r.file.played_at == null ? 'not_available' : 'invalid_timestamp' });

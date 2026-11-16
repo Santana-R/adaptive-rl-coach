@@ -1,3 +1,4 @@
+const { collectBoostMeasurements } = require('./boost');
 const REQUIRED_REPLAYS = 5;
 
 // Un cero registrado es válido. null, undefined y conteos inválidos se excluyen.
@@ -125,6 +126,7 @@ function calculateBlockMetrics(block) {
 
   const goals = sumCounts(replays, 'goals');
   const shots = sumCounts(replays, 'shots');
+  const boost = collectBoostMeasurements(replays);
 
   return {
     source: block.source,
@@ -132,11 +134,13 @@ function calculateBlockMetrics(block) {
     metrics_version: 'mvp.metrics.v1',
     sample_size: REQUIRED_REPLAYS,
     replay_ids: replayIds,
+    boost_zero_per_replay: boost.per_replay,
     values: {
       goals,
       shots,
       shooting_pct: shootingEfficiency(goals, shots),
       play_duration_s: sumDurations(replays),
+      boost_zero_s: boost.seconds,
     },
   };
 }

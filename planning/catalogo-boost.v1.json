@@ -1,0 +1,84 @@
+{
+  "catalog_version": "mvp.native-boost.v1",
+  "source": "bundled_native_instructions",
+  "sports_approval": {
+    "reviewer": "Roberto Santana Trujillo",
+    "approved_on": "2026-11-16",
+    "prepared_with_ai": true
+  },
+  "technical_scope": "Rutinas de instrucciones nativas, sin afirmar comprobación dentro del juego, seed SQL ni IDs de ejercicios persistidos.",
+  "exercises": [
+    {
+      "exercise_id": null,
+      "exercise_version_id": null,
+      "content_version": 1,
+      "priority_key": "boost",
+      "resource_type": "free_play",
+      "resource_code": null,
+      "resource_url": "https://dignitas.gg/articles/how-to-manage-your-boost-in-rocket-league-with-apparentlyjack",
+      "platforms": [
+        "steam",
+        "epic"
+      ],
+      "modes": [
+        "2v2",
+        "3v3"
+      ],
+      "requirements": {
+        "steam_workshop_access": false,
+        "bakkesmod": false
+      },
+      "difficulty_base": 1,
+      "minimum_duration_minutes": 5,
+      "source": "bundled_native_instructions",
+      "review_status": "sports_approved_instructions_not_in_game_tested",
+      "exercise_key": "boost-pad-routes",
+      "title": "Rutas de pads y recuperaciones",
+      "purpose": "Practicar recarga durante desplazamientos y conservación del movimiento.",
+      "instructions": [
+        "Abrir Juego libre y desactivar boost ilimitado. No requiere paquetes, Workshop ni BakkesMod.",
+        "Sin perseguir la pelota, recorrer rutas desde ambas bandas y el centro hacia una posición defensiva elegida.",
+        "Recoger pads pequeños durante el recorrido sin desviarse para llenar el tanque.",
+        "Practicar giros y aterrizajes sobre las cuatro ruedas conservando el movimiento; evitar gastar boost solo por regresar antes.",
+        "Practicar durante los minutos asignados. Registrar manualmente qué rutas o recuperaciones costaron más."
+      ],
+      "success_criterion": "Completar rutas recogiendo pads y conservar movimiento al aterrizar. La práctica es autorreportada; no acredita mejora en partidas."
+    },
+    {
+      "exercise_id": null,
+      "exercise_version_id": null,
+      "content_version": 1,
+      "priority_key": "boost",
+      "resource_type": "free_play",
+      "resource_code": null,
+      "resource_url": "https://dignitas.gg/articles/how-to-manage-your-boost-in-rocket-league-with-apparentlyjack",
+      "platforms": [
+        "steam",
+        "epic"
+      ],
+      "modes": [
+        "2v2",
+        "3v3"
+      ],
+      "requirements": {
+        "steam_workshop_access": false,
+        "bakkesmod": false
+      },
+      "difficulty_base": 1,
+      "minimum_duration_minutes": 5,
+      "source": "bundled_native_instructions",
+      "review_status": "sports_approved_instructions_not_in_game_tested",
+      "exercise_key": "boost-touch-recover",
+      "title": "Golpeo, seguimiento y recarga",
+      "purpose": "Combinar contacto con la pelota, recuperación y recarga para preparar el siguiente toque.",
+      "instructions": [
+        "Abrir Juego libre y desactivar boost ilimitado. No requiere paquetes, Workshop ni BakkesMod.",
+        "Golpear la pelota hacia una zona elegida y recuperar el coche tras el contacto.",
+        "Preparar el siguiente toque recogiendo pads pequeños sobre una ruta útil, sin buscar llenar el tanque a toda costa.",
+        "Usar el boost necesario para la jugada y evitar correcciones bruscas que destruyan el movimiento.",
+        "Repetir durante los minutos asignados. Es un ejercicio mecánico: perseguir la pelota aquí no prescribe una rotación para ranked."
+      ],
+      "success_criterion": "Encadenar contacto, recuperación y recarga con control. Registrar dificultades manualmente; no hay un porcentaje de éxito calibrado."
+    }
+  ]
+}
