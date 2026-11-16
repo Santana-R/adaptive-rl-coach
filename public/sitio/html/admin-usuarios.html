@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="../css/index.css" />
   </head>
   <body class="mainbody appbody admin">
+    <header id="site-navigation"></header>
     <div class="app-shell">
       <aside class="sidebar">
         <h5 class="sidebar-brand">ADMINISTRACIÓN</h5>
@@ -31,7 +32,7 @@
         <a href="admin-ejercicios.html" class="sidebar-link">Ejercicios</a>
         <a href="#" class="sidebar-link">Errores</a>
         <div class="sidebar-footer">
-          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info" data-session-logout>Cerrar sesión</button>
         </div>
       </aside>
       <main class="app-main">
@@ -67,6 +68,11 @@
     </div>
 
     <!-- MDB -->
+    <script src="../../vendor/jquery-3.7.1.min.js"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/session-client.js"></script>
+    <script src="../js/navigation.js"></script>
     <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
     <!-- Custom scripts -->
     <script type="text/javascript"></script>

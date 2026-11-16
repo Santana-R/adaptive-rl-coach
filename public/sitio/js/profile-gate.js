@@ -1,7 +1,6 @@
 'use strict';
 (async () => {
-  const config = window.SUPABASE_CONFIG || {};
-  const client = window.supabase?.createClient && config.url && config.anonKey ? window.supabase.createClient(config.url, config.anonKey) : null;
+  const client = window.CoachAuth.getClient();
   const gate = document.getElementById('perfil-gate');
   const content = document.getElementById('analysis-content');
   const fail = message => {

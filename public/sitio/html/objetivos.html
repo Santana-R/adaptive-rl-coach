@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../css/goals.css" />
   </head>
   <body class="mainbody appbody">
+    <header id="site-navigation"></header>
     <div class="container-fluid p-0">
       <div class="row g-0 min-vh-100">
       <div class="col-12 col-md-3 col-lg-2">
@@ -36,12 +37,12 @@
         <a href="perfil.html" class="sidebar-link">Perfil</a>
         <a href="helpme.html" class="sidebar-link">Ayuda</a>
         <div class="sidebar-footer">
-          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info" data-session-logout>Cerrar sesión</button>
         </div>
       </aside>
       </div>
       <div class="col-12 col-md-9 col-lg-10">
-      <main class="app-main text-light p-3 p-md-4">
+      <main class="app-main goals-page text-light p-3 p-md-4">
         <h1 class="fw-bold text-light">Gestión de objetivos</h1>
         <p class="text-bray">Define qué quieres mejorar por modalidad. Rendimiento y entrenamiento se consultan por separado.</p>
         <aside id="goals-source" class="goals-notice"></aside>
@@ -73,7 +74,7 @@
                 <label class="d-flex flex-column gap-2">Valor objetivo<input id="goal-target" type="number" min="0" step="any" required aria-describedby="goal-unit"></label>
               </div>
               <div class="col-12 col-md-6">
-                <label class="d-flex flex-column gap-2">Fecha límite (opcional)<input id="goal-due" type="date"></label>
+                <label class="d-flex flex-column gap-2"><span id="goal-due-label">Fecha límite (opcional)</span><input id="goal-due" type="date"></label>
               </div>
             </div>
             <p id="goal-unit" class="text-bray"></p>
@@ -99,7 +100,7 @@
               </div>
         </section>
         <p id="goal-count" class="text-bray"></p>
-        <div id="list" aria-busy="false"></div>
+        <div id="goals-list" aria-busy="false"></div>
         <p id="goals-empty" class="goals-card" hidden>No hay objetivos. Crea uno para empezar.</p>
         <section id="goal-detail" class="goals-card" aria-labelledby="detail-title" tabindex="-1" hidden>
           <h2 id="detail-title" class="h4">Detalle e historial</h2>
@@ -117,6 +118,11 @@
     </div>
 
     <!-- MDB -->
+    <script src="../../vendor/jquery-3.7.1.min.js"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/session-client.js"></script>
+    <script src="../js/navigation.js"></script>
     <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
     <!-- Custom scripts -->
     <script src="../js/goals-service.js"></script>

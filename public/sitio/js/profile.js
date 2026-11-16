@@ -1,7 +1,6 @@
 'use strict';
 (async () => {
-  const config = window.SUPABASE_CONFIG || {};
-  const supabase = window.supabase?.createClient && config.url && config.anonKey ? window.supabase.createClient(config.url, config.anonKey) : null;
+  const supabase = window.CoachAuth.getClient();
   const $ = id => document.getElementById(id);
   const status = text => {
     if ($('perfil-estado')) $('perfil-estado').textContent = text;
@@ -19,10 +18,6 @@
     location.replace('login.html');
     return;
   }
-  $('cerrar-sesion')?.addEventListener('click', async () => {
-    await supabase.auth.signOut();
-    location.replace('login.html');
-  });
   try {
     const response = await fetch('/api/v1/profile', {
       headers: {

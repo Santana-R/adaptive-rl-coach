@@ -1,6 +1,6 @@
 'use strict';
 
-// Issue 16 must confirm the extended payload before enabling API mode.
+// A16 must confirm the extended payload before enabling API mode.
 (() => {
   const config = window.COACH_GOALS_CONFIG || {};
   const mode = config.mode === 'api' ? 'api' : 'demo';

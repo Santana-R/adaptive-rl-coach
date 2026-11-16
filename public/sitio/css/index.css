@@ -383,9 +383,8 @@ body {
     }
     .car-image{
         width: 100% !important;
-        height: auto;
-        min-height: 220px;
-        max-height: 330px;
+        min-height: 750px;
+        max-height: 750px;
     }
     .carousel-caption{
         display: block !important;

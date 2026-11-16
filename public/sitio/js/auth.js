@@ -1,7 +1,6 @@
 'use strict';
 (() => {
-  const config = window.SUPABASE_CONFIG || {};
-  const client = window.supabase?.createClient && config.url && config.anonKey ? window.supabase.createClient(config.url, config.anonKey) : null;
+  const client = window.CoachAuth.getClient();
   const $ = id => document.getElementById(id);
   const message = (id, value, error = false) => {
     const el = $(id);
@@ -10,11 +9,9 @@
       el.classList.toggle('text-danger', error);
     }
   };
-
   const busy = (form, value) => form?.querySelectorAll('button').forEach(button => {
     button.disabled = value;
   });
-
   const explain = error => error?.message || 'No se pudo completar la operación. Inténtalo de nuevo.';
   const register = $('registro'),
     login = $('inicio-sesion');
@@ -68,7 +65,6 @@
       busy(login, false);
     }
   });
-  
   async function google() {
     if (!client) return message('login-estado', 'Configura Supabase para habilitar Google.', true);
     const {
