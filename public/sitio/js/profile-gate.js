@@ -4,6 +4,14 @@ $(function () {
   const gate = $('#perfil-gate');
   const content = $('#analysis-content');
 
+  // La demo sintética usa una ruta local separada, sin datos del jugador.
+  // El acceso a un bloque propio conserva sesión y perfil obligatorios.
+  if (window.CoachAnalysis && !new URLSearchParams(window.location.search).has('block_id')) {
+    gate.prop('hidden', true);
+    content.prop('hidden', false);
+    return;
+  }
+
   content.prop('hidden', true);
 
   function fail(message) {
@@ -62,6 +70,7 @@ $(function () {
 
       gate.prop('hidden', true);
       content.prop('hidden', false);
+      await window.CoachAnalysis?.load();
     } catch (error) {
       if (error.status === 401) {
         window.location.replace('login.html');

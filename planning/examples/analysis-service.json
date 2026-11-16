@@ -1,0 +1,253 @@
+{
+  "data": {
+    "block_id": "demo-current",
+    "source": "synthetic",
+    "metrics_version": "mvp.metrics.v1",
+    "block": {
+      "status": "ready",
+      "context": {
+        "platform": "steam",
+        "player_id": "TEST_PLAYER_01",
+        "mode": "2v2",
+        "match_type": "ranked"
+      },
+      "first_match_at": "2026-11-12T20:00:00.000Z",
+      "last_match_at": "2026-11-12T20:04:00.000Z",
+      "replay_ids": [
+        "demo-current-1",
+        "demo-current-2",
+        "demo-current-3",
+        "demo-current-4",
+        "demo-current-5"
+      ]
+    },
+    "metrics": {
+      "source": "synthetic",
+      "context": {
+        "platform": "steam",
+        "player_id": "TEST_PLAYER_01",
+        "mode": "2v2",
+        "match_type": "ranked"
+      },
+      "metrics_version": "mvp.metrics.v1",
+      "sample_size": 5,
+      "replay_ids": [
+        "demo-current-1",
+        "demo-current-2",
+        "demo-current-3",
+        "demo-current-4",
+        "demo-current-5"
+      ],
+      "values": {
+        "goals": {
+          "value": 6,
+          "unit": "count",
+          "coverage": 5,
+          "missing_reason": null,
+          "excluded": []
+        },
+        "shots": {
+          "value": 20,
+          "unit": "count",
+          "coverage": 5,
+          "missing_reason": null,
+          "excluded": []
+        },
+        "shooting_pct": {
+          "value": 30,
+          "unit": "percent",
+          "coverage": 5,
+          "missing_reason": null,
+          "numerator": {
+            "metric_key": "goals",
+            "value": 6,
+            "unit": "count"
+          },
+          "denominator": {
+            "metric_key": "shots",
+            "value": 20,
+            "unit": "count"
+          },
+          "excluded": []
+        },
+        "play_duration_s": {
+          "value": 1510,
+          "unit": "seconds",
+          "coverage": 5,
+          "missing_reason": null,
+          "excluded": [],
+          "scope": "match",
+          "source_field": "play_duration"
+        }
+      },
+      "block_id": "demo-current",
+      "status": "ready",
+      "first_match_at": "2026-11-12T20:00:00.000Z",
+      "last_match_at": "2026-11-12T20:04:00.000Z",
+      "date_exclusions": [],
+      "replay_keys": [
+        "id:demo-current-1",
+        "id:demo-current-2",
+        "id:demo-current-3",
+        "id:demo-current-4",
+        "id:demo-current-5"
+      ]
+    },
+    "comparison": {
+      "status": "comparable",
+      "current_block_id": "demo-current",
+      "baseline_block_id": "demo-previous",
+      "reason_codes": [],
+      "deltas": {
+        "goals": {
+          "baseline": 5,
+          "current": 6,
+          "delta": 1,
+          "unit": "count",
+          "coverage": {
+            "baseline": 5,
+            "current": 5
+          },
+          "missing_reason": null
+        },
+        "shots": {
+          "baseline": 20,
+          "current": 20,
+          "delta": 0,
+          "unit": "count",
+          "coverage": {
+            "baseline": 5,
+            "current": 5
+          },
+          "missing_reason": null
+        },
+        "shooting_pct": {
+          "baseline": 25,
+          "current": 30,
+          "delta": 5,
+          "unit": "percentage_points",
+          "coverage": {
+            "baseline": 5,
+            "current": 5
+          },
+          "missing_reason": null
+        },
+        "play_duration_s": {
+          "baseline": 1510,
+          "current": 1510,
+          "delta": 0,
+          "unit": "seconds",
+          "coverage": {
+            "baseline": 5,
+            "current": 5
+          },
+          "missing_reason": null
+        }
+      }
+    },
+    "rules_version": "mvp.rules.v1",
+    "priorities": [
+      {
+        "priority_key": "shooting",
+        "rule_id": "finalizacion-eficiencia",
+        "rules_version": "mvp.rules.v1",
+        "title": "Practicar colocación y finalización",
+        "score": 1,
+        "evidence": {
+          "metric_key": "shooting_pct",
+          "value": 30,
+          "unit": "percent",
+          "threshold": 30,
+          "direction": "below_or_equal",
+          "operator": "<=",
+          "sample_size": 5,
+          "coverage": 5,
+          "goals": {
+            "value": 6,
+            "unit": "count",
+            "coverage": 5
+          },
+          "shots": {
+            "value": 20,
+            "unit": "count",
+            "coverage": 5
+          },
+          "min_shots": 15,
+          "context": {
+            "platform": "steam",
+            "player_id": "TEST_PLAYER_01",
+            "mode": "2v2",
+            "match_type": "ranked"
+          },
+          "source": "synthetic",
+          "metrics_version": "mvp.metrics.v1",
+          "replay_ids": [
+            "demo-current-1",
+            "demo-current-2",
+            "demo-current-3",
+            "demo-current-4",
+            "demo-current-5"
+          ]
+        },
+        "explanation": "Registraste 6 goles en 20 tiros (30 %). Cumples el mínimo de 15 tiros para 2v2 y el criterio inicial de eficiencia ≤ 30 %; se sugiere practicar colocación y finalización.",
+        "calibration_status": "agreed_heuristic_not_calibrated",
+        "order": 1
+      }
+    ],
+    "evaluations": [
+      {
+        "rule_id": "finalizacion-eficiencia",
+        "rules_version": "mvp.rules.v1",
+        "status": "active",
+        "reason": "AT_OR_BELOW_THRESHOLD",
+        "evidence": {
+          "metric_key": "shooting_pct",
+          "value": 30,
+          "unit": "percent",
+          "threshold": 30,
+          "direction": "below_or_equal",
+          "operator": "<=",
+          "sample_size": 5,
+          "coverage": 5,
+          "goals": {
+            "value": 6,
+            "unit": "count",
+            "coverage": 5
+          },
+          "shots": {
+            "value": 20,
+            "unit": "count",
+            "coverage": 5
+          },
+          "min_shots": 15,
+          "context": {
+            "platform": "steam",
+            "player_id": "TEST_PLAYER_01",
+            "mode": "2v2",
+            "match_type": "ranked"
+          },
+          "source": "synthetic",
+          "metrics_version": "mvp.metrics.v1",
+          "replay_ids": [
+            "demo-current-1",
+            "demo-current-2",
+            "demo-current-3",
+            "demo-current-4",
+            "demo-current-5"
+          ]
+        },
+        "explanation": "Registraste 6 goles en 20 tiros (30 %). Cumples el mínimo de 15 tiros para 2v2 y el criterio inicial de eficiencia ≤ 30 %; se sugiere practicar colocación y finalización.",
+        "calibration_status": "agreed_heuristic_not_calibrated"
+      }
+    ],
+    "limitations": [
+      "heuristics_pending_calibration_A26",
+      "synthetic_fixture"
+    ]
+  },
+  "meta": {
+    "contract_version": "1.0",
+    "source": "synthetic",
+    "synthetic": true
+  }
+}

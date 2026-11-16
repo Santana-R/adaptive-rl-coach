@@ -1,0 +1,17 @@
+{
+  "source": "synthetic",
+  "note": "Estadísticas de entrada ficticias para ejecutar A14/A09/A10/A17. No son resultados precalculados ni archivos .replay procesados.",
+  "profile": {"platform": "steam", "player_id": "TEST_PLAYER_01"},
+  "blocks": {
+    "previous": {"block_id": "demo-previous", "mode": "2v2", "date": "2026-11-10T20:00:00Z", "goals": [1,1,1,1,1], "shots": [4,4,4,4,4]},
+    "current": {"block_id": "demo-current", "mode": "2v2", "date": "2026-11-12T20:00:00Z", "goals": [2,1,1,1,1], "shots": [4,4,4,4,4]},
+    "other_mode": {"block_id": "demo-3v3", "mode": "3v3", "date": "2026-11-12T20:00:00Z", "goals": [1,1,1,0,0], "shots": [2,2,2,2,2]},
+    "missing": {"block_id": "demo-missing", "mode": "2v2", "date": "2026-11-12T20:00:00Z", "goals": [2,1,1,1,1], "shots": [4,4,null,4,4]}
+  },
+  "cases": {
+    "initial": {"current": "previous", "baseline": null},
+    "followup": {"current": "current", "baseline": "previous"},
+    "incompatible": {"current": "other_mode", "baseline": "previous"},
+    "missing": {"current": "missing", "baseline": "previous"}
+  }
+}

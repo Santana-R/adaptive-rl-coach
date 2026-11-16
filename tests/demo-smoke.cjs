@@ -1,4 +1,4 @@
-/* Browser checks for the official site screens. Requires an external Playwright install. */
+/* Browser checks for the official site screens. Requires Playwright and a local server with ANALYSIS_DEMO_ENABLED=true. */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { chromium } = require('playwright');
@@ -81,10 +81,10 @@ let runningBrowser;
   await page.goto(`${official('analisis')}?scenario=initial&minutes=40`);
   await page.locator('.priority-card').first().waitFor();
   assert.match(await page.locator('#comparison-message').textContent(), /línea base/);
-  assert.equal(await page.locator('.priority-card').count(), 2);
+  assert.equal(await page.locator('.priority-card').count(), 1);
   await page.locator('#scenario-select').selectOption('followup');
-  await page.waitForFunction(() => document.getElementById('priority-count').textContent.startsWith('1 de'));
-  assert.match(await page.locator('#shooting-foot').textContent(), /5 pp/);
+  await page.waitForFunction(() => document.getElementById('comparison-message').textContent.includes('+5 puntos porcentuales'));
+  assert.match(await page.locator('#comparison-message').textContent(), /\+5 puntos porcentuales/);
   assert.equal(await page.locator('.priority-card').count(), 1);
   await page.screenshot({ path: `${output}/analisis-desktop.png`, fullPage: true });
 
@@ -110,7 +110,7 @@ let runningBrowser;
       `Horizontal overflow: ${name}`
     );
     assert.equal(await page.locator('h1').count(), 1);
-    assert.equal(await page.locator('nav a[aria-current=page]').count(), 1);
+    assert.equal(await page.locator('a[aria-current=page]').count(), 1);
     await page.screenshot({ path: `${output}/${name}-mobile.png`, fullPage: true });
   }
 

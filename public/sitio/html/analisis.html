@@ -33,40 +33,41 @@
         <h1 class="fw-bold text-light mb-1">Análisis del jugador</h1>
         <p class="text-bray mb-1">Métricas, comparación y prioridades del bloque seleccionado.</p>
         <div class="d-flex align-items-center gap-3 mb-4">
-          <label for="scenario-select" class="text-accent">Bloque</label>
+          <label for="scenario-select" id="scenario-label" class="text-accent">Datos de prueba</label>
           <select id="scenario-select" class="form-select bg-card text-light scenario-select" style="max-width: 220px">
             <option value="initial">Primer bloque</option>
             <option value="followup">Bloque posterior</option>
+            <option value="incompatible">Modalidad incompatible</option>
+            <option value="missing">Datos faltantes</option>
           </select>
-          <fieldset class="d-flex gap-2 border-0 m-0">
-            <legend class="visually-hidden">Tiempo disponible</legend>
-            <label class="text-bray"><input type="radio" name="minutes" value="20"> 20 min</label>
-            <label class="text-bray"><input type="radio" name="minutes" value="40" checked> 40 min</label>
-          </fieldset>
         </div>
+        <p id="analysis-status" class="text-bray" role="status" aria-live="polite"></p>
+        <p id="analysis-error" class="app-note" role="alert" hidden></p>
         <div class="row g-3 mb-4" aria-label="Resumen del bloque">
-          <div class="col-md-3"><div class="stat-card"><div class="stat-label">Precisión de tiro</div><div class="stat-value" id="shooting-value"></div><div class="stat-sub" id="shooting-foot"></div></div></div>
-          <div class="col-md-3"><div class="stat-card"><div class="stat-label">Boost bajo</div><div class="stat-value" id="boost-value"></div><div class="stat-sub" id="boost-foot"></div></div></div>
-          <div class="col-md-3"><div class="stat-card"><div class="stat-label">Tiros por partida</div><div class="stat-value" id="shots-value"></div><div class="stat-sub" id="shots-foot"></div></div></div>
+          <div class="col-md-3"><div class="stat-card"><div class="stat-label">Eficiencia de tiro</div><div class="stat-value" id="shooting-value"></div><div class="stat-sub" id="shooting-foot"></div></div></div>
+          <div class="col-md-3"><div class="stat-card"><div class="stat-label">Goles</div><div class="stat-value" id="goals-value"></div><div class="stat-sub" id="goals-foot"></div></div></div>
+          <div class="col-md-3"><div class="stat-card"><div class="stat-label">Tiros totales</div><div class="stat-value" id="shots-value"></div><div class="stat-sub" id="shots-foot"></div></div></div>
           <div class="col-md-3"><div class="stat-card"><div class="stat-label">Muestra analizada</div><div class="stat-value" id="sample-value"></div><div class="stat-sub" id="sample-foot"></div></div></div>
         </div>
         <p id="comparison-message" class="text-bray"></p>
         <div class="row g-4">
           <section class="col-lg-7">
             <div class="card bg-card border-card p-3">
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start gap-2">
                 <h2 class="h5 text-light">Rendimiento del bloque</h2>
-                <select id="metric-select" class="form-select bg-card text-light" style="max-width: 180px">
-                  <option value="shooting_pct">Precisión de tiro</option>
-                  <option value="boost_low_pct">Boost bajo</option>
-                  <option value="shots_per_match">Tiros por partida</option>
+                <select id="metric-select" aria-label="Métrica de la gráfica" class="form-select bg-card text-light" style="max-width: 180px">
+                  <option value="shooting_pct">Eficiencia de tiro</option>
+                  <option value="goals">Goles</option>
+                  <option value="shots">Tiros totales</option>
+                  <option value="play_duration_s">Duración de partidas</option>
                 </select>
               </div>
               <p id="analysis-period" class="text-bray"></p>
               <div style="height: 220px"><canvas id="comparison-chart" role="img"></canvas></div>
               <p id="chart-description" class="text-bray"></p>
-              <div class="table-responsive">
-                <table class="table table-dark">
+              <p class="text-bray d-sm-none">Desliza la tabla para ver todas las columnas.</p>
+              <div class="table-responsive" tabindex="0" role="region" aria-label="Tabla de métricas, desplazable horizontalmente">
+                <table class="table table-dark" style="min-width: 480px">
                   <caption class="text-bray">Valores del bloque</caption>
                   <thead><tr><th>Métrica</th><th>Anterior</th><th>Actual</th><th>Cambio</th></tr></thead>
                   <tbody id="metric-rows"></tbody>
@@ -82,11 +83,11 @@
               </div>
               <div id="priority-list"></div>
               <div id="maintenance-note" class="card bg-dark text-bray p-2 mt-3" hidden></div>
-              <a href="plan.html" data-page="plan.html" class="btn-rl btn-rl-accent w-100 mt-3">Ver mi plan</a>
+              <a id="analysis-plan-link" href="plan.html" class="btn-rl btn-rl-accent w-100 mt-3">Ver mi plan</a>
             </div>
           </section>
         </div>
-        <p class="app-note">Datos sintéticos de demostración. Las reglas requieren calibración con datos reales.</p>
+        <p id="analysis-source" class="app-note">La procedencia se mostrará al cargar el análisis.</p>
         </div>
       </main>
     </div>
@@ -98,13 +99,10 @@
     <script src="../js/mdb.umd.min.js"></script>
     <script src="../../vendor/jquery-3.7.1.min.js"></script>
     <script src="../../vendor/chart-4.5.1.umd.min.js"></script>
-    <script src="../../js/demo-data.js"></script>
-    <script src="../../js/demo-service.js"></script>
-    <script src="../../js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../js/profile-gate.js"></script>
     <script src="../js/profile-validation.js"></script>
     <script src="../js/profile-api.js"></script>
+    <script src="../../js/analysis.js"></script>
     <script src="../js/profile-gate.js"></script>
   </body>
 </html>

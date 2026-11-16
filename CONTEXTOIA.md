@@ -31,13 +31,13 @@ Si la IA no puede leer el repositorio privado, indicar qué archivo o fragmento 
 
 | Parte | Estado documentado en esta revisión |
 | --- | --- |
-| Demo visual oficial | Replays, Análisis y Plan en `public/sitio/html`, con datos sintéticos y reglas ilustrativas mientras se conectan los servicios definitivos. |
+| Demo visual oficial | Replays, Análisis y Plan en `public/sitio/html`, con datos sintéticos identificados. Análisis ya consume el cálculo A09/A10/A17 por HTTP en A19; las consultas persistidas y Plan siguen pendientes de integración. |
 | Fase 2 | Documento comprobado por el equipo y listo para presentarlo, según confirmó Roberto. La revisión del profesor sigue pendiente; SQL y diccionario de las 30 tablas están en el repo. |
 | Pantallas de Luis | Cuatro vistas públicas integradas en PR #50; A03/A04 cerradas. Continúa la construcción del frontend en A11/A12/A19/A20/A27/A28 y revisión A35. |
 | Servidor y motor definitivo | Pendientes de implementación/conexión. |
 | Proveedor real, acceso y persistencia de la web | Pendientes de integración y comprobación. |
 
-La interfaz oficial se abre desde `public/sitio/html/replays.html`; Análisis y Plan están en la misma carpeta. Replays valida cantidad, extensión y duplicados, y envía la carga al API local. Las métricas y planes sintéticos de las vistas oficiales siguen siendo una demostración y no acreditan historial persistido. [Alcance de la demo](docs/demo-progsa.md).
+La interfaz oficial se abre desde `public/sitio/html/replays.html`; Análisis y Plan están en la misma carpeta. Replays valida cantidad, extensión y duplicados, y envía la carga al API local. Análisis calcula desde entradas sintéticas mediante el motor y API; Plan conserva una demostración separada. Ninguna vista acredita historial persistido. [Alcance de la demo](docs/demo-progsa.md).
 
 El servidor Express y package.json ya existen en main; comprobar el README, la rama y los archivos actuales antes de indicar comandos o endpoints disponibles. El estado técnico de las demás filas conserva su carácter de instantánea y requiere comprobación.
 
@@ -62,7 +62,7 @@ No se conocen horas semanales disponibles. David lleva materias distintas; no as
 
 **Catálogo A23 · reparto concretado el 15 de noviembre:** Roberto define y revisa el contenido deportivo; David conserva seed, consulta, filtros y versiones. Las [tres fichas iniciales](docs/catalogo-ejercicios.md) y su [referencia estructurada](planning/catalogo-ejercicios.v1.json) incluyen Ground Shots de Castro, Mid Height Shots y CoCo, sin BakkesMod, con variantes por nivel y distribución proporcional con mínimo de cinco minutos. El contenido está aprobado como heurística inicial, pero A23 sigue pendiente de comprobación técnica; el archivo de fichas no es un seed ni un catálogo activo. A24 guardará las versiones que produzca el generador de A18.
 
-**Avance de dominio A18 · 15 de noviembre:** [generatePlan](docs/generador-planes.md) ya selecciona ejercicios activos/revisados, variante de CoCo y minutos; conserva versiones/snapshots y explica cobertura parcial/vacía. Se comprobó con 63 pruebas de planes y las 147 anteriores, usando un catálogo de consulta simulado. Las fichas reales de A23 siguen inactivas y producen vacío explicado. A18 permanece abierta hasta comprobar catálogo/ruta/persistencia; no se acredita un endpoint ni un plan guardado. A23 debe entregar datos normalizados según la guía y A24 asignará IDs/secuencia de versiones.
+**Avance de dominio A18 · 15 de noviembre:** [generatePlan](docs/generador-planes.md) ya selecciona ejercicios activos/revisados, variante de CoCo y minutos; conserva versiones/snapshots y explica cobertura parcial/vacía. Se comprobó con 63 pruebas de planes y las 147 anteriores, usando un catálogo de consulta simulado. Las fichas reales de A23 siguen inactivas y producen vacío explicado. A18 permanece abierta hasta comprobar catálogo y ruta de generación; A24 persiste después y no bloquea su cierre. No se acredita un endpoint ni un plan guardado. A23 debe entregar datos normalizados según la guía y A24 asignará IDs/secuencia de versiones.
 
 ## Acuerdo de frontend que debe respetar cualquier IA
 
@@ -167,3 +167,11 @@ Si código, issue y contrato discrepan, señalar el punto y proponer cómo recon
 ## Mensaje para empezar con cualquier IA
 
 > Soy [nombre], trabajo en Adaptive RL Coach y mi tarea es la issue #[número]. Lee CONTEXTOIA.md, la issue actual y los archivos pertinentes. Dime qué existe, qué debo entregar y explícame el primer paso con un ejemplo. Quiero comprender el código y los comandos. Espera mi Release antes de crear o modificar recursos.
+
+## Integración de Análisis A19 · 15 de noviembre
+
+`src/services/analysis.js` combina A09/A10/A17. La ruta privada reutiliza A08 y comprueba propiedad; requiere un repositorio de A15 que aún no está conectado. La vista oficial de Luis en `public/sitio/html/analisis.html` consume HTTP mediante `public/js/analysis.js`, sin fallback de resultados fijos. La demo local debe habilitarse explícitamente (`ANALYSIS_DEMO_ENABLED=true`) y calcula cuatro entradas sintéticas; no consulta ni guarda datos del jugador. [Guía y límites de A19](docs/analisis-integracion.md). A19 sigue abierta por conexión de consultas/sesión y comprobación real A37; no se acredita un análisis persistido ni Plan integrado.
+
+## Avances integrados y resolución A19 · 16 de noviembre
+
+A15 y A23 están cerradas con repositorios y evidencia registrados en `docs/a15-persistencia.md` y `docs/a23-catalogo-tecnico.md`. Los tres recursos del catálogo consultado ya están activos/verificados por David; las fichas históricas conservan `active: false` como referencia inicial. El servidor tiene GET/PATCH de Perfil, validación compartida y GET del catálogo. Luis integró su interfaz de acceso/Perfil. Al resolver el PR #66 se conserva ese trabajo y Análisis reutiliza su cliente de sesión y gate de Perfil. Las 297 pruebas combinadas pasan; demo y acceso privado sin sesión se comprobaron en navegador. Falta adaptar las consultas de bloques A15 al análisis A19, procesamiento A13 y comprobación privada real. A18 necesita la ruta que llame al generador con catálogo/perfil propios; A24 permanece posterior. Las instantáneas fechadas antes describen el estado anterior.
