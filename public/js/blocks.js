@@ -2,31 +2,40 @@
   'use strict';
 
   const labels = {
-    pending: 'Pendiente',
-    processing: 'Procesando',
-    invalid: 'Inválido',
-    failed: 'Fallido',
-    ready: 'Listo'
+    pending: 'Pendiente', processing: 'Procesando', invalid: 'Inválido',
+    failed: 'Fallido', ready: 'Listo'
   };
+  const endpoint = '/api/v1/blocks';
 
-  async function create(files) { //Crea el bloque de files llamando a blocks (POST)
-    const body = new FormData();
-    files.forEach(file => body.append('files', file, file.name));
-    const response = await fetch('/api/v1/blocks', { method: 'POST', body });
-    const payload = await response.json();
-    if (!response.ok) {
-      const message = payload.error?.message || 'No se pudo iniciar la carga.';
-      throw new Error(message);
+  async function request(path = '', { method = 'GET', body } = {}) {
+    const client = root.CoachProfileApi?.getClient();
+    if (!client) throw new Error('No se pudo iniciar la conexión de autenticación.');
+    const { data, error } = await client.auth.getSession();
+    if (error || !data?.session?.access_token) {
+      throw new Error('Inicia sesión para cargar o consultar tus replays.');
+    }
+
+    const response = await fetch(endpoint + path, {
+      method, body, headers: { Authorization: 'Bearer ' + data.session.access_token }
+    });
+    const payload = await response.json().catch(() => null);
+    if (!response.ok || !payload) {
+      throw new Error(payload?.error?.message || 'No se pudo completar la operación de replays.');
     }
     return payload.data;
   }
 
-  async function get(blockId) {
-    const response = await fetch(`/api/v1/blocks/${encodeURIComponent(blockId)}`);
-    const payload = await response.json();
-    if (!response.ok) throw new Error(payload.error?.message || 'No se pudo consultar el bloque.');
-    return payload.data;
+  function create(files) {
+    const body = new FormData();
+    for (const file of files) body.append('files', file, file.name);
+    return request('', { method: 'POST', body });
   }
-//Se puede acceder a labels al estar dentro del entorno original (function root)
-  root.CoachBlocks = Object.freeze({ create, get, label: status => labels[status] || 'Estado desconocido' });
+
+  root.CoachBlocks = Object.freeze({
+    create,
+    list: () => request(),
+    get: blockId => request('/' + encodeURIComponent(blockId)),
+    retry: blockId => request('/' + encodeURIComponent(blockId) + '/retry', { method: 'POST' }),
+    label: status => labels[status] || 'Estado desconocido'
+  });
 }(window));

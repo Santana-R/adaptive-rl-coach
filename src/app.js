@@ -10,22 +10,25 @@ const {
 const { getCatalog } = require('./repositories/catalog');
 const { createAnalysisRouter, createAnalysisDemoRouter } = require('./routes/analysis');
 const { createStoredAnalysisRepository } = require('./services/stored-block');
+const { createAdminUsersRouter } = require('./routes/admin-users');
 const { createPlansRouter } = require('./routes/plans');
 
 /**
  * Construye la aplicación. Recibe el cliente de Supabase para poder probarla
  * con un cliente simulado (tests/auth.test.cjs).
  */
-function createApp({ supabase = createServerClient(), analysisRepository, enableAnalysisDemo = false } = {}) {
+function createApp({ supabase = createServerClient(), analysisRepository, enableAnalysisDemo = false, enableBlocksDemo = false } = {}) {
   const app = express();
   const { requireAuth, requireRole } = createAuth(supabase);
   const repository = analysisRepository === undefined ? createStoredAnalysisRepository(supabase) : analysisRepository;
 
-  app.use(express.raw({
-    type: request => request.headers['content-type']?.startsWith('multipart/form-data'),
-    limit: '100mb'
-  }));
   app.use(express.json({ limit: '1mb' }));
+
+  app.use('/api/v1/admin/users', createAdminUsersRouter({
+  supabase,
+  requireAuth,
+  requireRole,
+}));
 
   app.get('/health', (_req, res) => {
     res.json({ status: 'ok' });
@@ -116,7 +119,9 @@ app.patch('/api/v1/profile', requireAuth, async (req, res, next) => {
   app.use('/api/v1/blocks', createAnalysisRouter({ requireAuth, requireRole, repository }));
   app.use('/api/v1/blocks', createPlansRouter({ supabase, requireAuth, requireRole, repository }));
   app.use('/api/v1/demo/analysis', createAnalysisDemoRouter({ enabled: enableAnalysisDemo }));
-  app.use('/api/v1/blocks', blocksRouter);
+    app.use('/api/v1/blocks', enableBlocksDemo && !supabase
+      ? blocksRouter
+      : blocksRouter.createPrivateBlocksRouter({ supabase, requireAuth }));
   app.use(express.static(path.join(__dirname, '..', 'public')));
 
   app.use((err, _req, res, _next) => {

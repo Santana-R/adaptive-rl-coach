@@ -1,7 +1,8 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const http = require('node:http');
-const app = require('../src/app');
+const { createApp } = require('../src/app');
+const app = createApp({ supabase: null, enableBlocksDemo: true });
 const store = require('../src/services/block-store');
 
 function request(method, path, body, headers = {}) {
@@ -56,7 +57,7 @@ test('POST blocks accepts multipart files from the browser', async () => {
     const port = server.address().port;
     const form = new FormData();
     for (let index = 1; index <= 5; index += 1) {
-      form.append('files', new Blob(['synthetic replay']), `match-${index}.replay`);
+      form.append('files', new Blob([`synthetic replay ${index}`]), `match-${index}.replay`);
     }
     const response = await fetch(`http://127.0.0.1:${port}/api/v1/blocks`, {
       method: 'POST',
