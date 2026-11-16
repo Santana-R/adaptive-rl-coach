@@ -1,0 +1,37 @@
+{
+  "catalog_version": "mvp.catalog.v1",
+  "document_type": "technical_verification_record_A23",
+  "technical_owner": "David Alonso Torres Guerrero",
+  "rules": [
+    "Solo un ejercicio con status 'verified' se carga activo en el seed y llega al generador como technical_review_status 'verified'.",
+    "Cada registro corresponde a una clave y una versión de contenido de planning/catalogo-ejercicios.v1.json. Otra versión necesita otro registro.",
+    "status admite 'pending', 'verified' o 'failed'. 'verified' requiere checked_on y method con lo que se comprobó en el juego.",
+    "Este archivo no modifica las fichas deportivas de Roberto ni sustituye su revisión."
+  ],
+  "exercises": [
+    {
+      "exercise_key": "castro-ground-shots",
+      "content_version": 1,
+      "status": "verified",
+      "check": "Importar el código 9472-6A26-7F5D-767B en Entrenamiento personalizado (Steam o Epic) y confirmar que abre el paquete de Ground Shots.",
+      "checked_on": "2026-11-16",
+      "method": "David importó el código 9472-6A26-7F5D-767B en Entrenamiento personalizado y el paquete abrió en el juego."
+    },
+    {
+      "exercise_key": "castro-mid-height-shots",
+      "content_version": 1,
+      "status": "verified",
+      "check": "Importar el código E6E3-1E82-E6DE-C4B4 en Entrenamiento personalizado (Steam o Epic) y confirmar que abre el paquete de Mid Height Shots.",
+      "checked_on": "2026-11-16",
+      "method": "David importó el código E6E3-1E82-E6DE-C4B4 en Entrenamiento personalizado y el paquete abrió en el juego."
+    },
+    {
+      "exercise_key": "coco-aim-training",
+      "content_version": 1,
+      "status": "verified",
+      "check": "Suscribirse al mapa de Steam Workshop (id 1906378036), abrirlo en Steam y confirmar los modos Easy, Normal y Survival.",
+      "checked_on": "2026-11-16",
+      "method": "David se suscribió al mapa de Steam Workshop (id 1906378036) y el mapa abrió en el juego desde Steam."
+    }
+  ]
+}
