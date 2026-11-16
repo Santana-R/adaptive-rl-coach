@@ -33,55 +33,55 @@
         <a href="perfil.html" class="sidebar-link active" aria-current="page">Perfil</a>
         <a href="helpme.html" class="sidebar-link">Ayuda</a>
         <div class="sidebar-footer">
-          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+          <button type="button" id="cerrar-sesion" class="btn-rl btn-rl-outline w-100">Cerrar sesión</button>
         </div>
       </aside>
       <main class="app-main">
         <h1 class="fw-bold text-light mb-4">Perfil y configuración inicial</h1>
-        <form>
+        <form id="form-perfil">
           <div class="row">
             <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="nombre" class="form-control" value="JugadorRL" />
+              <input type="text" id="nombre" class="form-control" autocomplete="name" />
               <label class="form-label" for="nombre">Nombre visible</label>
             </div></div>
             <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="plataforma" class="form-control" value="Steam" />
+              <select id="plataforma" class="form-select" required><option value="">Selecciona una plataforma</option><option value="steam">Steam</option><option value="epic">Epic Games</option></select>
               <label class="form-label" for="plataforma">Plataforma</label>
             </div></div>
           </div>
           <div class="row">
             <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="idplat" class="form-control" value="ID de la cuenta Steam" />
+              <input type="text" id="idplat" class="form-control" autocomplete="off" required />
               <label class="form-label" for="idplat">Identificador de plataforma</label>
             </div></div>
             <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="modalidad" class="form-control" value="2v2 competitivo" />
+              <select id="modalidad" class="form-select" required><option value="">Selecciona modalidad</option><option value="1v1">1v1</option><option value="2v2">2v2</option><option value="3v3">3v3</option></select>
               <label class="form-label" for="modalidad">Modalidad principal</label>
             </div></div>
           </div>
           <div class="row">
             <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="minutos" class="form-control" value="45" />
+              <input type="number" id="minutos" class="form-control" min="1" max="240" />
               <label class="form-label" for="minutos">Minutos por sesión</label>
             </div></div>
             <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="dias" class="form-control" value="4" />
+              <input type="number" id="dias" class="form-control" min="1" max="7" />
               <label class="form-label" for="dias">Días disponibles por semana</label>
             </div></div>
           </div>
           <div class="row">
             <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="rango" class="form-control" value="Diamond II · Temporada indicada" />
+              <input type="text" id="rango" class="form-control" />
               <label class="form-label" for="rango">Rango declarado y temporada</label>
             </div></div>
             <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="fecha" class="form-control" value="05/10/2026" />
+              <input type="date" id="fecha" class="form-control" />
               <label class="form-label" for="fecha">Fecha del registro</label>
             </div></div>
           </div>
           <div class="row">
             <div class="col-12"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="enfoque" class="form-control" value="Administración de boost" />
+              <input type="text" id="enfoque" class="form-control" />
               <label class="form-label" for="enfoque">Enfoque inicial: prepara una sugerencia en Objetivos</label>
             </div></div>
           </div>
@@ -91,26 +91,32 @@
               <div class="card-body">
                 <h5 class="card-title fw-bold text-light mb-2">Fuente y seguimiento</h5>
                 <ul class="card-text text-bray fs-6 list-unstyled mb-0">
-                <li>Rango declarado por el jugador.</li>
+                <li id="fuente-rango">El rango es opcional y declarado por el jugador.</li>
                 <li>El enfoque aún necesita una meta medible.</li>
                 </ul>
               </div>
             </div>
             </div>
             <div class="col-4">
-              <button type="button" class="btn-rl btn-rl-accent w-100 mb-3" data-mdb-ripple-init data-mdb-ripple-color="light">Guardar perfil</button>
+              <button type="submit" id="guardar-perfil" class="btn-rl btn-rl-accent w-100 mb-3">Guardar perfil</button>
               <button type="button" class="btn-rl btn-rl-outline w-100 mb-3" data-mdb-ripple-init data-mdb-ripple-color="info">Definir objetivo</button>
               <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cancelar</button>
             </div>
           </div>
         </form>
-        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
+        <p id="perfil-estado" class="app-note" role="status" aria-live="polite">Cargando perfil…</p>
       </main>
     </div>
 
     <!-- MDB -->
     <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
     <!-- Custom scripts -->
-    <script type="text/javascript"></script>
+     <script>
+      window.SUPABASE_CONFIG = {
+      url: "https://fylupliaforboawqdutb.supabase.co",
+      anonKey: "sb_publishable_DBJPBlKMqpNxAytdxCxwDw_cvuEo4Pc"};
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/profile.js"></script>
   </body>
 </html>
