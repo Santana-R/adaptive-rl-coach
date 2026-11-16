@@ -6,10 +6,10 @@ Implementación preparada con Roberto y asistencia de IA bajo su Release. La reg
 
 1. [evaluateReplayBlockRules](../src/services/block-rules.js) recibe cinco respuestas de replay y un perfil; reutiliza A14 y A09. Si A14 rechaza el bloque, conserva `valid: false`, `data: null` y los motivos; no genera un diagnóstico.
 2. [evaluateRules](../src/domain/rules.js) recibe las métricas normalizadas de A09 (`data`), o un bloque de A10. Comprueba contexto, versión, procedencia, cinco IDs distintos y datos necesarios. Devuelve `rules_version`, `priorities`, `evaluations` y `limitations`.
-3. [rules-config.js](../src/domain/rules-config.js) fija `mvp.rules.v2`, los mínimos por modalidad, límite inclusivo y máximo de tres prioridades. La configuración está congelada, incluidos sus objetos internos. Cambiar criterios publicados requiere una versión nueva.
-4. A18 consume las prioridades con `mvp.plans.v2` y A19 las muestra mediante su ruta HTTP. La persistencia A24 y el recorrido privado real continúan pendientes; ver la [integración de boost](disponibilidad-boost.md).
+3. [rules-config.js](../src/domain/rules-config.js) fija `mvp.rules.v3`, los mínimos por modalidad, límite inclusivo y máximo de tres prioridades. La configuración está congelada, incluidos sus objetos internos. Cambiar criterios publicados requiere una versión nueva.
+4. A18 consume las prioridades con `mvp.plans.v3` y A19 las muestra mediante su ruta HTTP. La persistencia A24 y el recorrido privado real continúan pendientes; ver la [integración de boost](disponibilidad-boost.md).
 
-La clave de prioridad es **`shooting`**, conservando el contrato del catálogo. El ID de regla sigue siendo **`finalizacion-eficiencia`**. La regla funciona sobre el bloque actual sin necesitar un anterior ni fechas: una comparación incompatible o ausente no invalida una señal propia del bloque. A10 mantiene sus validaciones temporales por separado.
+Para finalización, la clave de prioridad es **`shooting`**, conservando el contrato del catálogo. El ID de regla sigue siendo **`finalizacion-eficiencia`**. La regla funciona sobre el bloque actual sin necesitar un anterior ni fechas: una comparación incompatible o ausente no invalida una señal propia del bloque. A10 mantiene sus validaciones temporales por separado.
 
 ## La condición central
 
@@ -37,13 +37,13 @@ También se rechazan datos necesarios ausentes, conteos/porcentajes inválidos, 
 
 Cero goles con tiros suficientes sí permite evaluar y activar. Duración o boost ausentes no bloquean esta regla porque no utiliza esas métricas. La segunda regla, acordada el 16 de noviembre, se documenta en [Disponibilidad de boost](disponibilidad-boost.md): ≥15 % en al menos 3/5 partidas y prioridad alta con ≥20 % en 3/5. Requiere porcentajes del proveedor en las cinco partidas y evalúa ranked 2v2/3v3.
 
-Cada prioridad conserva regla/versión, clave `shooting`, orden, score, explicación y estado de calibración. Su `evidence` contiene porcentaje/unidad, umbral/comparador, goles/tiros/cobertura, cinco partidas e IDs, mínimo aplicado, contexto, fuente y versión de métricas.
+Cada prioridad de finalización conserva regla/versión, clave `shooting`, orden, score, explicación y estado de calibración. Su `evidence` contiene porcentaje/unidad, umbral/comparador, goles/tiros/cobertura, cinco partidas e IDs, mínimo aplicado, contexto, fuente y versión de métricas.
 
 ## Orden y límite
 
 `rankPriorities` recibe prioridades **ya justificadas** por reglas: ordena score descendente y, en empate, ID de regla ascendente como texto. Retorna como máximo tres, numeradas desde uno, sin modificar la lista recibida. Rechaza scores no finitos/negativos e IDs vacíos o repetidos. Es un ayudante de dominio, no una ruta para recibir diagnósticos enviados por el cliente.
 
-La regla de finalización usa **score fijo 1** como peso técnico inicial: no expresa probabilidad, confianza, gravedad ni mejora. La salida real contiene **cero, una o dos prioridades**. Boost usa score 1 normal y 2 alto; no se fabrican señales para completar tres lugares. El fixture de empate usa IDs ficticios para verificar el ordenador, no diagnósticos deportivos adicionales. El objetivo principal aún no introduce ponderaciones nuevas.
+La regla de finalización usa **score fijo 1** como peso técnico inicial: no expresa probabilidad, confianza, gravedad ni mejora. La salida real contiene **cero, una, dos o tres prioridades**. Boost usa score 1 normal y 2 alto; no se fabrican señales para completar tres lugares. El fixture de empate usa IDs ficticios para verificar el ordenador, no diagnósticos deportivos adicionales. El objetivo principal aún no introduce ponderaciones nuevas.
 
 El prototipo Python/Tkinter no se encontró en el repositorio. Se contrastó la demo JavaScript disponible: usa `shooting` y score 1, pero su umbral ilustrativo de 35 % y la regla de boost no son la ficha A02 aprobada. Se conservó la presentación provisional y se implementaron los criterios acordados en el dominio definitivo. Luis continúa su interfaz.
 
@@ -87,3 +87,11 @@ La primera salida es `inactive`; la segunda, `active`. El cálculo consume las e
 ## Segunda regla y comprobación vigente · 16 de noviembre
 
 La versión `mvp.rules.v2` añade `boost-disponibilidad` sin cambiar los umbrales de finalización. Ambas reglas se evalúan de forma independiente. La [ficha vigente](disponibilidad-boost.md) conserva casos, fuente/denominadores, investigación exploratoria, ejercicios y límites A13/A15/A24. `npm test`: 372 aprobadas, 0 fallidas; pruebas nuevas con entradas sintéticas y transporte/sesión simulados, sin acreditar calibración ni recorrido privado real.
+
+## Tercera regla · cobertura defensiva
+
+`mvp.rules.v3` incorpora `cobertura-defensiva-revision`, prioridad `defensive_review`: al menos dos goles recibidos como último defensor en tres de cinco ranked 2v2, con los cinco conteos originales disponibles. Usa score técnico 1 y estado `provisional_heuristic_pending_validation`; no atribuye responsabilidad ni identifica jugadas concretas. Los campos de contexto posicional se conservan sin intervenir en la activación.
+
+La [guía de cobertura defensiva](cobertura-defensiva.md) describe normalización, evidencia, actividad, versiones y límites. Los umbrales de finalización y boost se mantienen. Las tres reglas siguen independientes; faltantes defensivos no invalidan tiro ni boost.
+
+Con Node 22.19.0 en [run 43979860196](https://github.com/Santana-R/adaptive-rl-coach/actions/runs/43979860196): 447 pruebas aprobadas, 0 fallidas, incluidas 65 nuevas. La comprobación usa entradas sintéticas y sesiones/transporte simulados; no calibra el umbral ni acredita el recorrido privado real. A15 todavía no conserva los campos posicionales originales; esos bloques no activan esta regla.
