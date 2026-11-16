@@ -11,6 +11,10 @@ El recorrido del motor es **estadísticas → motor → Análisis → Plan adapt
 
 [Abrir las cuatro próximas entregas](https://github.com/users/Santana-R/projects/1/views/1) · [Ver la cola del motor por persona](https://github.com/users/Santana-R/projects/1/views/3).
 
+## Catálogo A23: contenido y aplicación
+
+Roberto aporta el criterio deportivo y las [tres fichas de finalización acordadas](catalogo-ejercicios.md): Ground Shots de Castro, Mid Height Shots y CoCo. David implementa su carga/consulta, filtros de compatibilidad/actividad y versiones sobre las tablas existentes. La [referencia estructurada](../planning/catalogo-ejercicios.v1.json) ayuda a preparar el seed; no acredita un catálogo activo. A23 permanece abierta hasta comprobar esa parte técnica. A18 usará el catálogo comprobado para seleccionar ejercicios y distribuir los minutos con los criterios de las fichas.
+
 ## Trabajar con una IA
 
 Comparte [CONTEXTOIA.md](../CONTEXTOIA.md), tu issue y los archivos de la tarea con el asistente que prefieras. Pídele que explique cada paso y comando y espere tu Release antes de modificar recursos. El contexto no se carga automáticamente en todas las herramientas; solicita que lo lea o adjúntalo. Incluye un mensaje listo para empezar.
