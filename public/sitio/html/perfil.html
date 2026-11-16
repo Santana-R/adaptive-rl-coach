@@ -33,84 +33,252 @@
         <a href="perfil.html" class="sidebar-link active" aria-current="page">Perfil</a>
         <a href="helpme.html" class="sidebar-link">Ayuda</a>
         <div class="sidebar-footer">
-          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+          <button type="button" id="cerrar-sesion" class="btn-rl btn-rl-outline w-100">Cerrar sesión</button>
         </div>
       </aside>
-      <main class="app-main">
-        <h1 class="fw-bold text-light mb-4">Perfil y configuración inicial</h1>
-        <form>
-          <div class="row">
-            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="nombre" class="form-control" value="JugadorRL" />
-              <label class="form-label" for="nombre">Nombre visible</label>
-            </div></div>
-            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="plataforma" class="form-control" value="Steam" />
-              <label class="form-label" for="plataforma">Plataforma</label>
-            </div></div>
-          </div>
-          <div class="row">
-            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="idplat" class="form-control" value="ID de la cuenta Steam" />
-              <label class="form-label" for="idplat">Identificador de plataforma</label>
-            </div></div>
-            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="modalidad" class="form-control" value="2v2 competitivo" />
-              <label class="form-label" for="modalidad">Modalidad principal</label>
-            </div></div>
-          </div>
-          <div class="row">
-            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="minutos" class="form-control" value="45" />
-              <label class="form-label" for="minutos">Minutos por sesión</label>
-            </div></div>
-            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="dias" class="form-control" value="4" />
-              <label class="form-label" for="dias">Días disponibles por semana</label>
-            </div></div>
-          </div>
-          <div class="row">
-            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="rango" class="form-control" value="Diamond II · Temporada indicada" />
-              <label class="form-label" for="rango">Rango declarado y temporada</label>
-            </div></div>
-            <div class="col-6"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="fecha" class="form-control" value="05/10/2026" />
-              <label class="form-label" for="fecha">Fecha del registro</label>
-            </div></div>
-          </div>
-          <div class="row">
-            <div class="col-12"><div data-mdb-input-init class="form-outline bodycolor mb-4">
-              <input type="text" id="enfoque" class="form-control" value="Administración de boost" />
-              <label class="form-label" for="enfoque">Enfoque inicial: prepara una sugerencia en Objetivos</label>
-            </div></div>
-          </div>
-          <div class="row mt-2">
-            <div class="col-8">
-              <div class="card bg-card border-card denotative pb-4 h-100">
-              <div class="card-body">
-                <h5 class="card-title fw-bold text-light mb-2">Fuente y seguimiento</h5>
-                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
-                <li>Rango declarado por el jugador.</li>
-                <li>El enfoque aún necesita una meta medible.</li>
-                </ul>
-              </div>
-            </div>
-            </div>
-            <div class="col-4">
-              <button type="button" class="btn-rl btn-rl-accent w-100 mb-3" data-mdb-ripple-init data-mdb-ripple-color="light">Guardar perfil</button>
-              <button type="button" class="btn-rl btn-rl-outline w-100 mb-3" data-mdb-ripple-init data-mdb-ripple-color="info">Definir objetivo</button>
-              <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cancelar</button>
-            </div>
-          </div>
-        </form>
-        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
-      </main>
+      <main class="app-main p-3 p-md-4">
+  <h1 class="fw-bold text-light mb-3">
+    Perfil y configuración inicial
+  </h1>
+
+  <p class="text-bray">
+    Completa tus datos para identificar tus partidas y preparar
+    el entrenamiento.
+  </p>
+
+  <p
+    id="perfil-estado"
+    class="text-bray"
+    role="status"
+    aria-live="polite"
+    tabindex="-1"
+  >
+    Cargando perfil…
+  </p>
+
+  <button
+    id="recargar-perfil"
+    type="button"
+    class="btn-rl btn-rl-outline mb-3"
+  >
+    Volver a consultar
+  </button>
+
+  <form id="form-perfil" novalidate>
+    <fieldset
+      id="perfil-campos"
+      class="border-0 p-0 m-0"
+      disabled
+    >
+      <legend class="visually-hidden">Datos del perfil</legend>
+
+      <div class="row g-3 mb-3">
+        <div class="col-12 col-md-6">
+          <label for="nombre" class="form-label text-light">
+            Nombre visible
+          </label>
+
+          <input
+            id="nombre"
+            type="text"
+            class="form-control bg-card text-light"
+            required
+            maxlength="60"
+            autocomplete="nickname"
+          >
+          <p
+            id="error-gamertag"
+            class="text-danger small mt-1 mb-0"
+            aria-live="polite"
+          ></p>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="plataforma" class="form-label text-light">
+            Plataforma
+          </label>
+          <select
+            id="plataforma"
+            class="form-select bg-card text-light"
+            required
+          >
+            <option value="">Selecciona una opción</option>
+            <option value="steam">Steam</option>
+            <option value="epic">Epic Games</option>
+          </select>
+
+          <p
+            id="error-platform"
+            class="text-danger small mt-1 mb-0"
+            aria-live="polite"
+          ></p>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label for="idplat" class="form-label text-light">
+            Identificador de cuenta Epic o Steam
+          </label>
+
+          <input
+            id="idplat"
+            type="text"
+            class="form-control bg-card text-light"
+            required
+            maxlength="100"
+            autocomplete="off"
+            aria-describedby="identidad-ayuda"
+          >
+
+          <p
+            id="error-player_id"
+            class="text-danger small mt-1 mb-0"
+            aria-live="polite"
+          ></p>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label for="modalidad" class="form-label text-light">
+            Modalidad principal
+          </label>
+
+          <select
+            id="modalidad"
+            class="form-select bg-card text-light"
+            required
+          >
+            <option value="">Selecciona una opción</option>
+            <option value="1v1">1v1</option>
+            <option value="2v2">2v2</option>
+            <option value="3v3">3v3</option>
+          </select>
+
+          <p
+            id="error-mode"
+            class="text-danger small mt-1 mb-0"
+            aria-live="polite"
+          ></p>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label for="minutos" class="form-label text-light">
+            Minutos por sesión
+          </label>
+
+          <input
+            id="minutos"
+            type="number"
+            class="form-control bg-card text-light"
+            required
+            min="1"
+            max="32767"
+            step="1"
+          >
+
+          <p
+            id="error-available_minutes"
+            class="text-danger small mt-1 mb-0"
+            aria-live="polite"
+          ></p>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label for="dias" class="form-label text-light">
+            Días disponibles por semana
+          </label>
+
+          <input
+            id="dias"
+            type="number"
+            class="form-control bg-card text-light"
+            required
+            min="1"
+            max="7"
+            step="1"
+          >
+
+          <p
+            id="error-days_per_week"
+            class="text-danger small mt-1 mb-0"
+            aria-live="polite"
+          ></p>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label for="zona-horaria" class="form-label text-light">
+            Zona horaria
+          </label>
+
+          <input
+            id="zona-horaria"
+            type="text"
+            class="form-control bg-card text-light"
+            required
+            maxlength="64"
+            placeholder="America/Monterrey"
+          >
+
+          <p
+            id="error-timezone"
+            class="text-danger small mt-1 mb-0"
+            aria-live="polite"
+          ></p>
+        </div>
+      </div>
+
+      <p id="identidad-ayuda" class="text-bray">
+        Usa el identificador de la cuenta que aparece en tus replays,
+        no el correo de acceso. El cotejo con esa cuenta se realiza
+        durante la carga de replays.
+      </p>
+
+      <div class="d-flex flex-wrap gap-3 mb-3">
+        <button
+          type="submit"
+          id="guardar-perfil"
+          class="btn-rl btn-rl-accent"
+        >
+          Guardar perfil
+        </button>
+
+        <button
+          type="button"
+          id="cancelar-perfil"
+          class="btn-rl btn-rl-outline"
+        >
+          Descartar cambios
+        </button>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="d-flex flex-wrap gap-3 mt-3">
+    <a href="objetivos.html" class="btn-rl btn-rl-outline">
+      Definir objetivo
+    </a>
+
+    <a href="analisis.html" class="btn-rl btn-rl-outline">
+      Ir a Análisis
+    </a>
+  </div>
+
+  <p class="text-bray mt-3">
+    Este formulario guarda los datos de Perfil.
+    El rango declarado y su historial se gestionan por separado.
+  </p>
+</main>
     </div>
 
     <!-- MDB -->
     <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
     <!-- Custom scripts -->
-    <script type="text/javascript"></script>
+     <script>
+      window.SUPABASE_CONFIG = {
+      url: "https://fylupliaforboawqdutb.supabase.co",
+      anonKey: "sb_publishable_DBJPBlKMqpNxAytdxCxwDw_cvuEo4Pc"};
+    </script>
+    <script src="../../vendor/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/profile-validation.js"></script>
+    <script src="../js/profile-api.js"></script>
+    <script src="../js/profile.js"></script>
   </body>
 </html>

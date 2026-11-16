@@ -42,37 +42,37 @@
         <div class="col-12 w-50 d-block mx-auto bg-card p-4 rounded-4 border-card">
             <form id="registro">
                 <h4 class="text-light fw-bold mb-3">Crear cuenta</h4>
-                <button type="button" class="mx-auto d-block w-75 p-2 accent rounded-4 border-0 fw-bold mb-2" data-mdb-ripple-init data-mdb-ripple-color="light"> Continuar con Google </button>
+                <button type="button" id="google-registro" class="mx-auto d-block w-75 p-2 accent rounded-4 border-0 fw-bold mb-2" data-mdb-ripple-init data-mdb-ripple-color="light"> Continuar con Google </button>
 
                 <p class="text-bray fw-light fs-6 text-center">O utiliza tu correo</p>
                 
                  <div data-mdb-input-init class="form-outline bodycolor">
-                <input type="text" id="Nombre" class="form-control mb-4" />
+                <input type="text" id="Nombre" class="form-control mb-4" autocomplete="name" required />
                 <label class="form-label" for="Nombre">Nombre</label>
                  </div>
 
                 <div data-mdb-input-init class="form-outline mb-4 bodycolor">
-                <input type="email" id="Correo" class="form-control" />
+                <input type="email" id="Correo" class="form-control" autocomplete="email" required />
                 <label class="form-label" for="Correo">Correo</label>
                 </div>
 
                 <div class="row mb-4">
                     <div class="col-6">
                         <div data-mdb-input-init class="form-outline mb-4 bodycolor">
-                <input type="password" id="contraseña" class=" form-control" />
+                <input type="password" id="contraseña" class=" form-control" autocomplete="new-password" minlength="8" required />
                 <label class="form-label" for="contraseña">Contraseña</label>
                 </div>
                     </div>
                 <div class="col-6">
                     <div data-mdb-input-init class="form-outline mb-4 bodycolor">
-                <input type="password" id="confirm" class=" form-control" />
+                <input type="password" id="confirm" class=" form-control" autocomplete="new-password" minlength="8" required />
                 <label class="form-label" for="confirm">Confirmación</label>
                 </div>
                 </div>
                 </div>
 
-                <button type="button" class="mb-2 mx-auto d-block w-75 p-2 accent rounded-4 border-0 fw-bold" data-mdb-ripple-init data-mdb-ripple-color="light"> Crear cuenta </button>
-                <p class="text-bray fw-light text-center">La autenticación por correo o Google se conectará con A08/A12.</p>
+                <button type="submit" class="mb-2 mx-auto d-block w-75 p-2 accent rounded-4 border-0 fw-bold">Crear cuenta</button>
+                <p id="registro-estado" class="text-bray fw-light text-center" role="status" aria-live="polite">Configura Supabase para habilitar el acceso.</p>
                 <p class="text-accent fw-light text-center"><a href="#inicio-sesion" class="text-accent">Ya tienes cuenta? Inicia sesión</a></p>
                 <div class="d-flex justify-content-center gap-3">
                 <a href="helpme.html" class="text-bray fw-light ">Recuperar contraseña</a>
@@ -90,8 +90,9 @@
                   <input type="password" id="login-contrasena" class="form-control" />
                   <label class="form-label" for="login-contrasena">Contraseña</label>
                 </div>
-                <button type="button" class="mx-auto d-block w-75 p-2 bodycolor border-accent rounded-4 fw-bold text-light">Iniciar sesión</button>
-                <p class="text-bray fw-light text-center mt-3">El acceso real y los estados de error se conectarán con A08/A12.</p>
+                <button type="submit" class="mx-auto d-block w-75 p-2 bodycolor border-accent rounded-4 fw-bold text-light">Iniciar sesión</button>
+                <button type="button" id="google-login" class="mx-auto d-block w-75 p-2 bodycolor border-accent rounded-4 fw-bold text-light mt-2">Iniciar con Google</button>
+                <p id="login-estado" class="text-bray fw-light text-center mt-3" role="status" aria-live="polite">Configura Supabase para habilitar el acceso.</p>
             </form>
         </div>
         </div>
@@ -102,6 +103,12 @@
     <!-- MDB -->
     <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
     <!-- Custom scripts -->
-    <script type="text/javascript"></script>
+    <script>
+      window.SUPABASE_CONFIG = {
+      url: "https://fylupliaforboawqdutb.supabase.co",
+      anonKey: "sb_publishable_DBJPBlKMqpNxAytdxCxwDw_cvuEo4Pc"};
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/auth.js"></script>
   </body>
 </html>
