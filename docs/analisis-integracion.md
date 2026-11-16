@@ -46,13 +46,13 @@ const analysisRepository = {
 };
 ```
 
-Cada bloque necesita `owner_id`, `block_id` como cadena, `status`, `source`, perfil del jugador y las cinco respuestas verificadas del proveedor (forma `blockInput` de A10). El adaptador debe preparar esa forma usando los campos comprobados por A05/A14. La ruta verifica de nuevo `owner_id`; un resultado ajeno y uno inexistente devuelven el mismo 404. El historial se filtra por propietario antes de resolver el bloque anterior. No aceptar el propietario enviado por el navegador.
+Las pruebas pueden inyectar bloques crudos con `owner_id`, `block_id` como cadena, `status`, `source`, perfil del jugador y las cinco respuestas verificadas del proveedor (forma `blockInput` de A10). El adaptador debe preparar esa forma usando los campos comprobados por A05/A14. La ruta verifica de nuevo `owner_id`; un resultado ajeno y uno inexistente devuelven el mismo 404. El historial se filtra por propietario antes de resolver el bloque anterior. No aceptar el propietario enviado por el navegador.
 
 La sesión usa A08: Bearer validado con Supabase y rol/estado actuales de `usuarios`. La ruta responde 401 sin sesión, 403 si está suspendido, 409 si el bloque no está listo, 422 si es inválido y 503 si falta la consulta o falla el proveedor. `baseline_id` permite elegir un anterior propio; omitirlo resuelve el compatible más reciente. Una incompatibilidad devuelve análisis propio y motivos, sin deltas ficticios.
 
 La interfaz privada se abre con `?block_id=<id>` y opcional `&baseline_id=<id>`. El controlador espera `window.CoachAuth.getAccessToken()` o permite configurar `CoachAnalysis.configure({getAccessToken})` desde el módulo de sesión. El puente ahora reutiliza `CoachProfileApi.getClient()` de Luis y obtiene su sesión vigente en cada petición. El gate de Perfil valida el perfil antes de llamar al análisis privado; sin sesión dirige al login. La demo local identificada usa su ruta separada sin consultar el perfil. No guarda tokens en almacenamiento adicional ni usa una clave de servicio en el navegador.
 
-El servidor de aplicación todavía no inyecta un repositorio real de A15, por lo que una solicitud privada autenticada responde 503 hasta conectarlo. A13 recibe nombres/metadatos en memoria y deja las cargas `pending`; no proporciona las estadísticas verificadas necesarias para este análisis. A15 ya aporta repositorios comprobados, pero aún debe adaptarse su salida SQL a la entrada normalizada de A19. A13 debe completar el procesamiento; A37 comprueba permisos/RLS con usuarios reales. Las pruebas con dobles no acreditan esas integraciones.
+El servidor conecta por defecto el adaptador de A15 descrito en la guía de propuestas; una solicitud autenticada consulta los bloques propios guardados. La base debe estar configurada y contener los cinco registros válidos. A13 recibe nombres/metadatos en memoria y deja las cargas `pending`; no proporciona las estadísticas verificadas necesarias para este análisis. A15 ya aporta repositorios comprobados, pero aún debe adaptarse su salida SQL a la entrada normalizada de A19. A13 debe completar el procesamiento; A37 comprueba permisos/RLS con usuarios reales. Las pruebas con dobles no acreditan esas integraciones.
 
 ## Evidencia y límites
 
@@ -83,3 +83,7 @@ Se incorpora `main` hasta `87ac3740f481bb91ef8539bcb84bbc08e604f7a7`: se conserv
 Capturas actuales: [escritorio](evidencias/a19/comparacion-integrada.jpg) y [390 px](evidencias/a19/comparacion-integrada-movil.jpg). Las anteriores conservan evidencia de la primera entrega.
 
 A23 ya tiene seed y consulta con los tres recursos comprobados por David (ver [registro técnico](a23-catalogo-tecnico.md)); A15 ya tiene repositorios y evidencia real registrada (ver [persistencia](a15-persistencia.md)). Que esas issues estén cerradas no conecta automáticamente sus salidas a Análisis: el adaptador y la inyección de `analysisRepository` siguen pendientes. Para A18 queda la ruta de propuesta usando perfil/análisis propios y catálogo consultado; A24 conserva sus versiones después.
+
+## Conexión A15 completada en la entrega de propuestas A18
+
+`src/services/stored-block.js` traduce los registros propios de A15 y recalcula las métricas mediante A09. El historial obtiene detalles propios antes de comparar; se comprueba el mismo archivo por hash. La duración de procedencia no acreditada permanece null. La conexión ya se inyecta por defecto en `createApp`; A13 y la comprobación privada real siguen pendientes para cerrar A19. Véanse [alcance y pruebas](integracion-propuestas.md). Las notas fechadas anteriores describen la entrega inicial.

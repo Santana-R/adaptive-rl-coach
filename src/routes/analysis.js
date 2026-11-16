@@ -14,7 +14,7 @@ function sendAnalysis(res, input) {
     });
   }
   return res.json({ data: result.data, meta: { contract_version: '1.0', source: result.data.source,
-    synthetic: result.data.source === 'synthetic' } });
+    synthetic: result.data.source === 'synthetic' ? true : result.data.source === 'ballchasing' ? false : null } });
 }
 
 function createAnalysisRouter({ requireAuth, requireRole, repository = null }) {
@@ -31,7 +31,7 @@ function createAnalysisRouter({ requireAuth, requireRole, repository = null }) {
       const current = await repository.getBlockForUser(req.params.blockId, req.user.id);
       if (!current) throw new ApiError(404, 'RESOURCE_NOT_FOUND', 'El recurso no existe.');
       assertOwner(req, current.owner_id);
-      if (current.status !== 'ready') return sendError(res, 409, 'BLOCK_NOT_READY', 'El bloque todavía no está listo para analizarse.');
+      if (!['ready', 'invalid'].includes(current.status)) return sendError(res, 409, 'BLOCK_NOT_READY', 'El bloque todavía no está listo para analizarse.');
       let baseline = null, history = [];
       if (baselineId !== undefined) {
         baseline = await repository.getBlockForUser(baselineId, req.user.id);

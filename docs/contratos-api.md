@@ -40,6 +40,7 @@ Frontend usa Supabase Auth para correo/Google y envía el access token a Express
 | GET | /api/v1/blocks/:blockId/metrics | Propietario | Roberto A09;David A15 | metrics de bloque listo; no calcula diagnóstico con faltantes como cero |
 | GET | /api/v1/blocks/:blockId/analysis?baseline_id=... | Propietario | Roberto A19 | analysis; omitir baseline_id para resolver anterior compatible |
 | GET/POST/PATCH/DELETE | /api/v1/goals[/:goalId] | Propietario | David A16;Luis A20 | goal; DELETE archiva si está enlazado, respuesta indica efecto |
+| POST | /api/v1/blocks/:blockId/plan-proposal | Propietario | Roberto A18 | Propuesta sin guardar; 200, IDs de plan null, meta.persisted false |
 | POST | /api/v1/blocks/:blockId/plans | Propietario | Roberto A18;David A24 | goal_ids, availability_minutes → plan-version inicial |
 | GET | /api/v1/plans/:planId | Propietario | David A24;Luis A27 | Plan y versión actual |
 | GET | /api/v1/plans/:planId/versions[/:version] | Propietario | David A24;Luis A27 | Lista/detalle de snapshots históricos |
@@ -58,7 +59,7 @@ Las rutas agrupadas CRUD son: GET colección/detalle, POST colección, PATCH det
 
 `analyzeBlock` conecta normalización A14/A09, comparación A10 y reglas A17. `GET /api/v1/blocks/:blockId/analysis` devuelve `{data,meta}` con métricas completas, bloque/contexto/fechas, comparación y evaluación de reglas. El ejemplo [analysis-service.json](../planning/examples/analysis-service.json) se genera desde el servicio, con entradas sintéticas identificadas.
 
-La ruta privada reutiliza `requireAuth` y roles de A08, obtiene el propietario de la sesión y exige el repositorio `getBlockForUser(blockId,userId)` / `listBlocksForUser(userId)`. Verifica propiedad también en los objetos devueltos; historial ajeno se excluye y un bloque ajeno o inexistente responde el mismo 404. Sin repositorio conectado responde 503; sin sesión 401, suspendido 403, bloque no listo 409, bloque inválido 422 y `baseline_id` repetido/vacío 400. Las pruebas de acceso usan autenticación y repositorio simulados: **no sustituyen A37 con usuarios/RLS reales**.
+La ruta privada reutiliza `requireAuth` y roles de A08, obtiene el propietario de la sesión y exige el repositorio `getBlockForUser(blockId,userId)` / `listBlocksForUser(userId)`. Verifica propiedad también en los objetos devueltos; historial ajeno se excluye y un bloque ajeno o inexistente responde el mismo 404. El adaptador predeterminado conecta las consultas A15 con el motor; sin configuración de datos responde 503; sin sesión 401, suspendido 403, bloque no listo 409, bloque inválido 422 y `baseline_id` repetido/vacío 400. Las pruebas de acceso usan autenticación y repositorio simulados: **no sustituyen A37 con usuarios/RLS reales**.
 
 `GET /api/v1/demo/analysis?case=initial|followup|incompatible|missing` es una ruta de solo lectura con cuatro entradas sintéticas. Por defecto está deshabilitada; exige `ANALYSIS_DEMO_ENABLED=true` y conexión de loopback. Ejecuta el mismo servicio y no admite datos privados ni genera/guarda planes. `meta.synthetic` y `meta.source` identifican su origen. Las respuestas de análisis no se almacenan en caché.
 
@@ -170,3 +171,9 @@ Todos son sintéticos. Los objetos de ejemplo son el contenido de data; envolver
 - [Supabase Auth: getUser](https://supabase.com/docs/reference/javascript/auth-getuser) y [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security): verificación de usuario y acceso por políticas. David/Tadeo comprueban configuración real durante la implementación.
 
 Cada cambio al contrato indica motivo, consumidores afectados y fixture ajustado. La versión inicial ofrece una dirección concreta y conserva pendientes verificables.
+
+## Integración de propuestas A18 · 16 de noviembre
+
+La [ruta de propuesta](integracion-propuestas.md) implementa `POST /api/v1/blocks/:blockId/plan-proposal`. Obtiene perfil/bloque/catálogo/metas propios; acepta disponibilidad y preferencias declaradas de rango/Workshop. Responde 200 con propuesta, cobertura, evidencia y snapshots; `meta.persisted: false`, IDs de plan null y sin asignación de secuencia persistida. Las rutas `/plans` siguen reservadas a la persistencia A24. El [ejemplo ejecutado](../planning/examples/plan-proposal-api.json) identifica datos controlados leídos en SQL y autenticación/transporte simulados.
+
+A19 usa por defecto `createStoredAnalysisRepository` sobre A15. La normalización recalcula goles/tiros por replay, valida cinco registros e identidad/contexto, conserva cobertura y deriva la eficiencia. Añade claves `hash:<sha256>` a la detección de replays compartidos. `source: stored_replay_metrics` y `meta.synthetic: null` indican que la tabla no distingue proveedor original/datos sintéticos. Duración no identificada como `play_duration` permanece null, sin usar tiempos individuales ni agregados como sustituto.

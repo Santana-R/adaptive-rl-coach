@@ -35,7 +35,7 @@ function blockProblems(block) {
   }
   if (block.replay_keys !== undefined && (!Array.isArray(block.replay_keys) ||
       !Array.from(block.replay_keys).every(key => typeof key === 'string' &&
-        /^(id|rocket_league_id|match_guid):.+$/.test(key)))) {
+        (/^(id|rocket_league_id|match_guid):.+$/.test(key) || /^hash:[a-f0-9]{64}$/.test(key))))) {
     reasons.push('REPLAY_KEYS_INVALID');
   }
   const first = parseTimestamp(block.first_match_at);

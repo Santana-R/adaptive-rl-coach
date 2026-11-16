@@ -4,8 +4,9 @@ const { evaluateRules } = require('../domain/rules');
 
 function normalized(input) {
   if (input?.status && input.status !== 'ready') {
-    return { block_id: input.block_id, status: input.status, reason_codes: ['BLOCK_NOT_READY'] };
+    return { block_id: input.block_id, status: input.status, reason_codes: input.reason_codes || ['BLOCK_NOT_READY'] };
   }
+  if (input?.metrics_block) return input.metrics_block;
   return buildComparisonBlock(input);
 }
 
@@ -27,6 +28,7 @@ function analyzeBlock({ current, baseline = null, history = [] }) {
       block: { status: block.status, context: { ...block.context }, first_match_at: block.first_match_at,
         last_match_at: block.last_match_at, replay_ids: [...block.replay_ids] },
       metrics: block, comparison, ...rules,
+      limitations: [...new Set([...(rules.limitations || []), ...(block.data_limitations || [])])],
     },
   };
 }
