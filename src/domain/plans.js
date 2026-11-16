@@ -237,4 +237,5 @@ function generatePlan({ analysis, profile, catalog, availability_minutes, goals 
   };
 }
 
-module.exports = { generatePlan };
+// candidateProblem se exporta para que el catálogo (A23) filtre con las mismas reglas que el generador.
+module.exports = { generatePlan, candidateProblem, ROUTINE_KEYS: KEYS };

@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('node:path');
 const blocksRouter = require('./routes/blocks');
-const { createAuth, sendError, ApiError } = require('./middleware/auth');
+const { createAuth, sendError, ApiError, CONTRACT_VERSION } = require('./middleware/auth');
 const { createServerClient } = require('./services/supabase');
+const { getCatalog } = require('./repositories/catalog');
 
 /**
  * Construye la aplicación. Recibe el cliente de Supabase para poder probarla
@@ -47,6 +48,20 @@ function createApp({ supabase = createServerClient() } = {}) {
         mode: data.modalidad_principal,
         available_minutes: data.minutos_sesion,
       });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  // A23 · catálogo. El jugador recibe solo activos; el admin puede pedir ?include_inactive=true.
+  app.get('/api/v1/exercises', requireAuth, async (req, res, next) => {
+    try {
+      const wantsInactive = req.query.include_inactive === 'true';
+      if (wantsInactive && req.user.role !== 'admin') {
+        throw new ApiError(403, 'ROLE_DENIED', 'Solo un administrador puede consultar ejercicios inactivos.');
+      }
+      const catalog = await getCatalog(supabase, { includeInactive: wantsInactive });
+      res.json({ data: catalog, meta: { contract_version: CONTRACT_VERSION } });
     } catch (err) {
       next(err);
     }
