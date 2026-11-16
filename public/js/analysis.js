@@ -15,7 +15,14 @@
     BLOCK_NOT_READY: 'El bloque anterior no está listo.', NO_COMPARABLE_METRICS: 'No hay métricas suficientes para comparar.',
   };
   let activeAnalysis = null, activeChart = null, requestId = 0;
-  let tokenProvider = async () => root.CoachAuth?.getAccessToken ? root.CoachAuth.getAccessToken() : null;
+  let tokenProvider = async () => {
+    if (root.CoachAuth?.getAccessToken) return root.CoachAuth.getAccessToken();
+    const client = root.CoachProfileApi?.getClient();
+    if (!client) return null;
+    const { data, error } = await client.auth.getSession();
+    if (error) throw new Error('No se pudo comprobar tu sesión. Inicia sesión de nuevo.');
+    return data?.session?.access_token ?? null;
+  };
   const number = value => Number.isFinite(value)
     ? new Intl.NumberFormat('es-MX', { maximumFractionDigits: 2 }).format(value) : 'No disponible';
   const escape = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
@@ -141,6 +148,7 @@
     $('metric-select').addEventListener('change', () => plot($('metric-select').value));
     const plan = $('analysis-plan-link'); plan.removeAttribute('href'); plan.setAttribute('aria-disabled', 'true');
     plan.tabIndex = -1; plan.textContent = 'Plan de este bloque no disponible';
-    load();
+    // El gate de Perfil llama a load después de comprobar el perfil privado.
+    if (!real) load();
   });
 }(window));

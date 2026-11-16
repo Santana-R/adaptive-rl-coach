@@ -26,6 +26,10 @@
         </div>
       </aside>
       <main class="app-main">
+        <section id="perfil-gate" class="card bg-card border-card p-4 mb-4" role="status" aria-live="polite">
+          <h1 class="h4 text-light">Comprobando perfil…</h1><p class="text-bray mb-0">Necesitamos verificar tu sesión y tu perfil antes de mostrar el análisis.</p>
+        </section>
+        <div id="analysis-content" hidden>
         <h1 class="fw-bold text-light mb-1">Análisis del jugador</h1>
         <p class="text-bray mb-1">Métricas, comparación y prioridades del bloque seleccionado.</p>
         <div class="d-flex align-items-center gap-3 mb-4">
@@ -84,11 +88,21 @@
           </section>
         </div>
         <p id="analysis-source" class="app-note">La procedencia se mostrará al cargar el análisis.</p>
+        </div>
       </main>
     </div>
+    <script>
+      window.SUPABASE_CONFIG = {
+      url: "https://fylupliaforboawqdutb.supabase.co",
+      anonKey: "sb_publishable_DBJPBlKMqpNxAytdxCxwDw_cvuEo4Pc"};
+    </script>
     <script src="../js/mdb.umd.min.js"></script>
     <script src="../../vendor/jquery-3.7.1.min.js"></script>
     <script src="../../vendor/chart-4.5.1.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/profile-validation.js"></script>
+    <script src="../js/profile-api.js"></script>
     <script src="../../js/analysis.js"></script>
+    <script src="../js/profile-gate.js"></script>
   </body>
 </html>

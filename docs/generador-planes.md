@@ -1,6 +1,6 @@
 # Generador de propuestas · A18
 
-Implementación preparada con Roberto y asistencia de IA bajo su Release. **La función de dominio está implementada y comprobada; A18 sigue abierta** mientras faltan el catálogo operativo A23 y la integración con la ruta de generación de A18. La persistencia A24 es posterior y no bloquea el cierre de A18. La entrega no acredita un endpoint, un plan guardado ni una interfaz conectada.
+Implementación preparada con Roberto y asistencia de IA bajo su Release. **La función de dominio está implementada y comprobada; A18 sigue abierta** mientras falta integrar y comprobar la ruta de generación de A18 con el catálogo operativo A23, ya entregado por David. La persistencia A24 es posterior y no bloquea el cierre de A18. La entrega no acredita un endpoint, un plan guardado ni una interfaz conectada.
 
 ## Entrada y salida
 
