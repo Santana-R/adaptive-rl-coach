@@ -20,10 +20,13 @@
     <!-- MDB -->
     <link rel="stylesheet" href="../css/mdb.min.css">
     <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/goals.css" />
   </head>
   <body class="mainbody appbody">
-    <div class="app-shell">
-      <aside class="sidebar">
+    <div class="container-fluid p-0">
+      <div class="row g-0 min-vh-100">
+      <div class="col-12 col-md-3 col-lg-2">
+      <aside class="sidebar w-100 h-100">
         <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
         <a href="plan.html" class="sidebar-link">Plan</a>
         <a href="replays.html" class="sidebar-link">Replays</a>
@@ -36,44 +39,87 @@
           <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
         </div>
       </aside>
-      <main class="app-main">
-        <h1 class="fw-bold text-light mb-1">Gestión de objetivos</h1>
-        <p class="text-bray mb-3">Un objetivo principal de cada tipo por modalidad. Los anteriores conservan su historia.</p>
-        <div class="row align-items-end mb-2">
-          <div class="col-6">
-            <label class="text-bray mb-1" for="buscar">Buscar</label>
-            <div data-mdb-input-init class="form-outline bodycolor">
-              <input type="text" id="buscar" class="form-control" />
-              <label class="form-label" for="buscar">Nombre del objetivo</label>
-            </div>
-          </div>
-          <div class="col-3"><button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Mostrar todos</button></div>
-          <div class="col-3"><button type="button" class="btn-rl btn-rl-accent w-100" data-mdb-ripple-init data-mdb-ripple-color="light">Nuevo objetivo</button></div>
+      </div>
+      <div class="col-12 col-md-9 col-lg-10">
+      <main class="app-main text-light p-3 p-md-4">
+        <h1 class="fw-bold text-light">Gestión de objetivos</h1>
+        <p class="text-bray">Define qué quieres mejorar por modalidad. Rendimiento y entrenamiento se consultan por separado.</p>
+        <aside id="goals-source" class="goals-notice"></aside>
+        <p id="goals-status" role="status" aria-live="polite" tabindex="-1"></p>
+        <div class="d-flex flex-wrap gap-3 mb-3">
+          <button id="new-goal" type="button" class="btn-rl btn-rl-accent">Nuevo objetivo</button>
+          <button id="reload-goals" type="button" class="btn-rl btn-rl-outline">Recargar lista</button>
         </div>
-        <p class="text-bray mb-3">Filtros: Tipo · Estado · Modalidad</p>
-        <div class="mb-3">
-        <div class="table-head" style="grid-template-columns: 2fr 1.5fr 1.5fr 2fr 1fr;"><span>Objetivo</span><span>Tipo</span><span>Meta</span><span>Evidencia / avance</span><span>Estado</span></div>
-        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 2fr 1fr;"><span>Mejorar tiro</span><span>Rendimiento</span><span>Superar 35 %</span><span>28 % inicial → 36 %</span><span>Cumplido</span></div>
-        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 2fr 1fr;"><span>Completar 4 sesiones</span><span>Entrenamiento</span><span>4 · 05-11 oct</span><span>1 de 4 completas · 25 %</span><span>Activo</span></div>
-        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 2fr 1fr;"><span>Reducir boost bajo</span><span>Rendimiento</span><span>Menor a 32 %</span><span>39 % actual</span><span>Activo</span></div>
-        </div>
-        <p class="link-actions mb-4">Fila seleccionada: <a href="#">Ver detalle</a> · <a href="#">Editar</a> · <a href="#">Archivar</a> · <a href="#">Eliminar si no tiene vínculos</a></p>
-        <div class="card bg-card border-card denotative pb-4 ">
-              <div class="card-body">
-                <h5 class="card-title fw-bold text-light mb-2">La evidencia depende del tipo de meta</h5>
-                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
-                <li>Rendimiento: valores de bloques comparables. Entrenamiento: sesiones completas.</li>
-                <li>Cambiar una meta afecta al siguiente plan; conserva los anteriores.</li>
-                </ul>
+        <section id="goal-editor" class="goals-card" aria-labelledby="editor-title" hidden>
+          <h2 id="editor-title" class="h4">Nuevo objetivo</h2>
+          <form id="goal-form">
+            <div class="goals-fields row g-3 mb-3">
+              <div class="col-12 col-md-6">
+                <label class="d-flex flex-column gap-2">Nombre del objetivo<input id="goal-title" required maxlength="100" autocomplete="off"></label>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="d-flex flex-column gap-2">Modalidad<select id="goal-mode" required><option value="1v1">1v1</option><option value="2v2">2v2</option><option value="3v3">3v3</option></select></label>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="d-flex flex-column gap-2">Tipo de meta<select id="goal-type"><option value="performance">Rendimiento</option><option value="training">Entrenamiento</option></select></label>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="d-flex flex-column gap-2">Métrica<select id="goal-metric"></select></label>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="d-flex flex-column gap-2">Comparación<select id="goal-direction"><option value="at_least">Al menos</option><option value="at_most">Como máximo</option></select></label>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="d-flex flex-column gap-2">Valor objetivo<input id="goal-target" type="number" min="0" step="any" required aria-describedby="goal-unit"></label>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="d-flex flex-column gap-2">Fecha límite (opcional)<input id="goal-due" type="date"></label>
               </div>
             </div>
-        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
+            <p id="goal-unit" class="text-bray"></p>
+            <p class="text-bray">Cada modalidad permite una meta activa por tipo. Para sustituirla, archiva la anterior. Editar una meta no modifica métricas ni planes anteriores.</p>
+            <div class="d-flex flex-wrap gap-3 mb-3">
+              <button type="submit" class="btn-rl btn-rl-accent">Guardar objetivo</button>
+              <button id="cancel-goal" type="button" class="btn-rl btn-rl-outline">Cancelar</button>
+            </div>
+          </form>
+        </section>
+        <section aria-label="Filtros" class="goals-fields goals-filters row g-3 mb-3">
+          <div class="col-12 col-md-6">
+                <label class="d-flex flex-column gap-2">Buscar<input id="goal-search" type="search" placeholder="Nombre del objetivo"></label>
+              </div>
+          <div class="col-12 col-md-6">
+                <label class="d-flex flex-column gap-2">Tipo<select id="filter-type"><option value="">Todos</option><option value="performance">Rendimiento</option><option value="training">Entrenamiento</option></select></label>
+              </div>
+          <div class="col-12 col-md-6">
+                <label class="d-flex flex-column gap-2">Estado<select id="filter-status"><option value="">Todos</option><option value="active">Activo</option><option value="archived">Archivado</option></select></label>
+              </div>
+          <div class="col-12 col-md-6">
+                <label class="d-flex flex-column gap-2">Modalidad<select id="filter-mode"><option value="">Todas</option><option value="1v1">1v1</option><option value="2v2">2v2</option><option value="3v3">3v3</option></select></label>
+              </div>
+        </section>
+        <p id="goal-count" class="text-bray"></p>
+        <div id="list" aria-busy="false"></div>
+        <p id="goals-empty" class="goals-card" hidden>No hay objetivos. Crea uno para empezar.</p>
+        <section id="goal-detail" class="goals-card" aria-labelledby="detail-title" tabindex="-1" hidden>
+          <h2 id="detail-title" class="h4">Detalle e historial</h2>
+          <div id="detail-body"></div>
+          <button id="close-detail" type="button" class="btn-rl btn-rl-outline">Cerrar detalle</button>
+        </section>
+        <aside class="goals-card">
+          <h2 class="h5">La evidencia depende del tipo de meta</h2>
+          <p>Rendimiento: métricas de bloques comparables, con sus unidades y cobertura. Entrenamiento: sesiones registradas en el período correspondiente.</p>
+          <p>Sin evidencia no se muestra un avance de cero ni se declara cumplida una meta. Cambiar objetivos orienta planes futuros y conserva el historial de los anteriores.</p>
+        </aside>
       </main>
+      </div>
+      </div>
     </div>
 
     <!-- MDB -->
     <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
     <!-- Custom scripts -->
-    <script type="text/javascript"></script>
+    <script src="../js/goals-service.js"></script>
+    <script src="../js/goals.js"></script>
   </body>
 </html>

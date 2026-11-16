@@ -1,0 +1,52 @@
+.goals-page [hidden] { display: none !important; }
+.goals-card, .goals-notice {
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid #557693;
+  border-radius: 1rem;
+  background: #1d3f51;
+}
+.goals-notice { 
+  border-left: 4px solid #0de4c4; 
+}
+
+.goals-fields input, .goals-fields select {
+  width: 100%; min-width: 0; padding: .65rem; border: 1px solid #8ba7bc;
+  border-radius: .4rem; background: #0f1c29; color: #fff;
+}
+
+.goals-page button:focus-visible, .goals-page input:focus-visible, .goals-page select:focus-visible {
+  outline: 3px solid #0de4c4; outline-offset: 3px;
+}
+
+.goals-page button:disabled { 
+  opacity: .55; cursor: wait; 
+}
+
+.goal-meta { 
+  color: #c7d5e1; 
+}
+
+.goal-archived { 
+  border-style: dashed; 
+}
+
+.goal-history { 
+  padding-left: 1.2rem; 
+}
+
+.goal-history li { 
+  margin-bottom: .75rem; 
+}
+
+#goals-status { 
+  min-height: 1.5rem; overflow-wrap: anywhere; 
+}
+
+#goals-status[data-error="true"] { 
+  color: #ffb4b4; 
+}
+
+.goals-card { 
+  overflow-wrap: anywhere; 
+}
