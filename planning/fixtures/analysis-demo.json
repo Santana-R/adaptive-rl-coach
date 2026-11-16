@@ -159,6 +159,117 @@
         20,
         10
       ]
+    },
+    "defense": {
+      "block_id": "demo-defense",
+      "mode": "2v2",
+      "date": "2026-11-16T20:00:00Z",
+      "goals": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "shots": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "last_defender_goals": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ]
+    },
+    "defense_missing": {
+      "block_id": "demo-defense_missing",
+      "mode": "2v2",
+      "date": "2026-11-16T20:00:00Z",
+      "goals": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "shots": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "last_defender_goals": [
+        2,
+        2,
+        2,
+        null,
+        0
+      ]
+    },
+    "defense_inactive": {
+      "block_id": "demo-defense_inactive",
+      "mode": "2v2",
+      "date": "2026-11-16T20:00:00Z",
+      "goals": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "shots": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "last_defender_goals": [
+        2,
+        2,
+        1,
+        0,
+        0
+      ]
+    },
+    "three_priorities": {
+      "block_id": "demo-three_priorities",
+      "mode": "2v2",
+      "date": "2026-11-16T20:00:00Z",
+      "goals": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "shots": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "last_defender_goals": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "boost_zero_pct": [
+        20,
+        20,
+        20,
+        10,
+        10
+      ]
     }
   },
   "cases": {
@@ -188,6 +299,22 @@
     },
     "boost-missing": {
       "current": "boost_missing",
+      "baseline": null
+    },
+    "defense": {
+      "current": "defense",
+      "baseline": null
+    },
+    "defense-missing": {
+      "current": "defense_missing",
+      "baseline": null
+    },
+    "defense-inactive": {
+      "current": "defense_inactive",
+      "baseline": null
+    },
+    "three-priorities": {
+      "current": "three_priorities",
       "baseline": null
     }
   }

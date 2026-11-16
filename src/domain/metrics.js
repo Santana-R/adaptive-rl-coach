@@ -1,4 +1,5 @@
 const { collectBoostMeasurements } = require('./boost');
+const { collectDefensiveMeasurements } = require('./defensive-positioning');
 const REQUIRED_REPLAYS = 5;
 
 // Un cero registrado es válido. null, undefined y conteos inválidos se excluyen.
@@ -135,6 +136,9 @@ function calculateBlockMetrics(block) {
     sample_size: REQUIRED_REPLAYS,
     replay_ids: replayIds,
     boost_zero_per_replay: boost.per_replay,
+    ...(replays.some(r => r.values?.defensive_positioning) ? {
+      defensive_review_per_replay: collectDefensiveMeasurements(replays),
+    } : {}),
     values: {
       goals,
       shots,

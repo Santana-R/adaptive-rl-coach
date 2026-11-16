@@ -65,7 +65,7 @@ test('Prioridad activa conserva regla, versión, unidad, conteos, muestra y expl
   const result = evaluateRules(normalized());
   const p = result.priorities[0];
   assert.equal(p.rule_id, 'finalizacion-eficiencia');
-  assert.equal(p.rules_version, 'mvp.rules.v2');
+  assert.equal(p.rules_version, 'mvp.rules.v3');
   assert.equal(p.priority_key, 'shooting');
   assert.equal(p.order, 1);
   assert.equal(p.evidence.value, 30);
@@ -147,7 +147,7 @@ test('Boost y duración ausentes no impiden evaluar finalización ni activan boo
   assert.equal(block.values.play_duration_s.value, null);
   const result = evaluateRules(block);
   assert.deepEqual(result.priorities.map(p => p.rule_id), ['finalizacion-eficiencia']);
-  assert.equal(result.evaluations.length, 2);
+  assert.equal(result.evaluations.length, 3);
 });
 
 test('Fixture faltantes: 0/0 sigue null y boost null no activa otra regla', () => {
