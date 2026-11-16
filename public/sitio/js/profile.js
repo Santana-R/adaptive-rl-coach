@@ -1,49 +1,264 @@
 'use strict';
-(async () => {
-  const config = window.SUPABASE_CONFIG || {};
-  const supabase = window.supabase?.createClient && config.url && config.anonKey ? window.supabase.createClient(config.url, config.anonKey) : null;
-  const $ = id => document.getElementById(id);
-  const status = text => {
-    if ($('perfil-estado')) $('perfil-estado').textContent = text;
+
+$(function () {
+  const api = window.CoachProfileApi;
+  const validation = window.CoachProfileValidation;
+
+  const fields = {
+    gamertag: '#nombre',
+    platform: '#plataforma',
+    player_id: '#idplat',
+    mode: '#modalidad',
+    available_minutes: '#minutos',
+    days_per_week: '#dias',
+    timezone: '#zona-horaria'
   };
-  if (!supabase) {
-    status('Perfil no conectado: configura SUPABASE_CONFIG con la URL y clave pública del proyecto.');
-    return;
+
+  let savedProfile = null;
+  let canEdit = false;
+  let busy = false;
+
+  function status(message, isError = false) {
+    $('#perfil-estado')
+      .text(message)
+      .toggleClass('text-danger', isError)
+      .toggleClass('text-bray', !isError);
   }
-  const {
-    data: {
-      session
+
+  function setBusy(value) {
+    busy = value;
+
+    $('#form-perfil').attr('aria-busy', String(value));
+
+    $('#perfil-campos').prop(
+      'disabled',
+      value || !canEdit
+    );
+
+    $('#recargar-perfil').prop('disabled', value);
+  }
+
+  function clearErrors() {
+    Object.entries(fields).forEach(function ([key, selector]) {
+      $(selector).removeAttr('aria-invalid aria-errormessage');
+      $('#error-' + key).text('');
+    });
+  }
+
+  function showErrors(errors) {
+    clearErrors();
+
+    let firstField = null;
+
+    Object.entries(errors).forEach(function ([key, message]) {
+      if (!fields[key]) {
+        return;
+      }
+
+      $(fields[key]).attr({
+        'aria-invalid': 'true',
+        'aria-errormessage': 'error-' + key
+      });
+
+      $('#error-' + key).text(message);
+
+      firstField = firstField || fields[key];
+    });
+
+    if (firstField) {
+      $(firstField).trigger('focus');
     }
-  } = await supabase.auth.getSession();
-  if (!session) {
-    location.replace('login.html');
-    return;
   }
-  $('cerrar-sesion')?.addEventListener('click', async () => {
-    await supabase.auth.signOut();
-    location.replace('login.html');
-  });
-  try {
-    const response = await fetch('/api/v1/profile', {
-      headers: {
-        Authorization: `Bearer ${session.access_token}`
+
+  function readForm() {
+    const profile = {};
+
+    Object.entries(fields).forEach(function ([key, selector]) {
+      const value = $(selector).val();
+
+      if (['available_minutes', 'days_per_week'].includes(key)) {
+        profile[key] = value === '' ? null : Number(value);
+      } else {
+        profile[key] = value;
       }
     });
-    if (response.status === 404) status('Aún no hay un perfil guardado. Completa los campos obligatorios. El guardado estará disponible al integrar PATCH de perfil.');
-    else if (!response.ok) throw new Error('No se pudo cargar el perfil.');
-    else {
-      const profile = await response.json();
-      $('plataforma').value = profile.platform || '';
-      $('idplat').value = profile.player_id || '';
-      $('modalidad').value = profile.mode || '';
-      $('minutos').value = profile.available_minutes || '';
-      status('Perfil cargado desde el servidor. El guardado requiere que A15 exponga PATCH /api/v1/profile.');
-    }
-  } catch (error) {
-    status(`${error.message} Verifica tu conexión e inténtalo de nuevo.`);
+
+    return profile;
   }
-  $('form-perfil')?.addEventListener('submit', event => {
+
+  function fillForm(profile) {
+    Object.entries(fields).forEach(function ([key, selector]) {
+      $(selector).val(profile?.[key] ?? '');
+    });
+  }
+
+  function blankProfile() {
+    let timezone = 'America/Monterrey';
+
+    try {
+      timezone =
+        Intl.DateTimeFormat().resolvedOptions().timeZone ||
+        timezone;
+    } catch {
+      // La zona también puede escribirse manualmente.
+    }
+
+    return { timezone };
+  }
+
+  async function loadProfile() {
+    if (busy) {
+      return;
+    }
+
+    canEdit = false;
+
+    setBusy(true);
+    clearErrors();
+    status('Cargando perfil…');
+
+    try {
+      savedProfile = await api.load();
+
+      fillForm(savedProfile);
+      canEdit = true;
+
+      if (validation.validate(savedProfile).valid) {
+        status('Perfil recuperado del servidor.');
+      } else {
+        status(
+          'El perfil guardado está incompleto. Revisa los campos antes de continuar.'
+        );
+      }
+    } catch (error) {
+      if (error.status === 404) {
+        savedProfile = blankProfile();
+
+        fillForm(savedProfile);
+        canEdit = true;
+
+        status(
+          'Aún no tienes perfil. Completa los datos y pulsa Guardar perfil.'
+        );
+      } else {
+        status(
+          error.message +
+          ' Usa Volver a consultar para reintentar.',
+          true
+        );
+      }
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  $('#form-perfil').on('submit', async function (event) {
     event.preventDefault();
-    status('Cambios aún no guardados: PATCH /api/v1/profile todavía no está disponible en el backend.');
+
+    if (busy || !canEdit) {
+      return;
+    }
+
+    const result = validation.validate(readForm());
+
+    clearErrors();
+
+    if (!result.valid) {
+      status(
+        'Revisa los campos señalados. No se guardaron cambios.',
+        true
+      );
+
+      showErrors(result.errors);
+      return;
+    }
+
+    setBusy(true);
+    status('Guardando perfil…');
+
+    let failure = null;
+
+    try {
+      savedProfile = await api.save(result.data);
+
+      fillForm(savedProfile);
+
+      status(
+        'Perfil guardado en el servidor. Puedes recargar para comprobarlo.'
+      );
+    } catch (error) {
+      failure = error;
+
+      status(
+        error.message + ' Tus cambios siguen en el formulario.',
+        true
+      );
+    } finally {
+      setBusy(false);
+    }
+
+    if (failure) {
+      showErrors(failure.details);
+    }
   });
-})();
+
+  $('#cancelar-perfil').on('click', function () {
+    fillForm(savedProfile);
+    clearErrors();
+
+    status('Se descartaron los cambios sin guardar.');
+  });
+
+  $('#recargar-perfil').on('click', function () {
+    const current = validation.validate(readForm()).data;
+    const saved = validation.validate(savedProfile).data;
+
+    const hasChanges =
+      JSON.stringify(current) !== JSON.stringify(saved);
+
+    if (
+      canEdit &&
+      hasChanges &&
+      !window.confirm(
+        'Volver a consultar descartará los cambios sin guardar. ¿Continuar?'
+      )
+    ) {
+      return;
+    }
+
+    loadProfile();
+  });
+
+  // Compatibilidad con el botón antiguo.
+  // La navegación común gestiona botones con data-session-logout.
+  $('#cerrar-sesion')
+    .not('[data-session-logout]')
+    .on('click', async function () {
+      const button = $(this).prop('disabled', true);
+
+      try {
+        const client = api.getClient();
+
+        if (!client) {
+          throw new Error('Falta configurar la autenticación.');
+        }
+
+        const { error } = await client.auth.signOut();
+
+        if (error) {
+          throw error;
+        }
+
+        window.location.replace('login.html');
+      } catch {
+        status(
+          'No se pudo cerrar la sesión. Inténtalo de nuevo.',
+          true
+        );
+
+        button.prop('disabled', false);
+      }
+    });
+
+  loadProfile();
+});

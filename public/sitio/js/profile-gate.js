@@ -1,34 +1,79 @@
 'use strict';
-(async () => {
-  const config = window.SUPABASE_CONFIG || {};
-  const client = window.supabase?.createClient && config.url && config.anonKey ? window.supabase.createClient(config.url, config.anonKey) : null;
-  const gate = document.getElementById('perfil-gate');
-  const content = document.getElementById('analysis-content');
-  const fail = message => {
-    gate.innerHTML = `<h1 class="h4 text-light">Completa tu perfil para continuar</h1><p class="text-bray">${message}</p><a class="btn-rl btn-rl-accent" href="perfil.html">Ir a Perfil</a>`;
-  };
-  if (!client) return fail('El acceso requiere configurar Supabase.');
-  const {
-    data: {
-      session
-    }
-  } = await client.auth.getSession();
-  if (!session) {
-    location.replace('login.html');
-    return;
+
+$(function () {
+  const gate = $('#perfil-gate');
+  const content = $('#analysis-content');
+
+  content.prop('hidden', true);
+
+  function fail(message) {
+    const title = $('<h1>')
+      .addClass('h4 text-light')
+      .text('Completa tu perfil para continuar');
+
+    const description = $('<p>')
+      .addClass('text-bray')
+      .text(message);
+
+    const profileLink = $('<a>')
+      .addClass('btn-rl btn-rl-accent')
+      .attr('href', 'perfil.html')
+      .text('Ir a Perfil');
+
+    const retryButton = $('<button>')
+      .attr('type', 'button')
+      .addClass('btn-rl btn-rl-outline ms-2')
+      .text('Reintentar')
+      .on('click', checkProfile);
+
+    gate
+      .empty()
+      .append(
+        title,
+        description,
+        profileLink,
+        retryButton
+      )
+      .prop('hidden', false);
   }
-  try {
-    const response = await fetch('/api/v1/profile', {
-      headers: {
-        Authorization: `Bearer ${session.access_token}`
+
+  async function checkProfile() {
+    content.prop('hidden', true);
+
+    gate
+      .prop('hidden', false)
+      .empty()
+      .append(
+        $('<p>')
+          .addClass('text-bray')
+          .text('Comprobando perfil…')
+      );
+
+    try {
+      const profile = await window.CoachProfileApi.load();
+
+      const result =
+        window.CoachProfileValidation.validate(profile);
+
+      if (!result.valid) {
+        fail(Object.values(result.errors).join(' '));
+        return;
       }
-    });
-    if (!response.ok) return fail(response.status === 404 ? 'Aún no hay un perfil persistido.' : 'No se pudo verificar tu perfil.');
-    const profile = await response.json();
-    if (!profile.platform || !profile.player_id || !profile.mode) return fail('Agrega plataforma, identificador de juego y modalidad.');
-    gate.hidden = true;
-    content.hidden = false;
-  } catch {
-    fail('No se pudo comprobar la conexión.');
+
+      gate.prop('hidden', true);
+      content.prop('hidden', false);
+    } catch (error) {
+      if (error.status === 401) {
+        window.location.replace('login.html');
+      } else {
+        fail(
+          error.status === 404
+            ? 'Aún no hay un perfil guardado. Crea tu perfil para continuar.'
+            : error.message
+        );
+      }
+    }
   }
-})();
+
+  checkProfile();
+});
