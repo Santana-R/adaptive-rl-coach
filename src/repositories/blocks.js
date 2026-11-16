@@ -299,7 +299,72 @@ async function saveReplayMetrics(supabase, userId, blockId, position, metrics) {
   return getBlock(supabase, userId, id);
 }
 
+// --- Carga privada A13 -----------------------------------------------------
+
+async function recordReplayUpload(supabase, userId, blockId, position, upload) {
+  if (upload.duplicate || upload.providerStatus !== 201 || !upload.id) {
+    throw new ApiError(409, 'DUPLICATE_REPLAY', 'El replay ya existe en Ballchasing.');
+  }
+  const id = await assertBlockOwner(supabase, userId, blockId);
+  const { data, error } = await supabase.from('replays')
+    .update({
+      ballchasing_id: upload.id, origen_carga: 'propia', visibilidad: 'private',
+      estado: 'pending', error: null, acceso_verificado: false
+    })
+    .eq('id_bloque', id).eq('posicion', position).is('ballchasing_id', null)
+    .select('ballchasing_id').maybeSingle();
+  if (error) throw toApiError(error, 'No se pudo guardar el ID de Ballchasing.');
+  if (!data) {
+    const block = await getBlock(supabase, userId, id);
+    const stored = block?.replays.find(replay => replay.position === position);
+    if (stored?.ballchasing_id !== upload.id || stored.upload_origin !== 'own') {
+      throw new ApiError(409, 'BLOCK_NOT_READY', 'El replay cambió durante el procesamiento.');
+    }
+  }
+}
+
+async function recordReplayResult(supabase, userId, blockId, position, externalId, result) {
+  const id = await assertBlockOwner(supabase, userId, blockId);
+  let query = supabase.from('replays').update({
+    estado: result.status, acceso_verificado: result.verified, error: result.error ?? null
+  }).eq('id_bloque', id).eq('posicion', position);
+  query = externalId ? query.eq('ballchasing_id', externalId) : query.is('ballchasing_id', null);
+  const { data, error } = await query.select('id_bloque').maybeSingle();
+  if (error) throw toApiError(error, 'No se pudo guardar el estado del replay.');
+  if (!data) throw new ApiError(409, 'BLOCK_NOT_READY', 'El replay cambió durante el procesamiento.');
+}
+
+async function completeReplayBlock(supabase, userId, blockId, context, results, metrics) {
+  const id = await assertBlockOwner(supabase, userId, blockId);
+  for (const replay of results) {
+    const { data: row, error: lookupError } = await supabase.from('replays')
+      .select('jugadores_replay(id_archivo)').eq('id_bloque', id)
+      .eq('posicion', replay.position).eq('ballchasing_id', replay.externalId)
+      .eq('estado', 'ok').eq('acceso_verificado', true).maybeSingle();
+    if (lookupError) throw toApiError(lookupError, 'No se pudo consultar el replay validado.');
+    const fileId = one(row?.jugadores_replay)?.id_archivo;
+    if (!fileId) throw new ApiError(409, 'BLOCK_NOT_READY', 'Falta un replay validado.');
+    const { error: fileError } = await supabase.from('archivos_replay')
+      .update({ modalidad: context.mode, tipo_partida: context.match_type, fecha_partida: replay.playedAt })
+      .eq('id_archivo', fileId);
+    if (fileError) throw toApiError(fileError, 'No se pudo guardar el contexto del replay.');
+    await saveReplayMetrics(supabase, userId, id, replay.position, replay.metrics);
+  }
+  if (Number.isFinite(metrics.play_duration_s) && metrics.play_duration_s > 0) {
+    await saveBlockMetrics(supabase, userId, id, metrics);
+  }
+  const { data, error } = await supabase.from('bloques')
+    .update({ tipo_partida: context.match_type, estado: 'completo', completado_en: new Date().toISOString() })
+    .eq('id_bloque', id).eq('id_usuario', userId).eq('estado', 'procesando')
+    .select('id_bloque').maybeSingle();
+  if (error) throw toApiError(error, 'No se pudo completar el bloque.');
+  if (!data) throw new ApiError(409, 'BLOCK_NOT_READY', 'El estado del bloque cambió.');
+}
+
 module.exports = {
+  recordReplayUpload,
+  recordReplayResult,
+  completeReplayBlock,
   createBlock,
   getBlock,
   listBlocks,
@@ -312,4 +377,5 @@ module.exports = {
   STATUS_TO_API,
   STATUS_TO_SQL,
   MAX_REPLAYS,
+  completeReplayBlock
 };
