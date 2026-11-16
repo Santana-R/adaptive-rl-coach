@@ -82,13 +82,28 @@ Los tokens no se pegan en el PR ni en capturas.
 
 El caso 11 cambia el estado a mano. El registro en `cambios_estado_usuario` y la ruta de administración corresponden a A29/A32.
 
-## Google (pendiente de configurar)
+## Google
 
-1. Google Cloud Console → APIs & Services → Credentials → *OAuth client ID* tipo *Web application*.
-2. *Authorized redirect URI*: la *Callback URL* que muestra Supabase en Authentication → Providers → Google (`https://<proyecto>.supabase.co/auth/v1/callback`).
-3. Pegar Client ID y Client Secret en ese proveedor de Supabase y activarlo.
-4. Authentication → URL Configuration: añadir `http://127.0.0.1:3000` a Site URL / Redirect URLs.
-5. El botón llama a `signInWithOAuth({ provider: 'google' })` desde la pantalla de acceso (A12). La cuenta creada pasa por el mismo trigger y queda como `jugador`.
+Configurado el 15 de noviembre de 2026. No requiere cambios de código: la cuenta pasa por el mismo trigger.
+
+1. **Google Cloud** (proyecto `adaptive-rl-coach`) → Google Auth Platform:
+   - Público **Externo**, estado de publicación **Prueba**. Solo pueden entrar los correos añadidos en *Usuarios de prueba*.
+   - Cliente OAuth tipo **Aplicación web** llamado `Supabase`:
+     - Origen de JavaScript: `http://127.0.0.1:3000`
+     - URI de redireccionamiento: `https://<proyecto>.supabase.co/auth/v1/callback` (la *Callback URL* que muestra Supabase).
+   - El secreto del cliente solo se muestra al crearlo. Se guarda fuera del repositorio.
+2. **Supabase** → Authentication → Sign In / Providers → Google: activado, con Client ID y Client Secret.
+3. **Supabase** → Authentication → URL Configuration:
+   - Site URL: `http://127.0.0.1:3000`
+   - Redirect URLs: `http://127.0.0.1:3000/**` (también `http://localhost:3000/**`).
+4. **Prueba sin pantalla de acceso:** con `npm start` en marcha, abrir en incógnito `https://<proyecto>.supabase.co/auth/v1/authorize?provider=google&redirect_to=http://127.0.0.1:3000/` y entrar con un usuario de prueba de Google. A12 hará lo mismo con `signInWithOAuth({ provider: 'google' })`.
+5. **Comprobación** en SQL Editor:
+
+```sql
+SELECT u.email, u.raw_app_meta_data->>'provider' AS proveedor, p.rol, p.estado
+FROM auth.users u JOIN public.usuarios p ON p.id_usuario = u.id
+ORDER BY u.created_at DESC LIMIT 5;
+```
 
 ## Evidencia para el PR
 
@@ -122,4 +137,13 @@ Hallazgos durante la prueba:
 - `service_role` no tenía `SELECT` en las tablas: Express respondía 503 con tokens válidos. Se corrigió con `a08-permisos-servidor.sql`.
 - Supabase rechaza la clave secreta en peticiones con User-Agent de navegador ("Forbidden use of secret API key in browser"). PowerShell 5.1 se identifica como "Mozilla", por lo que el script usa un User-Agent propio. Express no está afectado.
 
-**Pendiente:** inicio de sesión con Google (configuración arriba) y las pantallas de acceso de A12.
+### Inicio de sesión con Google · 15 de noviembre de 2026
+
+Ejecutado por David con la configuración de la sección [Google](#google). Se usó un Gmail distinto de las tres cuentas de correo de la prueba, dado de alta como usuario de prueba en Google Auth Platform.
+
+| Prueba | Esperado | Obtenido | OK |
+| --- | --- | --- | --- |
+| Entrar por `/auth/v1/authorize?provider=google` | Vuelve a `http://127.0.0.1:3000/` con sesión | Vuelve con sesión | Sí |
+| Fila creada por el trigger | `proveedor=google`, `rol=jugador`, `estado=activo` | `google` / `jugador` / `activo` | Sí |
+
+**Pendiente:** las pantallas de acceso de A12 (botón de Google con `signInWithOAuth`).
