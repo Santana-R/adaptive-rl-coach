@@ -109,4 +109,12 @@ function assertOwner(req, ownerId) {
   }
 }
 
-module.exports = { createAuth, assertOwner, sendError, ApiError, CONTRACT_VERSION };
+module.exports = {
+  createAuth,
+  assertOwner,
+  sendError,
+  ApiError,
+  CONTRACT_VERSION,
+  ROLE_TO_API,
+  STATUS_TO_API,
+};
