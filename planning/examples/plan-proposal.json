@@ -2,13 +2,14 @@
   "plan_id": null,
   "plan_version_id": null,
   "version": 1,
-  "generator_version": "mvp.plans.v1",
+  "generator_version": "mvp.plans.v2",
   "block_id": "test-block-shooting-plan",
-  "rules_version": "mvp.rules.v1",
+  "rules_version": "mvp.rules.v2",
   "metrics_version": "mvp.metrics.v1",
   "catalog_version": "mvp.catalog.v1",
   "catalog_source": "synthetic",
-  "allocation_version": "mvp.allocation.v1",
+  "native_catalog_version": null,
+  "allocation_version": "mvp.allocation.v2",
   "availability_minutes": 20,
   "assigned_minutes": 20,
   "unassigned_minutes": 0,
@@ -19,16 +20,7 @@
   "reason_codes": [],
   "catalog_exclusions": [],
   "goals_excluded": [],
-  "goals_snapshot": [
-    {
-      "goal_id": "test-goal",
-      "metric_key": "shooting_pct",
-      "target_value": 35,
-      "unit": "percent",
-      "status": "active",
-      "due_date": null
-    }
-  ],
+  "goals_snapshot": [],
   "profile_snapshot": {
     "platform": "steam",
     "player_id": "TEST_PLAYER_01",
@@ -45,7 +37,7 @@
       {
         "priority_key": "shooting",
         "rule_id": "finalizacion-eficiencia",
-        "rules_version": "mvp.rules.v1",
+        "rules_version": "mvp.rules.v2",
         "title": "Practicar colocación y finalización",
         "score": 1,
         "evidence": {

@@ -11,7 +11,9 @@ function rawBlock(key) {
       date: new Date(Date.parse(block.date) + index * 60000).toISOString(), date_has_timezone: true,
       play_duration: 300 + index,
       blue: { players: [{ id: { platform: profile.platform, id: profile.player_id },
-        stats: { core: { goals, shots: block.shots[index] } } }] },
+        stats: { core: { goals, shots: block.shots[index] },
+          ...(block.boost_zero_pct ? { boost: { percent_zero_boost: block.boost_zero_pct[index],
+            time_zero_boost: block.boost_zero_pct[index] == null ? null : block.boost_zero_pct[index] * (300 + index) / 100 } } : {}) } }] },
     })),
   };
 }

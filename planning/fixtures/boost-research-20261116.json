@@ -1,0 +1,1174 @@
+{
+  "kind": "exploratory_convenience_sample_not_calibration",
+  "collected_on": "2026-11-16",
+  "source": "public_ballchasing_replay_pages_embedded_player_stats",
+  "attempted": 37,
+  "read": 24,
+  "retained_games": 23,
+  "player_games": 92,
+  "identifiable_accounts": 70,
+  "excluded": [
+    {
+      "replay_id": "e3ceba8d-2385-47bd-9577-cefd69db70e3",
+      "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "replay_id": "1f85390d-f79c-4762-b539-89cff4be59f1",
+      "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "replay_id": "e815d02c-3eea-4a17-83eb-08da6d5570f3",
+      "reason": "professional_identity_not_verified"
+    },
+    {
+      "replay_id": "63f7783f-f908-4f3b-aec4-14055e5b5294",
+      "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "replay_id": "c2951a69-fdbc-4edf-886a-044448919a60",
+      "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "replay_id": "48c1e58b-c2c4-4b1f-9528-464deefe7e2d",
+      "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "replay_id": "ecb8c3c9-0367-43b8-9ef9-d4aac6a55e54",
+      "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "replay_id": "ab815671-384f-4445-809b-dc40ee4dba0c",
+      "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "replay_id": "301693ea-e77d-4a5c-8283-aa4f268d9ad7",
+      "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "replay_id": "2a3583df-9065-4900-860d-9bcefa861d4e",
+      "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "replay_id": "5ec551bf-9887-42c5-926c-114aa04977a9",
+      "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "replay_id": "02001c63-7cf1-4492-b314-6b12030b946b",
+      "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "replay_id": "fa0fef23-1c2e-4562-8882-653d66826ef6",
+      "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "replay_id": "b3e8f30a-ad28-4a15-a330-c185dcfeb9a1",
+      "reason": "HTTP Error 429: Too Many Requests"
+    }
+  ],
+  "matches": [
+    {
+      "replay_id": "8b7ca261-4a85-49e3-b22c-e7e0bf552abc",
+      "url": "https://ballchasing.com/replay/8b7ca261-4a85-49e3-b22c-e7e0bf552abc",
+      "duration_label": "05:59 (05:36 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/epic/e350147b7a0048be8fa97e33955451da",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 61.08,
+          "percent_zero_boost": 18.195902,
+          "percent_boost_0_25": 36.138
+        },
+        {
+          "position": 2,
+          "public_profile_url": null,
+          "player_name": null,
+          "rank": "Unranked",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 70.15,
+          "percent_zero_boost": 20.897879,
+          "percent_boost_0_25": 39.701366
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561199023677910",
+          "player_name": "ApparentlyJack",
+          "rank": "Supersonic Legend",
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 33.13,
+          "percent_zero_boost": 9.869519,
+          "percent_boost_0_25": 39.461014
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198151775989",
+          "player_name": "Mat.",
+          "rank": "Supersonic Legend",
+          "comparison_group": "named_circuit",
+          "time_zero_boost_s": 34.14,
+          "percent_zero_boost": 10.170401,
+          "percent_boost_0_25": 32.09781
+        }
+      ]
+    },
+    {
+      "replay_id": "dcfbfad2-aa1c-43e9-8746-bed4b6d8d83d",
+      "url": "https://ballchasing.com/replay/dcfbfad2-aa1c-43e9-8746-bed4b6d8d83d",
+      "duration_label": "04:36 (04:15 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561199023677910",
+          "player_name": "ApparentlyJack",
+          "rank": null,
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 25.5,
+          "percent_zero_boost": 9.986685,
+          "percent_boost_0_25": 19.871315
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198151775989",
+          "player_name": "Mat.",
+          "rank": "Supersonic Legend",
+          "comparison_group": "named_circuit",
+          "time_zero_boost_s": 35.16,
+          "percent_zero_boost": 13.769876,
+          "percent_boost_0_25": 44.470924
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/epic/6c7d7fb88bde49048e19cf2d21be603b",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 39.26,
+          "percent_zero_boost": 15.375577,
+          "percent_boost_0_25": 36.671295
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198811209484",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 21.89,
+          "percent_zero_boost": 8.572884,
+          "percent_boost_0_25": 45.342793
+        }
+      ]
+    },
+    {
+      "replay_id": "7058fa4e-be7a-49ad-9de5-9bf1e0d27114",
+      "url": "https://ballchasing.com/replay/7058fa4e-be7a-49ad-9de5-9bf1e0d27114",
+      "duration_label": "05:38 (05:26 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561199023677910",
+          "player_name": "ApparentlyJack",
+          "rank": "Supersonic Legend",
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 33.16,
+          "percent_zero_boost": 10.162116,
+          "percent_boost_0_25": 24.638306
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/epic/5289682c045e48b8a7173c8d4e34a4d9",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 22.71,
+          "percent_zero_boost": 6.9596395,
+          "percent_boost_0_25": 22.686146
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198818204178",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 19.52,
+          "percent_zero_boost": 5.982042,
+          "percent_boost_0_25": 18.856815
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198151775989",
+          "player_name": "Mat.",
+          "rank": "Supersonic Legend",
+          "comparison_group": "named_circuit",
+          "time_zero_boost_s": 34.42,
+          "percent_zero_boost": 10.548251,
+          "percent_boost_0_25": 32.975655
+        }
+      ]
+    },
+    {
+      "replay_id": "1b4be0f0-1478-4cc6-94ec-762d0ad3bda7",
+      "url": "https://ballchasing.com/replay/1b4be0f0-1478-4cc6-94ec-762d0ad3bda7",
+      "duration_label": "06:01 (05:41 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561199073918030",
+          "player_name": null,
+          "rank": "Diamond II Division 2",
+          "comparison_group": "diamond",
+          "time_zero_boost_s": 38.31,
+          "percent_zero_boost": 11.23856,
+          "percent_boost_0_25": 17.97788
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/epic/e33ed8ab8bc74aeda38929d44b7d4d26",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 25.18,
+          "percent_zero_boost": 7.3867636,
+          "percent_boost_0_25": 22.26559
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/epic/2c54f2c7cf474d22b9bff8298654476e",
+          "player_name": null,
+          "rank": "Diamond I Division 4",
+          "comparison_group": "diamond",
+          "time_zero_boost_s": 78.61,
+          "percent_zero_boost": 23.060902,
+          "percent_boost_0_25": 49.523487
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/ps4/Twitchpablo_09",
+          "player_name": null,
+          "rank": "Diamond I Division 3",
+          "comparison_group": "diamond",
+          "time_zero_boost_s": 64.99,
+          "percent_zero_boost": 19.06536,
+          "percent_boost_0_25": 42.741135
+        }
+      ]
+    },
+    {
+      "replay_id": "8c0bdae4-6cb4-43ca-ae5e-e7aca47bf0d6",
+      "url": "https://ballchasing.com/replay/8c0bdae4-6cb4-43ca-ae5e-e7aca47bf0d6",
+      "duration_label": "05:35 (05:24 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198051585007",
+          "player_name": null,
+          "rank": "Diamond I Division 4",
+          "comparison_group": "diamond",
+          "time_zero_boost_s": 10.34,
+          "percent_zero_boost": 3.1934278,
+          "percent_boost_0_25": 14.805788
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/ps4/noba13torf",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 33.87,
+          "percent_zero_boost": 10.460484,
+          "percent_boost_0_25": 29.471962
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/ps4/ko_bknb003",
+          "player_name": null,
+          "rank": "Diamond I Division 3",
+          "comparison_group": "diamond",
+          "time_zero_boost_s": 7.32,
+          "percent_zero_boost": 2.2607245,
+          "percent_boost_0_25": 12.947498
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/ps4/INFERNO_Soke33",
+          "player_name": null,
+          "rank": "Diamond I Division 3",
+          "comparison_group": "diamond",
+          "time_zero_boost_s": 20.53,
+          "percent_zero_boost": 6.340529,
+          "percent_boost_0_25": 17.382
+        }
+      ]
+    },
+    {
+      "replay_id": "3539b78d-3b5a-44bb-95f9-df64ddc7ef66",
+      "url": "https://ballchasing.com/replay/3539b78d-3b5a-44bb-95f9-df64ddc7ef66",
+      "duration_label": "05:38 (05:27 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/epic/5b75203dd83d4ade8b9d68856b6598db",
+          "player_name": null,
+          "rank": "Champion I Division 3",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 14.11,
+          "percent_zero_boost": 4.318154,
+          "percent_boost_0_25": 13.999697
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/epic/eba853e35f344234a1d4baffdb5894bb",
+          "player_name": null,
+          "rank": "Diamond III Division 4",
+          "comparison_group": "diamond",
+          "time_zero_boost_s": 14.94,
+          "percent_zero_boost": 4.572163,
+          "percent_boost_0_25": 19.216475
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/ps4/San_Sohan_CR7",
+          "player_name": null,
+          "rank": "Diamond III Division 3",
+          "comparison_group": "diamond",
+          "time_zero_boost_s": 22.06,
+          "percent_zero_boost": 6.751132,
+          "percent_boost_0_25": 16.813911
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198036298453",
+          "player_name": null,
+          "rank": "Champion I Division 3",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 35.49,
+          "percent_zero_boost": 10.861183,
+          "percent_boost_0_25": 34.573208
+        }
+      ]
+    },
+    {
+      "replay_id": "eb02527a-d3d7-4508-909f-6a9a2cb7c51d",
+      "url": "https://ballchasing.com/replay/eb02527a-d3d7-4508-909f-6a9a2cb7c51d",
+      "duration_label": "05:53 (05:36 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/ps4/subso_-",
+          "player_name": null,
+          "rank": "Diamond III Division 4",
+          "comparison_group": "diamond",
+          "time_zero_boost_s": 38.86,
+          "percent_zero_boost": 11.576157,
+          "percent_boost_0_25": 34.315006
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/epic/3e7c8e530b8a433990eb5b03b001b08e",
+          "player_name": null,
+          "rank": "Diamond III Division 4",
+          "comparison_group": "diamond",
+          "time_zero_boost_s": 51.11,
+          "percent_zero_boost": 15.225357,
+          "percent_boost_0_25": 42.37922
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/epic/6d16a923349748d69bbbdab9b43dcf3b",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 31.36,
+          "percent_zero_boost": 9.341952,
+          "percent_boost_0_25": 31.395416
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198451573532",
+          "player_name": null,
+          "rank": "Diamond III Division 4",
+          "comparison_group": "diamond",
+          "time_zero_boost_s": 51.4,
+          "percent_zero_boost": 15.311746,
+          "percent_boost_0_25": 37.64176
+        }
+      ]
+    },
+    {
+      "replay_id": "9a6b47aa-298c-43e4-8bec-f6a85da62769",
+      "url": "https://ballchasing.com/replay/9a6b47aa-298c-43e4-8bec-f6a85da62769",
+      "duration_label": "03:00 (02:49 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198253547081",
+          "player_name": null,
+          "rank": "Grand Champion II Division 4",
+          "comparison_group": "grand_champion",
+          "time_zero_boost_s": 18.48,
+          "percent_zero_boost": 10.950462,
+          "percent_boost_0_25": 30.103388
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/epic/2e366583a30f4e3682c7911972cca4b7",
+          "player_name": null,
+          "rank": "Grand Champion II Division 3",
+          "comparison_group": "grand_champion",
+          "time_zero_boost_s": 15.5,
+          "percent_zero_boost": 9.184641,
+          "percent_boost_0_25": 26.67438
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/epic/d607a6ce9c6d498a9ca48de712662e6e",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 13.48,
+          "percent_zero_boost": 7.987675,
+          "percent_boost_0_25": 20.685501
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198952039613",
+          "player_name": null,
+          "rank": "Grand Champion I Division 2",
+          "comparison_group": "grand_champion",
+          "time_zero_boost_s": 20.59,
+          "percent_zero_boost": 12.200759,
+          "percent_boost_0_25": 51.04405
+        }
+      ]
+    },
+    {
+      "replay_id": "79aa9f23-c784-426e-93af-76d44a128894",
+      "url": "https://ballchasing.com/replay/79aa9f23-c784-426e-93af-76d44a128894",
+      "duration_label": "08:08 (07:35 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198874689541",
+          "player_name": null,
+          "rank": "Grand Champion II Division 2",
+          "comparison_group": "grand_champion",
+          "time_zero_boost_s": 36.98,
+          "percent_zero_boost": 8.122474,
+          "percent_boost_0_25": 32.212997
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/xbox/2c478d17fd010900",
+          "player_name": null,
+          "rank": "Grand Champion II Division 2",
+          "comparison_group": "grand_champion",
+          "time_zero_boost_s": 62.4,
+          "percent_zero_boost": 13.705852,
+          "percent_boost_0_25": 35.792233
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198995052349",
+          "player_name": null,
+          "rank": "Grand Champion II Division 1",
+          "comparison_group": "grand_champion",
+          "time_zero_boost_s": 57.36,
+          "percent_zero_boost": 12.598841,
+          "percent_boost_0_25": 41.28458
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/ps4/SJ_P0tat0A1M",
+          "player_name": null,
+          "rank": "Grand Champion II Division 2",
+          "comparison_group": "grand_champion",
+          "time_zero_boost_s": 29.83,
+          "percent_zero_boost": 6.552012,
+          "percent_boost_0_25": 27.268366
+        }
+      ]
+    },
+    {
+      "replay_id": "3fe479cd-12a3-48a8-afc6-a394dfc3243a",
+      "url": "https://ballchasing.com/replay/3fe479cd-12a3-48a8-afc6-a394dfc3243a",
+      "duration_label": "05:34 (05:22 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/epic/e336220bdb4347a3a9d103fdd179481e",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 30.98,
+          "percent_zero_boost": 9.617235,
+          "percent_boost_0_25": 37.211132
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/xbox/a4236b09f2010900",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 40.83,
+          "percent_zero_boost": 12.675008,
+          "percent_boost_0_25": 39.32036
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/ps4/awesomeaub56",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 7.38,
+          "percent_zero_boost": 2.2910006,
+          "percent_boost_0_25": 24.303625
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/xbox/6b3e954efe010900",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 33.53,
+          "percent_zero_boost": 10.408841,
+          "percent_boost_0_25": 27.008389
+        }
+      ]
+    },
+    {
+      "replay_id": "4993787f-6cfb-477c-b9c2-b83ab7df074d",
+      "url": "https://ballchasing.com/replay/4993787f-6cfb-477c-b9c2-b83ab7df074d",
+      "duration_label": "07:08 (06:44 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198381037239",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 46.13,
+          "percent_zero_boost": 11.407305,
+          "percent_boost_0_25": 37.204372
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561199065280922",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 53.83,
+          "percent_zero_boost": 13.311407,
+          "percent_boost_0_25": 34.63127
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198144145654",
+          "player_name": "zen",
+          "rank": null,
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 36.07,
+          "percent_zero_boost": 8.919607,
+          "percent_boost_0_25": 34.035175
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/epic/92ff55982a41476d935dd7480bd12b04",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 49.21,
+          "percent_zero_boost": 12.168945,
+          "percent_boost_0_25": 42.247894
+        }
+      ]
+    },
+    {
+      "replay_id": "9e188997-9c7e-4e43-b66a-baa1ee871847",
+      "url": "https://ballchasing.com/replay/9e188997-9c7e-4e43-b66a-baa1ee871847",
+      "duration_label": "06:59 (06:32 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198144145654",
+          "player_name": "zen",
+          "rank": "Supersonic Legend",
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 30.82,
+          "percent_zero_boost": 7.85443,
+          "percent_boost_0_25": 27.886919
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561199023677910",
+          "player_name": "ApparentlyJack",
+          "rank": "Supersonic Legend",
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 52.29,
+          "percent_zero_boost": 13.326027,
+          "percent_boost_0_25": 34.39352
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198369498607",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 74.22,
+          "percent_zero_boost": 18.914854,
+          "percent_boost_0_25": 48.109005
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198151775989",
+          "player_name": "Mat.",
+          "rank": "Supersonic Legend",
+          "comparison_group": "named_circuit",
+          "time_zero_boost_s": 61.74,
+          "percent_zero_boost": 15.734345,
+          "percent_boost_0_25": 43.307365
+        }
+      ]
+    },
+    {
+      "replay_id": "51f4db08-607c-40a3-b6e1-b67e44d9744d",
+      "url": "https://ballchasing.com/replay/51f4db08-607c-40a3-b6e1-b67e44d9744d",
+      "duration_label": "04:53 (04:33 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198144145654",
+          "player_name": "zen",
+          "rank": null,
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 18.56,
+          "percent_zero_boost": 6.80327,
+          "percent_boost_0_25": 28.405775
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561199047701758",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 20.34,
+          "percent_zero_boost": 7.4557385,
+          "percent_boost_0_25": 36.145847
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198779195607",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 35.83,
+          "percent_zero_boost": 13.133684,
+          "percent_boost_0_25": 37.275394
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198881013611",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 27.49,
+          "percent_zero_boost": 10.076611,
+          "percent_boost_0_25": 33.412876
+        }
+      ]
+    },
+    {
+      "replay_id": "06591bfa-e5d3-4853-a9b7-43e67b2fe4cd",
+      "url": "https://ballchasing.com/replay/06591bfa-e5d3-4853-a9b7-43e67b2fe4cd",
+      "duration_label": "03:46 (03:29 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198956605973",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 20.28,
+          "percent_zero_boost": 9.706136,
+          "percent_boost_0_25": 35.604897
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561199023677910",
+          "player_name": "ApparentlyJack",
+          "rank": null,
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 21.05,
+          "percent_zero_boost": 10.074662,
+          "percent_boost_0_25": 29.90688
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198823985212",
+          "player_name": "M0nkey M00n",
+          "rank": null,
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 14.45,
+          "percent_zero_boost": 6.915861,
+          "percent_boost_0_25": 31.270763
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198356566425",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 35.01,
+          "percent_zero_boost": 16.756004,
+          "percent_boost_0_25": 34.356056
+        }
+      ]
+    },
+    {
+      "replay_id": "8a6b1fe8-e679-4058-9464-55925f150b2f",
+      "url": "https://ballchasing.com/replay/8a6b1fe8-e679-4058-9464-55925f150b2f",
+      "duration_label": "04:07 (03:50 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198956605973",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 16.07,
+          "percent_zero_boost": 6.987868,
+          "percent_boost_0_25": 22.325739
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561199023677910",
+          "player_name": "ApparentlyJack",
+          "rank": null,
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 27.71,
+          "percent_zero_boost": 12.049397,
+          "percent_boost_0_25": 28.465315
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198823985212",
+          "player_name": "M0nkey M00n",
+          "rank": null,
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 28.54,
+          "percent_zero_boost": 12.410315,
+          "percent_boost_0_25": 36.42264
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561199047701758",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 19.24,
+          "percent_zero_boost": 8.366308,
+          "percent_boost_0_25": 26.080551
+        }
+      ]
+    },
+    {
+      "replay_id": "e9662771-80d1-4583-b3ae-609754f386b8",
+      "url": "https://ballchasing.com/replay/e9662771-80d1-4583-b3ae-609754f386b8",
+      "duration_label": "06:14 (05:51 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561199023677910",
+          "player_name": "ApparentlyJack",
+          "rank": null,
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 36.57,
+          "percent_zero_boost": 10.424744,
+          "percent_boost_0_25": 28.934181
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198956605973",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 26.9,
+          "percent_zero_boost": 7.668187,
+          "percent_boost_0_25": 40.020298
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198356566425",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 38.27,
+          "percent_zero_boost": 10.90935,
+          "percent_boost_0_25": 28.97814
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198823985212",
+          "player_name": "M0nkey M00n",
+          "rank": "Supersonic Legend",
+          "comparison_group": "named_elite",
+          "time_zero_boost_s": 42.07,
+          "percent_zero_boost": 11.992589,
+          "percent_boost_0_25": 38.142136
+        }
+      ]
+    },
+    {
+      "replay_id": "15f86d63-6072-410f-b09c-affc5ca57b6d",
+      "url": "https://ballchasing.com/replay/15f86d63-6072-410f-b09c-affc5ca57b6d",
+      "duration_label": "06:32 (06:03 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198271573920",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 49.66,
+          "percent_zero_boost": 13.684211,
+          "percent_boost_0_25": 38.623146
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561199061951071",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 43.46,
+          "percent_zero_boost": 11.975751,
+          "percent_boost_0_25": 39.83639
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198313792336",
+          "player_name": "syracks",
+          "rank": "Grand Champion III Division 4",
+          "comparison_group": "named_circuit",
+          "time_zero_boost_s": 11.06,
+          "percent_zero_boost": 3.0476716,
+          "percent_boost_0_25": 20.932861
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/ps4/mxrxrl",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 42.44,
+          "percent_zero_boost": 11.694682,
+          "percent_boost_0_25": 30.688032
+        }
+      ]
+    },
+    {
+      "replay_id": "e73ec573-6ac2-42b2-aa6b-8f3318016ccc",
+      "url": "https://ballchasing.com/replay/e73ec573-6ac2-42b2-aa6b-8f3318016ccc",
+      "duration_label": "05:37 (05:19 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198313792336",
+          "player_name": "syracks",
+          "rank": "Supersonic Legend",
+          "comparison_group": "named_circuit",
+          "time_zero_boost_s": 37.97,
+          "percent_zero_boost": 11.895736,
+          "percent_boost_0_25": 32.55792
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198207855987",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 33.45,
+          "percent_zero_boost": 10.479651,
+          "percent_boost_0_25": 31.488562
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198809279586",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 36.34,
+          "percent_zero_boost": 11.385068,
+          "percent_boost_0_25": 36.161057
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/epic/d293fd773fde4f5186fb5f9a72221441",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 41.37,
+          "percent_zero_boost": 12.960933,
+          "percent_boost_0_25": 42.568844
+        }
+      ]
+    },
+    {
+      "replay_id": "10e29a52-09f4-4ff9-8dca-a3eb2ea6c120",
+      "url": "https://ballchasing.com/replay/10e29a52-09f4-4ff9-8dca-a3eb2ea6c120",
+      "duration_label": "04:22 (04:02 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198350121474",
+          "player_name": null,
+          "rank": "Grand Champion II Division 2",
+          "comparison_group": "grand_champion",
+          "time_zero_boost_s": 38.36,
+          "percent_zero_boost": 15.865007,
+          "percent_boost_0_25": 49.37088
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198159525421",
+          "player_name": null,
+          "rank": "Grand Champion II Division 2",
+          "comparison_group": "grand_champion",
+          "time_zero_boost_s": 29.62,
+          "percent_zero_boost": 12.2503,
+          "percent_boost_0_25": 33.839157
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198313792336",
+          "player_name": "syracks",
+          "rank": "Grand Champion II Division 3",
+          "comparison_group": "named_circuit",
+          "time_zero_boost_s": 24.04,
+          "percent_zero_boost": 9.9425125,
+          "percent_boost_0_25": 38.147327
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/epic/fb962d9663124325a0cb5f3460de08c0",
+          "player_name": null,
+          "rank": "Grand Champion II Division 2",
+          "comparison_group": "grand_champion",
+          "time_zero_boost_s": 30.6,
+          "percent_zero_boost": 12.655611,
+          "percent_boost_0_25": 25.184292
+        }
+      ]
+    },
+    {
+      "replay_id": "8f3bcbb8-53b7-40b1-af7d-fefd8cf7eb7f",
+      "url": "https://ballchasing.com/replay/8f3bcbb8-53b7-40b1-af7d-fefd8cf7eb7f",
+      "duration_label": "06:36 (06:03 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198155559291",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 62.98,
+          "percent_zero_boost": 17.338875,
+          "percent_boost_0_25": 49.859024
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198313792336",
+          "player_name": "syracks",
+          "rank": "Supersonic Legend",
+          "comparison_group": "named_circuit",
+          "time_zero_boost_s": 26.85,
+          "percent_zero_boost": 7.39201,
+          "percent_boost_0_25": 31.917755
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/steam/76561198097658765",
+          "player_name": null,
+          "rank": "Supersonic Legend",
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 28.42,
+          "percent_zero_boost": 7.8242435,
+          "percent_boost_0_25": 30.558155
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/epic/5d14918a347945d4969fe1658907875e",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 45.09,
+          "percent_zero_boost": 12.413622,
+          "percent_boost_0_25": 31.656422
+        }
+      ]
+    },
+    {
+      "replay_id": "89921651-2024-4af9-ad7b-9194b6233e3b",
+      "url": "https://ballchasing.com/replay/89921651-2024-4af9-ad7b-9194b6233e3b",
+      "duration_label": "04:59 (04:42 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/epic/ace5c7ad90f94aca8d38efa667b36fac",
+          "player_name": null,
+          "rank": "Gold II Division 2",
+          "comparison_group": "gold",
+          "time_zero_boost_s": 65.03,
+          "percent_zero_boost": 23.066826,
+          "percent_boost_0_25": 40.97586
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/epic/8fb0e033742a43d19e518c5d6e2f1e08",
+          "player_name": null,
+          "rank": "Gold II Division 3",
+          "comparison_group": "gold",
+          "time_zero_boost_s": 45.69,
+          "percent_zero_boost": 16.206724,
+          "percent_boost_0_25": 28.835602
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/epic/8d973b628a5f4cf2a94b8e2325606656",
+          "player_name": null,
+          "rank": "Gold II Division 3",
+          "comparison_group": "gold",
+          "time_zero_boost_s": 42.42,
+          "percent_zero_boost": 15.046821,
+          "percent_boost_0_25": 29.456808
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/epic/ca1cdde18ebd41569e315b23a3e96d03",
+          "player_name": null,
+          "rank": "Gold II Division 3",
+          "comparison_group": "gold",
+          "time_zero_boost_s": 24.27,
+          "percent_zero_boost": 8.608825,
+          "percent_boost_0_25": 25.890162
+        }
+      ]
+    },
+    {
+      "replay_id": "6b40731d-12c5-46b8-9f0a-d8c2073d55ce",
+      "url": "https://ballchasing.com/replay/6b40731d-12c5-46b8-9f0a-d8c2073d55ce",
+      "duration_label": "06:41 (06:08 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/psynet/c0c886b47bbeea9f",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 34.93,
+          "percent_zero_boost": 9.488753,
+          "percent_boost_0_25": 22.825397
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/epic/9724a0e2bb2d40658606e5f9693e67fe",
+          "player_name": null,
+          "rank": "Gold II Division 3",
+          "comparison_group": "gold",
+          "time_zero_boost_s": 10.61,
+          "percent_zero_boost": 2.8822124,
+          "percent_boost_0_25": 12.970835
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/ps4/pana_sebas10",
+          "player_name": null,
+          "rank": "Gold II Division 3",
+          "comparison_group": "gold",
+          "time_zero_boost_s": 41.74,
+          "percent_zero_boost": 11.338694,
+          "percent_boost_0_25": 25.969973
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/ps4/GG30-Junior27",
+          "player_name": null,
+          "rank": "Gold II Division 3",
+          "comparison_group": "gold",
+          "time_zero_boost_s": 37.99,
+          "percent_zero_boost": 12.224869,
+          "percent_boost_0_25": 35.381187
+        }
+      ]
+    },
+    {
+      "replay_id": "a617aaa9-d4e5-4bd8-92a7-00d5557741ee",
+      "url": "https://ballchasing.com/replay/a617aaa9-d4e5-4bd8-92a7-00d5557741ee",
+      "duration_label": "06:19 (05:53 played)",
+      "boost_warning_present": false,
+      "players": [
+        {
+          "position": 1,
+          "public_profile_url": "https://ballchasing.com/player/ps4/evuicx",
+          "player_name": null,
+          "rank": null,
+          "comparison_group": "other_or_unclassified",
+          "time_zero_boost_s": 33.79,
+          "percent_zero_boost": 9.581738,
+          "percent_boost_0_25": 23.965967
+        },
+        {
+          "position": 2,
+          "public_profile_url": "https://ballchasing.com/player/ps4/Shxrk77",
+          "player_name": null,
+          "rank": "Gold II Division 2",
+          "comparison_group": "gold",
+          "time_zero_boost_s": 51.73,
+          "percent_zero_boost": 14.668936,
+          "percent_boost_0_25": 38.354416
+        },
+        {
+          "position": 3,
+          "public_profile_url": "https://ballchasing.com/player/ps4/elgrogu09",
+          "player_name": null,
+          "rank": "Gold II Division 3",
+          "comparison_group": "gold",
+          "time_zero_boost_s": 41.03,
+          "percent_zero_boost": 11.634766,
+          "percent_boost_0_25": 31.654055
+        },
+        {
+          "position": 4,
+          "public_profile_url": "https://ballchasing.com/player/epic/9724a0e2bb2d40658606e5f9693e67fe",
+          "player_name": null,
+          "rank": "Gold II Division 3",
+          "comparison_group": "gold",
+          "time_zero_boost_s": 0,
+          "percent_zero_boost": 0,
+          "percent_boost_0_25": 4.502215
+        }
+      ]
+    }
+  ]
+}

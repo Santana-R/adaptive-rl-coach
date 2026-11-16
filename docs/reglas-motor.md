@@ -1,13 +1,13 @@
 # Reglas y prioridades · A17
 
-Implementación preparada con Roberto y asistencia de IA bajo su Release. La única regla deportiva publicada es `finalizacion-eficiencia`, acordada en A02: eficiencia **≤30 %**, cinco partidas con goles/tiros completos y mínimo de **20 / 15 / 10 tiros** en **1v1 / 2v2 / 3v3**. Son parámetros heurísticos, pendientes de calibración con bloques reales en A26.
+Implementación preparada con Roberto y asistencia de IA bajo su Release. La regla de finalización es `finalizacion-eficiencia`, acordada en A02: eficiencia **≤30 %**, cinco partidas con goles/tiros completos y mínimo de **20 / 15 / 10 tiros** en **1v1 / 2v2 / 3v3**. Son parámetros heurísticos, pendientes de calibración con bloques reales en A26.
 
 ## Cómo pasan los datos
 
 1. [evaluateReplayBlockRules](../src/services/block-rules.js) recibe cinco respuestas de replay y un perfil; reutiliza A14 y A09. Si A14 rechaza el bloque, conserva `valid: false`, `data: null` y los motivos; no genera un diagnóstico.
 2. [evaluateRules](../src/domain/rules.js) recibe las métricas normalizadas de A09 (`data`), o un bloque de A10. Comprueba contexto, versión, procedencia, cinco IDs distintos y datos necesarios. Devuelve `rules_version`, `priorities`, `evaluations` y `limitations`.
-3. [rules-config.js](../src/domain/rules-config.js) fija `mvp.rules.v1`, los mínimos por modalidad, límite inclusivo y máximo de tres prioridades. La configuración está congelada, incluidos sus objetos internos. Cambiar criterios publicados requiere una versión nueva.
-4. A18 consumirá las prioridades para seleccionar ejercicios; A19 compondrá métricas, comparación y reglas para la interfaz definitiva de Luis. Esta entrega no añade rutas HTTP ni persistencia.
+3. [rules-config.js](../src/domain/rules-config.js) fija `mvp.rules.v2`, los mínimos por modalidad, límite inclusivo y máximo de tres prioridades. La configuración está congelada, incluidos sus objetos internos. Cambiar criterios publicados requiere una versión nueva.
+4. A18 consume las prioridades con `mvp.plans.v2` y A19 las muestra mediante su ruta HTTP. La persistencia A24 y el recorrido privado real continúan pendientes; ver la [integración de boost](disponibilidad-boost.md).
 
 La clave de prioridad es **`shooting`**, conservando el contrato del catálogo. El ID de regla sigue siendo **`finalizacion-eficiencia`**. La regla funciona sobre el bloque actual sin necesitar un anterior ni fechas: una comparación incompatible o ausente no invalida una señal propia del bloque. A10 mantiene sus validaciones temporales por separado.
 
@@ -35,7 +35,7 @@ La eficiencia procede de A09: `(goles / tiros) * 100`, conservando precisión y 
 
 También se rechazan datos necesarios ausentes, conteos/porcentajes inválidos, unidades incorrectas, contexto/modalidad no soportados, versión incompatible o replays repetidos. `evaluations` conserva estado, motivo estable, explicación en español y evidencia; los motivos de métricas excluidas por replay permanecen en el resultado de A09.
 
-Cero goles con tiros suficientes sí permite evaluar y activar. Duración o boost ausentes no bloquean esta regla porque no utiliza esas métricas. No se incorporó una regla de boost sin criterios acordados.
+Cero goles con tiros suficientes sí permite evaluar y activar. Duración o boost ausentes no bloquean esta regla porque no utiliza esas métricas. La segunda regla, acordada el 16 de noviembre, se documenta en [Disponibilidad de boost](disponibilidad-boost.md): ≥15 % en al menos 3/5 partidas y prioridad alta con ≥20 % en 3/5. Requiere porcentajes del proveedor en las cinco partidas y evalúa ranked 2v2/3v3.
 
 Cada prioridad conserva regla/versión, clave `shooting`, orden, score, explicación y estado de calibración. Su `evidence` contiene porcentaje/unidad, umbral/comparador, goles/tiros/cobertura, cinco partidas e IDs, mínimo aplicado, contexto, fuente y versión de métricas.
 
@@ -43,13 +43,13 @@ Cada prioridad conserva regla/versión, clave `shooting`, orden, score, explicac
 
 `rankPriorities` recibe prioridades **ya justificadas** por reglas: ordena score descendente y, en empate, ID de regla ascendente como texto. Retorna como máximo tres, numeradas desde uno, sin modificar la lista recibida. Rechaza scores no finitos/negativos e IDs vacíos o repetidos. Es un ayudante de dominio, no una ruta para recibir diagnósticos enviados por el cliente.
 
-La regla de finalización usa **score fijo 1** como peso técnico inicial: no expresa probabilidad, confianza, gravedad ni mejora. Hoy la salida real contiene **cero o una prioridad**. No se fabrican otras dos señales para completar tres lugares. El fixture de empate usa IDs ficticios para verificar el ordenador, no diagnósticos deportivos adicionales. El objetivo principal aún no introduce ponderaciones nuevas.
+La regla de finalización usa **score fijo 1** como peso técnico inicial: no expresa probabilidad, confianza, gravedad ni mejora. La salida real contiene **cero, una o dos prioridades**. Boost usa score 1 normal y 2 alto; no se fabrican señales para completar tres lugares. El fixture de empate usa IDs ficticios para verificar el ordenador, no diagnósticos deportivos adicionales. El objetivo principal aún no introduce ponderaciones nuevas.
 
 El prototipo Python/Tkinter no se encontró en el repositorio. Se contrastó la demo JavaScript disponible: usa `shooting` y score 1, pero su umbral ilustrativo de 35 % y la regla de boost no son la ficha A02 aprobada. Se conservó la presentación provisional y se implementaron los criterios acordados en el dominio definitivo. Luis continúa su interfaz.
 
 A15/A24 asociarán códigos/versiones a `reglas`, `reglas_config`, `conjuntos_reglas` y `prioridades`, sin crear tablas duplicadas ni ejecutar cambios SQL en esta entrega. Deben resolver la representación del mínimo dependiente de modalidad y conservar el snapshot de la evidencia; el objeto JSON no se considera una fila ya guardada.
 
-## Comprobación ejecutada
+## Comprobación inicial A17 (histórica)
 
 Desde la raíz del repositorio:
 
@@ -83,3 +83,7 @@ NODE
 ```
 
 La primera salida es `inactive`; la segunda, `active`. El cálculo consume las estadísticas; no selecciona un resultado por nombre de escenario. Ver [casos A02](casos-motor.md), [pruebas](../tests/rules.test.cjs), [contrato](contratos-api.md) y [ejemplo de análisis](../planning/examples/analysis.json).
+
+## Segunda regla y comprobación vigente · 16 de noviembre
+
+La versión `mvp.rules.v2` añade `boost-disponibilidad` sin cambiar los umbrales de finalización. Ambas reglas se evalúan de forma independiente. La [ficha vigente](disponibilidad-boost.md) conserva casos, fuente/denominadores, investigación exploratoria, ejercicios y límites A13/A15/A24. `npm test`: 372 aprobadas, 0 fallidas; pruebas nuevas con entradas sintéticas y transporte/sesión simulados, sin acreditar calibración ni recorrido privado real.

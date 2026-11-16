@@ -1,3 +1,5 @@
+const { extractBoostValues } = require('../domain/boost');
+
 function findReplayPlayer(replay, profile) {
   const platform = profile?.platform;
   const playerId = profile?.player_id;
@@ -128,6 +130,7 @@ function extractReplayBlockMetrics(replays, profile) {
         : (duration == null ? 'not_available' : 'invalid_duration')
     };
 
+    Object.assign(values, extractBoostValues(player.stats?.boost));
     return { replay_id: validation.replays[index].replay_id, values };
   });
 

@@ -1,0 +1,331 @@
+{
+  "plan_id": null,
+  "plan_version_id": null,
+  "version": 1,
+  "generator_version": "mvp.plans.v2",
+  "block_id": "demo-boost_high",
+  "rules_version": "mvp.rules.v2",
+  "metrics_version": "mvp.metrics.v1",
+  "catalog_version": "mvp.catalog.v1",
+  "catalog_source": "synthetic",
+  "native_catalog_version": "mvp.native-boost.v1",
+  "allocation_version": "mvp.allocation.v2",
+  "availability_minutes": 20,
+  "assigned_minutes": 20,
+  "unassigned_minutes": 0,
+  "coverage": "complete",
+  "explanation": "Se proponen 4 ejercicios compatibles para practicar disponibilidad de boost y finalización durante 20 minutos.",
+  "uncovered_priorities": [],
+  "missing_exercises": [],
+  "reason_codes": [
+    "SHORT_SESSION"
+  ],
+  "catalog_exclusions": [],
+  "goals_excluded": [],
+  "goals_snapshot": [],
+  "profile_snapshot": {
+    "platform": "steam",
+    "player_id": "TEST_PLAYER_01",
+    "mode": "2v2",
+    "available_minutes": 20,
+    "rank": "diamond",
+    "rank_source": "self_reported",
+    "rank_mode": "2v2",
+    "workshop_access": true,
+    "coco_variant_key": null
+  },
+  "diagnosis_snapshot": {
+    "priorities": [
+      {
+        "priority_key": "boost",
+        "rule_id": "boost-disponibilidad",
+        "rules_version": "mvp.rules.v2",
+        "title": "Mejorar disponibilidad de boost",
+        "score": 2,
+        "evidence": {
+          "metric_key": "boost_zero_pct",
+          "unit": "percent",
+          "measurement_basis": "provider_percent_zero_boost",
+          "aggregation": "per_replay",
+          "threshold": 15,
+          "high_threshold": 20,
+          "operator": ">=",
+          "required_matches": 3,
+          "matched_replays": 3,
+          "high_matched_replays": 3,
+          "sample_size": 5,
+          "coverage": 5,
+          "severity": "high",
+          "replay_ids": [
+            "demo-boost_high-1",
+            "demo-boost_high-2",
+            "demo-boost_high-3",
+            "demo-boost_high-4",
+            "demo-boost_high-5"
+          ],
+          "context": {
+            "platform": "steam",
+            "player_id": "TEST_PLAYER_01",
+            "mode": "2v2",
+            "match_type": "ranked"
+          },
+          "source": "synthetic",
+          "metrics_version": "mvp.metrics.v1",
+          "observations": [
+            {
+              "replay_id": "demo-boost_high-1",
+              "percent_zero_boost": 20,
+              "time_zero_boost_s": 60,
+              "percent_missing_reason": null,
+              "seconds_missing_reason": null
+            },
+            {
+              "replay_id": "demo-boost_high-2",
+              "percent_zero_boost": 20,
+              "time_zero_boost_s": 60,
+              "percent_missing_reason": null,
+              "seconds_missing_reason": null
+            },
+            {
+              "replay_id": "demo-boost_high-3",
+              "percent_zero_boost": 20,
+              "time_zero_boost_s": 60,
+              "percent_missing_reason": null,
+              "seconds_missing_reason": null
+            },
+            {
+              "replay_id": "demo-boost_high-4",
+              "percent_zero_boost": 10,
+              "time_zero_boost_s": 30,
+              "percent_missing_reason": null,
+              "seconds_missing_reason": null
+            },
+            {
+              "replay_id": "demo-boost_high-5",
+              "percent_zero_boost": 10,
+              "time_zero_boost_s": 30,
+              "percent_missing_reason": null,
+              "seconds_missing_reason": null
+            }
+          ]
+        },
+        "explanation": "En 3 de 5 partidas pasaste al menos 20 % del tiempo medido con exactamente cero boost. Se sugiere practicar recarga y conservación del movimiento. La estadística no determina la causa ni demuestra mal manejo de boost.",
+        "calibration_status": "agreed_heuristic_not_calibrated",
+        "order": 1
+      },
+      {
+        "priority_key": "shooting",
+        "rule_id": "finalizacion-eficiencia",
+        "rules_version": "mvp.rules.v2",
+        "title": "Practicar colocación y finalización",
+        "score": 1,
+        "evidence": {
+          "metric_key": "shooting_pct",
+          "value": 25,
+          "unit": "percent",
+          "threshold": 30,
+          "direction": "below_or_equal",
+          "operator": "<=",
+          "sample_size": 5,
+          "coverage": 5,
+          "goals": {
+            "value": 5,
+            "unit": "count",
+            "coverage": 5
+          },
+          "shots": {
+            "value": 20,
+            "unit": "count",
+            "coverage": 5
+          },
+          "min_shots": 15,
+          "context": {
+            "platform": "steam",
+            "player_id": "TEST_PLAYER_01",
+            "mode": "2v2",
+            "match_type": "ranked"
+          },
+          "source": "synthetic",
+          "metrics_version": "mvp.metrics.v1",
+          "replay_ids": [
+            "demo-boost_high-1",
+            "demo-boost_high-2",
+            "demo-boost_high-3",
+            "demo-boost_high-4",
+            "demo-boost_high-5"
+          ]
+        },
+        "explanation": "Registraste 5 goles en 20 tiros (25 %). Cumples el mínimo de 15 tiros para 2v2 y el criterio inicial de eficiencia ≤ 30 %; se sugiere practicar colocación y finalización.",
+        "calibration_status": "agreed_heuristic_not_calibrated",
+        "order": 2
+      }
+    ],
+    "limitations": [
+      "heuristics_pending_calibration_A26",
+      "synthetic_fixture"
+    ]
+  },
+  "exercises": [
+    {
+      "plan_exercise_id": null,
+      "order": 1,
+      "priority_key": "boost",
+      "rule_id": "boost-disponibilidad",
+      "exercise_key": "boost-pad-routes",
+      "exercise_version_id": null,
+      "assigned_minutes": 5,
+      "difficulty": 1,
+      "exercise_snapshot": {
+        "exercise_id": null,
+        "exercise_version_id": null,
+        "exercise_key": "boost-pad-routes",
+        "content_version": 1,
+        "title": "Rutas de pads y recuperaciones",
+        "priority_key": "boost",
+        "resource_type": "free_play",
+        "resource_url": "https://dignitas.gg/articles/how-to-manage-your-boost-in-rocket-league-with-apparentlyjack",
+        "resource_code": null,
+        "purpose": "Practicar recarga durante desplazamientos y conservación del movimiento.",
+        "instructions": [
+          "Abrir Juego libre y desactivar boost ilimitado. No requiere paquetes, Workshop ni BakkesMod.",
+          "Sin perseguir la pelota, recorrer rutas desde ambas bandas y el centro hacia una posición defensiva elegida.",
+          "Recoger pads pequeños durante el recorrido sin desviarse para llenar el tanque.",
+          "Practicar giros y aterrizajes sobre las cuatro ruedas conservando el movimiento; evitar gastar boost solo por regresar antes.",
+          "Practicar durante los minutos asignados. Registrar manualmente qué rutas o recuperaciones costaron más.",
+          "Priorizar rutas sencillas, giros controlados y aterrizajes; no se exige wavedash."
+        ],
+        "success_criterion": "Completar rutas recogiendo pads y conservar movimiento al aterrizar. La práctica es autorreportada; no acredita mejora en partidas.",
+        "difficulty": 1,
+        "practice_level_instruction": "Priorizar rutas sencillas, giros controlados y aterrizajes; no se exige wavedash.",
+        "selected_variant": null,
+        "source": "bundled_native_instructions",
+        "native_catalog_version": "mvp.native-boost.v1",
+        "review_status": "sports_approved_instructions_not_in_game_tested"
+      }
+    },
+    {
+      "plan_exercise_id": null,
+      "order": 2,
+      "priority_key": "boost",
+      "rule_id": "boost-disponibilidad",
+      "exercise_key": "boost-touch-recover",
+      "exercise_version_id": null,
+      "assigned_minutes": 5,
+      "difficulty": 1,
+      "exercise_snapshot": {
+        "exercise_id": null,
+        "exercise_version_id": null,
+        "exercise_key": "boost-touch-recover",
+        "content_version": 1,
+        "title": "Golpeo, seguimiento y recarga",
+        "priority_key": "boost",
+        "resource_type": "free_play",
+        "resource_url": "https://dignitas.gg/articles/how-to-manage-your-boost-in-rocket-league-with-apparentlyjack",
+        "resource_code": null,
+        "purpose": "Combinar contacto con la pelota, recuperación y recarga para preparar el siguiente toque.",
+        "instructions": [
+          "Abrir Juego libre y desactivar boost ilimitado. No requiere paquetes, Workshop ni BakkesMod.",
+          "Golpear la pelota hacia una zona elegida y recuperar el coche tras el contacto.",
+          "Preparar el siguiente toque recogiendo pads pequeños sobre una ruta útil, sin buscar llenar el tanque a toda costa.",
+          "Usar el boost necesario para la jugada y evitar correcciones bruscas que destruyan el movimiento.",
+          "Repetir durante los minutos asignados. Es un ejercicio mecánico: perseguir la pelota aquí no prescribe una rotación para ranked.",
+          "Priorizar rutas sencillas, giros controlados y aterrizajes; no se exige wavedash."
+        ],
+        "success_criterion": "Encadenar contacto, recuperación y recarga con control. Registrar dificultades manualmente; no hay un porcentaje de éxito calibrado.",
+        "difficulty": 1,
+        "practice_level_instruction": "Priorizar rutas sencillas, giros controlados y aterrizajes; no se exige wavedash.",
+        "selected_variant": null,
+        "source": "bundled_native_instructions",
+        "native_catalog_version": "mvp.native-boost.v1",
+        "review_status": "sports_approved_instructions_not_in_game_tested"
+      }
+    },
+    {
+      "plan_exercise_id": null,
+      "order": 3,
+      "priority_key": "shooting",
+      "rule_id": "finalizacion-eficiencia",
+      "exercise_key": "castro-ground-shots",
+      "exercise_version_id": "test-castro-ground-shots-v1",
+      "assigned_minutes": 5,
+      "difficulty": 1,
+      "exercise_snapshot": {
+        "exercise_id": "test-castro-ground-shots",
+        "exercise_version_id": "test-castro-ground-shots-v1",
+        "exercise_key": "castro-ground-shots",
+        "content_version": 1,
+        "title": "Ground Shots — Castro",
+        "priority_key": "shooting",
+        "resource_type": "custom_training",
+        "resource_url": "https://docs.google.com/document/d/1d6D9Yh7KhT_acDZS_NLP7Ejsn_dfuUL3e4I1Qa7eXkI/edit?tab=t.0",
+        "resource_code": "9472-6A26-7F5D-767B",
+        "purpose": "Practicar contacto después del bote, consistencia, colocación y potencia de finalización.",
+        "instructions": [
+          "Abrir Entrenamiento personalizado e introducir el código del paquete.",
+          "Practicar el paquete base sin BakkesMod y sin añadir aleatorización externa.",
+          "Esperar el bote y golpear justo después; adaptar la colocación al nivel de práctica.",
+          "Recorrer las posiciones en orden, con máximo tres intentos por posición antes de avanzar.",
+          "Practicar durante los minutos asignados; no es necesario completar todo el paquete.",
+          "Elegir izquierda o derecha antes del tiro y buscar esa zona."
+        ],
+        "success_criterion": "Buscar el gol tras el contacto posterior al bote; después trabajar la zona elegida y la potencia según el nivel. No se impone una velocidad ni tasa de acierto calibrada.",
+        "difficulty": 1,
+        "practice_level_instruction": "Elegir izquierda o derecha antes del tiro y buscar esa zona.",
+        "selected_variant": null
+      }
+    },
+    {
+      "plan_exercise_id": null,
+      "order": 4,
+      "priority_key": "shooting",
+      "rule_id": "finalizacion-eficiencia",
+      "exercise_key": "coco-aim-training",
+      "exercise_version_id": "test-coco-aim-training-v1",
+      "assigned_minutes": 5,
+      "difficulty": 2,
+      "exercise_snapshot": {
+        "exercise_id": "test-coco-aim-training",
+        "exercise_version_id": "test-coco-aim-training-v1",
+        "exercise_key": "coco-aim-training",
+        "content_version": 1,
+        "title": "Aim Training — CoCo",
+        "priority_key": "shooting",
+        "resource_type": "steam_workshop",
+        "resource_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=1906378036",
+        "resource_code": null,
+        "purpose": "Practicar precisión y consistencia de contacto contra objetivos con dificultad elegida.",
+        "instructions": [
+          "Abrir el mapa desde Steam Workshop y seleccionar una sola variante para el bloque de práctica.",
+          "En Normal, comprobar los tres ajustes de la variante antes de empezar; no se deduce su estado por la captura de ejemplo.",
+          "Buscar contactos controlados contra el objetivo durante los minutos asignados, sin reiniciar el cronómetro después de fallar.",
+          "Registrar manualmente minutos realizados, variante, ajustes y mejor racha del bloque.",
+          "Si la dificultad resulta excesiva, elegir una variante más sencilla y registrar el cambio como otro bloque de práctica.",
+          "Modo elegido: normal.",
+          "Tamaños aleatorios: desactivado; distancias aleatorias: desactivado; caídas aleatorias: desactivado."
+        ],
+        "success_criterion": "Trabajar contactos controlados y consistencia; conservar la mejor racha como práctica autorreportada, sin establecer un umbral para acreditar mejora.",
+        "difficulty": 2,
+        "practice_level_instruction": null,
+        "selected_variant": {
+          "variant_key": "normal-fixed",
+          "mode": "normal",
+          "difficulty": 2,
+          "suggested_ranks": [
+            "platinum",
+            "diamond"
+          ],
+          "default_for_ranks": true,
+          "random_target_sizes": false,
+          "random_wall_distances": false,
+          "random_ball_drops": false
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "heuristics_pending_calibration_A26",
+    "synthetic_fixture",
+    "unpersisted_proposal",
+    "synthetic_catalog"
+  ]
+}

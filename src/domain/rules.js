@@ -1,4 +1,5 @@
 const { RULES_CONFIG: config } = require('./rules-config');
+const { evaluateBoostRule } = require('./boost-rule');
 const rule = config.finalization;
 const nonempty = value => typeof value === 'string' && value.trim().length > 0;
 
@@ -143,10 +144,12 @@ function evaluateRules(block) {
     title: 'Practicar colocación y finalización', score: rule.score,
     evidence, explanation: evaluation.explanation, calibration_status: rule.calibration_status,
   }] : [];
+  const boost = evaluateBoostRule(block, blockProblem(block));
+  if (boost.priority) priorities.push(boost.priority);
   return {
     rules_version: config.rules_version,
     priorities: rankPriorities(priorities),
-    evaluations: [evaluation],
+    evaluations: [evaluation, boost.evaluation],
     limitations: ['heuristics_pending_calibration_A26',
       ...(block?.source === 'synthetic' ? ['synthetic_fixture'] : [])],
   };

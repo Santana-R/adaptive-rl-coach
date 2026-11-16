@@ -54,7 +54,7 @@
     }
   },
   "priorities": [],
-  "rules_version": "mvp.rules.v1",
+  "rules_version": "mvp.rules.v2",
   "limitations": [
     "synthetic_fixture",
     "heuristics_pending_calibration_A26"
@@ -62,7 +62,7 @@
   "evaluations": [
     {
       "rule_id": "finalizacion-eficiencia",
-      "rules_version": "mvp.rules.v1",
+      "rules_version": "mvp.rules.v2",
       "status": "not_evaluable",
       "reason": "INSUFFICIENT_SHOTS",
       "evidence": {
