@@ -97,6 +97,14 @@ Generar plan usa diagnóstico, metas propias, disponibilidad y ejercicios activo
 
 Cada generación guarda plan_version_id, versión, bloque, reglas/métricas, diagnóstico, metas/perfil y snapshots de ejercicios con instrucciones/recurso/minutos. Actualizar metas, perfil o catálogo utilizado solicita nueva versión mediante POST; la anterior permanece inmutable. El tiempo asignado no supera disponibilidad. A18/A24 definen transacción consistente para plan/versión/ejercicios.
 
+### Generador de dominio comprobado en A18 · integración pendiente
+
+[generatePlan](generador-planes.md) recibe análisis de A09/A17, perfil/contexto, catálogo normalizado, disponibilidad, metas opcionales y número de propuesta. Selecciona ejercicios activos con revisión técnica, aplica la dificultad de A23 y reparte minutos conforme a `mvp.allocation.v1`, con mínimo cinco y redondeo determinista. Devuelve cobertura completa/parcial/vacía, motivos, exclusiones, versiones y snapshots de instrucciones/recursos/variante. Las metas compatibles se conservan; no crean prioridades ni modifican umbrales.
+
+El adaptador A23/A24 deberá aportar `catalog_version`, `source`, actividad y `technical_review_status: verified`, requisitos, modalidades/plataformas y referencias de las versiones de ejercicio. Ese estado de revisión describe datos ya comprobados por la aplicación, no un permiso editable por el jugador ni una columna SQL nueva obligatoria. Rango declarado normalizado (`rank`, `rank_mode`, `rank_source`) y acceso confirmado a Workshop se obtienen del contexto; la identidad Steam no sustituye comprobar el acceso al mapa.
+
+El [ejemplo de propuesta ejecutada](../planning/examples/plan-proposal.json) usa fixtures identificados y mantiene IDs de plan/versión en `null`; la asignación de IDs, secuencia histórica, transacción, ruta HTTP y consulta del catálogo real siguen pendientes de integración. El generador no implementa ni acredita las rutas de la tabla. Consumidores afectados: A23 prepara el catálogo, A24 guarda la propuesta y A27 muestra sus ejercicios/ajustes. El ejemplo anterior `plan-version.json` sigue siendo una forma de referencia para el futuro guardado, no una salida persistida ya comprobada.
+
 ## Objetivos, sesiones, reportes y administración
 Meta: métrica soportada, valor/unidad compatibles, fecha opcional y estado active/archived. Si ya está vinculada a un plan, DELETE archiva y devuelve el efecto; si no, puede borrar. Perfil/meta/catálogo editados no reescriben snapshots.
 
@@ -129,6 +137,7 @@ Admin consulta usuarios y cambia active/suspended; no se publica un formulario d
 - [planning/examples/goal.json](https://github.com/Santana-R/adaptive-rl-coach/blob/main/planning/examples/goal.json)
 - [planning/examples/exercise.json](https://github.com/Santana-R/adaptive-rl-coach/blob/main/planning/examples/exercise.json)
 - [planning/examples/plan-version.json](https://github.com/Santana-R/adaptive-rl-coach/blob/main/planning/examples/plan-version.json)
+- [planning/examples/plan-proposal.json](https://github.com/Santana-R/adaptive-rl-coach/blob/main/planning/examples/plan-proposal.json)
 - [planning/examples/session.json](https://github.com/Santana-R/adaptive-rl-coach/blob/main/planning/examples/session.json)
 - [planning/examples/report.json](https://github.com/Santana-R/adaptive-rl-coach/blob/main/planning/examples/report.json)
 - [planning/examples/admin-user.json](https://github.com/Santana-R/adaptive-rl-coach/blob/main/planning/examples/admin-user.json)
