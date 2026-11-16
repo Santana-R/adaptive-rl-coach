@@ -35,7 +35,8 @@ Piezas principales 4–6 e integración/ensayo 7–8 son metas internas propuest
 - **Interfaz oficial:** abrir `public/sitio/html/replays.html` para cargar cinco replays y consultar el historial. Análisis y Plan están en `public/sitio/html/analisis.html` y `public/sitio/html/plan.html`.
 - **Fase 2:** se verificaron las **30 tablas existentes** en Supabase el 1 de noviembre. [Estado, documento y revisión](docs/fase2-estado.md) · [esquema SQL](database/esquema-fase2.sql). El equipo confirmó que el documento está listo para presentarlo; la revisión del profesor sigue pendiente. A07 solo da seguimiento a sus observaciones y no bloquea la implementación.
 - **Luis:** sus cuatro vistas públicas se integraron en PR #50; A03 y A04 están cerradas. El diseño y la construcción del resto del frontend continúan en A11/A12/A19/A20/A27/A28 y la revisión A35.
-- **Pendiente:** motor definitivo, entrada real, consultas/persistencia y acceso. La creación de tablas es avance distinto de conectar esas operaciones.
+- **Motor:** métricas A09, comparación A10, reglas A17 y generador de propuestas A18 implementados. Análisis A19 calcula por HTTP y usa la interfaz de Luis; [guía de integración y límites](docs/analisis-integracion.md).
+- **Pendiente:** entrada real, consultas/persistencia, acceso integrado en las pantallas y ruta de generación de Plan con catálogo activo. La creación de tablas es avance distinto de conectar esas operaciones.
 
 ## Ejecutar la demo en local
 
@@ -48,7 +49,14 @@ npm start
 
 Abre `http://127.0.0.1:3000/health` para comprobar que el servidor responde con `{"status":"ok"}`.
 
-En `http://127.0.0.1:3000/`, entra a Replays para cargar cinco archivos `.replay`. Para revisar la demostración sintética de Análisis y Plan, abre `sitio/html/analisis.html?scenario=initial&minutes=40`.
+En `http://127.0.0.1:3000/`, entra a Replays para cargar cinco archivos `.replay`. Para probar Análisis con entradas sintéticas calculadas por el motor, detén el servidor y arráncalo con la demo explícita:
+
+```sh
+# macOS / Linux
+ANALYSIS_DEMO_ENABLED=true npm start
+```
+
+En PowerShell: `$env:ANALYSIS_DEMO_ENABLED="true"; npm start`. Abre `http://127.0.0.1:3000/sitio/html/analisis.html` y elige primer bloque, posterior, modalidad incompatible o faltantes. La demo se deshabilita por defecto y solo admite conexiones locales. Plan (`sitio/html/plan.html`) conserva su demostración separada; no representa un plan del bloque calculado en Análisis.
 
 La carga de archivos reales se envía a `POST /api/v1/blocks` como `multipart/form-data` y queda en estado `pending` en el servidor local en memoria. El procesamiento privado, persistencia, autenticación y transición a `ready` pertenecen a A13/A15/A30; la interfaz no presenta una carga aceptada como análisis calculado.
 

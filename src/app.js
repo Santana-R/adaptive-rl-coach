@@ -3,14 +3,15 @@ const path = require('node:path');
 const blocksRouter = require('./routes/blocks');
 const { createAuth, sendError, ApiError } = require('./middleware/auth');
 const { createServerClient } = require('./services/supabase');
+const { createAnalysisRouter, createAnalysisDemoRouter } = require('./routes/analysis');
 
 /**
  * Construye la aplicación. Recibe el cliente de Supabase para poder probarla
  * con un cliente simulado (tests/auth.test.cjs).
  */
-function createApp({ supabase = createServerClient() } = {}) {
+function createApp({ supabase = createServerClient(), analysisRepository = null, enableAnalysisDemo = false } = {}) {
   const app = express();
-  const { requireAuth } = createAuth(supabase);
+  const { requireAuth, requireRole } = createAuth(supabase);
 
   app.use(express.raw({
     type: request => request.headers['content-type']?.startsWith('multipart/form-data'),
@@ -52,6 +53,8 @@ function createApp({ supabase = createServerClient() } = {}) {
     }
   });
 
+  app.use('/api/v1/blocks', createAnalysisRouter({ requireAuth, requireRole, repository: analysisRepository }));
+  app.use('/api/v1/demo/analysis', createAnalysisDemoRouter({ enabled: enableAnalysisDemo }));
   app.use('/api/v1/blocks', blocksRouter);
   app.use(express.static(path.join(__dirname, '..', 'public')));
 
@@ -64,7 +67,7 @@ function createApp({ supabase = createServerClient() } = {}) {
   return app;
 }
 
-const app = createApp();
+const app = createApp({ enableAnalysisDemo: process.env.ANALYSIS_DEMO_ENABLED === 'true' });
 module.exports = app;
 module.exports.createApp = createApp;
 

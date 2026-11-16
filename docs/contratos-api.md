@@ -9,7 +9,7 @@ La Fase 2 tiene 30 tablas; usar [diccionario vigente](diccionario-datos.md) y SQ
 
 El recorrido Carga/Análisis/Plan usa fuente identificada y tendrá las interfaces definitivas que diseña y construye Luis según los bosquejos. El cascarón PROGSA es provisional. A06 sirve localhost; A05/A14 verifican entrada; Roberto expone Análisis y conecta sus datos en A19 compartida con Luis; A18/A24 generan/guardan Plan. El modo local de prueba no acredita permisos. Las rutas privadas requieren A08 antes de uso compartido. [Reparto de frontend](frontend-luis.md).
 
-Las rutas siguientes son el contrato objetivo de la aplicación completa del 16, no endpoints acreditados por esta reorganización.
+Las rutas siguientes son el contrato objetivo de la aplicación completa del 16. Las secciones de implementación describen qué recorridos están comprobados y cuáles siguen pendientes; esta tabla sola no acredita un despliegue.
 
 ## Qué significa contrato en este proyecto
 Luis necesita saber qué enviar y qué leer para pintar una pantalla. Tadeo necesita conocer las rutas y estados que sirve Express. David necesita saber qué relaciones se guardan. Roberto necesita métricas comparables para calcular diferencias y reglas. Los ejemplos en planning/examples permiten trabajar sin esperar que todos terminen; el cierre de las tareas de integración requiere datos reales.
@@ -53,6 +53,16 @@ Frontend usa Supabase Auth para correo/Google y envía el access token a Express
 | PATCH | /api/v1/admin/users/:userId/status | Administrador | Tadeo A29;David A32 | status active/suspended → admin-user |
 
 Las rutas agrupadas CRUD son: GET colección/detalle, POST colección, PATCH detalle, DELETE detalle. Roles y propietarios se verifican en cada operación. GET no crea ni modifica planes. Si cambia el diseño, actualizar contrato y consumidores en el mismo cambio.
+
+## Análisis A19 · servicio, HTTP e interfaz comprobables en local
+
+`analyzeBlock` conecta normalización A14/A09, comparación A10 y reglas A17. `GET /api/v1/blocks/:blockId/analysis` devuelve `{data,meta}` con métricas completas, bloque/contexto/fechas, comparación y evaluación de reglas. El ejemplo [analysis-service.json](../planning/examples/analysis-service.json) se genera desde el servicio, con entradas sintéticas identificadas.
+
+La ruta privada reutiliza `requireAuth` y roles de A08, obtiene el propietario de la sesión y exige el repositorio `getBlockForUser(blockId,userId)` / `listBlocksForUser(userId)`. Verifica propiedad también en los objetos devueltos; historial ajeno se excluye y un bloque ajeno o inexistente responde el mismo 404. Sin repositorio conectado responde 503; sin sesión 401, suspendido 403, bloque no listo 409, bloque inválido 422 y `baseline_id` repetido/vacío 400. Las pruebas de acceso usan autenticación y repositorio simulados: **no sustituyen A37 con usuarios/RLS reales**.
+
+`GET /api/v1/demo/analysis?case=initial|followup|incompatible|missing` es una ruta de solo lectura con cuatro entradas sintéticas. Por defecto está deshabilitada; exige `ANALYSIS_DEMO_ENABLED=true` y conexión de loopback. Ejecuta el mismo servicio y no admite datos privados ni genera/guarda planes. `meta.synthetic` y `meta.source` identifican su origen. Las respuestas de análisis no se almacenan en caché.
+
+La pantalla oficial `public/sitio/html/analisis.html`, construida por Luis e integrada en PR #63, usa ahora `public/js/analysis.js` para obtener la respuesta HTTP. Muestra unidades, cobertura/faltantes, comparación y evidencia; no usa los resultados fijos de `demo-data.js`. Con `?block_id=...` pide la sesión real mediante el puente de autenticación, aún pendiente de integrar en A12/A15. El CTA de Plan queda inactivo hasta que exista una propuesta asociada. [Procedimiento, capturas y límites](analisis-integracion.md).
 
 ## Carga y estados
 POST blocks recibe `multipart/form-data` con cinco partes `files`, valida cantidad/extensión/contenido permitido y usa el perfil persistido. El servidor crea el bloque y responde 202 con block-pending. Guardar archivos temporalmente fuera de Git; tamaño máximo permitido y caducidad se configuran y verifican en A05/A13.
