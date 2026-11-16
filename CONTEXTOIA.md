@@ -31,13 +31,13 @@ Si la IA no puede leer el repositorio privado, indicar qué archivo o fragmento 
 
 | Parte | Estado documentado en esta revisión |
 | --- | --- |
-| Demo visual provisional | Carga, Análisis y Plan del cascarón PROGSA, con datos sintéticos y reglas ilustrativas; Luis construye las interfaces definitivas según los bosquejos. |
+| Demo visual oficial | Replays, Análisis y Plan en `public/sitio/html`, con datos sintéticos y reglas ilustrativas mientras se conectan los servicios definitivos. |
 | Fase 2 | Documento comprobado por el equipo y listo para presentarlo, según confirmó Roberto. La revisión del profesor sigue pendiente; SQL y diccionario de las 30 tablas están en el repo. |
 | Pantallas de Luis | Cuatro vistas públicas integradas en PR #50; A03/A04 cerradas. Continúa la construcción del frontend en A11/A12/A19/A20/A27/A28 y revisión A35. |
 | Servidor y motor definitivo | Pendientes de implementación/conexión. |
 | Proveedor real, acceso y persistencia de la web | Pendientes de integración y comprobación. |
 
-La demo se abre desde `public/carga.html`. Su selector valida nombres/cantidad de archivos, pero no procesa el contenido de los .replay ni los envía al proveedor. Las versiones de ejemplo no acreditan historial guardado en base de datos. [Alcance de la demo](docs/demo-progsa.md).
+La interfaz oficial se abre desde `public/sitio/html/replays.html`; Análisis y Plan están en la misma carpeta. Replays valida cantidad, extensión y duplicados, y envía la carga al API local. Las métricas y planes sintéticos de las vistas oficiales siguen siendo una demostración y no acreditan historial persistido. [Alcance de la demo](docs/demo-progsa.md).
 
 El servidor Express y package.json ya existen en main; comprobar el README, la rama y los archivos actuales antes de indicar comandos o endpoints disponibles. El estado técnico de las demás filas conserva su carácter de instantánea y requiere comprobación.
 
@@ -62,7 +62,7 @@ No se conocen horas semanales disponibles. David lleva materias distintas; no as
 
 ## Acuerdo de frontend que debe respetar cualquier IA
 
-Luis diseña y construye las pantallas definitivas según los bosquejos y mantiene una apariencia común con su trabajo público. Carga, Análisis y Plan del cascarón PROGSA fueron provisionales: no indicar que se reutilice su HTML/CSS o presentación como interfaz final. Conservar los cálculos, contratos y funciones comprobados y conectarlos con las interfaces que desarrolle Luis. La sustitución del prototipo ocurre al integrar y comprobar esas nuevas vistas, no mediante una eliminación anticipada.
+Luis diseña y construye las pantallas oficiales según los bosquejos y mantiene una apariencia común con su trabajo público. Las vistas oficiales conservan los cálculos, contratos y funciones comprobados, y los muestran mediante los servicios sintéticos mientras se conectan los datos definitivos. Las páginas raíz antiguas quedan fuera del recorrido oficial hasta completar su retirada.
 
 [Guía de frontend, reparto por pantalla y evidencia](docs/frontend-luis.md). En A19 Luis construye frontend y Roberto motor/API/conexión de datos; ambos son responsables de la entrega. A32 conserva a David como implementador administrativo y a Luis como coordinador/revisor visual.
 
@@ -74,7 +74,7 @@ No cambiar el stack ni añadir frameworks/dependencias sin explicar la necesidad
 
 | Ruta | Uso |
 | --- | --- |
-| `public/carga.html`, `public/analisis.html`, `public/plan.html` | Rutas objetivo de las interfaces definitivas de Luis; el cascarón actual es provisional y su presentación será sustituida al integrar las nuevas vistas. |
+| `public/sitio/html/replays.html`, `analisis.html`, `plan.html` | Rutas de las interfaces oficiales del jugador; comparten los servicios sintéticos y estilos del sitio. |
 | `public/js/demo-data.js`, `demo-service.js`, `app.js` | Datos, lógica ilustrativa y presentación de la demo; comprobar sus rutas bajo public/js. |
 | `public/sitio/` | Vistas públicas propias de Luis, integradas en PR #50; referencia de coherencia visual del sitio. |
 | `src/app.js`, `src/routes/`, `src/services/` | Destino propuesto del servidor, rutas y adaptador de Tadeo; aún no acredita archivos creados. |
