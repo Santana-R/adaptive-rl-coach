@@ -4,7 +4,7 @@ Acuerdo confirmado por Roberto el 14 de noviembre de 2026.
 
 **Luis diseña y construye las pantallas definitivas del jugador, incluidas Carga, Análisis y Plan.** Parte de los bosquejos de Fase 1 y mantiene una apariencia común con sus vistas públicas. Decide la distribución, estilos, componentes y presentación de estados; su responsabilidad incluye implementar la interfaz y conectarla con el equipo.
 
-Las tres pantallas del cascarón PROGSA fueron una entrega provisional asistida. Su HTML/CSS y presentación no se adoptan como interfaz final. Las versiones definitivas requieren el diseño y la implementación de Luis. Los cálculos, contratos y funciones ya comprobados se conservan y se conectan con esas nuevas interfaces; las reglas ilustrativas de la demo no sustituyen al motor.
+Las tres vistas oficiales del jugador están implementadas en `public/sitio/html`. Conservan los cálculos, contratos y funciones ya comprobados y usan datos sintéticos mientras se conectan los servicios definitivos; las reglas ilustrativas de la demo no sustituyen al motor.
 
 ## Qué pantalla trabaja cada uno
 
@@ -33,9 +33,9 @@ Los bosquejos fijan el contenido y la navegación. Luis define cómo presentarlo
 
 Luis puede construir las vistas y sus estados con fixtures identificados mientras Roberto, Tadeo y David preparan los servicios. Ese avance visual se registra como parcial; el cierre de una tarea de integración requiere comprobar el recorrido conectado.
 
-Las rutas objetivo siguen siendo `public/carga.html`, `public/analisis.html` y `public/plan.html`, con los estilos/componentes comunes que defina Luis. Si reorganiza archivos, coordina rutas y recursos con Tadeo y lo registra en el PR. A19 separa HTML/CSS y componentes de Luis de cálculo/API y conexión de datos de Roberto; ambos acuerdan cualquier archivo compartido.
+Las rutas oficiales son `public/sitio/html/replays.html`, `public/sitio/html/analisis.html` y `public/sitio/html/plan.html`, con los estilos/componentes comunes del sitio. Las páginas raíz antiguas se conservan solo como compatibilidad de la demo anterior. A19 separa HTML/CSS y componentes de Luis de cálculo/API y conexión de datos de Roberto; ambos acuerdan cualquier archivo compartido.
 
-La sustitución del cascarón se hará al integrar las nuevas pantallas de Luis y comprobar navegación y comportamiento. Este acuerdo actualiza tareas y documentación; las pantallas definitivas siguen pendientes de construcción.
+La migración del recorrido oficial se comprobó mediante navegación y comportamiento en el smoke test. Las páginas raíz antiguas se mantienen temporalmente como compatibilidad y no deben recibir nuevos enlaces.
 
 ## Qué evidencia entrega
 

@@ -1,17 +1,15 @@
-# Cascarón HTML para PROGSA
+# Vistas oficiales del jugador
 
-**Prototipo provisional de PROGSA.** Las vistas públicas de Luis ya se integraron en PR #50. Luis diseña y construye las interfaces definitivas de Carga, Análisis y Plan según los bosquejos; la presentación de este cascarón no se adopta como interfaz final. [Reparto y entregas de frontend](frontend-luis.md).
-
-Tres pantallas navegables del mismo proyecto: **Carga → Análisis → Plan**. Esta entrega ofrece una interfaz ejecutable con datos sintéticos. Se conserva como demostración de aquella entrega mientras se construyen y conectan las interfaces definitivas de Luis.
+Las vistas oficiales de Luis están en `public/sitio/html`: **Replays → Análisis → Plan**. Comparten los servicios de datos sintéticos para conservar el recorrido de demostración mientras se conectan los endpoints definitivos. [Reparto y entregas de frontend](frontend-luis.md).
 
 ## Abrir la demostración
 
-La forma más sencilla, también sin internet:
+Para usar la carga y el API local:
 
-1. Descargar el ZIP de la rama del PR con **Code → Download ZIP**, o cambiar a `feat/progsa-cascaron-html` en GitHub Desktop.
-2. Extraer el ZIP si corresponde. Mantener juntas las carpetas `public/css`, `public/js` y `public/vendor`.
-3. Abrir `public/carga.html` con Chrome, Edge o Firefox. No requiere npm, instalación de dependencias, claves ni cuentas.
-4. Pulsar **Usar cinco replays de ejemplo** y después **Ver análisis de ejemplo**.
+1. Ejecutar `npm ci` y `npm start` desde la raíz.
+2. Abrir `http://127.0.0.1:3000/`; la entrada lleva a Replays.
+3. Seleccionar exactamente cinco archivos `.replay` distintos y pulsar **Procesar bloque**.
+4. Abrir Análisis y Plan para consultar la demostración sintética.
 
 También se puede servir localmente desde la raíz del repositorio:
 
@@ -19,15 +17,15 @@ También se puede servir localmente desde la raíz del repositorio:
 python -m http.server 8000 --directory public
 ```
 
-En Windows, si el comando disponible es `py`, usar `py -m http.server 8000 --directory public`. Abrir `http://localhost:8000/carga.html`. Para detener el servidor, Ctrl+C.
+En Windows, si el comando disponible es `py`, usar `py -m http.server 8000 --directory public`. Abrir `http://localhost:8000/sitio/html/analisis.html?scenario=initial&minutes=40`. Para detener el servidor, Ctrl+C.
 
 ## Guion de presentación de 3–4 minutos
 
 | Paso | Qué hacer | Qué explicar |
 | --- | --- | --- |
-| 1 · Entrada | Abrir Carga y pulsar «Usar cinco replays de ejemplo». | El sistema agrupa cinco partidas del mismo jugador y modalidad. El contexto y objetivo aparecen a la derecha. |
-| 2 · Línea base | Pulsar «Ver análisis de ejemplo». | El primer bloque establece el punto de partida: no muestra una comparación inexistente. Aparecen boost y precisión como prioridades. |
-| 3 · Primera respuesta | Abrir «Ver mi plan de entrenamiento». | El plan distribuye 40 minutos entre calentamiento, rutas de boost y tiros; cada ejercicio tiene finalidad e instrucciones. |
+| 1 · Entrada | Abrir Replays y seleccionar cinco archivos `.replay`. | El sistema valida cantidad, extensión y duplicados antes de enviar el bloque. |
+| 2 · Línea base | Abrir Análisis con el primer bloque. | El primer bloque establece el punto de partida: no muestra una comparación inexistente. Aparecen boost y precisión como prioridades. |
+| 3 · Primera respuesta | Abrir Plan. | El plan distribuye 40 minutos entre calentamiento, rutas de boost y tiros; cada ejercicio tiene finalidad e instrucciones. |
 | 4 · Retroalimentación | Cambiar Escenario a «Bloque posterior» y abrir Análisis. | La precisión pasa de 25 % a 30 %: son +5 puntos porcentuales. El tiempo con boost bajo pasa de 39 % a 24 %. Se conservan contexto y modalidad. |
 | 5 · Adaptación | Abrir Plan. | La referencia ilustrativa deja boost en mantenimiento y concentra más tiempo en precisión. Se explica qué cambió. |
 | 6 · Contexto | Elegir 20 minutos. Consultar después una versión anterior con el selector. | La rutina se reorganiza para caber en 20 minutos. La versión de 40 minutos conserva su contenido. |
@@ -39,8 +37,8 @@ Si quieren repetir el recorrido, **Restablecer** vuelve a primer bloque, 40 minu
 ## Qué funciona en esta entrega
 
 - Navegación entre las tres vistas con escenario, minutos y versiones conservados en la URL. Funciona incluso con apertura directa de archivos.
-- Selector local de archivos y arrastrar/soltar: valida exactamente cinco, extensión `.replay` y duplicados por nombre/tamaño; permite quitar un archivo.
-- Carga de cinco nombres ficticios para recorrer la demo sin disponer de replays.
+- Selector local de archivos y arrastrar/soltar en Replays: valida exactamente cinco, extensión `.replay` y duplicados; permite quitar un archivo.
+- Envío del bloque válido a `POST /api/v1/blocks`, con estado inicial `pending`.
 - Dos conjuntos sintéticos de cinco partidas, cálculos de precisión por totales y media de boost ponderada por duración.
 - Línea base frente a comparación posterior, gráfico con selector de métrica, tabla accesible y prioridades con evidencia desplegable.
 - Planes de 20/40 minutos, instrucciones desplegables y consulta de versiones de ejemplo anteriores durante el recorrido.
@@ -57,7 +55,7 @@ La mejora entre bloques no demuestra que el ejercicio la causó. Los porcentajes
 
 ## Cómo encaja con el reparto
 
-| Trabajo definitivo | Referencia funcional de esta demo provisional | Entrega acordada |
+| Trabajo definitivo | Referencia funcional de esta demostración sintética | Entrega acordada |
 | --- | --- | --- |
 | A03/A04 · Luis | Esta demo fue un avance separado de sus vistas públicas. | Sus cuatro vistas ya están integradas y ambas issues cerradas; el resto del frontend continúa. |
 | A11 · Luis | Recorrido ilustrativo de selección de replays. | Diseñar/construir Carga definitiva y conectarla con API y estados; historial continúa en A28. |
@@ -70,16 +68,16 @@ Tadeo mantiene servidor/Ballchasing e integración; David datos/Auth/historial. 
 
 | Archivo | Responsabilidad |
 | --- | --- |
-| `public/carga.html` | Estructura de Carga y contexto precargado. |
-| `public/analisis.html` | Estructura de métricas, gráfica, tabla y prioridades. |
-| `public/plan.html` | Estructura del plan y sus instrucciones. |
-| `public/css/app.css` | Diseño y componentes compartidos. |
+| `public/sitio/html/replays.html` | Carga e historial oficial de bloques. |
+| `public/sitio/html/analisis.html` | Métricas, gráfica, tabla y prioridades oficiales. |
+| `public/sitio/html/plan.html` | Plan, ejercicios, motivos y versiones oficiales. |
+| `public/sitio/css/index.css` | Diseño y componentes compartidos del sitio. |
 | `public/js/demo-data.js` | Datos sintéticos, normalización y reglas ilustrativas como funciones separadas. |
 | `public/js/demo-service.js` | Origen de datos de ejemplo; punto para conectar el servicio real después. |
 | `public/js/app.js` | Eventos de interfaz, navegación, presentación y estado del recorrido. |
 | `public/vendor/README.md` | Versiones, origen, integridad y licencias de dependencias. |
 
-Las funciones `loadAnalysis` y `loadPlan` devuelven un sobre `{ data, meta }` siguiendo la convención del contrato inicial. Este es un modelo de presentación de ejemplo: A19 debe mapear las respuestas reales, gestionar espera/error y probar permisos. Los controladores no contienen claves ni llamadas al proveedor. El frontend definitivo requiere el diseño e implementación de Luis según los bosquejos; no se adopta el HTML/CSS o la presentación del cascarón como solución final. Los contratos y funciones comprobados se conectan con esas nuevas interfaces; las reglas de demo no sustituyen el motor definitivo.
+Las funciones `loadAnalysis` y `loadPlan` devuelven un sobre `{ data, meta }` siguiendo la convención del contrato inicial. Las vistas oficiales muestran esta presentación sintética mientras A19 mapea las respuestas reales, gestiona espera/error y prueba permisos. Los controladores no contienen claves ni llamadas al proveedor; las reglas de demo no sustituyen el motor definitivo.
 
 Referencias internas: [contrato inicial](contratos-api.md), [flujo de pantallas](flujo-pantallas.md), [base técnica](base-tecnica.md). Referencias académicas: Fase 1, secciones 6.6/6.7/6.9; Sprint 1, ciclo de comparación y ajuste del entrenamiento.
 

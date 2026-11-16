@@ -251,6 +251,49 @@ body {
     height: 100%;
     border-radius: .25rem;
 }
+.bar-track{
+    display: flex;
+    overflow: hidden;
+    min-height: 18px;
+}
+.bar-track span{
+    display: block;
+    min-width: 2px;
+}
+.exercise{
+    background-color: rgb(15, 28, 41);
+    border: 1px solid rgb(85, 118, 147);
+    border-radius: .75rem;
+    margin-bottom: .75rem;
+    padding: .75rem;
+}
+.exercise summary{
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+}
+.exercise-detail{
+    color: rgb(179, 190, 205);
+    padding: .75rem 0 0 2rem;
+}
+.exercise-detail li{
+    margin-bottom: .25rem;
+}
+.exercise-goal{
+    color: rgb(13, 228, 196);
+}
+.priority-card{
+    background-color: rgb(15, 28, 41);
+    border: 1px solid rgb(85, 118, 147);
+    border-radius: .75rem;
+    color: rgb(179, 190, 205);
+    margin: .75rem 0;
+    padding: .85rem;
+}
+.priority-card h3{
+    color: #fff;
+    font-size: 1rem;
+}
 
 .step-num{
     color: rgb(13, 228, 196);

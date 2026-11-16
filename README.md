@@ -8,7 +8,7 @@ Lee [CONTEXTOIA.md](CONTEXTOIA.md) y tu issue actual antes de empezar. Puedes ad
 
 ## Esta semana: motor funcionando para el 9 de noviembre
 
-**Luis diseña y construye las pantallas definitivas de Carga → Análisis → Plan según los bosquejos.** El cascarón PROGSA fue provisional; su presentación no se adopta como interfaz final. Roberto mantiene el motor/API y conecta sus resultados con las nuevas vistas. [Reparto de frontend y entregas de Luis](docs/frontend-luis.md).
+**Las pantallas oficiales de Carga/Replays → Análisis → Plan están en `public/sitio/html`.** Roberto mantiene el motor/API y conecta sus resultados con estas vistas. [Reparto de frontend y entregas de Luis](docs/frontend-luis.md).
 
 | Persona | Empieza por esta entrega | Después |
 | --- | --- | --- |
@@ -32,7 +32,7 @@ Piezas principales 4–6 e integración/ensayo 7–8 son metas internas propuest
 
 ## Lo que ya está preparado
 
-- **Demo:** abrir `public/carga.html` y usar cinco replays de ejemplo. [Qué hace y qué falta](docs/demo-progsa.md). Este prototipo usa datos de ejemplo y se conserva mientras Luis desarrolla sus interfaces definitivas.
+- **Interfaz oficial:** abrir `public/sitio/html/replays.html` para cargar cinco replays y consultar el historial. Análisis y Plan están en `public/sitio/html/analisis.html` y `public/sitio/html/plan.html`.
 - **Fase 2:** se verificaron las **30 tablas existentes** en Supabase el 1 de noviembre. [Estado, documento y revisión](docs/fase2-estado.md) · [esquema SQL](database/esquema-fase2.sql). El equipo confirmó que el documento está listo para presentarlo; la revisión del profesor sigue pendiente. A07 solo da seguimiento a sus observaciones y no bloquea la implementación.
 - **Luis:** sus cuatro vistas públicas se integraron en PR #50; A03 y A04 están cerradas. El diseño y la construcción del resto del frontend continúan en A11/A12/A19/A20/A27/A28 y la revisión A35.
 - **Pendiente:** motor definitivo, entrada real, consultas/persistencia y acceso. La creación de tablas es avance distinto de conectar esas operaciones.
@@ -48,7 +48,7 @@ npm start
 
 Abre `http://127.0.0.1:3000/health` para comprobar que el servidor responde con `{"status":"ok"}`.
 
-En `http://127.0.0.1:3000/carga.html`, pulsa **Usar cinco replays de ejemplo** y luego **Ver análisis de ejemplo**. Desde Análisis, abre **Mi plan** para ver la rutina.
+En `http://127.0.0.1:3000/`, entra a Replays para cargar cinco archivos `.replay`. Para revisar la demostración sintética de Análisis y Plan, abre `sitio/html/analisis.html?scenario=initial&minutes=40`.
 
 La carga de archivos reales se envía a `POST /api/v1/blocks` como `multipart/form-data` y queda en estado `pending` en el servidor local en memoria. El procesamiento privado, persistencia, autenticación y transición a `ready` pertenecen a A13/A15/A30; la interfaz no presenta una carga aceptada como análisis calculado.
 
