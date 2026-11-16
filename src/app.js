@@ -9,14 +9,17 @@ const {
 } = require('../public/sitio/js/profile-validation');
 const { getCatalog } = require('./repositories/catalog');
 const { createAnalysisRouter, createAnalysisDemoRouter } = require('./routes/analysis');
+const { createStoredAnalysisRepository } = require('./services/stored-block');
+const { createPlansRouter } = require('./routes/plans');
 
 /**
  * Construye la aplicación. Recibe el cliente de Supabase para poder probarla
  * con un cliente simulado (tests/auth.test.cjs).
  */
-function createApp({ supabase = createServerClient(), analysisRepository = null, enableAnalysisDemo = false } = {}) {
+function createApp({ supabase = createServerClient(), analysisRepository, enableAnalysisDemo = false } = {}) {
   const app = express();
   const { requireAuth, requireRole } = createAuth(supabase);
+  const repository = analysisRepository === undefined ? createStoredAnalysisRepository(supabase) : analysisRepository;
 
   app.use(express.raw({
     type: request => request.headers['content-type']?.startsWith('multipart/form-data'),
@@ -110,7 +113,8 @@ app.patch('/api/v1/profile', requireAuth, async (req, res, next) => {
     }
   });
 
-  app.use('/api/v1/blocks', createAnalysisRouter({ requireAuth, requireRole, repository: analysisRepository }));
+  app.use('/api/v1/blocks', createAnalysisRouter({ requireAuth, requireRole, repository }));
+  app.use('/api/v1/blocks', createPlansRouter({ supabase, requireAuth, requireRole, repository }));
   app.use('/api/v1/demo/analysis', createAnalysisDemoRouter({ enabled: enableAnalysisDemo }));
   app.use('/api/v1/blocks', blocksRouter);
   app.use(express.static(path.join(__dirname, '..', 'public')));

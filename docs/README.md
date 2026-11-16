@@ -14,6 +14,7 @@ Para comenzar basta [la guía breve](empieza-aqui.md) y tu issue. Abre estas ref
 | Entender conexiones y responsabilidades | [Base técnica](base-tecnica.md) · [Arquitectura](arquitectura-y-diagramas.md) |
 | Implementar datos e historial | [Diccionario](diccionario-datos.md) |
 | Preparar el catálogo y distinguir la aportación de Roberto/David | [Fichas deportivas de A23](catalogo-ejercicios.md) · [Contenido estructurado](../planning/catalogo-ejercicios.v1.json) |
+| Probar la ruta de propuesta y conexión con bloques guardados | [Integración A18](integracion-propuestas.md) · [Ejemplo HTTP](../planning/examples/plan-proposal-api.json) |
 | Comprender/probar la selección de ejercicios y reparto de minutos | [Generador de propuestas A18](generador-planes.md) · [Ejemplo ejecutado](../planning/examples/plan-proposal.json) |
 | Comprender/probar datos → motor → API → pantalla de Análisis | [Integración A19 y evidencias](analisis-integracion.md) |
 | Verificar métricas y reglas | [Casos del motor](casos-motor.md) · [Fixtures](../tests/fixtures/analisis) |

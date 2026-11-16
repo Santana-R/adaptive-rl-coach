@@ -1,0 +1,228 @@
+{
+  "evidence": {
+    "data": "synthetic block inserted/read inside real SQL transaction, then rolled back",
+    "database_transport": "captured responses",
+    "authentication": "simulated",
+    "real_user_session_test": false,
+    "persisted_plan": false
+  },
+  "data": {
+    "plan_id": null,
+    "plan_version_id": null,
+    "version": 1,
+    "generator_version": "mvp.plans.v1",
+    "block_id": "7",
+    "rules_version": "mvp.rules.v1",
+    "metrics_version": "mvp.metrics.v1",
+    "catalog_version": "mvp.catalog.v1",
+    "catalog_source": "database",
+    "allocation_version": "mvp.allocation.v1",
+    "availability_minutes": 20,
+    "assigned_minutes": 20,
+    "unassigned_minutes": 0,
+    "coverage": "complete",
+    "explanation": "Se proponen 3 ejercicios compatibles para practicar finalización durante 20 minutos.",
+    "uncovered_priorities": [],
+    "missing_exercises": [],
+    "reason_codes": [],
+    "catalog_exclusions": [],
+    "goals_excluded": [],
+    "goals_snapshot": [],
+    "profile_snapshot": {
+      "platform": "steam",
+      "player_id": "TEST_A",
+      "mode": "2v2",
+      "available_minutes": 20,
+      "rank": "diamond",
+      "rank_source": "self_reported",
+      "rank_mode": "2v2",
+      "workshop_access": true,
+      "coco_variant_key": null
+    },
+    "diagnosis_snapshot": {
+      "priorities": [
+        {
+          "priority_key": "shooting",
+          "rule_id": "finalizacion-eficiencia",
+          "rules_version": "mvp.rules.v1",
+          "title": "Practicar colocación y finalización",
+          "score": 1,
+          "evidence": {
+            "metric_key": "shooting_pct",
+            "value": 30,
+            "unit": "percent",
+            "threshold": 30,
+            "direction": "below_or_equal",
+            "operator": "<=",
+            "sample_size": 5,
+            "coverage": 5,
+            "goals": {
+              "value": 6,
+              "unit": "count",
+              "coverage": 5
+            },
+            "shots": {
+              "value": 20,
+              "unit": "count",
+              "coverage": 5
+            },
+            "min_shots": 15,
+            "context": {
+              "platform": "steam",
+              "player_id": "TEST_A",
+              "mode": "2v2",
+              "match_type": "ranked"
+            },
+            "source": "stored_replay_metrics",
+            "metrics_version": "mvp.metrics.v1",
+            "replay_ids": [
+              "sha256:87f1ac53688a3f1775ac4312b35e8f0187f1ac53688a3f1775ac4312b35e8f01",
+              "sha256:e49a90c9553d1e0c73e0b6010121bff8e49a90c9553d1e0c73e0b6010121bff8",
+              "sha256:0102bba1c93a4e2a6ab87f7ebb0b6e270102bba1c93a4e2a6ab87f7ebb0b6e27",
+              "sha256:f3a7674e58172d191c238154e5405e44f3a7674e58172d191c238154e5405e44",
+              "sha256:bd43d6297c1f67aeae7c67307887579fbd43d6297c1f67aeae7c67307887579f"
+            ]
+          },
+          "explanation": "Registraste 6 goles en 20 tiros (30 %). Cumples el mínimo de 15 tiros para 2v2 y el criterio inicial de eficiencia ≤ 30 %; se sugiere practicar colocación y finalización.",
+          "calibration_status": "agreed_heuristic_not_calibrated",
+          "order": 1
+        }
+      ],
+      "limitations": [
+        "heuristics_pending_calibration_A26",
+        "stored_duration_basis_unverified",
+        "original_provider_not_recorded"
+      ]
+    },
+    "exercises": [
+      {
+        "plan_exercise_id": null,
+        "order": 1,
+        "priority_key": "shooting",
+        "rule_id": "finalizacion-eficiencia",
+        "exercise_key": "castro-ground-shots",
+        "exercise_version_id": "1",
+        "assigned_minutes": 10,
+        "difficulty": 1,
+        "exercise_snapshot": {
+          "exercise_id": "1",
+          "exercise_version_id": "1",
+          "exercise_key": "castro-ground-shots",
+          "content_version": 1,
+          "title": "Ground Shots — Castro",
+          "priority_key": "shooting",
+          "resource_type": "custom_training",
+          "resource_url": "https://docs.google.com/document/d/1d6D9Yh7KhT_acDZS_NLP7Ejsn_dfuUL3e4I1Qa7eXkI/edit?tab=t.0",
+          "resource_code": "9472-6A26-7F5D-767B",
+          "purpose": "Practicar contacto después del bote, consistencia, colocación y potencia de finalización.",
+          "instructions": [
+            "Abrir Entrenamiento personalizado e introducir el código del paquete.",
+            "Practicar el paquete base sin BakkesMod y sin añadir aleatorización externa.",
+            "Esperar el bote y golpear justo después; adaptar la colocación al nivel de práctica.",
+            "Recorrer las posiciones en orden, con máximo tres intentos por posición antes de avanzar.",
+            "Practicar durante los minutos asignados; no es necesario completar todo el paquete.",
+            "Elegir izquierda o derecha antes del tiro y buscar esa zona."
+          ],
+          "success_criterion": "Buscar el gol tras el contacto posterior al bote; después trabajar la zona elegida y la potencia según el nivel. No se impone una velocidad ni tasa de acierto calibrada.",
+          "difficulty": 1,
+          "practice_level_instruction": "Elegir izquierda o derecha antes del tiro y buscar esa zona.",
+          "selected_variant": null
+        }
+      },
+      {
+        "plan_exercise_id": null,
+        "order": 2,
+        "priority_key": "shooting",
+        "rule_id": "finalizacion-eficiencia",
+        "exercise_key": "castro-mid-height-shots",
+        "exercise_version_id": "2",
+        "assigned_minutes": 5,
+        "difficulty": 1,
+        "exercise_snapshot": {
+          "exercise_id": "2",
+          "exercise_version_id": "2",
+          "exercise_key": "castro-mid-height-shots",
+          "content_version": 1,
+          "title": "Mid Height Shots — Castro",
+          "priority_key": "shooting",
+          "resource_type": "custom_training",
+          "resource_url": "https://docs.google.com/document/d/1d6D9Yh7KhT_acDZS_NLP7Ejsn_dfuUL3e4I1Qa7eXkI/edit?tab=t.0",
+          "resource_code": "E6E3-1E82-E6DE-C4B4",
+          "purpose": "Practicar finalización de balones elevados que permiten aprovechar el flip para generar potencia.",
+          "instructions": [
+            "Abrir Entrenamiento personalizado e introducir el código del paquete.",
+            "Practicar el paquete base sin BakkesMod y sin añadir aleatorización externa.",
+            "Buscar finalizar directamente y aprovechar el flip cuando sea posible; adaptar la colocación al nivel de práctica.",
+            "Recorrer las posiciones en orden, con máximo tres intentos por posición antes de avanzar.",
+            "Practicar durante los minutos asignados; no es necesario completar todo el paquete.",
+            "Elegir izquierda o derecha antes del tiro y buscar esa zona."
+          ],
+          "success_criterion": "Buscar gol directo con contacto controlado; añadir zona elegida y potencia según el nivel. No se exige una mecánica avanzada adicional.",
+          "difficulty": 1,
+          "practice_level_instruction": "Elegir izquierda o derecha antes del tiro y buscar esa zona.",
+          "selected_variant": null
+        }
+      },
+      {
+        "plan_exercise_id": null,
+        "order": 3,
+        "priority_key": "shooting",
+        "rule_id": "finalizacion-eficiencia",
+        "exercise_key": "coco-aim-training",
+        "exercise_version_id": "3",
+        "assigned_minutes": 5,
+        "difficulty": 2,
+        "exercise_snapshot": {
+          "exercise_id": "3",
+          "exercise_version_id": "3",
+          "exercise_key": "coco-aim-training",
+          "content_version": 1,
+          "title": "Aim Training — CoCo",
+          "priority_key": "shooting",
+          "resource_type": "steam_workshop",
+          "resource_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=1906378036",
+          "resource_code": null,
+          "purpose": "Practicar precisión y consistencia de contacto contra objetivos con dificultad elegida.",
+          "instructions": [
+            "Abrir el mapa desde Steam Workshop y seleccionar una sola variante para el bloque de práctica.",
+            "En Normal, comprobar los tres ajustes de la variante antes de empezar; no se deduce su estado por la captura de ejemplo.",
+            "Buscar contactos controlados contra el objetivo durante los minutos asignados, sin reiniciar el cronómetro después de fallar.",
+            "Registrar manualmente minutos realizados, variante, ajustes y mejor racha del bloque.",
+            "Si la dificultad resulta excesiva, elegir una variante más sencilla y registrar el cambio como otro bloque de práctica.",
+            "Modo elegido: normal.",
+            "Tamaños aleatorios: desactivado; distancias aleatorias: desactivado; caídas aleatorias: desactivado."
+          ],
+          "success_criterion": "Trabajar contactos controlados y consistencia; conservar la mejor racha como práctica autorreportada, sin establecer un umbral para acreditar mejora.",
+          "difficulty": 2,
+          "practice_level_instruction": null,
+          "selected_variant": {
+            "variant_key": "normal-fixed",
+            "mode": "normal",
+            "difficulty": 2,
+            "suggested_ranks": [
+              "platinum",
+              "diamond"
+            ],
+            "default_for_ranks": true,
+            "random_target_sizes": false,
+            "random_wall_distances": false,
+            "random_ball_drops": false
+          }
+        }
+      }
+    ],
+    "limitations": [
+      "heuristics_pending_calibration_A26",
+      "stored_duration_basis_unverified",
+      "original_provider_not_recorded",
+      "unpersisted_proposal"
+    ]
+  },
+  "meta": {
+    "contract_version": "1.0",
+    "persisted": false,
+    "source": "stored_replay_metrics",
+    "session_preferences_source": "self_reported",
+    "catalog_source": "database"
+  }
+}

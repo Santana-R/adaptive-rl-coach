@@ -1,6 +1,6 @@
 # Generador de propuestas · A18
 
-Implementación preparada con Roberto y asistencia de IA bajo su Release. **La función de dominio está implementada y comprobada; A18 sigue abierta** mientras falta integrar y comprobar la ruta de generación de A18 con el catálogo operativo A23, ya entregado por David. La persistencia A24 es posterior y no bloquea el cierre de A18. La entrega no acredita un endpoint, un plan guardado ni una interfaz conectada.
+Implementación preparada con Roberto y asistencia de IA bajo su Release. El dominio y la [ruta de propuesta](integracion-propuestas.md) están implementados y comprobados con datos controlados; el catálogo A23 y repositorios A15 ya están integrados. La propuesta se devuelve sin guardar: A24 conserva versiones y A27 la muestra. La comprobación de sesión real/carga completa continúa en A19/A13/A37.
 
 ## Entrada y salida
 
@@ -112,4 +112,4 @@ console.table(plan.exercises.map(e => ({ ejercicio: e.exercise_key, minutos: e.a
 NODE
 ```
 
-La integración pendiente de A18 obtiene perfil/metas/catálogo propios y revisados y llama a esta función desde la ruta de generación. A24 toma esa propuesta y conserva sus versiones mediante persistencia; no es un requisito previo para cerrar A18. A27 lo mostrará en la interfaz de Luis. El [contrato](contratos-api.md) conserva esa responsabilidad; A18 no se cierra con esta entrega de dominio aislada.
+La ruta `POST /api/v1/blocks/:blockId/plan-proposal` obtiene el perfil, catálogo y metas propias y llama a esta función con el análisis del bloque. A24 toma esa propuesta y conserva sus versiones mediante persistencia; no es un requisito previo para cerrar A18. A27 lo mostrará en la interfaz de Luis. El [contrato](contratos-api.md) distingue la propuesta comprobada de la persistencia pendiente. El alcance y las pruebas integradas están en la guía de la ruta.
