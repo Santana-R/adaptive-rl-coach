@@ -14,7 +14,9 @@ const { createStoredAnalysisRepository } = require('./services/stored-block');
 const { createAdminUsersRouter } = require('./routes/admin-users');
 const { createPlansRouter, createPlanVersionsRouter } = require('./routes/plans');
 const { createGoalsRouter } = require('./routes/goals');
-
+const { createSessionsRouter } = require('./routes/sessions');
+const { createRankHistoryRouter } = require('./routes/ranks');
+const { createReportsRouter } = require('./routes/reports');
 /**
  * Construye la aplicación. Recibe el cliente de Supabase para poder probarla
  * con un cliente simulado (tests/auth.test.cjs).
@@ -31,6 +33,8 @@ function createApp({ supabase = createServerClient(), analysisRepository, enable
   requireAuth,
   requireRole,
 }));
+
+app.use('/api/v1/sessions', createSessionsRouter({ supabase, requireAuth, requireRole }));
 
   app.get('/health', (_req, res) => {
     res.json({ status: 'ok' });
@@ -112,6 +116,8 @@ app.patch('/api/v1/profile', requireAuth, async (req, res, next) => {
   app.use('/api/v1/blocks', createPlansRouter({ supabase, requireAuth, requireRole, repository }));
   app.use('/api/v1/plans', createPlanVersionsRouter({ supabase, requireAuth, requireRole, repository }));
   app.use('/api/v1/goals', createGoalsRouter({ supabase, requireAuth, requireRole }));
+  app.use('/api/v1/rank-history', createRankHistoryRouter({ supabase, requireAuth, requireRole }));
+  app.use('/api/v1/reports', createReportsRouter({ supabase, repository, requireAuth, requireRole }));
   app.use('/api/v1/demo/analysis', createAnalysisDemoRouter({ enabled: enableAnalysisDemo }));
     app.use('/api/v1/blocks', enableBlocksDemo && !supabase
       ? blocksRouter
@@ -120,7 +126,7 @@ app.patch('/api/v1/profile', requireAuth, async (req, res, next) => {
 
   app.use((err, _req, res, _next) => {
     if (err instanceof ApiError) return sendError(res, err.status, err.code, err.message);
-    console.error(err);
+    console.error('[INTERNAL_ERROR] Error inesperado del servidor.');
     return sendError(res, 500, 'INTERNAL_ERROR', 'Error inesperado del servidor.');
   });
 

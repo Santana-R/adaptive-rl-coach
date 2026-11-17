@@ -27,7 +27,7 @@ function catalogRows() {
 
 function storedDatabase() {
   const state = { rows: [blockRow('10', A, { date: '2026-11-10', goals: 5 }), blockRow(), blockRow('20', B)],
-    catalog: catalogRows(), goals: [], calls: [], fail: null,
+    catalog: catalogRows(), goals: [], ranks: [], calls: [], fail: null,
     profiles: new Map([A, B].map(id => [id, { id_usuario: id, gamertag: 'Prueba sintética', plataforma: 'steam',
       cuenta_juego_id: id === A ? 'TEST_PLAYER_A' : 'TEST_PLAYER_B', modalidad_principal: '2v2',
       minutos_sesion: 20, dias_semana: 3, zona_horaria: 'America/Monterrey' }])) };
@@ -47,13 +47,22 @@ function storedDatabase() {
           if (query.single) data = data[0] ?? null;
         } else if (table === 'ejercicios') data = state.catalog.filter(row => row.eliminado_en == null && (query.filters.activo !== true || row.activo));
         else if (table === 'objetivos') data = state.goals.filter(row => row.id_usuario === uid && query.filters.id_objetivo.includes(String(row.id_objetivo)));
-        else throw new Error('Unexpected table ' + table);
+        else if (table === 'rangos' && query.insert) {
+          data = { ...query.insert, id_rango: String(state.ranks.length + 1) }; state.ranks.push(data);
+        } else if (table === 'rangos') {
+          data = state.ranks.filter(row => row.id_usuario === uid && (!query.filters.modalidad || row.modalidad === query.filters.modalidad) &&
+            (!query.lte || row.fecha_registro <= query.lte))
+            .sort((a, b) => b.fecha_registro.localeCompare(a.fecha_registro) || Number(b.id_rango) - Number(a.id_rango));
+          if (query.limit) data = data.slice(0, query.limit);
+        } else throw new Error('Unexpected table ' + table);
         return { data: structuredClone(data), error: null };
       }
       return {
         select(columns) { query.columns = columns; return this; }, eq(key, value) { query.filters[key] = value; return this; },
         is(key, value) { query.filters[key] = value; return this; }, in(key, value) { query.filters[key] = value; return this; },
-        order() { return this; }, maybeSingle() { query.single = true; return Promise.resolve(result()); },
+        order() { return this; }, lte(_key, value) { query.lte = value; return this; }, limit(n) { query.limit = n; return this; },
+        insert(values) { query.insert = values; return this; }, single() { query.single = true; return Promise.resolve(result()); },
+        maybeSingle() { query.single = true; return Promise.resolve(result()); },
         then(resolve, reject) { return Promise.resolve().then(result).then(resolve, reject); },
       };
     },

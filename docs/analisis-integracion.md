@@ -91,3 +91,7 @@ A23 ya tiene seed y consulta con los tres recursos comprobados por David (ver [r
 ## Verificación privada A19 · siguiente comprobación
 
 A13 y la conexión A15 están integradas. A26 se cerró con criterios provisionales; no reemplaza la prueba privada de Análisis. El [comprobador A19](a19-prueba-privada.md) inicia la aplicación local, pide dos sesiones reales y contrasta permisos, conteos, HTTP y controlador sin guardar credenciales. Su preparación se verifica con simulaciones; ejecución con cuentas reales y revisión visual final de Luis siguen pendientes. Las notas anteriores conservan el estado de sus entregas.
+
+## Estado al corte de entrega
+
+A19 se cierra administrativamente con la implementación y regresión disponibles. **La prueba local A/B y la revisión visual final no se ejecutaron/registraron**; no se sustituyen por pruebas simuladas. [Registro de alcance y pendientes](a19-cierre-entrega.md). Seguridad real sigue en A37, revisión visual en A35 y ciclo completo en A25. Las notas anteriores son antecedentes y no acreditan esas comprobaciones.

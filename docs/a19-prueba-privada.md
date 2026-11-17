@@ -53,3 +53,7 @@ Son catorce comprobaciones si hay datos suficientes. El proceso termina con cód
 3. Registrar en la issue el commit, resultado, fuente de los bloques y revisión visual. Cerrar A19 solo cuando se cumplan esos criterios.
 
 La comprobación usa bloques existentes y no acredita una carga nueva de cinco archivos ni consulta a Ballchasing. La evidencia previa A13 se conserva como evidencia de aquel procesamiento. Originales de porcentaje de boost/positioning/duración siguen ausentes en A15; el análisis debe conservar esos faltantes, sin inventar prioridades. El resto de seguridad corresponde a A37.
+
+## Estado posterior: diferido al corte
+
+La ejecución real de este procedimiento no se completó. A19 se cierra administrativamente, manteniendo esa comprobación como pendiente explícito, según [registro](a19-cierre-entrega.md). No hay un JSON real aprobado ni se afirma que exista. La automatización propuesta de nuevas cuentas no se implementó.
