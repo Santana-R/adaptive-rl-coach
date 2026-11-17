@@ -41,10 +41,10 @@ Frontend usa Supabase Auth para correo/Google y envía el access token a Express
 | GET | /api/v1/blocks/:blockId/analysis?baseline_id=... | Propietario | Roberto A19 | analysis; omitir baseline_id para resolver anterior compatible |
 | GET/POST/PATCH/DELETE | /api/v1/goals[/:goalId] | Propietario | David A16;Luis A20 | goal; DELETE archiva si está enlazado, respuesta indica efecto |
 | POST | /api/v1/blocks/:blockId/plan-proposal | Propietario | Roberto A18 | Propuesta sin guardar; 200, IDs de plan null, meta.persisted false |
-| POST | /api/v1/blocks/:blockId/plans | Propietario | Roberto A18;David A24 | goal_ids, availability_minutes → plan-version inicial |
+| POST | /api/v1/blocks/:blockId/plans | Propietario | Roberto A18;David A24 | Entrada de plan-proposal → versión siguiente guardada del plan del bloque (1 si es nuevo). [A24](a24-planes.md) |
 | GET | /api/v1/plans/:planId | Propietario | David A24;Luis A27 | Plan y versión actual |
 | GET | /api/v1/plans/:planId/versions[/:version] | Propietario | David A24;Luis A27 | Lista/detalle de snapshots históricos |
-| POST | /api/v1/plans/:planId/versions | Propietario | Roberto A18;David A24 | Nuevo block_id/contexto/metas/minutos → versión nueva inmutable |
+| POST | /api/v1/plans/:planId/versions | Propietario | Roberto A18;David A24 | Nuevo contexto/metas/minutos del mismo bloque → versión nueva inmutable. Otro bloque = otro plan_id vía /blocks/:blockId/plans (analisis es UNIQUE por bloque) |
 | GET/POST/PATCH/DELETE | /api/v1/sessions[/:sessionId] | Propietario | Tadeo A21;Luis A27 | session; corrección/eliminación recalcula entrenamiento |
 | GET | /api/v1/reports?from=YYYY-MM-DD&to=YYYY-MM-DD | Propietario | Tadeo A22;Luis A28 | report con fuentes separadas y periodo |
 | GET/POST | /api/v1/rank-history | Propietario | David A31 | rank_label, mode, recorded_at; source fijo self_reported |
