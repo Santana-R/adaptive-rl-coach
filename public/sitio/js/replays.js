@@ -66,94 +66,8 @@
           REPLAY_CONTEXT_UNSUPPORTED: 'El contexto de esta partida no es compatible.'
         };
 
-        const history = document.getElementById('blocks-list');
-        let refreshTimer;
-
-        function historyMessage(message) {
-          const paragraph = document.createElement('p');
-          paragraph.className = 'text-bray';
-          paragraph.textContent = message;
-          history.replaceChildren(paragraph);
-        }
-
-        async function showBlock(blockId) {
-          const block = await window.CoachBlocks.get(blockId);
-          const files = block.replays.map(replay => {
-            const reason = replay.error?.split(',').map(code => reasons[code] || code).join(' ');
-            const state = replay.status === 'ok' ? 'Válido' : window.CoachBlocks.label(replay.status);
-            return replay.position + '. ' + replay.file_name + ' · ' + (reason || state);
-          });
-          const details = document.getElementById('block-details');
-          details.textContent = 'Bloque ' + blockId + ' · ' + window.CoachBlocks.label(block.status)
-            + '\n' + files.join('\n');
-          details.hidden = false;
-        }
-
-        function actionButton(label, handler) {
-          const button = document.createElement('button');
-          button.type = 'button';
-          button.className = 'btn-rl btn-rl-outline';
-          button.textContent = label;
-          button.addEventListener('click', async () => {
-            button.disabled = true;
-            try {
-              await handler();
-            } catch (error) {
-              showNotice(error.message, 'error');
-            } finally {
-              button.disabled = false;
-            }
-          });
-          return button;
-        }
-
         async function loadHistory() {
-          clearTimeout(refreshTimer);
-          const blocks = await window.CoachBlocks.list();
-          if (!blocks.length) {
-            historyMessage('Todavía no hay bloques cargados.');
-            return;
-          }
-          history.replaceChildren();
-          for (const block of blocks) {
-            const row = document.createElement('div');
-            row.className = 'table-row';
-            row.style.gridTemplateColumns = '1fr 2fr 1fr 1.5fr 1.5fr';
-            for (const text of [
-              block.block_id,
-              [block.mode, block.match_type === 'pending' ? null : block.match_type].filter(Boolean).join(' · '),
-              block.ready_replays + ' de ' + block.expected_replays,
-              window.CoachBlocks.label(block.status)
-            ]) {
-              const cell = document.createElement('span');
-              cell.textContent = text;
-              row.append(cell);
-            }
-            const actions = document.createElement('span');
-            actions.append(actionButton('Estado', () => showBlock(block.block_id)));
-            if (block.retry_allowed) {
-              actions.append(actionButton('Reintentar', async () => {
-                try {
-                  await window.CoachBlocks.retry(block.block_id);
-                  showNotice('Reintento aceptado para el bloque ' + block.block_id + '.', 'pending');
-                } finally {
-                  await loadHistory();
-                }
-              }));
-            }
-            if (block.status === 'ready') {
-              const link = document.createElement('a');
-              link.className = 'btn-rl btn-rl-outline';
-              link.href = 'analisis.html?block_id=' + encodeURIComponent(block.block_id);
-              link.textContent = 'Ver análisis';
-              actions.append(link);
-            }
-            row.append(actions);
-            history.append(row);
-          }
-          if (blocks.some(block => ['pending', 'processing'].includes(block.status) && !block.retry_allowed)) {
-            refreshTimer = setTimeout(() => loadHistory().catch(error => historyMessage(error.message)), 3000);
-          }
+          await window.CoachBlockHistory.refresh();
         }
 
         document.getElementById('select-files').addEventListener('click', () => input.click());
@@ -192,7 +106,5 @@
           }
         });
         renderFiles();
-        if (window.location.protocol !== 'file:') {
-          loadHistory().catch(error => historyMessage(error.message));
-        }
+
       }());
