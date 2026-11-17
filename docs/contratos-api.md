@@ -41,10 +41,10 @@ Frontend usa Supabase Auth para correo/Google y envía el access token a Express
 | GET | /api/v1/blocks/:blockId/analysis?baseline_id=... | Propietario | Roberto A19 | analysis; omitir baseline_id para resolver anterior compatible |
 | GET/POST/PATCH/DELETE | /api/v1/goals[/:goalId] | Propietario | David A16;Luis A20 | goal; DELETE archiva si está enlazado, respuesta indica efecto |
 | POST | /api/v1/blocks/:blockId/plan-proposal | Propietario | Roberto A18 | Propuesta sin guardar; 200, IDs de plan null, meta.persisted false |
-| POST | /api/v1/blocks/:blockId/plans | Propietario | Roberto A18;David A24 | goal_ids, availability_minutes → plan-version inicial |
+| POST | /api/v1/blocks/:blockId/plans | Propietario | Roberto A18;David A24 | Entrada de plan-proposal → versión siguiente guardada del plan del bloque (1 si es nuevo). [A24](a24-planes.md) |
 | GET | /api/v1/plans/:planId | Propietario | David A24;Luis A27 | Plan y versión actual |
 | GET | /api/v1/plans/:planId/versions[/:version] | Propietario | David A24;Luis A27 | Lista/detalle de snapshots históricos |
-| POST | /api/v1/plans/:planId/versions | Propietario | Roberto A18;David A24 | Nuevo block_id/contexto/metas/minutos → versión nueva inmutable |
+| POST | /api/v1/plans/:planId/versions | Propietario | Roberto A18;David A24 | Nuevo contexto/metas/minutos del mismo bloque → versión nueva inmutable. Otro bloque = otro plan_id vía /blocks/:blockId/plans (analisis es UNIQUE por bloque) |
 | GET/POST/PATCH/DELETE | /api/v1/sessions[/:sessionId] | Propietario | Tadeo A21;Luis A27 | session; corrección/eliminación recalcula entrenamiento |
 | GET | /api/v1/reports?from=YYYY-MM-DD&to=YYYY-MM-DD | Propietario | Tadeo A22;Luis A28 | report con fuentes separadas y periodo |
 | GET/POST | /api/v1/rank-history | Propietario | David A31 | rank_label, mode, recorded_at; source fijo self_reported |
@@ -191,3 +191,7 @@ La versión `mvp.rules.v4` añade `cobertura-defensiva-revision`, clave `defensi
 `mvp.plans.v3`/`mvp.allocation.v3` admiten las tres áreas y añaden `review_catalog_version` si utilizan `review-last-defender`. Su snapshot lleva `source: bundled_native_review`, versión `mvp.native-review.v1`, recurso `native_replay_review` y `requires_saved_replay: true`. Sus IDs SQL son null y su URL es una guía, no la ubicación de un evento. La evidencia no identifica timestamps ni atribuye culpa. Con poco tiempo se conserva cobertura parcial de las áreas sin actividad.
 
 La ruta sigue siendo una propuesta sin guardar; A24 debe resolver el mapeo de esa fuente antes de persistirla. A15 no conserva todavía los campos posicionales originales: el adaptador conserva `stored_positioning_not_recorded` y esta regla no se activa en esos bloques. Esta entrega no cambia tablas remotas ni acredita una sesión/carga real.
+
+### Persistencia de reglas v4 · compatibilidad A26/A24
+
+Ejecutar `database/seeds/a26-reglas-v4.sql` después de la seed A24. V2/v3 y sus análisis permanecen intactos. V4 registra la tasa `last_defender_goals_per_5_minutes`, unidad `goals_per_5_minutes`, y el código SQL `cobertura-defensiva-revision-tasa`; el adaptador lo aplica tanto a prioridades como a ejercicios. El ID lógico público sigue siendo `cobertura-defensiva-revision`, conservado en snapshots/evidencia. `valor_actual` guarda partidas coincidentes; las cinco tasas originales quedan en la evidencia. Esta compatibilidad no convierte las rutinas nativas en ejercicios SQL ni conserva campos originales de replays que A15 no tenga.
