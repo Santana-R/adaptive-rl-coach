@@ -1,0 +1,8 @@
+{
+  "evidence_version": "a26.results.v1",
+  "matrix_version": "a26.validation.v1",
+  "source": "synthetic",
+  "status": "pending_ci_execution",
+  "sports_review_status": "pending_roberto_review",
+  "results": null
+}
