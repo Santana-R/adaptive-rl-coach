@@ -49,9 +49,10 @@ Frontend usa Supabase Auth para correo/Google y envía el access token a Express
 | GET | /api/v1/reports?from=YYYY-MM-DD&to=YYYY-MM-DD | Propietario | Tadeo A22;Luis A28 | report con fuentes separadas y periodo |
 | GET/POST | /api/v1/rank-history | Propietario | David A31 | rank_label, mode, recorded_at; source fijo self_reported |
 | GET | /api/v1/exercises | Jugador activo/admin | David A23 | Jugador recibe activos; admin puede filtrar inactivos |
-| POST/PATCH/DELETE | /api/v1/exercises[/:exerciseId] | Administrador | David A23/A32 | exercise; DELETE desactiva si está usado y conserva snapshot |
-| GET | /api/v1/admin/users | Administrador | Tadeo A29;David A32 | Lista de usuarios con estado, sin tokens ni claves |
-| PATCH | /api/v1/admin/users/:userId/status | Administrador | Tadeo A29;David A32 | status active/suspended → admin-user |
+| GET/POST/PATCH/DELETE | /api/v1/exercises[/:exerciseId] | Administrador | David A23/A32 | exercise; PATCH con ficha crea versión nueva inactiva, `{active}` activa (solo revisado) o desactiva; DELETE desactiva si está usado y conserva snapshot. [A32](a32-admin.md) |
+| GET | /api/v1/admin/summary | Administrador | David A32 | Conteos de usuarios, catálogo, bloques, planes y metas; progreso pendiente (A22/A26) |
+| GET | /api/v1/admin/users | Administrador | Tadeo A29;David A32 | Lista de usuarios con estado, correo y último acceso, sin tokens ni claves |
+| PATCH | /api/v1/admin/users/:userId/status | Administrador | Tadeo A29;David A32 | status active/suspended → admin-user; no sobre la propia cuenta (409) |
 
 Las rutas agrupadas CRUD son: GET colección/detalle, POST colección, PATCH detalle, DELETE detalle. Roles y propietarios se verifican en cada operación. GET no crea ni modifica planes. Si cambia el diseño, actualizar contrato y consumidores en el mismo cambio.
 

@@ -7,7 +7,8 @@ const profiles = require('./repositories/profile');
 const {
   validate: validateProfile
 } = require('../public/sitio/js/profile-validation');
-const { getCatalog } = require('./repositories/catalog');
+const { createExercisesRouter } = require('./routes/exercises');
+const { createAdminSummaryRouter } = require('./routes/admin-summary');
 const { createAnalysisRouter, createAnalysisDemoRouter } = require('./routes/analysis');
 const { createStoredAnalysisRepository } = require('./services/stored-block');
 const { createAdminUsersRouter } = require('./routes/admin-users');
@@ -18,7 +19,7 @@ const { createGoalsRouter } = require('./routes/goals');
  * Construye la aplicación. Recibe el cliente de Supabase para poder probarla
  * con un cliente simulado (tests/auth.test.cjs).
  */
-function createApp({ supabase = createServerClient(), analysisRepository, enableAnalysisDemo = false, enableBlocksDemo = false } = {}) {
+function createApp({ supabase = createServerClient(), analysisRepository, enableAnalysisDemo = false, enableBlocksDemo = false, catalogOptions } = {}) {
   const app = express();
   const { requireAuth, requireRole } = createAuth(supabase);
   const repository = analysisRepository === undefined ? createStoredAnalysisRepository(supabase) : analysisRepository;
@@ -103,19 +104,9 @@ app.patch('/api/v1/profile', requireAuth, async (req, res, next) => {
   }
 });
 
-  // A23 · catálogo. El jugador recibe solo activos; el admin puede pedir ?include_inactive=true.
-  app.get('/api/v1/exercises', requireAuth, async (req, res, next) => {
-    try {
-      const wantsInactive = req.query.include_inactive === 'true';
-      if (wantsInactive && req.user.role !== 'admin') {
-        throw new ApiError(403, 'ROLE_DENIED', 'Solo un administrador puede consultar ejercicios inactivos.');
-      }
-      const catalog = await getCatalog(supabase, { includeInactive: wantsInactive });
-      res.json({ data: catalog, meta: { contract_version: CONTRACT_VERSION } });
-    } catch (err) {
-      next(err);
-    }
-  });
+  // A23 · catálogo (GET) y A32 · CRUD administrativo.
+  app.use('/api/v1/exercises', createExercisesRouter({ supabase, requireAuth, requireRole, catalogOptions }));
+  app.use('/api/v1/admin/summary', createAdminSummaryRouter({ supabase, requireAuth, requireRole }));
 
   app.use('/api/v1/blocks', createAnalysisRouter({ requireAuth, requireRole, repository }));
   app.use('/api/v1/blocks', createPlansRouter({ supabase, requireAuth, requireRole, repository }));
