@@ -1,0 +1,2121 @@
+{
+  "evidence_version": "a26.results.v2",
+  "status": "technical_validation_completed_duration_feedback_applied_remaining_sports_review_pending",
+  "ci": {
+    "run_id": 43990285053,
+    "job_id": 133728798153,
+    "url": "https://github.com/Santana-R/adaptive-rl-coach/actions/runs/43990285053",
+    "head_commit": "985cacb7594d7ffe4ab0efc3ce107cc7b2b20cf1",
+    "suite": {
+      "tests": 481,
+      "passed": 481,
+      "failed": 0
+    }
+  },
+  "sports_feedback": [
+    {
+      "reviewer": "Roberto Santana Trujillo",
+      "scope": "normalizar_por_duracion_de_cada_partida",
+      "decision": "requested_and_released",
+      "statement": "Deberíamos considerar cuánto duró cada partido.",
+      "all_other_cases_approved": false
+    }
+  ],
+  "report": {
+    "matrix_version": "a26.validation.v2",
+    "source": "synthetic",
+    "baseline_revision": "b848add4a93c7974e2d2b8ce650932a09df0bd4e",
+    "execution_commit": "43e750ed2b6d1933205e11f158745c08572a1995",
+    "head_commit": "985cacb7594d7ffe4ab0efc3ce107cc7b2b20cf1",
+    "node_version": "v22.19.0",
+    "versions": {
+      "rules": "mvp.rules.v4",
+      "metrics": "mvp.metrics.v1",
+      "generator": "mvp.plans.v3",
+      "allocation": "mvp.allocation.v3"
+    },
+    "total": 43,
+    "passed": 43,
+    "failed": 0,
+    "sports_review_status": "pending_roberto_review",
+    "population_calibration_status": "not_performed",
+    "cases": [
+      {
+        "id": "F01",
+        "label": "2v2: muestra mínima suficiente con 26.67 %",
+        "group": "finalization",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "active",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "AT_OR_BELOW_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 26.666666666666668,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "shooting"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "shooting": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "F02",
+        "label": "2v2: 30 % con solo diez tiros",
+        "group": "finalization",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "not_evaluable",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "INSUFFICIENT_SHOTS",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 30,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "F03",
+        "label": "1v1: veinte tiros y límite inclusivo de 30 %",
+        "group": "finalization",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "active",
+            "boost": "not_evaluable",
+            "defensive_review": "not_evaluable"
+          },
+          "reasons": {
+            "shooting": "AT_OR_BELOW_THRESHOLD",
+            "boost": "BOOST_MODE_UNSUPPORTED",
+            "defensive_review": "DEFENSIVE_MODE_UNSUPPORTED"
+          },
+          "shooting_pct": 30,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "shooting"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "shooting": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "F04",
+        "label": "1v1: diecinueve tiros no alcanzan la muestra",
+        "group": "finalization",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "not_evaluable",
+            "boost": "not_evaluable",
+            "defensive_review": "not_evaluable"
+          },
+          "reasons": {
+            "shooting": "INSUFFICIENT_SHOTS",
+            "boost": "BOOST_MODE_UNSUPPORTED",
+            "defensive_review": "DEFENSIVE_MODE_UNSUPPORTED"
+          },
+          "shooting_pct": 31.57894736842105,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "F05",
+        "label": "3v3: diez tiros y 30 %",
+        "group": "finalization",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "active",
+            "boost": "inactive",
+            "defensive_review": "not_evaluable"
+          },
+          "reasons": {
+            "shooting": "AT_OR_BELOW_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "DEFENSIVE_MODE_UNSUPPORTED"
+          },
+          "shooting_pct": 30,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "shooting"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "shooting": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "F06",
+        "label": "3v3: diez tiros y 40 %",
+        "group": "finalization",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "not_evaluable"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "DEFENSIVE_MODE_UNSUPPORTED"
+          },
+          "shooting_pct": 40,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "F07",
+        "label": "7/23 no se redondea a 30 % para activar",
+        "group": "finalization",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 30.434782608695656,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "F08",
+        "label": "Cero goles con veinte tiros sí es 0 %",
+        "group": "finalization",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "active",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "AT_OR_BELOW_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 0,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "shooting"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "shooting": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "F09",
+        "label": "Cero tiros no es 0 % de eficiencia",
+        "group": "finalization",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "not_evaluable",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "zero_denominator",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": null,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "F10",
+        "label": "Un conteo de goles ausente impide la recomendación",
+        "group": "finalization",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "not_evaluable",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "INCOMPLETE_METRIC_COVERAGE",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": null,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 4,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "F11",
+        "label": "Los totales dan 2/20=10 %; promediar porcentajes daría 40 %",
+        "group": "finalization",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "active",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "AT_OR_BELOW_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 10,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "shooting"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "shooting": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "B01",
+        "label": "Quince por ciento en tres partidas",
+        "group": "boost",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "active",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "REPEATED_ZERO_BOOST",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 3,
+          "boost_severity": "normal",
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "boost"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "boost": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "B02",
+        "label": "Veinte por ciento en tres partidas",
+        "group": "boost",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "active",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "REPEATED_HIGH_ZERO_BOOST",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 3,
+          "boost_severity": "high",
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "boost"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "boost": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "B03",
+        "label": "Dos partidas extremas no sustituyen la repetición",
+        "group": "boost",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 2,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "B04",
+        "label": "Un 14.99 % no alcanza el límite",
+        "group": "boost",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 2,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "B05",
+        "label": "Tres porcentajes altos y un faltante no completan cobertura",
+        "group": "boost",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "not_evaluable",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INCOMPLETE_BOOST_COVERAGE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": null,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 4,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "B06",
+        "label": "Porcentaje positivo y cero segundos son incoherentes",
+        "group": "boost",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "not_evaluable",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INCOMPLETE_BOOST_COVERAGE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": null,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 4,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "B07",
+        "label": "3v3 conserva el criterio inicial, sin calibración propia",
+        "group": "boost",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "active",
+            "defensive_review": "not_evaluable"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "REPEATED_ZERO_BOOST",
+            "defensive_review": "DEFENSIVE_MODE_UNSUPPORTED"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 3,
+          "boost_severity": "normal",
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "boost"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "boost": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "B08",
+        "label": "1v1 queda fuera de la regla actual",
+        "group": "boost",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "not_evaluable",
+            "defensive_review": "not_evaluable"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "BOOST_MODE_UNSUPPORTED",
+            "defensive_review": "DEFENSIVE_MODE_UNSUPPORTED"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 3,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "B09",
+        "label": "El intervalo 0–25 y los segundos no reconstruyen el porcentaje en cero",
+        "group": "boost",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "not_evaluable",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "BOOST_METRIC_UNAVAILABLE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": null,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 0,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "B10",
+        "label": "Porcentajes originales presentes con segundos no disponibles",
+        "group": "boost",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "active",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "REPEATED_HIGH_ZERO_BOOST",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 3,
+          "boost_severity": "high",
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "boost"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "boost": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D01",
+        "label": "Dos goles como último defensor en tres partidas",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "active"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "REPEATED_LAST_DEFENDER_GOALS"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 3,
+          "defensive_rates": [
+            2,
+            2,
+            2,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "defensive_review"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "defensive_review": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D02",
+        "label": "Dos partidas con muchos goles no alcanzan tres coincidencias",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 2,
+          "defensive_rates": [
+            9,
+            9,
+            1,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D03",
+        "label": "Tres conteos suficientes con dos faltantes",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "not_evaluable"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INCOMPLETE_DEFENSIVE_COVERAGE"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": null,
+          "defensive_rates": [
+            2,
+            2,
+            2,
+            null,
+            null
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 3
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D04",
+        "label": "Un gol en cada partida no cumple dos por partida",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D05",
+        "label": "La hipótesis defensiva no se aplica a 3v3",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "not_evaluable"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "DEFENSIVE_MODE_UNSUPPORTED"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 3,
+          "defensive_rates": [
+            2,
+            2,
+            2,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D06",
+        "label": "Mayor exposición al papel de último defensor no ajusta todavía la señal",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "active"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "REPEATED_LAST_DEFENDER_GOALS"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 3,
+          "defensive_rates": [
+            2,
+            2,
+            2,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "defensive_review"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "defensive_review": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D07",
+        "label": "Dos goles en diez minutos equivalen a uno por cinco: no activa",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "duration_adjustment_requested_by_roberto",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D08",
+        "label": "Los goles totales del equipo no rellenan el dato defensivo",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "not_evaluable"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "DEFENSIVE_METRIC_UNAVAILABLE"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": null,
+          "defensive_rates": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 0
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "C01",
+        "label": "Tres señales y quince minutos",
+        "group": "plan",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "active",
+            "boost": "active",
+            "defensive_review": "active"
+          },
+          "reasons": {
+            "shooting": "AT_OR_BELOW_THRESHOLD",
+            "boost": "REPEATED_HIGH_ZERO_BOOST",
+            "defensive_review": "REPEATED_LAST_DEFENDER_GOALS"
+          },
+          "shooting_pct": 25,
+          "boost_matched": 3,
+          "boost_severity": "high",
+          "defensive_matched": 3,
+          "defensive_rates": [
+            2,
+            2,
+            2,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "boost",
+            "defensive_review",
+            "shooting"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 15,
+            "minutes_by_priority": {
+              "boost": 5,
+              "defensive_review": 5,
+              "shooting": 5
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "C02",
+        "label": "Diez minutos cubren dos áreas y declaran la tercera pendiente",
+        "group": "plan",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "active",
+            "boost": "active",
+            "defensive_review": "active"
+          },
+          "reasons": {
+            "shooting": "AT_OR_BELOW_THRESHOLD",
+            "boost": "REPEATED_HIGH_ZERO_BOOST",
+            "defensive_review": "REPEATED_LAST_DEFENDER_GOALS"
+          },
+          "shooting_pct": 25,
+          "boost_matched": 3,
+          "boost_severity": "high",
+          "defensive_matched": 3,
+          "defensive_rates": [
+            2,
+            2,
+            2,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "boost",
+            "defensive_review",
+            "shooting"
+          ],
+          "plan": {
+            "coverage": "partial",
+            "assigned_minutes": 10,
+            "minutes_by_priority": {
+              "boost": 5,
+              "defensive_review": 5
+            },
+            "uncovered_priorities": [
+              "shooting"
+            ]
+          }
+        }
+      },
+      {
+        "id": "C03",
+        "label": "Veinte minutos se reparten en 7/7/6",
+        "group": "plan",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "active",
+            "boost": "active",
+            "defensive_review": "active"
+          },
+          "reasons": {
+            "shooting": "AT_OR_BELOW_THRESHOLD",
+            "boost": "REPEATED_HIGH_ZERO_BOOST",
+            "defensive_review": "REPEATED_LAST_DEFENDER_GOALS"
+          },
+          "shooting_pct": 25,
+          "boost_matched": 3,
+          "boost_severity": "high",
+          "defensive_matched": 3,
+          "defensive_rates": [
+            2,
+            2,
+            2,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "boost",
+            "defensive_review",
+            "shooting"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "boost": 7,
+              "defensive_review": 7,
+              "shooting": 6
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "C04",
+        "label": "Cuatro minutos no alcanzan el mínimo de una actividad",
+        "group": "plan",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "active",
+            "boost": "active",
+            "defensive_review": "active"
+          },
+          "reasons": {
+            "shooting": "AT_OR_BELOW_THRESHOLD",
+            "boost": "REPEATED_HIGH_ZERO_BOOST",
+            "defensive_review": "REPEATED_LAST_DEFENDER_GOALS"
+          },
+          "shooting_pct": 25,
+          "boost_matched": 3,
+          "boost_severity": "high",
+          "defensive_matched": 3,
+          "defensive_rates": [
+            2,
+            2,
+            2,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "boost",
+            "defensive_review",
+            "shooting"
+          ],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": [
+              "boost",
+              "defensive_review",
+              "shooting"
+            ]
+          }
+        }
+      },
+      {
+        "id": "C05",
+        "label": "Ninguna regla activa no fabrica un plan de mantenimiento",
+        "group": "plan",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "C06",
+        "label": "Un jugador ausente invalida el bloque",
+        "group": "validation",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": false,
+          "reason_codes": [
+            "PLAYER_MISMATCH"
+          ]
+        }
+      },
+      {
+        "id": "D09",
+        "label": "Cuatro goles en diez minutos equivalen a dos por cinco",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "active"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "REPEATED_LAST_DEFENDER_GOALS"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 3,
+          "defensive_rates": [
+            2,
+            2,
+            2,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "defensive_review"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "defensive_review": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D10",
+        "label": "Una duración ausente deja la tasa sin evaluar",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "not_evaluable"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INCOMPLETE_DEFENSIVE_COVERAGE"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": null,
+          "defensive_rates": [
+            2,
+            2,
+            null,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 4,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 4
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D11",
+        "label": "Cero segundos se conserva pero no admite división",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "not_evaluable"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INCOMPLETE_DEFENSIVE_COVERAGE"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": null,
+          "defensive_rates": [
+            2,
+            2,
+            null,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 4,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 4
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D12",
+        "label": "Dos goles en más de cinco minutos no alcanzan dos por cinco",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            1.9999999933333334,
+            1.9999999933333334,
+            1.9999999933333334,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D13",
+        "label": "Se conservan segundos fraccionarios",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "active"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "REPEATED_LAST_DEFENDER_GOALS"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 3,
+          "defensive_rates": [
+            2.003338898163606,
+            2.003338898163606,
+            2.003338898163606,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "defensive_review"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "defensive_review": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D14",
+        "label": "Un gol en un minuto equivale a cinco por cinco: caso corto pendiente de criterio",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "active"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "REPEATED_LAST_DEFENDER_GOALS"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 3,
+          "defensive_rates": [
+            5,
+            5,
+            5,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [
+            "defensive_review"
+          ],
+          "plan": {
+            "coverage": "complete",
+            "assigned_minutes": 20,
+            "minutes_by_priority": {
+              "defensive_review": 20
+            },
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D15",
+        "label": "duration no sustituye al play_duration original ausente",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "not_evaluable"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "DEFENSIVE_METRIC_UNAVAILABLE"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": null,
+          "defensive_rates": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "defensive_duration_coverage": 0,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 0
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      },
+      {
+        "id": "D16",
+        "label": "Cuatro goles con más de diez minutos no se redondean al límite",
+        "group": "defensive_review",
+        "passed": true,
+        "human_sports_review": "pending_roberto_review",
+        "validation": {
+          "valid": true,
+          "reason_codes": []
+        },
+        "observed": {
+          "statuses": {
+            "shooting": "inactive",
+            "boost": "inactive",
+            "defensive_review": "inactive"
+          },
+          "reasons": {
+            "shooting": "ABOVE_THRESHOLD",
+            "boost": "INSUFFICIENT_REPEATED_EXPOSURE",
+            "defensive_review": "INSUFFICIENT_DEFENSIVE_REPETITION"
+          },
+          "shooting_pct": 50,
+          "boost_matched": 0,
+          "boost_severity": null,
+          "defensive_matched": 0,
+          "defensive_rates": [
+            1.9999999966666666,
+            1.9999999966666666,
+            1.9999999966666666,
+            0,
+            0
+          ],
+          "defensive_duration_coverage": 5,
+          "coverage": {
+            "shooting": 5,
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "priority_keys": [],
+          "plan": {
+            "coverage": "empty",
+            "assigned_minutes": 0,
+            "minutes_by_priority": {},
+            "uncovered_priorities": []
+          }
+        }
+      }
+    ]
+  }
+}
