@@ -27,57 +27,153 @@
       <aside class="sidebar">
         <h5 class="sidebar-brand">ADMINISTRACIÓN</h5>
         <a href="admin-resumen.html" class="sidebar-link">Resumen</a>
-        <a href="#" class="sidebar-link">Progreso</a>
+        <a href="#" class="sidebar-link" aria-disabled="true" tabindex="-1" title="Pendiente (A22/A26)">Progreso</a>
         <a href="admin-usuarios.html" class="sidebar-link">Usuarios</a>
         <a href="admin-ejercicios.html" class="sidebar-link active" aria-current="page">Ejercicios</a>
-        <a href="#" class="sidebar-link">Errores</a>
+        <a href="#" class="sidebar-link" aria-disabled="true" tabindex="-1" title="Pendiente">Errores</a>
         <div class="sidebar-footer">
-          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+          <button type="button" class="btn-rl btn-rl-outline w-100" data-admin-logout data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
         </div>
       </aside>
       <main class="app-main">
         <h1 class="fw-bold text-light mb-1">Catálogo de ejercicios</h1>
-        <p class="text-bray mb-3">El motor selecciona actividades activas; el catálogo debe cargarse antes de generar planes.</p>
-        <div class="row align-items-end mb-2">
-          <div class="col-6">
+        <p class="text-bray mb-3">El motor selecciona actividades activas y revisadas; el catálogo debe cargarse antes de generar planes.</p>
+        <form class="row align-items-end mb-2" id="ejercicios-filtros" role="search">
+          <div class="col-12 col-md-4 mb-2">
             <label class="text-bray mb-1" for="buscare">Buscar</label>
-            <div data-mdb-input-init class="form-outline bodycolor">
-              <input type="text" id="buscare" class="form-control" />
-              <label class="form-label" for="buscare">Tiro, boost o nombre</label>
+            <input type="search" id="buscare" class="form-control admin-input" placeholder="Tiro, boost o nombre" autocomplete="off" />
+          </div>
+          <div class="col-6 col-md-2 mb-2">
+            <label class="text-bray mb-1" for="filtro-prioridad">Prioridad</label>
+            <select id="filtro-prioridad" class="form-select admin-input">
+              <option value="">Todas</option>
+              <option value="shooting">Tiro</option>
+              <option value="boost">Boost</option>
+              <option value="defensive_review">Defensa</option>
+              <option value="movement">Movimiento</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-2 mb-2">
+            <label class="text-bray mb-1" for="filtro-plataforma">Plataforma</label>
+            <select id="filtro-plataforma" class="form-select admin-input">
+              <option value="">Todas</option>
+              <option value="epic">Epic</option>
+              <option value="steam">Steam</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-2 mb-2">
+            <label class="text-bray mb-1" for="filtro-estado">Estado</label>
+            <select id="filtro-estado" class="form-select admin-input">
+              <option value="">Todos</option>
+              <option value="active">Activo</option>
+              <option value="inactive">Inactivo</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-2 mb-2"><button type="reset" class="btn-rl btn-rl-outline w-100">Mostrar todos</button></div>
+        </form>
+        <div class="mb-3"><button type="button" id="nuevo-ejercicio" class="btn-rl btn-rl-accent">Nuevo ejercicio</button></div>
+        <p id="admin-estado" class="text-bray mb-3" role="status" aria-live="polite">Cargando catálogo…</p>
+
+        <div class="mb-3 admin-table">
+          <div class="table-head" style="grid-template-columns: 2fr 1fr 1.2fr .8fr 1.5fr 2fr;"><span>Ejercicio</span><span>Prioridad</span><span>Plataforma</span><span>Duración</span><span>Estado</span><span>Acciones</span></div>
+          <div id="ejercicios-filas"></div>
+        </div>
+
+        <section class="card bg-card border-card denotative-gold mb-4" id="ejercicio-editor" hidden aria-labelledby="editor-titulo">
+          <div class="card-body">
+            <h2 class="h5 fw-bold text-light mb-1" id="editor-titulo">Nuevo ejercicio</h2>
+            <p class="text-bray mb-3" id="editor-nota">Se guarda como borrador inactivo. Para ofrecerlo en planes, su ficha debe revisarse y verificarse (A23).</p>
+            <form id="ejercicio-form" novalidate>
+              <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="text-bray mb-1" for="f-title">Nombre</label>
+                  <input id="f-title" class="form-control admin-input" maxlength="100" required />
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                  <label class="text-bray mb-1" for="f-priority">Prioridad</label>
+                  <select id="f-priority" class="form-select admin-input" required>
+                    <option value="shooting">Tiro</option>
+                    <option value="boost">Boost</option>
+                    <option value="defensive_review">Defensa</option>
+                    <option value="movement">Movimiento</option>
+                  </select>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                  <label class="text-bray mb-1" for="f-type">Tipo de recurso</label>
+                  <select id="f-type" class="form-select admin-input" required>
+                    <option value="custom_training">Custom Training</option>
+                    <option value="steam_workshop">Mapa de Workshop</option>
+                    <option value="external_guide">Guía externa</option>
+                  </select>
+                </div>
+                <div class="col-12 mb-3">
+                  <label class="text-bray mb-1" for="f-resource" id="f-resource-label">Código del paquete</label>
+                  <input id="f-resource" class="form-control admin-input" required />
+                </div>
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="text-bray mb-1" for="f-purpose">Finalidad</label>
+                  <textarea id="f-purpose" class="form-control admin-input" rows="3" maxlength="1000" required></textarea>
+                </div>
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="text-bray mb-1" for="f-success">Meta del ejercicio</label>
+                  <textarea id="f-success" class="form-control admin-input" rows="3" maxlength="1000" required></textarea>
+                </div>
+                <div class="col-12 mb-3">
+                  <label class="text-bray mb-1" for="f-instructions">Instrucciones (un paso por línea)</label>
+                  <textarea id="f-instructions" class="form-control admin-input" rows="5" required></textarea>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                  <label class="text-bray mb-1" for="f-difficulty">Dificultad base (1–5)</label>
+                  <input id="f-difficulty" type="number" min="1" max="5" step="1" class="form-control admin-input" required />
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                  <label class="text-bray mb-1" for="f-minutes">Duración (5–120 min)</label>
+                  <input id="f-minutes" type="number" min="5" max="120" step="1" class="form-control admin-input" required />
+                </div>
+                <fieldset class="col-12 col-md-6 mb-3">
+                  <legend class="text-bray fs-6 mb-1">Plataformas</legend>
+                  <label class="text-light me-3"><input type="checkbox" id="f-epic" value="epic" /> Epic</label>
+                  <label class="text-light"><input type="checkbox" id="f-steam" value="steam" /> Steam</label>
+                </fieldset>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <button type="submit" class="btn-rl btn-rl-accent">Guardar</button>
+                <button type="button" class="btn-rl btn-rl-outline" id="editor-cancelar">Cancelar</button>
+              </div>
+              <p id="editor-estado" class="text-danger mt-2 mb-0" role="alert"></p>
+            </form>
+            <div id="editor-historial" class="mt-4" hidden>
+              <h3 class="h6 fw-bold text-light mb-2">Versiones guardadas</h3>
+              <ul class="text-bray mb-0" id="historial-lista"></ul>
             </div>
           </div>
-          <div class="col-3"><button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Mostrar todos</button></div>
-          <div class="col-3"><button type="button" class="btn-rl btn-rl-accent w-100" data-mdb-ripple-init data-mdb-ripple-color="light">Nuevo ejercicio</button></div>
-        </div>
-        <p class="text-bray mb-3">Filtros: Prioridad · Plataforma · Estado</p>
-        <div class="mb-3">
-        <div class="table-head" style="grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr;"><span>Ejercicio</span><span>Prioridad</span><span>Plataforma</span><span>Duración</span><span>Estado</span></div>
-        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr;"><span>Rutas de recarga</span><span>Boost</span><span>Epic / Steam</span><span>15 min</span><span>Activo</span></div>
-        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr;"><span>Tiro: finalización</span><span>Tiro</span><span>Epic / Steam</span><span>12 min</span><span>Activo</span></div>
-        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr;"><span>Recuperaciones</span><span>Movimiento</span><span>Steam</span><span>10 min</span><span>Inactivo</span></div>
-        </div>
-        <p class="link-actions mb-4">Acciones: <a href="#">Ver detalle</a> · <a href="#">Editar</a> · <a href="#">Desactivar</a> · <a href="#">Eliminar si nunca se utilizó</a></p>
+        </section>
+
         <div class="card bg-card border-card denotative-gold pb-4 ">
               <div class="card-body">
                 <h5 class="card-title fw-bold text-light mb-2">Ficha del ejercicio y activación</h5>
                 <ul class="card-text text-bray fs-6 list-unstyled mb-0">
-                <li>Finalidad, instrucciones, meta, dificultad y recurso. Guardar conserva borrador.</li>
-                <li>Activar requiere ficha completa y recurso revisado; conserva versiones anteriores.</li>
+                <li>Finalidad, instrucciones, meta, dificultad y recurso. Guardar crea una versión nueva y deja el ejercicio inactivo.</li>
+                <li>Activar requiere que la versión vigente coincida con una ficha revisada y verificada; las versiones anteriores se conservan.</li>
+                <li>Eliminar solo quita del catálogo un ejercicio que nunca se usó; si ya está en planes, se desactiva y los planes conservan su versión.</li>
                 </ul>
               </div>
             </div>
-        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
+        <p class="app-note">El servidor vuelve a comprobar que eres administrador en cada cambio.</p>
       </main>
     </div>
 
     <!-- MDB -->
     <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
-    <!-- Custom scripts -->
-    <script src="../../vendor/jquery-3.7.1.min.js"></script>
-    <script src="../js/supabase-config.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../js/session-client.js"></script>
-    <script src="../js/navigation.js"></script>
-    <script type="text/javascript"></script>
+<script src="../../vendor/jquery-3.7.1.min.js"></script>
+
+<script src="../js/supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../js/session-client.js"></script>
+<script src="../js/navigation.js"></script>
+
+<script src="../js/admin-api.js"></script>
+<script src="../js/admin-ejercicios.js"></script>
   </body>
 </html>

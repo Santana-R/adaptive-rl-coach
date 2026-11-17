@@ -8,7 +8,7 @@
 
 const { ApiError } = require('../middleware/auth');
 const { requireClient, toApiError } = require('./errors');
-const { toStoredAnalysis } = require('./analysis');
+const { toStoredAnalysis, toStoredRuleId } = require('./analysis');
 
 const STATUS = { complete: 'completo', partial: 'parcial', empty: 'no_disponible' };
 const ID = /^[1-9]\d{0,17}$/;
@@ -52,7 +52,7 @@ function toSaveArgs({ userId, blockId, proposal, analysis, profile }) {
       sesiones_semana: days,
       justificacion: proposal.explanation,
       contexto: toContext(proposal),
-      ejercicios: proposal.exercises.map(e => ({ orden: e.order, rule_id: e.rule_id,
+      ejercicios: proposal.exercises.map(e => ({ orden: e.order, rule_id: toStoredRuleId(e.rule_id, analysis.rules_version),
         id_ejercicio_version: Number(e.exercise_version_id), minutos: e.assigned_minutes, dificultad: e.difficulty })),
       objetivos: proposal.goals_snapshot.map(g => Number(g.goal_version_id)),
     },

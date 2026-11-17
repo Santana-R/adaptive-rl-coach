@@ -10,6 +10,7 @@ function defensiveBlock({ counts = [2,2,2,0,0], boost = false, shooting = false,
   block.replays = counts.map((count,i) => {
     const replay = structuredClone(seeds[i % seeds.length]);
     replay.id = 'defensive-replay-' + (i+1);
+    replay.play_duration = 300; // Cinco minutos exactos; el contexto puede cambiarlo.
     if (match_type !== 'ranked') replay.playlist_id = match_type === 'private'
       ? 'private' : 'unranked-' + ({ '1v1':'duels', '2v2':'doubles', '3v3':'standard' }[mode]);
     const player = findReplayPlayer(replay, block.profile);

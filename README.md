@@ -73,3 +73,7 @@ La planificación y demo inicial tuvieron asistencia de IA y no acreditan aporta
 ## Pruebas automáticas
 
 GitHub Actions ejecuta `npm test` con Node 22.19.0 y comprueba por separado los 33 casos de la propuesta inicial. La implementación de cobertura defensiva aprobó 447 pruebas (65 nuevas) en [run 43979860196](https://github.com/Santana-R/adaptive-rl-coach/actions/runs/43979860196). Son pruebas del código con datos sintéticos y sesiones/transportes simulados; la validación deportiva y el recorrido con cinco archivos reales siguen pendientes.
+
+## Reglas v4 y guardado de planes
+
+Al instalar la versión del PR #78, ejecutar en orden `database/seeds/a24-reglas.sql` y `database/seeds/a26-reglas-v4.sql`, además de la migración A24. La seed v4 está aplicada en el entorno de desarrollo Adaptive RL Coach y se puede repetir. [Compatibilidad y comprobación](docs/a26-compatibilidad-persistencia.md). No reanaliza bloques históricos ni registra como ejercicios SQL las rutinas nativas.

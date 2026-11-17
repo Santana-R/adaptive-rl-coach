@@ -27,78 +27,74 @@
       <aside class="sidebar">
         <h5 class="sidebar-brand">ADMINISTRACIÓN</h5>
         <a href="admin-resumen.html" class="sidebar-link active" aria-current="page">Resumen</a>
-        <a href="#" class="sidebar-link">Progreso</a>
+        <a href="#" class="sidebar-link" aria-disabled="true" tabindex="-1" title="Pendiente (A22/A26)">Progreso</a>
         <a href="admin-usuarios.html" class="sidebar-link">Usuarios</a>
         <a href="admin-ejercicios.html" class="sidebar-link">Ejercicios</a>
-        <a href="#" class="sidebar-link">Errores</a>
+        <a href="#" class="sidebar-link" aria-disabled="true" tabindex="-1" title="Pendiente">Errores</a>
         <div class="sidebar-footer">
-          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+          <button type="button" class="btn-rl btn-rl-outline w-100" data-admin-logout data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
         </div>
       </aside>
       <main class="app-main">
-        <h1 class="fw-bold text-light mb-4">Progreso de los jugadores</h1>
-        <div class="row mb-4">
-          <div class="col-4"><button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Periodo: últimos 30 días</button></div>
-          <div class="col-4"><button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Modalidad: 2v2</button></div>
-          <div class="col-4"><button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Ver criterio</button></div>
+        <h1 class="fw-bold text-light mb-1">Resumen de la plataforma</h1>
+        <p class="text-bray mb-4">Datos actuales de la base. <span id="resumen-fecha"></span></p>
+        <p id="admin-estado" class="text-bray mb-3" role="status" aria-live="polite">Cargando resumen…</p>
+
+        <div class="row mb-4" id="resumen-tarjetas" hidden>
+          <div class="col-12 col-sm-6 col-lg-3 mb-3"><div class="stat-card"><div class="stat-label">Usuarios activos</div><div class="stat-value" id="r-usuarios">—</div><div class="stat-sub" id="r-usuarios-sub"></div></div></div>
+          <div class="col-12 col-sm-6 col-lg-3 mb-3"><div class="stat-card"><div class="stat-label">Ejercicios ofrecidos</div><div class="stat-value" id="r-ejercicios">—</div><div class="stat-sub" id="r-ejercicios-sub"></div></div></div>
+          <div class="col-12 col-sm-6 col-lg-3 mb-3"><div class="stat-card"><div class="stat-label">Bloques por corregir</div><div class="stat-value" id="r-bloques">—</div><div class="stat-sub" id="r-bloques-sub"></div></div></div>
+          <div class="col-12 col-sm-6 col-lg-3 mb-3"><div class="stat-card"><div class="stat-label">Planes guardados</div><div class="stat-value" id="r-planes">—</div><div class="stat-sub" id="r-planes-sub"></div></div></div>
         </div>
-        <div class="row mb-4">
-          <div class="col-3"><div class="stat-card"><div class="stat-label">Con comparación</div><div class="stat-value">14</div><div class="stat-sub">jugadores</div></div></div>
-          <div class="col-3"><div class="stat-card"><div class="stat-label">Mejoraron métricas</div><div class="stat-value">8 de 14</div><div class="stat-sub">57 % · jugadores</div></div></div>
-          <div class="col-3"><div class="stat-card"><div class="stat-label">Objetivos cumplidos</div><div class="stat-value">6 de 12</div><div class="stat-sub">50 % · metas</div></div></div>
-          <div class="col-3"><div class="stat-card"><div class="stat-label">Subieron de rango</div><div class="stat-value">3 de 9</div><div class="stat-sub">33 % · declarado</div></div></div>
-        </div>
-        <div class="row">
-          <div class="col-7">
+
+        <div class="row" id="resumen-detalle" hidden>
+          <div class="col-12 col-lg-7 mb-3">
             <div class="card bg-card border-card h-100">
               <div class="card-body">
-                <h5 class="card-title fw-bold text-light mb-1">Mejora por prioridad evaluable</h5>
-                <p class="text-bray mb-4">Cantidad y porcentaje; una comparación por jugador</p>
-                <p class="text-light mb-1">Boost</p>
-                <div class="d-flex align-items-center mb-3"><div class="bar-track me-3"><div class="bar-fill" style="width: 57%;"></div></div><span class="fw-bold text-light text-nowrap">8 de 14 · 57 %</span></div>
-                <p class="text-light mb-1">Eficiencia de tiro</p>
-                <div class="d-flex align-items-center mb-3"><div class="bar-track me-3"><div class="bar-fill" style="width: 43%;"></div></div><span class="fw-bold text-light text-nowrap">6 de 14 · 43 %</span></div>
-                <p class="text-bray mt-4 mb-1">4 jugadores sin segundo bloque: excluidos.</p>
-                <p class="text-bray mb-0">Las barras no se suman como un total.</p>
+                <h5 class="card-title fw-bold text-light mb-1">Progreso de los jugadores</h5>
+                <p class="text-gold fw-bold mb-3">Pendiente</p>
+                <p class="text-bray mb-3" id="r-progreso"></p>
+                <ul class="text-bray mb-0">
+                  <li>Jugadores que mejoraron entre bloques.</li>
+                  <li>Objetivos cumplidos.</li>
+                  <li>Jugadores que subieron de rango (declarado).</li>
+                </ul>
+                <p class="text-bray mt-3 mb-0">No se muestran cifras hasta que existan con periodo, muestra y exclusiones.</p>
               </div>
             </div>
           </div>
-          <div class="col-5">
+          <div class="col-12 col-lg-5">
             <div class="card bg-card border-card denotative-gold pb-4 mb-3">
               <div class="card-body">
-                <h5 class="card-title fw-bold text-light mb-2">Necesidades sin ejercicio</h5>
-                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
-                <li>Tiro en Epic: 4 casos.</li>
-                <li>Boost en Steam: 3 casos.</li>
-                <li>Casos = necesidades sin cobertura.</li>
-                </ul>
+                <h5 class="card-title fw-bold text-light mb-2">Catálogo</h5>
+                <ul class="card-text text-bray fs-6 list-unstyled mb-0" id="r-catalogo"></ul>
               </div>
             </div>
-            <button type="button" class="btn-rl btn-rl-accent w-100 mb-3" data-mdb-ripple-init data-mdb-ripple-color="light">Ver cobertura</button>
-            <div class="card bg-card border-card denotative pb-4 ">
+            <a href="admin-ejercicios.html" class="btn-rl btn-rl-accent w-100 mb-3">Administrar ejercicios</a>
+            <div class="card bg-card border-card denotative pb-4 mb-3">
               <div class="card-body">
                 <h5 class="card-title fw-bold text-light mb-2">Apoyo operativo</h5>
-                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
-                <li>2 bloques requieren atención.</li>
-                <li>1 perfil sin rango declarado.</li>
-                <li>El rango pendiente no bloquea análisis.</li>
-                </ul>
+                <ul class="card-text text-bray fs-6 list-unstyled mb-0" id="r-operativo"></ul>
               </div>
             </div>
+            <a href="admin-usuarios.html" class="btn-rl btn-rl-outline w-100">Administrar usuarios</a>
           </div>
         </div>
-        <p class="app-note">Datos ilustrativos. Periodo, muestra y exclusiones acompañan cada indicador.</p>
+        <p class="app-note">Cada cifra es un conteo actual; no se suman entre tarjetas.</p>
       </main>
     </div>
 
     <!-- MDB -->
     <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
-    <!-- Custom scripts -->
-    <script src="../../vendor/jquery-3.7.1.min.js"></script>
-    <script src="../js/supabase-config.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../js/session-client.js"></script>
-    <script src="../js/navigation.js"></script> 
-    <script type="text/javascript"></script>
+<script src="../../vendor/jquery-3.7.1.min.js"></script>
+
+<script src="../js/supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../js/session-client.js"></script>
+<script src="../js/navigation.js"></script>
+
+<script src="../js/admin-api.js"></script>
+<script src="../js/admin-resumen.js"></script>
   </body>
 </html>

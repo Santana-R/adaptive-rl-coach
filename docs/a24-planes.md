@@ -115,3 +115,7 @@ Para repetir:
 node --env-file=.env scripts/prueba-a24.cjs
 npm test
 ```
+
+## Compatibilidad con reglas v4 de A26
+
+Después de la seed A24, ejecutar `database/seeds/a26-reglas-v4.sql`. Registra tres configuraciones v4 sin alterar las cinco v2/v3 ni las versiones guardadas. La tasa defensiva usa otro código SQL/métrica; los adaptadores preservan el ID lógico público. [Guía, ejecución y límites](a26-compatibilidad-persistencia.md). Las restricciones de ejercicios nativos sin versión de catálogo y análisis único por bloque se mantienen.
