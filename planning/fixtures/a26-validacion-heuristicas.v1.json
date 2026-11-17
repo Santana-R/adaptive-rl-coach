@@ -66,10 +66,14 @@
     "allocation": "mvp.allocation.v3"
   },
   "review": {
-    "technical_status": "pending_node_execution",
+    "technical_status": "verified_against_runtime",
     "sports_status": "pending_roberto_review",
     "expectations_prepared_by": "assistant",
-    "reviewer_decisions_not_inferred": true
+    "reviewer_decisions_not_inferred": true,
+    "technical_evidence": {
+      "run_id": 43986135222,
+      "head_commit": "814b04dc3ae43244173d9f42ee82f170f6c8af98"
+    }
   },
   "limitations": [
     "synthetic_inputs_not_real_replays",

@@ -1,6 +1,6 @@
 # A26 · Contraste inicial de heurísticas y límites
 
-**Estado: preparación técnica en revisión; pendiente del criterio deportivo de Roberto.** Elaborado con asistencia de IA bajo su Release. La autorización para preparar esta entrega no se registra como una aprobación de sus resultados deportivos.
+**Estado: contraste técnico completado; pendiente del criterio deportivo de Roberto.** Elaborado con asistencia de IA bajo su Release. La autorización para preparar esta entrega no se registra como una aprobación de sus resultados deportivos.
 
 Esta ficha reúne los criterios implementados, expectativas calculadas manualmente por la IA y una comprobación reproducible con el motor. **Los casos son sintéticos; no son replays reales ni una calibración poblacional.** A26 permanece abierta hasta registrar la revisión deportiva y atender lo que resulte.
 
@@ -41,7 +41,7 @@ Los casos de una regla mantienen neutrales las otras dos. Los casos de plan acti
 
 ### Finalización · once casos
 
-| ID | Caso | Expectativa calculada, pendiente de revisión |
+| ID | Caso | Esperado y observado (coinciden) |
 | --- | --- | --- |
 | F01 | 2v2: muestra mínima suficiente con 26.67 % | Activa |
 | F02 | 2v2: 30 % con solo diez tiros | No evaluable |
@@ -59,7 +59,7 @@ Los mínimos dependen de la modalidad. Un 30 % calculable no basta si faltan tir
 
 ### Boost · diez casos
 
-| ID | Caso | Expectativa calculada, pendiente de revisión |
+| ID | Caso | Esperado y observado (coinciden) |
 | --- | --- | --- |
 | B01 | Quince por ciento en tres partidas | Activa (normal) |
 | B02 | Veinte por ciento en tres partidas | Activa (high) |
@@ -76,7 +76,7 @@ B03 conserva la repetición mínima: dos casos extremos no equivalen a tres coin
 
 ### Cobertura defensiva · ocho casos
 
-| ID | Caso | Expectativa calculada, pendiente de revisión |
+| ID | Caso | Esperado y observado (coinciden) |
 | --- | --- | --- |
 | D01 | Dos goles como último defensor en tres partidas | Activa |
 | D02 | Dos partidas con muchos goles no alcanzan tres coincidencias | Inactiva |
@@ -91,7 +91,7 @@ D06 y D07 exponen una limitación del criterio actual: el mismo conteo activa re
 
 ### Plan y validación · seis casos
 
-| ID | Caso | Expectativa calculada, pendiente de revisión |
+| ID | Caso | Esperado y observado (coinciden) |
 | --- | --- | --- |
 | C01 | Tres señales y quince minutos | complete; 15 min; boost 5, defensive_review 5, shooting 5 |
 | C02 | Diez minutos cubren dos áreas y declaran la tercera pendiente | partial; 10 min; boost 5, defensive_review 5 |
@@ -104,7 +104,7 @@ Con poco tiempo no se fabrican minutos ni se reparte por debajo de cinco por act
 
 ## Resultado técnico y reproducción
 
-El workflow de GitHub Actions ejecuta `npm test`, el comprobador histórico de la propuesta defensiva y esta matriz de A26 con Node.js 22.19.0. El resultado de esta nueva matriz se incorporará al PR y a [la evidencia](../planning/evidence/a26-resultados.v1.json) cuando termine la ejecución; ese enlace se completa antes de presentar la entrega.
+El workflow de GitHub Actions ejecuta `npm test`, el comprobador histórico de la propuesta defensiva y esta matriz de A26 con Node.js 22.19.0. En [run 43986135222](https://github.com/Santana-R/adaptive-rl-coach/actions/runs/43986135222), los **35 casos coincidieron, sin diferencias**. La suite del proyecto conservó **447 pruebas aprobadas, 0 fallidas**; el comprobador histórico de 33 casos también pasó en un paso separado. No se suman estas cifras como escenarios independientes. La [evidencia guardada](../planning/evidence/a26-resultados.v1.json) conserva el resultado emitido por Node y el commit de la ejecución.
 
 El informe conserva commit ejecutado, commit de la rama, versiones, resultado por caso, métricas, estados, prioridades y minutos por área. Los 35 casos no se presentan como 35 replays ni jugadores independientes.
 
@@ -147,7 +147,7 @@ Referencias de criterios y limitaciones: [reglas](reglas-motor.md), [boost](disp
 
 ## Qué falta para cerrar A26
 
-1. Completar el contraste técnico y conservar el resultado enlazado a su commit.
+1. **Completado:** contraste técnico de 35/35 y resultado conservado, enlazado al commit y run.
 2. Registrar la revisión de Roberto sobre los casos y atender las observaciones concretas.
 3. Si se acuerda cambiar un criterio, preparar el cambio versionado y repetir sus comprobaciones antes de atribuirle el resultado.
 4. Conservar expresamente las limitaciones y la evidencia aún pendiente; no declarar calibración poblacional conseguida.
