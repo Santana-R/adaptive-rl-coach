@@ -6,7 +6,7 @@ Implementación preparada con Roberto y asistencia de IA bajo su Release. La reg
 
 1. [evaluateReplayBlockRules](../src/services/block-rules.js) recibe cinco respuestas de replay y un perfil; reutiliza A14 y A09. Si A14 rechaza el bloque, conserva `valid: false`, `data: null` y los motivos; no genera un diagnóstico.
 2. [evaluateRules](../src/domain/rules.js) recibe las métricas normalizadas de A09 (`data`), o un bloque de A10. Comprueba contexto, versión, procedencia, cinco IDs distintos y datos necesarios. Devuelve `rules_version`, `priorities`, `evaluations` y `limitations`.
-3. [rules-config.js](../src/domain/rules-config.js) fija `mvp.rules.v3`, los mínimos por modalidad, límite inclusivo y máximo de tres prioridades. La configuración está congelada, incluidos sus objetos internos. Cambiar criterios publicados requiere una versión nueva.
+3. [rules-config.js](../src/domain/rules-config.js) fija `mvp.rules.v4`, los mínimos por modalidad, límite inclusivo y máximo de tres prioridades. La configuración está congelada, incluidos sus objetos internos. Cambiar criterios publicados requiere una versión nueva.
 4. A18 consume las prioridades con `mvp.plans.v3` y A19 las muestra mediante su ruta HTTP. La persistencia A24 y el recorrido privado real continúan pendientes; ver la [integración de boost](disponibilidad-boost.md).
 
 Para finalización, la clave de prioridad es **`shooting`**, conservando el contrato del catálogo. El ID de regla sigue siendo **`finalizacion-eficiencia`**. La regla funciona sobre el bloque actual sin necesitar un anterior ni fechas: una comparación incompatible o ausente no invalida una señal propia del bloque. A10 mantiene sus validaciones temporales por separado.
@@ -90,7 +90,7 @@ La versión `mvp.rules.v2` añade `boost-disponibilidad` sin cambiar los umbrale
 
 ## Tercera regla · cobertura defensiva
 
-`mvp.rules.v3` incorpora `cobertura-defensiva-revision`, prioridad `defensive_review`: al menos dos goles recibidos como último defensor en tres de cinco ranked 2v2, con los cinco conteos originales disponibles. Usa score técnico 1 y estado `provisional_heuristic_pending_validation`; no atribuye responsabilidad ni identifica jugadas concretas. Los campos de contexto posicional se conservan sin intervenir en la activación.
+`mvp.rules.v4` incorpora `cobertura-defensiva-revision`, prioridad `defensive_review`: tasa equivalente a al menos dos goles recibidos como último defensor por cinco minutos en tres de cinco ranked 2v2. Se calcula por partida con el conteo original y su `play_duration` original positivo; requiere cinco pares completos. Dos goles en diez minutos no alcanzan el umbral; cuatro sí. No se redondea para decidir ni se sustituye duración ausente o cero. No hay un mínimo de duración acordado; los casos cortos siguen pendientes de revisión deportiva. Usa score técnico 1 y estado `provisional_heuristic_pending_validation`; no atribuye responsabilidad ni identifica jugadas concretas. Los campos de contexto posicional se conservan sin intervenir en la activación.
 
 La [guía de cobertura defensiva](cobertura-defensiva.md) describe normalización, evidencia, actividad, versiones y límites. Los umbrales de finalización y boost se mantienen. Las tres reglas siguen independientes; faltantes defensivos no invalidan tiro ni boost.
 

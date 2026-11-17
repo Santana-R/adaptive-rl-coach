@@ -1,32 +1,32 @@
 # A26 · Contraste inicial de heurísticas y límites
 
-**Estado: contraste técnico completado; pendiente del criterio deportivo de Roberto.** Elaborado con asistencia de IA bajo su Release. La autorización para preparar esta entrega no se registra como una aprobación de sus resultados deportivos.
+**Estado: ajuste por duración solicitado por Roberto y comprobado; revisión deportiva restante pendiente.** Elaborado con asistencia de IA bajo su Release. La autorización para preparar esta entrega no se registra como una aprobación de sus resultados deportivos.
 
 Esta ficha reúne los criterios implementados, expectativas calculadas manualmente por la IA y una comprobación reproducible con el motor. **Los casos son sintéticos; no son replays reales ni una calibración poblacional.** A26 permanece abierta hasta registrar la revisión deportiva y atender lo que resulte.
 
 ## Configuración examinada
 
-Base del código: [`0843055`](https://github.com/Santana-R/adaptive-rl-coach/commit/0843055fba25b318ddcc6431f7170f20d0c2d08e), con PR #74 integrado. La matriz conserva una copia completa de `RULES_CONFIG`; el script rechaza una configuración distinta para evitar atribuir estos resultados a otra versión.
+Base anterior: [`0843055`](https://github.com/Santana-R/adaptive-rl-coach/commit/0843055fba25b318ddcc6431f7170f20d0c2d08e), con PR #74 integrado. El ajuste por duración se verifica en [`985cacb`](https://github.com/Santana-R/adaptive-rl-coach/commit/985cacb7594d7ffe4ab0efc3ce107cc7b2b20cf1), PR #78. La matriz conserva una copia completa de `RULES_CONFIG`; el script rechaza una configuración distinta para evitar atribuir estos resultados a otra versión.
 
 | Pieza | Versión |
 | --- | --- |
-| Reglas | `mvp.rules.v3` |
+| Reglas | `mvp.rules.v4` |
 | Métricas | `mvp.metrics.v1` |
 | Generador | `mvp.plans.v3` |
 | Reparto | `mvp.allocation.v3` |
-| Matriz de esta revisión | `a26.validation.v1` |
+| Matriz de esta revisión | `a26.validation.v2` |
 
 | Regla | Criterio y cobertura | Alcance actual | Estado deportivo |
 | --- | --- | --- | --- |
 | Finalización | Eficiencia ponderada ≤30 %, con goles/tiros 5/5. Mínimo de 20/15/10 tiros en 1v1/2v2/3v3. | Modalidades y tipos compatibles admitidos por A14. | Heurística inicial acordada, sin calibración poblacional. |
 | Disponibilidad de boost | Porcentaje original exactamente en cero ≥15 % en al menos 3/5; score alto con ≥20 % en 3/5. Los cinco porcentajes son necesarios. | Ranked 2v2/3v3; 1v1 sin evaluar. | Heurística acordada. La extensión a 3v3 necesita contraste específico; la investigación exploratoria anterior fue 2v2. |
-| Revisión defensiva | Conteo original ≥2 goles como último defensor en al menos 3/5, con datos 5/5. | Ranked 2v2. | Relevancia confirmada; criterio provisional pendiente de revisión y calibración. |
+| Revisión defensiva | Tasa por partida ≥2 goles como último defensor por cinco minutos en al menos 3/5; cinco conteos válidos y cinco duraciones originales positivas. Cero goles es válido. | Ranked 2v2. | Relevancia confirmada; ajuste por duración solicitado por Roberto. Umbral y casos restantes provisionales. |
 
 El porcentaje de boost 0–25 no es el porcentaje con exactamente cero. Los conteos de último defensor no son una medida de culpabilidad, fallos de entrada ni situaciones 2v1. Los scores solo ordenan prioridades técnicas.
 
 ## Qué se compara y qué decide Roberto
 
-El archivo [de entradas y expectativas](../planning/fixtures/a26-validacion-heuristicas.v1.json) contiene **35 casos**, con vectores de cinco valores, contextos y resultados esperados. La IA preparó esas expectativas mediante cálculo manual y lectura de los criterios publicados; **no se atribuyen a una revisión humana ya realizada**.
+El archivo [de entradas y expectativas](../planning/fixtures/a26-validacion-heuristicas.v2.json) contiene **43 casos**, con vectores de cinco valores, contextos y resultados esperados. La IA preparó esas expectativas mediante cálculo manual y lectura de los criterios publicados; **no se atribuyen a una revisión humana ya realizada**.
 
 El [script de contraste](../scripts/validar-heuristicas-a26.cjs) materializa cada caso como estadísticas sintéticas del jugador, ejecuta A14 → A09 → Análisis/reglas y genera una propuesta con catálogo explícitamente sintético. Compara el resultado calculado con la expectativa y verifica presupuesto/mínimos. No consulta Ballchasing, cuentas ni SQL.
 
@@ -74,20 +74,32 @@ Los mínimos dependen de la modalidad. Un 30 % calculable no basta si faltan tir
 
 B03 conserva la repetición mínima: dos casos extremos no equivalen a tres coincidencias. B09 impide rellenar el porcentaje original desde segundos o boost 0–25. B10 distingue disponibilidad de campos: un porcentaje original válido puede usarse aunque falten segundos; una contradicción explícita, como en B06, impide usarlo.
 
-### Cobertura defensiva · ocho casos
+### Cobertura defensiva · dieciséis casos
+
+Cada tasa usa `goles × 300 / segundos originales de esa partida`. Se necesitan cinco pares válidos; no se promedian relojes ni se redondea para decidir.
 
 | ID | Caso | Esperado y observado (coinciden) |
 | --- | --- | --- |
-| D01 | Dos goles como último defensor en tres partidas | Activa |
-| D02 | Dos partidas con muchos goles no alcanzan tres coincidencias | Inactiva |
+| D01 | Dos goles en cinco minutos en tres partidas | Activa |
+| D02 | Solo dos partidas alcanzan la tasa aunque tengan conteos extremos | Inactiva |
 | D03 | Tres conteos suficientes con dos faltantes | No evaluable |
-| D04 | Un gol en cada partida no cumple dos por partida | Inactiva |
-| D05 | La hipótesis defensiva no se aplica a 3v3 | No evaluable |
-| D06 | Mayor exposición al papel de último defensor no ajusta todavía la señal | Activa |
-| D07 | Partidas de diez minutos conservan el criterio de conteos | Activa |
+| D04 | Un gol en cinco minutos en cada partida | Inactiva |
+| D05 | 3v3 fuera de esta hipótesis | No evaluable |
+| D06 | Mismo reloj y conteos, pero mayor exposición como último defensor | Activa |
+| D07 | Dos goles en diez minutos equivalen a uno por cinco | Inactiva |
 | D08 | Los goles totales del equipo no rellenan el dato defensivo | No evaluable |
+| D09 | Cuatro goles en diez minutos equivalen a dos por cinco | Activa |
+| D10 | Una duración ausente impide completar los cinco pares | No evaluable |
+| D11 | Cero segundos se conserva pero impide calcular la tasa | No evaluable |
+| D12 | Dos goles en 300.000001 segundos quedan debajo del límite | Inactiva |
+| D13 | Dos goles en 299.5 segundos superan el límite | Activa |
+| D14 | Un gol en 60 segundos en tres partidas equivale a cinco por cinco | Activa; muestra corta pendiente de criterio |
+| D15 | `duration` presente sin `play_duration` original | No evaluable |
+| D16 | Cuatro goles en 600.000001 segundos quedan debajo del límite | Inactiva |
 
-D06 y D07 exponen una limitación del criterio actual: el mismo conteo activa revisión aunque aumente la exposición al papel o la duración. El motor **no estima una frecuencia anormal ajustada**. Roberto debe valorar si sigue siendo un selector útil de replays para revisar, si necesita un ajuste o si conviene dejar esos contextos pendientes. La recomendación no atribuye culpa en ninguno de los casos.
+**Observación de Roberto:** «Deberíamos considerar cuánto duró cada partido». Bajo su Release se cambia a una tasa por partida y se versiona a `mvp.rules.v4`. D07 cambia respecto de la matriz histórica v1: antes activaba por conteo; ahora no alcanza la tasa. Esto no registra aprobación de todos los umbrales ni de los otros casos.
+
+D06 conserva un límite distinto: el reloj de la partida no mide la exposición individual como último defensor. D14 hace visible que no existe un mínimo de duración deportiva acordado; muestras muy cortas pueden producir tasas altas. Ninguno se resuelve inventando un corte o atribuyendo culpa.
 
 ### Plan y validación · seis casos
 
@@ -104,9 +116,9 @@ Con poco tiempo no se fabrican minutos ni se reparte por debajo de cinco por act
 
 ## Resultado técnico y reproducción
 
-El workflow de GitHub Actions ejecuta `npm test`, el comprobador histórico de la propuesta defensiva y esta matriz de A26 con Node.js 22.19.0. En [run 43986135222](https://github.com/Santana-R/adaptive-rl-coach/actions/runs/43986135222), los **35 casos coincidieron, sin diferencias**. La suite del proyecto conservó **447 pruebas aprobadas, 0 fallidas**; el comprobador histórico de 33 casos también pasó en un paso separado. No se suman estas cifras como escenarios independientes. La [evidencia guardada](../planning/evidence/a26-resultados.v1.json) conserva el resultado emitido por Node y el commit de la ejecución.
+El workflow ejecuta `npm test`, el comprobador histórico defensivo y la matriz A26 en Node.js 22.19.0. En [run 43990285053](https://github.com/Santana-R/adaptive-rl-coach/actions/runs/43990285053), head `985cacb7594d7ffe4ab0efc3ce107cc7b2b20cf1`, los **43 casos coincidieron, sin diferencias**, y la suite aprobó **481 pruebas, 0 fallidas**. El comprobador histórico de 33 casos pasó por separado; no se suman los grupos como escenarios independientes.
 
-El informe conserva commit ejecutado, commit de la rama, versiones, resultado por caso, métricas, estados, prioridades y minutos por área. Los 35 casos no se presentan como 35 replays ni jugadores independientes.
+La [evidencia v2](../planning/evidence/a26-resultados.v2.json) conserva la salida real: commits, versiones, tasas, cobertura, prioridades y minutos. La [evidencia v1](../planning/evidence/a26-resultados.v1.json) y su [matriz v1](../planning/fixtures/a26-validacion-heuristicas.v1.json) son antecedentes de reglas v3 y se conservan. Ninguno de los 43 casos se presenta como replay real o jugador independiente.
 
 Desde una copia del repositorio:
 
@@ -120,7 +132,7 @@ El script sale con error si una expectativa no coincide. La tolerancia de 1e-12 
 
 ## Revisión deportiva que falta
 
-Cada caso conserva `sports_review.status: pending_roberto_review`. Las preguntas destacadas permiten revisar primero las decisiones más relevantes, sin pedir repetir todos los cálculos.
+La revisión global continúa pendiente. D07 registra `duration_adjustment_requested_by_roberto`; la matriz conserva el alcance específico de su comentario. Los demás casos no se marcan aprobados. Las preguntas destacadas permiten revisar primero las decisiones más relevantes, sin pedir repetir todos los cálculos.
 
 | Caso | Decisión a revisar | Registro de Roberto |
 | --- | --- | --- |
@@ -129,7 +141,8 @@ Cada caso conserva `sports_review.status: pending_roberto_review`. Las preguntas
 | B07 | ¿Aceptar la extensión provisional a 3v3 manteniendo pendiente su contraste específico? | Pendiente. |
 | D01 | ¿Es una señal suficiente para proponer revisión de esas partidas sin atribuir culpa? | Pendiente. |
 | D06 | ¿Conservar la revisión provisional aunque el jugador pase más tiempo como último defensor, o ajustar/deferir el criterio? | Pendiente. |
-| D07 | ¿Mantenerlo como selector de replays para revisar cuando hay tiempo extra, o hace falta restringirlo? | Pendiente. |
+| D07 | Considerar la duración de cada partida. | Solicitado por Roberto e implementado por cinco minutos; el umbral sigue provisional. |
+| D14 | ¿Exigir duración mínima de observación para evitar tasas infladas en partidas muy cortas? | Pendiente; sin corte aprobado. |
 | C02 | ¿El orden técnico actual es aceptable para esta versión cuando el tiempo solo permite dos áreas? | Pendiente. |
 
 Una respuesta puede aceptar provisionalmente el comportamiento, pedir cambiarlo o diferir su aplicación. Debe registrarse lo que Roberto diga, con los casos a los que se refiere. No se infiere aceptación por silencio, por ejecutar tests, por hacer merge de una entrega anterior ni por el Release para preparar esta revisión.
@@ -137,9 +150,9 @@ Una respuesta puede aceptar provisionalmente el comportamiento, pedir cambiarlo 
 ## Incertidumbre y evidencia aún necesaria
 
 - La muestra de boost conservada en el repositorio es exploratoria, de conveniencia, con jugadores repetidos; no establece umbrales representativos por rango.
-- Falta contraste de bloques reales para los tres criterios y, especialmente, para exposición/duración en defensa y extensión de boost a 3v3.
+- Falta contraste de bloques reales para los tres criterios y, especialmente, exposición y muestras cortas en defensa y extensión de boost a 3v3. El ajuste matemático por duración no calibra el umbral.
 - Las pruebas de esta matriz no comprueban la presencia de cada campo en respuestas autenticadas ni el significado detallado de las omisiones del proveedor.
-- A15 conserva segundos de boost, pero no su porcentaje original ni positioning original. Los adaptadores actuales conservan esos faltantes; no se convierten en cero para obtener una prioridad. Cerrar A13/A15 no añade automáticamente esos nuevos campos.
+- A15 conserva segundos de boost, pero no su porcentaje original ni positioning original ni reloj con procedencia original comprobada para esta tasa. Los adaptadores actuales conservan esos faltantes; no se convierten en cero para obtener una prioridad. Cerrar A13/A15 no añade automáticamente esos nuevos campos.
 - La actividad defensiva requiere revisar manualmente la replay; el agregado no localiza el minuto del evento. Su ejecución dentro del juego sigue sin verificación.
 - Una mejora posterior o una sesión completada no demuestra causalidad. La matriz no valida JWT real, la integración privada completa, la persistencia del plan ni su presentación final.
 
@@ -147,7 +160,7 @@ Referencias de criterios y limitaciones: [reglas](reglas-motor.md), [boost](disp
 
 ## Qué falta para cerrar A26
 
-1. **Completado:** contraste técnico de 35/35 y resultado conservado, enlazado al commit y run.
+1. **Completado:** contraste técnico de 43/43 con reglas v4 y resultado conservado, enlazado al commit y run.
 2. Registrar la revisión de Roberto sobre los casos y atender las observaciones concretas.
 3. Si se acuerda cambiar un criterio, preparar el cambio versionado y repetir sus comprobaciones antes de atribuirle el resultado.
 4. Conservar expresamente las limitaciones y la evidencia aún pendiente; no declarar calibración poblacional conseguida.

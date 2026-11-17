@@ -66,7 +66,7 @@
     "allocation": "mvp.allocation.v3"
   },
   "review": {
-    "technical_status": "pending_node_execution",
+    "technical_status": "completed_node_execution",
     "sports_status": "pending_roberto_review",
     "expectations_prepared_by": "assistant",
     "reviewer_decisions_not_inferred": true,
@@ -78,7 +78,14 @@
         "statement": "Deberíamos considerar cuánto duró cada partido.",
         "all_other_cases_approved": false
       }
-    ]
+    ],
+    "technical_evidence": {
+      "path": "planning/evidence/a26-resultados.v2.json",
+      "run_id": 43990285053,
+      "head_commit": "985cacb7594d7ffe4ab0efc3ce107cc7b2b20cf1",
+      "passed": 43,
+      "total": 43
+    }
   },
   "limitations": [
     "synthetic_inputs_not_real_replays",

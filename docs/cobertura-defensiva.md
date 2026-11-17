@@ -1,27 +1,31 @@
 # Cobertura defensiva y decisiones como último hombre
 
-Implementación preparada con Roberto y asistencia de IA bajo su Release del 16 de noviembre de 2026. La versión `mvp.rules.v3` añade una tercera prioridad de **revisión defensiva**, con el criterio provisional que se describe abajo. Los umbrales de finalización y boost se conservan. Hasta integrar el PR #74, estos cambios corresponden a su rama, no a main.
+La versión del PR #78 es `mvp.rules.v4`, preparada con Roberto y asistencia de IA bajo su Release. Ajusta la tercera prioridad de **revisión defensiva** por la duración original de cada partida. La primera implementación `mvp.rules.v3` (PR #74) usaba conteos por partida y se conserva como antecedente. Finalización y boost mantienen sus criterios.
 
 ## Criterio provisional
 
 | Entrada en cinco partidas distintas del mismo jugador | Evaluación |
 | --- | --- |
-| Ranked 2v2 y al menos tres conteos originales `goals_against_while_last_defender >= 2`, con cobertura 5/5 | Activa `cobertura-defensiva-revision`, prioridad `defensive_review`, score técnico 1. |
-| Datos completos, pero solo dos partidas alcanzan dos goles, aunque tengan conteos extremos | Inactiva por este criterio; no demuestra buena defensa. |
-| Falta un conteo válido, aunque tres valores presentes ya alcancen dos | No evaluable. Se conserva el faltante, sin convertirlo en cero. |
+| Ranked 2v2 y tasa ≥2 goles como último defensor por cinco minutos en al menos tres partidas, con cinco pares válidos de conteo y duración original positiva | Activa `cobertura-defensiva-revision`, prioridad `defensive_review`, score técnico 1. |
+| Datos completos, pero solo dos partidas alcanzan la tasa, aunque tengan conteos extremos | Inactiva por este criterio; no demuestra buena defensa. |
+| Falta un conteo o una duración original positiva, aunque tres tasas presentes alcancen el límite | No evaluable. Se conserva el faltante, sin convertirlo en cero. |
 | 1v1, 3v3, casual o privada | No evaluable; esta versión no extrapola el criterio. |
 
-El límite es inclusivo. `[2,2,2,0,0]` activa, `[9,9,1,0,0]` no activa y `[2,2,2,null,null]` no es evaluable. Cero explícito es válido y distinto de una omisión.
+El límite es inclusivo y se evalúa por partida: `tasa = goles × 300 / play_duration`. Si las cinco duran 300 segundos, `[2,2,2,0,0]` activa y `[9,9,1,0,0]` no. Si duran 600 segundos, `[2,2,2,0,0]` no activa y `[4,4,4,0,0]` sí. Se requieren tres coincidencias y cinco pares completos.
 
-**Dos goles en tres partidas es una heurística provisional, no un benchmark calibrado por rango.** Su estado es `provisional_heuristic_pending_validation`. Tiempo extra, presión rival y exposición al papel de último defensor pueden elevar los conteos. El contexto se conserva para revisar esa limitación; no se estima todavía una tasa ajustada por exposición.
+Cero goles es válido. Cero segundos se conserva pero produce tasa null (`zero_duration`). Se admiten segundos fraccionarios originales. No se promedian duraciones ni se sustituye el reloj por `duration`, SQL `duracion_s` o tiempo individual; tampoco se añade otra vez `overtime_seconds`.
+
+**Dos goles equivalentes por cinco minutos en tres partidas es una heurística provisional, no un benchmark calibrado por rango.** Su estado es `provisional_heuristic_pending_validation`. Roberto pidió considerar cuánto duró cada partido; ese ajuste está incorporado. El reloj de la partida no mide la exposición individual como último defensor.
+
+No hay un mínimo de duración deportiva acordado: un gol en 60 segundos equivale a cinco por cinco minutos. Si sucede en tres de cinco puede activar revisión. D14 conserva este caso pendiente del criterio de Roberto; no se inventa un corte adicional ni se presenta la muestra corta como estable.
 
 La prioridad selecciona partidas para estudiar. No atribuye culpa ni identifica un 2v1, un doble commit o una mala rotación. Tampoco presupone que el gol fuera evitable. La [guía con ApparentlyJack](https://dignitas.gg/articles/a-guide-to-defense-in-rocket-league-with-apparentlyjack) orienta la actividad —paciencia, cobertura y momento de entrada—, pero no respalda estos números.
 
 ## Cómo pasa el dato por el código
 
 1. `replay-validation.js` conserva la selección de identidad de A14 y lee exclusivamente `selected_player.stats.positioning`.
-2. [defensive-positioning.js](../src/domain/defensive-positioning.js) valida conteos, unidades y campos de origen. [metrics.js](../src/domain/metrics.js) conserva observaciones identificadas en `defensive_review_per_replay`, con cobertura, exclusiones y base `provider_goals_against_while_last_defender`.
-3. [defensive-rule.js](../src/domain/defensive-rule.js) vuelve a validar las observaciones y su correspondencia con los cinco IDs. Cuenta partidas que cumplen el límite, sin promediar goles para reemplazar la repetición.
+2. [defensive-positioning.js](../src/domain/defensive-positioning.js) valida conteos, unidades y campos de origen. [metrics.js](../src/domain/metrics.js) conserva observaciones identificadas en `defensive_review_per_replay`, con cobertura, exclusiones y base `provider_last_defender_goals_per_300_match_play_seconds`.
+3. [defensive-rule.js](../src/domain/defensive-rule.js) vuelve a validar las observaciones y su correspondencia con los cinco IDs. Cuenta partidas que cumplen la tasa, recalculada desde conteo y reloj originales; rechaza evidencia alterada.
 4. [rules.js](../src/domain/rules.js) evalúa finalización, boost y revisión defensiva de manera independiente. Una métrica de tiro ausente no invalida los conteos defensivos.
 5. [plans.js](../src/domain/plans.js) recalcula el respaldo de cada prioridad antes de seleccionar su actividad. Rechaza evidencia o scores alterados.
 6. El controlador de Análisis muestra la etiqueta defensiva y sus cinco observaciones con el diseño oficial de Luis, sin confundirlas con eficiencia de tiro.
@@ -29,7 +33,7 @@ La prioridad selecciona partidas para estudiar. No atribuye culpa ni identifica 
 El núcleo de la decisión es equivalente a:
 
 ```js
-const matched = observations.filter(o => o.goals.value >= 2).length;
+const matched = observations.filter(o => o.goals.value * 300 >= 2 * o.duration.value).length;
 const active = matched >= 3;
 ```
 
@@ -41,7 +45,7 @@ La [API documentada de Ballchasing](https://ballchasing.com/doc/api) incluye los
 
 | Campo original de positioning | Medición conservada | Uso |
 | --- | --- | --- |
-| `goals_against_while_last_defender` | `goals`, conteo entero seguro no negativo | Activación por partida. |
+| `goals_against_while_last_defender` | `goals`, conteo entero seguro no negativo | Numerador de la tasa por partida. |
 | `time_most_back` | `role_seconds`, segundos | Contexto. |
 | `percent_most_back` | `role_percent`, porcentaje original 0–100 | Contexto. |
 | `percent_infront_ball` | `infront_percent`, porcentaje original 0–100 | Contexto. |
@@ -49,7 +53,9 @@ La [API documentada de Ballchasing](https://ballchasing.com/doc/api) incluye los
 
 Cada medición conserva `value`, `unit`, `scope: player`, `source_field` y `missing_reason`. Booleanos, cadenas, negativos, valores no finitos y promedios fraccionarios no sustituyen un conteo. Un contexto inválido queda no disponible sin inventar su valor ni sustituir la señal principal.
 
-La regla conserva los datos posicionales, pero estos **no cambian la activación**. No se infiere que una distancia media y un gol ocurrieran a la vez. No se divide entre saves, goles totales o duración para fabricar una eficiencia defensiva. `play_duration` sigue siendo duración de la partida, no exposición individual como último defensor.
+Cada observación añade `duration` (`seconds`, ámbito `match`, origen `play_duration`) y `rate` (`goals_per_5_minutes`, numerador, denominador y referencia de 300 segundos). `coverage` cuenta pares válidos; `count_coverage` conteos y `duration_coverage` relojes positivos.
+
+Los otros datos posicionales **no cambian la activación**. No se infiere que una distancia media y un gol ocurrieran a la vez. La tasa no es una eficiencia defensiva ni se divide entre saves, goles totales o tiempo individual como último defensor.
 
 Los ejemplos de la API y los tests no acreditan una captura autenticada de estos campos. La evidencia real de A05 conservada en el repositorio verifica goles y tiros; la validación del proveedor y la calibración con bloques completos siguen pendientes.
 
@@ -89,19 +95,19 @@ La salida conserva `review_catalog_version` cuando usa esta actividad, además d
 
 ## Qué funciona y qué falta de persistencia
 
-La ruta existente de propuesta reutiliza sesión, rol, propiedad del bloque, perfil y catálogo. La lógica nueva funciona cuando recibe los conteos explícitos a través de la extracción del jugador. La demo local y las pruebas HTTP ejecutan ese recorrido con entradas sintéticas identificadas y sesiones/transportes simulados.
+La ruta existente de propuesta reutiliza sesión, rol, propiedad del bloque, perfil y catálogo. La lógica funciona cuando recibe conteos explícitos del jugador y la duración original de cada partida. La demo local y las pruebas HTTP ejecutan ese recorrido con entradas sintéticas identificadas y sesiones/transportes simulados.
 
-**El adaptador A15 todavía no dispone de positioning original persistido.** [stored-block.js](../src/services/stored-block.js) entrega esos datos como null con `stored_positioning_not_recorded`; no los reconstruye de goles totales o relojes. Por ello, los bloques guardados actuales no activan esta regla hasta conservar las mediciones originales. Esta entrega no modifica la base remota.
+**El adaptador A15 todavía no dispone de positioning original persistido ni de reloj con procedencia original comprobada para esta tasa.** [stored-block.js](../src/services/stored-block.js) entrega esos datos como null con `stored_positioning_not_recorded`; no los reconstruye de goles totales o relojes. Por ello, los bloques guardados actuales no activan esta regla hasta conservar las mediciones originales. Esta entrega no modifica la base remota.
 
-A13/A15 deben resolver la conservación comprobada de esos campos. A24 necesita mapear los snapshots nativos antes de guardarlos como relaciones. A19/A37 mantienen pendiente el recorrido con sesión y cinco archivos reales; A26 la validación deportiva y A33 la regresión completa del proyecto. No se cierran esas issues con esta entrega.
+A13/A15 tienen entregas cerradas; eso no incorpora automáticamente estos campos nuevos. Su conservación requiere una entrega adicional comprobada. A24 necesita mapear los snapshots nativos antes de guardarlos como relaciones. A19 mantiene pendientes de integración privada y revisión visual; A26, revisión deportiva; A33, regresión del ciclo completo. Esta entrega no cierra esas issues.
 
 ## Comprobación ejecutada
 
-Con Node.js **22.19.0** en [GitHub Actions, run 43979860196](https://github.com/Santana-R/adaptive-rl-coach/actions/runs/43979860196): **447 pruebas aprobadas, 0 fallidas**; 65 nuevas sobre las 382 de la base actualizada.
+Con Node.js **22.19.0** en [GitHub Actions, run 43990285053](https://github.com/Santana-R/adaptive-rl-coach/actions/runs/43990285053), head `985cacb7594d7ffe4ab0efc3ce107cc7b2b20cf1`: **481 pruebas aprobadas, 0 fallidas** y matriz A26 **43/43 coincidentes**. Incluyen 41 casos de la [especificación por duración](../planning/fixtures/cobertura-defensiva-duracion.v1.json). El comprobador histórico de 33 casos conserva la hipótesis anterior y se ejecuta aparte; estas cifras no se suman como escenarios independientes.
 
-Incluyen los 33 casos de la propuesta materializados contra las funciones reales; límites y faltantes; selección del jugador; independencia entre señales; metadatos alterados; falta de positioning en A15; actividad/snapshots; reparto de 0–120 minutos con tres áreas; rutas HTTP y denegaciones; demos y controlador de Análisis ejecutado en un DOM mínimo mediante VM. El comprobador aislado de los 33 casos también pasó en un paso separado.
+Se comprobaron límites sin redondear, cinco/diez minutos, segundos fraccionarios, relojes ausentes/cero/inválidos, ausencia de fallback, tiempo extra sin duplicarlo, duración por partida, metadatos alterados, HTTP y controlador en DOM mínimo. La [evidencia A26 v2](../planning/evidence/a26-resultados.v2.json) conserva la salida real y sus commits.
 
-Las pruebas HTTP usan sesión y transporte simulados; la VM no es una revisión visual en navegador. No se acredita JWT real, procesamiento de cinco replays reales, SQL de estos campos ni calibración deportiva. Los escenarios y el número de pruebas constan en el log del run.
+Las entradas son sintéticas y la sesión/transporte simulados. La VM no acredita revisión visual en navegador, campos reales del proveedor, JWT, SQL, calibración poblacional ni ejecución dentro del juego.
 
 ### Repetir y ver la demo
 
@@ -111,6 +117,6 @@ npm test
 ANALYSIS_DEMO_ENABLED=true npm start
 ```
 
-Abrir la vista oficial de Análisis con `?case=defense`, `defense-inactive`, `defense-missing` o `three-priorities`. La demo conserva el control explícito y la restricción a loopback.
+Abrir la vista oficial de Análisis con `?case=defense`, `defense-inactive`, `defense-missing`, `defense-long`, `defense-long-active`, `defense-duration-missing` o `three-priorities`. La demo conserva el control explícito y la restricción a loopback.
 
-La [propuesta v0](cobertura-defensiva-propuesta.md) y sus artefactos conservan la especificación inicial: su `runtime_enabled: false` describe aquel borrador, no es un interruptor de la implementación v3.
+La [propuesta v0](cobertura-defensiva-propuesta.md) y sus artefactos conservan la especificación inicial: su `runtime_enabled: false` describe aquel borrador, no es un interruptor de las implementaciones posteriores.
