@@ -32,7 +32,7 @@
       const messages = {
         401: 'Inicia sesión para consultar tus datos.',
         403: 'Tu cuenta no tiene permiso para esta operación.',
-        404: 'El recurso o servicio no está disponible. En esta copia faltan las APIs A21/A22/A31.',
+        404: 'El recurso no existe o no está disponible para tu cuenta.',
         429: 'Se alcanzó el límite de solicitudes. Espera antes de reintentar.'
       };
       const error = new Error(failure.responseJSON?.error?.message || messages[failure.status] || 'No se pudo contactar con el servidor.');

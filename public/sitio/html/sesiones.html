@@ -45,14 +45,14 @@
         <section class="followup-panel" aria-labelledby="session-title">
           <h2 id="session-title" class="h4">Registrar o corregir práctica</h2>
           <p id="session-edit-note">La fecha y hora se introducen en la zona local de este dispositivo.</p>
-          <p>Selecciona la versión desde <a class="text-accent" href="plan.html">Plan</a>. Las operaciones requieren el servicio de sesiones A21.</p>
+          <p>Selecciona la versión desde <a class="text-accent" href="plan.html">Plan</a>. Las sesiones se guardan en el servidor y conservan la versión exacta practicada.</p>
           <form id="session-form">
             <fieldset id="session-fields" disabled>
               <legend class="visually-hidden">Datos de la sesión</legend>
               <div class="row g-3">
                 <div class="col-12 col-md-6"><label for="session-date">Fecha y hora local</label><input id="session-date" type="datetime-local" class="form-control" required></div>
                 <div class="col-12 col-md-6"><label for="session-minutes">Minutos practicados</label><input id="session-minutes" type="number" min="1" max="32767" step="1" class="form-control" required></div>
-                <div class="col-12"><label for="session-exercise">Ejercicio de esta versión</label><select id="session-exercise" class="form-select"></select></div>
+                <div class="col-12"><label for="session-exercise">Ejercicio de esta versión</label><select id="session-exercise" class="form-select" required></select></div>
                 <div class="col-12"><label for="session-notes">Notas (opcional)</label><textarea id="session-notes" class="form-control" maxlength="2000" rows="3"></textarea></div>
               </div>
               <button id="session-submit" type="submit" class="btn-rl btn-rl-accent mt-3">Registrar sesión</button>

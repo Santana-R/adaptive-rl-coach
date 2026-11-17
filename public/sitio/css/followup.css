@@ -1,0 +1,69 @@
+.followup-panel { 
+    color: #e9f3fa; 
+    background: #112735; 
+    border: 1px solid #4e6c7f; 
+    border-radius: .7rem; 
+    padding: 1.2rem; 
+    margin-block: 1.25rem; 
+    overflow-wrap: anywhere; 
+}
+
+.followup-panel .form-control, .followup-panel .form-select { 
+    background-color: #091b26; 
+    color: #fff; 
+    border: 1px solid #8199aa; 
+}
+
+.followup-panel .form-control:focus, .followup-panel .form-select:focus { 
+    background-color: #102d3e; 
+    color: #fff; 
+    border-color: #00d5c0; 
+    box-shadow: 0 0 0 .2rem #00d5c033; 
+}
+
+.followup-panel input::-webkit-calendar-picker-indicator { 
+    filter: invert(1); 
+}
+
+.followup-panel button:focus-visible, .followup-panel a:focus-visible, .followup-panel summary:focus-visible { 
+    outline: 3px solid #00d5c0; 
+    outline-offset: 3px; 
+}
+
+.followup-panel :disabled { 
+    opacity: .65; 
+}
+
+.followup-panel .table { 
+    color: #e9f3fa; 
+    border-color: #456277; 
+}
+
+.followup-panel .table th { 
+    color: #00e0c6; 
+}
+
+.followup-panel .table td, .followup-panel .table th { 
+    background: transparent; 
+}
+
+.followup-panel .followup-muted { 
+    color: #b4c9d8; 
+}
+
+.followup-panel .followup-error { 
+    color: #ffc2c6; 
+}
+
+.followup-panel .followup-item { 
+    border-top: 1px solid #456277; 
+    padding-block: 1rem; 
+}
+
+.followup-panel pre { 
+    white-space: pre-wrap; 
+}
+
+.followup-panel [hidden] { 
+    display: none !important; 
+}

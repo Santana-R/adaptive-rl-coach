@@ -12,7 +12,7 @@ const plan = {
 };
 
 function input(changes = {}) {
-  return { performed_at: '2026-11-16T12:00:00Z', duration_minutes: '20', notes: ' práctica ', ...changes };
+  return { performed_at: '2026-11-16T12:00:00Z', duration_minutes: '20', plan_exercise_id: '20', notes: ' práctica ', ...changes };
 }
 
 test('A28: datos ausentes no se convierten en cero y periodo valida fechas reales', () => {
@@ -69,4 +69,32 @@ test('A28: autenticación ausente no consulta; fallo de escritura es incierto; 4
   await assert.rejects(offline.sessions(), error => error.uncertain === false);
   await assert.rejects(service(async () => { throw { status: 404 }; }).sessions(), error => error.status === 404);
   await assert.rejects(service(async () => '<html>error</html>').sessions(), /incompatible/);
+});
+
+test('A28/A21: el alta del formulario cumple el contrato real y exige un ejercicio', () => {
+  const { parseCreate } = require('../src/domain/sessions');
+  const body = model.session(input(), plan);
+  assert.deepEqual(parseCreate(body), body);
+  assert.throws(() => model.session(input({plan_exercise_id:''}), plan), /ejercicio/);
+  assert.throws(() => model.session(input({performed_at:'2999-01-01T00:00:00Z'}), plan), /futuras/);
+  assert.throws(() => model.session(input({notes:'nota\0inválida'}), plan));
+});
+
+test('A28/A21: corrección conserva vínculo y usa solo campos aceptados por PATCH', () => {
+  const { parsePatch } = require('../src/domain/sessions');
+  const existing = { plan_version_id: '14', plan_exercise_id: '20' };
+  const body = model.sessionPatch(input({ duration_minutes: '40' }), plan, existing);
+  assert.equal(body.plan_version_id, undefined);
+  assert.deepEqual(parsePatch(body), body);
+  const multiple = model.sessionPatch(input({ duration_minutes:'999', plan_exercise_id:'999' }), plan, { plan_version_id:'14', plan_exercise_id:null });
+  assert.deepEqual(Object.keys(multiple).sort(), ['notes','performed_at']);
+  assert.deepEqual(parsePatch(multiple), multiple);
+  assert.throws(() => model.sessionPatch(input(), plan, {plan_version_id:'15'}), /versión/);
+});
+
+test('A28/A21: IDs bigint se conservan como cadenas sin redondeo', () => {
+  assert.equal(model.id('9223372036854775807'), true);
+  assert.equal(model.id('9223372036854775808'), false);
+  assert.equal(model.id(9223372036854775807), false);
+  assert.equal(model.id('01'), false);
 });
