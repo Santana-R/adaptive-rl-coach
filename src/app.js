@@ -14,6 +14,7 @@ const { createStoredAnalysisRepository } = require('./services/stored-block');
 const { createAdminUsersRouter } = require('./routes/admin-users');
 const { createPlansRouter, createPlanVersionsRouter } = require('./routes/plans');
 const { createGoalsRouter } = require('./routes/goals');
+const { createSessionsRouter } = require('./routes/sessions');
 const { createRankHistoryRouter } = require('./routes/ranks');
 
 /**
@@ -32,6 +33,8 @@ function createApp({ supabase = createServerClient(), analysisRepository, enable
   requireAuth,
   requireRole,
 }));
+
+app.use('/api/v1/sessions', createSessionsRouter({ supabase, requireAuth, requireRole }));
 
   app.get('/health', (_req, res) => {
     res.json({ status: 'ok' });
