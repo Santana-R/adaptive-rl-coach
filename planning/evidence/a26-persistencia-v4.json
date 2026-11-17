@@ -1,0 +1,125 @@
+{
+  "evidence_version": "a26.persistence.v4.1",
+  "prepared_with": "assistant_under_roberto_release",
+  "code_commit": "de7fba09641182d14fff70c617fbbab6d04dc211",
+  "ci": {
+    "run_id": 43992766098,
+    "url": "https://github.com/Santana-R/adaptive-rl-coach/actions/runs/43992766098",
+    "tests": 491,
+    "passed": 491,
+    "failed": 0,
+    "a26_cases": 43,
+    "a26_passed": 43
+  },
+  "database": {
+    "project": "adaptive-rl-coach",
+    "project_ref": "fylupliaforboawqdutb",
+    "source": "synthetic_sql_contract",
+    "seed_test_runs_in_rollback": 2,
+    "seed_applied": true,
+    "historical_configurations_unchanged": true,
+    "report": {
+      "source": "synthetic_sql_contract",
+      "rollback": true,
+      "v4_rules": 3,
+      "version_2": true,
+      "v4_rpc_save": true,
+      "update_denied": true,
+      "v3_still_saves": true,
+      "new_metric_unit": true,
+      "other_owner_denied": true,
+      "version_1_unchanged": true,
+      "old_configs_unchanged": true,
+      "v3_to_v4_conflict_preserved": true
+    },
+    "verification": {
+      "counts": {
+        "plans": 0,
+        "blocks": 3,
+        "analyses": 0
+      },
+      "configurations": [
+        {
+          "umbral": 15,
+          "unidad": "percent",
+          "version": "mvp.rules.v2",
+          "rule_code": "boost-disponibilidad",
+          "comparador": ">=",
+          "metric_code": "boost_zero_pct",
+          "muestra_minima": 5
+        },
+        {
+          "umbral": 30,
+          "unidad": "percent",
+          "version": "mvp.rules.v2",
+          "rule_code": "finalizacion-eficiencia",
+          "comparador": "<=",
+          "metric_code": "shooting_pct",
+          "muestra_minima": 5
+        },
+        {
+          "umbral": 15,
+          "unidad": "percent",
+          "version": "mvp.rules.v3",
+          "rule_code": "boost-disponibilidad",
+          "comparador": ">=",
+          "metric_code": "boost_zero_pct",
+          "muestra_minima": 5
+        },
+        {
+          "umbral": 2,
+          "unidad": "count",
+          "version": "mvp.rules.v3",
+          "rule_code": "cobertura-defensiva-revision",
+          "comparador": ">=",
+          "metric_code": "goals_against_while_last_defender",
+          "muestra_minima": 5
+        },
+        {
+          "umbral": 30,
+          "unidad": "percent",
+          "version": "mvp.rules.v3",
+          "rule_code": "finalizacion-eficiencia",
+          "comparador": "<=",
+          "metric_code": "shooting_pct",
+          "muestra_minima": 5
+        },
+        {
+          "umbral": 15,
+          "unidad": "percent",
+          "version": "mvp.rules.v4",
+          "rule_code": "boost-disponibilidad",
+          "comparador": ">=",
+          "metric_code": "boost_zero_pct",
+          "muestra_minima": 5
+        },
+        {
+          "umbral": 2,
+          "unidad": "goals_per_5_minutes",
+          "version": "mvp.rules.v4",
+          "rule_code": "cobertura-defensiva-revision-tasa",
+          "comparador": ">=",
+          "metric_code": "last_defender_goals_per_5_minutes",
+          "muestra_minima": 5
+        },
+        {
+          "umbral": 30,
+          "unidad": "percent",
+          "version": "mvp.rules.v4",
+          "rule_code": "finalizacion-eficiencia",
+          "comparador": "<=",
+          "metric_code": "shooting_pct",
+          "muestra_minima": 5
+        }
+      ]
+    },
+    "limits": [
+      "No HTTP auth or real replay processing exercised by SQL check",
+      "Draft blocks and synthetic contract, no exercise links; not a full app cycle",
+      "ID sequences advance on rollback",
+      "Native exercises without SQL versions remain unpersistable",
+      "A15 still lacks original positioning and duration provenance"
+    ]
+  },
+  "sports_review_status": "remaining_review_pending"
+}

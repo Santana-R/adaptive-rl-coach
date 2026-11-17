@@ -120,3 +120,7 @@ ANALYSIS_DEMO_ENABLED=true npm start
 Abrir la vista oficial de Análisis con `?case=defense`, `defense-inactive`, `defense-missing`, `defense-long`, `defense-long-active`, `defense-duration-missing` o `three-priorities`. La demo conserva el control explícito y la restricción a loopback.
 
 La [propuesta v0](cobertura-defensiva-propuesta.md) y sus artefactos conservan la especificación inicial: su `runtime_enabled: false` describe aquel borrador, no es un interruptor de las implementaciones posteriores.
+
+## Actualización de persistencia A26/A24
+
+La [compatibilidad con reglas v4](a26-compatibilidad-persistencia.md) registra la tasa con una métrica/código SQL nuevos, conserva v2/v3 y verifica el RPC con datos sintéticos revertidos. La seed v4 está aplicada; esto no incorpora positioning ni duración originales a los bloques guardados ni convierte la actividad nativa en un ejercicio SQL. El criterio deportivo restante sigue pendiente.
