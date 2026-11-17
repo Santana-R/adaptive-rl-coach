@@ -160,3 +160,32 @@ test('sin configuración de Supabase → 503, la demo estática sigue', async ()
     await new Promise((resolve) => srv.close(resolve));
   }
 });
+test('A37: un error interno no expone datos privados', async (t) => {
+  const supabase = fakeSupabase();
+  const app = createApp({ supabase });
+
+  t.mock.method(supabase, 'from', () => {
+    throw new Error('dato privado ficticio de A37');
+  });
+  const log = t.mock.method(console, 'error', () => {});
+
+  const servidor = await new Promise((resolve) => {
+    const instancia = app.listen(0, '127.0.0.1', () => resolve(instancia));
+  });
+  t.after(() => new Promise((resolve) => servidor.close(resolve)));
+
+  const url = `http://127.0.0.1:${servidor.address().port}/api/v1/me`;
+  const respuesta = await fetch(url, {
+    headers: { Authorization: 'Bearer token-a' }
+  });
+
+  assert.equal(respuesta.status, 500);
+  assert.deepEqual((await respuesta.json()).error, {
+    code: 'INTERNAL_ERROR',
+    message: 'Error inesperado del servidor.'
+  });
+  assert.equal(log.mock.callCount(), 1);
+  assert.deepEqual(log.mock.calls[0].arguments, [
+    '[INTERNAL_ERROR] Error inesperado del servidor.'
+  ]);
+});

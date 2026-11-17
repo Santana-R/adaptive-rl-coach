@@ -1,0 +1,119 @@
+{
+  "evidence_version": "a19.private-check.v1",
+  "passed": true,
+  "total": 14,
+  "failed": 0,
+  "cases": [
+    {
+      "id": "distinct_accounts",
+      "passed": true,
+      "expected": "A y B distintos",
+      "observed": true
+    },
+    {
+      "id": "session_A",
+      "passed": true,
+      "expected": "200, identidad de la sesión activa",
+      "observed": 200
+    },
+    {
+      "id": "session_B",
+      "passed": true,
+      "expected": "200, identidad de la sesión activa",
+      "observed": 200
+    },
+    {
+      "id": "own_ready_block",
+      "passed": true,
+      "expected": "Un bloque propio ready con cinco replays",
+      "observed": "ready"
+    },
+    {
+      "id": "no_session",
+      "passed": true,
+      "expected": "401 AUTH_REQUIRED",
+      "observed": 401
+    },
+    {
+      "id": "invalid_session",
+      "passed": true,
+      "expected": "401 AUTH_REQUIRED",
+      "observed": 401
+    },
+    {
+      "id": "own_analysis",
+      "passed": true,
+      "expected": "200, cinco replays guardados, no-store",
+      "observed": 200
+    },
+    {
+      "id": "original_counts_available",
+      "passed": true,
+      "expected": "Cinco conteos originales guardados válidos",
+      "observed": true
+    },
+    {
+      "id": "manual_totals",
+      "passed": true,
+      "expected": {
+        "goals": 17,
+        "shots": 31,
+        "shooting_pct": 54.83870967741935
+      },
+      "observed": {
+        "goals": 17,
+        "shots": 31,
+        "shooting_pct": 54.83870967741935
+      }
+    },
+    {
+      "id": "api_controller_values",
+      "passed": true,
+      "expected": "Controlador presenta los valores calculados; DOM mínimo, no revisión visual",
+      "observed": {
+        "error_hidden": true,
+        "shooting": "54.84 %",
+        "goals": "17 goles",
+        "shots": "31 tiros",
+        "sample": "5 replays"
+      }
+    },
+    {
+      "id": "foreign_same_as_missing",
+      "passed": true,
+      "expected": "Ajeno e inexistente: mismo 404, sin datos",
+      "observed": {
+        "foreign": 404,
+        "missing": 404
+      }
+    },
+    {
+      "id": "owner_not_from_query",
+      "passed": true,
+      "expected": "B no suplanta a A mediante user_id",
+      "observed": 404
+    },
+    {
+      "id": "history_owner_filtered",
+      "passed": true,
+      "expected": "Historial de B excluye el bloque de A",
+      "observed": 200
+    },
+    {
+      "id": "explicit_owned_baseline",
+      "passed": true,
+      "expected": "Anterior propio permitido; mismo bloque explicado sin comparación ficticia",
+      "observed": 200
+    }
+  ],
+  "limitations": [
+    "No es una auditoría completa A37.",
+    "Controlador ejecutado en DOM mínimo: falta revisión visual de Luis en escritorio y 390 px.",
+    "Los datos se leen de bloques existentes; no se acredita una nueva carga o llamada a Ballchasing.",
+    "No se crea, modifica o elimina ningún bloque, replay, perfil ni plan."
+  ],
+  "execution_source": "real_supabase_sessions_existing_stored_blocks",
+  "node_version": "v24.7.0",
+  "executed_at": "2026-11-17T02:21:13.823Z",
+  "commit": "64d49bf8face6ad01d2073ed96971668d506bdcd"
+}
