@@ -15,6 +15,7 @@
   <!-- MDB -->
   <link rel="stylesheet" href="../css/mdb.min.css">
   <link rel="stylesheet" href="../css/index.css" />
+<link rel="stylesheet" href="../css/followup.css" />
 </head>
 
 <body class="mainbody appbody">
@@ -58,17 +59,10 @@
         <p id="file-notice" class="text-bray fs-6 mb-4" role="status" aria-live="polite">Selecciona exactamente cinco
           archivos .replay.</p>
       </form>
-      <div class="mb-3">
-        <div class="table-head" style="grid-template-columns: 1fr 2fr 1fr 1.5fr 1.5fr;">
-          <span>Bloque</span><span>Contexto</span><span>Partidas</span><span>Estado</span><span>Acción</span></div>
-        <div id="blocks-list">
-          <p class="text-bray">Todavía no hay bloques cargados.</p>
-        </div>
-      </div>
-      <pre id="block-details" class="text-bray" style="white-space: pre-wrap" aria-live="polite" hidden></pre>
+      <section data-block-history aria-label="Historial de bloques"></section>
+
       <p class="text-bray">Reintentar se ofrece ante fallas recuperables. Ver análisis exige cinco partidas válidas.</p>
-      <p class="app-note">Los bloques se consultan desde el API local. El procesamiento real y la persistencia se
-        incorporan en las tareas de integración del motor.</p>
+      <p class="app-note">El historial consulta los bloques de tu cuenta. La disponibilidad de reintentos depende del estado y de los archivos temporales conservados por el servidor.</p>
     </main>
   </div>
 
@@ -84,6 +78,9 @@
 
 <script src="../js/profile-api.js"></script>
 <script src="../../js/blocks.js"></script>
+<script src="../js/followup-model.js"></script>
+<script src="../js/followup-service.js"></script>
+<script src="../js/block-history.js"></script>
 <script src="../js/replays.js"></script>
 </body>
 

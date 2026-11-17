@@ -1,0 +1,212 @@
+{
+  "period": {
+    "from": "2026-10-08",
+    "to": "2026-10-10",
+    "timezone": "America/Monterrey"
+  },
+  "performance": {
+    "period": {"from": "2026-10-08", "to": "2026-10-10", "timezone": "America/Monterrey"},
+    "source": "compatible_replays",
+    "unit": "percent",
+    "metric_key": "shooting_pct",
+    "sample_size": 10,
+    "denominator": {"metric_key": "shots", "value": 18, "unit": "count"},
+    "points": [
+      {
+        "block_id": "test-block-baseline",
+        "first_match_at": "2026-10-08T20:00:00Z",
+        "last_match_at": "2026-10-08T21:00:00Z",
+        "mode": "2v2",
+        "match_type": "ranked",
+        "platform": "steam",
+        "source": "stored_replay_metrics",
+        "metrics_version": "mvp.metrics.v1",
+        "sample_size": 5,
+        "value": 25,
+        "numerator": {"metric_key": "goals", "value": 2, "unit": "count"},
+        "denominator": {"metric_key": "shots", "value": 8, "unit": "count"},
+        "comparison": {
+          "status": "baseline",
+          "baseline_block_id": null,
+          "delta_pp": null,
+          "reason_codes": ["NO_PREVIOUS_COMPATIBLE_BLOCK"]
+        }
+      },
+      {
+        "block_id": "test-block-current",
+        "first_match_at": "2026-10-10T20:00:00Z",
+        "last_match_at": "2026-10-10T21:00:00Z",
+        "mode": "2v2",
+        "match_type": "ranked",
+        "platform": "steam",
+        "source": "stored_replay_metrics",
+        "metrics_version": "mvp.metrics.v1",
+        "sample_size": 5,
+        "value": 30,
+        "numerator": {"metric_key": "goals", "value": 3, "unit": "count"},
+        "denominator": {"metric_key": "shots", "value": 10, "unit": "count"},
+        "comparison": {
+          "status": "comparable",
+          "baseline_block_id": "test-block-baseline",
+          "delta_pp": 5,
+          "reason_codes": []
+        }
+      }
+    ],
+    "excluded": [
+      {"block_id": "sin-tiros", "reason": "zero_denominator"}
+    ]
+  },
+  "training": {
+    "period": {"from": "2026-10-08", "to": "2026-10-10", "timezone": "America/Monterrey"},
+    "source": "self_reported_sessions",
+    "unit": "minutes",
+    "sample_size": 3,
+    "denominator": null,
+    "total_minutes": 31,
+    "points": [
+      {
+        "session_id": "1",
+        "plan_version_id": "9223372036854775807",
+        "mode": "2v2",
+        "performed_at": "2026-10-08T06:00:00Z",
+        "duration_minutes": 10
+      },
+      {
+        "session_id": "2",
+        "plan_version_id": "12",
+        "mode": "2v2",
+        "performed_at": "2026-10-10T19:00:00Z",
+        "duration_minutes": 15
+      },
+      {
+        "session_id": "3",
+        "plan_version_id": "13",
+        "mode": null,
+        "performed_at": "2026-10-10T20:00:00Z",
+        "duration_minutes": 6
+      }
+    ],
+    "excluded": [
+      {"session_id": "5", "reason": "missing_duration"}
+    ]
+  },
+  "rank": {
+    "period": {"from": "2026-10-08", "to": "2026-10-10", "timezone": "America/Monterrey"},
+    "source": "self_reported",
+    "unit": "rank_label",
+    "sample_size": 1,
+    "denominator": null,
+    "points": [
+      {
+        "rank_id": "1",
+        "mode": "2v2",
+        "rank_label": "diamond",
+        "division": 1,
+        "season": "prueba",
+        "recorded_at": "2026-10-10T12:00:00.000Z"
+      }
+    ],
+    "excluded": [
+      {"rank_id": "2", "reason": "unverified_rank_source"}
+    ]
+  },
+  "goals": {
+    "period": {"from": "2026-10-08", "to": "2026-10-10", "timezone": "America/Monterrey"},
+    "source": "goal_versions",
+    "unit": "mixed",
+    "sample_size": 3,
+    "denominator": null,
+    "points": [
+      {
+        "goal_id": "1",
+        "goal_version_id": "1",
+        "version": 1,
+        "name": "Meta de prueba",
+        "type": "training",
+        "mode": "2v2",
+        "metric_key": "training_minutes",
+        "unit": "minutes",
+        "comparator": ">=",
+        "target_value": 10,
+        "goal_period": {"from": "2026-10-08", "to": null, "timezone": "America/Monterrey"},
+        "active_from": "2026-10-08T06:00:00.000Z",
+        "active_until": "2026-10-10T06:00:00.000Z",
+        "status": "met",
+        "source": "self_reported_sessions",
+        "sample_size": 1,
+        "actual_value": 10,
+        "denominator": null,
+        "evidence": {"session_ids": ["1"]},
+        "reason": null
+      },
+      {
+        "goal_id": "1",
+        "goal_version_id": "2",
+        "version": 2,
+        "name": "Meta de prueba",
+        "type": "training",
+        "mode": "2v2",
+        "metric_key": "training_minutes",
+        "unit": "minutes",
+        "comparator": ">=",
+        "target_value": 20,
+        "goal_period": {"from": "2026-10-08", "to": null, "timezone": "America/Monterrey"},
+        "active_from": "2026-10-10T06:00:00.000Z",
+        "active_until": "2026-10-11T06:00:00.000Z",
+        "status": "not_met",
+        "source": "self_reported_sessions",
+        "sample_size": 1,
+        "actual_value": 15,
+        "denominator": null,
+        "evidence": {"session_ids": ["2"]},
+        "reason": null
+      },
+      {
+        "goal_id": "2",
+        "goal_version_id": "3",
+        "version": 1,
+        "name": "Meta de prueba",
+        "type": "performance",
+        "mode": "2v2",
+        "metric_key": "shooting_pct",
+        "unit": "percent",
+        "comparator": ">",
+        "target_value": 30,
+        "goal_period": {"from": "2026-10-08", "to": null, "timezone": "America/Monterrey"},
+        "active_from": "2026-10-08T06:00:00.000Z",
+        "active_until": "2026-10-11T06:00:00.000Z",
+        "status": "not_met",
+        "source": "compatible_replays",
+        "sample_size": 5,
+        "actual_value": 30,
+        "denominator": {"metric_key": "shots", "value": 10, "unit": "count"},
+        "evidence": {"block_id": "test-block-current"},
+        "reason": null
+      },
+      {
+        "goal_id": "3",
+        "goal_version_id": "4",
+        "version": 1,
+        "name": "Meta de prueba",
+        "type": "training",
+        "mode": "1v1",
+        "metric_key": "training_minutes",
+        "unit": "minutes",
+        "comparator": ">=",
+        "target_value": 5,
+        "goal_period": {"from": "2026-10-08", "to": null, "timezone": "America/Monterrey"},
+        "active_from": "2026-10-08T06:00:00.000Z",
+        "active_until": "2026-10-11T06:00:00.000Z",
+        "status": "insufficient_data",
+        "source": "self_reported_sessions",
+        "sample_size": 0,
+        "actual_value": null,
+        "denominator": null,
+        "evidence": {"session_ids": []},
+        "reason": "no_matching_training_sessions"
+      }
+    ],
+    "excluded": []
+  }
+}
