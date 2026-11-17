@@ -10,7 +10,7 @@ const {
 const { getCatalog } = require('./repositories/catalog');
 const { createAnalysisRouter, createAnalysisDemoRouter } = require('./routes/analysis');
 const { createStoredAnalysisRepository } = require('./services/stored-block');
-const { createPlansRouter } = require('./routes/plans');
+const { createPlansRouter, createPlanVersionsRouter } = require('./routes/plans');
 
 /**
  * Construye la aplicación. Recibe el cliente de Supabase para poder probarla
@@ -111,6 +111,7 @@ app.patch('/api/v1/profile', requireAuth, async (req, res, next) => {
 
   app.use('/api/v1/blocks', createAnalysisRouter({ requireAuth, requireRole, repository }));
   app.use('/api/v1/blocks', createPlansRouter({ supabase, requireAuth, requireRole, repository }));
+  app.use('/api/v1/plans', createPlanVersionsRouter({ supabase, requireAuth, requireRole, repository }));
   app.use('/api/v1/demo/analysis', createAnalysisDemoRouter({ enabled: enableAnalysisDemo }));
     app.use('/api/v1/blocks', enableBlocksDemo && !supabase
       ? blocksRouter
