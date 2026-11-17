@@ -1,0 +1,53 @@
+{
+  "catalog_version": "mvp.native-review.v1",
+  "source": "bundled_native_review",
+  "sports_review": {
+    "reviewer": "Roberto Santana Trujillo",
+    "relevance_confirmed_on": "2026-11-16",
+    "numerical_calibration": "pending",
+    "in_game_execution": "not_verified",
+    "prepared_with_ai": true
+  },
+  "technical_scope": "Actividad de revisión manual con snapshot propio. No acredita filas SQL, timestamps automáticos ni detección causal.",
+  "exercises": [
+    {
+      "exercise_id": null,
+      "exercise_version_id": null,
+      "exercise_key": "review-last-defender",
+      "content_version": 1,
+      "priority_key": "defensive_review",
+      "title": "Revisión de cobertura defensiva",
+      "resource_type": "native_replay_review",
+      "resource_code": null,
+      "resource_url": "https://dignitas.gg/articles/a-guide-to-defense-in-rocket-league-with-apparentlyjack",
+      "resource_role": "supporting_guide_not_replay_link",
+      "platforms": [
+        "steam",
+        "epic"
+      ],
+      "modes": [
+        "2v2"
+      ],
+      "requirements": {
+        "saved_replay": true,
+        "steam_workshop_access": false,
+        "bakkesmod": false
+      },
+      "difficulty_base": 1,
+      "minimum_duration_minutes": 5,
+      "reference_duration_minutes": 10,
+      "source": "bundled_native_review",
+      "review_status": "relevance_confirmed_execution_and_threshold_pending",
+      "purpose": "Revisar preparación, cobertura y decisión de entrar o temporizar en situaciones de último defensor.",
+      "instructions": [
+        "Abrir manualmente en Rocket League una replay guardada de las partidas señaladas. No requiere paquetes, Workshop, BakkesMod ni compañero de práctica.",
+        "Recorrer los goles recibidos y retroceder aproximadamente diez segundos para observar la preparación de la jugada.",
+        "Comprobar visualmente si ocupabas el papel de último defensor. El conteo agregado no indica el minuto ni cuáles goles corresponden; continuar con otro gol si no corresponde.",
+        "Identificar las opciones del rival y qué debías cubrir, valorar entrar o ganar tiempo y observar la recuperación de tu compañero.",
+        "Anotar una decisión alternativa concreta o que no identificas una alternativa clara. Si no logras localizar una situación, registrar esa dificultad sin inventar un error.",
+        "Detener la actividad al cumplir los minutos asignados. Diez minutos es una referencia, no un tiempo obligatorio; con más tiempo se pueden revisar más situaciones."
+      ],
+      "success_criterion": "Dedicar los minutos asignados y registrar qué se pudo revisar y una observación o dificultad. Es una revisión autorreportada, no una prueba de error ni de mejora competitiva."
+    }
+  ]
+}

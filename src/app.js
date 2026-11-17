@@ -10,6 +10,7 @@ const {
 const { getCatalog } = require('./repositories/catalog');
 const { createAnalysisRouter, createAnalysisDemoRouter } = require('./routes/analysis');
 const { createStoredAnalysisRepository } = require('./services/stored-block');
+const { createAdminUsersRouter } = require('./routes/admin-users');
 const { createPlansRouter, createPlanVersionsRouter } = require('./routes/plans');
 
 /**
@@ -22,6 +23,12 @@ function createApp({ supabase = createServerClient(), analysisRepository, enable
   const repository = analysisRepository === undefined ? createStoredAnalysisRepository(supabase) : analysisRepository;
 
   app.use(express.json({ limit: '1mb' }));
+
+  app.use('/api/v1/admin/users', createAdminUsersRouter({
+  supabase,
+  requireAuth,
+  requireRole,
+}));
 
   app.get('/health', (_req, res) => {
     res.json({ status: 'ok' });

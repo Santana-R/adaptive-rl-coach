@@ -4,6 +4,7 @@ const { RULES_CONFIG } = require('./rules-config');
 const { allocateMinutes } = require('./time-allocation');
 
 const nativeBoostCatalog = require('../../planning/catalogo-boost.v1.json');
+const nativeReviewCatalog = require('../../planning/catalogo-revision-defensiva.v1.json');
 
 const KEYS = ['castro-ground-shots', 'castro-mid-height-shots', 'coco-aim-training'];
 const RANKS = ['bronze', 'silver', 'gold', 'platinum', 'diamond', 'champion', 'grand_champion', 'supersonic_legend'];
@@ -143,6 +144,9 @@ function exerciseSnapshot(exercise, variant, rank) {
       ? 'Añadir wavedashes solo si ya se dominan, sin sacrificar la posición elegida.'
       : 'Priorizar rutas sencillas, giros controlados y aterrizajes; no se exige wavedash.';
   }
+  if (exercise.priority_key === 'defensive_review') {
+    level = 'Revisar el contexto antes de atribuir responsabilidad; no se exige una mecánica ni un rango.';
+  }
   if (variant === null) instructions.push(level);
   else {
     instructions.push(`Modo elegido: ${variant.mode}.`);
@@ -164,6 +168,9 @@ function exerciseSnapshot(exercise, variant, rank) {
     selected_variant: variant,
     ...(exercise.source === 'bundled_native_instructions' ? { source: exercise.source,
       native_catalog_version: nativeBoostCatalog.catalog_version, review_status: exercise.review_status } : {}),
+    ...(exercise.source === 'bundled_native_review' ? { source: exercise.source,
+      native_catalog_version: nativeReviewCatalog.catalog_version, review_status: exercise.review_status,
+      requires_saved_replay: true, resource_role: exercise.resource_role } : {}),
   });
 }
 
@@ -199,11 +206,15 @@ function generatePlan({ analysis, profile, catalog, availability_minutes, goals 
   const boostCandidates = nativeBoostCatalog.exercises
     .filter(e => e.platforms.includes(profile.platform) && e.modes.includes(profile.mode))
     .map(exercise => ({ exercise: clone(exercise), variant: null }));
-  // Las rutinas nativas tienen fuente y versión propias; no se hacen pasar por filas SQL.
+  const reviewCandidates = nativeReviewCatalog.exercises
+    .filter(e => e.platforms.includes(profile.platform) && e.modes.includes(profile.mode))
+    .map(exercise => ({ exercise: clone(exercise), variant: null }));
+  // Las actividades nativas tienen fuente y versión propias; no se hacen pasar por filas SQL.
   const groups = supported.map(priority => {
     const shooting = priority.priority_key === 'shooting';
-    const candidates = shooting ? shootingCandidates : boostCandidates;
-    const expected = shooting ? expectedShooting : nativeBoostCatalog.exercises.map(e => e.exercise_key);
+    const review = priority.priority_key === 'defensive_review';
+    const candidates = shooting ? shootingCandidates : review ? reviewCandidates : boostCandidates;
+    const expected = shooting ? expectedShooting : (review ? nativeReviewCatalog : nativeBoostCatalog).exercises.map(e => e.exercise_key);
     const available = new Set(candidates.map(c => c.exercise.exercise_key));
     const order = shooting ? hasWorkshop ? [KEYS[0], KEYS[2], KEYS[1]] : KEYS.slice(0, 2) : expected;
     return { priority, candidates, expected, order, available };
@@ -243,16 +254,17 @@ function generatePlan({ analysis, profile, catalog, availability_minutes, goals 
   const limitations = unique([...(analysis.limitations || []), 'unpersisted_proposal',
     ...(catalog.source === 'synthetic' ? ['synthetic_catalog'] : [])]);
   const explanations = {
-    complete: `Se proponen ${exercises.length} ejercicios compatibles para practicar ${supported.map(p => p.priority_key === 'boost' ? 'disponibilidad de boost' : 'finalización').join(' y ')} durante ${assigned} minutos.`,
+    complete: `Se proponen ${exercises.length} ejercicios compatibles para practicar ${supported.map(p => ({ boost: 'disponibilidad de boost', shooting: 'finalización', defensive_review: 'cobertura defensiva' }[p.priority_key])).join(', ')} durante ${assigned} minutos.`,
     partial: `Se proponen ${assigned} minutos de práctica con cobertura parcial; revisa las prioridades o recursos sin cubrir.`,
     empty: 'No se propone una rutina con estas entradas; revisa los motivos de prioridad, catálogo o disponibilidad.',
   };
   return {
-    plan_id: null, plan_version_id: null, version, generator_version: 'mvp.plans.v2',
+    plan_id: null, plan_version_id: null, version, generator_version: 'mvp.plans.v3',
     block_id: analysis.block_id, rules_version: analysis.rules_version, metrics_version: analysis.metrics.metrics_version,
     catalog_version: catalog.catalog_version, catalog_source: catalog.source ?? 'content_handoff',
     native_catalog_version: exercises.some(e => e.priority_key === 'boost') ? nativeBoostCatalog.catalog_version : null,
-    allocation_version: 'mvp.allocation.v2', availability_minutes, assigned_minutes: assigned,
+    review_catalog_version: exercises.some(e => e.priority_key === 'defensive_review') ? nativeReviewCatalog.catalog_version : null,
+    allocation_version: 'mvp.allocation.v3', availability_minutes, assigned_minutes: assigned,
     unassigned_minutes: availability_minutes - assigned, coverage, explanation: explanations[coverage],
     uncovered_priorities: unique(uncovered), missing_exercises: supported.length ? missing : [],
     reason_codes: unique(reasons), catalog_exclusions: exclusions, goals_excluded: goalsExcluded,

@@ -20,6 +20,9 @@ const blocks = require('../src/repositories/blocks');
 const plans = require('../src/repositories/plans');
 const { buildProposal } = require('../src/routes/plans');
 const { createStoredAnalysisRepository } = require('../src/services/stored-block');
+const { RULES_CONFIG } = require('../src/domain/rules-config');
+// Reglas por conjunto: las claves con rule_id de rules-config.js (v3 = finalización, boost, defensiva).
+const RULE_COUNT = Object.values(RULES_CONFIG).filter(value => value && typeof value === 'object' && value.rule_id).length;
 
 const KEEP = process.argv.includes('--conservar');
 const results = [];
@@ -92,8 +95,8 @@ async function main() {
   try {
     // 1) Seed de reglas y migración.
     const { data: rules } = await supabase.from('reglas_config')
-      .select('comparador, umbral, reglas!inner(codigo), conjuntos_reglas!inner(version)').eq('conjuntos_reglas.version', 'mvp.rules.v2');
-    check('Seed de reglas mvp.rules.v2', '2 reglas configuradas', rules?.length === 2, `${rules?.length ?? 0} regla(s)`);
+      .select('comparador, umbral, reglas!inner(codigo), conjuntos_reglas!inner(version)').eq('conjuntos_reglas.version', RULES_CONFIG.rules_version);
+    check(`Seed de reglas ${RULES_CONFIG.rules_version}`, `${RULE_COUNT} reglas configuradas`, rules?.length === RULE_COUNT, `${rules?.length ?? 0} regla(s)`);
     const { error: colError } = await supabase.from('planes').select('contexto').limit(1);
     check('Columna planes.contexto', 'existe', !colError, colError ? 'no existe' : 'existe');
 

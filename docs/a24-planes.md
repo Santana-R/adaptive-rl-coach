@@ -6,7 +6,7 @@ A24 guarda la propuesta de A18 como una **versión inmutable** del plan. `planes
 
 | Archivo | Qué hace |
 | --- | --- |
-| `database/seeds/a24-reglas.sql` | Carga `metricas` (shooting_pct, boost_zero_pct), `conjuntos_reglas` (mvp.rules.v2), `reglas` y `reglas_config` desde `src/domain/rules-config.js`. Es idempotente y aborta si ya hay filas con otros valores. |
+| `database/seeds/a24-reglas.sql` | Carga `metricas`, `conjuntos_reglas` (mvp.rules.v2 y mvp.rules.v3), `reglas` y `reglas_config` desde `src/domain/rules-config.js`. v3 (PR #74) agrega `cobertura-defensiva-revision` (>= 2 goles como último defensor en 3 de 5 partidas). Es idempotente y aborta si ya hay filas con otros valores. |
 | `database/migraciones/a24-planes.sql` | Agrega `planes.contexto jsonb` y la función `a24_guardar_plan` (una transacción, solo service_role). También crea el trigger `a24_inmutable`, que rechaza UPDATE en análisis, prioridades, planes, plan_ejercicio y plan_objetivo. |
 | `src/repositories/analysis.js` | Convierte el análisis del motor en filas de `analisis`/`prioridades`. |
 | `src/repositories/plans.js` | Guarda (rpc) y lee versiones propias, y arma el objeto plan-version del contrato. |
@@ -77,8 +77,8 @@ Al leer, el orden, los minutos, la dificultad y la versión de ejercicio salen d
 
 ## Comprobación
 
-- `npm test`: **389 aprobadas, 0 fallidas** (11 nuevas de A24 sobre las 378 anteriores). Auth y Supabase se simulan; se ejecutan el motor, los repositorios y HTTP reales.
-- Prueba real (`scripts/prueba-a24.cjs`): **14/14** en Supabase dev el 16 de noviembre de 2026 (Node.js v24.15.0), después de ejecutar `a24-reglas.sql` y `a24-planes.sql` en el SQL Editor.
+- `npm test`: **458 aprobadas, 0 fallidas** con main integrado (incluye las 11 de A24). Auth y Supabase se simulan; se ejecutan el motor, los repositorios y HTTP reales.
+- Prueba real (`scripts/prueba-a24.cjs`): **14/14** en Supabase dev el 16 de noviembre de 2026 (Node.js v24.15.0), después de ejecutar `a24-reglas.sql` (con mvp.rules.v3, tras integrar el PR #74) y `a24-planes.sql` en el SQL Editor.
 
 ### Resultado de la prueba real · 16 de noviembre de 2026
 
@@ -86,14 +86,14 @@ Bloque sintético de TEST_A (steam, 2v2, ranked, 6 goles en 20 tiros = 30 %). Re
 
 | # | Prueba | Esperado | Obtenido | OK |
 | --- | --- | --- | --- | --- |
-| 1 | Seed de reglas mvp.rules.v2 | 2 reglas configuradas | 2 regla(s) | Sí |
+| 1 | Seed de reglas mvp.rules.v3 | 3 reglas configuradas | 3 regla(s) | Sí |
 | 2 | Columna planes.contexto | existe | existe | Sí |
 | 3 | Bloque sintético listo | 5 replays, ready | 5 replays, ready | Sí |
 | 4 | Guardar versión 1 | versión 1, análisis creado | versión 1, análisis creado true | Sí |
 | 5 | Minutos de la versión 1 | asignados ≤ 30 y > 0 | 30 de 30 | Sí |
 | 6 | Prioridad guardada con evidencia | orden 1, 30 %, mínimo 15 tiros, 5 replays | orden 1, 30 %, mínimo 15, 5 replays | Sí |
 | 7 | plan_ejercicio conserva orden/minutos/dificultad/versión | [[1,23,1,1],[2,7,1,2]] | [[1,23,1,1],[2,7,1,2]] | Sí |
-| 8 | Cambiar contexto crea versión 2 | mismo plan_id, versión 2, otra fila | plan_id 4, versión 2, fila 7 | Sí |
+| 8 | Cambiar contexto crea versión 2 | mismo plan_id, versión 2, otra fila | plan_id 5, versión 2, fila 9 | Sí |
 | 9 | Versión 1 intacta tras la 2 | idéntica a la leída antes | idéntica | Sí |
 | 10 | Lista de versiones | [1, 2] | [1,2] | Sí |
 | 11 | UPDATE de una versión guardada | rechazado (55000) | 55000 | Sí |
