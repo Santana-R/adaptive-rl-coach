@@ -401,3 +401,72 @@ body {
         min-height: 44px;
     }
 }
+
+/* A32 · Administración: formularios, acciones y tablas en móvil (solo dentro de .admin) */
+.admin .admin-input{
+    background-color: rgb(15, 28, 41);
+    color: #fff;
+    border: 1px solid rgb(120, 92, 40);
+    border-radius: .5rem;
+    min-height: 44px;
+}
+.admin .admin-input::placeholder{ color: rgb(179, 190, 205); }
+.admin .admin-input:focus{
+    background-color: rgb(15, 28, 41);
+    color: #fff;
+    border-color: rgb(247, 190, 74);
+    box-shadow: 0 0 0 .2rem rgba(247, 190, 74, .25);
+}
+.admin .admin-input option{ background-color: rgb(15, 28, 41); color: #fff; }
+.admin .link-admin{
+    color: rgb(247, 190, 74);
+    font-size: .95rem;
+    min-height: 32px;
+    font-weight: 700;
+    text-transform: none;
+    text-decoration: none;
+    box-shadow: none;
+}
+.admin .link-admin:hover,
+.admin .link-admin:focus-visible{ color: rgb(247, 190, 74); text-decoration: underline; }
+.admin .text-gold{ color: rgb(247, 190, 74); }
+.admin .sidebar-link[aria-disabled="true"]{
+    opacity: .5;
+    pointer-events: none;
+}
+.admin button[data-confirming="true"]{
+    border-color: rgb(247, 190, 74);
+    color: rgb(247, 190, 74);
+}
+.admin fieldset input[type="checkbox"]{ accent-color: rgb(247, 190, 74); width: 1.1rem; height: 1.1rem; }
+
+@media (max-width: 768px){
+    .admin .sidebar{
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: .5rem;
+        align-items: center;
+        padding: 1rem;
+    }
+    .admin .sidebar-brand{ width: 100%; margin: 0 0 .25rem .25rem; }
+    .admin .sidebar-link{ margin-bottom: 0; padding: .5rem .75rem; }
+    .admin .sidebar-footer{ margin-top: .5rem; width: 100%; }
+    .admin .app-main{ padding: 1.25rem 1rem; }
+}
+
+@media (max-width: 576px){
+    /* Cada fila se apila: etiqueta + valor, sin desbordar a 390 px. */
+    .admin .admin-table .table-head{ display: none; }
+    .admin .admin-table .table-row{
+        grid-template-columns: 1fr !important;
+        gap: .35rem;
+    }
+    .admin .admin-table .table-row > span[data-label]::before{
+        content: attr(data-label) ": ";
+        color: rgb(247, 190, 74);
+        font-weight: 700;
+    }
+    .admin .admin-table .table-row > span[data-label="Acción"]::before,
+    .admin .admin-table .table-row > span[data-label="Acciones"]::before{ content: none; }
+    .admin .stat-card .stat-value{ font-size: 1.6rem; }
+}
