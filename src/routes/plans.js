@@ -77,6 +77,17 @@ async function saveVersion({ supabase, repository, req, res, blockId }) {
 
 function createPlansRouter({ supabase, repository, requireAuth, requireRole }) {
   const router = express.Router();
+  // A27: recuperar lo guardado sin generar ni modificar versiones.
+  router.get('/:blockId/plan', requireAuth, requireRole('player', 'admin'), async (req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    try {
+      const plan = await plans.getPlanForBlock(supabase, req.user.id, req.params.blockId);
+      if (!plan) throw new ApiError(404, 'RESOURCE_NOT_FOUND', 'No hay un plan guardado para este bloque.');
+      return res.json({ data: plan, meta: { contract_version: CONTRACT_VERSION, persisted: true } });
+    } catch (error) {
+      return failure(res, next, error, 'No se pudo consultar el plan del bloque.');
+    }
+  });
   // Propuesta sin guardar (A18).
   router.post('/:blockId/plan-proposal', requireAuth, requireRole('player', 'admin'), async (req, res, next) => {
     res.set('Cache-Control', 'no-store');

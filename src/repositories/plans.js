@@ -84,16 +84,27 @@ const LINEAGE = 'id_analisis, id_bloque, bloques!fk_analisis_id_bloque!inner(id_
   'plan_ejercicio(id_plan_ejercicio, orden, minutos, dificultad, id_ejercicio_version), plan_objetivo(id_objetivo_version))';
 
 /** Línea de versiones propia, o null si no existe o es ajena (la ruta responde el mismo 404). */
-async function getLineage(supabase, userId, planId) {
+async function getLineageBy(supabase, userId, column, id) {
   requireClient(supabase);
-  if (!ID.test(String(planId))) return null;
+  if (!ID.test(String(id))) return null;
   const { data, error } = await supabase.from('analisis').select(LINEAGE)
-    .eq('id_analisis', planId).eq('bloques.id_usuario', userId).maybeSingle();
+    .eq(column, id).eq('bloques.id_usuario', userId).maybeSingle();
   if (error) throw toApiError(error, 'No se pudo consultar el plan.');
   const owner = Array.isArray(data?.bloques) ? data.bloques[0]?.id_usuario : data?.bloques?.id_usuario;
   if (!data || owner !== userId) return null;
   return { plan_id: String(data.id_analisis), block_id: String(data.id_bloque),
     versions: [...(data.planes || [])].sort((a, b) => a.version - b.version) };
+}
+
+// A27: lectura de la línea por ID de plan o por bloque, siempre con propietario.
+function getLineage(supabase, userId, planId) {
+  return getLineageBy(supabase, userId, 'id_analisis', planId);
+}
+
+async function getPlanForBlock(supabase, userId, blockId) {
+  const lineage = await getLineageBy(supabase, userId, 'id_bloque', blockId);
+  if (!lineage || !lineage.versions.length) return null;
+  return toPlanVersion(lineage, lineage.versions.at(-1));
 }
 
 /** Fila de planes → plan-version del contrato. Lo relacional (orden/minutos/dificultad/versión) manda. */
@@ -135,4 +146,4 @@ async function listPlanVersions(supabase, userId, planId) {
   }));
 }
 
-module.exports = { savePlan, getLineage, getPlanVersion, listPlanVersions, toSaveArgs, toContext, toPlanVersion, STATUS };
+module.exports = { savePlan, getPlanForBlock, getLineage, getPlanVersion, listPlanVersions, toSaveArgs, toContext, toPlanVersion, STATUS };

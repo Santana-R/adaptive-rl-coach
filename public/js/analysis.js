@@ -137,6 +137,16 @@
       if (!response.ok) throw new Error(body.error?.message || 'No se pudo obtener el análisis.');
       if (id !== requestId) return;
       render(body); $('analysis-status').textContent = ''; $('metric-select').disabled = false;
+
+      // A27 recibe el mismo bloque que acaba de analizarse; las demos no crean planes.
+      if (block && /^[1-9]\d{0,17}$/.test(block)) {
+        const plan = $('analysis-plan-link');
+        plan.href = 'plan.html?' + new URLSearchParams({ block_id: block });
+        plan.removeAttribute('aria-disabled');
+        plan.tabIndex = 0;
+        plan.textContent = 'Ver o generar mi plan';
+      }
+
     } catch (error) {
       if (id !== requestId) return;
       clear(); $('analysis-status').textContent = '';

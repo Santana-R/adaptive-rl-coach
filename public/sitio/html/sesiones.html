@@ -39,6 +39,7 @@
       </aside>
       <main class="app-main">
         <h1 class="fw-bold text-light mb-1">Sesiones e historial</h1>
+        <section id="sessions-plan-context" class="card bg-card border-card p-3 mb-3 text-light" role="status" aria-live="polite" hidden></section>
         <p class="text-bray mb-3">Cada registro describe práctica declarada y conserva la versión del plan realizada.</p>
         <div class="row align-items-end mb-4">
           <div class="col-6">
@@ -80,6 +81,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/session-client.js"></script>
     <script src="../js/navigation.js"></script> 
-    <script type="text/javascript"></script>
+    <script src="../js/plan-model.js"></script>
+    <script src="../js/plan-service.js"></script>
+    <script src="../js/session-plan-context.js"></script>
   </body>
 </html>

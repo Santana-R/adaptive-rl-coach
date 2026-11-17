@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
     <link rel="stylesheet" href="../css/mdb.min.css">
     <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/plan.css" />
   </head>
   <body class="mainbody appbody">
     <header id="site-navigation"></header>
@@ -26,64 +27,106 @@
           <button type="button" class="btn-rl btn-rl-outline w-100">Cerrar sesión</button>
         </div>
       </aside>
-      <main class="app-main">
-        <h1 class="fw-bold text-light mb-1">Plan de entrenamiento adaptado</h1>
-        <p id="plan-caption" class="text-bray mb-1"></p>
-        <p class="text-accent mb-4">Objetivo de rendimiento: prioridades del bloque · Meta semanal: práctica constante</p>
-        <div class="d-flex align-items-center gap-3 mb-4">
-          <label for="scenario-select" class="text-accent">Bloque</label>
-          <select id="scenario-select" class="form-select bg-card text-light scenario-select" style="max-width: 220px">
-            <option value="initial">Primer bloque</option>
-            <option value="followup">Bloque posterior</option>
-          </select>
-          <fieldset class="d-flex gap-2 border-0 m-0">
-            <legend class="visually-hidden">Tiempo disponible</legend>
-            <label class="text-bray"><input type="radio" name="minutes" value="20"> 20 min</label>
-            <label class="text-bray"><input type="radio" name="minutes" value="40" checked> 40 min</label>
-          </fieldset>
-          <div class="ms-auto">
-            <label for="version-select" class="text-bray me-2">Versión</label>
-            <select id="version-select" class="form-select d-inline-block bg-card text-light" style="width: auto"></select>
-          </div>
+      <main class="app-main text-light">
+        <h1 class="fw-bold text-light">Plan de entrenamiento</h1>
+        <p class="text-bray">Consulta tus versiones guardadas o prepara una nueva propuesta a partir de tus partidas.</p>
+        <p id="plan-status" role="status" aria-live="polite" tabindex="-1">Consultando datos…</p>
+        <div class="d-flex flex-wrap gap-3 mb-3">
+          <button id="reload-plan" type="button" class="btn-rl btn-rl-outline">Actualizar datos</button>
+          <a id="plan-login" href="login.html" class="btn-rl btn-rl-accent" hidden>Iniciar sesión</a>
+          <a href="perfil.html" class="btn-rl btn-rl-outline">Revisar Perfil</a>
+          <a href="replays.html" class="btn-rl btn-rl-outline">Ir a Replays</a>
         </div>
-        <div class="row mb-4">
-          <section class="col-lg-7">
-            <div class="card bg-card border-card denotative pb-3">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                  <h2 class="h5 fw-bold text-light mb-0">Tu rutina tiene un porqué</h2>
-                  <span id="plan-version" class="text-accent"></span>
+        <section class="plan-card" aria-labelledby="context-title">
+          <h2 id="context-title" class="h4">Preferencias para una nueva propuesta</h2>
+          <p id="plan-profile" class="text-bray"></p>
+          <form id="plan-form" novalidate>
+            <fieldset id="plan-fields" class="border-0 p-0 m-0" disabled>
+              <legend class="visually-hidden">Contexto del plan</legend>
+              <div class="row g-3 mb-3">
+                <div class="col-12 col-md-6">
+                  <label for="plan-block" class="form-label">Bloque de partidas</label>
+                  <select id="plan-block" class="form-select"><option value="">Selecciona un bloque</option></select>
+                  <p id="plan-block-help" class="text-bray small mt-2"></p>
                 </div>
-                <div class="d-flex align-items-center gap-3 my-3">
-                  <strong id="plan-duration" class="text-light fs-3"></strong>
-                  <div class="flex-grow-1">
-                    <div id="duration-bar" class="bar-track" aria-hidden="true"></div>
-                    <div id="duration-legend" class="text-bray small mt-2"></div>
+                <div class="col-12 col-md-6">
+                  <label for="plan-minutes" class="form-label">Minutos disponibles</label>
+                  <input id="plan-minutes" type="number" class="form-control" min="0" max="32767" step="1" required>
+                  <div class="d-flex flex-wrap gap-2 mt-2">
+                    <button type="button" class="btn-rl btn-rl-outline" data-plan-minutes="20">20 min</button>
+                    <button type="button" class="btn-rl btn-rl-outline" data-plan-minutes="40">40 min</button>
                   </div>
                 </div>
-                <ol id="exercise-list" class="list-unstyled mb-0"></ol>
-                <div id="historical-note" class="text-accent mt-3" role="status" hidden></div>
-                <p id="version-help" class="text-bray mt-3 mb-0">Abre cada ejercicio para consultar finalidad, pasos y meta.</p>
+                <div class="col-12 col-md-6">
+                  <label for="plan-rank" class="form-label">Rango declarado de esta modalidad</label>
+                  <select id="plan-rank" class="form-select">
+                    <option value="">Sin declarar</option><option value="bronze">Bronce</option><option value="silver">Plata</option><option value="gold">Oro</option><option value="platinum">Platino</option><option value="diamond">Diamante</option><option value="champion">Campeón</option><option value="grand_champion">Gran campeón</option><option value="supersonic_legend">Leyenda supersónica</option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="plan-variant" class="form-label">Variante de CoCo (si es compatible)</label>
+                  <select id="plan-variant" class="form-select">
+                    <option value="">Automática según contexto</option><option value="easy-base">Easy</option><option value="normal-fixed">Normal: ajustes fijos</option><option value="normal-distance">Normal: distancia aleatoria</option><option value="normal-random">Normal: ajustes aleatorios</option><option value="survival-optional">Survival (elección expresa)</option>
+                  </select>
+                </div>
               </div>
-              <div class="card-footer border-card">
-                <a href="replays.html" class="btn-rl btn-rl-outline">Volver a replays</a>
-              </div>
+              <label class="d-flex gap-2 align-items-start mb-2">
+                <input id="plan-workshop" type="checkbox" class="form-check-input">
+                <span>Confirmo que puedo abrir el mapa de Steam Workshop.</span>
+              </label>
+              <p id="plan-platform-help" class="text-bray"></p>
+              <fieldset class="border-0 p-0 mb-3">
+                <legend class="h6">Metas activas de rendimiento (opcionales)</legend>
+                <div id="plan-goals"></div>
+                <p class="text-bray small">Se ofrecen metas de la modalidad del bloque. Las de entrenamiento se consultan en Objetivos; no se envían al generador de rendimiento.</p>
+              </fieldset>
+              <p class="text-bray">Cambiar estos campos no modifica la versión que estás consultando. La disponibilidad de recursos y variantes la decide el generador.</p>
+              <button id="preview-plan" type="submit" class="btn-rl btn-rl-accent">Generar propuesta</button>
+            </fieldset>
+          </form>
+        </section>
+        <section class="plan-card" aria-labelledby="versions-title">
+          <h2 id="versions-title" class="h4">Versiones guardadas del bloque</h2>
+          <label for="plan-version" class="form-label">Consultar versión</label>
+          <select id="plan-version" class="form-select" disabled><option value="">Sin versiones consultadas</option></select>
+          <p id="versions-note" class="text-bray mt-2 mb-0">Cada bloque tiene su propio plan. Otro bloque inicia otra línea de versiones.</p>
+        </section>
+        <p id="no-plan" class="plan-card">Selecciona un bloque para consultar su plan o generar una propuesta.</p>
+        <section id="plan-output" aria-labelledby="output-title" hidden>
+          <div class="plan-card">
+            <div class="d-flex flex-wrap gap-3 justify-content-between align-items-center">
+              <h2 id="output-title" class="h4 mb-0">Rutina</h2>
+              <span id="plan-badge" class="plan-tag"></span>
             </div>
-          </section>
-          <section class="col-lg-5">
-            <div class="card bg-card border-card denotative pb-3 mb-4">
-              <div class="card-body">
-                <h2 class="h5 fw-bold text-light">Por qué este plan</h2>
-                <ul id="plan-reason" class="text-bray"></ul>
-              </div>
+            <p id="plan-identity" class="text-bray mt-3"></p>
+            <p id="plan-source" class="text-bray"></p>
+            <p id="plan-explanation"></p>
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-md-4"><strong id="available-minutes"></strong><p class="text-bray mb-0">Minutos disponibles</p></div>
+              <div class="col-12 col-md-4"><strong id="assigned-minutes"></strong><p class="text-bray mb-0">Minutos asignados</p></div>
+              <div class="col-12 col-md-4"><strong id="unassigned-minutes"></strong><p class="text-bray mb-0">Minutos sin asignar</p></div>
             </div>
-            <div class="card bg-card border-card p-3">
-              <h2 class="h5 fw-bold text-light">El próximo ciclo cuenta</h2>
-              <p class="text-bray mb-0">Entrena con este plan y vuelve a medir con cinco partidas comparables.</p>
+            <div class="progress" role="progressbar" aria-label="Tiempo asignado" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="plan-time-progress"><div class="progress-bar" id="plan-time-bar"></div></div>
+            <p id="plan-context-note" class="text-bray mt-3"></p>
+            <p id="plan-save-note" class="text-bray"></p>
+            <div class="d-flex flex-wrap gap-3">
+              <button id="save-plan" type="button" class="btn-rl btn-rl-accent" hidden>Generar y guardar versión</button>
+              <a id="plan-sessions" class="btn-rl btn-rl-outline" hidden>Sesiones de esta versión</a>
             </div>
-          </section>
-        </div>
-        <p class="app-note">Datos sintéticos de demostración. Registrar sesiones reales se incorporará en una integración posterior.</p>
+          </div>
+          <div class="row g-3">
+            <section class="col-12 col-lg-7" aria-labelledby="exercises-title">
+              <h2 id="exercises-title" class="h4">Ejercicios e instrucciones</h2>
+              <div id="plan-exercises"></div>
+            </section>
+            <aside class="col-12 col-lg-5">
+              <section class="plan-card"><h2 class="h5">Por qué este plan</h2><div id="plan-reasons"></div></section>
+              <section class="plan-card"><h2 class="h5">Metas utilizadas</h2><div id="plan-used-goals"></div></section>
+              <section class="plan-card"><h2 class="h5">Cobertura y límites</h2><div id="plan-limitations"></div></section>
+            </aside>
+          </div>
+        </section>
+        <p class="app-note">Propuestas y versiones proceden de la API autenticada. El registro de sesiones se completa en A21/A28. Las reglas deportivas son heurísticas; no acreditan mejora por sí solas.</p>
       </main>
     </div>
     <script src="../js/mdb.umd.min.js"></script>
@@ -92,8 +135,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/session-client.js"></script>
     <script src="../js/navigation.js"></script> 
-    <script src="../../js/demo-data.js"></script>
-    <script src="../../js/demo-service.js"></script>
-    <script src="../../js/app.js"></script>
+    <script src="../js/plan-model.js"></script>
+    <script src="../js/plan-service.js"></script>
+    <script src="../js/plan.js"></script>
   </body>
 </html>
