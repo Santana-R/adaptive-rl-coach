@@ -38,3 +38,7 @@ jobs:
           const report = check(proposal, cases);
           console.log(JSON.stringify(report, null, 2));
           NODE
+      - name: Contrastar casos manuales de A26 con el motor
+        env:
+          A26_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/validar-heuristicas-a26.cjs

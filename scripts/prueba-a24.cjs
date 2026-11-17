@@ -3,7 +3,8 @@
 // A24 · Prueba real contra Supabase dev: guardar versiones del plan y recuperar la anterior intacta.
 //
 // Requisitos: .env con SUPABASE_URL y SUPABASE_SERVICE_ROLE_KEY, y ya ejecutados en el SQL Editor:
-//   database/seeds/a23-catalogo.sql, database/seeds/a24-reglas.sql, database/migraciones/a24-planes.sql
+//   database/seeds/a23-catalogo.sql, database/seeds/a24-reglas.sql,
+//   database/seeds/a26-reglas-v4.sql y database/migraciones/a24-planes.sql
 //
 // Uso (desde la raíz del repo):
 //   node --env-file=.env scripts/prueba-a24.cjs              → prueba y borra lo creado
@@ -21,7 +22,7 @@ const plans = require('../src/repositories/plans');
 const { buildProposal } = require('../src/routes/plans');
 const { createStoredAnalysisRepository } = require('../src/services/stored-block');
 const { RULES_CONFIG } = require('../src/domain/rules-config');
-// Reglas por conjunto: las claves con rule_id de rules-config.js (v3 = finalización, boost, defensiva).
+// Reglas por conjunto: las claves con rule_id de rules-config.js (v3/v4 = finalización, boost, defensiva; v4 usa alias SQL para tasa).
 const RULE_COUNT = Object.values(RULES_CONFIG).filter(value => value && typeof value === 'object' && value.rule_id).length;
 
 const KEEP = process.argv.includes('--conservar');

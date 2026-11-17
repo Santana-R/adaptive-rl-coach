@@ -42,13 +42,14 @@ test('La integración mantiene 401 sin sesión y 404 para otro propietario',asyn
 });
 for(const[name,status,count]of[
   ['defense','active',1],['defense-inactive','inactive',0],['defense-missing','not_evaluable',0],['three-priorities','active',3],
+  ['defense-long','inactive',0],['defense-long-active','active',1],['defense-duration-missing','not_evaluable',0],
 ])test('Demo HTTP defensiva identificada: '+name,async()=>{
   const r=await request('/api/v1/demo/analysis?case='+name);
   assert.equal(r.status,200);assert.equal(r.body.meta.synthetic,true);
   assert.equal(r.body.data.priorities.length,count);
   assert.equal(r.body.data.evaluations.find(e=>e.rule_id==='cobertura-defensiva-revision').status,status);
 });
-for(const name of ['defense','defense-missing','three-priorities'])test('Controlador de Luis presenta '+name+' con su evidencia correcta',async()=>{
+for(const name of ['defense','defense-missing','three-priorities','defense-long-active','defense-duration-missing'])test('Controlador de Luis presenta '+name+' con su evidencia correcta',async()=>{
   const elements=new Map();
   function get(id){
     if(!elements.has(id))elements.set(id,{textContent:'',innerHTML:'',value:id==='metric-select'?'shooting_pct':name,
@@ -60,12 +61,13 @@ for(const name of ['defense','defense-missing','three-priorities'])test('Control
   vm.runInContext(fs.readFileSync(require.resolve('../public/js/analysis.js'),'utf8'),context);
   await root.CoachAnalysis.load();
   assert.equal(get('analysis-error').hidden,true);
-  if(name==='defense-missing'){
+  if(name==='defense-missing'||name==='defense-duration-missing'){
     assert.match(get('priority-list').innerHTML,/No se puede evaluar la revisión de cobertura defensiva/);
   }else{
     const html=get('priority-list').innerHTML;
     assert.match(html,/COBERTURA DEFENSIVA/);assert.match(html,/Partida 5: 0 goles como último defensor/);
     assert.match(html,/no localiza el minuto/);
+    assert.match(html,/goles\/5 min/);
     if(name==='three-priorities'){assert.match(html,/FINALIZACIÓN/);assert.match(html,/DISPONIBILIDAD DE BOOST/);}
   }
 });

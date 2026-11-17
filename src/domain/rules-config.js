@@ -1,6 +1,6 @@
 // Cambiar los criterios publicados requiere una versión nueva; no se calibraron con partidas reales.
 const RULES_CONFIG = Object.freeze({
-  rules_version: 'mvp.rules.v3',
+  rules_version: 'mvp.rules.v4',
   metrics_version: 'mvp.metrics.v1',
   max_priorities: 3,
   boost: Object.freeze({
@@ -13,7 +13,7 @@ const RULES_CONFIG = Object.freeze({
   }),
   defensive_review: Object.freeze({
     rule_id: 'cobertura-defensiva-revision', priority_key: 'defensive_review',
-    required_replays: 5, required_coverage: 5, minimum_goals_per_replay: 2, minimum_matches: 3,
+    required_replays: 5, required_coverage: 5, minimum_goals_per_five_minutes: 2, reference_duration_s: 300, minimum_matches: 3,
     score: 1, modes: Object.freeze(['2v2']), match_types: Object.freeze(['ranked']),
     calibration_status: 'provisional_heuristic_pending_validation',
   }),

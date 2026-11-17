@@ -21,7 +21,7 @@ test('Propuesta completa conserva instrucciones, dificultad, recurso, contexto y
   const input = makePlanInput(); const plan = generatePlan(input);
   assert.equal(plan.coverage, 'complete');
   assert.deepEqual(plan.uncovered_priorities, []);
-  assert.equal(plan.rules_version, 'mvp.rules.v3');
+  assert.equal(plan.rules_version, 'mvp.rules.v4');
   assert.equal(plan.metrics_version, 'mvp.metrics.v1');
   assert.equal(plan.generator_version, 'mvp.plans.v3');
   assert.equal(plan.catalog_version, content.catalog_version);
@@ -207,7 +207,7 @@ test('Prioridad sin respaldo en los datos actuales no se convierte en un plan', 
 
 test('Prioridad adicional no soportada queda sin cubrir, manteniendo finalización válida', () => {
   const input = makePlanInput();
-  input.analysis.priorities.push({ rule_id: 'test-future-boost', priority_key: 'boost', score: 2, rules_version: 'mvp.rules.v3', evidence: {} });
+  input.analysis.priorities.push({ rule_id: 'test-future-boost', priority_key: 'boost', score: 2, rules_version: 'mvp.rules.v4', evidence: {} });
   const plan = generatePlan(input);
   assert.equal(plan.coverage, 'partial');
   assert.deepEqual(plan.uncovered_priorities, ['boost']);
