@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const cases = require('../planning/fixtures/cobertura-defensiva-propuesta.v0.json');
+const cases = require('../planning/fixtures/cobertura-defensiva-duracion.v1.json');
 const { defensiveBlock, defensivePlan } = require('./helpers/defensive-inputs.cjs');
 const { analyzeBlock } = require('../src/services/analysis');
 const { findReplayPlayer } = require('../src/services/replay-validation');
@@ -28,10 +28,15 @@ for (const c of cases.cases) test('Cobertura defensiva: ' + c.id, () => {
 
 test('La evidencia conserva campos originales, contexto y el criterio provisional', () => {
   const data = analyze(), e = defense(data), p = data.priorities[0];
-  assert.equal(data.rules_version,'mvp.rules.v3');
+  assert.equal(data.rules_version,'mvp.rules.v4');
   assert.equal(e.evidence.coverage,5); assert.equal(e.evidence.matched_replays,3);
+  assert.equal(e.evidence.count_coverage,5); assert.equal(e.evidence.duration_coverage,5);
+  assert.equal(e.evidence.unit,'goals_per_5_minutes');
+  assert.equal(e.evidence.observations[0].duration.value,300);
+  assert.equal(e.evidence.observations[0].duration.source_field,'play_duration');
+  assert.equal(e.evidence.observations[0].rate.value,2);
   assert.equal(e.evidence.threshold,2); assert.equal(e.evidence.required_matches,3);
-  assert.equal(e.evidence.measurement_basis,'provider_goals_against_while_last_defender');
+  assert.equal(e.evidence.measurement_basis,'provider_last_defender_goals_per_300_match_play_seconds');
   assert.equal(e.evidence.observations[0].goals.scope,'player');
   assert.equal(e.evidence.observations[0].goals.source_field,'goals_against_while_last_defender');
   assert.equal(e.evidence.observations[0].role_seconds.source_field,'time_most_back');
@@ -207,4 +212,51 @@ test('Tres áreas de 0 a 120 minutos respetan presupuesto, mínimos y cobertura'
       }
     }
   }
+});
+
+test('Duración original positiva por partida; no usa duration ni overtime como sustitutos',()=>{
+  const block=defensiveBlock();
+  for(const r of block.replays){delete r.play_duration;r.duration=300;r.overtime_seconds=60;}
+  const e=defense(analyzeBlock({current:block}).data);
+  assert.equal(e.status,'not_evaluable');assert.equal(e.evidence.count_coverage,5);
+  assert.equal(e.evidence.duration_coverage,0);assert.equal(e.evidence.coverage,0);
+});
+test('No utiliza el promedio de duraciones del bloque para la repetición',()=>{
+  const e=defense(analyze({contextual_data:{play_duration_s:[300,300,600,150,150]}}));
+  assert.equal(e.status,'inactive');assert.equal(e.evidence.matched_replays,2);
+  assert.equal(e.evidence.observations[2].rate.value,1);
+});
+test('Tiempo extra ya incluido en play_duration no se suma por segunda vez',()=>{
+  const block=defensiveBlock({counts:[4,4,4,0,0],contextual_data:{play_duration_s:[600,600,600,600,600]}});
+  block.replays.forEach(r=>{r.overtime=true;r.overtime_seconds=300;});
+  const e=defense(analyzeBlock({current:block}).data);
+  assert.equal(e.status,'active');assert.equal(e.evidence.matched_replays,3);
+  assert.equal(e.evidence.observations[0].duration.value,600);
+  assert.equal(e.evidence.observations[0].rate.value,2);
+});
+test('Cero segundos se conserva como dato y deja la tasa sin evaluar',()=>{
+  const e=defense(analyze({contextual_data:{play_duration_s:[300,300,0,300,300]}}));
+  assert.equal(e.status,'not_evaluable');assert.equal(e.evidence.observations[2].duration.value,0);
+  assert.equal(e.evidence.observations[2].rate.value,null);
+  assert.equal(e.evidence.observations[2].rate.missing_reason,'zero_duration');
+});
+test('La evaluación rechaza metadatos de duración o tasas calculadas manipulados',()=>{
+  for(const mutate of [
+    d=>{d.observations[0].duration.scope='player';},
+    d=>{d.observations[0].duration.source_field='duration';},
+    d=>{d.observations[0].rate.value=99;},
+    d=>{d.duration_coverage=0;},
+  ]){
+    const data=analyze();mutate(data.metrics.defensive_review_per_replay);
+    assert.equal(defense(evaluateRules(data.metrics)).status,'not_evaluable');
+  }
+});
+for(const value of [undefined,NaN,Infinity,true])test('Duración no válida sin sustitución: '+String(value),()=>{
+  const e=defense(analyze({contextual_data:{play_duration_s:[300,300,value,300,300]}}));
+  assert.equal(e.status,'not_evaluable');assert.equal(e.evidence.coverage,4);
+});
+test('Una tasa con cálculo inseguro no activa una prioridad',()=>{
+  const e=defense(analyze({counts:[Number.MAX_SAFE_INTEGER,2,2,0,0]}));
+  assert.equal(e.status,'not_evaluable');assert.equal(e.evidence.coverage,4);
+  assert.equal(e.evidence.observations[0].rate.missing_reason,'unsafe_rate_calculation');
 });

@@ -8,7 +8,7 @@ const { findReplayPlayer } = require('../src/services/replay-validation');
 const { analyzeBlock } = require('../src/services/analysis');
 const { generatePlan } = require('../src/domain/plans');
 const { makePlanInput } = require('../tests/helpers/plan-inputs.cjs');
-const matrix = require('../planning/fixtures/a26-validacion-heuristicas.v1.json');
+const matrix = require('../planning/fixtures/a26-validacion-heuristicas.v2.json');
 const RULE_IDS = {
   shooting:'finalizacion-eficiencia', boost:'boost-disponibilidad',
   defensive_review:'cobertura-defensiva-revision',
@@ -30,6 +30,8 @@ function inputFor(c) {
     replay.playlist_id = (input.match_type === 'ranked' ? 'ranked-' : 'unranked-') +
       ({'1v1':'duels','2v2':'doubles','3v3':'standard'}[input.mode]);
     replay.play_duration = input.play_duration_s[index];
+    if(input.omit_play_duration)delete replay.play_duration;
+    if(input.fallback_duration_s!=null)replay.duration=input.fallback_duration_s;
     player.stats.core.goals = input.goals[index];
     player.stats.core.shots = input.shots[index];
     player.stats.boost = {
@@ -108,6 +110,8 @@ function evaluateCase(c) {
       boost_matched:evaluations.boost.evidence.matched_replays,
       boost_severity:evaluations.boost.evidence.severity,
       defensive_matched:evaluations.defensive_review.evidence.matched_replays,
+      defensive_rates:evaluations.defensive_review.evidence.observations.map(o=>o.rate.value),
+      defensive_duration_coverage:evaluations.defensive_review.evidence.duration_coverage,
       coverage:Object.fromEntries(Object.entries(evaluations).map(([key,e])=>[key,e.evidence.coverage])),
       priority_keys:data.priorities.map(p=>p.priority_key),
       plan:{coverage:plan.coverage,assigned_minutes:plan.assigned_minutes,minutes_by_priority:byPriority,
@@ -128,7 +132,7 @@ function validateMatrix() {
   assert.equal(new Set(ids).size,ids.length,'IDs repetidos.');
   const cases=matrix.cases.map(evaluateCase);
   return {
-    matrix_version:matrix.matrix_version,source:'synthetic',source_revision:matrix.source_revision,
+    matrix_version:matrix.matrix_version,source:'synthetic',baseline_revision:matrix.base_revision,
     execution_commit:process.env.GITHUB_SHA || null,
     head_commit:process.env.A26_HEAD_SHA || null,
     node_version:process.version,versions:matrix.expected_versions,

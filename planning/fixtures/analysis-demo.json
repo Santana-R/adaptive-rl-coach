@@ -184,6 +184,13 @@
         2,
         0,
         0
+      ],
+      "play_duration_s": [
+        300,
+        300,
+        300,
+        300,
+        300
       ]
     },
     "defense_missing": {
@@ -210,6 +217,13 @@
         2,
         null,
         0
+      ],
+      "play_duration_s": [
+        300,
+        300,
+        300,
+        300,
+        300
       ]
     },
     "defense_inactive": {
@@ -236,6 +250,13 @@
         1,
         0,
         0
+      ],
+      "play_duration_s": [
+        300,
+        300,
+        300,
+        300,
+        300
       ]
     },
     "three_priorities": {
@@ -269,6 +290,133 @@
         20,
         10,
         10
+      ],
+      "play_duration_s": [
+        300,
+        300,
+        300,
+        300,
+        300
+      ]
+    },
+    "defense_long": {
+      "block_id": "demo-defense_long",
+      "mode": "2v2",
+      "date": "2026-11-16T20:00:00Z",
+      "goals": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "shots": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "last_defender_goals": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "play_duration_s": [
+        600,
+        600,
+        600,
+        600,
+        600
+      ],
+      "role_seconds": [
+        240,
+        240,
+        240,
+        240,
+        240
+      ]
+    },
+    "defense_long_active": {
+      "block_id": "demo-defense_long_active",
+      "mode": "2v2",
+      "date": "2026-11-16T20:00:00Z",
+      "goals": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "shots": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "last_defender_goals": [
+        4,
+        4,
+        4,
+        0,
+        0
+      ],
+      "play_duration_s": [
+        600,
+        600,
+        600,
+        600,
+        600
+      ],
+      "role_seconds": [
+        240,
+        240,
+        240,
+        240,
+        240
+      ]
+    },
+    "defense_duration_missing": {
+      "block_id": "demo-defense_duration_missing",
+      "mode": "2v2",
+      "date": "2026-11-16T20:00:00Z",
+      "goals": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "shots": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "last_defender_goals": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "play_duration_s": [
+        300,
+        300,
+        null,
+        300,
+        300
+      ],
+      "role_seconds": [
+        120,
+        120,
+        null,
+        120,
+        120
       ]
     }
   },
@@ -315,6 +463,18 @@
     },
     "three-priorities": {
       "current": "three_priorities",
+      "baseline": null
+    },
+    "defense-long": {
+      "current": "defense_long",
+      "baseline": null
+    },
+    "defense-long-active": {
+      "current": "defense_long_active",
+      "baseline": null
+    },
+    "defense-duration-missing": {
+      "current": "defense_duration_missing",
       "baseline": null
     }
   }

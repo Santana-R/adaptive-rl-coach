@@ -65,7 +65,7 @@ test('Prioridad activa conserva regla, versión, unidad, conteos, muestra y expl
   const result = evaluateRules(normalized());
   const p = result.priorities[0];
   assert.equal(p.rule_id, 'finalizacion-eficiencia');
-  assert.equal(p.rules_version, 'mvp.rules.v3');
+  assert.equal(p.rules_version, 'mvp.rules.v4');
   assert.equal(p.priority_key, 'shooting');
   assert.equal(p.order, 1);
   assert.equal(p.evidence.value, 30);

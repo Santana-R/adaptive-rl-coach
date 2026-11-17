@@ -1,0 +1,1710 @@
+{
+  "matrix_version": "a26.validation.v2",
+  "source": "synthetic",
+  "rules_config_snapshot": {
+    "rules_version": "mvp.rules.v4",
+    "metrics_version": "mvp.metrics.v1",
+    "max_priorities": 3,
+    "boost": {
+      "rule_id": "boost-disponibilidad",
+      "priority_key": "boost",
+      "metric_key": "boost_zero_pct",
+      "required_replays": 5,
+      "required_coverage": 5,
+      "minimum_matches": 3,
+      "threshold_pct": 15,
+      "high_threshold_pct": 20,
+      "score": 1,
+      "high_score": 2,
+      "modes": [
+        "2v2",
+        "3v3"
+      ],
+      "match_types": [
+        "ranked"
+      ],
+      "calibration_status": "agreed_heuristic_not_calibrated"
+    },
+    "defensive_review": {
+      "rule_id": "cobertura-defensiva-revision",
+      "priority_key": "defensive_review",
+      "required_replays": 5,
+      "required_coverage": 5,
+      "minimum_goals_per_five_minutes": 2,
+      "reference_duration_s": 300,
+      "minimum_matches": 3,
+      "score": 1,
+      "modes": [
+        "2v2"
+      ],
+      "match_types": [
+        "ranked"
+      ],
+      "calibration_status": "provisional_heuristic_pending_validation"
+    },
+    "finalization": {
+      "rule_id": "finalizacion-eficiencia",
+      "priority_key": "shooting",
+      "metric_key": "shooting_pct",
+      "threshold_pct": 30,
+      "operator": "<=",
+      "required_replays": 5,
+      "required_coverage": 5,
+      "min_shots_by_mode": {
+        "1v1": 20,
+        "2v2": 15,
+        "3v3": 10
+      },
+      "score": 1,
+      "calibration_status": "agreed_heuristic_not_calibrated"
+    }
+  },
+  "expected_versions": {
+    "rules": "mvp.rules.v4",
+    "metrics": "mvp.metrics.v1",
+    "generator": "mvp.plans.v3",
+    "allocation": "mvp.allocation.v3"
+  },
+  "review": {
+    "technical_status": "pending_node_execution",
+    "sports_status": "pending_roberto_review",
+    "expectations_prepared_by": "assistant",
+    "reviewer_decisions_not_inferred": true,
+    "feedback": [
+      {
+        "reviewer": "Roberto Santana Trujillo",
+        "scope": "normalizar_por_duracion_de_cada_partida",
+        "decision": "requested_and_released",
+        "statement": "Deberíamos considerar cuánto duró cada partido.",
+        "all_other_cases_approved": false
+      }
+    ]
+  },
+  "limitations": [
+    "synthetic_inputs_not_real_replays",
+    "no_population_calibration",
+    "no_causal_attribution",
+    "provider_capture_and_stored_positioning_pending"
+  ],
+  "defaults": {
+    "mode": "2v2",
+    "match_type": "ranked",
+    "platform": "steam",
+    "minutes": 20,
+    "goals": [
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "shots": [
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "boost_pct": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "boost_seconds": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "defender_goals": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "role_seconds": [
+      120,
+      120,
+      120,
+      120,
+      120
+    ],
+    "role_percent": [
+      40,
+      40,
+      40,
+      40,
+      40
+    ],
+    "infront_percent": [
+      25,
+      25,
+      25,
+      25,
+      25
+    ],
+    "mates_distance": [
+      3200,
+      3200,
+      3200,
+      3200,
+      3200
+    ],
+    "play_duration_s": [
+      300,
+      300,
+      300,
+      300,
+      300
+    ]
+  },
+  "cases": [
+    {
+      "id": "F01",
+      "group": "finalization",
+      "label": "2v2: muestra mínima suficiente con 26.67 %",
+      "input": {
+        "goals": [
+          1,
+          1,
+          1,
+          1,
+          0
+        ],
+        "shots": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "active",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [
+          "shooting"
+        ],
+        "shooting_pct": 26.666666666666668
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "F02",
+      "group": "finalization",
+      "label": "2v2: 30 % con solo diez tiros",
+      "input": {
+        "goals": [
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "shots": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "not_evaluable",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "shooting_pct": 30
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": "¿Mantener los quince tiros mínimos de 2v2 aunque ya se pueda calcular el porcentaje?"
+      }
+    },
+    {
+      "id": "F03",
+      "group": "finalization",
+      "label": "1v1: veinte tiros y límite inclusivo de 30 %",
+      "input": {
+        "mode": "1v1",
+        "goals": [
+          2,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "active",
+          "boost": "not_evaluable",
+          "defensive_review": "not_evaluable"
+        },
+        "priority_keys": [
+          "shooting"
+        ],
+        "shooting_pct": 30
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "F04",
+      "group": "finalization",
+      "label": "1v1: diecinueve tiros no alcanzan la muestra",
+      "input": {
+        "mode": "1v1",
+        "goals": [
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "shots": [
+          3,
+          4,
+          4,
+          4,
+          4
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "not_evaluable",
+          "boost": "not_evaluable",
+          "defensive_review": "not_evaluable"
+        },
+        "priority_keys": [],
+        "shooting_pct": 31.57894736842105
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "F05",
+      "group": "finalization",
+      "label": "3v3: diez tiros y 30 %",
+      "input": {
+        "mode": "3v3",
+        "goals": [
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "shots": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "active",
+          "boost": "inactive",
+          "defensive_review": "not_evaluable"
+        },
+        "priority_keys": [
+          "shooting"
+        ],
+        "shooting_pct": 30
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "F06",
+      "group": "finalization",
+      "label": "3v3: diez tiros y 40 %",
+      "input": {
+        "mode": "3v3",
+        "goals": [
+          1,
+          1,
+          1,
+          1,
+          0
+        ],
+        "shots": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "not_evaluable"
+        },
+        "priority_keys": [],
+        "shooting_pct": 40
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "F07",
+      "group": "finalization",
+      "label": "7/23 no se redondea a 30 % para activar",
+      "input": {
+        "goals": [
+          2,
+          2,
+          1,
+          1,
+          1
+        ],
+        "shots": [
+          5,
+          5,
+          5,
+          4,
+          4
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "shooting_pct": 30.434782608695652
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "F08",
+      "group": "finalization",
+      "label": "Cero goles con veinte tiros sí es 0 %",
+      "input": {
+        "goals": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "active",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [
+          "shooting"
+        ],
+        "shooting_pct": 0
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "F09",
+      "group": "finalization",
+      "label": "Cero tiros no es 0 % de eficiencia",
+      "input": {
+        "goals": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "not_evaluable",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "shooting_pct": null
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "F10",
+      "group": "finalization",
+      "label": "Un conteo de goles ausente impide la recomendación",
+      "input": {
+        "goals": [
+          null,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "not_evaluable",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "shooting_pct": null
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "F11",
+      "group": "finalization",
+      "label": "Los totales dan 2/20=10 %; promediar porcentajes daría 40 %",
+      "input": {
+        "goals": [
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "shots": [
+          1,
+          1,
+          6,
+          6,
+          6
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "active",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [
+          "shooting"
+        ],
+        "shooting_pct": 10
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "B01",
+      "group": "boost",
+      "label": "Quince por ciento en tres partidas",
+      "input": {
+        "boost_pct": [
+          15,
+          15,
+          15,
+          0,
+          0
+        ],
+        "boost_seconds": [
+          45,
+          45,
+          45,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "active",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [
+          "boost"
+        ],
+        "boost_severity": "normal",
+        "boost_matched": 3
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "B02",
+      "group": "boost",
+      "label": "Veinte por ciento en tres partidas",
+      "input": {
+        "boost_pct": [
+          20,
+          20,
+          20,
+          0,
+          0
+        ],
+        "boost_seconds": [
+          60,
+          60,
+          60,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "active",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [
+          "boost"
+        ],
+        "boost_severity": "high",
+        "boost_matched": 3
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "B03",
+      "group": "boost",
+      "label": "Dos partidas extremas no sustituyen la repetición",
+      "input": {
+        "boost_pct": [
+          40,
+          40,
+          0,
+          0,
+          0
+        ],
+        "boost_seconds": [
+          120,
+          120,
+          0,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "boost_matched": 2
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": "¿Mantener revisión repetida de tres partidas aunque dos casos aislados sean muy altos?"
+      }
+    },
+    {
+      "id": "B04",
+      "group": "boost",
+      "label": "Un 14.99 % no alcanza el límite",
+      "input": {
+        "boost_pct": [
+          15,
+          15,
+          14.99,
+          0,
+          0
+        ],
+        "boost_seconds": [
+          45,
+          45,
+          44.97,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "boost_matched": 2
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "B05",
+      "group": "boost",
+      "label": "Tres porcentajes altos y un faltante no completan cobertura",
+      "input": {
+        "boost_pct": [
+          20,
+          20,
+          null,
+          20,
+          10
+        ],
+        "boost_seconds": [
+          60,
+          60,
+          60,
+          60,
+          30
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "not_evaluable",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "boost_matched": null
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "B06",
+      "group": "boost",
+      "label": "Porcentaje positivo y cero segundos son incoherentes",
+      "input": {
+        "boost_pct": [
+          20,
+          20,
+          20,
+          0,
+          0
+        ],
+        "boost_seconds": [
+          0,
+          60,
+          60,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "not_evaluable",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "boost_matched": null
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "B07",
+      "group": "boost",
+      "label": "3v3 conserva el criterio inicial, sin calibración propia",
+      "input": {
+        "mode": "3v3",
+        "boost_pct": [
+          15,
+          15,
+          15,
+          0,
+          0
+        ],
+        "boost_seconds": [
+          45,
+          45,
+          45,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "active",
+          "defensive_review": "not_evaluable"
+        },
+        "priority_keys": [
+          "boost"
+        ],
+        "boost_severity": "normal",
+        "boost_matched": 3
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": "¿Aceptar la extensión provisional a 3v3 manteniendo pendiente su contraste específico?"
+      }
+    },
+    {
+      "id": "B08",
+      "group": "boost",
+      "label": "1v1 queda fuera de la regla actual",
+      "input": {
+        "mode": "1v1",
+        "boost_pct": [
+          20,
+          20,
+          20,
+          0,
+          0
+        ],
+        "boost_seconds": [
+          60,
+          60,
+          60,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "not_evaluable",
+          "defensive_review": "not_evaluable"
+        },
+        "priority_keys": []
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "B09",
+      "group": "boost",
+      "label": "El intervalo 0–25 y los segundos no reconstruyen el porcentaje en cero",
+      "input": {
+        "omit_boost_percent": true,
+        "boost_seconds": [
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "boost_0_25": [
+          50,
+          50,
+          50,
+          50,
+          50
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "not_evaluable",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "boost_matched": null
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "B10",
+      "group": "boost",
+      "label": "Porcentajes originales presentes con segundos no disponibles",
+      "input": {
+        "boost_pct": [
+          20,
+          20,
+          20,
+          0,
+          0
+        ],
+        "boost_seconds": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "active",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [
+          "boost"
+        ],
+        "boost_severity": "high",
+        "boost_matched": 3
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "D01",
+      "group": "defensive_review",
+      "label": "Dos goles como último defensor en tres partidas",
+      "input": {
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "active"
+        },
+        "priority_keys": [
+          "defensive_review"
+        ],
+        "defensive_matched": 3
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": "¿Es una señal suficiente para proponer revisión de esas partidas sin atribuir culpa?"
+      }
+    },
+    {
+      "id": "D02",
+      "group": "defensive_review",
+      "label": "Dos partidas con muchos goles no alcanzan tres coincidencias",
+      "input": {
+        "defender_goals": [
+          9,
+          9,
+          1,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "defensive_matched": 2
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "D03",
+      "group": "defensive_review",
+      "label": "Tres conteos suficientes con dos faltantes",
+      "input": {
+        "defender_goals": [
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "not_evaluable"
+        },
+        "priority_keys": [],
+        "defensive_matched": null
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "D04",
+      "group": "defensive_review",
+      "label": "Un gol en cada partida no cumple dos por partida",
+      "input": {
+        "defender_goals": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "defensive_matched": 0
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "D05",
+      "group": "defensive_review",
+      "label": "La hipótesis defensiva no se aplica a 3v3",
+      "input": {
+        "mode": "3v3",
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "not_evaluable"
+        },
+        "priority_keys": []
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "D06",
+      "group": "defensive_review",
+      "label": "Mayor exposición al papel de último defensor no ajusta todavía la señal",
+      "input": {
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "role_seconds": [
+          225,
+          225,
+          225,
+          225,
+          225
+        ],
+        "role_percent": [
+          75,
+          75,
+          75,
+          75,
+          75
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "active"
+        },
+        "priority_keys": [
+          "defensive_review"
+        ],
+        "defensive_matched": 3
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": "¿Conservar la revisión provisional aunque el jugador pase más tiempo como último defensor, o ajustar/deferir el criterio?"
+      }
+    },
+    {
+      "id": "D07",
+      "group": "defensive_review",
+      "label": "Dos goles en diez minutos equivalen a uno por cinco: no activa",
+      "input": {
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "play_duration_s": [
+          600,
+          600,
+          600,
+          600,
+          600
+        ],
+        "role_seconds": [
+          240,
+          240,
+          240,
+          240,
+          240
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "defensive_matched": 0
+      },
+      "sports_review": {
+        "status": "duration_adjustment_requested_by_roberto",
+        "question": null
+      }
+    },
+    {
+      "id": "D08",
+      "group": "defensive_review",
+      "label": "Los goles totales del equipo no rellenan el dato defensivo",
+      "input": {
+        "omit_defender_goals": true,
+        "team_goals_against": 99
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "not_evaluable"
+        },
+        "priority_keys": [],
+        "defensive_matched": null
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "C01",
+      "group": "plan",
+      "label": "Tres señales y quince minutos",
+      "input": {
+        "goals": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "boost_pct": [
+          20,
+          20,
+          20,
+          0,
+          0
+        ],
+        "boost_seconds": [
+          60,
+          60,
+          60,
+          0,
+          0
+        ],
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "minutes": 15
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "active",
+          "boost": "active",
+          "defensive_review": "active"
+        },
+        "priority_keys": [
+          "boost",
+          "defensive_review",
+          "shooting"
+        ],
+        "plan": {
+          "coverage": "complete",
+          "assigned_minutes": 15,
+          "minutes_by_priority": {
+            "boost": 5,
+            "defensive_review": 5,
+            "shooting": 5
+          },
+          "uncovered_priorities": []
+        }
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "C02",
+      "group": "plan",
+      "label": "Diez minutos cubren dos áreas y declaran la tercera pendiente",
+      "input": {
+        "goals": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "boost_pct": [
+          20,
+          20,
+          20,
+          0,
+          0
+        ],
+        "boost_seconds": [
+          60,
+          60,
+          60,
+          0,
+          0
+        ],
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "minutes": 10
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "active",
+          "boost": "active",
+          "defensive_review": "active"
+        },
+        "priority_keys": [
+          "boost",
+          "defensive_review",
+          "shooting"
+        ],
+        "plan": {
+          "coverage": "partial",
+          "assigned_minutes": 10,
+          "minutes_by_priority": {
+            "boost": 5,
+            "defensive_review": 5
+          },
+          "uncovered_priorities": [
+            "shooting"
+          ]
+        }
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": "¿El orden técnico actual es aceptable para esta versión cuando el tiempo solo permite dos áreas?"
+      }
+    },
+    {
+      "id": "C03",
+      "group": "plan",
+      "label": "Veinte minutos se reparten en 7/7/6",
+      "input": {
+        "goals": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "boost_pct": [
+          20,
+          20,
+          20,
+          0,
+          0
+        ],
+        "boost_seconds": [
+          60,
+          60,
+          60,
+          0,
+          0
+        ],
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "minutes": 20
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "active",
+          "boost": "active",
+          "defensive_review": "active"
+        },
+        "priority_keys": [
+          "boost",
+          "defensive_review",
+          "shooting"
+        ],
+        "plan": {
+          "coverage": "complete",
+          "assigned_minutes": 20,
+          "minutes_by_priority": {
+            "boost": 7,
+            "defensive_review": 7,
+            "shooting": 6
+          },
+          "uncovered_priorities": []
+        }
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "C04",
+      "group": "plan",
+      "label": "Cuatro minutos no alcanzan el mínimo de una actividad",
+      "input": {
+        "goals": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "boost_pct": [
+          20,
+          20,
+          20,
+          0,
+          0
+        ],
+        "boost_seconds": [
+          60,
+          60,
+          60,
+          0,
+          0
+        ],
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "minutes": 4
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "active",
+          "boost": "active",
+          "defensive_review": "active"
+        },
+        "priority_keys": [
+          "boost",
+          "defensive_review",
+          "shooting"
+        ],
+        "plan": {
+          "coverage": "empty",
+          "assigned_minutes": 0,
+          "minutes_by_priority": {},
+          "uncovered_priorities": [
+            "boost",
+            "defensive_review",
+            "shooting"
+          ]
+        }
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "C05",
+      "group": "plan",
+      "label": "Ninguna regla activa no fabrica un plan de mantenimiento",
+      "input": {},
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "plan": {
+          "coverage": "empty",
+          "assigned_minutes": 0,
+          "minutes_by_priority": {},
+          "uncovered_priorities": []
+        }
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "C06",
+      "group": "validation",
+      "label": "Un jugador ausente invalida el bloque",
+      "input": {
+        "wrong_player": true
+      },
+      "expected": {
+        "statuses": {},
+        "priority_keys": [],
+        "validation_valid": false,
+        "validation_reason": "PLAYER_MISMATCH"
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "D09",
+      "group": "defensive_review",
+      "label": "Cuatro goles en diez minutos equivalen a dos por cinco",
+      "input": {
+        "defender_goals": [
+          4,
+          4,
+          4,
+          0,
+          0
+        ],
+        "play_duration_s": [
+          600,
+          600,
+          600,
+          600,
+          600
+        ],
+        "role_seconds": [
+          240,
+          240,
+          240,
+          240,
+          240
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "active"
+        },
+        "priority_keys": [
+          "defensive_review"
+        ],
+        "defensive_matched": 3
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "D10",
+      "group": "defensive_review",
+      "label": "Una duración ausente deja la tasa sin evaluar",
+      "input": {
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "play_duration_s": [
+          300,
+          300,
+          null,
+          300,
+          300
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "not_evaluable"
+        },
+        "priority_keys": [],
+        "defensive_matched": null
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "D11",
+      "group": "defensive_review",
+      "label": "Cero segundos se conserva pero no admite división",
+      "input": {
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "play_duration_s": [
+          300,
+          300,
+          0,
+          300,
+          300
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "not_evaluable"
+        },
+        "priority_keys": [],
+        "defensive_matched": null
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "D12",
+      "group": "defensive_review",
+      "label": "Dos goles en más de cinco minutos no alcanzan dos por cinco",
+      "input": {
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "play_duration_s": [
+          300.000001,
+          300.000001,
+          300.000001,
+          300,
+          300
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "defensive_matched": 0
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "D13",
+      "group": "defensive_review",
+      "label": "Se conservan segundos fraccionarios",
+      "input": {
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "play_duration_s": [
+          299.5,
+          299.5,
+          299.5,
+          300,
+          300
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "active"
+        },
+        "priority_keys": [
+          "defensive_review"
+        ],
+        "defensive_matched": 3
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "D14",
+      "group": "defensive_review",
+      "label": "Un gol en un minuto equivale a cinco por cinco: caso corto pendiente de criterio",
+      "input": {
+        "defender_goals": [
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "play_duration_s": [
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "role_seconds": [
+          24,
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "active"
+        },
+        "priority_keys": [
+          "defensive_review"
+        ],
+        "defensive_matched": 3
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": "¿Hace falta un mínimo de duración u observaciones antes de recomendar revisión en partidas muy cortas?"
+      }
+    },
+    {
+      "id": "D15",
+      "group": "defensive_review",
+      "label": "duration no sustituye al play_duration original ausente",
+      "input": {
+        "defender_goals": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "omit_play_duration": true,
+        "fallback_duration_s": 300
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "not_evaluable"
+        },
+        "priority_keys": [],
+        "defensive_matched": null
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    },
+    {
+      "id": "D16",
+      "group": "defensive_review",
+      "label": "Cuatro goles con más de diez minutos no se redondean al límite",
+      "input": {
+        "defender_goals": [
+          4,
+          4,
+          4,
+          0,
+          0
+        ],
+        "play_duration_s": [
+          600.000001,
+          600.000001,
+          600.000001,
+          600,
+          600
+        ]
+      },
+      "expected": {
+        "statuses": {
+          "shooting": "inactive",
+          "boost": "inactive",
+          "defensive_review": "inactive"
+        },
+        "priority_keys": [],
+        "defensive_matched": 0
+      },
+      "sports_review": {
+        "status": "pending_roberto_review",
+        "question": null
+      }
+    }
+  ],
+  "base_revision": "b848add4a93c7974e2d2b8ce650932a09df0bd4e"
+}
