@@ -4,14 +4,17 @@
 //
 // Requiere ejecutado en el SQL Editor (además de lo de A16/A24/A32):
 //   database/migraciones/a31-rangos.sql
+//   database/migraciones/a21-sesiones.sql
+//   database/migraciones/a31-historial-sesiones.sql
 //
 // Uso (desde la raíz del repo):
 //   node --env-file=.env scripts/prueba-a31.cjs
 //
-// Usa los perfiles de desarrollo TEST_A y TEST_B. Crea un bloque sintético, metas, rangos y un plan;
-// después corrige la meta, el rango y el catálogo (desactivar/reactivar un ejercicio del plan) y
-// comprueba que la versión guardada del plan no cambia. Al terminar borra todo lo que creó y deja
-// el catálogo como estaba. Las correcciones de sesiones dependen de A21 y se marcan pendientes.
+// Usa los perfiles de desarrollo TEST_A y TEST_B. Crea un bloque sintético, metas, rangos, un plan y
+// dos sesiones; después corrige la meta, el rango, las sesiones y el catálogo (desactivar/reactivar
+// un ejercicio del plan) y comprueba que la versión guardada del plan y las versiones anteriores no
+// cambian. Genera el reporte (A22) antes y después con el mismo código de GET /api/v1/reports.
+// Al terminar borra todo lo que creó y deja el catálogo como estaba.
 
 const crypto = require('node:crypto');
 const { isDeepStrictEqual } = require('node:util');
@@ -21,13 +24,16 @@ const plans = require('../src/repositories/plans');
 const goals = require('../src/repositories/goals');
 const ranks = require('../src/repositories/ranks');
 const admin = require('../src/repositories/exercises-admin');
+const sessions = require('../src/repositories/sessions');
+const sessionRules = require('../src/domain/sessions');
+const { buildReport } = require('../src/routes/reports');
+const { parseReportPeriod } = require('../src/services/reports');
 const { parseCreate, parseEdit, todayIn } = require('../src/domain/goals');
 const { parseRank } = require('../src/domain/ranks');
 const { buildProposal } = require('../src/routes/plans');
 const { createStoredAnalysisRepository } = require('../src/services/stored-block');
 
 const results = [];
-const pending = [];
 const check = (name, expected, ok, obtained) => results.push({ name, expected, obtained: String(obtained), ok: Boolean(ok) });
 const hash = () => crypto.randomBytes(32).toString('hex');
 const TZ = 'America/Monterrey';
@@ -59,6 +65,30 @@ const planView = plan => ({
   exercises: plan.exercises.map(e => ({ exercise_version_id: e.exercise_version_id, title: e.exercise_snapshot.title, minutes: e.assigned_minutes })),
 });
 
+// Lo que el reporte dice de los datos de esta prueba (el perfil puede tener otros).
+function reportView(report, created, sessionIds) {
+  return {
+    performance: report.performance.points.filter(p => p.block_id === created.blockId)
+      .map(p => ({ block_id: p.block_id, value: p.value, goals: p.numerator.value, shots: p.denominator.value })),
+    training: report.training.points.filter(p => sessionIds.includes(p.session_id))
+      .map(p => ({ session_id: p.session_id, plan_version_id: p.plan_version_id, mode: p.mode, duration_minutes: p.duration_minutes })),
+    rank: report.rank.points.filter(p => created.rankIds.includes(p.rank_id))
+      .map(p => ({ rank_id: p.rank_id, mode: p.mode, rank_label: p.rank_label, division: p.division, recorded_at: p.recorded_at.slice(0, 10) })),
+    rank_source: report.rank.source,
+    goals: report.goals.points.filter(p => created.goalIds.includes(p.goal_id))
+      .map(p => ({ goal_version_id: p.goal_version_id, type: p.type, version: p.version, target_value: p.target_value,
+        actual_value: p.actual_value, status: p.status, evidence: p.evidence })),
+  };
+}
+
+async function sessionHistory(supabase, sessionId) {
+  const { data, error } = await supabase.from('sesion_versiones')
+    .select('id_sesion_version, version, notas, sesion_ejercicio(id_plan_ejercicio, minutos)')
+    .eq('id_sesion', Number(sessionId)).order('version');
+  if (error) throw new Error('No se pudo leer el historial de la sesión: ' + error.message);
+  return data.map(v => ({ id: v.id_sesion_version, version: v.version, notes: v.notas, minutes: v.sesion_ejercicio[0]?.minutos }));
+}
+
 async function cleanup(supabase, { blockId, hashes, goalIds, rankIds, owner, reactivate }) {
   for (const id of reactivate) {
     try { await admin.setActive(supabase, id, true); } catch (err) { console.error(`No se pudo reactivar el ejercicio ${id}: ${err.message}`); }
@@ -70,6 +100,8 @@ async function cleanup(supabase, { blockId, hashes, goalIds, rankIds, owner, rea
       const { data: p } = await supabase.from('planes').select('id_plan').in('id_analisis', analysisIds);
       const planIds = (p ?? []).map(r => r.id_plan);
       if (planIds.length) {
+        const { error } = await supabase.rpc('a31_borrar_sesiones_de_planes', { p_id_usuario: owner, p_ids_plan: planIds });
+        if (error) console.error('No se pudieron borrar las sesiones de prueba: ' + error.message);
         await supabase.from('plan_objetivo').delete().in('id_plan', planIds);
         await supabase.from('plan_ejercicio').delete().in('id_plan', planIds);
         await supabase.from('planes').delete().in('id_plan', planIds);
@@ -104,7 +136,10 @@ async function main() {
   const today = todayIn(TZ);
   const hashes = [hash(), hash(), hash(), hash(), hash()];
   const created = { blockId: null, hashes, goalIds: [], rankIds: [], owner: A, reactivate: [] };
-  let before = null, after = null;
+  let before = null, after = null, reportBefore = null, reportAfter = null;
+
+  const { error: missing } = await supabase.rpc('a31_borrar_sesiones_de_planes', { p_id_usuario: A, p_ids_plan: [] });
+  if (missing) throw new Error('Falta ejecutar database/migraciones/a31-historial-sesiones.sql (' + (missing.code ?? missing.message) + ').');
 
   try {
     // 1) Rango declarado: registro, fuente fija e historial.
@@ -140,6 +175,10 @@ async function main() {
     const goal = await goals.saveGoalVersion(supabase, A, null,
       parseCreate({ type: 'performance', mode: '2v2', name: 'Prueba A31 eficiencia', target_value: 35 }, { today }), TZ);
     created.goalIds.push(goal.goal_id);
+    const trainingGoal = await goals.saveGoalVersion(supabase, A, null,
+      parseCreate({ type: 'training', mode: '2v2', name: 'Prueba A31 minutos', target_value: 30 }, { today }), TZ);
+    created.goalIds.push(trainingGoal.goal_id);
+    const trainingGoalSavedAt = Date.now();
     const block = await blocks.createBlock(supabase, A, { mode: '2v2', match_type: 'ranked', status: 'ready',
       replays: hashes.map((h, i) => syntheticReplay(i + 1, h, i === 0 ? 2 : 1)) });
     created.blockId = block?.block_id;
@@ -157,7 +196,37 @@ async function main() {
       plan.profile_snapshot.rank === 'diamond' && plan.goal_version_ids.length === 1 && plan.exercises.length >= 1,
       `rank ${plan.profile_snapshot.rank}, ${plan.goal_version_ids.length} meta, ${plan.exercises.length} ejercicios`);
 
-    // 4) Corregir meta, rango y catálogo.
+    // 3b) Dos sesiones ligadas a la versión 1 del plan y el reporte antes de corregir.
+    // La práctica se fecha 1 y 2 s después de activar la meta de entrenamiento, según el reloj de
+    // la base. Se esperan 3 s desde que se guardó la meta para que esa hora ya haya pasado allá.
+    const goalActivation = Date.parse(trainingGoal.activated_at);
+    await new Promise(resolve => setTimeout(resolve, Math.max(0, trainingGoalSavedAt + 3000 - Date.now())));
+    const newSession = (offsetMs, minutes) => sessions.createSession(supabase, A, sessionRules.parseCreate({
+      plan_version_id: plan.plan_version_id, plan_exercise_id: plan.exercises[0].plan_exercise_id,
+      performed_at: new Date(goalActivation + offsetMs).toISOString(), duration_minutes: minutes, notes: 'Prueba A31',
+    }, goalActivation + 60_000));
+    const s1 = await newSession(1000, 20);
+    const s2 = await newSession(2000, 5);
+    const sessionIds = [s1.session_id, s2.session_id];
+    const interval = parseReportPeriod({ from: '2026-10-01', to: today });
+    const report = () => buildReport({ supabase, repository, userId: A, interval });
+    const fullBefore = await report();
+    reportBefore = reportView(fullBefore, created, sessionIds);
+    const trainingBefore = reportBefore.goals.find(g => g.type === 'training');
+    check('Sesiones registradas en la versión 1 del plan', `2 sesiones (20 y 5 min) en la versión ${plan.plan_version_id}, 2v2`,
+      reportBefore.training.length === 2 && reportBefore.training.every(p => p.plan_version_id === plan.plan_version_id && p.mode === '2v2') &&
+      isDeepStrictEqual(reportBefore.training.map(p => p.duration_minutes), [20, 5]),
+      `${reportBefore.training.length} sesiones (${reportBefore.training.map(p => p.duration_minutes).join(' y ')} min) en la versión ` +
+      `${[...new Set(reportBefore.training.map(p => p.plan_version_id))].join()}, ${[...new Set(reportBefore.training.map(p => p.mode))].join()}`);
+    check('Reporte antes: meta de entrenamiento', '25 de 30 min, not_met',
+      trainingBefore?.actual_value === 25 && trainingBefore.status === 'not_met',
+      `${trainingBefore?.actual_value} de ${trainingBefore?.target_value} min, ${trainingBefore?.status}`);
+    const rankInPerformance = fullBefore.performance.points.some(p => 'rank_label' in p || 'rank' in p);
+    check('Reporte: rango separado de las métricas', 'serie rank self_reported con 2 registros; performance con el bloque y sin rango',
+      fullBefore.rank.source === 'self_reported' && reportBefore.rank.length === 2 && !rankInPerformance && reportBefore.performance.length === 1,
+      `serie rank ${fullBefore.rank.source} con ${reportBefore.rank.length} registros; performance ${reportBefore.performance.length === 1 ? 'con' : 'sin'} el bloque y ${rankInPerformance ? 'con' : 'sin'} rango`);
+
+    // 4) Corregir meta, rango, sesiones y catálogo.
     const { goal: edited } = parseEdit({ target_value: 45 }, goal);
     const goalV2 = await goals.saveGoalVersion(supabase, A, goal.goal_id, edited, TZ);
     const r3 = await ranks.addRank(supabase, A, parseRank({ mode: '2v2', rank_label: 'champion', division: 2 }));
@@ -169,6 +238,27 @@ async function main() {
     check('Correcciones aplicadas', 'meta v2, rango champion, ejercicio inactivo',
       goalV2.version === 2 && r3.rank_label === 'champion' && off.exercise.active === false,
       `meta v${goalV2.version}, rango ${r3.rank_label}, ejercicio ${off.exercise.active ? 'activo' : 'inactivo'}`);
+
+    // 4b) Corregir una sesión y borrar la otra: el historial queda.
+    const corrected = await sessions.updateSession(supabase, A, s1.session_id,
+      sessionRules.parsePatch({ duration_minutes: 35, notes: 'Prueba A31 corregida' }));
+    const versions = await sessionHistory(supabase, s1.session_id);
+    check('Corregir la sesión crea la versión 2 y conserva la 1', 'v1 20 min, v2 35 min; vigente v2',
+      corrected.version === 2 && corrected.duration_minutes === 35 && versions.length === 2 &&
+      versions[0].minutes === 20 && versions[0].notes === 'Prueba A31' && versions[1].minutes === 35,
+      versions.map(v => `v${v.version} ${v.minutes} min`).join(', ') + `; vigente v${corrected.version}`);
+    const { error: updVersion } = await supabase.from('sesion_versiones').update({ notas: 'reescrita' }).eq('id_sesion_version', versions[0].id);
+    const { error: updMinutes } = await supabase.from('sesion_ejercicio').update({ minutos: 99 }).eq('id_sesion_version', versions[0].id);
+    check('UPDATE de una versión de sesión guardada', 'rechazado (A3102) en sesion_versiones y sesion_ejercicio',
+      updVersion?.code === 'A3102' && updMinutes?.code === 'A3102', `${updVersion?.code ?? 'sin error'} y ${updMinutes?.code ?? 'sin error'}`);
+    await sessions.deleteSession(supabase, A, s2.session_id);
+    const { data: deletedRow } = await supabase.from('sesiones').select('eliminado_en').eq('id_sesion', Number(s2.session_id)).maybeSingle();
+    const listed = (await sessions.listSessions(supabase, A)).map(s => s.session_id);
+    check('Borrar una sesión la excluye sin perder el registro', 'fuera de la lista; fila con eliminado_en',
+      !listed.includes(s2.session_id) && listed.includes(s1.session_id) && deletedRow?.eliminado_en != null,
+      `${listed.includes(s2.session_id) ? 'en' : 'fuera de'} la lista; fila ${deletedRow?.eliminado_en ? 'con' : 'sin'} eliminado_en`);
+    const foreignSession = await attempt(() => sessions.updateSession(supabase, B, s1.session_id, sessionRules.parsePatch({ duration_minutes: 1 })));
+    check('B corrige la sesión de A', '404 RESOURCE_NOT_FOUND', foreignSession === '404 RESOURCE_NOT_FOUND', foreignSession);
 
     // 5) La versión guardada no cambia.
     const planAfter = await plans.getPlanVersion(supabase, A, saved.plan_id, saved.version);
@@ -191,24 +281,59 @@ async function main() {
     check('Versión 1 sigue igual después de guardar la 2', 'idéntica', isDeepStrictEqual(v1Again, plan),
       isDeepStrictEqual(v1Again, plan) ? 'idéntica' : 'cambió');
 
+    // 6b) La sesión sigue ligada a la versión 1 y no acepta ejercicios de la versión 2.
+    const [linked] = await sessions.listSessions(supabase, A, s1.session_id);
+    const crossVersion = await attempt(() => sessions.updateSession(supabase, A, s1.session_id,
+      sessionRules.parsePatch({ plan_exercise_id: planV2.exercises[0].plan_exercise_id })));
+    check('La sesión sigue en la versión 1 del plan', `versión ${plan.plan_version_id}; ejercicio de la v2: 422 INPUT_INVALID`,
+      linked?.plan_version_id === plan.plan_version_id && linked.plan_exercise_id === plan.exercises[0].plan_exercise_id && crossVersion === '422 INPUT_INVALID',
+      `versión ${linked?.plan_version_id}; ejercicio de la v2: ${crossVersion}`);
+
+    // 6c) Reporte después de todas las correcciones.
+    const fullAfter = await report();
+    reportAfter = reportView(fullAfter, created, sessionIds);
+    check('Reporte después: entrenamiento usa la sesión corregida', `1 sesión de 35 min en la versión ${plan.plan_version_id}`,
+      isDeepStrictEqual(reportAfter.training, [{ session_id: s1.session_id, plan_version_id: plan.plan_version_id, mode: '2v2', duration_minutes: 35 }]),
+      `${reportAfter.training.length} sesión de ${reportAfter.training.map(p => p.duration_minutes).join()} min en la versión ${reportAfter.training.map(p => p.plan_version_id).join()}`);
+    const trainingAfter = reportAfter.goals.find(g => g.type === 'training');
+    check('Reporte después: meta de entrenamiento', `35 de 30 min, met, evidencia sesión ${s1.session_id}`,
+      trainingAfter?.actual_value === 35 && trainingAfter.status === 'met' && isDeepStrictEqual(trainingAfter.evidence.session_ids, [s1.session_id]),
+      `${trainingAfter?.actual_value} de ${trainingAfter?.target_value} min, ${trainingAfter?.status}, evidencia sesión ${trainingAfter?.evidence.session_ids.join()}`);
+    const perfVersions = fullAfter.goals.points.filter(p => p.goal_id === goal.goal_id);
+    const contiguous = perfVersions.length === 2 && perfVersions[0].active_until === perfVersions[1].active_from;
+    check('Reporte después: las dos versiones de la meta corregida', 'v1 meta 35 y v2 meta 45, vigencias contiguas',
+      contiguous && perfVersions[0].target_value === 35 && perfVersions[1].target_value === 45,
+      perfVersions.map(p => `v${p.version} meta ${p.target_value}`).join(' y ') + (contiguous ? ', vigencias contiguas' : ', vigencias no contiguas'));
+    const sameRanks = isDeepStrictEqual(reportAfter.rank.slice(0, 2), reportBefore.rank);
+    check('Reporte después: rango', 'los 2 registros anteriores iguales + champion',
+      reportAfter.rank.length === 3 && sameRanks && reportAfter.rank[2].rank_id === r3.rank_id,
+      `${sameRanks ? 'los 2 registros anteriores iguales' : 'cambiaron los anteriores'} + ${reportAfter.rank[2]?.rank_label}`);
+    const samePerformance = isDeepStrictEqual(fullAfter.performance, fullBefore.performance);
+    check('Reporte después: rendimiento', 'idéntico al de antes', samePerformance, samePerformance ? 'idéntico al de antes' : 'cambió');
+    const reportGoalIds = fullAfter.goals.points.map(p => p.goal_version_id);
+    const reportRankIds = fullAfter.rank.points.map(p => p.rank_id);
+    const planCoherent = [plan, planV2].every(p => p.goal_version_ids.every(id => reportGoalIds.includes(id)) &&
+      reportRankIds.includes(p.profile_snapshot.rank_record.rank_id));
+    check('Plan y reporte usan los mismos registros', 'las metas y rangos de las versiones 1 y 2 del plan aparecen en el reporte',
+      planCoherent, planCoherent ? 'las metas y rangos de las versiones 1 y 2 del plan aparecen en el reporte' : 'falta alguno en el reporte');
+
     // 7) Propiedad del plan y de la meta.
     const foreignPlan = await plans.getPlanVersion(supabase, B, saved.plan_id, 1);
     check('B lee el plan de A', 'null (404)', foreignPlan === null, foreignPlan === null ? 'null' : 'devuelve el plan');
     const foreignGoal = await attempt(() => goals.saveGoalVersion(supabase, B, goal.goal_id, edited, TZ));
     check('B corrige la meta de A', '404 RESOURCE_NOT_FOUND', foreignGoal === '404 RESOURCE_NOT_FOUND', foreignGoal);
 
-    pending.push('Corregir una sesión (sesion_versiones) y comprobar el plan/reportes: depende de A21 (sesiones, Tadeo).');
-    pending.push('Coherencia con reportes: depende de A22 (reportes, Tadeo). GET /api/v1/rank-history ya entrega el rango separado.');
   } finally {
     await cleanup(supabase, created);
     console.log('\nDatos de prueba borrados y catálogo restaurado.');
   }
 
-  if (before) console.log('\nPlan versión 1 ANTES de corregir meta, rango y catálogo:\n' + JSON.stringify(before, null, 2));
+  if (before) console.log('\nPlan versión 1 ANTES de corregir meta, rango, sesiones y catálogo:\n' + JSON.stringify(before, null, 2));
   if (after) console.log('\nPlan versión 1 DESPUÉS de corregir:\n' + JSON.stringify(after, null, 2));
+  if (reportBefore) console.log('\nReporte ANTES de corregir (solo los datos de esta prueba):\n' + JSON.stringify(reportBefore, null, 2));
+  if (reportAfter) console.log('\nReporte DESPUÉS de corregir:\n' + JSON.stringify(reportAfter, null, 2));
   console.log('\n| # | Prueba | Esperado | Obtenido | OK |\n| --- | --- | --- | --- | --- |');
   results.forEach((r, i) => console.log(`| ${i + 1} | ${r.name} | ${r.expected} | ${r.obtained} | ${r.ok ? 'Sí' : 'NO'} |`));
-  if (pending.length) console.log('\nPendiente (no cuenta como fallo):\n' + pending.map(p => '- ' + p).join('\n'));
   const passed = results.filter(r => r.ok).length;
   console.log(`\n${passed}/${results.length} comprobaciones correctas.`);
   process.exitCode = passed === results.length ? 0 : 1;
