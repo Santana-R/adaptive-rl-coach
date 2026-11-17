@@ -23,15 +23,7 @@
   </head>
   <body class="mainbody">
     <!-- Start your project here-->
-    <nav class="navbar navbar-expand-lg navbar-color .shadow-4-strong mb-4">
-      <h4 class="ms-4 fw-bold text-light pt-2">Acerca de - Adaptive RL Coach</h4>
-      <a href="index.html" id="grayb" class="p-2 rounded-1 ms-auto me-4 text-bray">Inicio</a>
-      <a href="aboutus.html" id="grayb" aria-current="page" class="p-2 current rounded-1 ms-2 me-4 text-bray">Acerca</a>
-      <a href="helpme.html" id="grayb" class="p-2 rounded-1 ms-2 me-4 text-bray">Ayuda</a>
-      <button  class="accent rounded-4 me-4 p-2 border-0 fw-bold" data-mdb-ripple-init data-mdb-ripple-color="light">
-        <a href="login.html" class="text-navy" role="button">Ingresar</a>
-      </button>
-    </nav>
+    <header id="site-navigation"></header>
     <div class="container">
       <div class="row mb-4">
         <div class="col-12">
@@ -130,7 +122,6 @@
       </div>
       <div class="row mb-4">
         <div class="col-12">
-            <button type="button" class="mx-auto d-block w-75 p-2 accent rounded-4 border-0" data-mdb-ripple-init data-mdb-ripple-color="light"> <a href="replays.html" class="text-navy">Conocer el flujo</a> </button>
         </div>
       </div>
       <div class="row mb-4">
@@ -144,7 +135,13 @@
 
     <!-- MDB -->
     <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
+    
     <!-- Custom scripts -->
+    <script src="../../vendor/jquery-3.7.1.min.js"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/session-client.js"></script>
+    <script src="../js/navigation.js"></script> 
     <script type="text/javascript"></script>
   </body>
 </html>
