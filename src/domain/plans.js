@@ -261,6 +261,7 @@ function generatePlan({ analysis, profile, catalog, availability_minutes, goals 
   return {
     plan_id: null, plan_version_id: null, version, generator_version: 'mvp.plans.v3',
     block_id: analysis.block_id, rules_version: analysis.rules_version, metrics_version: analysis.metrics.metrics_version,
+    metrics_source: analysis.source ?? analysis.metrics.source ?? null,
     catalog_version: catalog.catalog_version, catalog_source: catalog.source ?? 'content_handoff',
     native_catalog_version: exercises.some(e => e.priority_key === 'boost') ? nativeBoostCatalog.catalog_version : null,
     review_catalog_version: exercises.some(e => e.priority_key === 'defensive_review') ? nativeReviewCatalog.catalog_version : null,

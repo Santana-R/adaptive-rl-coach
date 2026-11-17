@@ -178,7 +178,8 @@ $(function () {
       ? ' · Plan ' + plan.plan_id + ' · Versión ' + plan.version + ' · ID de versión ' + plan.plan_version_id
       : ' · Propuesta calculada, sin ID de versión guardada.') +
       ' · ' + (snapshot.platform || 'Plataforma no disponible') + ' · ' + (snapshot.mode || 'Modalidad no disponible'));
-    const source = meta.source || plan.diagnosis_snapshot?.priorities?.[0]?.evidence?.source ||
+    const source = plan.metrics_source || meta.source ||
+      plan.diagnosis_snapshot?.priorities?.[0]?.evidence?.source ||
       (plan.limitations?.includes('synthetic_fixture') ? 'synthetic' : 'No disponible');
     $('#plan-source').text('Fuente de métricas: ' + source + ' · Catálogo: ' + (plan.catalog_source || meta.catalog_source || 'No disponible') +
       ' · Reglas: ' + (plan.rules_version || 'No disponible'));
@@ -196,8 +197,8 @@ $(function () {
     const older = display.persisted && versions.some(item => item.version > plan.version);
     $('#plan-context-note').text(display.persisted
       ? (older ? 'Versión histórica. ' : 'Versión guardada. ') +
-        'Se muestran sus instrucciones y preferencias originales; editar el formulario no la modifica. Rango: ' +
-        (snapshot.rank || 'Sin declarar') + ' · Workshop declarado: ' + (snapshot.workshop_access ? 'Sí' : 'No') + '.'
+      'Se muestran sus instrucciones y preferencias originales; editar el formulario no la modifica. Rango: ' +
+      (snapshot.rank || 'Sin declarar') + ' · Workshop declarado: ' + (snapshot.workshop_access ? 'Sí' : 'No') + '.'
       : 'Propuesta calculada con las preferencias indicadas. Todavía no forma parte del historial.');
     $('#save-plan').prop('hidden', display.persisted);
     $('#plan-save-note').text(display.persisted
@@ -413,8 +414,10 @@ $(function () {
     message('Calculando propuesta…');
     try {
       const response = await api.proposal(selectedBlock, result.data);
-      display = { plan: response.data, meta: response.meta, persisted: false,
-        request: JSON.parse(JSON.stringify(result.data)), signature: fingerprint() };
+      display = {
+        plan: response.data, meta: response.meta, persisted: false,
+        request: JSON.parse(JSON.stringify(result.data)), signature: fingerprint()
+      };
       renderVersions();
       renderOutput();
       syncUrl();
