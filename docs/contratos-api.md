@@ -39,7 +39,7 @@ Frontend usa Supabase Auth para correo/Google y envía el access token a Express
 | POST | /api/v1/blocks/:blockId/retry | Propietario | Tadeo A13/A30 | Reintentar fallos recuperables → 202, mismo block_id |
 | GET | /api/v1/blocks/:blockId/metrics | Propietario | Roberto A09;David A15 | metrics de bloque listo; no calcula diagnóstico con faltantes como cero |
 | GET | /api/v1/blocks/:blockId/analysis?baseline_id=... | Propietario | Roberto A19 | analysis; omitir baseline_id para resolver anterior compatible |
-| GET/POST/PATCH/DELETE | /api/v1/goals[/:goalId] | Propietario | David A16;Luis A20 | goal; DELETE archiva si está enlazado, respuesta indica efecto |
+| GET/POST/PATCH/DELETE | /api/v1/goals[/:goalId] | Propietario | David A16;Luis A20 | goal; PATCH crea versión nueva; DELETE archiva si está enlazado, respuesta indica efecto. [A16](a16-objetivos.md) |
 | POST | /api/v1/blocks/:blockId/plan-proposal | Propietario | Roberto A18 | Propuesta sin guardar; 200, IDs de plan null, meta.persisted false |
 | POST | /api/v1/blocks/:blockId/plans | Propietario | Roberto A18;David A24 | Entrada de plan-proposal → versión siguiente guardada del plan del bloque (1 si es nuevo). [A24](a24-planes.md) |
 | GET | /api/v1/plans/:planId | Propietario | David A24;Luis A27 | Plan y versión actual |
@@ -117,7 +117,7 @@ El adaptador A23/A24 deberá aportar `catalog_version`, `source`, actividad y `t
 El [ejemplo de propuesta ejecutada](../planning/examples/plan-proposal.json) usa fixtures identificados y mantiene IDs de plan/versión en `null`; la asignación de IDs, secuencia histórica, transacción, ruta HTTP y consulta del catálogo real siguen pendientes de integración. El generador no implementa ni acredita las rutas de la tabla. Consumidores afectados: A23 prepara el catálogo, A24 guarda la propuesta y A27 muestra sus ejercicios/ajustes. El ejemplo anterior `plan-version.json` sigue siendo una forma de referencia para el futuro guardado, no una salida persistida ya comprobada.
 
 ## Objetivos, sesiones, reportes y administración
-Meta: métrica soportada, valor/unidad compatibles, fecha opcional y estado active/archived. Si ya está vinculada a un plan, DELETE archiva y devuelve el efecto; si no, puede borrar. Perfil/meta/catálogo editados no reescriben snapshots.
+Meta: métrica soportada, valor/unidad compatibles, fecha opcional y estado active/archived. Si ya está vinculada a un plan, DELETE archiva y devuelve el efecto; si no, puede borrar. Perfil/meta/catálogo editados no reescriben snapshots. Implementado en [A16](a16-objetivos.md): rendimiento `shooting_pct` y entrenamiento `training_minutes`, una meta activa por tipo y modalidad, historial en `objetivo_versiones`.
 
 Sesión: plan_version_id obligatorio, ejercicio perteneciente a esa versión cuando se elija, performed_at y duration_minutes positivos, notas opcionales. La duración es entrenamiento declarado. Corregir/eliminar recalcula totales de entrenamiento, nunca el rendimiento medido por replays. El ejemplo de sesión requiere una versión con ejercicio y no puede enlazarse al ejemplo de plan vacío.
 
