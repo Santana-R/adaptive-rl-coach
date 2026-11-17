@@ -245,3 +245,90 @@ test('A26: prioridad y ejercicio usan el mismo código SQL; snapshot mantiene el
   assert.throws(() => toSaveArgs({ userId: A, blockId: '11', proposal, analysis, profile: { days_per_week: 3 } }),
     e => e.code === 'PLAN_NOT_PERSISTABLE');
 });
+
+// A25 · Bloques sintéticos, repositorios y motor reales, base de datos simulada.
+test('A25 integra dos bloques con plan adaptado y recuperación de versiones', async () => {
+  const firstAnalysis = await call('GET', '/api/v1/blocks/10/analysis');
+  assert.equal(firstAnalysis.status, 200);
+  assert.equal(firstAnalysis.body.data.metrics.sample_size, 5);
+  assert.equal(firstAnalysis.body.data.metrics.values.shooting_pct.value, 25);
+  assert.equal(firstAnalysis.body.data.comparison.status, 'baseline');
+
+  const firstSave = await call('POST', '/api/v1/blocks/10/plans', {
+    body: { availability_minutes: 30 }
+  });
+  assert.equal(firstSave.status, 201);
+  const planA = firstSave.body.data;
+  assert.equal(planA.assigned_minutes, 30);
+  assert.ok(planA.exercises.length > 0);
+
+  const secondAnalysis = await call('GET', '/api/v1/blocks/11/analysis');
+  assert.equal(secondAnalysis.status, 200);
+  const analysis = secondAnalysis.body.data;
+  assert.equal(analysis.metrics.sample_size, 5);
+  assert.equal(analysis.metrics.values.shooting_pct.value, 30);
+  assert.equal(analysis.comparison.status, 'comparable');
+  assert.equal(analysis.comparison.baseline_block_id, '10');
+  assert.equal(analysis.comparison.deltas.shooting_pct.delta, 5);
+  assert.ok(analysis.priorities.some(p => p.rule_id === 'finalizacion-eficiencia'));
+
+  const secondSave = await call('POST', '/api/v1/blocks/11/plans', {
+    body: { availability_minutes: 20 }
+  });
+  assert.equal(secondSave.status, 201);
+  const planB = secondSave.body.data;
+  assert.equal(planB.assigned_minutes, 20);
+  assert.notEqual(planB.plan_id, planA.plan_id);
+  assert.equal(planB.version, 1);
+
+  const path = '/api/v1/plans/' + planB.plan_id + '/versions';
+  const updated = await call('POST', path, { body: { availability_minutes: 10 } });
+  assert.equal(updated.status, 201);
+  assert.equal(updated.body.data.version, 2);
+  assert.equal(updated.body.data.assigned_minutes, 10);
+  assert.notEqual(updated.body.data.plan_version_id, planB.plan_version_id);
+
+  const currentBlock = db.state.rows.find(block => block.id_bloque === '11');
+  const metric = currentBlock.replays[0].jugadores_replay.metricas_replay;
+  const previousGoals = metric.goles;
+  try {
+    // 7 goles de 20 tiros dan 35 % y desactivan la prioridad de finalización.
+    metric.goles += 1;
+    const alternate = await call('POST', '/api/v1/blocks/11/plan-proposal', {
+      body: { availability_minutes: 20 }
+    });
+    assert.equal(alternate.status, 200);
+    assert.equal(alternate.body.data.coverage, 'empty');
+    assert.deepEqual(alternate.body.data.exercises, []);
+  } finally {
+    metric.goles = previousGoals;
+  }
+
+  const history = await call('GET', path);
+  assert.equal(history.status, 200);
+  assert.deepEqual(history.body.data.map(plan => plan.version), [1, 2]);
+  assert.deepEqual((await call('GET', path + '/1')).body.data, planB);
+  assert.deepEqual((await call('GET', firstSave.location)).body.data, planA);
+});
+
+test('A25 recupera la fuente de métricas de una versión guardada vacía', async () => {
+  const block = db.state.rows.find(row => row.id_bloque === '11');
+  const metric = block.replays[0].jugadores_replay.metricas_replay;
+  const originalGoals = metric.goles;
+
+  try {
+    metric.goles += 1;
+    const saved = await call('POST', '/api/v1/blocks/11/plans', {
+      body: { availability_minutes: 20 }
+    });
+    assert.equal(saved.status, 201);
+    assert.equal(saved.body.data.coverage, 'empty');
+    assert.equal(saved.body.data.metrics_source, 'stored_replay_metrics');
+
+    const recovered = await call('GET', saved.location);
+    assert.equal(recovered.status, 200);
+    assert.equal(recovered.body.data.metrics_source, 'stored_replay_metrics');
+  } finally {
+    metric.goles = originalGoals;
+  }
+});
