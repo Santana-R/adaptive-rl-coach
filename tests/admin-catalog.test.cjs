@@ -55,7 +55,7 @@ function adminDatabase() {
     const builder = {
       select(_cols, opts) { head = opts?.head === true; return builder; },
       eq(k, v) { filters[k] = v; return builder; }, is(k, v) { filters[k] = v; return builder; },
-      order() { return builder; }, update(values) { patch = values; return builder; },
+      order() { return builder; }, lte() { return builder; }, limit() { return builder; }, update(values) { patch = values; return builder; },
       maybeSingle() { single = true; return Promise.resolve(result()); },
       then(resolve, reject) { return Promise.resolve().then(result).then(resolve, reject); },
     };

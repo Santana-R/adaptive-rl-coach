@@ -6,6 +6,7 @@ const { getProfile } = require('../repositories/profile');
 const { getCatalog } = require('../repositories/catalog');
 const { getPlanGoals } = require('../repositories/plan-goals');
 const plans = require('../repositories/plans');
+const { latestRank } = require('../repositories/ranks');
 const { analyzeBlock } = require('../services/analysis');
 const { generatePlan } = require('../domain/plans');
 
@@ -50,12 +51,18 @@ async function buildProposal({ supabase, repository, req, blockId, body }) {
   if (!Number.isInteger(minutes) || minutes < 0 || minutes > 32767) throw new ApiError(422, 'PROFILE_REQUIRED', 'Revisa los minutos disponibles en tu perfil.');
   const catalog = await getCatalog(supabase);
   const goals = await getPlanGoals(supabase, req.user.id, input.goal_ids);
+  // A31 · Sin rank en la petición se usa el último rango declarado en la modalidad del bloque.
+  // rank: null explícito = generar sin rango. El rango nunca se infiere del bloque ni del MMR.
+  const declared = input.rank === undefined ? await latestRank(supabase, req.user.id, context.mode) : null;
+  const rank = input.rank !== undefined ? input.rank : declared?.rank_label ?? null;
+  const rankOrigin = input.rank !== undefined ? (input.rank === null ? 'none' : 'request') : (declared ? 'rank_history' : 'none');
   const trainingProfile = { ...profile, mode: context.mode, workshop_access: input.workshop_access === true,
-    rank: input.rank ?? null, rank_mode: context.mode, rank_source: input.rank ? 'self_reported' : null,
+    rank, rank_mode: context.mode, rank_source: rank ? 'self_reported' : null,
+    rank_record: declared ? { rank_id: declared.rank_id, recorded_at: declared.recorded_at } : null,
     coco_variant_key: input.coco_variant_key };
   const proposal = generatePlan({ analysis: analysis.data, profile: trainingProfile, catalog,
     goals, availability_minutes: minutes });
-  return { proposal, analysis: analysis.data, profile, catalog };
+  return { proposal, analysis: analysis.data, profile, catalog, rankOrigin };
 }
 
 function failure(res, next, error, message) {
@@ -65,14 +72,14 @@ function failure(res, next, error, message) {
 
 // A24 · Genera con buildProposal y guarda la versión siguiente; responde lo que quedó guardado.
 async function saveVersion({ supabase, repository, req, res, blockId }) {
-  const { proposal, analysis, profile, catalog } = await buildProposal({ supabase, repository, req, blockId, body: req.body });
+  const { proposal, analysis, profile, catalog, rankOrigin } = await buildProposal({ supabase, repository, req, blockId, body: req.body });
   const saved = await plans.savePlan(supabase, { userId: req.user.id, blockId, proposal, analysis, profile });
   const stored = await plans.getPlanVersion(supabase, req.user.id, saved.plan_id, saved.version);
   if (!stored) throw new ApiError(503, 'PROVIDER_UNAVAILABLE', 'El plan se guardó, pero no se pudo leer.');
   res.set('Location', `/api/v1/plans/${saved.plan_id}/versions/${saved.version}`);
   return res.status(201).json({ data: stored, meta: { contract_version: CONTRACT_VERSION, persisted: true,
     analysis_created: saved.analysis_created, source: analysis.source,
-    session_preferences_source: 'self_reported', catalog_source: catalog.source } });
+    session_preferences_source: 'self_reported', rank_origin: rankOrigin, catalog_source: catalog.source } });
 }
 
 function createPlansRouter({ supabase, repository, requireAuth, requireRole }) {
@@ -92,9 +99,9 @@ function createPlansRouter({ supabase, repository, requireAuth, requireRole }) {
   router.post('/:blockId/plan-proposal', requireAuth, requireRole('player', 'admin'), async (req, res, next) => {
     res.set('Cache-Control', 'no-store');
     try {
-      const { proposal, analysis, catalog } = await buildProposal({ supabase, repository, req, blockId: req.params.blockId, body: req.body });
+      const { proposal, analysis, catalog, rankOrigin } = await buildProposal({ supabase, repository, req, blockId: req.params.blockId, body: req.body });
       return res.json({ data: proposal, meta: { contract_version: '1.0', persisted: false,
-        source: analysis.source, session_preferences_source: 'self_reported', catalog_source: catalog.source } });
+        source: analysis.source, session_preferences_source: 'self_reported', rank_origin: rankOrigin, catalog_source: catalog.source } });
     } catch (error) {
       return failure(res, next, error, 'No se pudo generar la propuesta. Intenta más tarde.');
     }

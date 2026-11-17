@@ -265,6 +265,74 @@
     Este formulario guarda los datos de Perfil.
     El rango declarado y su historial se gestionan por separado.
   </p>
+
+  <!-- A31 · Rango declarado: se registra aparte del perfil y no se edita; corregir = registrar otro. -->
+  <section id="rango" class="mt-4" aria-labelledby="rango-titulo">
+    <h2 id="rango-titulo" class="h4 fw-bold text-light mb-2">Rango declarado</h2>
+    <p class="text-bray">
+      Indica el rango que ves en el juego y la fecha en que lo viste.
+      Lo declaras tú: no se calcula con tus replays ni con el MMR.
+      Si te equivocas, registra el correcto; el historial conserva ambos.
+    </p>
+
+    <p id="rango-estado" class="text-bray" role="status" aria-live="polite" tabindex="-1">Cargando rango…</p>
+
+    <form id="form-rango" novalidate>
+      <fieldset id="rango-campos" class="border-0 p-0 m-0" disabled>
+        <legend class="visually-hidden">Registrar rango</legend>
+        <div class="row g-3 mb-3">
+          <div class="col-6 col-md-3">
+            <label for="rango-modalidad" class="form-label text-light">Modalidad</label>
+            <select id="rango-modalidad" class="form-select bg-card table-head" required>
+              <option value="1v1">1v1</option>
+              <option value="2v2" selected>2v2</option>
+              <option value="3v3">3v3</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-3">
+            <label for="rango-valor" class="form-label text-light">Rango</label>
+            <select id="rango-valor" class="form-select bg-card table-head" required>
+              <option value="">Selecciona</option>
+              <option value="bronze">Bronze</option>
+              <option value="silver">Silver</option>
+              <option value="gold">Gold</option>
+              <option value="platinum">Platinum</option>
+              <option value="diamond">Diamond</option>
+              <option value="champion">Champion</option>
+              <option value="grand_champion">Grand Champion</option>
+              <option value="supersonic_legend">Supersonic Legend</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-3">
+            <label for="rango-division" class="form-label text-light">División</label>
+            <select id="rango-division" class="form-select bg-card table-head">
+              <option value="">Sin división</option>
+              <option value="1">I</option>
+              <option value="2">II</option>
+              <option value="3">III</option>
+              <option value="4">IV</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-3">
+            <label for="rango-fecha" class="form-label text-light">Fecha</label>
+            <input id="rango-fecha" type="date" class="form-control bg-card table-head" required min="2015-07-07">
+          </div>
+        </div>
+        <p id="rango-error" class="text-danger small mb-2" aria-live="polite"></p>
+        <button type="submit" id="guardar-rango" class="btn-rl btn-rl-accent mb-3">Registrar rango</button>
+      </fieldset>
+    </form>
+
+    <div class="table-responsive">
+      <table class="table table-dark table-sm align-middle mb-1">
+        <caption class="text-bray">Historial, más reciente primero. Fuente: declarado por el jugador.</caption>
+        <thead>
+          <tr><th scope="col">Fecha</th><th scope="col">Modalidad</th><th scope="col">Rango</th><th scope="col">Fuente</th></tr>
+        </thead>
+        <tbody id="rango-historial"></tbody>
+      </table>
+    </div>
+  </section>
 </main>
     </div>
 
@@ -279,4 +347,5 @@
     <script src="../js/profile-validation.js"></script>
     <script src="../js/profile-api.js"></script>
     <script src="../js/profile.js"></script>
+    <script src="../js/rank-history.js"></script>
   </body>
