@@ -209,3 +209,39 @@ test('Entrada inválida se rechaza antes de llamar a la base', async () => {
   }
   assert.equal(db.state.saved.rpcCalls, before);
 });
+
+// Entradas de contrato sintéticas: este caso no activa un catálogo defensivo SQL.
+test('A26: códigos de tasa v4 separados de conteos v3, sin alterar la evidencia lógica', () => {
+  const basis = 'provider_last_defender_goals_per_300_match_play_seconds';
+  for (const version of ['mvp.rules.v3', 'mvp.rules.v4']) {
+    const analysis = { rules_version: version, priorities: [{ rule_id: 'cobertura-defensiva-revision',
+      rules_version: version, order: 1, priority_key: 'defensive_review', score: 1,
+      evidence: { metric_key: 'last_defender_goals_per_5_minutes', unit: 'goals_per_5_minutes',
+        measurement_basis: basis, matched_replays: 3, threshold: 2, reference_duration_s: 300,
+        observations: [{ goals: { value: 4 }, duration: { value: 600 }, rate: { value: 2 } }] } }] };
+    const before = structuredClone(analysis);
+    const stored = toStoredAnalysis(analysis), row = stored.prioridades[0];
+    assert.equal(row.rule_id, version === 'mvp.rules.v4' ? 'cobertura-defensiva-revision-tasa' : 'cobertura-defensiva-revision');
+    assert.equal(row.valor_actual, 3);
+    const evidence = JSON.parse(row.evidencia);
+    assert.equal(evidence.rule_id, 'cobertura-defensiva-revision');
+    assert.deepEqual(evidence.evidence, before.priorities[0].evidence);
+    assert.deepEqual(analysis, before);
+  }
+});
+
+test('A26: prioridad y ejercicio usan el mismo código SQL; snapshot mantiene el lógico', async () => {
+  const proposal = (await call('POST', '/api/v1/blocks/11/plan-proposal', { body: { availability_minutes: 20 } })).body.data;
+  const logical = 'cobertura-defensiva-revision';
+  // Ficha SQL ficticia SOLO para contrastar el adaptador; las rutinas nativas siguen sin ID.
+  proposal.exercises[0].rule_id = logical;
+  const analysis = { rules_version: 'mvp.rules.v4', priorities: [{ rule_id: logical, rules_version: 'mvp.rules.v4',
+    order: 1, priority_key: 'defensive_review', evidence: { matched_replays: 3 } }] };
+  const args = toSaveArgs({ userId: A, blockId: '11', proposal, analysis, profile: { days_per_week: 3 } });
+  assert.equal(args.p_analisis.prioridades[0].rule_id, 'cobertura-defensiva-revision-tasa');
+  assert.equal(args.p_plan.ejercicios[0].rule_id, args.p_analisis.prioridades[0].rule_id);
+  assert.equal(args.p_plan.contexto.exercises[0].rule_id, logical);
+  proposal.exercises[0].exercise_version_id = null;
+  assert.throws(() => toSaveArgs({ userId: A, blockId: '11', proposal, analysis, profile: { days_per_week: 3 } }),
+    e => e.code === 'PLAN_NOT_PERSISTABLE');
+});

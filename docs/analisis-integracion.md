@@ -87,3 +87,7 @@ A23 ya tiene seed y consulta con los tres recursos comprobados por David (ver [r
 ## Conexión A15 completada en la entrega de propuestas A18
 
 `src/services/stored-block.js` traduce los registros propios de A15 y recalcula las métricas mediante A09. El historial obtiene detalles propios antes de comparar; se comprueba el mismo archivo por hash. La duración de procedencia no acreditada permanece null. La conexión ya se inyecta por defecto en `createApp`; A13 y la comprobación privada real siguen pendientes para cerrar A19. Véanse [alcance y pruebas](integracion-propuestas.md). Las notas fechadas anteriores describen la entrega inicial.
+
+## Verificación privada A19 · siguiente comprobación
+
+A13 y la conexión A15 están integradas. A26 se cerró con criterios provisionales; no reemplaza la prueba privada de Análisis. El [comprobador A19](a19-prueba-privada.md) inicia la aplicación local, pide dos sesiones reales y contrasta permisos, conteos, HTTP y controlador sin guardar credenciales. Su preparación se verifica con simulaciones; ejecución con cuentas reales y revisión visual final de Luis siguen pendientes. Las notas anteriores conservan el estado de sus entregas.

@@ -49,9 +49,10 @@ Frontend usa Supabase Auth para correo/Google y envía el access token a Express
 | GET | /api/v1/reports?from=YYYY-MM-DD&to=YYYY-MM-DD | Propietario | Tadeo A22;Luis A28 | report con fuentes separadas y periodo |
 | GET/POST | /api/v1/rank-history | Propietario | David A31 | rank_label, mode, recorded_at; source fijo self_reported |
 | GET | /api/v1/exercises | Jugador activo/admin | David A23 | Jugador recibe activos; admin puede filtrar inactivos |
-| POST/PATCH/DELETE | /api/v1/exercises[/:exerciseId] | Administrador | David A23/A32 | exercise; DELETE desactiva si está usado y conserva snapshot |
-| GET | /api/v1/admin/users | Administrador | Tadeo A29;David A32 | Lista de usuarios con estado, sin tokens ni claves |
-| PATCH | /api/v1/admin/users/:userId/status | Administrador | Tadeo A29;David A32 | status active/suspended → admin-user |
+| GET/POST/PATCH/DELETE | /api/v1/exercises[/:exerciseId] | Administrador | David A23/A32 | exercise; PATCH con ficha crea versión nueva inactiva, `{active}` activa (solo revisado) o desactiva; DELETE desactiva si está usado y conserva snapshot. [A32](a32-admin.md) |
+| GET | /api/v1/admin/summary | Administrador | David A32 | Conteos de usuarios, catálogo, bloques, planes y metas; progreso pendiente (A22/A26) |
+| GET | /api/v1/admin/users | Administrador | Tadeo A29;David A32 | Lista de usuarios con estado, correo y último acceso, sin tokens ni claves |
+| PATCH | /api/v1/admin/users/:userId/status | Administrador | Tadeo A29;David A32 | status active/suspended → admin-user; no sobre la propia cuenta (409) |
 
 Las rutas agrupadas CRUD son: GET colección/detalle, POST colección, PATCH detalle, DELETE detalle. Roles y propietarios se verifican en cada operación. GET no crea ni modifica planes. Si cambia el diseño, actualizar contrato y consumidores en el mismo cambio.
 
@@ -100,7 +101,7 @@ Prioridad: `{ priority_key, rule_id, score, evidence: { metric_key, value, unit,
 
 ### Reglas implementadas en A17
 
-El [servicio de reglas](reglas-motor.md) reutiliza A14/A09 y devuelve métricas, `rules_version: mvp.rules.v3`, `priorities`, `evaluations` y limitaciones. El dominio también acepta las métricas ya normalizadas, sin requerir anterior ni fechas. Se conserva `finalizacion-eficiencia`, clave de prioridad `shooting`, eficiencia ≤30 % y mínimo de 20/15/10 tiros por modalidad 1v1/2v2/3v3, con cobertura completa de cinco partidas. Estos parámetros son heurísticos sin calibración; score 1 es un peso técnico fijo.
+El [servicio de reglas](reglas-motor.md) reutiliza A14/A09 y devuelve métricas, `rules_version: mvp.rules.v4`, `priorities`, `evaluations` y limitaciones. El dominio también acepta las métricas ya normalizadas, sin requerir anterior ni fechas. Se conserva `finalizacion-eficiencia`, clave de prioridad `shooting`, eficiencia ≤30 % y mínimo de 20/15/10 tiros por modalidad 1v1/2v2/3v3, con cobertura completa de cinco partidas. Estos parámetros son heurísticos sin calibración; score 1 es un peso técnico fijo.
 
 Cada evaluación conserva `active`, `inactive` o `not_evaluable`, motivo, explicación y evidencia. Solo `active` produce prioridad; muestra insuficiente, faltantes o cero tiros no se convierten en ausencia de necesidad deportiva. Cada prioridad amplía el objeto base con `order`, `title`, `explanation` y `calibration_status`; la evidencia añade operador, conteos/cobertura, muestra, mínimo, contexto, fuente/versión e IDs de replay. Se conservan las claves existentes del catálogo y se actualiza el ejemplo de análisis. A18 consume las prioridades; A19 conecta la respuesta con la interfaz de Luis; A15/A24 resolverán persistencia y versionado SQL. Esta entrega no acredita un endpoint ni un diagnóstico guardado.
 
@@ -186,8 +187,12 @@ La ampliación histórica `mvp.plans.v2`/`mvp.allocation.v2` comparte minutos en
 
 ### Tercera regla y actividad de revisión defensiva
 
-La versión `mvp.rules.v3` añade `cobertura-defensiva-revision`, clave `defensive_review`, sin alterar los criterios de las dos reglas anteriores. Es una hipótesis provisional para ranked 2v2: al menos dos goles como último defensor en tres de cinco partidas, con los cinco conteos originales disponibles. `defensive_review_per_replay` es un campo opcional aditivo de `mvp.metrics.v1`, con base `provider_goals_against_while_last_defender`, cobertura, exclusiones y observaciones por ID. Cada observación conserva conteo y contexto posicional con unidad/ámbito/campo de origen; un faltante no es cero. La [ficha actual](cobertura-defensiva.md) especifica los límites y estados.
+La versión `mvp.rules.v4` añade `cobertura-defensiva-revision`, clave `defensive_review`, sin alterar los criterios de las dos reglas anteriores. Es una hipótesis provisional para ranked 2v2: tasa ≥2 goles como último defensor por cinco minutos en tres de cinco partidas, con cinco pares de conteo original y `play_duration` original positivo. Se calcula `goles × 300 / segundos` por partida, sin redondear para decidir ni usar relojes alternativos. No hay un mínimo de duración deportiva acordado. `defensive_review_per_replay` es un campo opcional aditivo de `mvp.metrics.v1`, con base `provider_last_defender_goals_per_300_match_play_seconds`, cobertura, exclusiones y observaciones por ID. Cada observación conserva conteo y contexto posicional, `duration` (`seconds`, ámbito `match`, origen `play_duration`) y `rate` (`goals_per_5_minutes`, numerador, denominador, referencia de 300 segundos y motivo de ausencia). `coverage` cuenta pares válidos; `count_coverage` y `duration_coverage` detallan disponibilidad. Duración cero se conserva pero produce tasa null con `zero_duration`. La base nueva impide reinterpretar observaciones antiguas de conteos como tasas. La [ficha actual](cobertura-defensiva.md) especifica los límites y estados.
 
 `mvp.plans.v3`/`mvp.allocation.v3` admiten las tres áreas y añaden `review_catalog_version` si utilizan `review-last-defender`. Su snapshot lleva `source: bundled_native_review`, versión `mvp.native-review.v1`, recurso `native_replay_review` y `requires_saved_replay: true`. Sus IDs SQL son null y su URL es una guía, no la ubicación de un evento. La evidencia no identifica timestamps ni atribuye culpa. Con poco tiempo se conserva cobertura parcial de las áreas sin actividad.
 
 La ruta sigue siendo una propuesta sin guardar; A24 debe resolver el mapeo de esa fuente antes de persistirla. A15 no conserva todavía los campos posicionales originales: el adaptador conserva `stored_positioning_not_recorded` y esta regla no se activa en esos bloques. Esta entrega no cambia tablas remotas ni acredita una sesión/carga real.
+
+### Persistencia de reglas v4 · compatibilidad A26/A24
+
+Ejecutar `database/seeds/a26-reglas-v4.sql` después de la seed A24. V2/v3 y sus análisis permanecen intactos. V4 registra la tasa `last_defender_goals_per_5_minutes`, unidad `goals_per_5_minutes`, y el código SQL `cobertura-defensiva-revision-tasa`; el adaptador lo aplica tanto a prioridades como a ejercicios. El ID lógico público sigue siendo `cobertura-defensiva-revision`, conservado en snapshots/evidencia. `valor_actual` guarda partidas coincidentes; las cinco tasas originales quedan en la evidencia. Esta compatibilidad no convierte las rutinas nativas en ejercicios SQL ni conserva campos originales de replays que A15 no tenga.

@@ -27,54 +27,69 @@
       <aside class="sidebar">
         <h5 class="sidebar-brand">ADMINISTRACIÓN</h5>
         <a href="admin-resumen.html" class="sidebar-link">Resumen</a>
-        <a href="#" class="sidebar-link">Progreso</a>
+        <a href="#" class="sidebar-link" aria-disabled="true" tabindex="-1" title="Pendiente (A22/A26)">Progreso</a>
         <a href="admin-usuarios.html" class="sidebar-link active" aria-current="page">Usuarios</a>
         <a href="admin-ejercicios.html" class="sidebar-link">Ejercicios</a>
-        <a href="#" class="sidebar-link">Errores</a>
+        <a href="#" class="sidebar-link" aria-disabled="true" tabindex="-1" title="Pendiente">Errores</a>
         <div class="sidebar-footer">
-          <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
+          <button type="button" class="btn-rl btn-rl-outline w-100" data-admin-logout data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
         </div>
       </aside>
       <main class="app-main">
         <h1 class="fw-bold text-light mb-4">Administración de usuarios</h1>
-        <div class="row align-items-end mb-2">
-          <div class="col-6">
+        <form class="row align-items-end mb-2" id="usuarios-filtros" role="search">
+          <div class="col-12 col-md-6 mb-2">
             <label class="text-bray mb-1" for="buscaru">Buscar por nombre o correo</label>
-            <div data-mdb-input-init class="form-outline bodycolor">
-              <input type="text" id="buscaru" class="form-control" value="Jugador" />
-              <label class="form-label" for="buscaru">Nombre o correo</label>
-            </div>
+            <input type="search" id="buscaru" class="form-control admin-input" placeholder="Nombre o correo" autocomplete="off" />
           </div>
-          <div class="col-3"><button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Mostrar todos</button></div>
+          <div class="col-6 col-md-2 mb-2">
+            <label class="text-bray mb-1" for="filtro-rol">Rol</label>
+            <select id="filtro-rol" class="form-select admin-input">
+              <option value="">Todos</option>
+              <option value="player">Jugador</option>
+              <option value="admin">Administrador</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-2 mb-2">
+            <label class="text-bray mb-1" for="filtro-estado">Estado</label>
+            <select id="filtro-estado" class="form-select admin-input">
+              <option value="">Todos</option>
+              <option value="active">Activo</option>
+              <option value="suspended">Suspendido</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-2 mb-2"><button type="reset" class="btn-rl btn-rl-outline w-100">Mostrar todos</button></div>
+        </form>
+        <p id="admin-estado" class="text-bray mb-3" role="status" aria-live="polite">Cargando usuarios…</p>
+        <div class="mb-3 admin-table" id="usuarios-tabla">
+          <div class="table-head" style="grid-template-columns: 1.5fr 2fr 1.2fr 1fr 1.2fr 1.3fr;"><span>Usuario</span><span>Correo</span><span>Rol</span><span>Estado</span><span>Último acceso</span><span>Acción</span></div>
+          <div id="usuarios-filas"></div>
         </div>
-        <p class="text-bray mb-3">Filtros: Rol · Estado</p>
-        <div class="mb-3">
-        <div class="table-head" style="grid-template-columns: 1.5fr 2fr 1.5fr 1.2fr 1.2fr;"><span>Usuario</span><span>Correo</span><span>Rol</span><span>Estado</span><span>Último acceso</span></div>
-        <div class="table-row" style="grid-template-columns: 1.5fr 2fr 1.5fr 1.2fr 1.2fr;"><span>Jugador 01</span><span>j01@correo.mx</span><span>Jugador</span><span>Activo</span><span>07/10</span></div>
-        <div class="table-row" style="grid-template-columns: 1.5fr 2fr 1.5fr 1.2fr 1.2fr;"><span>Jugador 02</span><span>j02@correo.mx</span><span>Jugador</span><span>Suspendido</span><span>05/10</span></div>
-        <div class="table-row" style="grid-template-columns: 1.5fr 2fr 1.5fr 1.2fr 1.2fr;"><span>Admin 01</span><span>admin@correo.mx</span><span>Administrador</span><span>Activo</span><span>Hoy</span></div>
-        </div>
-        <p class="link-actions mb-4">Acciones de cuenta: <a href="#">Ver</a> · <a href="#">Editar datos permitidos</a> · <a href="#">Suspender / Activar</a></p>
         <div class="card bg-card border-card denotative-gold pb-4 ">
               <div class="card-body">
                 <h5 class="card-title fw-bold text-light mb-2">Suspender conserva el historial</h5>
                 <ul class="card-text text-bray fs-6 list-unstyled mb-0">
+                <li>Una cuenta suspendida no puede iniciar sesión ni usar la API; sus datos se conservan.</li>
                 <li>No hay eliminación completa de usuarios ni cambio libre de rol.</li>
+                <li>No puedes cambiar el estado de tu propia cuenta.</li>
                 </ul>
               </div>
             </div>
-        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
+        <p class="app-note">El servidor vuelve a comprobar que eres administrador en cada cambio.</p>
       </main>
     </div>
 
     <!-- MDB -->
     <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
-    <!-- Custom scripts -->
-    <script src="../../vendor/jquery-3.7.1.min.js"></script>
-    <script src="../js/supabase-config.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../js/session-client.js"></script>
-    <script src="../js/navigation.js"></script> 
-    <script type="text/javascript"></script>
+<script src="../../vendor/jquery-3.7.1.min.js"></script>
+
+<script src="../js/supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../js/session-client.js"></script>
+<script src="../js/navigation.js"></script>
+
+<script src="../js/admin-api.js"></script>
+<script src="../js/admin-usuarios.js"></script>
   </body>
 </html>
