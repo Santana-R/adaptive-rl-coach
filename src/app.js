@@ -14,6 +14,7 @@ const { createStoredAnalysisRepository } = require('./services/stored-block');
 const { createAdminUsersRouter } = require('./routes/admin-users');
 const { createPlansRouter, createPlanVersionsRouter } = require('./routes/plans');
 const { createGoalsRouter } = require('./routes/goals');
+const { createSessionsRouter } = require('./routes/sessions');
 
 /**
  * Construye la aplicación. Recibe el cliente de Supabase para poder probarla
@@ -31,6 +32,8 @@ function createApp({ supabase = createServerClient(), analysisRepository, enable
   requireAuth,
   requireRole,
 }));
+
+app.use('/api/v1/sessions', createSessionsRouter({ supabase, requireAuth, requireRole }));
 
   app.get('/health', (_req, res) => {
     res.json({ status: 'ok' });
