@@ -48,7 +48,7 @@ function rpcError(error, fallback) {
   }
 }
 
-async function listGoals(supabase, userId, { status = 'active', mode } = {}) {
+async function listGoals(supabase, userId, { status = 'active', mode, withHistory = false } = {}) {
   requireClient(supabase);
   let query = supabase.from('objetivos').select(SELECT).eq('id_usuario', userId);
   if (status === 'active') query = query.eq('estado', 'activo');
@@ -56,7 +56,8 @@ async function listGoals(supabase, userId, { status = 'active', mode } = {}) {
   if (mode) query = query.eq('modalidad', mode);
   const { data, error } = await query;
   if (error) throw toApiError(error, 'No se pudieron consultar las metas.');
-  return (data || []).map(row => toGoal(row)).filter(Boolean).sort((a, b) => Number(a.goal_id) - Number(b.goal_id));
+  return (data || []).map(row => toGoal(row, { withHistory })).filter(Boolean)
+    .sort((a, b) => Number(a.goal_id) - Number(b.goal_id));
 }
 
 /** Meta propia con su historial, o null si no existe o es ajena. */
