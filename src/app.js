@@ -120,7 +120,7 @@ app.patch('/api/v1/profile', requireAuth, async (req, res, next) => {
 
   app.use((err, _req, res, _next) => {
     if (err instanceof ApiError) return sendError(res, err.status, err.code, err.message);
-    console.error(err);
+    console.error('[INTERNAL_ERROR] Error inesperado del servidor.');
     return sendError(res, 500, 'INTERNAL_ERROR', 'Error inesperado del servidor.');
   });
 
