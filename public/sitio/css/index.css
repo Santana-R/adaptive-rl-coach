@@ -402,7 +402,6 @@ body {
     }
 }
 
-/* A32 · Administración: formularios, acciones y tablas en móvil (solo dentro de .admin) */
 .admin .admin-input{
     background-color: rgb(15, 28, 41);
     color: #fff;
@@ -455,7 +454,6 @@ body {
 }
 
 @media (max-width: 576px){
-    /* Cada fila se apila: etiqueta + valor, sin desbordar a 390 px. */
     .admin .admin-table .table-head{ display: none; }
     .admin .admin-table .table-row{
         grid-template-columns: 1fr !important;
@@ -469,4 +467,36 @@ body {
     .admin .admin-table .table-row > span[data-label="Acción"]::before,
     .admin .admin-table .table-row > span[data-label="Acciones"]::before{ content: none; }
     .admin .stat-card .stat-value{ font-size: 1.6rem; }
+}
+
+.app-main .form-control,
+.app-main .form-select {
+  background-color: #102735;
+  color: #eef6fc;
+  border-color: #67869a;
+}
+
+.app-main .form-control::placeholder {
+  color: #b4c9d8;
+  opacity: 1;
+}
+
+.app-main .form-control:focus,
+.app-main .form-select:focus {
+  background-color: #173747;
+  color: #ffffff;
+  border-color: #00d5c0;
+  box-shadow: 0 0 0 0.2rem #00d5c033;
+}
+
+.app-main select option {
+  background-color: #102735;
+  color: #eef6fc;
+}
+
+.app-main .form-control:disabled,
+.app-main .form-select:disabled {
+  background-color: #203642;
+  color: #b4c9d8;
+  opacity: 1;
 }

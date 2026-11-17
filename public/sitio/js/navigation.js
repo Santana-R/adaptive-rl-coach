@@ -18,6 +18,7 @@ $(function () {
   let signedIn = false;
   let signingOut = false;
   let authRevision = 0;
+  let adminRevision = 0;
 
   // Crear un enlace y marcar la página actual.
   function link(title, page) {
@@ -128,11 +129,27 @@ $(function () {
     playerLinks.append(link(title, page));
   });
 
+  // Opciones administrativas, ocultas hasta comprobar el rol.
+  const adminLinks = $('<div>')
+    .addClass('d-none');
+
+  adminLinks.append(
+    link('Panel de administración', 'admin-resumen.html')
+  );
+
+  // Evitar que el enlace al panel se duplique.
+  const addedAdminPages = new Set([
+    'admin-resumen.html'
+  ]);
+
   existingAdminLinks.forEach(function (item) {
-    playerLinks.append(link(item.title, item.page));
+    if (!addedAdminPages.has(item.page)) {
+      adminLinks.append(link(item.title, item.page));
+      addedAdminPages.add(item.page);
+    }
   });
 
-  navigation.append(playerLinks);
+  navigation.append(playerLinks, adminLinks);
 
   const loginLink = link('Ingresar', 'login.html')
     .addClass('d-none');
@@ -175,9 +192,17 @@ $(function () {
 
   $('body').addClass('appbody');
 
-  // Actualizar opciones sin recrear la barra.
+  // Actualizar las opciones sin recrear la barra.
   function updateSession(session) {
     signedIn = Boolean(session);
+
+    const revision = ++adminRevision;
+
+    adminLinks.addClass('d-none');
+
+    if (session?.access_token) {
+      checkAdminAccess(session.access_token, revision);
+    }
 
     playerLinks.toggleClass('d-none', !signedIn);
     loginLink.toggleClass('d-none', signedIn);
@@ -187,6 +212,42 @@ $(function () {
       'disabled',
       !signedIn || signingOut
     );
+  }
+
+  // Consultar el rol real de la cuenta en el servidor.
+  async function checkAdminAccess(token, revision) {
+    try {
+      const account = await $.ajax({
+        url: '/api/v1/me',
+        method: 'GET',
+        dataType: 'json',
+        timeout: 15000,
+        cache: false,
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      });
+
+      // Descartar respuestas antiguas tras salir o cambiar de cuenta.
+      if (revision !== adminRevision || !signedIn) {
+        return;
+      }
+
+      adminLinks.toggleClass(
+        'd-none',
+        account.role !== 'admin' || account.status !== 'active'
+      );
+    } catch {
+      if (revision !== adminRevision || !signedIn) {
+        return;
+      }
+
+      adminLinks.addClass('d-none');
+
+      status.text(
+        'No se pudo comprobar el acceso administrativo. Recarga para reintentar.'
+      );
+    }
   }
 
   async function initialize() {
@@ -222,7 +283,7 @@ $(function () {
         throw error;
       }
 
-      // Evitar sobrescribir un cambio de sesión más reciente.
+      // No sobrescribir un cambio de sesión más reciente.
       if (authRevision === revisionBeforeRead) {
         updateSession(data.session);
         status.text('');
