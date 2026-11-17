@@ -47,7 +47,7 @@ Frontend usa Supabase Auth para correo/Google y envía el access token a Express
 | POST | /api/v1/plans/:planId/versions | Propietario | Roberto A18;David A24 | Nuevo contexto/metas/minutos del mismo bloque → versión nueva inmutable. Otro bloque = otro plan_id vía /blocks/:blockId/plans (analisis es UNIQUE por bloque) |
 | GET/POST/PATCH/DELETE | /api/v1/sessions[/:sessionId] | Propietario | Tadeo A21;Luis A27 | session; corrección/eliminación recalcula entrenamiento |
 | GET | /api/v1/reports?from=YYYY-MM-DD&to=YYYY-MM-DD | Propietario | Tadeo A22;Luis A28 | report con fuentes separadas y periodo |
-| GET/POST | /api/v1/rank-history | Propietario | David A31 | rank_label, mode, recorded_at; source fijo self_reported |
+| GET/POST | /api/v1/rank-history | Propietario | David A31 | POST rank_label, mode, division?, season?, recorded_at? → registro nuevo (source fijo self_reported, sin edición). GET ?mode= → entries (más reciente primero) y current por modalidad. Sin rank en plan-proposal se usa el vigente de la modalidad (meta.rank_origin). [A31](a31-rangos.md) |
 | GET | /api/v1/exercises | Jugador activo/admin | David A23 | Jugador recibe activos; admin puede filtrar inactivos |
 | GET/POST/PATCH/DELETE | /api/v1/exercises[/:exerciseId] | Administrador | David A23/A32 | exercise; PATCH con ficha crea versión nueva inactiva, `{active}` activa (solo revisado) o desactiva; DELETE desactiva si está usado y conserva snapshot. [A32](a32-admin.md) |
 | GET | /api/v1/admin/summary | Administrador | David A32 | Conteos de usuarios, catálogo, bloques, planes y metas; progreso pendiente (A22/A26) |

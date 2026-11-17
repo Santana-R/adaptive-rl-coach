@@ -272,7 +272,8 @@ function generatePlan({ analysis, profile, catalog, availability_minutes, goals 
     profile_snapshot: {
       platform: profile.platform, player_id: profile.player_id, mode: profile.mode,
       available_minutes: availability_minutes, rank, rank_source: rank === null ? null : 'self_reported',
-      rank_mode: rank === null ? null : profile.rank_mode, workshop_access: profile.workshop_access === true,
+      rank_mode: rank === null ? null : profile.rank_mode,
+      rank_record: rank === null ? null : profile.rank_record ?? null, workshop_access: profile.workshop_access === true,
       coco_variant_key: profile.coco_variant_key ?? null,
     },
     diagnosis_snapshot: { priorities: clone(supplied), limitations: clone(analysis.limitations || []) },
