@@ -1,0 +1,58 @@
+/* A20: colores y estados; distribución adaptable mediante MDB. */
+.goals-page [hidden]{ 
+    display: none !important; 
+}
+.goals-page .goals-card {
+  background-color: rgb(29, 63, 81);
+  border: 1px solid rgb(85, 118, 147);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  overflow-wrap: anywhere;
+}
+.goals-page .form-control,
+.goals-page .form-control:focus,
+.goals-page .form-select,
+.goals-page .form-select:focus {
+  background-color: rgb(15, 28, 41);
+  color: white;
+  border-color: rgb(85, 118, 147);
+}
+
+.goals-page .form-control::placeholder { 
+    color: #b3becd; opacity: 1; 
+}
+
+.goals-page input { 
+    color-scheme: dark; 
+}
+
+.goals-page :is(input, select, button, a):focus-visible {
+  outline: 3px solid rgb(13, 228, 196);
+  outline-offset: 3px;
+}
+
+.goals-page [aria-invalid="true"]{ 
+    border-color: #ffb4b4; 
+}
+
+.goals-page .goals-error { 
+    color: #ffb4b4; 
+}
+
+.goals-page .goal-archived { 
+    border-style: dashed; 
+}
+
+.goals-page button:disabled { 
+    opacity: .6; cursor: default; 
+}
+
+.goals-page fieldset { 
+    min-width: 0; 
+}
+
+.goals-page .goal-table th,
+.goals-page .goal-table td { 
+    white-space: nowrap; 
+}

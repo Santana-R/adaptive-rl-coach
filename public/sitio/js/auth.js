@@ -1,7 +1,6 @@
 'use strict';
 (() => {
-  const config = window.SUPABASE_CONFIG || {};
-  const client = window.supabase?.createClient && config.url && config.anonKey ? window.supabase.createClient(config.url, config.anonKey) : null;
+  const client = window.CoachAuth.getClient();
   const $ = id => document.getElementById(id);
   const message = (id, value, error = false) => {
     const el = $(id);

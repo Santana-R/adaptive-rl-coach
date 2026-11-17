@@ -20,8 +20,10 @@
     <!-- MDB -->
     <link rel="stylesheet" href="../css/mdb.min.css">
     <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/goals.css" />
   </head>
   <body class="mainbody appbody">
+    <header id="site-navigation"></header>
     <div class="app-shell">
       <aside class="sidebar">
         <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
@@ -36,44 +38,126 @@
           <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
         </div>
       </aside>
-      <main class="app-main">
-        <h1 class="fw-bold text-light mb-1">Gestión de objetivos</h1>
-        <p class="text-bray mb-3">Un objetivo principal de cada tipo por modalidad. Los anteriores conservan su historia.</p>
-        <div class="row align-items-end mb-2">
-          <div class="col-6">
-            <label class="text-bray mb-1" for="buscar">Buscar</label>
-            <div data-mdb-input-init class="form-outline bodycolor">
-              <input type="text" id="buscar" class="form-control" />
-              <label class="form-label" for="buscar">Nombre del objetivo</label>
-            </div>
-          </div>
-          <div class="col-3"><button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Mostrar todos</button></div>
-          <div class="col-3"><button type="button" class="btn-rl btn-rl-accent w-100" data-mdb-ripple-init data-mdb-ripple-color="light">Nuevo objetivo</button></div>
+      <main class="app-main text-light">
+        <h1 class="fw-bold text-light">Gestión de objetivos</h1>
+        <p class="text-bray">Una meta principal de rendimiento y una meta opcional de entrenamiento por modalidad.</p>
+        <p id="goals-status" role="status" aria-live="polite" tabindex="-1">Consultando objetivos…</p>
+        <a id="goals-login" href="login.html" class="btn-rl btn-rl-accent mb-3" hidden>Iniciar sesión</a>
+        <div class="d-flex flex-wrap gap-3 mb-3">
+          <button id="new-goal" type="button" class="btn-rl btn-rl-accent" disabled>Nuevo objetivo</button>
+          <button id="reload-goals" type="button" class="btn-rl btn-rl-outline">Actualizar lista</button>
         </div>
-        <p class="text-bray mb-3">Filtros: Tipo · Estado · Modalidad</p>
-        <div class="mb-3">
-        <div class="table-head" style="grid-template-columns: 2fr 1.5fr 1.5fr 2fr 1fr;"><span>Objetivo</span><span>Tipo</span><span>Meta</span><span>Evidencia / avance</span><span>Estado</span></div>
-        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 2fr 1fr;"><span>Mejorar tiro</span><span>Rendimiento</span><span>Superar 35 %</span><span>28 % inicial → 36 %</span><span>Cumplido</span></div>
-        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 2fr 1fr;"><span>Completar 4 sesiones</span><span>Entrenamiento</span><span>4 · 05-11 oct</span><span>1 de 4 completas · 25 %</span><span>Activo</span></div>
-        <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1.5fr 2fr 1fr;"><span>Reducir boost bajo</span><span>Rendimiento</span><span>Menor a 32 %</span><span>39 % actual</span><span>Activo</span></div>
-        </div>
-        <p class="link-actions mb-4">Fila seleccionada: <a href="#">Ver detalle</a> · <a href="#">Editar</a> · <a href="#">Archivar</a> · <a href="#">Eliminar si no tiene vínculos</a></p>
-        <div class="card bg-card border-card denotative pb-4 ">
-              <div class="card-body">
-                <h5 class="card-title fw-bold text-light mb-2">La evidencia depende del tipo de meta</h5>
-                <ul class="card-text text-bray fs-6 list-unstyled mb-0">
-                <li>Rendimiento: valores de bloques comparables. Entrenamiento: sesiones completas.</li>
-                <li>Cambiar una meta afecta al siguiente plan; conserva los anteriores.</li>
-                </ul>
+
+        <section id="goal-editor" class="goals-card" aria-labelledby="editor-title" hidden>
+          <h2 id="editor-title" class="h4">Nuevo objetivo</h2>
+          <form id="goal-form" novalidate>
+            <fieldset id="goal-fields" class="border-0 p-0 m-0">
+              <legend class="visually-hidden">Datos de la meta</legend>
+              <div class="row g-3 mb-3">
+                <div class="col-12 col-md-6">
+                  <label for="goal-name" class="form-label">Nombre del objetivo</label>
+                  <input id="goal-name" class="form-control" type="text" required maxlength="100" autocomplete="off">
+                  <p id="error-name" class="goals-error small mt-1 mb-0"></p>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="goal-mode" class="form-label">Modalidad</label>
+                  <select id="goal-mode" class="form-select"><option value="1v1">1v1</option><option value="2v2" selected>2v2</option><option value="3v3">3v3</option></select>
+                  <p id="error-mode" class="goals-error small mt-1 mb-0"></p>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="goal-type" class="form-label">Tipo de meta</label>
+                  <select id="goal-type" class="form-select"><option value="performance">Rendimiento</option><option value="training">Entrenamiento</option></select>
+                  <p id="error-type" class="goals-error small mt-1 mb-0"></p>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="goal-comparator" class="form-label">Comparación</label>
+                  <select id="goal-comparator" class="form-select"></select>
+                  <p id="error-comparator" class="goals-error small mt-1 mb-0"></p>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label id="goal-target-label" for="goal-target" class="form-label">Valor objetivo</label>
+                  <input id="goal-target" class="form-control" type="number" required aria-describedby="goal-metric-help">
+                  <p id="error-target_value" class="goals-error small mt-1 mb-0"></p>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="goal-start" class="form-label">Fecha de inicio</label>
+                  <input id="goal-start" class="form-control" type="date" aria-describedby="goal-date-help">
+                  <p id="error-start_date" class="goals-error small mt-1 mb-0"></p>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="goal-due" class="form-label">Fecha límite (opcional)</label>
+                  <input id="goal-due" class="form-control" type="date">
+                  <p id="error-due_date" class="goals-error small mt-1 mb-0"></p>
+                </div>
               </div>
-            </div>
-        <p class="app-note">Bosquejo funcional. Datos ilustrativos; formularios y detalles se abren en el módulo.</p>
+              <p id="goal-metric-help" class="text-bray"></p>
+              <p id="goal-date-help" class="text-bray">Al crear, si dejas el inicio vacío se usa hoy en la zona horaria de tu perfil. La fecha límite no puede ser anterior al inicio.</p>
+              <p id="goal-edit-note" class="text-bray" hidden>El tipo y la modalidad se conservan. Para cambiarlos, retira esta meta y crea otra. Cada cambio real crea una nueva versión; los planes anteriores mantienen su versión original.</p>
+              <div class="d-flex flex-wrap gap-3">
+                <button type="submit" class="btn-rl btn-rl-accent">Guardar objetivo</button>
+                <button id="cancel-goal" type="button" class="btn-rl btn-rl-outline">Cancelar</button>
+              </div>
+            </fieldset>
+          </form>
+        </section>
+
+        <section class="row g-3 mb-3" aria-label="Filtros de objetivos">
+          <div class="col-12 col-md-6 col-lg-3">
+            <label for="goal-search" class="form-label">Buscar por nombre</label>
+            <input id="goal-search" class="form-control" type="search" placeholder="Nombre del objetivo">
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <label for="filter-type" class="form-label">Tipo</label>
+            <select id="filter-type" class="form-select"><option value="">Todos</option><option value="performance">Rendimiento</option><option value="training">Entrenamiento</option></select>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <label for="filter-status" class="form-label">Estado</label>
+            <select id="filter-status" class="form-select"><option value="active">Activos</option><option value="archived">Archivados</option><option value="">Todos</option></select>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <label for="filter-mode" class="form-label">Modalidad</label>
+            <select id="filter-mode" class="form-select"><option value="">Todas</option><option value="1v1">1v1</option><option value="2v2">2v2</option><option value="3v3">3v3</option></select>
+          </div>
+        </section>
+        <p id="goal-count" class="text-bray" aria-live="polite"></p>
+        <div id="goals-results" aria-busy="true" hidden>
+          <p id="goals-empty" class="goals-card" hidden></p>
+          <section id="performance-section" aria-labelledby="performance-title">
+            <h2 id="performance-title" class="h4">Rendimiento</h2>
+            <p class="text-bray">Precisión de tiro de bloques comparables, en porcentaje.</p>
+            <div id="performance-list"></div>
+          </section>
+          <section id="training-section" aria-labelledby="training-title">
+            <h2 id="training-title" class="h4">Entrenamiento</h2>
+            <p class="text-bray">Minutos declarados en sesiones. No equivalen a mejora medida en partidas.</p>
+            <div id="training-list"></div>
+          </section>
+        </div>
+
+        <section id="goal-detail" class="goals-card" aria-labelledby="detail-title" tabindex="-1" hidden>
+          <h2 id="detail-title" class="h4">Detalle e historial</h2>
+          <div id="detail-body"></div>
+          <button id="close-detail" type="button" class="btn-rl btn-rl-outline">Cerrar detalle</button>
+        </section>
+        <aside class="goals-card mt-3">
+          <h2 class="h5">Qué cambia al editar o retirar una meta</h2>
+          <p>Editar crea una versión nueva sin reescribir planes anteriores. Las metas no cambian tus métricas ni el diagnóstico. Las metas de entrenamiento no se envían como metas de rendimiento al generador de planes.</p>
+          <p>Al retirar una meta, el servidor la archiva si está vinculada a planes o evaluaciones. Si no tiene vínculos, elimina la meta y su historial. Siempre se pide confirmación y se informa el efecto real.</p>
+          <p class="mb-0">El avance y cumplimiento requieren evaluaciones de bloques o sesiones (A21/A22). Si no hay evidencia conectada, se muestra como no disponible, nunca como cero.</p>
+        </aside>
       </main>
     </div>
 
     <!-- MDB -->
     <script type="text/javascript" src="../js/mdb.umd.min.js"></script>
     <!-- Custom scripts -->
-    <script type="text/javascript"></script>
+    <script src="../../vendor/jquery-3.7.1.min.js"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/session-client.js"></script>
+    <script src="../js/navigation.js"></script> 
+    <script src="../js/goals-validation.js"></script>
+    <script src="../js/goals-service.js"></script>
+    <script src="../js/goals.js"></script>
   </body>
 </html>
