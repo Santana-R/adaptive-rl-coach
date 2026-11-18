@@ -1,0 +1,16 @@
+.git
+node_modules
+.env
+.env.*
+!.env.example
+backups
+data
+uploads
+tmp
+output
+coverage
+*.replay
+*.dump
+*.backup
+*.log
+.DS_Store

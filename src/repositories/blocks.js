@@ -49,6 +49,7 @@ const REPLAY_METRIC_FIELDS = [
   ['velocidad_media', 'avg_speed'],
   ['distancia_companeros', 'teammate_distance'],
   ['zona_defensiva_s', 'defensive_zone_s'],
+  ['mediciones_proveedor', 'provider_measurements'],
 ];
 const BLOCK_METRIC_FIELDS = [
   ['version_calculo', 'metrics_version'],
@@ -195,7 +196,7 @@ function metricsFromCalculation(result) {
     play_duration_s: v.play_duration_s?.value ?? null,
     shots: v.shots?.value ?? null,
     goals: v.goals?.value ?? null,
-    boost_zero_s: null,
+    boost_zero_s: v.boost_zero_s?.value ?? null,
     boost_low_s: null,
     small_pads: null,
     avg_speed: null,

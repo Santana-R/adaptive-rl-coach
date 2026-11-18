@@ -1,79 +1,67 @@
 # Adaptive RL Coach
 
-Cinco partidas de Rocket League → métricas → prioridades explicables → plan → comparación posterior.
+Cinco partidas de Rocket League → métricas → prioridades explicables → plan → práctica y comparación posterior.
 
-## Apoyo con cualquier IA
+Aplicación académica UANL–FIME con Express, frontend HTML/JavaScript, Supabase Auth/PostgreSQL y Ballchasing. El motor utiliza reglas deterministas; los criterios deportivos son heurísticas provisionales.
 
-Lee [CONTEXTOIA.md](CONTEXTOIA.md) y tu issue actual antes de empezar. Puedes adjuntarlos a tu asistente favorito; el archivo incluye un mensaje de inicio, reparto, reglas, estado y la autorización por Release.
+## Estado actual · 18 de noviembre de 2026
 
-## Esta semana: motor funcionando para el 9 de noviembre
+El recorrido implementado incluye acceso, perfil, carga privada de cinco replays, procesamiento, métricas persistidas, análisis, versiones del plan, objetivos, sesiones e informes. El administrador consulta usuarios y mantiene el catálogo de ejercicios.
 
-**Las pantallas oficiales de Carga/Replays → Análisis → Plan están en `public/sitio/html`.** Roberto mantiene el motor/API y conecta sus resultados con estas vistas. [Reparto de frontend y entregas de Luis](docs/frontend-luis.md).
+La integración conserva por replay el porcentaje y los segundos con cero boost, las medidas originales de positioning y `play_duration`, con unidades, fuente y motivos de ausencia. El motor vuelve a leer esas medidas desde Supabase. Los bloques anteriores a esta corrección conservan sus faltantes; no se completan con valores inventados ni se reinterpretan los análisis guardados.
 
-| Persona | Empieza por esta entrega | Después |
-| --- | --- | --- |
-| Roberto · motor | [A02: primera regla y casos comprobables](https://github.com/Santana-R/adaptive-rl-coach/issues/2) · [guía paso a paso](docs/motor-paso-a-paso.md) | Métricas → comparación → reglas → plan → API y Análisis. |
-| Tadeo · servidor | [A06: Express, /health y servir public/](https://github.com/Santana-R/adaptive-rl-coach/issues/6) | [A05: comprobar Ballchasing antes del 3](https://github.com/Santana-R/adaptive-rl-coach/issues/5) → entrada válida al motor. |
-| Luis · interfaz | [A11: diseñar y construir Carga](https://github.com/Santana-R/adaptive-rl-coach/issues/11) · [guía de frontend](docs/frontend-luis.md) | Construir Análisis en A19 con Roberto, Plan en A27 y las demás vistas en A12/A20/A28. |
-| David · datos | [A23: preparar el catálogo que necesita el motor](https://github.com/Santana-R/adaptive-rl-coach/issues/23) | Consultas → análisis y versiones del plan. |
+[Estado, evidencia y límites vigentes](docs/estado-actual.md) · [Funcionamiento de las medidas persistidas](docs/persistencia-mediciones.md) · [Contexto para colaboradores e IAs](CONTEXTOIA.md).
 
-[Empieza aquí: cuatro próximas entregas](https://github.com/users/Santana-R/projects/1/views/1) · [Cola del motor del 9](https://github.com/users/Santana-R/projects/1/views/3). Tomar una por persona; `siguiente` no significa iniciada. Al terminar, mover esa etiqueta a su próxima entrega.
+## Ejecutar con Node
 
-## Fechas de noviembre de 2026
+Versión fijada en Docker y CI: **Node 22.19.0**. Desde la raíz:
 
-| Fecha | Entrega |
-| --- | --- |
-| Martes 3 | Revisión Fase 2 de LBPWEB: base de datos. |
-| Lunes 9 | Motor adaptativo funcionando para PROGSA. |
-| Lunes 16 | Proyecto completo para PROGSA. |
-| Lunes 23, **tentativo** | Entrega final de LBPWEB. |
-
-Piezas principales 4–6 e integración/ensayo 7–8 son metas internas propuestas. No se asumen horas disponibles de nadie. [Calendario](docs/calendario-y-dependencias.md).
-
-## Lo que ya está preparado
-
-- **Interfaz oficial:** abrir `public/sitio/html/replays.html` para cargar cinco replays y consultar el historial. Análisis y Plan están en `public/sitio/html/analisis.html` y `public/sitio/html/plan.html`.
-- **Fase 2:** se verificaron las **30 tablas existentes** en Supabase el 1 de noviembre. [Estado, documento y revisión](docs/fase2-estado.md) · [esquema SQL](database/esquema-fase2.sql). El equipo confirmó que el documento está listo para presentarlo; la revisión del profesor sigue pendiente. A07 solo da seguimiento a sus observaciones y no bloquea la implementación.
-- **Luis:** sus cuatro vistas públicas se integraron en PR #50; A03 y A04 están cerradas. El diseño y la construcción del resto del frontend continúan en A11/A12/A19/A20/A27/A28 y la revisión A35.
-- **Motor:** métricas A09, comparación A10, reglas A17 y generador de propuestas A18 implementados. La [segunda regla de disponibilidad de boost](docs/disponibilidad-boost.md) añade 15/20 % en al menos 3/5 partidas y rutinas nativas; el plan comparte minutos con finalización. La [tercera regla provisional de cobertura defensiva](docs/cobertura-defensiva.md) añade revisión manual de replays y reparto entre tres áreas, conservando faltantes y límites de persistencia. Análisis A19 calcula por HTTP y usa la interfaz de Luis; [guía de integración y límites](docs/analisis-integracion.md).
-- **Pendiente:** procesamiento real A13, comprobación privada A19/A37 y persistencia/presentación de Plan A24/A27. A15 ya se conecta a Análisis y existe la ruta de propuestas sin guardar. Perfil y catálogo ya tienen consultas integradas; Análisis reutiliza el acceso de Luis. La creación de tablas es avance distinto de conectar esas operaciones.
-
-## Ejecutar la demo en local
-
-Probado con Node.js v24.7.0 y npm 11.5.1. Desde la raíz del repositorio, ejecuta:
-
-```powershell
-npm ci
+```sh
+cp .env.example .env
+# Completar la configuración privada en .env.
+npm ci --ignore-scripts
 npm start
 ```
 
-Abre `http://127.0.0.1:3000/health` para comprobar que el servidor responde con `{"status":"ok"}`.
+Configurar `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_ANON_KEY` y `BALLCHASING_TOKEN`. La clave privada de Supabase y el token de Ballchasing solo los utiliza Express. El archivo `.env` se excluye del repositorio y de la imagen.
 
-En `http://127.0.0.1:3000/`, entra a Replays para cargar cinco archivos `.replay`. Para probar Análisis con entradas sintéticas calculadas por el motor, detén el servidor y arráncalo con la demo explícita:
+Abrir [la aplicación local](http://127.0.0.1:3000/) y [la comprobación de salud](http://127.0.0.1:3000/health). El servidor sirve las pantallas oficiales en `public/sitio/html`. `HOST` y `PORT` permiten ajustar la escucha; por defecto Node usa `127.0.0.1:3000`.
+
+Para otra base Supabase, preparar primero su esquema y migraciones según [database/README.md](database/README.md). Crear la imagen no crea cuentas de Auth ni copia los datos remotos.
+
+## Ejecutar con Docker
+
+Con Docker Desktop en ejecución y `.env` completo:
 
 ```sh
-# macOS / Linux
-ANALYSIS_DEMO_ENABLED=true npm start
+docker compose up --build -d
+docker compose ps
 ```
 
-En PowerShell: `$env:ANALYSIS_DEMO_ENABLED="true"; npm start`. Abre `http://127.0.0.1:3000/sitio/html/analisis.html` y elige primer bloque, posterior, modalidad incompatible, faltantes, revisión defensiva o las tres prioridades. La demo se deshabilita por defecto y solo admite conexiones locales. Plan (`sitio/html/plan.html`) conserva su demostración separada; no representa un plan del bloque calculado en Análisis.
+Abrir [la aplicación local](http://127.0.0.1:3000/). Compose publica el puerto solo en la Mac y configura la escucha interna en `0.0.0.0`. La aplicación corre con el usuario `node`.
 
-La carga de archivos reales se envía a `POST /api/v1/blocks` como `multipart/form-data` y queda en estado `pending` en el servidor local en memoria. El procesamiento privado, persistencia, autenticación y transición a `ready` pertenecen a A13/A15/A30; la interfaz no presenta una carga aceptada como análisis calculado.
+```sh
+docker compose logs -f app
+docker compose down
+```
 
-El puerto predeterminado es `3000`. Para cambiarlo, copia `.env.example` a `.env`, ajusta `PORT` y reinicia el servidor. Para detenerlo, presiona `Ctrl+C` en la terminal.
+El volumen `replay-pending` conserva los archivos pendientes al parar o recrear el contenedor. Su caducidad sigue siendo de 60 minutos por defecto; los trabajos se reanudan mediante la acción de reintento del bloque. [Guía de conservación y recuperación](docs/ejecucion-y-recuperacion.md).
 
-## Cómo trabajar
+## Pruebas
 
-Cada quien construye y sube su cambio desde su identidad de Git. El PR explica qué cambió, cómo comprobarlo y qué falta. Avisar bloqueos en la issue al detectarlos; apoyo por escrito sin reuniones obligatorias. [Guía breve](docs/empieza-aqui.md) · [Cómo entregar](CONTRIBUTING.md).
+```sh
+npm test
+node scripts/validar-heuristicas-a26.cjs
+```
 
-La planificación y demo inicial tuvieron asistencia de IA y no acreditan aportaciones individuales del equipo. Se conserva el historial y se registran los cambios reales.
+Todas las suites utilizan ahora el patrón `tests/*.test.cjs`, incluidas las pruebas de frontend de objetivos y plan. La regresión de persistencia recorre extracción → guardado → lectura → reglas con transporte SQL simulado. La prueba SQL `database/tests/mediciones-proveedor.sql` comprueba el RPC real y termina con rollback.
 
-[Referencias](docs/README.md) · [Cola del proyecto](docs/backlog.md) · [Notion](https://app.notion.com/p/3f7dd7559dd881bfbbceeff2d19b9d5f) · [Miro](https://miro.com/app/board/uXjVEcA_AAE=/).
+GitHub Actions ejecuta las suites y los 43 escenarios de A26. El flujo de Docker construye una imagen limpia, comprueba HTTP desde el host, el usuario de ejecución, la exclusión de `.env` y la conservación del volumen al recrear el contenedor. Sus resultados y límites se registran en [estado actual](docs/estado-actual.md).
 
-## Pruebas automáticas
+La demo sintética de Análisis se activa expresamente con `ANALYSIS_DEMO_ENABLED=true npm start`; sus resultados se identifican como sintéticos. Una respuesta correcta de `/health` solo confirma que Express está disponible.
 
-GitHub Actions ejecuta `npm test` con Node 22.19.0 y comprueba por separado los 33 casos de la propuesta inicial. La implementación de cobertura defensiva aprobó 447 pruebas (65 nuevas) en [run 43979860196](https://github.com/Santana-R/adaptive-rl-coach/actions/runs/43979860196). Son pruebas del código con datos sintéticos y sesiones/transportes simulados; la validación deportiva y el recorrido con cinco archivos reales siguen pendientes.
+## Colaboración
 
-## Reglas v4 y guardado de planes
+Cada integrante usa su identidad de Git y entrega cambios comprobables mediante PR. Antes de aplicar un nuevo conjunto de cambios se requiere el **Release** de Roberto; una autorización cubre todos los pasos necesarios de ese conjunto. La planificación y partes del código tuvieron asistencia de IA.
 
-Al instalar la versión del PR #78, ejecutar en orden `database/seeds/a24-reglas.sql` y `database/seeds/a26-reglas-v4.sql`, además de la migración A24. La seed v4 está aplicada en el entorno de desarrollo Adaptive RL Coach y se puede repetir. [Compatibilidad y comprobación](docs/a26-compatibilidad-persistencia.md). No reanaliza bloques históricos ni registra como ejercicios SQL las rutinas nativas.
+[Cómo contribuir](CONTRIBUTING.md) · [Referencias](docs/README.md) · [Tablero](https://github.com/users/Santana-R/projects/1/views/1).

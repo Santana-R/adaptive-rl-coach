@@ -27,21 +27,23 @@ Antes de implementar, identificar al integrante, su issue, el resultado que nece
 
 Si la IA no puede leer el repositorio privado, indicar qué archivo o fragmento necesita. El integrante puede adjuntar este Markdown, su issue y los archivos pertinentes. No solicitar que el repositorio se haga público ni pedir contraseñas/tokens para obtener contexto.
 
-## 3. Qué existe y qué sigue pendiente
+## 3. Estado vigente · 18 de noviembre de 2026
 
-| Parte | Estado documentado en esta revisión |
+El [README](README.md) y [estado actual](docs/estado-actual.md) son las referencias vigentes; los apartados posteriores conservan acuerdos y evidencia histórica.
+
+| Parte | Estado vigente |
 | --- | --- |
-| Demo visual oficial | Replays, Análisis y Plan en `public/sitio/html`, con datos sintéticos identificados. Análisis ya consume el cálculo A09/A10/A17 por HTTP en A19; las consultas persistidas y Plan siguen pendientes de integración. |
-| Fase 2 | Documento comprobado por el equipo y listo para presentarlo, según confirmó Roberto. La revisión del profesor sigue pendiente; SQL y diccionario de las 30 tablas están en el repo. |
-| Pantallas de Luis | Cuatro vistas públicas integradas en PR #50; A03/A04 cerradas. Continúa la construcción del frontend en A11/A12/A19/A20/A27/A28 y revisión A35. |
-| Servidor y motor definitivo | Pendientes de implementación/conexión. |
-| Proveedor real, acceso y persistencia de la web | Pendientes de integración y comprobación. |
+| Servidor, acceso y base | Express con Supabase Auth/PostgreSQL; las rutas privadas verifican sesión y propietario. |
+| Carga | Cinco archivos propios enviados privadamente a Ballchasing, IDs persistidos y reintentos. |
+| Motor | Finalización, boost y revisión defensiva deterministas; criterios deportivos provisionales. |
+| Persistencia nueva | Porcentaje/segundos de boost, positioning y reloj original conservados en JSONB versionado por replay. Bloques antiguos conservan faltantes. |
+| Interfaz | Pantallas oficiales en `public/sitio/html`, con análisis, planes, objetivos, sesiones, informes y administración. La ayuda no envía mensajes todavía. |
+| Ejecución | Node directo o Docker Compose con Supabase externo y volumen local para pendientes. |
+| Recuperación | Respaldo de tablas/datos de aplicación comprobado en tablas temporales; autenticación excluida y recuperación completa pendiente. |
 
-La interfaz oficial se abre desde `public/sitio/html/replays.html`; Análisis y Plan están en la misma carpeta. Replays valida cantidad, extensión y duplicados, y envía la carga al API local. Análisis calcula desde entradas sintéticas mediante el motor y API; Plan conserva una demostración separada. Ninguna vista acredita historial persistido. [Alcance de la demo](docs/demo-progsa.md).
+La nueva migración es `database/migraciones/20261118200550_persistir_mediciones_proveedor.sql`. Se aplica después de A15 y conserva los permisos del RPC. No inventar porcentajes, relojes, datos de partidas, revisiones humanas ni resultados de pruebas.
 
-El servidor Express y package.json ya existen en main; comprobar el README, la rama y los archivos actuales antes de indicar comandos o endpoints disponibles. El estado técnico de las demás filas conserva su carácter de instantánea y requiere comprobación.
-
-El martes el profesor solo revisa el documento de Fase 2. Su preparación ya fue comprobada por el equipo; A07 queda para registrar y atender las observaciones que haga. No es un requisito previo del catálogo ni de otras tareas de implementación. La restauración del SQL en un proyecto nuevo sigue pendiente en A38, como comprobación técnica separada. El [estado de Fase 2](docs/fase2-estado.md) enlaza el PDF vigente; el binario todavía no está en el repositorio.
+Consultar [persistencia](docs/persistencia-mediciones.md) y [arranque y recuperación](docs/ejecucion-y-recuperacion.md). El recorrido nuevo con cinco replays ranked reales continúa sin repetirse en esta revisión.
 
 ## 4. Equipo y tarea inicial
 

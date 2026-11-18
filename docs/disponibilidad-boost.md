@@ -1,5 +1,7 @@
 # Disponibilidad de boost · regla y rutina inicial
 
+**Actualización del 18 de noviembre de 2026:** para el estado vigente, consultar [estado actual](estado-actual.md) y [persistencia de medidas](persistencia-mediciones.md). Este documento conserva evidencia y decisiones de su fecha; las limitaciones anteriores de almacenamiento de boost/defensa se corrigieron para las nuevas cargas. Los registros históricos mantienen sus faltantes.
+
 Acordado por Roberto el 16 de noviembre de 2026 e implementado con asistencia de IA bajo su Release. Este cambio amplía el motor mientras continúa la integración real A13/A19/A37. No acredita calibración poblacional ni identifica la causa de quedarse sin boost.
 
 ## Criterio publicado

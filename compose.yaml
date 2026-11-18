@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:${PORT:-3000}:3000"
+    env_file:
+      - .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      REPLAY_TEMP_DIR: /app/data/replays
+    volumes:
+      - replay-pending:/app/data
+    restart: unless-stopped
+    init: true
+
+volumes:
+  replay-pending:

@@ -1,5 +1,7 @@
 # Análisis: del dato a la pantalla · A19
 
+**Actualización del 18 de noviembre de 2026:** para el estado vigente, consultar [estado actual](estado-actual.md) y [persistencia de medidas](persistencia-mediciones.md). Este documento conserva evidencia y decisiones de su fecha; las limitaciones anteriores de almacenamiento de boost/defensa se corrigieron para las nuevas cargas. Los registros históricos mantienen sus faltantes.
+
 La pantalla oficial de Luis (`public/sitio/html/analisis.html`, integrada en PR #63) recibe ahora el análisis calculado por el motor. Se conserva su distribución, navegación, colores y componentes; Roberto añade servicio/API y conexión HTTP con asistencia de IA bajo su Release. Esta entrega no acredita consultas de bloques persistidos ni un análisis guardado.
 
 ## Qué hace cada archivo

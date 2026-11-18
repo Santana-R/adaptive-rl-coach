@@ -5,6 +5,7 @@ const { parseTimestamp } = require('../domain/timestamps');
 const blocks = require('../repositories/blocks');
 const { boostMeasurement } = require('../domain/boost');
 const { unavailableDefensiveValues } = require('../domain/defensive-positioning');
+const { readProviderMeasurements } = require('./provider-measurements');
 
 // A15 ya filtró por propietario. Las métricas se recalculan desde los cinco
 // registros del jugador, no desde totales editables ni respuestas ficticias del proveedor.
@@ -27,6 +28,7 @@ function fromStoredBlock(block, ownerId) {
   if (replays.some(r => r.file?.mode !== block.mode)) return invalid('MODE_MISMATCH');
   if (replays.some(r => r.file?.match_type !== block.match_type)) return invalid('MATCH_TYPE_MISMATCH');
   const seen = new Set(), keys = [], normalized = [], dates = [], dateExclusions = [];
+  let missingProviderMeasurements = false;
   for (const r of replays) {
     const hash = r.file?.hash?.trim().toLowerCase();
     if (!/^[a-f0-9]{64}$/.test(hash || '')) return invalid('REPLAY_ID_MISSING');
@@ -42,6 +44,9 @@ function fromStoredBlock(block, ownerId) {
     values.boost_zero_pct = boostMeasurement(null, 'percent', 'percent_zero_boost', 'stored_boost_percentage_not_recorded');
     // A15 no conserva los campos originales de positioning; no se reconstruyen de goles totales.
     values.defensive_positioning = unavailableDefensiveValues('stored_positioning_not_recorded');
+    const providerValues = readProviderMeasurements(r.metrics?.provider_measurements, id);
+    if (providerValues) Object.assign(values, providerValues);
+    else missingProviderMeasurements = true;
     normalized.push({ replay_id: id, values });
     const time = parseTimestamp(r.file.played_at);
     if (time === null) dateExclusions.push({ replay_id: id, reason: r.file.played_at == null ? 'not_available' : 'invalid_timestamp' });
@@ -53,7 +58,8 @@ function fromStoredBlock(block, ownerId) {
   return { ...outer, metrics_block: { ...metrics, block_id: block.block_id, status: 'ready', replay_keys: keys,
     first_match_at: dates.length === 5 ? new Date(Math.min(...dates)).toISOString() : null,
     last_match_at: dates.length === 5 ? new Date(Math.max(...dates)).toISOString() : null,
-    date_exclusions: dateExclusions, data_limitations: ['stored_duration_basis_unverified', 'original_provider_not_recorded'] } };
+    date_exclusions: dateExclusions, data_limitations: missingProviderMeasurements
+      ? ['stored_duration_basis_unverified', 'original_provider_not_recorded'] : [] } };
 }
 
 function createStoredAnalysisRepository(supabase) {

@@ -1,5 +1,7 @@
 # Referencias del proyecto
 
+**Actualización del 18 de noviembre de 2026:** para el estado vigente, consultar [estado actual](estado-actual.md) y [persistencia de medidas](persistencia-mediciones.md). Este documento conserva evidencia y decisiones de su fecha; las limitaciones anteriores de almacenamiento de boost/defensa se corrigieron para las nuevas cargas. Los registros históricos mantienen sus faltantes.
+
 Para comenzar basta [la guía breve](empieza-aqui.md) y tu issue. Abre estas referencias cuando tu cambio las necesite.
 
 | Necesitas | Documento |

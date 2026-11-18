@@ -1,0 +1,45 @@
+name: Comprobar Docker
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obtener código
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Construir imagen limpia
+        run: docker build --pull -t adaptive-rl-coach:check .
+      - name: Iniciar, comprobar HTTP y conservar pendientes al recrear
+        shell: bash
+        run: |
+          set -euo pipefail
+          trap 'docker rm -f arc-check >/dev/null 2>&1 || true; docker volume rm arc-check-data >/dev/null 2>&1 || true' EXIT
+          docker volume create arc-check-data
+          start_app() {
+            docker run -d --name arc-check -p 127.0.0.1:3000:3000 \
+              -v arc-check-data:/app/data adaptive-rl-coach:check
+            for attempt in $(seq 1 30); do
+              if curl --fail --silent http://127.0.0.1:3000/health >/dev/null; then return; fi
+              sleep 1
+            done
+            docker logs arc-check
+            return 1
+          }
+          start_app
+          curl --fail --silent http://127.0.0.1:3000/sitio/html/login.html >/dev/null
+          test "$(docker exec arc-check id -u)" != 0
+          docker exec arc-check node -e "if (require('node:fs').existsSync('/app/.env')) process.exit(1)"
+          docker exec arc-check node -e "require('node:fs').writeFileSync('/app/data/replays/volume-check', 'retained')"
+          docker rm -f arc-check
+          start_app
+          docker exec arc-check node -e "if (require('node:fs').readFileSync('/app/data/replays/volume-check', 'utf8') !== 'retained') process.exit(1)"
+          echo 'HTTP, usuario no privilegiado, secretos excluidos y volumen conservado: correctos.'
