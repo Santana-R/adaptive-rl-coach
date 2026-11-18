@@ -39,7 +39,7 @@ El [README](README.md) y [estado actual](docs/estado-actual.md) son las referenc
 | Persistencia nueva | Porcentaje/segundos de boost, positioning y reloj original conservados en JSONB versionado por replay. Bloques antiguos conservan faltantes. |
 | Interfaz | Pantallas oficiales en `public/sitio/html`, con análisis, planes, objetivos, sesiones, informes y administración. La ayuda no envía mensajes todavía. |
 | Ejecución | Node directo o Docker Compose con Supabase externo y volumen local para pendientes. |
-| Recuperación | Respaldo de tablas/datos de aplicación comprobado en tablas temporales; autenticación excluida y recuperación completa pendiente. |
+| Recuperación | Respaldo de aplicación y cuentas/identidades/hashes de Auth en paquete privado, con restauraciones temporales comprobadas. Falta validar una restauración completa y el acceso en otro proyecto; OAuth/SMTP y claves se configuran aparte. |
 
 La nueva migración es `database/migraciones/20261118200550_persistir_mediciones_proveedor.sql`. Se aplica después de A15 y conserva los permisos del RPC. No inventar porcentajes, relojes, datos de partidas, revisiones humanas ni resultados de pruebas.
 
