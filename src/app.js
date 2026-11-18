@@ -138,7 +138,7 @@ module.exports = app;
 module.exports.createApp = createApp;
 
 if (require.main === module) {
-  const host = '127.0.0.1';
+  const host = process.env.HOST || '127.0.0.1';
   const port = Number(process.env.PORT ?? '3000');
   app.listen(port, host, () => {
     console.log(`Adaptive RL Coach en http://${host}:${port}`);

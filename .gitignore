@@ -24,4 +24,8 @@ npm-debug.log*
 *.replay
 uploads/
 tmp/
+backups/
+data/
+*.dump
+*.backup
 

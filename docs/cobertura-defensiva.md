@@ -1,5 +1,7 @@
 # Cobertura defensiva y decisiones como último hombre
 
+**Actualización del 18 de noviembre de 2026:** para el estado vigente, consultar [estado actual](estado-actual.md) y [persistencia de medidas](persistencia-mediciones.md). Este documento conserva evidencia y decisiones de su fecha; las limitaciones anteriores de almacenamiento de boost/defensa se corrigieron para las nuevas cargas. Los registros históricos mantienen sus faltantes.
+
 La versión del PR #78 es `mvp.rules.v4`, preparada con Roberto y asistencia de IA bajo su Release. Ajusta la tercera prioridad de **revisión defensiva** por la duración original de cada partida. La primera implementación `mvp.rules.v3` (PR #74) usaba conteos por partida y se conserva como antecedente. Finalización y boost mantienen sus criterios.
 
 ## Criterio provisional

@@ -1,5 +1,7 @@
 # A19 · Estado al corte de entrega
 
+**Actualización del 18 de noviembre de 2026:** para el estado vigente, consultar [estado actual](estado-actual.md) y [persistencia de medidas](persistencia-mediciones.md). Este documento conserva evidencia y decisiones de su fecha; las limitaciones anteriores de almacenamiento de boost/defensa se corrigieron para las nuevas cargas. Los registros históricos mantienen sus faltantes.
+
 ## Implementado y comprobado
 
 Interfaz oficial de Luis (PR #63), motor/API (PR #66), conexión A15 (PR #72), carga A13 y comprobador privado (PR #81) integrados. El endpoint calcula desde datos del repositorio; no selecciona respuestas fijas por escenario. La presentación conserva unidades, faltantes, comparación y evidencia.

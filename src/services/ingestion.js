@@ -13,12 +13,13 @@ const { parseTimestamp } = require('../domain/timestamps');
 const { validateFiles } = require('./block-store');
 const { extractReplayBlockMetrics } = require('./replay-validation');
 const ballchasing = require('./ballchasing');
+const { captureProviderMeasurements } = require('./provider-measurements');
 
 const MAX_POLL_ROUNDS = 6;
 const POLL_INTERVAL_MS = 5000;
 const USER_ID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
 const BLOCK_ID = /^[1-9]\d{0,17}$/;
-const scratchRoot = join(tmpdir(), 'adaptive-rl-coach-replays',
+const scratchRoot = process.env.REPLAY_TEMP_DIR || join(tmpdir(), 'adaptive-rl-coach-replays',
   createHash('sha256').update(__dirname).digest('hex').slice(0, 16));
 
 function readPositiveInteger(value, fallback, max) {
@@ -281,7 +282,11 @@ async function processReplayBlock({ supabase, userId, blockId, folder, files, pr
     position: block.replays[i].position,
     externalId: entry.replay_id,
     playedAt: parseTimestamp(ordered[i].date) === null ? null : ordered[i].date,
-    metrics: Object.fromEntries(['goals', 'shots', 'assists', 'saves'].map(key => [key, entry.values[key].value]))
+    metrics: {
+      ...Object.fromEntries(['goals', 'shots', 'assists', 'saves'].map(key => [key, entry.values[key].value])),
+      boost_zero_s: entry.values.boost_zero_s?.value ?? null,
+      provider_measurements: captureProviderMeasurements(entry),
+    }
   }));
   const metrics = blocks.metricsFromCalculation(calculateBlockMetrics(normalized.data));
   await blocks.completeReplayBlock(supabase, userId, blockId, normalized.data.context, results, metrics);
