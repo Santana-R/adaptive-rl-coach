@@ -10,14 +10,14 @@ La corrección de persistencia guarda las medidas originales necesarias para boo
 
 ## Verificación de este cambio
 
-- 132 pruebas dirigidas aprobadas: reglas de boost/defensa, repositorios y nueva regresión de persistencia. Transporte del proveedor y SQL simulados en Node.
+- [GitHub Actions Node, commit 1f1bec4](https://github.com/Santana-R/adaptive-rl-coach/actions/runs/44389714573): **553 pruebas aprobadas, cero fallidas y cero omitidas**, incluidas las suites frontend antes excluidas y seis pruebas nuevas de persistencia. Transporte del proveedor y SQL simulados en las integraciones Node.
 - 43 escenarios A26 siguen coincidiendo con los resultados esperados.
 - RPC PostgreSQL real: cinco instantáneas sintéticas conservadas, ceros y duración fraccional correctos, JSON incompleto rechazado; rollback.
 - Migración aplicada: nueva columna disponible, diez filas históricas conservadas sin medidas añadidas. `anon` y `authenticated` siguen sin permiso para ejecutar A15; `service_role` sí.
 - Recuperación de respaldo de aplicación: 30 tablas y 125 filas reconstruidas en tablas temporales, con igualdad de datos y restricciones comprobadas; Auth representado solo mediante UUID.
-- Compose validado localmente. Construcción, acceso HTTP y recreación del volumen se comprueban en el flujo de Docker de este cambio.
+- [GitHub Actions Docker](https://github.com/Santana-R/adaptive-rl-coach/actions/runs/44389714712): imagen construida desde cero, HTTP accesible desde el host, usuario no privilegiado, `.env` excluido y archivo conservado al recrear el contenedor. Compose validado localmente.
 
-La ejecución local completa de Node encontró restricciones de apertura de puertos (`listen EPERM`); el resultado de las suites HTTP se toma de GitHub Actions. Los resultados finales de CI se registran al cerrar este cambio.
+La ejecución local completa de Node encontró restricciones de apertura de puertos (`listen EPERM`); las suites HTTP sí terminaron correctamente en GitHub Actions. La comprobación Docker se ejecutó en Linux; la Mac no tenía su motor de Docker disponible.
 
 ## Pendiente y límites
 
