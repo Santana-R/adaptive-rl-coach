@@ -12,15 +12,23 @@ async function renderController(base, blockId, token, fetchImpl = fetch) {
     if (!elements.has(id)) elements.set(id, {
       textContent: '', innerHTML: '', value: id === 'metric-select' ? 'shooting_pct' : 'initial',
       hidden: false, disabled: false, replaceChildren() { this.innerHTML = ''; },
-      setAttribute() {}, removeAttribute() {}, addEventListener() {},
+      setAttribute() {}, removeAttribute() {}, addEventListener() {}, add() {},
     });
     return elements.get(id);
   };
   const search = '?block_id=' + encodeURIComponent(blockId);
-  const root = { location: { search, href: base + '/sitio/html/analisis.html' + search },
+  const root = { CoachFollowupModel: require('../public/sitio/js/followup-model'), location: { search, href: base + '/sitio/html/analisis.html' + search },
     fetch: (url, options) => fetchImpl(new URL(url, base), { ...options, redirect: 'error', signal: AbortSignal.timeout(15000) }) };
+  root.CoachFollowupService = {
+    async blocks() {
+      const response = await root.fetch('/api/v1/blocks', { headers: { Authorization: 'Bearer ' + token } });
+      const body = await response.json();
+      if (!response.ok) throw new Error('No se pudo consultar el historial del comprobador.');
+      return body.data;
+    },
+  };
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../public/js/analysis.js'), 'utf8'),
-    { window: root, document: { getElementById: get, addEventListener() {} }, URL, URLSearchParams, Intl },
+    { window: root, document: { getElementById: get, addEventListener() {} }, Option: class {}, URL, URLSearchParams, Intl },
     { timeout: 1000 });
   root.CoachAnalysis.configure({ getAccessToken: async () => token });
   await root.CoachAnalysis.load();
