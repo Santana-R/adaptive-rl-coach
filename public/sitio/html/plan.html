@@ -34,11 +34,44 @@
         <div class="d-flex flex-wrap gap-3 mb-3">
           <button id="reload-plan" type="button" class="btn-rl btn-rl-outline">Actualizar datos</button>
           <a id="plan-login" href="login.html" class="btn-rl btn-rl-accent" hidden>Iniciar sesión</a>
-          <a href="perfil.html" class="btn-rl btn-rl-outline">Revisar Perfil</a>
-          <a href="replays.html" class="btn-rl btn-rl-outline">Ir a Replays</a>
+          <a href="perfil.html" class="text-accent align-self-center">Perfil</a>
+          <a href="replays.html" class="text-accent align-self-center">Replays</a>
         </div>
-        <section class="plan-card" aria-labelledby="context-title">
-          <h2 id="context-title" class="h4">Preferencias para una nueva propuesta</h2>
+        <p id="no-plan" class="plan-card">Selecciona un bloque para consultar su plan o generar una propuesta.</p>
+        <section id="plan-output" aria-labelledby="output-title" hidden>
+          <div class="plan-card">
+            <div class="d-flex flex-wrap gap-3 justify-content-between align-items-center">
+              <h2 id="output-title" tabindex="-1" class="h4 mb-0">Rutina</h2>
+              <span id="plan-badge" class="plan-tag"></span>
+            </div>
+            <p id="plan-identity" class="text-bray mt-3"></p>
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-md-4"><strong id="available-minutes"></strong><p class="text-bray mb-0">Minutos disponibles</p></div>
+              <div class="col-12 col-md-4"><strong id="assigned-minutes"></strong><p class="text-bray mb-0">Minutos asignados</p></div>
+              <div class="col-12 col-md-4"><strong id="unassigned-minutes"></strong><p class="text-bray mb-0">Minutos sin asignar</p></div>
+            </div>
+            <div class="progress" role="progressbar" aria-label="Tiempo asignado" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="plan-time-progress"><div class="progress-bar" id="plan-time-bar"></div></div>
+            <p id="plan-context-note" class="text-bray mt-3"></p>
+            <p id="plan-save-note" class="text-bray"></p>
+            <div class="d-flex flex-wrap gap-3">
+              <button id="save-plan" type="button" class="btn-rl btn-rl-accent" hidden>Guardar plan</button>
+              <a id="plan-sessions" class="btn-rl btn-rl-accent" hidden>Registrar sesión</a>
+            </div>
+          </div>
+          <div class="row g-3">
+            <section class="col-12 col-lg-7" aria-labelledby="exercises-title">
+              <h2 id="exercises-title" class="h4">Ejercicios e instrucciones</h2>
+              <div id="plan-exercises"></div>
+            </section>
+            <aside class="col-12 col-lg-5">
+              <section class="plan-card"><h2 class="h5">Por qué este plan</h2><p id="plan-explanation"></p><div id="plan-reasons"></div></section>
+              <section class="plan-card"><h2 class="h5">Metas utilizadas</h2><div id="plan-used-goals"></div></section>
+              <section class="plan-card"><h2 class="h5">Cobertura y límites</h2><div id="plan-limitations"></div><details class="mt-2"><summary>Fuente de los datos</summary><p id="plan-source" class="text-bray mb-0"></p></details></section>
+            </aside>
+          </div>
+        </section>
+        <details id="plan-adjust" class="plan-card" open>
+          <summary class="h5 mb-3">Ajustar rutina</summary>
           <p id="plan-profile" class="text-bray"></p>
           <form id="plan-form" novalidate>
             <fieldset id="plan-fields" class="border-0 p-0 m-0" disabled>
@@ -84,49 +117,14 @@
               <button id="preview-plan" type="submit" class="btn-rl btn-rl-accent">Generar propuesta</button>
             </fieldset>
           </form>
-        </section>
+        </details>
         <section class="plan-card" aria-labelledby="versions-title">
           <h2 id="versions-title" class="h4">Versiones guardadas del bloque</h2>
           <label for="plan-version" class="form-label">Consultar versión</label>
           <select id="plan-version" class="form-select" disabled><option value="">Sin versiones consultadas</option></select>
           <p id="versions-note" class="text-bray mt-2 mb-0">Cada bloque tiene su propio plan. Otro bloque inicia otra línea de versiones.</p>
         </section>
-        <p id="no-plan" class="plan-card">Selecciona un bloque para consultar su plan o generar una propuesta.</p>
-        <section id="plan-output" aria-labelledby="output-title" hidden>
-          <div class="plan-card">
-            <div class="d-flex flex-wrap gap-3 justify-content-between align-items-center">
-              <h2 id="output-title" class="h4 mb-0">Rutina</h2>
-              <span id="plan-badge" class="plan-tag"></span>
-            </div>
-            <p id="plan-identity" class="text-bray mt-3"></p>
-            <p id="plan-source" class="text-bray"></p>
-            <p id="plan-explanation"></p>
-            <div class="row g-3 mb-3">
-              <div class="col-12 col-md-4"><strong id="available-minutes"></strong><p class="text-bray mb-0">Minutos disponibles</p></div>
-              <div class="col-12 col-md-4"><strong id="assigned-minutes"></strong><p class="text-bray mb-0">Minutos asignados</p></div>
-              <div class="col-12 col-md-4"><strong id="unassigned-minutes"></strong><p class="text-bray mb-0">Minutos sin asignar</p></div>
-            </div>
-            <div class="progress" role="progressbar" aria-label="Tiempo asignado" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="plan-time-progress"><div class="progress-bar" id="plan-time-bar"></div></div>
-            <p id="plan-context-note" class="text-bray mt-3"></p>
-            <p id="plan-save-note" class="text-bray"></p>
-            <div class="d-flex flex-wrap gap-3">
-              <button id="save-plan" type="button" class="btn-rl btn-rl-accent" hidden>Generar y guardar versión</button>
-              <a id="plan-sessions" class="btn-rl btn-rl-outline" hidden>Sesiones de esta versión</a>
-            </div>
-          </div>
-          <div class="row g-3">
-            <section class="col-12 col-lg-7" aria-labelledby="exercises-title">
-              <h2 id="exercises-title" class="h4">Ejercicios e instrucciones</h2>
-              <div id="plan-exercises"></div>
-            </section>
-            <aside class="col-12 col-lg-5">
-              <section class="plan-card"><h2 class="h5">Por qué este plan</h2><div id="plan-reasons"></div></section>
-              <section class="plan-card"><h2 class="h5">Metas utilizadas</h2><div id="plan-used-goals"></div></section>
-              <section class="plan-card"><h2 class="h5">Cobertura y límites</h2><div id="plan-limitations"></div></section>
-            </aside>
-          </div>
-        </section>
-        <p class="app-note">Propuestas y versiones proceden de la API autenticada. El registro de sesiones se completa en A21/A28. Las reglas deportivas son heurísticas; no acreditan mejora por sí solas.</p>
+
       </main>
     </div>
     <script src="../js/mdb.umd.min.js"></script>

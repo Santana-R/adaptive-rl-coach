@@ -20,6 +20,15 @@
     return new URLSearchParams({ from, to }).toString();
   }
 
+  function readyBlocks(blocks) {
+    if (!Array.isArray(blocks)) throw new Error('No se pudo leer el historial de bloques.');
+    return blocks.filter(block => block.status === 'ready' && id(String(block.block_id)));
+  }
+
+  function matchType(type) {
+    return { ranked: 'competitivo', casual: 'casual', private: 'privado' }[type] ?? display(type);
+  }
+
   function localDate(value) {
     if (missing(value)) return 'No disponible';
     const date = new Date(value);
@@ -69,5 +78,5 @@
       (!params.get('plan_exercise_id') || plan.exercises.some(item => item.plan_exercise_id === params.get('plan_exercise_id')));
   }
 
-  return { id, missing, display, period, localDate, session, sessionPatch, matches };
+  return { id, missing, display, period, readyBlocks, matchType, localDate, session, sessionPatch, matches };
 }));

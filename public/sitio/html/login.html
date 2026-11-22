@@ -31,8 +31,8 @@
         </div>
       </div>
       <div class="row mb-4">
-        <div class="col-12 w-50 d-block mx-auto bg-card p-4 rounded-4 border-card">
-            <form id="registro">
+        <div class="col-12 col-md-8 col-lg-6 d-block mx-auto bg-card p-4 rounded-4 border-card">
+            <form id="registro" hidden>
                 <h4 class="text-light fw-bold mb-3">Crear cuenta</h4>
                 <button type="button" id="google-registro" class="mx-auto d-block w-75 p-2 accent rounded-4 border-0 fw-bold mb-2" data-mdb-ripple-init data-mdb-ripple-color="light"> Continuar con Google </button>
 
@@ -65,26 +65,26 @@
 
                 <button type="submit" class="mb-2 mx-auto d-block w-75 p-2 accent rounded-4 border-0 fw-bold">Crear cuenta</button>
                 <p id="registro-estado" class="text-bray fw-light text-center" role="status" aria-live="polite">Configura Supabase para habilitar el acceso.</p>
-                <p class="text-accent fw-light text-center"><a href="#inicio-sesion" class="text-accent">Ya tienes cuenta? Inicia sesión</a></p>
+                <p class="text-accent fw-light text-center"><a href="#inicio-sesion" class="text-accent">¿Ya tienes cuenta? Inicia sesión</a></p>
                 <div class="d-flex justify-content-center gap-3">
-                <a href="helpme.html" class="text-bray fw-light ">Recuperar contraseña</a>
                 <a href="index.html" class=" text-bray fw-light">Volver a inicio</a>
                 </div> 
             </form>
-            <hr class="border-secondary my-4">
             <form id="inicio-sesion">
                 <h4 class="text-light fw-bold mb-3">Iniciar sesión</h4>
                 <div data-mdb-input-init class="form-outline mb-4 bodycolor">
-                  <input type="email" id="login-correo" class="form-control" />
+                  <input type="email" id="login-correo" class="form-control" autocomplete="username" required />
                   <label class="form-label" for="login-correo">Correo</label>
                 </div>
                 <div data-mdb-input-init class="form-outline mb-4 bodycolor">
-                  <input type="password" id="login-contrasena" class="form-control" />
+                  <input type="password" id="login-contrasena" class="form-control" autocomplete="current-password" required />
                   <label class="form-label" for="login-contrasena">Contraseña</label>
                 </div>
                 <button type="submit" class="mx-auto d-block w-75 p-2 bodycolor border-accent rounded-4 fw-bold text-light">Iniciar sesión</button>
                 <button type="button" id="google-login" class="mx-auto d-block w-75 p-2 bodycolor border-accent rounded-4 fw-bold text-light mt-2">Iniciar con Google</button>
                 <p id="login-estado" class="text-bray fw-light text-center mt-3" role="status" aria-live="polite">Configura Supabase para habilitar el acceso.</p>
+                <p class="text-center mb-2"><a class="text-accent" href="#registro">Crear una cuenta</a></p>
+                <p class="text-center mb-0"><a class="text-bray" href="helpme.html#acceso">Ayuda con el acceso</a></p>
             </form>
         </div>
         </div>

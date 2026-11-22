@@ -6,7 +6,9 @@
         const count = document.getElementById('file-count');
         const notice = document.getElementById('file-notice');
         const process = document.getElementById('process-block');
+        const fileButton = document.getElementById('select-files');
         let files = [];
+        let sending = false;
 
         function validate() {
           if (files.length !== 5) return 'Selecciona exactamente cinco archivos .replay.';
@@ -44,50 +46,40 @@
           count.textContent = `${files.length} de 5`;
           const error = message || validate();
           showNotice(
-            error || 'Cantidad y extensión válidas. Puedes procesar el bloque.',
-            error ? 'error' : 'valid'
+            !files.length && !message ? 'Elige cinco archivos .replay distintos.' : error || 'Todo listo. Ya puedes procesar el bloque.',
+            !files.length && !message ? 'idle' : error ? 'error' : 'valid'
           );
           process.disabled = Boolean(error);
         }
-
-        const reasons = {
-          DUPLICATE_REPLAY: 'El replay ya existe en Ballchasing.',
-          RATE_LIMITED: 'Ballchasing limitó las solicitudes temporalmente.',
-          REPLAY_FORMAT_INVALID: 'Ballchasing rechazó el formato del archivo.',
-          REPLAY_PROCESSING_FAILED: 'Ballchasing no pudo procesar el replay.',
-          REPLAY_NOT_PRIVATE: 'No se pudo comprobar la privacidad del replay.',
-          REPLAY_FILES_EXPIRED: 'Los archivos temporales caducaron. Crea un bloque nuevo.',
-          REPLAY_FILES_CHANGED: 'Un archivo temporal cambió. Crea un bloque nuevo.',
-          UPLOAD_UNAVAILABLE: 'Falló la carga a Ballchasing.',
-          PROCESSING_TIMEOUT: 'Se agotó la espera para consultar el replay.',
-          PLAYER_MISMATCH: 'El jugador del perfil no aparece en este replay.',
-          MODE_MISMATCH: 'La modalidad no coincide con la del perfil.',
-          MATCH_TYPE_MISMATCH: 'El tipo de partida no coincide con el resto.',
-          REPLAY_CONTEXT_UNSUPPORTED: 'El contexto de esta partida no es compatible.'
-        };
 
         async function loadHistory() {
           await window.CoachBlockHistory.refresh();
         }
 
-        document.getElementById('select-files').addEventListener('click', () => input.click());
+        fileButton.addEventListener('click', () => input.click());
         input.addEventListener('change', () => {
           files = Array.from(input.files);
+          input.value = '';
           renderFiles();
         });
         form.addEventListener('dragover', event => event.preventDefault());
         form.addEventListener('drop', event => {
           event.preventDefault();
+          if (sending) return;
           files = Array.from(event.dataTransfer.files);
           renderFiles();
         });
         form.addEventListener('submit', async event => {
           event.preventDefault();
+          if (sending) return;
           const error = validate();
           if (error) {
             renderFiles(error);
             return;
           }
+          sending = true;
+          fileButton.disabled = true;
+          list.querySelectorAll('button').forEach(button => { button.disabled = true; });
           process.disabled = true;
           showNotice('Enviando replays...', 'pending');
           try {
@@ -103,6 +95,10 @@
           } catch (requestError) {
             process.disabled = false;
             showNotice(requestError.message, 'error');
+          } finally {
+            sending = false;
+            fileButton.disabled = false;
+            list.querySelectorAll('button').forEach(button => { button.disabled = false; });
           }
         });
         renderFiles();

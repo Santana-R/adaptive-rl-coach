@@ -48,7 +48,23 @@
         </div>
 
         <div class="row" id="resumen-detalle" hidden>
-          <div class="col-12 col-lg-7 mb-3">
+          <div class="col-12 col-lg-7">
+            <div class="card bg-card border-card denotative pb-4 mb-3">
+              <div class="card-body">
+                <h5 class="card-title fw-bold text-light mb-2">Bloques que requieren atención</h5>
+                <ul class="card-text text-bray fs-6 list-unstyled mb-0" id="r-operativo"></ul>
+              </div>
+            </div>
+            <div class="card bg-card border-card denotative-gold pb-4 mb-3">
+              <div class="card-body">
+                <h5 class="card-title fw-bold text-light mb-2">Catálogo</h5>
+                <ul class="card-text text-bray fs-6 list-unstyled mb-0" id="r-catalogo"></ul>
+              </div>
+            </div>
+            <a href="admin-ejercicios.html" class="btn-rl btn-rl-accent w-100 mb-3">Administrar ejercicios</a>
+            <a href="admin-usuarios.html" class="btn-rl btn-rl-outline w-100">Administrar usuarios</a>
+          </div>
+          <div class="col-12 col-lg-5 mb-3">
             <div class="card bg-card border-card h-100">
               <div class="card-body">
                 <h5 class="card-title fw-bold text-light mb-1">Progreso de los jugadores</h5>
@@ -62,22 +78,6 @@
                 <p class="text-bray mt-3 mb-0">No se muestran cifras hasta que existan con periodo, muestra y exclusiones.</p>
               </div>
             </div>
-          </div>
-          <div class="col-12 col-lg-5">
-            <div class="card bg-card border-card denotative-gold pb-4 mb-3">
-              <div class="card-body">
-                <h5 class="card-title fw-bold text-light mb-2">Catálogo</h5>
-                <ul class="card-text text-bray fs-6 list-unstyled mb-0" id="r-catalogo"></ul>
-              </div>
-            </div>
-            <a href="admin-ejercicios.html" class="btn-rl btn-rl-accent w-100 mb-3">Administrar ejercicios</a>
-            <div class="card bg-card border-card denotative pb-4 mb-3">
-              <div class="card-body">
-                <h5 class="card-title fw-bold text-light mb-2">Apoyo operativo</h5>
-                <ul class="card-text text-bray fs-6 list-unstyled mb-0" id="r-operativo"></ul>
-              </div>
-            </div>
-            <a href="admin-usuarios.html" class="btn-rl btn-rl-outline w-100">Administrar usuarios</a>
           </div>
         </div>
         <p class="app-note">Cada cifra es un conteo actual; no se suman entre tarjetas.</p>

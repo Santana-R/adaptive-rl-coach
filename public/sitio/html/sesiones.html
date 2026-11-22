@@ -42,10 +42,9 @@
         <h1 class="fw-bold text-light">Sesiones y seguimiento</h1>
         <p class="text-bray">Registra tu práctica sobre el plan que realizaste. Entrenar y mejorar en partidas son evidencias distintas.</p>
         <section id="sessions-plan-context" class="followup-panel" aria-live="polite"></section>
-        <section class="followup-panel" aria-labelledby="session-title">
+        <section id="session-editor" class="followup-panel" aria-labelledby="session-title" hidden>
           <h2 id="session-title" class="h4">Registrar o corregir práctica</h2>
           <p id="session-edit-note">La fecha y hora se introducen en la zona local de este dispositivo.</p>
-          <p>Selecciona la versión desde <a class="text-accent" href="plan.html">Plan</a>. Las sesiones se guardan en el servidor y conservan la versión exacta practicada.</p>
           <form id="session-form">
             <fieldset id="session-fields" disabled>
               <legend class="visually-hidden">Datos de la sesión</legend>
@@ -61,7 +60,7 @@
           </form>
         </section>
         <section class="followup-panel" aria-labelledby="sessions-history-title">
-          <h2 id="sessions-history-title" class="h4">Historial de práctica declarada</h2>
+          <h2 id="sessions-history-title" class="h4">Historial de sesiones</h2>
           <div class="row g-3 mb-3">
             <div class="col-12 col-sm-4"><label for="sessions-from">Desde (fecha local)</label><input id="sessions-from" type="date" class="form-control"></div>
             <div class="col-12 col-sm-4"><label for="sessions-to">Hasta (fecha local)</label><input id="sessions-to" type="date" class="form-control"></div>

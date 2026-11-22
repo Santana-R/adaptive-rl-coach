@@ -30,15 +30,17 @@
           <h1 class="fw-bold text-light mb-4">Entrena con evidencia y seguimiento</h1>
         </div>
       </div>
-      <div class="row mb-3">
-        <div class="col-7">
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-lg-7">
           <p class="text-bray fs-5">Analiza cinco partidas de Rocket League.</p>
           <p class="text-bray fs-5 mb-4">Conoce tus prioridades y consulta ejercicios compatibles con tu plataforma y disponibilidad.</p>
           
-          <button type="button" class="ms-auto me-2 p-2 accent rounded-4 border-0" data-mdb-ripple-init data-mdb-ripple-color="light"> <a href="login.html" class="text-navy">Crear cuenta</a> </button>
-          <button type="button" class="p-2 fw-bold bodycolor border-accent rounded-4" data-mdb-ripple-init data-mdb-ripple-color="info"> <a href="aboutus.html" class="text-light">Ver como funciona</a></button>
+          <div class="d-flex flex-wrap gap-2">
+            <a id="home-primary" class="btn-rl btn-rl-accent" href="login.html#registro">Crear cuenta</a>
+            <a class="btn-rl btn-rl-outline" href="aboutus.html">Ver cómo funciona</a>
+          </div>
         </div>
-        <div class="col-5">
+        <div class="col-12 col-lg-5">
             <div class="card bg-card border-card denotative pb-4">
               <div class="card-body bg-card rounded-4">
               <h5 class="card-title fw-bold text-light mb-2">Tu ciclo de entrenamiento</h5>
@@ -54,7 +56,7 @@
         </div>
       </div>
       <div class="row mb-4">
-        <div class="col-6">
+        <div class="col-12 col-lg-6">
           <div class="card bg-card border-card denotative pb-4">
               <div class="card-body bg-card">
               <h5 class="card-title fw-bold text-light mb-3">Qué podrás revisar aquí</h5>
@@ -81,7 +83,8 @@
     <script src="../js/supabase-config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/session-client.js"></script>
-    <script src="../js/navigation.js"></script> 
-    <script type="text/javascript"></script>
+    <script src="../js/followup-model.js"></script>
+    <script src="../js/followup-service.js"></script>
+    <script src="../js/navigation.js"></script>
   </body>
 </html>

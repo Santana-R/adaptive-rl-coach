@@ -17,6 +17,16 @@
   const explain = error => error?.message || 'No se pudo completar la operación. Inténtalo de nuevo.';
   const register = $('registro'),
     login = $('inicio-sesion');
+
+  function selectForm() {
+    const registering = location.hash === '#registro';
+    register.hidden = !registering;
+    login.hidden = registering;
+  }
+
+  selectForm();
+  window.addEventListener('hashchange', selectForm);
+
   if (!client)['registro-estado', 'login-estado'].forEach(id => message(id, 'Acceso deshabilitado: configura SUPABASE_CONFIG.url y anonKey.'));
   register?.addEventListener('submit', async event => {
     event.preventDefault();
@@ -69,7 +79,7 @@
   });
   
   async function google() {
-    if (!client) return message('login-estado', 'Configura Supabase para habilitar Google.', true);
+    if (!client) return message(register.hidden ? 'login-estado' : 'registro-estado', 'El acceso con Google no está disponible.', true);
     const {
       error
     } = await client.auth.signInWithOAuth({
@@ -78,7 +88,7 @@
         redirectTo: `${location.origin}${location.pathname.replace(/login\.html$/, 'perfil.html')}`
       }
     });
-    if (error) message('login-estado', explain(error), true);
+    if (error) message(register.hidden ? 'login-estado' : 'registro-estado', explain(error), true);
   }
   $('google-login')?.addEventListener('click', google);
   $('google-registro')?.addEventListener('click', google);

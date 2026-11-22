@@ -58,7 +58,7 @@ Todas las suites utilizan ahora el patrón `tests/*.test.cjs`, incluidas las pru
 
 GitHub Actions ejecuta las suites y los 43 escenarios de A26. El flujo de Docker construye una imagen limpia, comprueba HTTP desde el host, el usuario de ejecución, la exclusión de `.env` y la conservación del volumen al recrear el contenedor. Sus resultados y límites se registran en [estado actual](docs/estado-actual.md).
 
-La demo sintética de Análisis se activa expresamente con `ANALYSIS_DEMO_ENABLED=true npm start`; sus resultados se identifican como sintéticos. Una respuesta correcta de `/health` solo confirma que Express está disponible.
+La demo sintética de Análisis se activa con `ANALYSIS_DEMO_ENABLED=true npm start` y se abre en [Análisis de ejemplo](http://127.0.0.1:3000/sitio/html/analisis.html?demo=1); sus resultados se identifican como sintéticos. Una respuesta correcta de `/health` solo confirma que Express está disponible.
 
 ## Colaboración
 

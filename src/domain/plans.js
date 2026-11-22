@@ -191,7 +191,7 @@ function generatePlan({ analysis, profile, catalog, availability_minutes, goals 
   const { included: goalsSnapshot, excluded: goalsExcluded } = compatibleGoals(goals, profile.mode, supported, reasons);
   const exclusions = [];
   const shootingCandidates = [];
-  for (const exercise of catalog.exercises) {
+  for (const exercise of catalog.exercises.filter(item => !['boost', 'defensive_review'].includes(item.priority_key))) {
     let reason = candidateProblem(exercise, catalog, profile);
     let variant = null;
     if (!reason && exercise.exercise_key === KEYS[2]) {
@@ -203,18 +203,28 @@ function generatePlan({ analysis, profile, catalog, availability_minutes, goals 
   }
   const hasWorkshop = shootingCandidates.some(c => c.exercise.exercise_key === KEYS[2]);
   const expectedShooting = profile.platform === 'steam' && profile.workshop_access === true ? KEYS : KEYS.slice(0, 2);
-  const boostCandidates = nativeBoostCatalog.exercises
-    .filter(e => e.platforms.includes(profile.platform) && e.modes.includes(profile.mode))
-    .map(exercise => ({ exercise: clone(exercise), variant: null }));
-  const reviewCandidates = nativeReviewCatalog.exercises
-    .filter(e => e.platforms.includes(profile.platform) && e.modes.includes(profile.mode))
-    .map(exercise => ({ exercise: clone(exercise), variant: null }));
-  // Las actividades nativas tienen fuente y versión propias; no se hacen pasar por filas SQL.
+  function nativeCandidates(source) {
+    return source.exercises
+      .filter(e => e.platforms.includes(profile.platform) && e.modes.includes(profile.mode))
+      .flatMap(exercise => {
+        if (catalog.source !== 'database' || analysis.source === 'synthetic') return [{ exercise, variant: null }];
+        const stored = catalog.exercises.find(item => item.exercise_key === exercise.exercise_key &&
+          item.content_version === exercise.content_version && item.active === true &&
+          item.technical_review_status === 'verified' && /^[1-9]\d{0,17}$/.test(item.exercise_version_id));
+        if (!stored) return [];
+        return [{ exercise: { ...exercise, exercise_id: stored.exercise_id,
+          exercise_version_id: stored.exercise_version_id }, variant: null }];
+      });
+  }
+
+  const boostCandidates = nativeCandidates(nativeBoostCatalog);
+  const reviewCandidates = nativeCandidates(nativeReviewCatalog);
   const groups = supported.map(priority => {
     const shooting = priority.priority_key === 'shooting';
     const review = priority.priority_key === 'defensive_review';
     const candidates = shooting ? shootingCandidates : review ? reviewCandidates : boostCandidates;
-    const expected = shooting ? expectedShooting : (review ? nativeReviewCatalog : nativeBoostCatalog).exercises.map(e => e.exercise_key);
+    const expected = shooting ? expectedShooting : (review ? nativeReviewCatalog : nativeBoostCatalog).exercises
+      .filter(e => e.platforms.includes(profile.platform) && e.modes.includes(profile.mode)).map(e => e.exercise_key);
     const available = new Set(candidates.map(c => c.exercise.exercise_key));
     const order = shooting ? hasWorkshop ? [KEYS[0], KEYS[2], KEYS[1]] : KEYS.slice(0, 2) : expected;
     return { priority, candidates, expected, order, available };

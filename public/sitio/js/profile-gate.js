@@ -6,7 +6,7 @@ $(function () {
 
   // La demo sintética usa una ruta local separada, sin datos del jugador.
   // El acceso a un bloque propio conserva sesión y perfil obligatorios.
-  if (window.CoachAnalysis && !new URLSearchParams(window.location.search).has('block_id')) {
+  if (window.CoachAnalysis?.demo(new URLSearchParams(window.location.search))) {
     gate.prop('hidden', true);
     content.prop('hidden', false);
     return;

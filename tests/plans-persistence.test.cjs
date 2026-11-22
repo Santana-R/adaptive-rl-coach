@@ -233,7 +233,7 @@ test('A26: códigos de tasa v4 separados de conteos v3, sin alterar la evidencia
 test('A26: prioridad y ejercicio usan el mismo código SQL; snapshot mantiene el lógico', async () => {
   const proposal = (await call('POST', '/api/v1/blocks/11/plan-proposal', { body: { availability_minutes: 20 } })).body.data;
   const logical = 'cobertura-defensiva-revision';
-  // Ficha SQL ficticia SOLO para contrastar el adaptador; las rutinas nativas siguen sin ID.
+  // Ficha SQL ficticia para contrastar el adaptador y el rechazo si falta la versión.
   proposal.exercises[0].rule_id = logical;
   const analysis = { rules_version: 'mvp.rules.v4', priorities: [{ rule_id: logical, rules_version: 'mvp.rules.v4',
     order: 1, priority_key: 'defensive_review', evidence: { matched_replays: 3 } }] };
