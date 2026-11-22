@@ -19,6 +19,8 @@ $(function () {
   let signingOut = false;
   let authRevision = 0;
   let adminRevision = 0;
+  let homeUser;
+  const homeAction = $('#home-primary');
 
   // Crear un enlace y marcar la página actual.
   function link(title, page) {
@@ -97,7 +99,7 @@ $(function () {
     .attr('aria-label', 'Navegación principal');
 
   const playerLinks = $('<div>')
-    .addClass('d-none');
+    .addClass('d-none pt-2 mt-2 border-top border-secondary');
 
   const footer = $('<div>')
     .addClass('sidebar-footer pt-3');
@@ -117,12 +119,12 @@ $(function () {
 
   // Opciones que requieren sesión.
   const playerPages = [
-    ['Perfil', 'perfil.html'],
     ['Replays', 'replays.html'],
     ['Análisis', 'analisis.html'],
-    ['Objetivos', 'objetivos.html'],
     ['Plan', 'plan.html'],
-    ['Sesiones', 'sesiones.html']
+    ['Sesiones', 'sesiones.html'],
+    ['Objetivos', 'objetivos.html'],
+    ['Perfil', 'perfil.html']
   ];
 
   playerPages.forEach(function ([title, page]) {
@@ -192,9 +194,28 @@ $(function () {
 
   $('body').addClass('appbody');
 
+  async function updateHome(session) {
+    const user = session?.user?.id ?? null;
+    if (!homeAction.length || homeUser === user) return;
+    homeUser = user;
+    if (!user) {
+      homeAction.attr('href', 'login.html#registro').text('Crear cuenta');
+      return;
+    }
+    homeAction.attr('href', 'replays.html').text('Ir a Replays');
+    try {
+      const [block] = window.CoachFollowupModel.readyBlocks(await window.CoachFollowupService.blocks());
+      if (homeUser === user && block) homeAction
+        .attr('href', 'analisis.html?' + new URLSearchParams({ block_id: block.block_id })).text('Ver mi último bloque');
+    } catch {
+      // El acceso a Replays también permite reintentar la consulta.
+    }
+  }
+
   // Actualizar las opciones sin recrear la barra.
   function updateSession(session) {
     signedIn = Boolean(session);
+    void updateHome(session);
 
     const revision = ++adminRevision;
 

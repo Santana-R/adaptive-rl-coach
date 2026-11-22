@@ -2,6 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
+const followupModel = require('../public/sitio/js/followup-model');
 
 const flush = () => new Promise(resolve => setImmediate(resolve));
 
@@ -9,22 +10,23 @@ function controller(search) {
   const elements = new Map(), events = {}, calls = [];
   const element = id => {
     if (!elements.has(id)) elements.set(id, { value: id === 'metric-select' ? 'shooting_pct' : 'initial',
-      setAttribute() {}, removeAttribute() {}, addEventListener() {}, replaceChildren() {} });
+      setAttribute() {}, removeAttribute() {}, addEventListener() {}, replaceChildren() {}, add() {} });
     return elements.get(id);
   };
-  const root = { location: { search }, history: {},
+  const root = { location: { search }, history: {}, CoachFollowupModel: followupModel,
+    CoachFollowupService: { async blocks() { return []; } },
     fetch: async (url, options) => {
       calls.push({ url, ...options });
       return { ok: false, json: async () => ({ error: { message: 'Consulta pendiente.' } }) };
     },
   };
   const document = { getElementById: element, addEventListener: (name, callback) => { events[name] = callback; } };
-  vm.runInNewContext(fs.readFileSync('public/js/analysis.js', 'utf8'), { window: root, document, URLSearchParams, URL, Intl });
+  vm.runInNewContext(fs.readFileSync('public/js/analysis.js', 'utf8'), { window: root, document, Option: class {}, URLSearchParams, URL, Intl });
   return { root, events, calls, element };
 }
 
 test('Demo de Análisis consulta solo su ruta sintética sin pedir sesión', async () => {
-  const c = controller('');
+  const c = controller('?demo=1');
   c.root.CoachProfileApi = { getClient() { throw new Error('No debe consultar identidad para la demo'); } };
   c.events.DOMContentLoaded(); await flush();
   assert.equal(c.calls.length, 1);
@@ -61,7 +63,7 @@ async function gate({ search = '?block_id=12', valid = true, status = null } = {
     empty() { return this; }, append() { return this; }, addClass() { return this; },
     text() { return this; }, attr() { return this; }, on() { return this; } });
   const root = { location: { search, replace: url => order.push(url) },
-    CoachAnalysis: { load: async () => order.push('analysis') },
+    CoachAnalysis: { demo: controller(search).root.CoachAnalysis.demo, load: async () => order.push('analysis') },
     CoachProfileApi: { load: async () => {
       order.push('profile'); if (status) throw { status }; return {};
     } },

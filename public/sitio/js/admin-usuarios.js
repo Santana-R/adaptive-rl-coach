@@ -49,7 +49,7 @@
     if (!button) return;
     const user = users.find(u => u.id === button.dataset.user);
     const suspend = button.dataset.next === 'suspended';
-    if (!confirmStep(button, suspend ? '¿Confirmar suspensión?' : '¿Confirmar activación?')) return;
+    if (!confirmStep(button, suspend ? '¿Suspender el acceso? Su historial se conserva.' : '¿Reactivar el acceso a la cuenta?')) return;
     button.disabled = true;
     try {
       const { data } = await request('PATCH', `/api/v1/admin/users/${encodeURIComponent(user.id)}/status`, { status: button.dataset.next });

@@ -128,6 +128,7 @@ $(function () {
 
     editing = goal || null;
     $('#goal-form')[0].reset();
+    $('#goal-edit-impact').prop('hidden', !goal);
     $('#editor-title').text(goal ? 'Editar objetivo · versión ' + goal.version : 'Nuevo objetivo');
     $('#goal-name').val(goal?.name || '');
     $('#goal-mode').val(goal?.mode || '2v2');
@@ -199,10 +200,11 @@ $(function () {
       $(goal.type === 'training' ? '#training-list' : '#performance-list').append(card);
     });
 
-    $('#goal-count').text(visible.length + ' de ' + goals.length + ' objetivos');
+    $('#goals-filters').prop('hidden', !ready || !goals.length);
+    $('#goal-count').text(goals.length ? visible.length + ' de ' + goals.length + ' objetivos' : '');
     $('#goals-empty').prop('hidden', visible.length !== 0).text(goals.length
       ? 'Ningún objetivo coincide con los filtros.'
-      : 'Todavía no tienes objetivos. Crea uno para empezar.');
+      : 'Todavía no tienes objetivos. Puedes proponerte llegar al 35 % de eficiencia de tiro o practicar 60 minutos esta semana.');
     $('#performance-section').prop('hidden', !visible.some(function (goal) { return goal.type !== 'training'; }));
     $('#training-section').prop('hidden', !visible.some(function (goal) { return goal.type === 'training'; }));
     $('#goals-results').prop('hidden', !ready);

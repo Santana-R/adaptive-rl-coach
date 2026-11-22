@@ -67,3 +67,16 @@
 .followup-panel [hidden] { 
     display: none !important; 
 }
+
+.block-history-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem 1.25rem;
+    padding-block: .75rem;
+}
+
+.block-history-row .btn-rl {
+    padding: .4rem .75rem;
+}

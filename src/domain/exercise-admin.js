@@ -8,7 +8,7 @@ const { ApiError } = require('../middleware/auth');
 
 const FIELDS = ['title', 'priority_key', 'resource_type', 'resource', 'purpose', 'instructions',
   'success_criterion', 'difficulty_base', 'reference_duration_minutes', 'platforms'];
-const RESOURCE_TYPES = ['custom_training', 'steam_workshop', 'external_guide'];
+const RESOURCE_TYPES = ['custom_training', 'steam_workshop', 'external_guide', 'free_play', 'native_replay_review'];
 const PLATFORMS = ['epic', 'steam'];
 const PRIORITY_KEYS = ['shooting', 'boost', 'defensive_review', 'movement'];
 const CODE = /^[A-F0-9]{4}(?:-[A-F0-9]{4}){3}$/;

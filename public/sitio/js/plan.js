@@ -174,10 +174,8 @@ $(function () {
     $('#no-plan').prop('hidden', true);
     $('#plan-output').prop('hidden', false);
     $('#plan-badge').text((display.persisted ? 'Guardado · ' : 'Sin guardar · ') + (coverageLabels[plan.coverage] || plan.coverage));
-    $('#plan-identity').text('Bloque ' + plan.block_id + (display.persisted
-      ? ' · Plan ' + plan.plan_id + ' · Versión ' + plan.version + ' · ID de versión ' + plan.plan_version_id
-      : ' · Propuesta calculada, sin ID de versión guardada.') +
-      ' · ' + (snapshot.platform || 'Plataforma no disponible') + ' · ' + (snapshot.mode || 'Modalidad no disponible'));
+    $('#plan-identity').text('Bloque ' + plan.block_id + ' · ' + (display.persisted ? 'Versión ' + plan.version : 'Propuesta') +
+      ' · ' + (snapshot.mode || 'Modalidad no disponible'));
     const source = plan.metrics_source || meta.source ||
       plan.diagnosis_snapshot?.priorities?.[0]?.evidence?.source ||
       (plan.limitations?.includes('synthetic_fixture') ? 'synthetic' : 'No disponible');
@@ -201,11 +199,13 @@ $(function () {
       (snapshot.rank || 'Sin declarar') + ' · Workshop declarado: ' + (snapshot.workshop_access ? 'Sí' : 'No') + '.'
       : 'Propuesta calculada con las preferencias indicadas. Todavía no forma parte del historial.');
     $('#save-plan').prop('hidden', display.persisted);
-    $('#plan-save-note').text(display.persisted
-      ? 'Para otra versión, cambia las preferencias, genera otra propuesta y guárdala.'
-      : model.canSave(plan)
-        ? 'Al guardar, el servidor vuelve a generar con estas preferencias y muestra exactamente lo guardado. Los recursos pueden haber cambiado desde la consulta.'
-        : 'Esta propuesta no se puede guardar: necesita minutos positivos y versiones de ejercicios persistibles. El motivo de la rutina vacía se conserva en pantalla.');
+    const missingVersions = (plan.exercises || []).filter(exercise => !model.validId(exercise.exercise_version_id));
+    const saveNote = display.persisted ? 'Puedes ajustar la rutina para preparar otra versión.'
+      : plan.availability_minutes < 1 ? 'Indica al menos un minuto para guardar el plan.'
+      : missingVersions.length ? 'Falta una versión de catálogo para: ' +
+        missingVersions.map(exercise => exercise.exercise_snapshot?.title || exercise.exercise_key).join(', ') + '.'
+      : 'El plan aparecerá en el historial de este bloque después de guardarlo.';
+    $('#plan-save-note').text(saveNote);
 
     const sessions = display.persisted ? model.sessionsUrl(plan) : null;
     $('#plan-sessions').prop('hidden', !sessions);
@@ -285,6 +285,7 @@ $(function () {
       $('#versions-note').text('Se recuperó esta versión, pero no el historial completo. Usa Actualizar datos para reintentar.');
     }
     renderOutput();
+    $('#plan-adjust').prop('open', false);
     syncUrl();
   }
 
@@ -293,6 +294,7 @@ $(function () {
     lineageId = null;
     versions = [];
     $('#plan-output').prop('hidden', true);
+    $('#plan-adjust').prop('open', true);
     $('#no-plan').prop('hidden', false).text('No hay un plan consultado. Genera una propuesta para este bloque.');
     renderVersions();
   }
@@ -421,6 +423,8 @@ $(function () {
       renderVersions();
       renderOutput();
       syncUrl();
+      $('#plan-adjust').prop('open', false);
+      $('#output-title').trigger('focus');
       message('Propuesta calculada. Todavía no está guardada.');
     } catch (error) { problem(error); }
     finally { setBusy(false); }

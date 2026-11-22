@@ -9,7 +9,8 @@
   const PRIORITY = { shooting: 'Tiro', boost: 'Boost', defensive_review: 'Defensa', movement: 'Movimiento' };
   const REVIEW = { verified: 'Revisado', pending: 'Revisión pendiente', not_in_reviewed_content: 'Sin revisión',
     content_mismatch: 'Cambió desde la revisión', duplicate: 'Duplicado' };
-  const RESOURCE_LABEL = { custom_training: 'Código del paquete (XXXX-XXXX-XXXX-XXXX)', steam_workshop: 'Enlace https del mapa en Steam Workshop', external_guide: 'Enlace https de la guía' };
+  const RESOURCE_LABEL = { custom_training: 'Código del paquete (XXXX-XXXX-XXXX-XXXX)', steam_workshop: 'Enlace https del mapa en Steam Workshop', external_guide: 'Enlace https de la guía',
+    free_play: 'Enlace https de apoyo para juego libre', native_replay_review: 'Enlace https de la guía de revisión' };
   let exercises = [], editing = null;
 
   const platformText = list => (list ?? []).map(p => p === 'epic' ? 'Epic' : 'Steam').join(' / ') || '—';
@@ -35,7 +36,7 @@
         <span data-label="Prioridad">${escape(PRIORITY[e.priority_key] ?? e.priority_key)}</span>
         <span data-label="Plataforma">${escape(platformText(e.platforms))}</span>
         <span data-label="Duración">${escape(e.reference_duration_minutes)} min</span>
-        <span data-label="Estado"><span class="${e.active ? '' : 'text-gold'}">${e.active ? 'Activo' : 'Inactivo'}</span> · <small class="text-bray">${escape(REVIEW[e.technical_review_status] ?? e.technical_review_status)}</small></span>
+        <span data-label="Estado"><span class="${e.active ? '' : 'text-gold'}">${e.active ? 'Activo' : 'Inactivo'}</span> · <small class="text-bray">${escape(e.active && verified ? 'Disponible para planes' : REVIEW[e.technical_review_status] ?? e.technical_review_status)}</small></span>
         <span data-label="Acciones" class="link-actions d-flex flex-wrap gap-2">
           <button type="button" class="btn btn-link link-admin p-0" data-action="edit" data-id="${escape(e.exercise_id)}">Ver / editar</button>
           ${toggle}

@@ -23,12 +23,22 @@
     status = $('<p>').attr({ role: 'status', 'aria-live': 'polite' });
     list = $('<div>');
     detail = $('<section>').attr({ tabindex: '-1', 'aria-label': 'Detalle del bloque' }).prop('hidden', true);
-    panel.empty().append($('<h2>').addClass('h4').text('Historial de bloques'),
-      $('<p>').text('Cinco partidas por bloque. Los estados y permisos de reintento proceden del servidor.'),
-      $('<button>').attr('type', 'button').addClass('btn-rl btn-rl-outline mb-3').text('Actualizar historial').on('click', () => refresh()), status, list, detail);
+    const heading = $('<div>').addClass('d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2').append(
+      $('<h2>').addClass('h4 mb-0').text('Historial de bloques'),
+      $('<button>').attr('type', 'button').addClass('btn-rl btn-rl-outline').text('Actualizar historial').on('click', () => refresh())
+    );
+    panel.empty().append(heading, status, list, detail);
   }
 
   const reasonText = code => reasons[code] || code;
+
+  function readyActions(id) {
+    const query = '?' + new URLSearchParams({ block_id: id });
+    return [
+      $('<a>').addClass('btn-rl btn-rl-accent').attr('href', 'analisis.html' + query).text('Ver análisis'),
+      $('<a>').addClass('btn-rl btn-rl-outline').attr('href', 'plan.html' + query).text('Ver plan')
+    ];
+  }
   async function show(id, focus = true) {
     selected = id;
     const ticket = ++detailRevision;
@@ -37,7 +47,7 @@
       const block = await api.block(id);
       if (ticket !== detailRevision) return;
       detail.empty().append($('<h3>').addClass('h5 mt-3').text('Bloque ' + block.block_id),
-        $('<p>').text((labels[block.status] || 'Estado desconocido') + ' · ' + model.display(block.mode) + ' · ' + model.display(block.match_type)),
+        $('<p>').text((labels[block.status] || 'Estado desconocido') + ' · ' + model.display(block.mode) + ' · ' + model.matchType(block.match_type)),
         $('<p>').text('Creado: ' + model.localDate(block.created_at) + ' · Completado: ' + model.localDate(block.completed_at)));
       const replays = $('<ul>');
       for (const replay of block.replays || []) {
@@ -47,7 +57,7 @@
       }
       detail.append(replays);
       if (!(block.replays || []).length) detail.append($('<p>').text('El servicio no devolvió el detalle de partidas.'));
-      if (block.status === 'ready') detail.append($('<a>').addClass('btn-rl btn-rl-outline').attr('href', 'analisis.html?block_id=' + encodeURIComponent(id)).text('Ver análisis'));
+      if (block.status === 'ready') detail.append($('<div>').addClass('d-flex flex-wrap gap-2').append(...readyActions(id)));
       if (focus) detail.trigger('focus');
     } catch (error) { if (ticket === detailRevision) detail.empty().append($('<p>').text(error.message)); }
   }
@@ -80,21 +90,23 @@
       const blocks = await api.blocks();
       if (ticket !== revision) return;
       if (!Array.isArray(blocks)) throw new Error('Respuesta de historial incompatible.');
-      status.text(blocks.length ? blocks.length + ' bloques consultados.' : 'Todavía no hay bloques cargados.');
+      status.text(blocks.length ? '' : 'Todavía no hay bloques cargados.');
       for (const block of blocks) {
-        const card = $('<article>').addClass('followup-item');
-        card.append($('<h3>').addClass('h5').text('Bloque ' + block.block_id + ' · ' + (labels[block.status] || 'Estado desconocido')),
-          $('<p>').text(model.display(block.mode) + ' · ' + model.display(block.match_type) + ' · Partidas válidas: ' + model.display(block.ready_replays) + ' de ' + model.display(block.expected_replays)),
-          $('<p>').text('Creado: ' + model.localDate(block.created_at)));
-        for (const code of block.reason_codes || []) card.append($('<p>').text(reasonText(code)));
-        const actions = $('<div>').addClass('d-flex flex-wrap gap-2');
+        const card = $('<article>').addClass('followup-item block-history-row');
+        const facts = $('<div>').append(
+          $('<h3>').addClass('h6 mb-1').text('Bloque ' + block.block_id + ' · ' + (labels[block.status] || 'Estado desconocido')),
+          $('<p>').addClass('followup-muted mb-0').text(model.display(block.mode) + ' ' + model.matchType(block.match_type) + ' · ' +
+            model.display(block.ready_replays) + ' de ' + model.display(block.expected_replays) + ' válidas · ' + model.localDate(block.created_at))
+        );
+        for (const code of block.reason_codes || []) facts.append($('<p>').addClass('mb-0').text(reasonText(code)));
+        const actions = $('<div>').addClass('d-flex flex-wrap gap-2 align-items-center');
+        if (block.status === 'ready') actions.append(...readyActions(block.block_id));
         actions.append($('<button>').attr('type', 'button').addClass('btn-rl btn-rl-outline').text('Ver detalle').on('click', () => show(block.block_id)));
         if (block.retry_allowed === true) {
           const button = $('<button>').attr('type', 'button').addClass('btn-rl btn-rl-outline').text('Reintentar procesamiento');
           button.on('click', () => retry(block, button)); actions.append(button);
         }
-        if (block.status === 'ready') actions.append($('<a>').addClass('btn-rl btn-rl-outline').attr('href', 'analisis.html?block_id=' + encodeURIComponent(block.block_id)).text('Ver análisis'));
-        list.append(card.append(actions));
+        list.append(card.append(facts, actions));
       }
       if (selected && blocks.some(block => block.block_id === selected)) await show(selected, false);
       if (blocks.some(block => ['pending', 'processing'].includes(block.status) && !block.retry_allowed) && !document.hidden) {

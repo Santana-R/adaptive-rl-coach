@@ -71,7 +71,7 @@
       class="border-0 p-0 m-0"
       disabled
     >
-      <legend class="visually-hidden">Datos del perfil</legend>
+      <legend class="h5 text-light">Cuenta de juego</legend>
 
       <div class="row g-3 mb-3">
         <div class="col-12 col-md-6">
@@ -129,6 +129,9 @@
             aria-describedby="identidad-ayuda"
           >
 
+          <p id="identidad-ayuda" class="text-bray small mt-1 mb-0">
+            Usa el ID de Steam o Epic que aparece en tus replays. Es distinto del correo que usas para entrar.
+          </p>
           <p
             id="error-player_id"
             class="text-danger small mt-1 mb-0"
@@ -159,6 +162,9 @@
           ></p>
         </div>
 
+      </div>
+      <h2 class="h5 text-light mt-4">Disponibilidad</h2>
+      <div class="row g-3 mb-3">
         <div class="col-12 col-md-6">
           <label for="minutos" class="form-label text-light">
             Minutos por sesión
@@ -225,12 +231,6 @@
         </div>
       </div>
 
-      <p id="identidad-ayuda" class="text-bray">
-        Usa el identificador de la cuenta que aparece en tus replays,
-        no el correo de acceso. El cotejo con esa cuenta se realiza
-        durante la carga de replays.
-      </p>
-
       <div class="d-flex flex-wrap gap-3 mb-3">
         <button
           type="submit"
@@ -256,15 +256,10 @@
       Definir objetivo
     </a>
 
-    <a href="analisis.html" class="btn-rl btn-rl-outline">
-      Ir a Análisis
+    <a href="replays.html" class="btn-rl btn-rl-outline">
+      Ir a Replays
     </a>
   </div>
-
-  <p class="text-bray mt-3">
-    Este formulario guarda los datos de Perfil.
-    El rango declarado y su historial se gestionan por separado.
-  </p>
 
   <!-- A31 · Rango declarado: se registra aparte del perfil y no se edita; corregir = registrar otro. -->
   <section id="rango" class="mt-4" aria-labelledby="rango-titulo">
@@ -323,7 +318,9 @@
       </fieldset>
     </form>
 
-    <div class="table-responsive">
+    <details>
+      <summary class="text-accent mb-2">Ver historial de rango</summary>
+      <div class="table-responsive">
       <table class="table table-dark table-sm align-middle mb-1">
         <caption class="text-bray">Historial, más reciente primero. Fuente: declarado por el jugador.</caption>
         <thead>
@@ -331,7 +328,8 @@
         </thead>
         <tbody id="rango-historial"></tbody>
       </table>
-    </div>
+      </div>
+    </details>
   </section>
 </main>
     </div>

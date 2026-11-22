@@ -45,12 +45,13 @@
         <p id="goals-status" role="status" aria-live="polite" tabindex="-1">Consultando objetivos…</p>
         <a id="goals-login" href="login.html" class="btn-rl btn-rl-accent mb-3" hidden>Iniciar sesión</a>
         <div class="d-flex flex-wrap gap-3 mb-3">
-          <button id="new-goal" type="button" class="btn-rl btn-rl-accent" disabled>Nuevo objetivo</button>
+          <button id="new-goal" type="button" class="btn-rl btn-rl-accent" disabled>Crear objetivo</button>
           <button id="reload-goals" type="button" class="btn-rl btn-rl-outline">Actualizar lista</button>
         </div>
 
         <section id="goal-editor" class="goals-card" aria-labelledby="editor-title" hidden>
           <h2 id="editor-title" class="h4">Nuevo objetivo</h2>
+          <p id="goal-edit-impact" class="text-bray" hidden>Guardar estos cambios crea otra versión. Los planes anteriores conservan la meta que usaron.</p>
           <form id="goal-form" novalidate>
             <fieldset id="goal-fields" class="border-0 p-0 m-0">
               <legend class="visually-hidden">Datos de la meta</legend>
@@ -102,7 +103,7 @@
           </form>
         </section>
 
-        <section class="row g-3 mb-3" aria-label="Filtros de objetivos">
+        <section id="goals-filters" class="row g-3 mb-3" aria-label="Filtros de objetivos" hidden>
           <div class="col-12 col-md-6 col-lg-3">
             <label for="goal-search" class="form-label">Buscar por nombre</label>
             <input id="goal-search" class="form-control" type="search" placeholder="Nombre del objetivo">
@@ -140,12 +141,6 @@
           <div id="detail-body"></div>
           <button id="close-detail" type="button" class="btn-rl btn-rl-outline">Cerrar detalle</button>
         </section>
-        <aside class="goals-card mt-3">
-          <h2 class="h5">Qué cambia al editar o retirar una meta</h2>
-          <p>Editar crea una versión nueva sin reescribir planes anteriores. Las metas no cambian tus métricas ni el diagnóstico. Las metas de entrenamiento no se envían como metas de rendimiento al generador de planes.</p>
-          <p>Al retirar una meta, el servidor la archiva si está vinculada a planes o evaluaciones. Si no tiene vínculos, elimina la meta y su historial. Siempre se pide confirmación y se informa el efecto real.</p>
-          <p class="mb-0">El avance y cumplimiento requieren evaluaciones de bloques o sesiones (A21/A22). Si no hay evidencia conectada, se muestra como no disponible, nunca como cero.</p>
-        </aside>
       <section data-coach-report aria-label="Seguimiento por periodo"></section>
       </main>
     </div>

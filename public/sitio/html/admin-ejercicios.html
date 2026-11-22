@@ -36,7 +36,10 @@
         </div>
       </aside>
       <main class="app-main">
-        <h1 class="fw-bold text-light mb-1">Catálogo de ejercicios</h1>
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+          <h1 class="fw-bold text-light mb-0">Catálogo de ejercicios</h1>
+          <button type="button" id="nuevo-ejercicio" class="btn-rl btn-rl-accent">Nuevo ejercicio</button>
+        </div>
         <p class="text-bray mb-3">El motor selecciona actividades activas y revisadas; el catálogo debe cargarse antes de generar planes.</p>
         <form class="row align-items-end mb-2" id="ejercicios-filtros" role="search">
           <div class="col-12 col-md-4 mb-2">
@@ -71,7 +74,6 @@
           </div>
           <div class="col-6 col-md-2 mb-2"><button type="reset" class="btn-rl btn-rl-outline w-100">Mostrar todos</button></div>
         </form>
-        <div class="mb-3"><button type="button" id="nuevo-ejercicio" class="btn-rl btn-rl-accent">Nuevo ejercicio</button></div>
         <p id="admin-estado" class="text-bray mb-3" role="status" aria-live="polite">Cargando catálogo…</p>
 
         <div class="mb-3 admin-table">
@@ -104,6 +106,8 @@
                     <option value="custom_training">Custom Training</option>
                     <option value="steam_workshop">Mapa de Workshop</option>
                     <option value="external_guide">Guía externa</option>
+                    <option value="free_play">Juego libre</option>
+                    <option value="native_replay_review">Revisión manual de replays</option>
                   </select>
                 </div>
                 <div class="col-12 mb-3">

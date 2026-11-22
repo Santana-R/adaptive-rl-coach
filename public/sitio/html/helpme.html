@@ -25,59 +25,29 @@
     <!-- Start your project here-->
     <header id="site-navigation"></header>
     <div class="container">
-      <div class="row mb-4">
-        <div class="col-12">
-          <h1 class="fw-bold text-light mb-4">Ayuda y contacto</h1>
-        </div>
-      </div>
-      <div class="row mb-4">
-        <div class="col-6">
-            <div class="card bg-card border-card denotative pb-4 mb-4">
-              <div class="card-body">
-              <h5 class="card-title fw-bold text-light mb-3">Antes de cargar tus partidas</h5>
-              <ul class="card-text text-bray fs-6 list-unstyled">
-                <li>Guarda y localiza tus replays en la PC.</li>
-                <li>Selecciona 5 partidas distintas.</li>
-                <li>Mantén el mismo jugador, modalidad y tipo de partida.</li>
-                <li>Consulta la guía para encontrar los archivos.</li>
-            </ul>
-              </div>
-          </div>  
-          <div class="card bg-card border-card denotative pb-4 mb-4">
-              <div class="card-body">
-              <h5 class="card-title fw-bold text-light mb-3">Preguntas frecuentes</h5>
-              <ul class="card-text text-bray fs-6 list-unstyled">
-                <li>Usa archivos .replay de PC y revisa el tamaño permitido.</li>
-                <li>Los archivos son privados durante el procesamiento.</li>
-                <li>Si la carga falla, revisa el estado y vuelve a intentarlo.</li>
-              </ul>
-              </div>
-          </div> 
-        </div>
-        <div class="col-6">
-            <form>
-                <h4 class="text-light fw-bold mb-3">Contacto y reporte</h4>
-
-                 <div data-mdb-input-init class="form-outline">
-                <input type="text" id="Nombre" class="form-control mb-4" />
-                <label class="form-label" for="Nombre">Nombre</label>
-                 </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                <input type="email" id="Correo" class="form-control" />
-                <label class="form-label" for="Correo">Correo</label>
-                </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                <textarea class="form-control" id="queja" rows="4"></textarea>
-                <label class="form-label" for="queja">Tu queja</label>
-                </div>
-                <p class="text-bray fw-light">No compartas tu contraseña ni tokens. El envío se habilitará con el módulo de contacto.</p>
-
-                <button type="button" class="mx-auto d-block w-75 p-2 accent rounded-4 border-0 fw-bold" data-mdb-ripple-init data-mdb-ripple-color="light"> Enviar mensaje </button>
-            </form>
-        </div>
-      </div>
+      <h1 class="fw-bold text-light mb-3">Ayuda</h1>
+      <section class="card bg-card border-card p-3 mb-3">
+        <h2 class="h5 text-light">Encuentra tus replays en PC</h2>
+        <ol class="text-bray mb-0">
+          <li>Guarda la repetición al terminar la partida en Rocket League.</li>
+          <li>En Windows, abre el Explorador y busca <code>My Games/Rocket League/TAGame/Demos</code> dentro de Documentos.</li>
+          <li>En Replays, selecciona cinco archivos <code>.replay</code> distintos del mismo jugador, modalidad y tipo de partida.</li>
+        </ol>
+      </section>
+      <section class="card bg-card border-card p-3 mb-3">
+        <h2 class="h5 text-light">Si un bloque tarda o falla</h2>
+        <ul class="text-bray mb-3">
+          <li><strong>Procesando.</strong> Espera y consulta el historial antes de volver a cargar.</li>
+          <li><strong>Requiere corrección.</strong> Abre el detalle y revisa qué archivo, cuenta o modalidad causó el problema.</li>
+          <li><strong>Fallo recuperable.</strong> Usa Reintentar procesamiento si aparece en el bloque.</li>
+        </ul>
+        <a href="replays.html" class="text-accent align-self-start">Ir a Replays</a>
+      </section>
+      <section id="acceso" class="card bg-card border-card p-3">
+        <h2 class="h5 text-light">Ayuda para iniciar sesión</h2>
+        <p class="text-bray mb-2">Si creaste tu cuenta con Google, usa Iniciar con Google. La recuperación de contraseña por correo está pendiente en esta versión.</p>
+        <a href="login.html#inicio-sesion" class="text-accent align-self-start">Volver al inicio de sesión</a>
+      </section>
     </div>
     <!-- End your project here-->
 

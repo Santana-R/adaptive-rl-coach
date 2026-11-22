@@ -10,6 +10,7 @@ $(function () {
   const params = new URLSearchParams(window.location.search);
 
   function controls() {
+    $('#session-editor').prop('hidden', !plan?.exercises.length);
     fields.prop('disabled', !plan || !plan.exercises.length || !available || busy || uncertain);
     $('#session-minutes, #session-exercise').prop('disabled', Boolean(editing && !editing.plan_exercise_id));
     $('#sessions-refresh').prop('disabled', busy);
@@ -34,7 +35,7 @@ $(function () {
   async function context() {
     const box = $('#sessions-plan-context');
     if (!params.has('plan_id')) {
-      box.text('Abre una versión guardada desde Plan para registrar o corregir una sesión. Puedes consultar el historial sin seleccionar una versión.');
+      box.prop('hidden', true);
       return;
     }
     box.text('Comprobando la versión guardada del plan…');
@@ -45,8 +46,7 @@ $(function () {
       plan = response.data;
       $('#session-exercise').empty().append($('<option>').val('').text('Selecciona un ejercicio'));
       for (const item of plan.exercises) $('#session-exercise').append($('<option>').val(item.plan_exercise_id).text(item.exercise_snapshot.title + ' · ' + item.assigned_minutes + ' min propuestos'));
-      box.empty().append($('<h2>').addClass('h5').text('Plan ' + plan.plan_id + ' · Versión ' + plan.version),
-        $('<p>').text('ID de versión ' + plan.plan_version_id + ' · Bloque ' + plan.block_id + '. Registrar práctica no modifica este plan histórico.'),
+      box.empty().append($('<h2>').addClass('h5').text('Bloque ' + plan.block_id + ' · Plan versión ' + plan.version),
         $('<a>').addClass('btn-rl btn-rl-outline').attr('href', 'plan.html?' + new URLSearchParams({ plan_id: plan.plan_id, version: String(plan.version), block_id: plan.block_id })).text('Consultar esta versión del plan'));
       if (!plan.exercises.length) box.append($('<p>').text('Esta versión no contiene ejercicios: puedes consultarla, pero no registrar una sesión sobre ella.'));
       reset();
@@ -68,7 +68,11 @@ $(function () {
       shown = rows.filter(row => { const day = localDay(row.performed_at); return day && (!from || day >= from) && (!to || day <= to); });
     }
     if (from && to && from > to) { list.append($('<p>').text('La fecha inicial debe ser anterior o igual a la final.')); return; }
-    if (!shown.length) { list.append($('<p>').text('No hay sesiones registradas para esta selección.')); return; }
+    if (!shown.length) {
+      list.append($('<p>').text(rows.length ? 'No hay sesiones en estas fechas.' : 'Todavía no hay sesiones registradas.'));
+      if (!plan && !rows.length) list.append($('<a>').attr('href', 'plan.html').addClass('btn-rl btn-rl-accent').text('Ir a Plan'));
+      return;
+    }
     for (const row of shown) {
       const card = $('<article>').addClass('followup-item').attr('data-session-id', row.session_id);
       card.append($('<h3>').addClass('h5').text(model.localDate(row.performed_at)),
@@ -114,7 +118,7 @@ $(function () {
         throw new Error('El listado de sesiones no tiene el formato esperado.');
       }
       rows = response; available = true; uncertain = false;
-      message('Historial consultado: ' + rows.length + ' sesiones. Los minutos son práctica declarada, no rendimiento de partidas.');
+      message(rows.length ? 'Sesiones registradas: ' + rows.length : '');
       render();
     } catch (error) { if (ticket === revision) message(error.message + ' Puedes usar Actualizar sesiones para volver a consultar.', true); }
     finally { if (ticket === revision) controls(); }

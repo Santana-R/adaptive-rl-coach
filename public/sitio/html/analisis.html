@@ -33,7 +33,12 @@
         </section>
         <div id="analysis-content" hidden>
         <h1 class="fw-bold text-light mb-1">Análisis del jugador</h1>
-        <p class="text-bray mb-1">Métricas, comparación y prioridades del bloque seleccionado.</p>
+        <p id="analysis-block-context" class="text-bray mb-3"></p>
+        <div id="analysis-block-picker" class="mb-3" hidden>
+          <label for="analysis-block" class="form-label">Bloque de partidas</label>
+          <select id="analysis-block" class="form-select w-auto"></select>
+        </div>
+        <p id="analysis-empty" class="text-bray" hidden>Todavía no hay bloques listos. <a class="text-accent" href="replays.html">Ir a Replays</a></p>
         <div class="d-flex align-items-center gap-3 mb-4">
           <label for="scenario-select" id="scenario-label" class="text-accent">Datos de prueba</label>
           <select id="scenario-select" class="form-select bg-card text-light scenario-select" style="max-width: 220px">
@@ -54,7 +59,12 @@
           </select>
         </div>
         <p id="analysis-status" class="text-bray" role="status" aria-live="polite"></p>
-        <p id="analysis-error" class="app-note" role="alert" hidden></p>
+        <div id="analysis-error-panel" class="followup-panel" hidden>
+          <p id="analysis-error" class="followup-error" role="alert" hidden></p>
+          <button id="analysis-retry" type="button" class="btn-rl btn-rl-outline">Reintentar</button>
+          <a class="text-accent ms-2" href="replays.html">Volver a Replays</a>
+        </div>
+        <div id="analysis-results" hidden>
         <div class="row g-3 mb-4" aria-label="Resumen del bloque">
           <div class="col-md-3"><div class="stat-card"><div class="stat-label">Eficiencia de tiro</div><div class="stat-value" id="shooting-value"></div><div class="stat-sub" id="shooting-foot"></div></div></div>
           <div class="col-md-3"><div class="stat-card"><div class="stat-label">Goles</div><div class="stat-value" id="goals-value"></div><div class="stat-sub" id="goals-foot"></div></div></div>
@@ -63,12 +73,12 @@
         </div>
         <p id="comparison-message" class="text-bray"></p>
         <div class="row g-4">
-          <section class="col-lg-7">
+          <section class="col-lg-7 order-2 order-lg-1">
             <div class="card bg-card border-card p-3">
               <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start gap-2">
                 <h2 class="h5 text-light">Rendimiento del bloque</h2>
                 <select id="metric-select" aria-label="Métrica de la gráfica" class="form-select bg-card text-light" style="max-width: 180px">
-                  <option value="shooting_pct text-accent">Eficiencia de tiro</option>
+                  <option value="shooting_pct">Eficiencia de tiro</option>
                   <option value="goals">Goles</option>
                   <option value="shots">Tiros totales</option>
                   <option value="play_duration_s">Duración de partidas</option>
@@ -88,7 +98,7 @@
               </div>
             </div>
           </section>
-          <section class="col-lg-5">
+          <section class="col-lg-5 order-1 order-lg-2">
             <div class="card bg-card border-card p-3">
               <div class="d-flex justify-content-between">
                 <h2 class="h5 text-light">En qué enfocarte</h2>
@@ -101,6 +111,7 @@
           </section>
         </div>
         <p id="analysis-source" class="app-note">La procedencia se mostrará al cargar el análisis.</p>
+        </div>
         </div>
       <section data-coach-report aria-label="Seguimiento por periodo"></section>
       </main>
@@ -119,11 +130,11 @@
 <script src="../js/profile-validation.js"></script>
 <script src="../js/profile-api.js"></script>
 
+<script src="../js/followup-model.js"></script>
+<script src="../js/followup-service.js"></script>
 <script src="../../js/analysis.js"></script>
 <script src="../js/profile-gate.js"></script>
-    
-  <script src="../js/followup-model.js"></script>
-    <script src="../js/followup-service.js"></script>
+
     <script src="../../js/reports.js"></script>
   </body>
 </html>

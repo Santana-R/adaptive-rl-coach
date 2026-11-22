@@ -23,7 +23,7 @@ body {
     color:rgb(15, 28, 41);
 }
 .text-bray{
-    color:rgb(179, 190, 205);
+    color:rgb(191, 202, 215);
 }
 .right{
     float:right;
@@ -41,8 +41,8 @@ body {
 }
 .border-card{
     border-style: solid;
-    border-width: 2px;
-    border-color: rgb(85, 118, 147);
+    border-width: 1px;
+    border-color: rgb(76, 103, 124);
 }
 .denotative{
     border-left: double 5px rgb(13, 228, 196); 
@@ -136,6 +136,9 @@ body {
     border-radius: .5rem;
     padding: .65rem .85rem;
     border: 1px solid transparent;
+}
+.replay-notice-idle{
+    color: rgb(191, 202, 215);
 }
 .replay-notice-error{
     color: #ffb4b4;
@@ -499,4 +502,32 @@ body {
   background-color: #203642;
   color: #b4c9d8;
   opacity: 1;
+}
+
+.app-main [hidden] {
+    display: none !important;
+}
+
+.btn-rl:focus-visible, .sidebar-link:focus-visible, .app-main summary:focus-visible {
+    outline: 2px solid rgb(13, 228, 196);
+    outline-offset: 3px;
+}
+
+@media (max-width: 767.98px) {
+    .sidebar nav {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .sidebar nav > div:not(.d-none) {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .sidebar-link {
+        padding: .5rem .65rem;
+        margin-bottom: .25rem;
+    }
 }

@@ -31,9 +31,10 @@ function toSaveArgs({ userId, blockId, proposal, analysis, profile }) {
   if (!Number.isInteger(proposal.availability_minutes) || proposal.availability_minutes < 1) {
     throw new ApiError(422, 'PLAN_NOT_PERSISTABLE', 'Para guardar un plan indica al menos 1 minuto disponible.');
   }
-  if (proposal.exercises.some(e => !ID.test(String(e.exercise_version_id ?? '')))) {
-    // Rutinas nativas de boost (exercise_version_id null): todavía no son filas de ejercicio_versiones.
-    throw new ApiError(422, 'PLAN_NOT_PERSISTABLE', 'La propuesta incluye rutinas que todavía no están en el catálogo guardado.');
+  const missing = proposal.exercises.filter(e => !ID.test(String(e.exercise_version_id ?? '')));
+  if (missing.length) {
+    const titles = missing.map(e => e.exercise_snapshot?.title || e.exercise_key).join(', ');
+    throw new ApiError(422, 'PLAN_NOT_PERSISTABLE', 'Falta una versión de catálogo para: ' + titles + '.');
   }
   const days = profile?.days_per_week;
   if (!Number.isInteger(days) || days < 1 || days > 7) {

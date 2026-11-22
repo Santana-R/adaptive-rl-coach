@@ -39,7 +39,7 @@
       <h1 class="fw-bold text-light mb-4">Carga e historial de replays</h1>
       <div class="card bg-card border-card denotative pb-4 mb-4">
         <div class="card-body">
-          <h5 class="card-title fw-bold text-light mb-2">Bloque nuevo: cinco archivos .replay distintos</h5>
+          <h5 class="card-title fw-bold text-light mb-2">Cargar un bloque</h5>
           <ul class="card-text text-bray fs-6 list-unstyled mb-0">
             <li>Mismo jugador, modalidad y tipo de partida. Carga disponible desde PC.</li>
             <li>El servidor valida el tamaño total de la carga.</li>
@@ -47,7 +47,7 @@
         </div>
       </div>
       <form id="replay-upload-form" novalidate>
-        <input id="replay-input" type="file" accept=".replay" multiple class="form-control mb-3">
+        <input id="replay-input" type="file" accept=".replay" multiple hidden>
         <div class="mb-3">
           <button id="select-files" type="button" class="btn-rl btn-rl-outline me-3" data-mdb-ripple-init
             data-mdb-ripple-color="info">Seleccionar archivos</button>
@@ -56,13 +56,11 @@
         </div>
         <h6 class="fw-bold text-accent">Selección: <span id="file-count">0 de 5</span></h6>
         <ul id="file-list" class="text-light mb-1"></ul>
-        <p id="file-notice" class="text-bray fs-6 mb-4" role="status" aria-live="polite">Selecciona exactamente cinco
-          archivos .replay.</p>
+        <p id="file-notice" class="text-bray fs-6 mb-4" role="status" aria-live="polite">Elige cinco archivos .replay distintos.</p>
       </form>
       <section data-block-history aria-label="Historial de bloques"></section>
 
       <p class="text-bray">Reintentar se ofrece ante fallas recuperables. Ver análisis exige cinco partidas válidas.</p>
-      <p class="app-note">El historial consulta los bloques de tu cuenta. La disponibilidad de reintentos depende del estado y de los archivos temporales conservados por el servidor.</p>
     </main>
   </div>
 

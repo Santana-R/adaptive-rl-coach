@@ -11,3 +11,7 @@ No contiene filas, identidades personales, credenciales ni cuentas de Auth. Requ
 Incluye las funciones arc_private necesarias para los triggers; exportar solo tablas dejaría incompleta esa dependencia. Las políticas de la aplicación siguen pendientes en A08; RLS habilitado no acredita los recorridos de acceso.
 
 [Estado de Fase 2](../docs/fase2-estado.md) · [Diccionario vigente](../docs/diccionario-datos.md).
+
+## Catálogo de rutinas del plan
+
+En el entorno de prueba, ejecuta [rutinas-nativas.sql](seeds/rutinas-nativas.sql) después del esquema y las migraciones de planes. El script registra las versiones de los ejercicios de boost y revisión defensiva. Puede ejecutarse de nuevo y conserva el contenido, el estado y las versiones previamente guardadas. Sin esas fichas activas, el plan refleja la cobertura disponible en esa base.

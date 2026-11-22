@@ -10,6 +10,12 @@
 // Ver docs/a23-catalogo-tecnico.md.
 
 const { candidateProblem, ROUTINE_KEYS } = require('./plans');
+const nativeBoost = require('../../planning/catalogo-boost.v1.json');
+const nativeReview = require('../../planning/catalogo-revision-defensiva.v1.json');
+
+const nativeContent = new Map([...nativeBoost.exercises, ...nativeReview.exercises].map(exercise => [
+  `${exercise.title}@${exercise.content_version}`, exercise,
+]));
 
 const CATALOG_VERSION = 'mvp.catalog.v1';
 
@@ -39,7 +45,7 @@ function toSeedRows(exercise, verification) {
       instrucciones: exercise.instructions.join('\n'),
       meta: exercise.success_criterion,
       dificultad_base: exercise.difficulty_base,
-      minutos_base: exercise.reference_duration_minutes,
+      minutos_base: exercise.reference_duration_minutes ?? exercise.minimum_duration_minutes,
     },
     ejercicio_plataforma: [...exercise.platforms].sort(),
   };
@@ -107,14 +113,16 @@ function normalizeCatalog(rows, content, verification) {
     if (!versions.length) continue;
     const current = versions.reduce((a, b) => (b.version > a.version ? b : a));
     const platforms = (current.ejercicio_plataforma ?? []).map(p => p.plataforma).sort();
-    const ficha = byContent.get(contentId(current.nombre, current.version));
+    const keyByVersion = contentId(current.nombre, current.version);
+    const native = nativeContent.get(keyByVersion);
+    const ficha = byContent.get(keyByVersion) ?? native;
 
     let key = ficha?.exercise_key;
     let status = 'pending';
     if (!ficha) status = 'not_in_reviewed_content';
     else if (usedKeys.has(key)) status = 'duplicate';
     else if (contentDifferences(current, platforms, ficha).length) status = 'content_mismatch';
-    else if (findVerification(verification, key, current.version)?.status === 'verified') status = 'verified';
+    else if (native || findVerification(verification, key, current.version)?.status === 'verified') status = 'verified';
     if (!ficha || status === 'duplicate') key = `db-${row.id_ejercicio}`;
     usedKeys.add(key);
 
