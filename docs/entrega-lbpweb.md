@@ -63,11 +63,24 @@ Rama `docs/A40-entrega-lbpweb` con `main` integrado (`0e731bc`, incluye A38). Eq
 | `npm run smoke` | Salud, 15 páginas, configuración pública y 3 rutas protegidas correctas |
 | `npm run check:connections` | Con las cuatro claves: Supabase Auth con Google habilitado OK, PostgreSQL con auditoría A39 OK, ping autenticado de Ballchasing OK |
 
-Esta corrida usó Node 24.15.0, no la versión fijada 22.19.0. No acredita Docker, login con Google ni cargas reales.
+Esta corrida usó Node 24.15.0 en el host, no la versión fijada 22.19.0. La comprobación con Docker de abajo sí usa 22.19.0.
+
+### Docker sobre la versión actual · 22 de noviembre de 2026
+
+Commit `398b34d`, Docker Engine 29.9.2, Compose 5.6.1, Docker Desktop en Windows 11.
+
+| Comprobación | Resultado observado |
+| --- | --- |
+| `docker compose up --build -d` | Imagen construida desde cero, contenedor `healthy` |
+| Usuario y Node en el contenedor | `node` (uid 1000), Node v22.19.0 |
+| `.env` dentro de la imagen | No existe; las variables llegan por `env_file` |
+| `npm run smoke -- http://127.0.0.1:3000` | Salud, 15 páginas, configuración pública y 3 rutas protegidas correctas |
+| `npm run check:connections` (desde el host, mismo `.env`) | Auth/Google, PostgreSQL y Ballchasing OK |
+| Volumen `replay-pending` | Archivo de prueba conservado tras `docker compose down` y `up -d`; después se eliminó |
 
 ### Lo que A38 deja pendiente
 
-La guía de A38 se declara parcial. Faltan Docker sobre la versión actual (CI lo acreditó el 18 de noviembre para la anterior), la instalación en un Supabase real, el login real con Google y la matriz de once pasos P11/P12 con otro integrante y dos bloques reales. Esa matriz es la evidencia de instalación más fuerte que puede llevar el paquete.
+La guía de A38 se declara parcial. Docker sobre la versión actual ya quedó comprobado arriba. Faltan la instalación en un Supabase vacío, el login real con Google y la matriz de once pasos P11/P12 con otro integrante y dos bloques reales. Esa matriz es la evidencia de instalación más fuerte que puede llevar el paquete.
 
 ## Observaciones de Fase 2
 
