@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('node:path');
 const blocksRouter = require('./routes/blocks');
 const { createAuth, sendError, ApiError, CONTRACT_VERSION } = require('./middleware/auth');
-const { createServerClient } = require('./services/supabase');
+const { createServerClient, getPublicConfig } = require('./services/supabase');
 const profiles = require('./repositories/profile');
 const {
   validate: validateProfile
@@ -21,7 +21,7 @@ const { createReportsRouter } = require('./routes/reports');
  * Construye la aplicación. Recibe el cliente de Supabase para poder probarla
  * con un cliente simulado (tests/auth.test.cjs).
  */
-function createApp({ supabase = createServerClient(), analysisRepository, enableAnalysisDemo = false, enableBlocksDemo = false, catalogOptions } = {}) {
+function createApp({ supabase = createServerClient(), analysisRepository, enableAnalysisDemo = false, enableBlocksDemo = false, catalogOptions, publicConfigEnv = process.env } = {}) {
   const app = express();
   const { requireAuth, requireRole } = createAuth(supabase);
   const repository = analysisRepository === undefined ? createStoredAnalysisRepository(supabase) : analysisRepository;
@@ -38,6 +38,15 @@ app.use('/api/v1/sessions', createSessionsRouter({ supabase, requireAuth, requir
 
   app.get('/health', (_req, res) => {
     res.json({ status: 'ok' });
+  });
+
+  // A38: el navegador y Express usan el mismo proyecto, sin incorporar secretos de servidor.
+  // La ruta precede a express.static para mantener los imports de todas las pantallas.
+  app.get('/sitio/js/supabase-config.js', (_req, res) => {
+    res.set('Cache-Control', 'no-store');
+    res.type('application/javascript').send(
+      `window.SUPABASE_CONFIG = ${JSON.stringify(getPublicConfig(publicConfigEnv))};\n`
+    );
   });
 
   // A08 · usuario de la sesión verificada.

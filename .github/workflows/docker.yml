@@ -36,6 +36,8 @@ jobs:
           }
           start_app
           curl --fail --silent http://127.0.0.1:3000/sitio/html/login.html >/dev/null
+          curl --fail --silent http://127.0.0.1:3000/sitio/js/supabase-config.js \
+            | grep -Fx 'window.SUPABASE_CONFIG = {"url":"","anonKey":""};'
           test "$(docker exec arc-check id -u)" != 0
           docker exec arc-check node -e "if (require('node:fs').existsSync('/app/.env')) process.exit(1)"
           docker exec arc-check node -e "require('node:fs').writeFileSync('/app/data/replays/volume-check', 'retained')"

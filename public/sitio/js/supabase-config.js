@@ -1,6 +1,5 @@
 'use strict';
 
-window.SUPABASE_CONFIG = window.SUPABASE_CONFIG || {
-  url: 'https://fylupliaforboawqdutb.supabase.co',
-  anonKey: 'sb_publishable_DBJPBlKMqpNxAytdxCxwDw_cvuEo4Pc'
-};
+// Respaldo para las vistas abiertas como archivos: no se conecta a ningún proyecto.
+// Express sirve esta misma ruta con la configuración pública tomada de .env.
+window.SUPABASE_CONFIG = window.SUPABASE_CONFIG || { url: '', anonKey: '' };
