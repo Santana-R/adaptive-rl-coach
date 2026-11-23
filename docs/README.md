@@ -23,6 +23,7 @@ Para comenzar basta [la guía breve](empieza-aqui.md) y tu issue. Abre estas ref
 | Consultar tareas futuras | [Índice del backlog](backlog.md) |
 | Consultar acuerdos y fechas | [Equipo](equipo-y-acuerdos-semanales.md) · [Calendario de referencia](calendario-y-dependencias.md) |
 | Preparar la entrega académica | [Pruebas y evidencia](pruebas-y-entrega.md) · [Pendientes](riesgos-y-decisiones-pendientes.md) |
+| Instalar, desplegar y comprobar desde cero (A38) | [Guía y registro A38](a38-ejecucion-reproducible.md) · [Orden SQL](../database/README.md#instalación-inicial-a38) |
 
 ## Historial
 
