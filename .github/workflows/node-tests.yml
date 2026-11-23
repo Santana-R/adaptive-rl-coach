@@ -29,6 +29,8 @@ jobs:
         run: npm ci --ignore-scripts
       - name: Ejecutar pruebas
         run: npm test
+      - name: Comprobar arranque y rutas de una instalación limpia (A38)
+        run: npm run smoke
       - name: Comprobar propuesta defensiva sin activar el motor
         run: |
           node <<'NODE'

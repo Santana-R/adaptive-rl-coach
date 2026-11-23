@@ -12,22 +12,28 @@ La integración conserva por replay el porcentaje y los segundos con cero boost,
 
 [Estado, evidencia y límites vigentes](docs/estado-actual.md) · [Funcionamiento de las medidas persistidas](docs/persistencia-mediciones.md) · [Contexto para colaboradores e IAs](CONTEXTOIA.md).
 
-## Ejecutar con Node
+## Ejecutar desde cero con Node
 
-Versión fijada en Docker y CI: **Node 22.19.0**. Desde la raíz:
+Requisitos: Git, **Node 22.19.0** (fijado en `.nvmrc`, Docker y CI), npm incluido con Node y acceso al proyecto de Supabase y a Ballchasing para el recorrido privado. Desde una copia nueva:
 
 ```sh
+git clone https://github.com/Santana-R/adaptive-rl-coach.git
+cd adaptive-rl-coach
+node --version
+npm --version
 cp .env.example .env
 # Completar la configuración privada en .env.
 npm ci --ignore-scripts
 npm start
 ```
 
-Configurar `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_ANON_KEY` y `BALLCHASING_TOKEN`. La clave privada de Supabase y el token de Ballchasing solo los utiliza Express. El archivo `.env` se excluye del repositorio y de la imagen.
+En PowerShell de Windows, sustituir `cp .env.example .env` por `Copy-Item .env.example .env`. No sobrescribir un `.env` existente. `npm ci` instala las versiones exactas de `package-lock.json`.
+
+Configurar `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_ANON_KEY` y `BALLCHASING_TOKEN`. Las tres variables de Supabase deben corresponder al **mismo proyecto**. Express sirve la URL y la clave pública al navegador; la clave privada de Supabase y el token de Ballchasing solo se utilizan en el servidor. El archivo `.env` se excluye del repositorio y de la imagen.
 
 Abrir [la aplicación local](http://127.0.0.1:3000/) y [la comprobación de salud](http://127.0.0.1:3000/health). El servidor sirve las pantallas oficiales en `public/sitio/html`. `HOST` y `PORT` permiten ajustar la escucha; por defecto Node usa `127.0.0.1:3000`.
 
-Para otra base Supabase, preparar primero su esquema y migraciones según [database/README.md](database/README.md). Crear la imagen no crea cuentas de Auth ni copia los datos remotos.
+Para una base Supabase nueva, preparar primero su esquema y migraciones siguiendo [el orden de instalación A38](database/README.md#instalación-inicial-a38). No ejecutar el esquema de Fase 2 sobre una base existente. Crear la imagen no crea cuentas de Auth ni copia los datos remotos. Configurar también Google OAuth y las URLs de retorno de cada entorno ([guía A38](docs/a38-ejecucion-reproducible.md)).
 
 ## Ejecutar con Docker
 
@@ -38,7 +44,7 @@ docker compose up --build -d
 docker compose ps
 ```
 
-Abrir [la aplicación local](http://127.0.0.1:3000/). Compose publica el puerto solo en la Mac y configura la escucha interna en `0.0.0.0`. La aplicación corre con el usuario `node`.
+Abrir [la aplicación local](http://127.0.0.1:3000/). Compose publica el puerto solo en el equipo anfitrión (Windows, Linux o macOS) y configura la escucha interna en `0.0.0.0`. La aplicación corre con el usuario `node`.
 
 ```sh
 docker compose logs -f app
@@ -51,14 +57,19 @@ El volumen `replay-pending` conserva los archivos pendientes al parar o recrear 
 
 ```sh
 npm test
+npm run smoke
 node scripts/validar-heuristicas-a26.cjs
 ```
+
+`npm run smoke` arranca una instancia temporal, comprueba salud, las pantallas servidas, configuración pública y rechazo de acceso anónimo. Para comprobar una instancia existente, instalar dependencias en la copia de revisión y ejecutar `npm run smoke -- http://127.0.0.1:3000` (con el `.env` correspondiente). Con las variables reales configuradas, `npm run check:connections` comprueba de forma no destructiva Supabase Auth, la auditoría de PostgreSQL y el ping autenticado de Ballchasing. No sustituye iniciar sesión ni cargar partidas reales.
 
 Todas las suites utilizan ahora el patrón `tests/*.test.cjs`, incluidas las pruebas de frontend de objetivos y plan. La regresión de persistencia recorre extracción → guardado → lectura → reglas con transporte SQL simulado. La prueba SQL `database/tests/mediciones-proveedor.sql` comprueba el RPC real y termina con rollback.
 
 GitHub Actions ejecuta las suites y los 43 escenarios de A26. El flujo de Docker construye una imagen limpia, comprueba HTTP desde el host, el usuario de ejecución, la exclusión de `.env` y la conservación del volumen al recrear el contenedor. Sus resultados y límites se registran en [estado actual](docs/estado-actual.md).
 
 La demo sintética de Análisis se activa con `ANALYSIS_DEMO_ENABLED=true npm start` y se abre en [Análisis de ejemplo](http://127.0.0.1:3000/sitio/html/analisis.html?demo=1); sus resultados se identifican como sintéticos. Una respuesta correcta de `/health` solo confirma que Express está disponible.
+
+Para publicar el contenedor con HTTPS o repetir la revisión funcional y la entrega, consultar [ejecución, conexiones, evidencia y revisión A38](docs/a38-ejecucion-reproducible.md). Node local queda disponible como respaldo si el entorno publicado no está accesible.
 
 ## Colaboración
 
