@@ -61,7 +61,7 @@ Rama `docs/A40-entrega-lbpweb` con `main` integrado (`0e731bc`, incluye A38). Eq
 | `npm test` | 560/560 aprobadas, 0 fallidas, 0 omitidas |
 | `node scripts/validar-heuristicas-a26.cjs` | 43/43, 0 fallidos |
 | `npm run smoke` | Salud, 15 páginas, configuración pública y 3 rutas protegidas correctas |
-| `npm run check:connections` | No ejecutado: falta `BALLCHASING_TOKEN` en el `.env` local |
+| `npm run check:connections` | Con las cuatro claves: Supabase Auth con Google habilitado OK, PostgreSQL con auditoría A39 OK, ping autenticado de Ballchasing OK |
 
 Esta corrida usó Node 24.15.0, no la versión fijada 22.19.0. No acredita Docker, login con Google ni cargas reales.
 
