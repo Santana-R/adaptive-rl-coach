@@ -14,7 +14,7 @@ La distribución por materia de [pruebas y entrega](pruebas-y-entrega.md) asigna
 | Trece pantallas | [Flujo de pantallas](flujo-pantallas.md) · `public/sitio/html/` | Implementadas; faltan capturas de la versión oficial (ver abajo) |
 | Tres CRUD | [Resultados CRUD](resultados-crud.md): metas 18/18, sesiones 19/19, ejercicios 19/19 | Comprobado el 16 nov contra Supabase de desarrollo |
 | Modelo de datos | [Diccionario](diccionario-datos.md) · [esquema SQL](../database/esquema-fase2.sql) · [migraciones](../database/migraciones/) · UML/ERD en el PDF de Fase 2 ([estado](fase2-estado.md)) | Vigente; el PDF lo facilita Roberto |
-| Ejecución e instalación | [README](../README.md) · [ejecución y recuperación](ejecucion-y-recuperacion.md) · `Dockerfile` / `compose.yaml` | Documentada; el cierre formal depende de A38 |
+| Ejecución e instalación | [README](../README.md) · [A38 ejecución reproducible](a38-ejecucion-reproducible.md) · [ejecución y recuperación](ejecucion-y-recuperacion.md) · `database/instalar-a38.sql` · `Dockerfile` / `compose.yaml` | Procedimiento integrado (PR #99, A38 cerrada); faltan Docker de esta versión, Supabase real y la matriz P11/P12 |
 | Seguridad y permisos | [Permisos verificados](permisos-verificados.md) · [prueba de auth](prueba-auth.md) | Comprobado con cuentas reales |
 | Pruebas funcionales | [Estado actual](estado-actual.md) (553 pruebas en CI) · [regresión A33](resultados-regresion.md) · [integración del ciclo](integracion-ciclo.md) | Comprobado; límites registrados en cada documento |
 
@@ -44,11 +44,30 @@ Las capturas nuevas se guardan en `docs/evidencias/lbpweb/` con el nombre del ar
 
 ## Instalación
 
-1. Node 22.19.0: `cp .env.example .env`, completar las cuatro variables, `npm ci --ignore-scripts`, `npm start`.
-2. Docker: `docker compose up --build -d` con `.env` completo.
-3. Base de datos: `database/esquema-fase2.sql`, después las migraciones de `database/migraciones/` y los seeds según [database/README.md](../database/README.md).
+El procedimiento oficial es el de [A38](a38-ejecucion-reproducible.md) (PR #99):
 
-Docker y Node se comprobaron en GitHub Actions ([estado actual](estado-actual.md)). Falta que **otro integrante** reproduzca la instalación desde cero (P12) y que se cierre A38 (#38, ejecución y despliegue reproducibles). Esta sección se actualiza cuando A38 tenga resultado.
+1. Node 22.19.0 (`.nvmrc`): `cp .env.example .env`, completar las cuatro variables, `npm ci --ignore-scripts`, `npm start`.
+2. Docker Compose (entorno acordado): `docker compose up --build -d` con `.env` completo.
+3. Supabase vacío: ejecutar `database/instalar-a38.sql` según [database/README.md](../database/README.md#instalación-inicial-a38). No se ejecuta sobre la base activa.
+4. Comprobación: `npm test`, `npm run smoke`, `node scripts/validar-heuristicas-a26.cjs` y, con las claves privadas, `npm run check:connections`.
+
+### Comprobación del paquete · 22 de noviembre de 2026
+
+Rama `docs/A40-entrega-lbpweb` con `main` integrado (`0e731bc`, incluye A38). Equipo de David, Windows 11.
+
+| Comprobación | Resultado observado |
+| --- | --- |
+| `npm ci --ignore-scripts` | Correcto, 0 vulnerabilidades |
+| `npm test` | 560/560 aprobadas, 0 fallidas, 0 omitidas |
+| `node scripts/validar-heuristicas-a26.cjs` | 43/43, 0 fallidos |
+| `npm run smoke` | Salud, 15 páginas, configuración pública y 3 rutas protegidas correctas |
+| `npm run check:connections` | No ejecutado: falta `BALLCHASING_TOKEN` en el `.env` local |
+
+Esta corrida usó Node 24.15.0, no la versión fijada 22.19.0. No acredita Docker, login con Google ni cargas reales.
+
+### Lo que A38 deja pendiente
+
+La guía de A38 se declara parcial. Faltan Docker sobre la versión actual (CI lo acreditó el 18 de noviembre para la anterior), la instalación en un Supabase real, el login real con Google y la matriz de once pasos P11/P12 con otro integrante y dos bloques reales. Esa matriz es la evidencia de instalación más fuerte que puede llevar el paquete.
 
 ## Observaciones de Fase 2
 
@@ -58,8 +77,8 @@ El profesor aprobó el documento de Fase 2 el 3 de noviembre **sin solicitar cor
 
 | Pendiente | Responsable propuesto | Bloquea |
 | --- | --- | --- |
-| Cierre de A38: instalación y despliegue reproducibles | OmarHub-star / Roberto | Sección de instalación |
-| Instalación por otro integrante (P12) | Tadeo, con revisión de Luis | Sección de instalación |
+| Matriz P11/P12 de A38 desde copia limpia (11 pasos) | Roberto, como revisor de A38 | Sección de instalación |
+| `npm run check:connections` con las cuatro claves | Quien tenga `BALLCHASING_TOKEN` | Sección de instalación |
 | Capturas de las trece pantallas oficiales | Luis / David | Rubro de pantallas |
 | Inicio de sesión real con Google (RF01) | Luis | RF01 |
 | Confirmar fecha y formato de entrega LBPWEB | Roberto | Envío |
@@ -67,4 +86,4 @@ El profesor aprobó el documento de Fase 2 el 3 de noviembre **sin solicitar cor
 
 ## Copia estable
 
-Cuando el checklist esté firmado, se crea la etiqueta `entrega-lbpweb-v1` sobre el commit de `main` revisado. La entrega usa esa etiqueta, no la punta de `main`. Si después hay correcciones, se crea `entrega-lbpweb-v2` y se anota aquí el motivo.
+A38 también pide acordar un tag después de validar la versión final. Se propone usar uno solo para ambas tareas. Cuando el checklist esté firmado, se crea la etiqueta `entrega-lbpweb-v1` sobre el commit de `main` revisado. La entrega usa esa etiqueta, no la punta de `main`. Si después hay correcciones, se crea `entrega-lbpweb-v2` y se anota aquí el motivo.
