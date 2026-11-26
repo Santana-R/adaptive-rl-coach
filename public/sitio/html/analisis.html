@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Análisis</title>
+    <title>Resultados</title>
     <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
@@ -16,11 +16,11 @@
     <div class="app-shell">
       <aside class="sidebar">
         <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
-        <a href="plan.html" data-page="plan.html" class="sidebar-link">Plan</a>
-        <a href="replays.html" class="sidebar-link">Replays</a>
-        <a href="analisis.html" data-page="analisis.html" class="sidebar-link active" aria-current="page">Análisis</a>
+        <a href="plan.html" data-page="plan.html" class="sidebar-link">Mi entrenamiento</a>
+        <a href="replays.html" class="sidebar-link">Mis partidas</a>
+        <a href="analisis.html" data-page="analisis.html" class="sidebar-link active" aria-current="page">Resultados</a>
         <a href="objetivos.html" class="sidebar-link">Objetivos</a>
-        <a href="sesiones.html" class="sidebar-link">Sesiones</a>
+        <a href="sesiones.html" class="sidebar-link">Mi progreso</a>
         <a href="perfil.html" class="sidebar-link">Perfil</a>
         <a href="helpme.html" class="sidebar-link">Ayuda</a>
         <div class="sidebar-footer">
@@ -32,13 +32,13 @@
           <h1 class="h4 text-light">Comprobando perfil…</h1><p class="text-bray mb-0">Necesitamos verificar tu sesión y tu perfil antes de mostrar el análisis.</p>
         </section>
         <div id="analysis-content" hidden>
-        <h1 class="fw-bold text-light mb-1">Análisis del jugador</h1>
+        <h1 class="fw-bold text-light mb-1">Resultados</h1>
         <p id="analysis-block-context" class="text-bray mb-3"></p>
         <div id="analysis-block-picker" class="mb-3" hidden>
           <label for="analysis-block" class="form-label">Bloque de partidas</label>
           <select id="analysis-block" class="form-select w-auto"></select>
         </div>
-        <p id="analysis-empty" class="text-bray" hidden>Todavía no hay bloques listos. <a class="text-accent" href="replays.html">Ir a Replays</a></p>
+        <p id="analysis-empty" class="text-bray" hidden>Todavía no hay bloques listos. <a class="text-accent" href="replays.html">Ir a Mis partidas</a></p>
         <div class="d-flex align-items-center gap-3 mb-4">
           <label for="scenario-select" id="scenario-label" class="text-accent">Datos de prueba</label>
           <select id="scenario-select" class="form-select bg-card text-light scenario-select" style="max-width: 220px">
@@ -62,9 +62,23 @@
         <div id="analysis-error-panel" class="followup-panel" hidden>
           <p id="analysis-error" class="followup-error" role="alert" hidden></p>
           <button id="analysis-retry" type="button" class="btn-rl btn-rl-outline">Reintentar</button>
-          <a class="text-accent ms-2" href="replays.html">Volver a Replays</a>
+          <a class="text-accent ms-2" href="replays.html">Volver a Mis partidas</a>
         </div>
         <div id="analysis-results" hidden>
+        <div class="row mb-4">
+          <section class="col-12">
+            <div class="card bg-card border-card p-3">
+              <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+                <h2 class="h5 text-light">Qué conviene practicar</h2>
+                <small id="priority-count" class="text-accent"></small>
+                <a id="analysis-plan-link" href="plan.html" class="btn-rl btn-rl-accent">Preparar mi entrenamiento</a>
+              </div>
+              <div id="priority-list"></div>
+              <div id="maintenance-note" class="card bg-dark text-bray p-2 mt-3" hidden></div>
+            </div>
+          </section>
+        </div>
+        <h2 class="h5 text-light">Tus cinco partidas en números</h2>
         <div class="row g-3 mb-4" aria-label="Resumen del bloque">
           <div class="col-md-3"><div class="stat-card"><div class="stat-label">Eficiencia de tiro</div><div class="stat-value" id="shooting-value"></div><div class="stat-sub" id="shooting-foot"></div></div></div>
           <div class="col-md-3"><div class="stat-card"><div class="stat-label">Goles</div><div class="stat-value" id="goals-value"></div><div class="stat-sub" id="goals-foot"></div></div></div>
@@ -73,7 +87,7 @@
         </div>
         <p id="comparison-message" class="text-bray"></p>
         <div class="row g-4">
-          <section class="col-lg-7 order-2 order-lg-1">
+          <section class="col-12">
             <div class="card bg-card border-card p-3">
               <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start gap-2">
                 <h2 class="h5 text-light">Rendimiento del bloque</h2>
@@ -98,22 +112,12 @@
               </div>
             </div>
           </section>
-          <section class="col-lg-5 order-1 order-lg-2">
-            <div class="card bg-card border-card p-3">
-              <div class="d-flex justify-content-between">
-                <h2 class="h5 text-light">En qué enfocarte</h2>
-                <small id="priority-count" class="text-accent"></small>
-              </div>
-              <div id="priority-list"></div>
-              <div id="maintenance-note" class="card bg-dark text-bray p-2 mt-3" hidden></div>
-              <a id="analysis-plan-link" href="plan.html" class="btn-rl btn-rl-accent w-100 mt-3">Ver mi plan</a>
-            </div>
-          </section>
+
         </div>
         <p id="analysis-source" class="app-note">La procedencia se mostrará al cargar el análisis.</p>
         </div>
         </div>
-      <section data-coach-report aria-label="Seguimiento por periodo"></section>
+      <details class="report-details"><summary>Ver seguimiento por periodo</summary><section data-coach-report aria-label="Seguimiento por periodo"></section></details>
       </main>
     </div>
 
@@ -125,7 +129,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="../js/session-client.js"></script>
-<script src="../js/navigation.js"></script>
+<script src="../js/player-ui.js"></script>
+    <script src="../js/navigation.js"></script>
 
 <script src="../js/profile-validation.js"></script>
 <script src="../js/profile-api.js"></script>

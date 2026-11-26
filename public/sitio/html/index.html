@@ -24,55 +24,26 @@
   <body class="mainbody">
     <!-- Start your project here-->
     <header id="site-navigation"></header>
-    <div class="container">
-      <div class="row mb-4">
-        <div class="col-12">
-          <h1 class="fw-bold text-light mb-4">Entrena con evidencia y seguimiento</h1>
+    <div class="container home-content">
+      <section class="home-hero" aria-labelledby="home-title">
+        <p class="eyebrow">ADAPTIVE RL COACH</p>
+        <h1 id="home-title" class="fw-bold text-light">Descubre qué practicar después de jugar.</h1>
+        <p id="home-description" class="text-bray fs-5">Sube cinco partidas de Rocket League, revisa tus prioridades y prepara un entrenamiento para el tiempo que tienes.</p>
+        <p id="home-status" class="text-bray" role="status" aria-live="polite"></p>
+        <div class="d-flex flex-wrap gap-3">
+          <a id="home-primary" class="btn-rl btn-rl-accent" href="login.html#registro">Crear cuenta</a>
+          <a class="text-accent align-self-center" href="helpme.html">¿Cómo empiezo?</a>
         </div>
-      </div>
-      <div class="row g-3 mb-4">
-        <div class="col-12 col-lg-7">
-          <p class="text-bray fs-5">Analiza cinco partidas de Rocket League.</p>
-          <p class="text-bray fs-5 mb-4">Conoce tus prioridades y consulta ejercicios compatibles con tu plataforma y disponibilidad.</p>
-          
-          <div class="d-flex flex-wrap gap-2">
-            <a id="home-primary" class="btn-rl btn-rl-accent" href="login.html#registro">Crear cuenta</a>
-            <a class="btn-rl btn-rl-outline" href="aboutus.html">Ver cómo funciona</a>
-          </div>
+      </section>
+      <section class="mt-4" aria-labelledby="home-steps-title">
+        <h2 id="home-steps-title" class="h4 text-light mb-3">De tus partidas a la práctica</h2>
+        <div class="row g-3">
+          <div class="col-12 col-lg-4"><article class="home-step"><span class="step-num">01</span><h3 class="h5 text-light">Sube 5 partidas</h3><p class="text-bray mb-0">Del mismo jugador, modalidad y tipo de partida. Las analizamos juntas como un bloque.</p></article></div>
+          <div class="col-12 col-lg-4"><article class="home-step"><span class="step-num">02</span><h3 class="h5 text-light">Elige qué practicar</h3><p class="text-bray mb-0">Revisa las prioridades y prepara una rutina con ejercicios y minutos asignados.</p></article></div>
+          <div class="col-12 col-lg-4"><article class="home-step"><span class="step-num">03</span><h3 class="h5 text-light">Guarda tu avance</h3><p class="text-bray mb-0">Registra la práctica y sube otras cinco partidas para comparar tus resultados.</p></article></div>
         </div>
-        <div class="col-12 col-lg-5">
-            <div class="card bg-card border-card denotative pb-4">
-              <div class="card-body bg-card rounded-4">
-              <h5 class="card-title fw-bold text-light mb-2">Tu ciclo de entrenamiento</h5>
-              <ol class="card-text text-bray">
-                <li>Configura tu perfil y objetivos</li>
-                <li>Carga cinco replays comparables</li>
-                <li>Consulta prioridades y actividades.</li>
-                <li>Practica y registra tus sesiones</li>
-                <li>Compara un bloque posterior</li>
-              </ol>
-              </div>
-          </div>
-        </div>
-      </div>
-      <div class="row mb-4">
-        <div class="col-12 col-lg-6">
-          <div class="card bg-card border-card denotative pb-4">
-              <div class="card-body bg-card">
-              <h5 class="card-title fw-bold text-light mb-3">Qué podrás revisar aquí</h5>
-              <ul class="card-text text-bray fs-6 list-unstyled">
-                <li>Métricas del juego, cumplimiento de metas y rango declarado se presentan por separado.</li>
-                <li>Cada recomendación muestra su evidencia.</li>
-              </ul>
-              </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <h6 class="text-bray">Replays privados durante el procesamiento. Resultados personales después del acceso.</h6>
-        </div>
-      </div>
+      </section>
+      <p class="app-note">Las recomendaciones explican qué datos se usaron. Tu primer bloque sirve como punto de partida para las comparaciones.</p>
     </div>
     <!-- End your project here-->
 
@@ -85,6 +56,8 @@
     <script src="../js/session-client.js"></script>
     <script src="../js/followup-model.js"></script>
     <script src="../js/followup-service.js"></script>
+    <script src="../js/player-ui.js"></script>
+    <script src="../js/profile-validation.js"></script>
     <script src="../js/navigation.js"></script>
   </body>
 </html>

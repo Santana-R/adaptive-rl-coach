@@ -2,6 +2,7 @@
 
 $(function () {
   const api = window.CoachPlanService;
+  const ui = window.CoachPlayerUI;
   const model = window.CoachPlanModel;
   const coverageLabels = { complete: 'Completo', partial: 'Parcial', empty: 'Vacío' };
   const blockLabels = { ready: 'Listo', invalid: 'Requiere revisión', pending: 'Pendiente', processing: 'Procesando', failed: 'Fallido' };
@@ -134,7 +135,7 @@ $(function () {
     const block = blocks.find(item => item.block_id === selectedBlock);
     $('#plan-block-help').text(block
       ? (blockLabels[block.status] || block.status) + ' · ' + (block.mode || 'Modalidad no disponible') + '. El servidor verifica identidad y validez de los replays.'
-      : 'Selecciona un bloque propio. Si no tienes bloques, empieza en Replays.');
+      : 'Selecciona un bloque propio. Si no tienes bloques, empieza en Mis partidas.');
   }
 
   function renderVersions() {
@@ -170,7 +171,7 @@ $(function () {
     const plan = display.plan;
     const meta = display.meta || {};
     const snapshot = plan.profile_snapshot || {};
-    const number = value => value === null || value === undefined ? 'No disponible' : String(value);
+    const number = ui.number;
     $('#no-plan').prop('hidden', true);
     $('#plan-output').prop('hidden', false);
     $('#plan-badge').text((display.persisted ? 'Guardado · ' : 'Sin guardar · ') + (coverageLabels[plan.coverage] || plan.coverage));
@@ -181,7 +182,7 @@ $(function () {
       (plan.limitations?.includes('synthetic_fixture') ? 'synthetic' : 'No disponible');
     $('#plan-source').text('Fuente de métricas: ' + source + ' · Catálogo: ' + (plan.catalog_source || meta.catalog_source || 'No disponible') +
       ' · Reglas: ' + (plan.rules_version || 'No disponible'));
-    $('#plan-explanation').text(plan.explanation || 'Sin explicación disponible.');
+    $('#plan-explanation').text(ui.text(plan.explanation || 'Sin explicación disponible.'));
     $('#available-minutes').text(number(plan.availability_minutes));
     $('#assigned-minutes').text(number(plan.assigned_minutes));
     $('#unassigned-minutes').text(number(plan.unassigned_minutes));
@@ -196,7 +197,7 @@ $(function () {
     $('#plan-context-note').text(display.persisted
       ? (older ? 'Versión histórica. ' : 'Versión guardada. ') +
       'Se muestran sus instrucciones y preferencias originales; editar el formulario no la modifica. Rango: ' +
-      (snapshot.rank || 'Sin declarar') + ' · Workshop declarado: ' + (snapshot.workshop_access ? 'Sí' : 'No') + '.'
+      (snapshot.rank ? ui.name(snapshot.rank) : 'Sin declarar') + ' · Workshop declarado: ' + (snapshot.workshop_access ? 'Sí' : 'No') + '.'
       : 'Propuesta calculada con las preferencias indicadas. Todavía no forma parte del historial.');
     $('#save-plan').prop('hidden', display.persisted);
     const missingVersions = (plan.exercises || []).filter(exercise => !model.validId(exercise.exercise_version_id));
@@ -216,28 +217,30 @@ $(function () {
     if (!plan.exercises?.length) exerciseBox.append(element('p', 'No hay ejercicios para estas entradas. Revisa la explicación y la cobertura.', 'plan-card'));
     (plan.exercises || []).forEach(function (exercise) {
       const content = exercise.exercise_snapshot || {};
-      const card = element('details', undefined, 'plan-card');
-      card.append(element('summary', exercise.order + '. ' + (content.title || exercise.exercise_key) +
-        ' · ' + number(exercise.assigned_minutes) + ' min · Dificultad ' + number(exercise.difficulty), 'fw-bold'));
-      card.append(element('p', content.purpose || 'Finalidad no disponible.', 'mt-3'));
+      const card = element('article', undefined, 'plan-card');
+      card.append(element('h3', exercise.order + '. ' + (content.title || ui.name(exercise.exercise_key)), 'h5'));
+      card.append(element('p', number(exercise.assigned_minutes) + ' min', 'text-accent fw-bold mb-2'));
+      card.append(element('p', ui.text(content.purpose || 'Finalidad no disponible.')));
+      const instructions = element('details');
+      instructions.append(element('summary', 'Cómo practicarlo'));
+      instructions.append(element('p', 'Dificultad ' + number(exercise.difficulty), 'text-bray mt-2'));
       const steps = element('ol');
       (content.instructions || []).forEach(step => steps.append(element('li', step)));
-      card.append(steps);
-      if (content.practice_level_instruction) card.append(element('p', content.practice_level_instruction));
-      if (content.success_criterion) card.append(element('p', 'Criterio de práctica: ' + content.success_criterion));
-      if (content.resource_code) card.append(element('p', 'Código del recurso: ' + content.resource_code, 'text-accent'));
+      instructions.append(steps);
+      if (content.practice_level_instruction) instructions.append(element('p', content.practice_level_instruction));
+      if (content.success_criterion) instructions.append(element('p', 'Criterio de práctica: ' + content.success_criterion));
+      if (content.resource_code) instructions.append(element('p', 'Código del recurso: ' + content.resource_code, 'text-accent'));
       const href = model.safeResource(content.resource_url);
-      if (href) card.append($('<a>').attr({ href, target: '_blank', rel: 'noopener noreferrer' }).addClass('text-accent').text('Abrir recurso'));
-      card.append(element('p', 'Versión de ejercicio: ' + (exercise.exercise_version_id || 'Rutina nativa sin ID SQL') +
-        (content.content_version ? ' · Contenido ' + content.content_version : ''), 'text-bray mt-2'));
+      if (href) instructions.append($('<a>').attr({ href, target: '_blank', rel: 'noopener noreferrer' }).addClass('text-accent').text('Abrir recurso'));
       if (content.selected_variant) {
         const variant = content.selected_variant;
         const settings = ['random_target_sizes', 'random_wall_distances', 'random_ball_drops']
-          .filter(key => typeof variant[key] === 'boolean').map(key => key + ': ' + (variant[key] ? 'Sí' : 'No')).join(' · ');
-        card.append(element('p', 'Variante: ' + variant.variant_key + (settings ? ' · ' + settings : ''), 'text-bray'));
+          .filter(key => typeof variant[key] === 'boolean').map(key => ({ random_target_sizes: 'Tamaño de objetivos aleatorio', random_wall_distances: 'Distancia aleatoria', random_ball_drops: 'Caídas de balón aleatorias' }[key]) + ': ' + (variant[key] ? 'Sí' : 'No')).join(' · ');
+        instructions.append(element('p', 'Variante: ' + ({ 'easy-base': 'Easy', 'normal-fixed': 'Normal, ajustes fijos', 'normal-distance': 'Normal, distancia aleatoria', 'normal-random': 'Normal, ajustes aleatorios', 'survival-optional': 'Survival' }[variant.variant_key] || variant.variant_key) + (settings ? ' · ' + settings : ''), 'text-bray'));
       }
+      card.append(instructions);
       const exerciseSessions = display.persisted ? model.sessionsUrl(plan, exercise.plan_exercise_id) : null;
-      if (exerciseSessions) card.append($('<a>').attr('href', exerciseSessions).addClass('btn-rl btn-rl-outline mt-2').text('Ir a Sesiones con este ejercicio'));
+      if (exerciseSessions) card.append($('<a>').attr('href', exerciseSessions).addClass('btn-rl btn-rl-outline mt-2').text('Registrar esta práctica'));
       exerciseBox.append(card);
     });
 
@@ -246,7 +249,8 @@ $(function () {
     if (!priorities.length) rationale.append(element('p', 'Sin prioridades respaldadas para esta propuesta.', 'text-bray'));
     priorities.forEach(priority => {
       rationale.append(element('h3', priority.title || priority.priority_key, 'h6'));
-      rationale.append(element('p', priority.explanation || 'Consulta la explicación de cobertura.'));
+      rationale.append(element('p', ui.summary(priority)));
+      rationale.append(element('details').append(element('summary', 'Ver explicación completa'), element('p', ui.text(priority.explanation || 'Consulta la explicación de cobertura.'))));
     });
     const used = $('#plan-used-goals').empty();
     if (!plan.goals_snapshot?.length) used.append(element('p', 'No se utilizaron metas compatibles.', 'text-bray'));
@@ -254,10 +258,10 @@ $(function () {
       (goal.name || goal.metric_key) + ' · ' + goal.comparator + ' ' + goal.target_value + ' % · Versión de meta ' + (goal.goal_version_id || 'No disponible'))));
     const limits = $('#plan-limitations').empty();
     appendList(limits, 'Motivos', plan.reason_codes, explainCode);
-    appendList(limits, 'Prioridades sin cubrir', plan.uncovered_priorities, String);
-    appendList(limits, 'Recursos faltantes', plan.missing_exercises, String);
+    appendList(limits, 'Prioridades sin cubrir', plan.uncovered_priorities, ui.name);
+    appendList(limits, 'Recursos faltantes', plan.missing_exercises, ui.name);
     appendList(limits, 'Recursos excluidos', plan.catalog_exclusions, value =>
-      (value.exercise_key || value.key || 'Recurso') + ': ' + explainCode(value.reason || value.reason_code || 'No disponible'));
+      ui.name(value.exercise_key || value.key || 'Recurso') + ': ' + explainCode(value.reason || value.reason_code || 'No disponible'));
     appendList(limits, 'Metas excluidas', plan.goals_excluded, value => 'Meta ' + value.goal_id + ': ' + explainCode(value.reason));
     appendList(limits, 'Limitaciones', plan.limitations, explainCode);
     if (!limits.children().length) limits.append(element('p', 'No se informaron exclusiones adicionales.', 'text-bray'));
@@ -295,14 +299,14 @@ $(function () {
     versions = [];
     $('#plan-output').prop('hidden', true);
     $('#plan-adjust').prop('open', true);
-    $('#no-plan').prop('hidden', false).text('No hay un plan consultado. Genera una propuesta para este bloque.');
+    $('#no-plan').prop('hidden', false).text('No hay un plan consultado. Abre Preparar o ajustar entrenamiento para crear tu rutina.');
     renderVersions();
   }
 
   async function readBlockPlan() {
     clearPlan();
     if (!selectedBlock) {
-      $('#no-plan').text('Selecciona un bloque. Si aún no tienes partidas cargadas, empieza en Replays.');
+      $('#no-plan').text('Selecciona un bloque. Si aún no tienes partidas cargadas, empieza en Mis partidas.');
       return;
     }
     try {
@@ -310,7 +314,7 @@ $(function () {
       message('Plan guardado recuperado del servidor.');
     } catch (error) {
       if (error.status === 404) {
-        $('#no-plan').text('Este bloque aún no tiene un plan guardado. Genera una propuesta cuando el bloque esté listo.');
+        $('#no-plan').text('Este bloque aún no tiene un plan guardado. Revisa el tiempo disponible y pulsa Preparar entrenamiento.');
         message('Sin plan guardado para este bloque.');
       } else {
         problem(error);

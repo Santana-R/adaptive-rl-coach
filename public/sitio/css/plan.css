@@ -67,3 +67,12 @@
 .plan-page .table th, .plan-page .table td { 
     white-space: nowrap; 
 }
+
+.training-time { display: flex; flex-wrap: wrap; gap: .75rem 2rem; margin-block: .75rem; }
+.training-time dt { color: #b3becd; font-size: .8rem; font-weight: 400; }
+.training-time dd { margin: 0; color: #fff; font-weight: 700; }
+.plan-page #plan-time-progress { height: .4rem; }
+.plan-page #plan-time-bar { font-size: 0; }
+.plan-page #plan-identity { margin-block: .5rem; font-size: .9rem; }
+.plan-page .plan-card { border-radius: .65rem; border-color: #385566; padding: 1rem; }
+.plan-page #reload-plan { padding: .3rem .75rem; font-size: .85rem; }

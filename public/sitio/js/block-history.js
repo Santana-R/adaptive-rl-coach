@@ -24,7 +24,7 @@
     list = $('<div>');
     detail = $('<section>').attr({ tabindex: '-1', 'aria-label': 'Detalle del bloque' }).prop('hidden', true);
     const heading = $('<div>').addClass('d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2').append(
-      $('<h2>').addClass('h4 mb-0').text('Historial de bloques'),
+      $('<h2>').addClass('h4 mb-0').text('Mis bloques de partidas'),
       $('<button>').attr('type', 'button').addClass('btn-rl btn-rl-outline').text('Actualizar historial').on('click', () => refresh())
     );
     panel.empty().append(heading, status, list, detail);
@@ -35,8 +35,8 @@
   function readyActions(id) {
     const query = '?' + new URLSearchParams({ block_id: id });
     return [
-      $('<a>').addClass('btn-rl btn-rl-accent').attr('href', 'analisis.html' + query).text('Ver análisis'),
-      $('<a>').addClass('btn-rl btn-rl-outline').attr('href', 'plan.html' + query).text('Ver plan')
+      $('<a>').addClass('btn-rl btn-rl-accent').attr('href', 'analisis.html' + query).text('Ver resultados'),
+      $('<a>').addClass('btn-rl btn-rl-outline').attr('href', 'plan.html' + query).text('Mi entrenamiento')
     ];
   }
   async function show(id, focus = true) {

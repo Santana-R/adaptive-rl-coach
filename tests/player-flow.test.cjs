@@ -52,6 +52,7 @@ test('Análisis abre el último bloque listo y conserva las métricas si falla l
     },
   };
 
+  vm.runInNewContext(fs.readFileSync(require.resolve('../public/sitio/js/player-ui.js'), 'utf8'), { window });
   vm.runInNewContext(source, {
     window,
     document: { getElementById: node, addEventListener() {} },

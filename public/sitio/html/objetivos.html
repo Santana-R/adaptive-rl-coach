@@ -28,11 +28,11 @@
     <div class="app-shell">
       <aside class="sidebar">
         <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
-        <a href="plan.html" class="sidebar-link">Plan</a>
-        <a href="replays.html" class="sidebar-link">Replays</a>
-        <a href="analisis.html" class="sidebar-link">Análisis</a>
+        <a href="plan.html" class="sidebar-link">Mi entrenamiento</a>
+        <a href="replays.html" class="sidebar-link">Mis partidas</a>
+        <a href="analisis.html" class="sidebar-link">Resultados</a>
         <a href="objetivos.html" class="sidebar-link active" aria-current="page">Objetivos</a>
-        <a href="sesiones.html" class="sidebar-link">Sesiones</a>
+        <a href="sesiones.html" class="sidebar-link">Mi progreso</a>
         <a href="perfil.html" class="sidebar-link">Perfil</a>
         <a href="helpme.html" class="sidebar-link">Ayuda</a>
         <div class="sidebar-footer">
@@ -40,8 +40,8 @@
         </div>
       </aside>
       <main class="app-main text-light">
-        <h1 class="fw-bold text-light">Gestión de objetivos</h1>
-        <p class="text-bray">Una meta principal de rendimiento y una meta opcional de entrenamiento por modalidad.</p>
+        <h1 class="fw-bold text-light">Mis objetivos</h1>
+        <p class="text-bray">Elige una meta para tus partidas y, si quieres, otra para tu práctica. Por ejemplo: alcanzar 30 % de eficiencia de tiro o practicar 40 minutos.</p>
         <p id="goals-status" role="status" aria-live="polite" tabindex="-1">Consultando objetivos…</p>
         <a id="goals-login" href="login.html" class="btn-rl btn-rl-accent mb-3" hidden>Iniciar sesión</a>
         <div class="d-flex flex-wrap gap-3 mb-3">
@@ -141,7 +141,7 @@
           <div id="detail-body"></div>
           <button id="close-detail" type="button" class="btn-rl btn-rl-outline">Cerrar detalle</button>
         </section>
-      <section data-coach-report aria-label="Seguimiento por periodo"></section>
+      <details class="report-details"><summary>Ver avance por periodo</summary><section data-coach-report aria-label="Seguimiento por periodo"></section></details>
       </main>
     </div>
 

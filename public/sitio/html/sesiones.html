@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Sesiones</title>
+    <title>Mi progreso</title>
     <!-- MDB icon -->
     <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
     <!-- Font Awesome -->
@@ -27,11 +27,11 @@
     <div class="app-shell">
       <aside class="sidebar">
         <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
-        <a href="plan.html" class="sidebar-link">Plan</a>
-        <a href="replays.html" class="sidebar-link">Replays</a>
-        <a href="analisis.html" class="sidebar-link">Análisis</a>
+        <a href="plan.html" class="sidebar-link">Mi entrenamiento</a>
+        <a href="replays.html" class="sidebar-link">Mis partidas</a>
+        <a href="analisis.html" class="sidebar-link">Resultados</a>
         <a href="objetivos.html" class="sidebar-link">Objetivos</a>
-        <a href="sesiones.html" class="sidebar-link active" aria-current="page">Sesiones</a>
+        <a href="sesiones.html" class="sidebar-link active" aria-current="page">Mi progreso</a>
         <a href="perfil.html" class="sidebar-link">Perfil</a>
         <a href="helpme.html" class="sidebar-link">Ayuda</a>
         <div class="sidebar-footer">
@@ -39,11 +39,11 @@
         </div>
       </aside>
       <main class="app-main">
-        <h1 class="fw-bold text-light">Sesiones y seguimiento</h1>
-        <p class="text-bray">Registra tu práctica sobre el plan que realizaste. Entrenar y mejorar en partidas son evidencias distintas.</p>
+        <h1 class="fw-bold text-light">Mi progreso</h1>
+        <p class="text-bray">Aquí puedes revisar lo que has practicado. Para registrar otra sesión, abre un ejercicio desde Mi entrenamiento.</p>
         <section id="sessions-plan-context" class="followup-panel" aria-live="polite"></section>
         <section id="session-editor" class="followup-panel" aria-labelledby="session-title" hidden>
-          <h2 id="session-title" class="h4">Registrar o corregir práctica</h2>
+          <h2 id="session-title" class="h4">Registrar mi práctica</h2>
           <p id="session-edit-note">La fecha y hora se introducen en la zona local de este dispositivo.</p>
           <form id="session-form">
             <fieldset id="session-fields" disabled>
@@ -51,17 +51,17 @@
               <div class="row g-3">
                 <div class="col-12 col-md-6"><label for="session-date">Fecha y hora local</label><input id="session-date" type="datetime-local" class="form-control" required></div>
                 <div class="col-12 col-md-6"><label for="session-minutes">Minutos practicados</label><input id="session-minutes" type="number" min="1" max="32767" step="1" class="form-control" required></div>
-                <div class="col-12"><label for="session-exercise">Ejercicio de esta versión</label><select id="session-exercise" class="form-select" required></select></div>
+                <div class="col-12"><label for="session-exercise">Ejercicio que practicaste</label><select id="session-exercise" class="form-select" required></select></div>
                 <div class="col-12"><label for="session-notes">Notas (opcional)</label><textarea id="session-notes" class="form-control" maxlength="2000" rows="3"></textarea></div>
               </div>
               <button id="session-submit" type="submit" class="btn-rl btn-rl-accent mt-3">Registrar sesión</button>
             </fieldset>
-            <button id="session-cancel" type="button" class="btn-rl btn-rl-outline mt-3">Limpiar / cancelar corrección</button>
+            <button id="session-cancel" type="button" class="btn-rl btn-rl-outline mt-3">Cancelar corrección</button>
           </form>
         </section>
         <section class="followup-panel" aria-labelledby="sessions-history-title">
-          <h2 id="sessions-history-title" class="h4">Historial de sesiones</h2>
-          <div class="row g-3 mb-3">
+          <h2 id="sessions-history-title" class="h4">Mi práctica registrada</h2>
+          <div id="sessions-filters" class="row g-3 mb-3" hidden>
             <div class="col-12 col-sm-4"><label for="sessions-from">Desde (fecha local)</label><input id="sessions-from" type="date" class="form-control"></div>
             <div class="col-12 col-sm-4"><label for="sessions-to">Hasta (fecha local)</label><input id="sessions-to" type="date" class="form-control"></div>
             <div class="col-12 col-sm-4 d-flex align-items-end"><button id="sessions-refresh" type="button" class="btn-rl btn-rl-outline">Actualizar sesiones</button></div>
@@ -69,8 +69,8 @@
           <p id="sessions-status" role="status" aria-live="polite"></p>
           <div id="sessions-list"></div>
         </section>
-        <section data-coach-report aria-label="Seguimiento de la práctica"></section>
-        <section data-block-history aria-label="Historial de bloques"></section>
+        <details class="report-details"><summary>Comparar práctica y resultados por periodo</summary><section data-coach-report aria-label="Seguimiento de la práctica"></section></details>
+
       </main>
     </div>
 
@@ -87,7 +87,6 @@
     <script src="../js/followup-model.js"></script>
     <script src="../js/followup-service.js"></script>
     <script src="../js/sessions.js"></script>
-    <script src="../js/block-history.js"></script>
     <script src="../../js/reports.js"></script>
   </body>
 </html>

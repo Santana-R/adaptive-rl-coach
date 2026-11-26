@@ -27,6 +27,7 @@ async function renderController(base, blockId, token, fetchImpl = fetch) {
       return body.data;
     },
   };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../public/sitio/js/player-ui.js'), 'utf8'), { window: root });
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../public/js/analysis.js'), 'utf8'),
     { window: root, document: { getElementById: get, addEventListener() {} }, Option: class {}, URL, URLSearchParams, Intl },
     { timeout: 1000 });
