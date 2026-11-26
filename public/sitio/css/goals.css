@@ -1,14 +1,93 @@
-/* A20: colores y estados; distribución adaptable mediante MDB. */
+/* Objetivos */
 .goals-page [hidden]{ 
     display: none !important; 
 }
+
+.goals-heading, .goal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .65rem;
+}
+
+.goals-heading {
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.goals-heading h1 { margin: 0; }
+
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
 .goals-page .goals-card {
   background-color: rgb(29, 63, 81);
-  border: 1px solid rgb(85, 118, 147);
-  border-radius: 1rem;
-  padding: 1.25rem;
+  border: 1px solid #385566;
+  border-radius: .65rem;
+  padding: 1rem;
   margin-bottom: 1rem;
   overflow-wrap: anywhere;
+}
+
+.goals-grid > .goals-card { grid-column: 1 / -1; }
+
+.goal-filter-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: .75rem;
+  max-width: 40rem;
+}
+
+.goal-extra-filters { margin-top: .75rem; }
+.goal-extra-filters summary { cursor: pointer; width: fit-content; }
+.goal-extra-filters .goal-filter-row { margin-top: .65rem; }
+
+.goals-page .form-label { color: #c7d7e2; }
+.goals-page #goals-status:empty, .goals-page #goal-count:empty { margin: 0; }
+
+.goal-name {
+  font-size: 1.125rem;
+  margin-bottom: .5rem;
+}
+
+.goal-target {
+  color: #c7d7e2;
+  margin-bottom: .3rem;
+}
+
+.goal-target strong {
+  color: #0de4c4;
+  font-size: 1.25rem;
+}
+
+.goal-meta {
+  color: #c7d7e2;
+  font-size: .875rem;
+  margin-bottom: .875rem;
+}
+
+.goals-page .goal-actions .btn-rl {
+  padding: .45rem .75rem;
+  font-size: .875rem;
+}
+
+.goals-page .goal-actions .goal-retire {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #e1ebf2;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.goals-page .goal-actions .goal-retire:hover { color: #ffb4b4; }
+
+@media (max-width: 36rem) {
+  .goal-filter-row { grid-template-columns: minmax(0, 1fr); }
 }
 .goals-page .form-control,
 .goals-page .form-control:focus,
@@ -27,7 +106,7 @@
     color-scheme: dark; 
 }
 
-.goals-page :is(input, select, button, a):focus-visible {
+.goals-page :is(input, select, button, a, summary):focus-visible {
   outline: 3px solid rgb(13, 228, 196);
   outline-offset: 3px;
 }

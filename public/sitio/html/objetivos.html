@@ -39,15 +39,16 @@
           <button type="button" class="btn-rl btn-rl-outline w-100" data-mdb-ripple-init data-mdb-ripple-color="info">Cerrar sesión</button>
         </div>
       </aside>
-      <main class="app-main text-light">
-        <h1 class="fw-bold text-light">Mis objetivos</h1>
-        <p class="text-bray">Elige una meta para tus partidas y, si quieres, otra para tu práctica. Por ejemplo: alcanzar 30 % de eficiencia de tiro o practicar 40 minutos.</p>
+      <main class="app-main text-light goals-page">
+        <header class="goals-heading">
+          <h1 class="fw-bold text-light">Mis objetivos</h1>
+          <div class="goal-actions">
+            <button id="new-goal" type="button" class="btn-rl btn-rl-accent" disabled>Crear objetivo</button>
+            <button id="reload-goals" type="button" class="btn-rl btn-rl-outline">Actualizar lista</button>
+          </div>
+        </header>
         <p id="goals-status" role="status" aria-live="polite" tabindex="-1">Consultando objetivos…</p>
         <a id="goals-login" href="login.html" class="btn-rl btn-rl-accent mb-3" hidden>Iniciar sesión</a>
-        <div class="d-flex flex-wrap gap-3 mb-3">
-          <button id="new-goal" type="button" class="btn-rl btn-rl-accent" disabled>Crear objetivo</button>
-          <button id="reload-goals" type="button" class="btn-rl btn-rl-outline">Actualizar lista</button>
-        </div>
 
         <section id="goal-editor" class="goals-card" aria-labelledby="editor-title" hidden>
           <h2 id="editor-title" class="h4">Nuevo objetivo</h2>
@@ -103,41 +104,46 @@
           </form>
         </section>
 
-        <section id="goals-filters" class="row g-3 mb-3" aria-label="Filtros de objetivos" hidden>
-          <div class="col-12 col-md-6 col-lg-3">
-            <label for="goal-search" class="form-label">Buscar por nombre</label>
-            <input id="goal-search" class="form-control" type="search" placeholder="Nombre del objetivo">
+        <section id="goals-filters" class="goals-card" aria-label="Filtros de objetivos" hidden>
+          <div class="goal-filter-row">
+            <div>
+              <label for="goal-search" class="form-label">Buscar por nombre</label>
+              <input id="goal-search" class="form-control" type="search" placeholder="Nombre del objetivo">
+            </div>
+            <div>
+              <label for="filter-status" class="form-label">Estado</label>
+              <select id="filter-status" class="form-select"><option value="active">Activos</option><option value="archived">Archivados</option><option value="">Todos</option></select>
+            </div>
           </div>
-          <div class="col-12 col-md-6 col-lg-3">
-            <label for="filter-type" class="form-label">Tipo</label>
-            <select id="filter-type" class="form-select"><option value="">Todos</option><option value="performance">Rendimiento</option><option value="training">Entrenamiento</option></select>
-          </div>
-          <div class="col-12 col-md-6 col-lg-3">
-            <label for="filter-status" class="form-label">Estado</label>
-            <select id="filter-status" class="form-select"><option value="active">Activos</option><option value="archived">Archivados</option><option value="">Todos</option></select>
-          </div>
-          <div class="col-12 col-md-6 col-lg-3">
-            <label for="filter-mode" class="form-label">Modalidad</label>
-            <select id="filter-mode" class="form-select"><option value="">Todas</option><option value="1v1">1v1</option><option value="2v2">2v2</option><option value="3v3">3v3</option></select>
-          </div>
+          <details class="goal-extra-filters">
+            <summary id="goal-more-filters">Más filtros</summary>
+            <div class="goal-filter-row">
+              <div>
+                <label for="filter-type" class="form-label">Tipo</label>
+                <select id="filter-type" class="form-select"><option value="">Todos</option><option value="performance">Rendimiento</option><option value="training">Entrenamiento</option></select>
+              </div>
+              <div>
+                <label for="filter-mode" class="form-label">Modalidad</label>
+                <select id="filter-mode" class="form-select"><option value="">Todas</option><option value="1v1">1v1</option><option value="2v2">2v2</option><option value="3v3">3v3</option></select>
+              </div>
+            </div>
+          </details>
         </section>
         <p id="goal-count" class="text-bray" aria-live="polite"></p>
-        <div id="goals-results" aria-busy="true" hidden>
+        <div id="goals-results" class="goals-grid" aria-busy="true" hidden>
           <p id="goals-empty" class="goals-card" hidden></p>
           <section id="performance-section" aria-labelledby="performance-title">
-            <h2 id="performance-title" class="h4">Rendimiento</h2>
-            <p class="text-bray">Precisión de tiro de bloques comparables, en porcentaje.</p>
+            <h2 id="performance-title" class="h5">Rendimiento</h2>
             <div id="performance-list"></div>
           </section>
           <section id="training-section" aria-labelledby="training-title">
-            <h2 id="training-title" class="h4">Entrenamiento</h2>
-            <p class="text-bray">Minutos declarados en sesiones. No equivalen a mejora medida en partidas.</p>
+            <h2 id="training-title" class="h5">Entrenamiento</h2>
             <div id="training-list"></div>
           </section>
         </div>
 
         <section id="goal-detail" class="goals-card" aria-labelledby="detail-title" tabindex="-1" hidden>
-          <h2 id="detail-title" class="h4">Detalle e historial</h2>
+          <h2 id="detail-title" class="h4">Historial del objetivo</h2>
           <div id="detail-body"></div>
           <button id="close-detail" type="button" class="btn-rl btn-rl-outline">Cerrar detalle</button>
         </section>
