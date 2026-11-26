@@ -68,19 +68,66 @@
             <div class="card bg-card border-card h-100">
               <div class="card-body">
                 <h5 class="card-title fw-bold text-light mb-1">Progreso de los jugadores</h5>
-                <p class="text-gold fw-bold mb-3">Pendiente</p>
-                <p class="text-bray mb-3" id="r-progreso"></p>
-                <ul class="text-bray mb-0">
-                  <li>Jugadores que mejoraron entre bloques.</li>
-                  <li>Objetivos cumplidos.</li>
-                  <li>Jugadores que subieron de rango (declarado).</li>
-                </ul>
-                <p class="text-bray mt-3 mb-0">No se muestran cifras hasta que existan con periodo, muestra y exclusiones.</p>
+                <p class="text-bray mb-3">El reporte con datos reales está pendiente de integración.</p>
+                <button type="button" id="progress-demo-toggle" class="btn-rl btn-rl-outline"
+                  aria-controls="progress-demo" aria-expanded="false">Ver demo de progreso</button>
               </div>
             </div>
           </div>
         </div>
         <p class="app-note">Cada cifra es un conteo actual; no se suman entre tarjetas.</p>
+
+        <section class="card bg-card border-card denotative-gold mb-3" id="progress-demo" aria-labelledby="progress-demo-title" hidden>
+          <div class="card-body">
+            <h2 class="h4 fw-bold text-light" id="progress-demo-title" tabindex="-1">Progreso de los jugadores</h2>
+            <p class="text-gold fw-bold mb-3">Datos de demostración · Jugadores ficticios</p>
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-sm-6 col-lg-4">
+                <label for="progress-demo-days" class="form-label text-bray">Periodo</label>
+                <select id="progress-demo-days" class="form-select admin-input">
+                  <option value="7">Últimos 7 días</option><option value="30" selected>Últimos 30 días</option><option value="60">Últimos 60 días</option>
+                </select>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <label for="progress-demo-mode" class="form-label text-bray">Modalidad</label>
+                <select id="progress-demo-mode" class="form-select admin-input">
+                  <option value="1v1">1v1</option><option value="2v2" selected>2v2</option><option value="3v3">3v3</option>
+                </select>
+              </div>
+            </div>
+            <p id="progress-demo-status" class="text-bray mb-3" role="status"></p>
+            <div id="progress-demo-results" hidden>
+              <div class="row g-3 mb-4">
+                <div class="col-12 col-md-4"><div class="stat-card h-100">
+                  <div class="stat-label">Jugadores que mejoraron en tiro</div>
+                  <div class="stat-value" id="demo-shooting"></div>
+                  <div class="stat-sub" id="demo-shooting-excluded"></div>
+                </div></div>
+                <div class="col-12 col-md-4"><div class="stat-card h-100">
+                  <div class="stat-label">Objetivos cumplidos</div>
+                  <div class="stat-value" id="demo-goals"></div>
+                  <div class="stat-sub" id="demo-goals-excluded"></div>
+                </div></div>
+                <div class="col-12 col-md-4"><div class="stat-card h-100">
+                  <div class="stat-label">Jugadores que subieron de rango declarado</div>
+                  <div class="stat-value" id="demo-ranks"></div>
+                  <div class="stat-sub" id="demo-ranks-excluded"></div>
+                </div></div>
+              </div>
+              <h3 class="h5 fw-bold text-light mb-2">Mejora por prioridad</h3>
+              <label for="demo-shooting-bar" id="demo-shooting-label" class="text-bray d-block"></label>
+              <progress id="demo-shooting-bar" class="w-100" max="1" value="0"></progress>
+              <details class="text-bray mt-3">
+                <summary>Cómo se calcula</summary>
+                <ul class="mt-2 mb-0">
+                  <li>Tiro: compara el bloque más reciente del periodo con su anterior compatible. Hay mejora si sube la eficiencia.</li>
+                  <li>Objetivos: cuenta metas que vencen en el periodo y tienen evidencia para evaluarse.</li>
+                  <li>Rango: compara dos registros declarados de la misma modalidad y temporada. Cuenta un cambio a un rango superior.</li>
+                </ul>
+              </details>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
 

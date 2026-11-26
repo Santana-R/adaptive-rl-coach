@@ -420,6 +420,7 @@ body {
     box-shadow: 0 0 0 .2rem rgba(247, 190, 74, .25);
 }
 .admin .admin-input option{ background-color: rgb(15, 28, 41); color: #fff; }
+#demo-shooting-bar{ height: 1rem; accent-color: rgb(247, 190, 74); }
 .admin .link-admin{
     color: rgb(247, 190, 74);
     font-size: .95rem;
