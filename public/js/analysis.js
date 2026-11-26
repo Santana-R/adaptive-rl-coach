@@ -21,6 +21,7 @@
     BLOCK_NOT_READY: 'El bloque anterior no está listo.', NO_COMPARABLE_METRICS: 'No hay métricas suficientes para comparar.',
   };
   const model = root.CoachFollowupModel;
+  const ui = root.CoachPlayerUI;
   const demo = params => !params.has('block_id') &&
     (params.get('demo') === '1' || params.has('case') || params.has('scenario'));
   let activeAnalysis = null, activeChart = null, requestId = 0;
@@ -127,8 +128,8 @@
         : `${number(e.goals.value)} goles / ${number(e.shots.value)} tiros; ${e.coverage}/5 partidas. Mínimo aplicado: ${e.min_shots} tiros.`;
       const observations = defense ? `<ul>${e.observations.map((o, i) => `<li>Partida ${i + 1}: ${escape(number(o.goals.value))} goles como último defensor en ${escape(number(o.duration.value))} s de partida; equivalente a ${escape(number(o.rate.value))} goles/5 min; ${escape(number(o.role_seconds.value))} s en el papel más retrasado (${escape(number(o.role_percent.value))} %); por delante del balón ${escape(number(o.infront_percent.value))} %; separación media ${escape(number(o.mates_distance.value))} uu.</li>`).join('')}</ul><p>El agregado no localiza el minuto del gol ni demuestra un error; la revisión de la replay es manual.</p>`
         : boost ? `<ul>${e.observations.map((o, i) => `<li>Partida ${i + 1}: ${escape(number(o.percent_zero_boost))} % en cero; ${escape(number(o.time_zero_boost_s))} s acumulados.</li>`).join('')}</ul>` : '';
-      return `<article class="priority-card${index ? ' secondary' : ''}"><div class="priority-top d-flex justify-content-between flex-wrap gap-2"><span>PRIORIDAD ${String(index + 1).padStart(2, '0')}</span><span>${defense ? 'COBERTURA DEFENSIVA' : boost ? 'DISPONIBILIDAD DE BOOST' : 'FINALIZACIÓN'}</span></div><h3>${escape(p.title)}</h3><p>${escape(p.explanation)}</p><details><summary>Ver evidencia</summary><p>${escape(p.rule_id)} · ${escape(p.rules_version)}. ${escape(detail)} Criterio inicial pendiente de calibración.</p>${observations}</details></article>`;
-    }).join('') + (a.evaluations || []).filter(e => e.status !== 'active').map(e => `<details class="mb-2"><summary>${escape(ruleLabels[e.rule_id] || 'Otra señal')}</summary><p>${escape(e.explanation)}</p></details>`).join('');
+      return `<article class="priority-card${index ? ' secondary' : ''}"><div class="priority-top d-flex justify-content-between flex-wrap gap-2"><span>PRIORIDAD ${String(index + 1).padStart(2, '0')}</span><span>${defense ? 'COBERTURA DEFENSIVA' : boost ? 'DISPONIBILIDAD DE BOOST' : 'FINALIZACIÓN'}</span></div><h3>${escape(p.title)}</h3><p>${escape(ui.summary(p))}</p><details><summary>Por qué se recomienda</summary><p>${escape(ui.text(p.explanation))}</p><p>${escape(p.rule_id)} · ${escape(p.rules_version)}. ${escape(detail)} Criterio inicial pendiente de calibración.</p>${observations}</details></article>`;
+    }).join('') + (a.evaluations || []).filter(e => e.status !== 'active').map(e => `<details class="mb-2"><summary>${escape(ruleLabels[e.rule_id] || 'Otra señal')}</summary><p>${escape(ui.text(e.explanation))}</p></details>`).join('');
     $('analysis-source').textContent = envelope.meta.synthetic
       ? 'Datos sintéticos de prueba. El motor calcula estas métricas y prioridades; no provienen de replays cargados.'
       : 'Estadísticas del bloque consultado. Las recomendaciones usan criterios iniciales pendientes de calibración.';

@@ -29,7 +29,7 @@
           list.replaceChildren();
           files.forEach(file => {
             const item = document.createElement('li');
-            item.className = 'd-flex justify-content-between align-items-center';
+            item.className = 'd-flex justify-content-between align-items-center gap-3';
             const name = document.createElement('span');
             name.textContent = file.name;
             const remove = document.createElement('button');
@@ -46,7 +46,7 @@
           count.textContent = `${files.length} de 5`;
           const error = message || validate();
           showNotice(
-            !files.length && !message ? 'Elige cinco archivos .replay distintos.' : error || 'Todo listo. Ya puedes procesar el bloque.',
+            !files.length && !message ? 'Elige cinco archivos .replay distintos.' : error || 'Todo listo. Pulsa Analizar estas 5 partidas.',
             !files.length && !message ? 'idle' : error ? 'error' : 'valid'
           );
           process.disabled = Boolean(error);

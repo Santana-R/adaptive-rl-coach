@@ -7,6 +7,7 @@
 const express = require('express');
 const { ApiError, CONTRACT_VERSION } = require('../middleware/auth');
 const { getCatalog } = require('../repositories/catalog');
+const { buildAdminProgressDemo } = require('../services/admin-progress-demo');
 
 async function count(supabase, table, filters = {}) {
   let query = supabase.from(table).select('*', { count: 'exact', head: true });
@@ -19,6 +20,10 @@ async function count(supabase, table, filters = {}) {
 function createAdminSummaryRouter({ supabase, requireAuth, requireRole }) {
   const router = express.Router();
   router.use(requireAuth, requireRole('admin'), (_req, res, next) => { res.set('Cache-Control', 'no-store'); next(); });
+
+  router.get('/progress-demo', (req, res) => {
+    res.json({ data: buildAdminProgressDemo(req.query), meta: { contract_version: CONTRACT_VERSION } });
+  });
 
   router.get('/', async (_req, res, next) => {
     try {

@@ -420,6 +420,7 @@ body {
     box-shadow: 0 0 0 .2rem rgba(247, 190, 74, .25);
 }
 .admin .admin-input option{ background-color: rgb(15, 28, 41); color: #fff; }
+#demo-shooting-bar{ height: 1rem; accent-color: rgb(247, 190, 74); }
 .admin .link-admin{
     color: rgb(247, 190, 74);
     font-size: .95rem;
@@ -530,4 +531,60 @@ body {
         padding: .5rem .65rem;
         margin-bottom: .25rem;
     }
+}
+
+/* Recorrido del jugador: estructura y controles compartidos, sin otra librería. */
+.app-main {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    line-height: 1.6;
+}
+.app-main h1 { font-size: clamp(1.7rem, 3vw, 2.25rem); line-height: 1.2; }
+.app-main h2, .app-main h3 { line-height: 1.35; }
+.app-main .btn-rl { border-radius: .6rem; text-decoration: none; min-height: 44px; }
+.app-main .btn-rl-outline { border-width: 1px; }
+.app-main .btn-rl-accent:hover { background-color: #50edda; color: #0f1c29; }
+.app-main button:disabled { cursor: not-allowed; opacity: .55; }
+.app-main summary { cursor: pointer; color: #c5d8e3; }
+.app-main summary:hover { color: #0de4c4; }
+.app-main details > summary { padding-block: .35rem; }
+.app-main .priority-card { border: 0; border-left: 3px solid #0de4c4; border-radius: .35rem; padding: 1rem 1.25rem; }
+.app-main .priority-card h3 { font-size: 1.15rem; margin-block: .5rem; }
+.priority-top { font-size: .75rem; color: #9bb7c6; letter-spacing: .035em; }
+.app-main .stat-card { border-width: 1px; border-color: #294554; border-radius: .65rem; }
+.app-main .stat-card .stat-value { font-size: 1.65rem; }
+.sidebar-group { color: #8399aa; font-size: .75rem; margin: 1rem 1rem .4rem; text-transform: uppercase; letter-spacing: .06em; }
+.sidebar-information { margin-top: 1.25rem; padding-top: .5rem; border-top: 1px solid #243744; }
+.player-journey { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; padding: 0; margin: 0 0 1.75rem; font-size: .85rem; }
+.player-journey a { display: block; color: #91a8b9; padding: .65rem .5rem; border-bottom: 2px solid #294554; text-decoration: none; }
+.player-journey a.active { border-color: #0de4c4; color: #0de4c4; font-weight: 700; }
+.player-journey a:hover { color: #e9f3fa; }
+.player-journey a:focus-visible { outline: 2px solid #0de4c4; outline-offset: 2px; }
+.home-content { padding: 0; }
+.home-hero { padding-block: 1.5rem 2rem; max-width: 46rem; }
+.home-hero h1 { font-size: clamp(2rem, 3.5vw, 3rem); margin-bottom: 1.25rem; }
+.eyebrow { color: #0de4c4; font-size: .8rem; font-weight: 700; letter-spacing: .09em; }
+.home-step { padding: 1.25rem; height: 100%; background: #112735; border-radius: .65rem; }
+.home-step .step-num { display: block; margin-bottom: .5rem; }
+.report-details { color: #c5d8e3; border-top: 1px solid #294554; margin-top: 1.5rem; padding-block: 1rem; }
+#file-list { list-style: none; padding-left: 0; max-width: 50rem; }
+#file-list li { border-bottom: 1px solid #294554; padding: .55rem 0; overflow-wrap: anywhere; }
+#file-list .btn-rl { min-height: 36px; padding: .3rem .75rem; }
+@media (min-width: 768px) {
+    .sidebar { position: sticky; top: 0; height: 100vh !important; overflow-y: auto; }
+}
+@media (max-width: 767.98px) {
+    .sidebar { padding: 1rem; }
+    .sidebar-brand { margin-bottom: .75rem; }
+    .sidebar-group { width: 100%; margin: .5rem .65rem .25rem; }
+    .sidebar-information { margin-top: .5rem; }
+    .player-journey { grid-template-columns: repeat(2, 1fr); gap: .25rem .75rem; }
+}
+@media (max-width: 767.98px) {
+    .sidebar { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .5rem; }
+    .sidebar-brand { margin: 0; }
+    .sidebar-menu-toggle { padding: .4rem .75rem; min-height: 44px; border-radius: .6rem; }
+    .sidebar nav, .sidebar-footer { grid-column: 1 / -1; }
+    .sidebar:not(.menu-open) nav, .sidebar:not(.menu-open) .sidebar-footer { display: none; }
 }

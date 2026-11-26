@@ -14,7 +14,7 @@ $(function () {
     fields.prop('disabled', !plan || !plan.exercises.length || !available || busy || uncertain);
     $('#session-minutes, #session-exercise').prop('disabled', Boolean(editing && !editing.plan_exercise_id));
     $('#sessions-refresh').prop('disabled', busy);
-    $('#session-cancel').prop('disabled', busy);
+    $('#session-cancel').prop('disabled', busy).text(editing ? 'Cancelar corrección' : 'Limpiar formulario');
     $('#sessions-list button').prop('disabled', busy || !available || uncertain);
     $('#session-submit').text(editing ? 'Guardar corrección' : 'Registrar sesión');
     form.attr('aria-busy', String(busy));
@@ -27,7 +27,7 @@ $(function () {
   function reset() {
     editing = null;
     form[0].reset();
-    $('#session-edit-note').text('La fecha y hora se introducen en la zona local de este dispositivo. El servidor recibe el instante UTC.');
+    $('#session-edit-note').text('La fecha y hora se introducen en la zona local de este dispositivo.');
     if (plan && params.get('plan_exercise_id')) $('#session-exercise').val(params.get('plan_exercise_id'));
     controls();
   }
@@ -50,12 +50,17 @@ $(function () {
         $('<a>').addClass('btn-rl btn-rl-outline').attr('href', 'plan.html?' + new URLSearchParams({ plan_id: plan.plan_id, version: String(plan.version), block_id: plan.block_id })).text('Consultar esta versión del plan'));
       if (!plan.exercises.length) box.append($('<p>').text('Esta versión no contiene ejercicios: puedes consultarla, pero no registrar una sesión sobre ella.'));
       reset();
-    } catch (error) { plan = null; box.text(error.message + ' Vuelve a Plan y selecciona una versión guardada.'); }
-    finally { controls(); }
+    } catch (error) { plan = null; box.text(error.message + ' Vuelve a Mi entrenamiento y selecciona una versión guardada.'); }
+    finally {
+      // El historial puede terminar de cargar antes que la versión del plan.
+      if (available) render();
+      controls();
+    }
   }
 
   function render() {
     const list = $('#sessions-list').empty();
+    $('#sessions-filters').prop('hidden', !rows.length);
     let shown = rows;
     const from = $('#sessions-from').val(), to = $('#sessions-to').val();
     if (from || to) {
@@ -70,19 +75,23 @@ $(function () {
     if (from && to && from > to) { list.append($('<p>').text('La fecha inicial debe ser anterior o igual a la final.')); return; }
     if (!shown.length) {
       list.append($('<p>').text(rows.length ? 'No hay sesiones en estas fechas.' : 'Todavía no hay sesiones registradas.'));
-      if (!plan && !rows.length) list.append($('<a>').attr('href', 'plan.html').addClass('btn-rl btn-rl-accent').text('Ir a Plan'));
+      if (!plan && !rows.length) list.append($('<a>').attr('href', 'plan.html').addClass('btn-rl btn-rl-accent').text('Abrir Mi entrenamiento'));
       return;
     }
     for (const row of shown) {
       const card = $('<article>').addClass('followup-item').attr('data-session-id', row.session_id);
+      const exercise = plan?.plan_version_id === row.plan_version_id
+        ? plan.exercises.find(item => item.plan_exercise_id === row.plan_exercise_id) : null;
       card.append($('<h3>').addClass('h5').text(model.localDate(row.performed_at)),
-        $('<p>').text('Versión exacta de plan: ' + model.display(row.plan_version_id) + ' · Duración declarada: ' + model.display(row.duration_minutes) + ' min'),
-        $('<p>').text('Ejercicio de plan: ' + (row.plan_exercise_id || 'Varios ejercicios / no individualizado')),
+        $('<p>').text(exercise?.exercise_snapshot?.title || 'Sesión de entrenamiento'),
+        $('<p>').addClass('text-accent').text(model.display(row.duration_minutes) + ' minutos de práctica'),
+        $('<details>').append($('<summary>').text('Referencia del entrenamiento'),
+          $('<p>').text('Versión de plan: ' + model.display(row.plan_version_id) + ' · Ejercicio: ' + (row.plan_exercise_id || 'Varios ejercicios'))),
         $('<p>').text(row.notes || 'Sin notas.'));
       const actions = $('<div>').addClass('d-flex flex-wrap gap-2');
       if (plan && row.plan_version_id === plan.plan_version_id && model.id(row.session_id)) {
         actions.append($('<button>').attr('type', 'button').addClass('btn-rl btn-rl-outline').text('Corregir').on('click', () => edit(row)));
-      } else card.append($('<p>').addClass('followup-muted').text('Para corregir, abre desde Plan la versión exacta de esta sesión.'));
+      } else card.append($('<p>').addClass('followup-muted').text('Para corregir, abre desde Mi entrenamiento la versión exacta de esta sesión.'));
       if (model.id(row.session_id)) actions.append($('<button>').attr('type', 'button').addClass('btn-rl btn-rl-outline').text('Eliminar').on('click', () => remove(row)));
       list.append(card.append(actions));
     }

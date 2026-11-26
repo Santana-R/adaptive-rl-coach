@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>Replays</title>
+  <title>Mis partidas</title>
   <!-- MDB icon -->
   <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
   <!-- Font Awesome -->
@@ -23,11 +23,11 @@
   <div class="app-shell">
     <aside class="sidebar">
       <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
-      <a href="plan.html" class="sidebar-link">Plan</a>
-      <a href="replays.html" class="sidebar-link active" aria-current="page">Replays</a>
-      <a href="analisis.html" class="sidebar-link">Análisis</a>
+      <a href="plan.html" class="sidebar-link">Mi entrenamiento</a>
+      <a href="replays.html" class="sidebar-link active" aria-current="page">Mis partidas</a>
+      <a href="analisis.html" class="sidebar-link">Resultados</a>
       <a href="objetivos.html" class="sidebar-link">Objetivos</a>
-      <a href="sesiones.html" class="sidebar-link">Sesiones</a>
+      <a href="sesiones.html" class="sidebar-link">Mi progreso</a>
       <a href="perfil.html" class="sidebar-link">Perfil</a>
       <a href="helpme.html" class="sidebar-link">Ayuda</a>
       <div class="sidebar-footer">
@@ -36,13 +36,13 @@
       </div>
     </aside>
     <main class="app-main">
-      <h1 class="fw-bold text-light mb-4">Carga e historial de replays</h1>
+      <h1 class="fw-bold text-light mb-4">Mis partidas</h1>
       <div class="card bg-card border-card denotative pb-4 mb-4">
         <div class="card-body">
-          <h5 class="card-title fw-bold text-light mb-2">Cargar un bloque</h5>
+          <h5 class="card-title fw-bold text-light mb-2">Analiza tus últimas 5 partidas</h5>
           <ul class="card-text text-bray fs-6 list-unstyled mb-0">
-            <li>Mismo jugador, modalidad y tipo de partida. Carga disponible desde PC.</li>
-            <li>El servidor valida el tamaño total de la carga.</li>
+            <li>Elige cinco archivos .replay del mismo jugador, modalidad y tipo de partida.</li>
+            <li>A este grupo de cinco partidas lo llamamos bloque. Necesitas los archivos guardados en tu PC.</li>
           </ul>
         </div>
       </div>
@@ -52,7 +52,7 @@
           <button id="select-files" type="button" class="btn-rl btn-rl-outline me-3" data-mdb-ripple-init
             data-mdb-ripple-color="info">Seleccionar archivos</button>
           <button id="process-block" type="submit" class="btn-rl btn-rl-accent" data-mdb-ripple-init
-            data-mdb-ripple-color="light" disabled>Procesar bloque</button>
+            data-mdb-ripple-color="light" disabled>Analizar estas 5 partidas</button>
         </div>
         <h6 class="fw-bold text-accent">Selección: <span id="file-count">0 de 5</span></h6>
         <ul id="file-list" class="text-light mb-1"></ul>
@@ -60,7 +60,7 @@
       </form>
       <section data-block-history aria-label="Historial de bloques"></section>
 
-      <p class="text-bray">Reintentar se ofrece ante fallas recuperables. Ver análisis exige cinco partidas válidas.</p>
+      <p class="text-bray">Cuando las cinco partidas estén listas, abre sus resultados desde el historial.</p>
     </main>
   </div>
 

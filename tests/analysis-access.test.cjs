@@ -21,6 +21,7 @@ function controller(search) {
     },
   };
   const document = { getElementById: element, addEventListener: (name, callback) => { events[name] = callback; } };
+  vm.runInNewContext(fs.readFileSync('public/sitio/js/player-ui.js', 'utf8'), { window: root });
   vm.runInNewContext(fs.readFileSync('public/js/analysis.js', 'utf8'), { window: root, document, Option: class {}, URLSearchParams, URL, Intl });
   return { root, events, calls, element };
 }

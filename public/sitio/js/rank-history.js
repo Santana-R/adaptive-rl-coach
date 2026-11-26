@@ -4,8 +4,8 @@
 // Solo agrega registros; no edita ni borra (el historial se conserva).
 (function () {
   const NAMES = {
-    bronze: 'Bronze', silver: 'Silver', gold: 'Gold', platinum: 'Platinum', diamond: 'Diamond',
-    champion: 'Champion', grand_champion: 'Grand Champion', supersonic_legend: 'Supersonic Legend'
+    bronze: 'Bronce', silver: 'Plata', gold: 'Oro', platinum: 'Platino', diamond: 'Diamante',
+    champion: 'Campeón', grand_champion: 'Gran campeón', supersonic_legend: 'Leyenda supersónica'
   };
   const ROMAN = ['', 'I', 'II', 'III', 'IV'];
   const SOURCES = { self_reported: 'Declarado por ti' };

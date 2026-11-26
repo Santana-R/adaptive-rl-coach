@@ -112,22 +112,21 @@ $(function () {
 
   // Opciones siempre disponibles.
   navigation.append(
-    link('Inicio', 'index.html'),
-    link('Acerca', 'aboutus.html'),
-    link('Ayuda', 'helpme.html')
+    link('Inicio', 'index.html')
   );
 
   // Opciones que requieren sesión.
   const playerPages = [
-    ['Replays', 'replays.html'],
-    ['Análisis', 'analisis.html'],
-    ['Plan', 'plan.html'],
-    ['Sesiones', 'sesiones.html'],
+    ['Mis partidas', 'replays.html'],
+    ['Resultados', 'analisis.html'],
+    ['Mi entrenamiento', 'plan.html'],
+    ['Mi progreso', 'sesiones.html'],
     ['Objetivos', 'objetivos.html'],
     ['Perfil', 'perfil.html']
   ];
 
   playerPages.forEach(function ([title, page]) {
+    if (page === 'objetivos.html') playerLinks.append($('<p>').addClass('sidebar-group').text('Mi cuenta'));
     playerLinks.append(link(title, page));
   });
 
@@ -151,7 +150,27 @@ $(function () {
     }
   });
 
-  navigation.append(playerLinks, adminLinks);
+  const information = $('<div>').addClass('sidebar-information').append(
+    link('Ayuda', 'helpme.html'), link('Acerca', 'aboutus.html')
+  );
+  navigation.append(playerLinks, adminLinks, information);
+
+  // El recorrido orienta sin bloquear la navegación entre pantallas.
+  const journeyPages = playerPages.slice(0, 4);
+  if (journeyPages.some(([, page]) => page === currentPage)) {
+    const journey = $('<ol>').addClass('player-journey').attr('aria-label', 'Recorrido del jugador');
+    journeyPages.forEach(([title, page], index) => {
+      const item = $('<li>');
+      const anchor = link((index + 1) + '. ' + title, page).removeClass('sidebar-link');
+      const block = new URLSearchParams(window.location.search).get('block_id');
+      if (/^[1-9]\d{0,18}$/.test(block || '') && ['analisis.html', 'plan.html'].includes(page)) {
+        anchor.attr('href', page + '?' + new URLSearchParams({ block_id: block }));
+      }
+      item.append(anchor);
+      journey.append(item);
+    });
+    main.prepend(journey);
+  }
 
   const loginLink = link('Ingresar', 'login.html')
     .addClass('d-none');
@@ -179,7 +198,15 @@ $(function () {
     status
   );
 
-  sidebar.append(navigation, footer);
+  navigation.attr('id', 'player-navigation');
+  const menuButton = $('<button>').attr({ type: 'button', 'aria-controls': 'player-navigation', 'aria-expanded': 'false' })
+    .addClass('sidebar-menu-toggle btn-rl btn-rl-outline d-md-none').text('Menú');
+  menuButton.on('click', function () {
+    const expanded = !sidebar.hasClass('menu-open');
+    sidebar.toggleClass('menu-open', expanded);
+    menuButton.attr('aria-expanded', String(expanded)).text(expanded ? 'Cerrar menú' : 'Menú');
+  });
+  sidebar.append(menuButton, navigation, footer);
   sidebarColumn.append(sidebar);
   contentColumn.append(main);
 
@@ -198,17 +225,48 @@ $(function () {
     const user = session?.user?.id ?? null;
     if (!homeAction.length || homeUser === user) return;
     homeUser = user;
+    function next(title, description, label, href) {
+      if (homeUser !== user) return;
+      $('#home-title').text(title);
+      $('#home-description').text(description);
+      homeAction.attr('href', href).text(label);
+    }
+    $('#home-status').text('');
     if (!user) {
-      homeAction.attr('href', 'login.html#registro').text('Crear cuenta');
+      next('Descubre qué practicar después de jugar.', 'Sube cinco partidas de Rocket League, revisa tus prioridades y prepara un entrenamiento para el tiempo que tienes.', 'Crear cuenta', 'login.html#registro');
       return;
     }
-    homeAction.attr('href', 'replays.html').text('Ir a Replays');
+    next('Continúa tu entrenamiento.', 'Sube cinco partidas o consulta tus resultados anteriores.', 'Ir a Mis partidas', 'replays.html');
+    const api = window.CoachFollowupService;
+    if (!api) return;
     try {
-      const [block] = window.CoachFollowupModel.readyBlocks(await window.CoachFollowupService.blocks());
-      if (homeUser === user && block) homeAction
-        .attr('href', 'analisis.html?' + new URLSearchParams({ block_id: block.block_id })).text('Ver mi último bloque');
+      let profile;
+      try { profile = await api.request('/profile'); }
+      catch (error) { if (error.status !== 404) throw error; }
+      if (homeUser !== user) return;
+      if (!window.CoachProfileValidation.validate(profile).valid) {
+        next('Primero, configura tu perfil.', 'Indica tu cuenta de juego y cuánto tiempo tienes para entrenar. Así podremos identificar tus partidas.', 'Completar mi perfil', 'perfil.html');
+        return;
+      }
+      const [block] = window.CoachFollowupModel.readyBlocks(await api.blocks());
+      if (homeUser !== user) return;
+      if (!block) {
+        next('Tu siguiente paso: subir 5 partidas.', 'Elige cinco archivos .replay del mismo jugador, modalidad y tipo de partida. Serán tu punto de partida.', 'Subir mis primeras partidas', 'replays.html');
+        return;
+      }
+      const query = new URLSearchParams({ block_id: block.block_id });
+      next('Tus resultados están listos.', 'Revisa las prioridades de tu último bloque y prepara una rutina.', 'Ver mis resultados', 'analisis.html?' + query);
+      let plan;
+      try { plan = await api.request('/blocks/' + encodeURIComponent(block.block_id) + '/plan'); }
+      catch (error) { if (error.status !== 404) throw error; }
+      if (homeUser !== user) return;
+      if (plan?.plan_id && plan.version) {
+        query.set('plan_id', plan.plan_id);
+        query.set('version', String(plan.version));
+        next('Tu entrenamiento está guardado.', 'Consulta los ejercicios de tu último bloque. Después de practicar, registra lo que hiciste en Mi progreso.', 'Continuar mi entrenamiento', 'plan.html?' + query);
+      }
     } catch {
-      // El acceso a Replays también permite reintentar la consulta.
+      if (homeUser === user) $('#home-status').text('No se pudieron consultar todos tus datos. Puedes volver a intentarlo desde Mis partidas.');
     }
   }
 

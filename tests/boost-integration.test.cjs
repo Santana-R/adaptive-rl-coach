@@ -57,6 +57,7 @@ for (const name of ['boost-high','boost-missing']) test('Controlador real de AnÃ
   const root = { CoachFollowupModel: require('../public/sitio/js/followup-model'), location:{ search:'?case='+name,href:base+'/sitio/html/analisis.html?case='+name },
     fetch:(path,options)=>fetch(base+path,options) };
   const context = vm.createContext({window:root,document:{getElementById:get,addEventListener(){}},URL,URLSearchParams,Intl,console});
+  vm.runInContext(fs.readFileSync(require.resolve('../public/sitio/js/player-ui.js'),'utf8'),context);
   vm.runInContext(fs.readFileSync(require.resolve('../public/js/analysis.js'),'utf8'),context);
   await root.CoachAnalysis.load();
   assert.equal(get('analysis-error').hidden,true);

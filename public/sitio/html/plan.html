@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Plan</title>
+    <title>Mi entrenamiento</title>
     <link rel="icon" href="../img/mdb-favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
@@ -16,28 +16,26 @@
     <div class="app-shell">
       <aside class="sidebar">
         <h5 class="sidebar-brand">ADAPTIVE<br>RL COACH</h5>
-        <a href="plan.html" data-page="plan.html" class="sidebar-link active" aria-current="page">Plan</a>
-        <a href="replays.html" class="sidebar-link">Replays</a>
-        <a href="analisis.html" class="sidebar-link">Análisis</a>
+        <a href="plan.html" data-page="plan.html" class="sidebar-link active" aria-current="page">Mi entrenamiento</a>
+        <a href="replays.html" class="sidebar-link">Mis partidas</a>
+        <a href="analisis.html" class="sidebar-link">Resultados</a>
         <a href="objetivos.html" class="sidebar-link">Objetivos</a>
-        <a href="sesiones.html" class="sidebar-link">Sesiones</a>
+        <a href="sesiones.html" class="sidebar-link">Mi progreso</a>
         <a href="perfil.html" class="sidebar-link">Perfil</a>
         <a href="helpme.html" class="sidebar-link">Ayuda</a>
         <div class="sidebar-footer">
           <button type="button" class="btn-rl btn-rl-outline w-100">Cerrar sesión</button>
         </div>
       </aside>
-      <main class="app-main text-light">
-        <h1 class="fw-bold text-light">Plan de entrenamiento</h1>
-        <p class="text-bray">Consulta tus versiones guardadas o prepara una nueva propuesta a partir de tus partidas.</p>
-        <p id="plan-status" role="status" aria-live="polite" tabindex="-1">Consultando datos…</p>
+      <main class="app-main text-light plan-page">
+        <h1 class="fw-bold text-light">Mi entrenamiento</h1>
+        <p class="text-bray">Prepara una rutina, guárdala y registra tu práctica al terminar.</p>
+        <p id="plan-status" class="text-bray small mb-2" role="status" aria-live="polite" tabindex="-1">Consultando datos…</p>
         <div class="d-flex flex-wrap gap-3 mb-3">
           <button id="reload-plan" type="button" class="btn-rl btn-rl-outline">Actualizar datos</button>
           <a id="plan-login" href="login.html" class="btn-rl btn-rl-accent" hidden>Iniciar sesión</a>
-          <a href="perfil.html" class="text-accent align-self-center">Perfil</a>
-          <a href="replays.html" class="text-accent align-self-center">Replays</a>
         </div>
-        <p id="no-plan" class="plan-card">Selecciona un bloque para consultar su plan o generar una propuesta.</p>
+        <p id="no-plan" class="plan-card">Elige tus partidas y cuánto tiempo tienes. Después, prepara tu entrenamiento.</p>
         <section id="plan-output" aria-labelledby="output-title" hidden>
           <div class="plan-card">
             <div class="d-flex flex-wrap gap-3 justify-content-between align-items-center">
@@ -45,33 +43,33 @@
               <span id="plan-badge" class="plan-tag"></span>
             </div>
             <p id="plan-identity" class="text-bray mt-3"></p>
-            <div class="row g-3 mb-3">
-              <div class="col-12 col-md-4"><strong id="available-minutes"></strong><p class="text-bray mb-0">Minutos disponibles</p></div>
-              <div class="col-12 col-md-4"><strong id="assigned-minutes"></strong><p class="text-bray mb-0">Minutos asignados</p></div>
-              <div class="col-12 col-md-4"><strong id="unassigned-minutes"></strong><p class="text-bray mb-0">Minutos sin asignar</p></div>
-            </div>
+            <dl class="training-time">
+              <div><dt>Disponibles</dt><dd><span id="available-minutes"></span> min</dd></div>
+              <div><dt>De práctica</dt><dd><span id="assigned-minutes"></span> min</dd></div>
+              <div><dt>Sin asignar</dt><dd><span id="unassigned-minutes"></span> min</dd></div>
+            </dl>
             <div class="progress" role="progressbar" aria-label="Tiempo asignado" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="plan-time-progress"><div class="progress-bar" id="plan-time-bar"></div></div>
-            <p id="plan-context-note" class="text-bray mt-3"></p>
-            <p id="plan-save-note" class="text-bray"></p>
+            <details class="mt-2"><summary>Preferencias de esta versión</summary><p id="plan-context-note" class="text-bray"></p></details>
+            <p id="plan-save-note" class="text-bray small my-2"></p>
             <div class="d-flex flex-wrap gap-3">
-              <button id="save-plan" type="button" class="btn-rl btn-rl-accent" hidden>Guardar plan</button>
-              <a id="plan-sessions" class="btn-rl btn-rl-accent" hidden>Registrar sesión</a>
+              <button id="save-plan" type="button" class="btn-rl btn-rl-accent" hidden>Guardar entrenamiento</button>
+              <a id="plan-sessions" class="btn-rl btn-rl-accent" hidden>Registrar mi práctica</a>
             </div>
           </div>
           <div class="row g-3">
-            <section class="col-12 col-lg-7" aria-labelledby="exercises-title">
-              <h2 id="exercises-title" class="h4">Ejercicios e instrucciones</h2>
+            <section class="col-12 col-lg-8" aria-labelledby="exercises-title">
+              <h2 id="exercises-title" class="h4">Tus ejercicios</h2>
               <div id="plan-exercises"></div>
             </section>
-            <aside class="col-12 col-lg-5">
-              <section class="plan-card"><h2 class="h5">Por qué este plan</h2><p id="plan-explanation"></p><div id="plan-reasons"></div></section>
-              <section class="plan-card"><h2 class="h5">Metas utilizadas</h2><div id="plan-used-goals"></div></section>
-              <section class="plan-card"><h2 class="h5">Cobertura y límites</h2><div id="plan-limitations"></div><details class="mt-2"><summary>Fuente de los datos</summary><p id="plan-source" class="text-bray mb-0"></p></details></section>
+            <aside class="col-12 col-lg-4">
+              <details class="plan-card"><summary>Por qué este entrenamiento</summary><p id="plan-explanation" class="mt-3"></p><div id="plan-reasons"></div></details>
+              <details class="plan-card"><summary>Objetivos utilizados</summary><div id="plan-used-goals"></div></details>
+              <details class="plan-card"><summary>Qué cubre este entrenamiento y sus límites</summary><div id="plan-limitations"></div><details class="mt-2"><summary>Fuente de los datos</summary><p id="plan-source" class="text-bray mb-0"></p></details></details>
             </aside>
           </div>
         </section>
         <details id="plan-adjust" class="plan-card" open>
-          <summary class="h5 mb-3">Ajustar rutina</summary>
+          <summary class="h5 mb-3">Preparar o ajustar entrenamiento</summary>
           <p id="plan-profile" class="text-bray"></p>
           <form id="plan-form" novalidate>
             <fieldset id="plan-fields" class="border-0 p-0 m-0" disabled>
@@ -114,15 +112,15 @@
                 <p class="text-bray small">Se ofrecen metas de la modalidad del bloque. Las de entrenamiento se consultan en Objetivos; no se envían al generador de rendimiento.</p>
               </fieldset>
               <p class="text-bray">Cambiar estos campos no modifica la versión que estás consultando. La disponibilidad de recursos y variantes la decide el generador.</p>
-              <button id="preview-plan" type="submit" class="btn-rl btn-rl-accent">Generar propuesta</button>
+              <button id="preview-plan" type="submit" class="btn-rl btn-rl-accent">Preparar entrenamiento</button>
             </fieldset>
           </form>
         </details>
         <section class="plan-card" aria-labelledby="versions-title">
-          <h2 id="versions-title" class="h4">Versiones guardadas del bloque</h2>
+          <h2 id="versions-title" class="h4">Historial de entrenamientos</h2>
           <label for="plan-version" class="form-label">Consultar versión</label>
           <select id="plan-version" class="form-select" disabled><option value="">Sin versiones consultadas</option></select>
-          <p id="versions-note" class="text-bray mt-2 mb-0">Cada bloque tiene su propio plan. Otro bloque inicia otra línea de versiones.</p>
+          <p id="versions-note" class="text-bray mt-2 mb-0">Elige una versión guardada de estas cinco partidas. Los cambios se guardan como otra versión.</p>
         </section>
 
       </main>
@@ -132,6 +130,7 @@
     <script src="../js/supabase-config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/session-client.js"></script>
+    <script src="../js/player-ui.js"></script>
     <script src="../js/navigation.js"></script> 
     <script src="../js/plan-model.js"></script>
     <script src="../js/plan-service.js"></script>
