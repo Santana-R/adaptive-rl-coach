@@ -9,6 +9,13 @@ $(function () {
     active: 'Activo',
     archived: 'Archivado'
   };
+  const metricDescriptions = {
+    shooting_pct: 'de precisión de tiro',
+    training_minutes: 'de práctica'
+  };
+  const shortDate = new Intl.DateTimeFormat('es-MX', {
+    day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC'
+  });
   const fields = {
     name: '#goal-name',
     mode: '#goal-mode',
@@ -146,13 +153,13 @@ $(function () {
     $('#goal-name').trigger('focus');
   }
 
-  function closeEditor() {
+  function closeEditor(restoreFocus = true) {
     editing = null;
     originalForm = '';
     $('#goal-editor').prop('hidden', true);
     $('#goal-type, #goal-mode').prop('disabled', false);
     clearErrors();
-    $('#new-goal').trigger('focus');
+    if (restoreFocus) $('#new-goal').trigger('focus');
   }
 
   function targetText(goal) {
@@ -161,39 +168,49 @@ $(function () {
     return prefix + ' ' + goal.target_value + ' ' + (unit || '');
   }
 
-  function button(text, handler) {
-    return node('button', text, 'btn-rl btn-rl-outline')
+  function deadlineText(date) {
+    if (!date) return 'Sin fecha límite';
+    const utcDate = new Date(date + 'T00:00:00Z');
+    return 'Hasta el ' + (Number.isNaN(utcDate.getTime()) ? date : shortDate.format(utcDate));
+  }
+
+  function button(text, handler, style = 'btn-rl-outline') {
+    return node('button', text, 'btn-rl ' + style)
       .attr('type', 'button').prop('disabled', busy || !ready).on('click', handler);
   }
 
   function render() {
     const search = $('#goal-search').val().trim().toLocaleLowerCase('es');
+    const type = $('#filter-type').val();
+    const mode = $('#filter-mode').val();
+    const status = $('#filter-status').val();
     const visible = goals.filter(function (goal) {
       return String(goal.name || '').toLocaleLowerCase('es').includes(search) &&
-        (!$('#filter-type').val() || goal.type === $('#filter-type').val()) &&
-        (!$('#filter-status').val() || goal.status === $('#filter-status').val()) &&
-        (!$('#filter-mode').val() || goal.mode === $('#filter-mode').val());
+        (!type || goal.type === type) && (!status || goal.status === status) && (!mode || goal.mode === mode);
     });
 
+    const activeFilters = Number(Boolean(type)) + Number(Boolean(mode));
+    $('#goal-more-filters').text(activeFilters ? 'Más filtros (' + activeFilters + ')' : 'Más filtros');
     $('#performance-list, #training-list').empty();
 
     visible.forEach(function (goal) {
       const card = node('article', undefined, 'goals-card');
       if (goal.status === 'archived') card.addClass('goal-archived');
+      const target = node('p', undefined, 'goal-target').append(node('strong', targetText(goal)));
+      if (metricDescriptions[goal.metric_key]) target.append(' ' + metricDescriptions[goal.metric_key]);
       card.append(
-        node('h3', goal.name, 'h5'),
-        node('p', (labels[goal.type] || goal.type) + ' · ' + goal.mode + ' · ' + (labels[goal.status] || goal.status), 'text-bray'),
-        node('p', targetText(goal)),
-        node('p', 'Inicio: ' + goal.start_date + ' · Límite: ' + (goal.due_date || 'Sin fecha') + ' · Zona: ' + goal.timezone, 'text-bray'),
-        node('p', 'Versión ' + goal.version + ' · Avance no disponible: falta evaluación conectada.', 'text-bray')
+        node('h3', goal.name, 'goal-name'),
+        target,
+        node('p', [goal.mode, labels[goal.status] || goal.status, deadlineText(goal.due_date)].join(' · '), 'goal-meta')
       );
 
-      const actions = node('div', undefined, 'd-flex flex-wrap gap-3');
-      actions.append(button('Ver detalle e historial', function () { loadDetail(goal.goal_id); }));
-
+      const actions = node('div', undefined, 'goal-actions');
       if (goal.status === 'active') {
-        actions.append(button('Editar', function () { openEditor(goal); }));
-        actions.append(button('Retirar objetivo', function () { removeGoal(goal); }));
+        actions.append(button('Editar', function () { openEditor(goal); }, 'btn-rl-accent'));
+      }
+      actions.append(button('Ver historial', function () { loadDetail(goal.goal_id); }));
+      if (goal.status === 'active') {
+        actions.append(button('Retirar objetivo', function () { removeGoal(goal); }, 'goal-retire'));
       }
 
       card.append(actions);
@@ -201,7 +218,8 @@ $(function () {
     });
 
     $('#goals-filters').prop('hidden', !ready || !goals.length);
-    $('#goal-count').text(goals.length ? visible.length + ' de ' + goals.length + ' objetivos' : '');
+    const count = visible.length === goals.length ? String(goals.length) : visible.length + ' de ' + goals.length;
+    $('#goal-count').text(goals.length ? count + (goals.length === 1 && visible.length === 1 ? ' objetivo' : ' objetivos') : '');
     $('#goals-empty').prop('hidden', visible.length !== 0).text(goals.length
       ? 'Ningún objetivo coincide con los filtros.'
       : 'Todavía no tienes objetivos. Puedes proponerte llegar al 35 % de eficiencia de tiro o practicar 60 minutos esta semana.');
@@ -217,8 +235,7 @@ $(function () {
       node('h3', goal.name, 'h5'),
       node('p', (labels[goal.type] || goal.type) + ' · ' + goal.mode + ' · ' + (labels[goal.status] || goal.status)),
       node('p', targetText(goal) + ' · Zona horaria: ' + goal.timezone),
-      node('p', 'Objetivo ' + goal.goal_id + ' · Versión vigente ' + goal.version + ' · ID de versión ' + goal.goal_version_id),
-      node('p', 'Sin evaluación conectada: no se puede determinar avance ni cumplimiento.', 'text-bray')
+      node('p', 'Versión vigente ' + goal.version, 'text-bray')
     );
 
     if (goal.archived_at) body.append(node('p', 'Archivado: ' + goal.archived_at));
@@ -277,11 +294,11 @@ $(function () {
       goals = await service.list();
       ready = true;
       $('#goals-login').prop('hidden', true);
-      closeEditor();
+      closeEditor(false);
       $('#goal-detail').prop('hidden', true);
       detailId = null;
       render();
-      message('Objetivos consultados en el servidor.');
+      message('');
     } catch (error) {
       ready = false;
       $('#goals-results, #goal-detail').prop('hidden', true);
